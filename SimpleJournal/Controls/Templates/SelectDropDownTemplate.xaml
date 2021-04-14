@@ -1,0 +1,15 @@
+﻿<local:DropDownTemplate x:Class="SimpleJournal.Controls.Templates.SelectDropDownTemplate"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SimpleJournal.Controls.Templates"
+             xmlns:controls="clr-namespace:SimpleJournal.Controls"
+             mc:Ignorable="d"  Width="255" Height="300" BorderBrush="Black" BorderThickness="1">
+    <Grid>
+        <StackPanel Background="{DynamicResource Fluent.Ribbon.Brushes.RibbonTabItem.Active.Background}">
+            <controls:PenSizeControl x:Name="PenSize" SwitchtedPenSize="PenSize_SwitchtedPenSize" IsToggleable="False" />
+            <controls:ColorPalette x:Name="colorPalette" Margin="0,5,0,0"/>
+        </StackPanel>
+    </Grid>
+</local:DropDownTemplate>

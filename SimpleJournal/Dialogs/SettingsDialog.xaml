@@ -1,0 +1,240 @@
+﻿<Window x:Class="SimpleJournal.SettingsDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SimpleJournal"
+        xmlns:res="clr-namespace:SimpleJournal.Properties"
+        xmlns:controlzEx="urn:controlzex"
+        xmlns:controls="clr-namespace:SimpleJournal.Controls"
+        xmlns:Fluent="urn:fluent-ribbon"
+        mc:Ignorable="d"
+        Title="{x:Static res:Resources.strSettings}"
+        Height="370" Width="650"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize">
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibility"/>
+        <Style TargetType="{x:Type CheckBox}">
+            <Setter Property="Foreground" Value="{DynamicResource BlackBrush}" />
+        </Style>
+        <Style TargetType="{x:Type RadioButton}">
+            <Setter Property="Foreground" Value="{DynamicResource BlackBrush}" />
+        </Style>
+        <Style TargetType="{x:Type TextBlock}">
+            <Setter Property="Foreground" Value="{DynamicResource BlackBrush}" />
+        </Style>
+    </Window.Resources>
+    <Grid Background="{DynamicResource WhiteBrush}">
+        <TabControl Margin="2" Background="Transparent">
+            <TabControl.Resources>
+                <ResourceDictionary>
+                    <ResourceDictionary.MergedDictionaries>
+                        <ResourceDictionary Source="..\resources\TabControlStyle.xaml"/>
+                    </ResourceDictionary.MergedDictionaries>
+                </ResourceDictionary>
+            </TabControl.Resources>
+            <TabItem Header="{x:Static res:Resources.strGeneral}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Border Grid.Column="1" Background="{DynamicResource Fluent.Ribbon.Brushes.GalleryGroupContainer.Header.Background}" BorderThickness="1" BorderBrush="Black">
+                        <StackPanel Margin="4,0,0,0" >
+                            <StackPanel.Resources>
+                                <Style TargetType="{x:Type Hyperlink}">
+                                    <Setter Property="Foreground" Value="{DynamicResource Link.Foreground}" />
+                                </Style>
+                            </StackPanel.Resources>
+                            <TextBlock Text="{x:Static res:Resources.strSettingsFeatureBar}" Margin="5,5" />
+                            <TextBlock FontSize="13" TextTrimming="CharacterEllipsis">
+                                <Run Text="•" />
+                                <Hyperlink x:Name="btnResetPens" Click="BtnResetPens_Click" ToolTip="{x:Static res:Resources.strSettingsResetPensTooltip}">
+                                    <Run Text="{x:Static res:Resources.strResetPens}" />
+                                </Hyperlink>
+                                <LineBreak /><LineBreak />
+                                <Run Text="•" />
+                                <Hyperlink x:Name="btnResetRecentlyOpenedDocuments" Click="BtnResetRecentlyOpenedDocuments_Click" ToolTip="{x:Static res:Resources.strSettingsClearLastOpenedDocumentsToolTip}">
+                                    <Run Text="{x:Static res:Resources.strClearLastOpenedDocuments}" />
+                                </Hyperlink>
+                                <LineBreak /><LineBreak />
+                                <Run Text="•" />
+                                <Hyperlink x:Name="btnOpenAssistent" Click="BtnOpenAssistent_Click" ToolTip="{x:Static res:Resources.strSettingsOpenSetupAssistantTooltip}">
+                                    <Run Text="{x:Static res:Resources.strOpenSetupAssistant}" />
+                                </Hyperlink>
+                                <LineBreak /><LineBreak />
+                                <Run x:Name="btnSetFileAssocPoint" Text="•" />
+                                <Hyperlink x:Name="btnSetFileAssoc" Click="btnSetFileAssoc_Click" ToolTip="{x:Static res:Resources.strSettingsSetFileAssocToolTip}">
+                                    <Run x:Name="btnSetFileAssocText" Text="{x:Static res:Resources.strSettingsSetFileAssoc}" />
+                                </Hyperlink>
+                            </TextBlock>
+                        </StackPanel>
+                    </Border>                    
+                    <StackPanel Margin="3,0,0,0" Background="Transparent">
+                        <TextBlock Margin="0,3,0,0" Text="{x:Static res:Resources.strPaperFormat}"/>
+                        <Fluent:ComboBox Header="{x:Null}" IsEditable="False" Margin="-8,3,3,0" Padding="4" SelectedIndex="1" x:Name="chkPaperType" SelectionChanged="chkPaperType_SelectionChanged">
+                            <ComboBox.Items>
+                                <ComboBoxItem Content="{x:Static res:Resources.strPlain}"/>
+                                <ComboBoxItem Content="{x:Static res:Resources.strChequered}"/>
+                                <ComboBoxItem Content="{x:Static res:Resources.strRuled}"/>
+                            </ComboBox.Items>
+                        </Fluent:ComboBox>
+                        <TextBlock Margin="0,5,0,0" Text="{x:Static res:Resources.strPaperSize}"/>
+                        <Fluent:ComboBox IsEditable="False" Margin="-8,3,3,0" Padding="4" SelectedIndex="0" x:Name="chkPaperFormat">
+                            <ComboBox.Items>
+                                <ComboBoxItem Content="{x:Static res:Resources.strA4}"/>
+                            </ComboBox.Items>
+                        </Fluent:ComboBox>
+                        <TextBlock Margin="0,8,5,0" Text="{x:Static res:Resources.strWindowSize}"/>
+                        <Fluent:ComboBox IsEditable="False" Margin="-8,3,4,0" Padding="4" SelectedIndex="0" x:Name="chkWindowMode" SelectionChanged="chkWindowMode_SelectionChanged">
+                            <ComboBox.Items>
+                                <ComboBoxItem Content="{x:Static res:Resources.strWindowModeNormal}"/>
+                                <ComboBoxItem Content="{x:Static res:Resources.strWindowModeMaximized}"/>
+                                <ComboBoxItem Content="{x:Static res:Resources.strWindowModeFullscreen}"/>
+                            </ComboBox.Items>
+                        </Fluent:ComboBox>
+
+                        <TextBlock Margin="0,8,5,0" Text="{x:Static res:Resources.strDarkModeSettingsTitle}"/>
+                        <Fluent:ComboBox IsEditable="False" Padding="4" Margin="-8,3,4,0" SelectedIndex="0" x:Name="CheckBoxDisplayMode" SelectionChanged="CheckBoxDisplayMode_SelectionChanged">
+                            <ComboBox.Items>
+                                <ComboBoxItem Content="{x:Static res:Resources.strLight}" />
+                                <ComboBoxItem Content="{x:Static res:Resources.strDark}" />
+                            </ComboBox.Items>
+                        </Fluent:ComboBox>
+
+                        <TextBlock Margin="0,8,5,0" Text="{x:Static res:Resources.strTheme}"/>
+                        <Fluent:ComboBox x:Name="ComboBoxThemeChooser" SelectionChanged="ComboBoxThemeChooser_SelectionChanged" MinWidth="150" Margin="-8,3,4,0" IsEditable="False" ItemsSource="{Binding Themes}">
+                            <Fluent:ComboBox.ItemTemplate>
+                                <DataTemplate DataType="{x:Type controlzEx:Theme}">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Ellipse Width="16" Height="16" Fill="{Binding ShowcaseBrush, Mode=OneWay}" />
+                                        <TextBlock Margin="5,0,0,0" Text="{Binding DisplayName}" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </Fluent:ComboBox.ItemTemplate>
+                        </Fluent:ComboBox>
+                        <CheckBox x:Name="CheckBoxThemeIsColorful" Content="{x:Static res:Resources.strIsColorfulTheme}" Checked="CheckBoxThemeIsColorful_Checked" Unchecked="CheckBoxThemeIsColorful_Unchecked" Margin="0,8,0,0" />
+
+                        <CheckBox x:Name="CheckBoxActivateGlowingBrush" Checked="CheckBoxActivateGlowingBrush_Checked" Unchecked="CheckBoxActivateGlowingBrush_Checked"  Margin="0,5,0,0">
+                            <TextBlock TextWrapping="Wrap">
+                                <Run Text="{x:Static res:Resources.strSettingsActivateGlowingEffect}"/>
+                                <Run Text="{x:Static res:Resources.strSettingsActivateGlowingEffectDescription}" Foreground="Red"/>
+                            </TextBlock>
+                        </CheckBox>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+            
+            <TabItem Header="{x:Static res:Resources.strSettingsBackgroundHeader}">
+                <StackPanel Margin="0,5,0,0">
+                    <RadioButton x:Name="RbDefault" Checked="rb_Checked" GroupName="background" Content="{x:Static res:Resources.strSettingsBackgroundDefault}" />
+                    
+                    <StackPanel Orientation="Horizontal" Margin="0,3,0,0">
+                        <RadioButton x:Name="RbWooden2" Checked="rb_Checked" GroupName="background" VerticalContentAlignment="Center" Margin="3">
+                            <Image Source="../../resources/backgrounds/wooden-2.jpg" Height="64" />
+                        </RadioButton>
+                        <RadioButton x:Name="RbWooden1" Checked="rb_Checked" GroupName="background" VerticalContentAlignment="Center" Margin="3">
+                            <Image Source="../../resources/backgrounds/wooden-1.jpg" Height="64" />
+                        </RadioButton>
+                        <RadioButton x:Name="RbSand" Checked="rb_Checked" GroupName="background" VerticalContentAlignment="Center" Margin="3">
+                            <Image Source="../../resources/backgrounds/sand.jpg" Height="64" />
+                        </RadioButton>
+                        <RadioButton x:Name="RbBlue" Checked="rb_Checked" GroupName="background" VerticalContentAlignment="Center" Margin="3">
+                            <Image Source="../../resources/backgrounds/blue.jpg" Height="64" />
+                        </RadioButton>
+                    </StackPanel>
+
+                    <RadioButton x:Name="RbCustom" Checked="rb_Checked" GroupName="background" Content="{x:Static res:Resources.strSettingsBackgroundCustom}" />
+
+                    <Grid Margin="0,3,0,0" Visibility="{Binding ElementName=RbCustom, Path=IsChecked, Converter={StaticResource BooleanToVisibility}}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        
+                        <TextBox x:Name="TextCustomImagePath" TextChanged="TextCustomImagePath_TextChanged"  Margin="3,0,0,0" Grid.Column="0" />
+                        <Button x:Name="ButtonSearchCustomImage" Click="ButtonSearchCustomImage_Click" Grid.Column="1" Content="..." Margin="3,0,3,0" Width="50" Height="25" />
+                    </Grid>
+                </StackPanel>
+            </TabItem>
+            <TabItem Header="{x:Static res:Resources.strGUI}">
+                <ScrollViewer>
+                    <StackPanel Margin="3,0,0,0">
+                        <CheckBox x:Name="chkScrollbar" Margin="0,9,0,0" Content="{x:Static res:Resources.strUseBigScrollbar}" Checked="ChkScrollbar_Checked_1" Unchecked="ChkScrollbar_Checked_1" />
+                        <TextBlock Margin="0,5,0,0" TextWrapping="Wrap">
+                            <Run FontWeight="Bold" Text="{x:Static res:Resources.strDescription}" />
+                            <Run Text="{x:Static res:Resources.strUseBigScrollbarDescription}"/>
+                        </TextBlock>
+
+                        <CheckBox x:Name="chkScrollbarNatural" Margin="0,9,0,0" Content="{x:Static res:Resources.strUseNaturalScrolling}" Checked="chkScrollbarNatural_Checked"  Unchecked="chkScrollbarNatural_Checked" />
+                        <TextBlock Margin="0,5,0,0" TextWrapping="Wrap">
+                            <Run FontWeight="Bold" Text="{x:Static res:Resources.strDescription}" />
+                            <Run Text="{x:Static res:Resources.strUseNaturalScrollingDescription}"/>
+                        </TextBlock>
+
+                        <CheckBox x:Name="chkDisplaySidebarAutomatically" Margin="0,9,0,0" Content="{x:Static res:Resources.strDisplaySidebarAutomatically}" Checked="ChkDisplaySidebarAutomatically_Checked" Unchecked="ChkDisplaySidebarAutomatically_Checked"  IsChecked="True" />
+                        <TextBlock Margin="0,5,0,0" TextWrapping="Wrap">
+                            <Run FontWeight="Bold" Text="{x:Static res:Resources.strDescription}" />
+                            <Run Text="{x:Static res:Resources.strDisplaySidebarAutomaticallyDescription}" />
+                        </TextBlock>
+                        <CheckBox x:Name="CheckBoxOldPattern" Margin="0,9,0,0" Content="{x:Static res:Resources.strUseOldChequeredPatternLine1}" Checked="CheckBoxOldPattern_Checked"  Unchecked="CheckBoxOldPattern_Checked" />
+                        <TextBlock Margin="0,5,0,0" TextWrapping="Wrap">
+                            <Run FontWeight="Bold" Text="{x:Static res:Resources.strDescription}" />
+                            <Run Text="{x:Static res:Resources.strUseOldChequeredPatternLine2}" />
+                        </TextBlock>
+                        <CheckBox x:Name="CheckBoxDisableTouchScreen" Content="{x:Static res:Resources.strSettingsCeckBoxDisableTouchscreen}" Checked="CheckBoxDisableTouchScreen_Checked" Unchecked="CheckBoxDisableTouchScreen_Checked" Margin="0,9,0,0" />
+                        <TextBlock Margin="0,5,0,0" TextWrapping="Wrap">
+                            <Run FontWeight="Bold" Text="{x:Static res:Resources.strDescription}" />
+                            <Run Text="{x:Static res:Resources.strSettingsDisableTouchExplanation}"/>
+                            <Hyperlink x:Name="DownloadTDM" RequestNavigate="DownloadTDM_RequestNavigate" NavigateUri="https://code-a-software.net/simplejournal/setups/tdm.zip">
+                                <Run Text="Download" />
+                            </Hyperlink>
+                        </TextBlock>
+                        <CheckBox x:Name="CheckBoxUseAutoSave" IsChecked="True" Content="{x:Static res:Resources.strUseAutoSave}" Checked="CheckBoxUseAutoSave_Checked" Unchecked="CheckBoxUseAutoSave_Checked"  Margin="0,9,0,0"  />
+                        <TextBlock Margin="0,5,0,0" TextWrapping="Wrap">
+                            <Run FontWeight="Bold" Text="{x:Static res:Resources.strDescription}" />
+                            <Run Text="{x:Static res:Resources.strAutoSaveDescription}" />
+                        </TextBlock>
+                        <StackPanel Visibility="{Binding ElementName=CheckBoxUseAutoSave, Path=IsChecked, Converter={StaticResource BooleanToVisibility}}">
+                            <TextBlock Text="{x:Static res:Resources.strAutoSaveInterval}" Margin="0,5,0,0"/>
+                            <controls:NumericUpDown x:Name="NumericUpDownAutoSaveInteral" OnChanged="NumericUpDownAutoSaveInteral_OnChanged" Margin="0,2,0,0" Width="180" HorizontalAlignment="Left" Minimum="1" Maximum="60" Value="5"/>
+                            <CheckBox Visibility="Hidden" x:Name="CheckBoxDisplayRecoverDialog" Margin="0,9,0,0" IsChecked="True" Content="{x:Static res:Resources.strDisplayRecoverDialogTitle}" Checked="CheckBoxDisplayRecoverDialog_Checked" Unchecked="CheckBoxDisplayRecoverDialog_Checked" />
+                            <TextBlock Visibility="Hidden" Margin="0,5,0,0" TextWrapping="Wrap">
+                                <Run FontWeight="Bold" Text="{x:Static res:Resources.strDescription}" />
+                                <Run Text="{x:Static res:Resources.strDisplayRecoverDialogDescription}" />
+                            </TextBlock>
+                        </StackPanel>
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+            <TabItem Header="{x:Static res:Resources.strDraw}">
+                <ScrollViewer>
+                    <StackPanel Margin="3,0,0,0">
+                        <CheckBox x:Name="chkUseFitToCurve" Margin="0,9,0,0" Content="{x:Static res:Resources.strFitToCurveTitle}" Checked="chkUseFitToCurve_Checked" Unchecked="chkUseFitToCurve_Checked" IsChecked="True" />
+                        <TextBlock Margin="0,5,0,0" TextWrapping="Wrap">
+                            <Run FontWeight="Bold" Text="{x:Static res:Resources.strDescription}" />
+                            <Run Text="{x:Static res:Resources.strFitToCurveDescription}"/>
+                        </TextBlock>
+                        <CheckBox x:Name="chkUseInputPreasure" Margin="0,9,0,0" Content="{x:Static res:Resources.strUseContactPressure}" Checked="ChkUseInputPreasure_Checked" Unchecked="ChkUseInputPreasure_Checked" IsChecked="True" />
+                        <TextBlock Margin="0,5,0,0" TextWrapping="Wrap">
+                            <Run FontWeight="Bold" Text="{x:Static res:Resources.strDescription}" />
+                            <Run Text="{x:Static res:Resources.strSetupStep3Description}"/>
+                        </TextBlock>
+                        <CheckBox x:Name="useRotationCorrect" Margin="0,9,0,0" Content="{x:Static res:Resources.strUseRotationCompensation}" Checked="UseRotationCorrect_Checked" Unchecked="UseRotationCorrect_Checked" IsChecked="True" />
+                        <TextBlock Margin="0,5,0,0" TextWrapping="Wrap">
+                            <Run FontWeight="Bold" Text="{x:Static res:Resources.strDescription}" />
+                            <Run Text="{x:Static res:Resources.strSetupRotationComparisonDescription}"/>
+                        </TextBlock>
+                        <CheckBox x:Name="useCircleCorrect" Margin="0,9,0,0" Content="{x:Static res:Resources.strUseReplaceEllipsesWithCircles}" Checked="UseCircleCorrect_Checked"  Unchecked="UseCircleCorrect_Checked" IsChecked="True" />
+                        <TextBlock Margin="0,5,0,0" TextWrapping="Wrap">
+                            <Run FontWeight="Bold" Text="{x:Static res:Resources.strDescription}" />
+                            <Run Text="{x:Static res:Resources.strSetupReplaceEllipsesWithCirclesDescription}" />
+                        </TextBlock>
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>

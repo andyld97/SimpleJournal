@@ -1,0 +1,23 @@
+﻿<temlates:DropDownTemplate x:Class="SimpleJournal.Controls.Templates.RulerDropDownTemplate"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SimpleJournal.Controls.Templates"
+             xmlns:temlates="clr-namespace:SimpleJournal.Controls.Templates"
+             mc:Ignorable="d" 
+             Width="115" Height="60" BorderBrush="Black" BorderThickness="0.5">
+    <ListBox x:Name="lstBoxChooseRulerMode" Background="Transparent" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden" SelectionChanged="LstBoxChooseRulerMode_SelectionChanged" ItemContainerStyle="{DynamicResource ListBoxSelectionHoldActiveContainerStyle}"  Padding="0,2,0,0">
+        <ListBox.Items>
+            <ListBoxItem>
+                <Rectangle x:Name="rectFullStroke" Stroke="Green" StrokeThickness="15" Width="100" Height="10" Margin="0,2" />
+            </ListBoxItem>
+            <ListBoxItem>
+                <Rectangle x:Name="rectDashedStroke" Stroke="Green" StrokeThickness="20" StrokeDashArray="0.5,0.8" Width="100" Height="10" Margin="0,2" />
+            </ListBoxItem>
+            <ListBoxItem>
+                <Line x:Name="lineDottetStroke" X1="0" Y1="5" X2="100" Y2="5" Stroke="Green" StrokeDashOffset="-1" StrokeThickness="10" Height="10" Margin="0,2" StrokeDashCap="Round" StrokeDashArray="0.03,2"></Line>
+            </ListBoxItem>
+        </ListBox.Items>
+    </ListBox>
+</temlates:DropDownTemplate>

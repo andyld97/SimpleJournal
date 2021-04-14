@@ -1,0 +1,37 @@
+﻿<Page x:Class="SimpleJournal.Templates.Ruled"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:SimpleJournal.Templates"
+      xmlns:local1="clr-namespace:SimpleJournal"
+      mc:Ignorable="d" 
+       Height="29.7cm" Width="21cm"
+      Title="Ruled">
+    <!--
+    For more infos see this url
+    https://stackoverflow.com/questions/20748651/wpf-drawing-colored-grid-lines-on-a-canvas-panel-background -->
+    <Grid>
+        <Border Background="White">
+            <local1:DrawingCanvas x:Name="canvas" Height="29.7cm" Width="21cm">
+                <local1:DrawingCanvas.Background>
+                    <DrawingBrush Stretch="None" TileMode="Tile"
+                          Viewport="0,0 50,50" ViewportUnits="Absolute">
+                        <DrawingBrush.Drawing>
+                            <GeometryDrawing>
+                                <GeometryDrawing.Geometry>
+                                    <GeometryGroup>
+                                        <LineGeometry StartPoint="0,0" EndPoint="50,0"/>                                        
+                                    </GeometryGroup>
+                                </GeometryDrawing.Geometry>
+                                <GeometryDrawing.Pen>
+                                    <Pen Thickness="0.1" Brush="Black"/>
+                                </GeometryDrawing.Pen>
+                            </GeometryDrawing>
+                        </DrawingBrush.Drawing>
+                    </DrawingBrush>
+                </local1:DrawingCanvas.Background>
+            </local1:DrawingCanvas>
+        </Border>
+    </Grid>
+</Page>

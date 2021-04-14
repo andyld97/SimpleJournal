@@ -1,0 +1,61 @@
+﻿<Window x:Class="SimpleJournal.Dialogs.RecoverAutoBackupFileDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:res="clr-namespace:SimpleJournal.Properties"
+        xmlns:dialogs="clr-namespace:SimpleJournal.Dialogs"
+        mc:Ignorable="d"
+        Title="{x:Static res:Resources.strRecoverAutoBackupFileDialogTitle}" SizeToContent="Height" Width="650"
+        WindowStartupLocation="CenterScreen" 
+        ResizeMode="NoResize">
+    <Grid Background="{DynamicResource WhiteBrush}">
+        <Grid.Resources>
+            <Style TargetType="{x:Type TextBlock}">
+                <Setter Property="Foreground" Value="{DynamicResource BlackBrush}" />
+            </Style>
+            <Style TargetType="{x:Type CheckBox}">
+                <Setter Property="Foreground" Value="{DynamicResource BlackBrush}" />
+            </Style>
+        </Grid.Resources>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="80"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Border Grid.Column="0">
+            <Border.Background>
+                <LinearGradientBrush>
+                    <GradientStop Color="LightGray" Offset="0.1"/>
+                    <GradientStop Color="#FAD69E" Offset="0.4"/>
+                </LinearGradientBrush>
+            </Border.Background>
+            <Grid Margin="0,10,0,0">
+                <Image Source="pack://application:,,,/SimpleJournal;component/resources/warning.png" Stretch="Uniform" VerticalAlignment="Top" Width="64" Height="64"/>
+            </Grid>
+        </Border>
+
+        <Grid Grid.Column="1" Margin="0,10,0,0">
+            <StackPanel>
+                <TextBlock FontSize="22" HorizontalAlignment="Center" FontWeight="Bold" Text="{x:Static res:Resources.strSJTerminated}"/>
+                <TextBlock FontSize="16" TextAlignment="Left" Margin="10,10,30,0">
+                    <Run x:Name="RunAutoSaveRecoverInfo" Text="{x:Static res:Resources.strLabelBackups}"/>
+                </TextBlock>
+
+                <ListBox x:Name="ListBackupFiles" Background="Transparent" ItemContainerStyle="{DynamicResource _ListBoxItemStyle}" Margin="10" Height="200" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Grid.IsSharedSizeScope="False" HorizontalContentAlignment="Stretch" />
+
+                <CheckBox x:Name="CheckBoxOpenBackupsAfterRestore" Margin="10,6,23,0" IsChecked="True" HorizontalAlignment="Left" Content="{x:Static res:Resources.strOpenBackupsAfterRecovery}"/>
+                    <TextBlock Margin="10,8,23,0" Foreground="Red" TextWrapping="Wrap">
+                    <Run Text="{x:Static res:Resources.strHint}" FontWeight="Bold"/><Run Text=":" FontWeight="Bold"/>
+                    <LineBreak/>
+                    <Run Text="{x:Static res:Resources.strBackupOriginExplanation}"/>
+                </TextBlock>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,12,20,10">
+                    <Button x:Name="ButtonRecoverAll" Click="ButtonRecoverAll_Click" Content="{x:Static res:Resources.strAutoSaveDialogButtonRecover}" Margin="3,3,3,3" Padding="3" FontSize="14" FontWeight="Bold" Width="180" Height="30"/>
+                    <Button x:Name="ButtonDiscardAll" Click="ButtonDiscardAll_Click" Content="{x:Static res:Resources.strAutoSaveDialogButtonDiscard}" Margin="3,3,3,3" Padding="3" Width="180" FontSize="14"/>
+                    <Button x:Name="ButtonDisplayDirectoryInExplorer" Click="ButtonDisplayDirectoryInExplorer_Click" Content="{x:Static res:Resources.strButtonDisplayAutoSaveDirectory}" HorizontalAlignment="Right" Width="150" FontSize="14" Height="30" Margin="3"/>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>

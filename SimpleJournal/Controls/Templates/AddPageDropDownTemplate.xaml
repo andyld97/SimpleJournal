@@ -1,0 +1,22 @@
+﻿<local:DropDownTemplate x:Class="SimpleJournal.Controls.Templates.AddPageDropDownTemplate"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SimpleJournal.Controls.Templates"
+             xmlns:res="clr-namespace:SimpleJournal.Properties"
+             mc:Ignorable="d" Width="75" BorderBrush="Black" BorderThickness="0.8">
+    <ListBox x:Name="ListBoxPageType" ItemContainerStyle="{DynamicResource ListBoxSelectionHoldActiveContainerStyle}" HorizontalContentAlignment="Center" PreviewMouseDown="ListBoxPageType_PreviewMouseDown">
+        <ListBox.Items>
+            <ListBoxItem ToolTip="{x:Static res:Resources.strChequered}">
+                <Image Source="pack://application:,,,/SimpleJournal;component/resources/managment/chequred.png"  Width="48" Height="48" Margin="5"/>
+            </ListBoxItem>
+            <ListBoxItem ToolTip="{x:Static res:Resources.strRuled}">
+                <Image Source="pack://application:,,,/SimpleJournal;component/resources/managment/ruled.png"  Width="48" Height="48" Margin="5"/>
+            </ListBoxItem>
+            <ListBoxItem ToolTip="{x:Static res:Resources.strPlain}">
+                <Image Source="pack://application:,,,/SimpleJournal;component/resources/clear.png"  Width="48" Height="48" Margin="5"/>
+            </ListBoxItem>
+        </ListBox.Items>
+    </ListBox>
+</local:DropDownTemplate>

@@ -1,0 +1,43 @@
+﻿<UserControl x:Class="SimpleJournal.Controls.BackupItem"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SimpleJournal.Controls"
+             xmlns:res="clr-namespace:SimpleJournal.Properties"
+             mc:Ignorable="d" >
+    <UserControl.Resources>
+        <local:PathToRunConverter x:Key="pathToRunConverter"/>
+    </UserControl.Resources>
+    <Grid Height="70">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="50"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="100"/>
+        </Grid.ColumnDefinitions>
+
+        <Image Grid.Column="0" Width="48" Height="48" Source="pack://application:,,,/SimpleJournal;component/resources/journalicon.png" Stretch="Uniform" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Grid Grid.Column="1" Margin="0,2,0,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <TextBlock FontSize="16">
+                <Run Text="{Binding Name}" ToolTip="{Binding Name}"/>                
+            </TextBlock>
+            <TextBlock FontSize="12" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top">
+                <Run Text="(" /><Run Text="{Binding Path, Converter={StaticResource pathToRunConverter}}" FontWeight="Bold"/><Run Text="{Binding Path}" /><Run Text=")" />
+            </TextBlock>
+        </Grid>
+        <Grid Grid.Column="2" Margin="0,6,0,0" HorizontalAlignment="Center" VerticalAlignment="Top">
+            <StackPanel Orientation="Horizontal">
+                <Button x:Name="RestoreFileButton" Click="RestoreFileButton_Click" Width="32" Height="32" Padding="3" ToolTip="{x:Static res:Resources.strRestoreBackupToolTip}">
+                    <Image Source="pack://application:,,,/SimpleJournal;component/resources/backup.png" Stretch="Uniform" />
+                </Button>
+                <Button x:Name="DiscardFileButton" Click="DiscardFileButton_Click" Margin="5,0,0,0" Width="32" Height="32" ToolTip="{x:Static res:Resources.strDiscardBackupToolTip}" Padding="3">
+                    <Image Source="pack://application:,,,/SimpleJournal;component/resources/remove.png" Stretch="Uniform" />
+                </Button>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</UserControl>

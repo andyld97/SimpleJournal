@@ -1,0 +1,94 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28407.52
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleJournal", "SimpleJournal\SimpleJournal.csproj", "{1A9449F7-5161-4CF0-B07B-645327AB44AC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Analyzer", "Analyser\Analyzer.csproj", "{FE0DD19A-1AAC-486F-9206-C8430AB8A25A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SJFileAssoc", "SJFileAssoc\SJFileAssoc.csproj", "{32F31565-E65E-4E7C-9A7F-90E26A1DA287}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
+		Normal|Any CPU = Normal|Any CPU
+		Normal|x64 = Normal|x64
+		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
+		UWP|Any CPU = UWP|Any CPU
+		UWP|x64 = UWP|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1A9449F7-5161-4CF0-B07B-645327AB44AC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A9449F7-5161-4CF0-B07B-645327AB44AC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A9449F7-5161-4CF0-B07B-645327AB44AC}.Debug|x64.ActiveCfg = Debug|x64
+		{1A9449F7-5161-4CF0-B07B-645327AB44AC}.Debug|x64.Build.0 = Debug|x64
+		{1A9449F7-5161-4CF0-B07B-645327AB44AC}.Normal|Any CPU.ActiveCfg = Normal|Any CPU
+		{1A9449F7-5161-4CF0-B07B-645327AB44AC}.Normal|Any CPU.Build.0 = Normal|Any CPU
+		{1A9449F7-5161-4CF0-B07B-645327AB44AC}.Normal|x64.ActiveCfg = Normal|x64
+		{1A9449F7-5161-4CF0-B07B-645327AB44AC}.Normal|x64.Build.0 = Normal|x64
+		{1A9449F7-5161-4CF0-B07B-645327AB44AC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A9449F7-5161-4CF0-B07B-645327AB44AC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1A9449F7-5161-4CF0-B07B-645327AB44AC}.Release|x64.ActiveCfg = Release|x64
+		{1A9449F7-5161-4CF0-B07B-645327AB44AC}.Release|x64.Build.0 = Release|x64
+		{1A9449F7-5161-4CF0-B07B-645327AB44AC}.UWP|Any CPU.ActiveCfg = UWP|Any CPU
+		{1A9449F7-5161-4CF0-B07B-645327AB44AC}.UWP|Any CPU.Build.0 = UWP|Any CPU
+		{1A9449F7-5161-4CF0-B07B-645327AB44AC}.UWP|x64.ActiveCfg = UWP|x64
+		{1A9449F7-5161-4CF0-B07B-645327AB44AC}.UWP|x64.Build.0 = UWP|x64
+		{FE0DD19A-1AAC-486F-9206-C8430AB8A25A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE0DD19A-1AAC-486F-9206-C8430AB8A25A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE0DD19A-1AAC-486F-9206-C8430AB8A25A}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{FE0DD19A-1AAC-486F-9206-C8430AB8A25A}.Debug|x64.Build.0 = Debug|Any CPU
+		{FE0DD19A-1AAC-486F-9206-C8430AB8A25A}.Normal|Any CPU.ActiveCfg = Normal|Any CPU
+		{FE0DD19A-1AAC-486F-9206-C8430AB8A25A}.Normal|Any CPU.Build.0 = Normal|Any CPU
+		{FE0DD19A-1AAC-486F-9206-C8430AB8A25A}.Normal|x64.ActiveCfg = Normal|Any CPU
+		{FE0DD19A-1AAC-486F-9206-C8430AB8A25A}.Normal|x64.Build.0 = Normal|Any CPU
+		{FE0DD19A-1AAC-486F-9206-C8430AB8A25A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE0DD19A-1AAC-486F-9206-C8430AB8A25A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE0DD19A-1AAC-486F-9206-C8430AB8A25A}.Release|x64.ActiveCfg = Release|Any CPU
+		{FE0DD19A-1AAC-486F-9206-C8430AB8A25A}.Release|x64.Build.0 = Release|Any CPU
+		{FE0DD19A-1AAC-486F-9206-C8430AB8A25A}.UWP|Any CPU.ActiveCfg = UWP|Any CPU
+		{FE0DD19A-1AAC-486F-9206-C8430AB8A25A}.UWP|Any CPU.Build.0 = UWP|Any CPU
+		{FE0DD19A-1AAC-486F-9206-C8430AB8A25A}.UWP|x64.ActiveCfg = UWP|Any CPU
+		{FE0DD19A-1AAC-486F-9206-C8430AB8A25A}.UWP|x64.Build.0 = UWP|Any CPU
+		{32F31565-E65E-4E7C-9A7F-90E26A1DA287}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{32F31565-E65E-4E7C-9A7F-90E26A1DA287}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{32F31565-E65E-4E7C-9A7F-90E26A1DA287}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{32F31565-E65E-4E7C-9A7F-90E26A1DA287}.Debug|x64.Build.0 = Debug|Any CPU
+		{32F31565-E65E-4E7C-9A7F-90E26A1DA287}.Normal|Any CPU.ActiveCfg = Normal|Any CPU
+		{32F31565-E65E-4E7C-9A7F-90E26A1DA287}.Normal|Any CPU.Build.0 = Normal|Any CPU
+		{32F31565-E65E-4E7C-9A7F-90E26A1DA287}.Normal|x64.ActiveCfg = Normal|Any CPU
+		{32F31565-E65E-4E7C-9A7F-90E26A1DA287}.Normal|x64.Build.0 = Normal|Any CPU
+		{32F31565-E65E-4E7C-9A7F-90E26A1DA287}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{32F31565-E65E-4E7C-9A7F-90E26A1DA287}.Release|Any CPU.Build.0 = Release|Any CPU
+		{32F31565-E65E-4E7C-9A7F-90E26A1DA287}.Release|x64.ActiveCfg = Release|Any CPU
+		{32F31565-E65E-4E7C-9A7F-90E26A1DA287}.Release|x64.Build.0 = Release|Any CPU
+		{32F31565-E65E-4E7C-9A7F-90E26A1DA287}.UWP|Any CPU.ActiveCfg = UWP|Any CPU
+		{32F31565-E65E-4E7C-9A7F-90E26A1DA287}.UWP|Any CPU.Build.0 = UWP|Any CPU
+		{32F31565-E65E-4E7C-9A7F-90E26A1DA287}.UWP|x64.ActiveCfg = UWP|Any CPU
+		{32F31565-E65E-4E7C-9A7F-90E26A1DA287}.UWP|x64.Build.0 = UWP|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {58519301-A59B-4F8D-A7ED-59C7AED0CAC4}
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 4
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://dev.azure.com/code-a-software
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Analyser\\Analyzer.csproj
+		SccProjectName1 = Analyser
+		SccLocalPath1 = Analyser
+		SccProjectUniqueName2 = SimpleJournal\\SimpleJournal.csproj
+		SccProjectName2 = SimpleJournal
+		SccLocalPath2 = SimpleJournal
+		SccProjectUniqueName3 = SJFileAssoc\\SJFileAssoc.csproj
+		SccProjectName3 = SJFileAssoc
+		SccLocalPath3 = SJFileAssoc
+	EndGlobalSection
+EndGlobal

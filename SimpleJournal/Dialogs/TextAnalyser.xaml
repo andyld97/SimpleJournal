@@ -1,0 +1,23 @@
+﻿<Window x:Class="SimpleJournal.TextAnalyser"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:res="clr-namespace:SimpleJournal.Properties"
+        xmlns:local="clr-namespace:SimpleJournal"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        Title="{x:Static res:Resources.strOCRLoading}" Height="350" Width="400" MinHeight="350" MinWidth="400">
+    <Grid Background="{DynamicResource WhiteBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+        <ScrollViewer Grid.Row="0">
+            <TextBox Background="Transparent" Foreground="{DynamicResource BlackBrush}" x:Name="txtText" IsReadOnly="True" IsEnabled="false"/>
+        </ScrollViewer>
+
+        <Button Grid.Row="1" IsEnabled="False" Content="{x:Static res:Resources.strOCRCopyToClipboard}" HorizontalAlignment="Left" Margin="5,5,5,5" Width="200" x:Name="btnCopy" Click="btnCopy_Click"/>
+        <Button Grid.Row="1" IsEnabled="False" Content="{x:Static res:Resources.strOK}" Margin="5,5,5,5" HorizontalAlignment="Right" Width="100" x:Name="btnOk" Click="btnOk_Click" />
+    </Grid>
+</Window>

@@ -1,0 +1,13 @@
+﻿<local:DropDownTemplate x:Class="SimpleJournal.Controls.Templates.PlotDropDownTemplate"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SimpleJournal.Controls.Templates"
+             xmlns:res="clr-namespace:SimpleJournal.Properties"
+             mc:Ignorable="d" Width="165" Height="30" BorderBrush="Black" BorderThickness="1"
+             Background="{DynamicResource Fluent.Ribbon.Brushes.RibbonTabItem.Active.Background}">
+    <StackPanel>
+        <CheckBox x:Name="CheckBoxNegativePlot" Checked="CheckBoxNegativePlot_Checked" Unchecked="CheckBoxNegativePlot_Checked" Margin="5,5,0,2" FontSize="12" Content="{x:Static res:Resources.strPlotDrawNegativeAxis}" Foreground="{DynamicResource BlackBrush}"/>
+    </StackPanel>
+</local:DropDownTemplate>

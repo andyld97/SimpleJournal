@@ -1,0 +1,325 @@
+﻿<Fluent:RibbonWindow x:Class="SimpleJournal.Window2"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SimpleJournal"
+        xmlns:Fluent="urn:fluent-ribbon"
+        xmlns:res="clr-namespace:SimpleJournal.Properties"
+        FlowDirection="LeftToRight"
+        xmlns:controls="clr-namespace:SimpleJournal.Controls"
+        mc:Ignorable="d"
+        Title="SimpleJournal - Neues Journal"  Height="700"
+        Width="1130">
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="boolToVisibilityConverter" />
+        <local:SelectedIndexToColumnSpanConverter x:Key="indexToColumn"/>
+        <local:SelectedIndexToVisiblityConverter x:Key="indexToVisibilty"/>   
+    </Window.Resources>
+    <Window.CommandBindings>
+        <CommandBinding x:Name="NewCommand" Command="ApplicationCommands.New" Executed="NewCommand_Executed" CanExecute="NewCommand_CanExecute" />        
+        <CommandBinding x:Name="SaveCommand" Command="ApplicationCommands.Save" Executed="SaveCommand_Executed" CanExecute="SaveCommand_CanExecute" />
+        <CommandBinding x:Name="UndoCommand" Command="ApplicationCommands.Undo" Executed="UndoCommand_Executed" CanExecute="UndoCommand_CanExecute" />
+        <CommandBinding x:Name="RedoCommand" Command="ApplicationCommands.Redo" Executed="RedoCommand_Executed" CanExecute="RedoCommand_CanExecute" />
+        <CommandBinding x:Name="PrintCommand" Command="ApplicationCommands.Print" Executed="PrintCommand_Executed" CanExecute="PrintCommand_CanExecute" />
+        <CommandBinding x:Name="InsertCommand" Command="ApplicationCommands.Paste" Executed="InsertCommand_Executed" CanExecute="InsertCommand_CanExecute" />
+        <CommandBinding x:Name="InsertFromClipboardCommand" Command="local:Commands.InsertFromClipboard" CanExecute="InsertFromClipboardCommand_CanExecute" Executed="InsertFromClipboardCommand_Executed" />
+    </Window.CommandBindings>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Fluent:Ribbon x:Name="ribbon" AutomaticStateManagement="True" >
+            <Fluent:Ribbon.Menu>
+                <Fluent:ApplicationMenu Header="{x:Static res:Resources.strFile}" MaxDropDownHeight="500" BorderBrush="Blue">
+                    <Fluent:ApplicationMenu.RightPaneContent>
+                        <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Orientation="Vertical" CanVerticallyScroll="True">
+                            <Border HorizontalAlignment="Stretch" BorderBrush="#64647F" BorderThickness="0,0,0,0">
+                                <TextBlock Text="{x:Static res:Resources.strRecentFiles}" Background="{DynamicResource Fluent.Ribbon.Brushes.MenuItem.Background}" Foreground="#64647F" TextAlignment="Left" Padding="12,4,4,4" FontWeight="SemiBold" FontSize="12" />
+                            </Border>
+                            <StackPanel HorizontalAlignment="Stretch" Height="2">
+                                <Border Height="1" BorderThickness="1" HorizontalAlignment="Stretch" BorderBrush="#DCDDDE" />
+                                <Border Height="1" BorderThickness="1" HorizontalAlignment="Stretch" BorderBrush="#FEFEFF" />
+                            </StackPanel>
+
+                            <ListBox x:Name="ListRecentlyOpenedDocuments" ItemContainerStyle="{DynamicResource _ListBoxItemStyle}" Background="Transparent" BorderThickness="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" SelectionChanged="ListRecentlyOpenedDocuments_SelectionChanged">
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid Background="Transparent" Height="40" ToolTip="{Binding Path}">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="35" />
+                                                <ColumnDefinition Width="*" />
+                                            </Grid.ColumnDefinitions>
+                                            <Image Source="pack://application:,,,/SimpleJournal;component/resources/journalicon.png" />
+                                            <TextBlock Grid.Column="1" Text="{Binding Name}" Foreground="{DynamicResource BlackBrush}" VerticalAlignment="Center" Margin="10,0,0,0" />
+                                        </Grid>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                        </StackPanel>
+                    </Fluent:ApplicationMenu.RightPaneContent>
+                    <Fluent:MenuItem x:Name="btnNew" Command="ApplicationCommands.New" Header="{x:Static res:Resources.strNewDocument}" KeyTip="N" Icon="pack://application:,,,/SimpleJournal;component/resources/add.png"  />
+                    <Fluent:MenuItem x:Name="btnOpen" Click="btnOpen_Click" Header="{x:Static res:Resources.strOpenDocument}" KeyTip="O" Icon="pack://application:,,,/SimpleJournal;component/resources/open.png"  />
+                    <Fluent:MenuItem x:Name="btnSaveProject" Click="btnSaveProject_Click" Header="{x:Static res:Resources.strSaveDocument}" KeyTip="S" Icon="pack://application:,,,/SimpleJournal;component/resources/save.png"  />
+                    <Fluent:MenuItem x:Name="btnSave" Command="ApplicationCommands.Save" Header="{x:Static res:Resources.strSaveAsDocument}" KeyTip="S" Icon="pack://application:,,,/SimpleJournal;component/resources/save.png"  />
+                    <Fluent:MenuItem x:Name="btnPrint" Command="ApplicationCommands.Print" Header="{x:Static res:Resources.strPrintDocument}" KeyTip="D" Icon="pack://application:,,,/SimpleJournal;component/resources/print.png"  />
+                    <Fluent:MenuItem x:Name="btnExport" Click="btnExport_Click" Header="{x:Static res:Resources.strExportDocument}" KeyTip="E" Icon="pack://application:,,,/SimpleJournal;component/resources/export.png"  />
+                    <Fluent:MenuItem x:Name="btnSettings" Click="btnSettings_Click" Header="{x:Static res:Resources.strSettings}" KeyTip="S" Icon="pack://application:,,,/SimpleJournal;component/resources/settings.png"  />
+                    <Fluent:MenuItem x:Name="btnAbout" Click="btnAbout_Click" Header="{x:Static res:Resources.strAbout}" KeyTip="A" Icon="pack://application:,,,/SimpleJournal;component/resources/about.png"  />
+                    <Fluent:MenuItem x:Name="btnClose" Click="btnExit_Click" Header="{x:Static res:Resources.strClose}" KeyTip="E" Icon="pack://application:,,,/SimpleJournal;component/resources/close.png"  />
+                </Fluent:ApplicationMenu>
+            </Fluent:Ribbon.Menu>
+            <Fluent:RibbonTabItem Header="{x:Static res:Resources.strStart}" ReduceOrder="(GroupEdit),(GroupPens),(GroupRubber),(GroupTools),(GroupPages)" KeyTip="ST">
+                <Fluent:RibbonTabItem.HeaderTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding}" Width="50" TextAlignment="Center" />
+                    </DataTemplate>
+                </Fluent:RibbonTabItem.HeaderTemplate>
+                <Fluent:RibbonGroupBox x:Name="GroupEdit" Header="{x:Static res:Resources.strEdit}" KeyTip="B">
+                    <controls:FluentToggleButtonRemovedToggle x:Name="btnBack" Command="ApplicationCommands.Undo" Header="{x:Static res:Resources.strBackwards}" ToolTip="{x:Static res:Resources.strBackwardsDescription}" LargeIcon="pack://application:,,,/SimpleJournal;component/resources/undo.png"/>
+                    <controls:FluentToggleButtonRemovedToggle x:Name="btnForward" Command="ApplicationCommands.Redo" Header="{x:Static res:Resources.strForward}" ToolTip="{x:Static res:Resources.strForwardDescription}" LargeIcon="pack://application:,,,/SimpleJournal;component/resources/redo.png"/>
+                </Fluent:RibbonGroupBox>
+                <Fluent:RibbonGroupBox x:Name="GroupPens" Header="{x:Static res:Resources.strPens}" KeyTip="ST">
+                    <controls:DropDownToggleButton x:Name="btnPen1" IsChecked="True" Click="btnPen1_Click" Header="1">
+                        <controls:DropDownToggleButton.LargeIcon>
+                            <Viewbox Width="32" Height="32">
+                                <Canvas Width="24" Height="24">
+                                    <Path x:Name="pathPen1" Data="M20.71,7.04C20.37,7.38 20.04,7.71 20.03,8.04C20,8.36 20.34,8.69 20.66,9C21.14,9.5 21.61,9.95 21.59,10.44C21.57,10.93 21.06,11.44 20.55,11.94L16.42,16.08L15,14.66L19.25,10.42L18.29,9.46L16.87,10.87L13.12,7.12L16.96,3.29C17.35,2.9 18,2.9 18.37,3.29L20.71,5.63C21.1,6 21.1,6.65 20.71,7.04M3,17.25L12.56,7.68L16.31,11.43L6.75,21H3V17.25Z"  />
+                                </Canvas>
+                            </Viewbox>
+                        </controls:DropDownToggleButton.LargeIcon>
+                    </controls:DropDownToggleButton>
+                    <controls:DropDownToggleButton x:Name="btnPen2" Click="btnPen2_Click" Header="2">
+                        <controls:DropDownToggleButton.LargeIcon>
+                            <Viewbox Width="32" Height="32">
+                                <Canvas Width="24" Height="24">
+                                    <Path x:Name="pathPen2" Data="M20.71,7.04C20.37,7.38 20.04,7.71 20.03,8.04C20,8.36 20.34,8.69 20.66,9C21.14,9.5 21.61,9.95 21.59,10.44C21.57,10.93 21.06,11.44 20.55,11.94L16.42,16.08L15,14.66L19.25,10.42L18.29,9.46L16.87,10.87L13.12,7.12L16.96,3.29C17.35,2.9 18,2.9 18.37,3.29L20.71,5.63C21.1,6 21.1,6.65 20.71,7.04M3,17.25L12.56,7.68L16.31,11.43L6.75,21H3V17.25Z"  />
+                                </Canvas>
+                            </Viewbox>
+                        </controls:DropDownToggleButton.LargeIcon>
+                    </controls:DropDownToggleButton>
+                    <controls:DropDownToggleButton x:Name="btnPen3" Click="btnPen3_Click" Header="3">
+                        <controls:DropDownToggleButton.LargeIcon>
+                            <Viewbox Width="32" Height="32">
+                                <Canvas Width="24" Height="24">
+                                    <Path x:Name="pathPen3" Data="M20.71,7.04C20.37,7.38 20.04,7.71 20.03,8.04C20,8.36 20.34,8.69 20.66,9C21.14,9.5 21.61,9.95 21.59,10.44C21.57,10.93 21.06,11.44 20.55,11.94L16.42,16.08L15,14.66L19.25,10.42L18.29,9.46L16.87,10.87L13.12,7.12L16.96,3.29C17.35,2.9 18,2.9 18.37,3.29L20.71,5.63C21.1,6 21.1,6.65 20.71,7.04M3,17.25L12.56,7.68L16.31,11.43L6.75,21H3V17.25Z"  />
+                                </Canvas>
+                            </Viewbox>
+                        </controls:DropDownToggleButton.LargeIcon>
+                    </controls:DropDownToggleButton>
+                    <controls:DropDownToggleButton x:Name="btnPen4" Click="btnPen4_Click" Header="4">
+                        <controls:DropDownToggleButton.LargeIcon>
+                            <Viewbox Width="32" Height="32">
+                                <Canvas Width="24" Height="24">
+                                    <Path x:Name="pathPen4" Data="M20.71,7.04C20.37,7.38 20.04,7.71 20.03,8.04C20,8.36 20.34,8.69 20.66,9C21.14,9.5 21.61,9.95 21.59,10.44C21.57,10.93 21.06,11.44 20.55,11.94L16.42,16.08L15,14.66L19.25,10.42L18.29,9.46L16.87,10.87L13.12,7.12L16.96,3.29C17.35,2.9 18,2.9 18.37,3.29L20.71,5.63C21.1,6 21.1,6.65 20.71,7.04M3,17.25L12.56,7.68L16.31,11.43L6.75,21H3V17.25Z"  />
+                                </Canvas>
+                            </Viewbox>
+                        </controls:DropDownToggleButton.LargeIcon>
+                    </controls:DropDownToggleButton>
+                    <controls:DropDownToggleButton x:Name="btnTextMarker" Click="btnTextMarker_Click" Header="{x:Static res:Resources.strHighlight}" >
+                        <controls:DropDownToggleButton.LargeIcon>
+                            <Viewbox Width="32" Height="32">
+                                <Canvas Width="24" Height="24">
+                                    <Path x:Name="markerPath" Data="M18.5,1.15C17.97,1.15 17.46,1.34 17.07,1.73L11.26,7.55L16.91,13.2L22.73,7.39C23.5,6.61 23.5,5.35 22.73,4.56L19.89,1.73C19.5,1.34 19,1.15 18.5,1.15M10.3,8.5L4.34,14.46C3.56,15.24 3.56,16.5 4.36,17.31C3.14,18.54 1.9,19.77 0.67,21H6.33L7.19,20.14C7.97,20.9 9.22,20.89 10,20.12L15.95,14.16" Fill="Black" />
+                                </Canvas>
+                            </Viewbox>
+                        </controls:DropDownToggleButton.LargeIcon>
+                    </controls:DropDownToggleButton>
+                    <controls:DropDownToggleButton x:Name="btnRuler" Click="btnRuler_Click" Header="{x:Static res:Resources.strRuler}" ToolTip="{x:Static res:Resources.strRulerDescription}" Width="50">
+                        <controls:DropDownToggleButton.LargeIcon>
+                            <Viewbox Width="32" Height="32">
+                                <Image Source="pack://application:,,,/SimpleJournal;component/resources/ruler.png"/>
+                            </Viewbox>
+                        </controls:DropDownToggleButton.LargeIcon>
+                    </controls:DropDownToggleButton>
+                </Fluent:RibbonGroupBox>
+                <Fluent:RibbonGroupBox x:Name="GroupTools" Header="{x:Static res:Resources.strTools}" KeyTip="W">
+                    <Fluent:ToggleButton x:Name="btnRubberGrob" Click="btnRubberGrob_Click" Header="{x:Static res:Resources.strStrokes}" ToolTip="{x:Static res:Resources.strStrokesDescription}" LargeIcon="pack://application:,,,/SimpleJournal;component/resources/rubber.png"/>
+                    <controls:DropDownToggleButton x:Name="btnRubberFine" Click="btnRubberFine_Click" Width="45" Header="{x:Static res:Resources.strFree}" ToolTip="{x:Static res:Resources.strFreeDescription}">
+                        <controls:DropDownToggleButton.LargeIcon>
+                            <Viewbox Width="32" Height="32">
+                                <Image Source="pack://application:,,,/SimpleJournal;component/resources/rubber.png"/>
+                            </Viewbox>
+                        </controls:DropDownToggleButton.LargeIcon>
+                    </controls:DropDownToggleButton>
+                    <controls:DropDownToggleButton x:Name="btnSelect" Click="btnSelect_Click" Header="{x:Static res:Resources.strSelect}" ToolTip="{x:Static res:Resources.strSelectDescription}" Width="52">
+                        <controls:DropDownToggleButton.LargeIcon>
+                            <Viewbox Width="32" Height="32">
+                                <Image Source="pack://application:,,,/SimpleJournal;component/resources/selectarea.png"/>
+                            </Viewbox>
+                        </controls:DropDownToggleButton.LargeIcon>
+                    </controls:DropDownToggleButton>
+                    <Fluent:Button x:Name="btnRemoveSelectedStrokes" Click="btnRemoveSelectedStrokes_Click" Size="Middle" ToolTip="{x:Static res:Resources.strRemoveDescription}" Header="{x:Static res:Resources.strRemove}" Icon="pack://application:,,,/SimpleJournal;component/resources/delete.png"/>
+                    <Fluent:Button x:Name="btnCopy" Click="BtnCopy_Click_1" Size="Middle" Header="{x:Static res:Resources.strCopy}" ToolTip="{x:Static res:Resources.strCopyDescription}" Icon="pack://application:,,,/SimpleJournal;component/resources/copy.png"/>
+                    <Fluent:Button x:Name="btnPaste" Click="BtnPaste_Click_1" Size="Middle" Header="{x:Static res:Resources.strPaste}" ToolTip="{x:Static res:Resources.strPasteDescription}" Icon="pack://application:,,,/SimpleJournal;component/resources/paste.png"/>
+                </Fluent:RibbonGroupBox>
+
+                <Fluent:RibbonGroupBox x:Name="GroupForms" Header="{x:Static res:Resources.strShapesHeader}">
+                    <controls:DropDownToggleButton x:Name="btnInsertSimpleForm" Click="btnInsertSimpleForm_Click_1" Header="{x:Static res:Resources.strToolFormFixed}" ToolTip="{x:Static res:Resources.strInsertSimpleFormToolTip}" Width="52">
+                        <controls:DropDownToggleButton.LargeIcon>
+                            <Viewbox Width="32" Height="32">
+                                <Image Source="pack://application:,,,/SimpleJournal;component/resources/shapes.png"/>
+                            </Viewbox>
+                        </controls:DropDownToggleButton.LargeIcon>
+                    </controls:DropDownToggleButton>
+                    <Fluent:ToggleButton x:Name="btnRecogniziation" Click="btnRecogniziation_Click" Header="{x:Static res:Resources.strToolFormFree}" ToolTip="{x:Static res:Resources.strRecognizationDescription}" Width="50" LargeIcon="pack://application:,,,/SimpleJournal;component/resources/shapes.png"/>
+                    <controls:DropDownToggleButton x:Name="btnFreeHandPolygon" Click="BtnFreeHandPolygon_Click" Header="{x:Static res:Resources.strPolygonButton}" ToolTip="{x:Static res:Resources.strPolygonToolTip}" Width="50">
+                        <controls:DropDownToggleButton.LargeIcon>
+                            <Viewbox Width="32" Height="32">
+                                <Image Source="pack://application:,,,/SimpleJournal;component/resources/polygon.png"/>
+                            </Viewbox>
+                        </controls:DropDownToggleButton.LargeIcon>
+                    </controls:DropDownToggleButton>
+                    <controls:DropDownToggleButton x:Name="btnInsertPlot" Header="XY" Foreground="{DynamicResource BlackBrush}" Width="50" Click="btnCooardinateSystem_Click" ToolTip="{x:Static res:Resources.strInsertPlotToolTip}">
+                        <controls:DropDownToggleButton.LargeIcon>
+                            <Viewbox Width="32" Height="32">
+                                <Canvas Width="48" Height="48" UseLayoutRounding="True" SnapsToDevicePixels="True">
+                                    <Path Data="M 0 8 L 4 0 L 8 8 Z" Fill="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type controls:DropDownToggleButton}}, Path=Foreground}" Canvas.Left="1" Canvas.Top="1.125" />
+                                    <Line Stroke="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type controls:DropDownToggleButton}}, Path=Foreground}" StrokeThickness="2" X1="5" X2="5" Y1="8" Y2="41" />
+                                    <Line Stroke="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type controls:DropDownToggleButton}}, Path=Foreground}" StrokeThickness="2" X1="5" X2="36" Y1="40" Y2="40" />
+                                    <Path Data="M 0 0 L 8 4 L 0 8 Z" Fill="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type controls:DropDownToggleButton}}, Path=Foreground}" Canvas.Left="34.625" Canvas.Top="35.875"/>
+                                    <TextBlock Text="X" Canvas.Left="34" Canvas.Top="22" />
+                                    <TextBlock Text="Y" Canvas.Left="10" Canvas.Top="-2" />
+                                </Canvas>
+                            </Viewbox>
+                        </controls:DropDownToggleButton.LargeIcon>
+                    </controls:DropDownToggleButton>
+
+                </Fluent:RibbonGroupBox>
+                
+                <Fluent:RibbonGroupBox x:Name="GroupPages" Header="{x:Static res:Resources.strPages}" KeyTip="S">
+                    <controls:DropDownToggleButton x:Name="btnInsertNewPage" Click="BtnInsertNewPage_Click" Header="{x:Static res:Resources.strAddPage}" ToolTip="{x:Static res:Resources.strAddPageTooltip}" IsToggleable="False" Width="65">
+                        <controls:DropDownToggleButton.LargeIcon>
+                            <Viewbox Width="32" Height="32">
+                                <Image x:Name="ButtonInsertNewPageIcon" Source="pack://application:,,,/SimpleJournal;component/resources/add.png"/>
+                            </Viewbox>
+                        </controls:DropDownToggleButton.LargeIcon>
+                    </controls:DropDownToggleButton>
+                    <controls:FluentToggleButtonRemovedToggle x:Name="btnDeletePage" Click="btnDeletePage_Click"  Header="{x:Static res:Resources.strDeletePage}" ToolTip="{x:Static res:Resources.strDeletePageTooltip}" Width="55" LargeIcon="pack://application:,,,/SimpleJournal;component/resources/deletepage.png"/>
+                    <controls:FluentToggleButtonRemovedToggle x:Name="btnClearPage" Click="btnClearPage_Click" Header="{x:Static res:Resources.strClearPage}" ToolTip="{x:Static res:Resources.strClearPageTooltip}" Width="55" LargeIcon="pack://application:,,,/SimpleJournal;component/resources/clear.png"/>
+                    <controls:FluentToggleButtonRemovedToggle x:Name="btnManagePages" Click="BtnManagePages_Click" Header="{x:Static res:Resources.strManagePage}" ToolTip="{x:Static res:Resources.strManagePageTooltip}" Width="60" LargeIcon="pack://application:,,,/SimpleJournal;component/resources/editpage.png"/>
+                    <!-- Make some space for the combobox-->
+                    <Fluent:Button Size="Middle" Visibility="Hidden"/>
+                    <Fluent:ComboBox x:Name="cmbPages" Size="Large" Width="93" IsEditable="False" SelectionChanged="ComboBox_SelectionChanged" HorizontalContentAlignment="Center" />
+                </Fluent:RibbonGroupBox>
+            </Fluent:RibbonTabItem>
+            <Fluent:RibbonTabItem Header="{x:Static res:Resources.strPaste}" KeyTip="EI">
+                <Fluent:RibbonTabItem.HeaderTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding}" Width="80" TextAlignment="Center" />
+                    </DataTemplate>
+                </Fluent:RibbonTabItem.HeaderTemplate>
+                <Fluent:RibbonGroupBox Header="{x:Static res:Resources.strClipboard}" KeyTip="ZW" Width="100">
+                    <Fluent:Button x:Name="btnInsertFromClipboard" Click="btnInsertFromClipboard_Click" Header="{x:Static res:Resources.strObject}" LargeIcon="pack://application:,,,/SimpleJournal;component/resources/paste.png"/>
+                </Fluent:RibbonGroupBox>
+                <Fluent:RibbonGroupBox Header="{x:Static res:Resources.strSelection}" KeyTip="AU">
+                    <Fluent:Button x:Name="btnCreateForm" Click="btnCreateForm_Click" Header="{x:Static res:Resources.strConvertToForm}" LargeIcon="pack://application:,,,/SimpleJournal;component/resources/shapes.png"/>
+                </Fluent:RibbonGroupBox>
+                <Fluent:RibbonGroupBox Header="{x:Static res:Resources.strText}" KeyTip="TE">
+                    <Fluent:Button x:Name="btnInsertText" Click="btnInsertText_Click" Header="{x:Static res:Resources.strInsertText}" LargeIcon="pack://application:,,,/SimpleJournal;component/resources/text.png"/>
+                    <Fluent:Button x:Name="btnInsertDate" Click="btnInsertDate_Click" Header="{x:Static res:Resources.strInsertDate}" LargeIcon="pack://application:,,,/SimpleJournal;component/resources/text.png"/>
+                </Fluent:RibbonGroupBox>
+                <Fluent:RibbonGroupBox Header="{x:Static res:Resources.strImage}" KeyTip="BI">
+                    <Fluent:Button x:Name="btnInsertImage" Click="btnInsertImage_Click" Header="{x:Static res:Resources.strInsertImage}" LargeIcon="pack://application:,,,/SimpleJournal;component/resources/image.png"/>
+                </Fluent:RibbonGroupBox>
+            </Fluent:RibbonTabItem>
+            <Fluent:RibbonTabItem Header="{x:Static res:Resources.strText}" KeyTip="TE">
+                <Fluent:RibbonTabItem.HeaderTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding}" Width="50" TextAlignment="Center" />
+                    </DataTemplate>
+                </Fluent:RibbonTabItem.HeaderTemplate>
+                <Fluent:RibbonGroupBox Header="{x:Static res:Resources.strTextRecognization}">
+                    <Fluent:Button x:Name="btnTextDetection" Click="test_Click" Header="{x:Static res:Resources.strTextDectection}" LargeIcon="pack://application:,,,/SimpleJournal;component/resources/textdetection.png"/>
+                    <Fluent:Button x:Name="btnSearch" Click="btnSearch_Click" Header="{x:Static res:Resources.strTextSearch}" LargeIcon="pack://application:,,,/SimpleJournal;component/resources/search.png"/>
+                </Fluent:RibbonGroupBox>
+            </Fluent:RibbonTabItem>
+            <Fluent:RibbonTabItem Header="{x:Static res:Resources.strView}" KeyTip="AN">
+                <Fluent:RibbonTabItem.HeaderTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding}" Width="50" TextAlignment="Center" />
+                    </DataTemplate>
+                </Fluent:RibbonTabItem.HeaderTemplate>
+                <Fluent:RibbonGroupBox Header="{x:Static res:Resources.strSidepage}">
+                    <Fluent:Button x:Name="btnDisplaySidebar" Click="btnDisplaySidebar_Click"  Header="{x:Static res:Resources.strDisplayObjects}" LargeIcon="pack://application:,,,/SimpleJournal;component/resources/sidebar.png"/>
+                </Fluent:RibbonGroupBox>
+                <Fluent:RibbonGroupBox Header="{x:Static res:Resources.strZoom}">
+                    <Fluent:ToggleButton x:Name="btnZoom100" Header="100%" Click="btnZoom100_Click" LargeIcon="pack://application:,,,/SimpleJournal;component/resources/zoom.png"/>
+                    <Fluent:ToggleButton x:Name="btnZoom120" Header="120%" Click="btnZoom120_Click" LargeIcon="pack://application:,,,/SimpleJournal;component/resources/zoom.png"/>
+                    <Fluent:ToggleButton x:Name="btnZoom150" Header="150%" Click="btnZoom150_Click" LargeIcon="pack://application:,,,/SimpleJournal;component/resources/zoom.png"/>
+                    <Fluent:ToggleButton x:Name="btnZoom180" Header="180%" Click="btnZoom180_Click" LargeIcon="pack://application:,,,/SimpleJournal;component/resources/zoom.png"/>
+                    <Fluent:ToggleButton x:Name="btnZoom200" Header="200%" Click="btnZoom200_Click" LargeIcon="pack://application:,,,/SimpleJournal;component/resources/zoom.png"/>
+                </Fluent:RibbonGroupBox>
+            </Fluent:RibbonTabItem>
+            <Fluent:Ribbon.ToolBarItems>
+                <Fluent:Button Size="Small" Icon="pack://application:,,,/SimpleJournal;component/resources/help.png" x:Name="btnHelp" Click="BtnHelp_Click"/>
+            </Fluent:Ribbon.ToolBarItems>
+            <Fluent:Ribbon.QuickAccessItems>
+                <Fluent:QuickAccessMenuItem x:Name="QuickAccessButtonNew" IsChecked="True">
+                    <Fluent:Button Header="{x:Static res:Resources.strNewDocument}" Command="ApplicationCommands.New" Icon="pack://application:,,,/SimpleJournal;component/resources/add.png" />
+                </Fluent:QuickAccessMenuItem>
+                <Fluent:QuickAccessMenuItem x:Name="QuickAccessButtonSave" IsChecked="True">
+                    <Fluent:Button Header="{x:Static res:Resources.strSave}" Command="ApplicationCommands.Save" Icon="pack://application:,,,/SimpleJournal;component/resources/save.png" />
+                </Fluent:QuickAccessMenuItem>
+                <Fluent:QuickAccessMenuItem x:Name="QuickAccessButtonUndo" IsChecked="True">
+                    <Fluent:Button Header="{x:Static res:Resources.strUndo}" Command="ApplicationCommands.Undo" Icon="pack://application:,,,/SimpleJournal;component/resources/undo.png" />
+                </Fluent:QuickAccessMenuItem>
+                <Fluent:QuickAccessMenuItem x:Name="QuickAccessButtonRedo" IsChecked="True">
+                    <Fluent:Button Header="{x:Static res:Resources.strRedo}" Command="ApplicationCommands.Redo" Icon="pack://application:,,,/SimpleJournal;component/resources/redo.png" />
+                </Fluent:QuickAccessMenuItem>
+                <Fluent:QuickAccessMenuItem x:Name="QuickAccessButtonPrint" IsChecked="True">
+                    <Fluent:Button Header="{x:Static res:Resources.strPrintDocument}" Command="ApplicationCommands.Print" Icon="pack://application:,,,/SimpleJournal;component/resources/print.png" />
+                </Fluent:QuickAccessMenuItem>
+                <Fluent:QuickAccessMenuItem x:Name="QuickAccessButtonInsertImage" IsChecked="True">
+                    <Fluent:Button Header="{x:Static res:Resources.strInsertImage}" Command="ApplicationCommands.Paste" Icon="pack://application:,,,/SimpleJournal;component/resources/add_image.png" />
+                </Fluent:QuickAccessMenuItem>
+                <Fluent:QuickAccessMenuItem x:Name="QuickAccessButtonInsertFromClipboard" IsChecked="True">
+                    <Fluent:Button Header="{x:Static res:Resources.strInsertFromClipboard}" Command="local:Commands.InsertFromClipboard" Icon="pack://application:,,,/SimpleJournal;component/resources/insertimgfromc.png" />
+                </Fluent:QuickAccessMenuItem>                               
+            </Fluent:Ribbon.QuickAccessItems>
+        </Fluent:Ribbon>
+        <Grid Grid.Row="1">
+            <Grid x:Name="pnlSidebar" Panel.ZIndex="1" HorizontalAlignment="Left" Width="200" Background="{DynamicResource Item.SidebarBackgroundColor}" Visibility="Collapsed">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <DockPanel Grid.Row="0" HorizontalAlignment="Stretch">
+                    <TextBlock Margin="5,10,0,0" FontWeight="Bold" Foreground="{DynamicResource BlackBrush}">
+                        <Run Text="{x:Static res:Resources.strObjects}" />
+                        <Run x:Name="TextObjectCounter" Text="0" />
+                    </TextBlock>
+                    <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                        <Button Margin="5" Width="30" Height="30" x:Name="btnDeleteSidebarItem" Click="btnDeleteSidebarItem_Click" ToolTip="{x:Static res:Resources.strRemoveObjectsDescription}">
+                            <Button.Content>
+                                <Image Source="resources/remove.png"/>
+                            </Button.Content>
+                        </Button>
+                        <Button Margin="5" Width="30" Height="30" x:Name="ButtonBringToFront" Click="ButtonBringToFront_Click" ToolTip="{x:Static res:Resources.strBringToFront}">
+                            <Button.Content>
+                                <Image Source="resources/front.png"/>
+                            </Button.Content>
+                        </Button>
+                        <Button HorizontalAlignment="Right" Margin="5" Width="30" Height="30" x:Name="btnSwitchSidebarOff" Click="btnSwitchSidebarOff_Click" ToolTip="{x:Static res:Resources.strCloseSidebar}">
+                            <Button.Content>
+                                <Image Source="resources/close.png"/>
+                            </Button.Content>
+                        </Button>
+                    </StackPanel>
+                </DockPanel>
+                <controls:ListBoxScroll x:Name="pnlItems" Margin="2,2" Background="Transparent" ItemContainerStyle="{DynamicResource _ListBoxItemStyle}" Grid.Row="1" Grid.RowSpan="{Binding ElementName=pnlItems, Path=SelectedIndex, Converter={StaticResource indexToColumn}}" SelectionChanged="pnlItems_SelectionChanged" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" SelectionMode="Multiple" />
+
+                <StackPanel Grid.Row="2" Margin="0,5,0,0" Background="Transparent" Visibility="{Binding ElementName=pnlItems, Path=SelectedIndex, Converter={StaticResource indexToVisibilty}}">
+                    <controls:ImageDesign Margin="0,5,0,0" x:Name="objImgSettings" OnChanged="ObjImgSettings_Changed" Visibility="Collapsed"/>
+                    <controls:ShapeDesign Margin="0,5,0,0" x:Name="objShapeSettings" OnChanged="ObjShapeSettings_OnChanged_1" Visibility="Collapsed"/>
+                    <controls:TextDesign Margin="0,5,0,0" x:Name="objTextSettings" OnChanged="ObjTextSettings_OnChanged" Visibility="Collapsed"/>
+                </StackPanel>
+            </Grid>
+            <controls:AnimatedScrollViewer CanContentScroll="False" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"  x:Name="mainScrollView" ScrollChanged="mainScrollView_ScrollChanged" SnapsToDevicePixels="True" UseLayoutRounding="True">
+                <StackPanel x:Name="pages" Orientation="Vertical" Background="Transparent" PreviewMouseDown="Pages_MouseDown"  PreviewMouseUp="Pages_PreviewMouseUp" MouseLeave="Pages_MouseLeave" SnapsToDevicePixels="True" UseLayoutRounding="True" />
+            </controls:AnimatedScrollViewer>
+        </Grid>
+    </Grid>
+</Fluent:RibbonWindow>

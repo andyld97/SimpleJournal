@@ -1,0 +1,37 @@
+﻿<UserControl x:Class="SimpleJournal.Controls.PenSizeControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SimpleJournal.Controls"
+             xmlns:res="clr-namespace:SimpleJournal.Properties"
+             mc:Ignorable="d" >
+    <StackPanel>
+        <TextBlock Margin="5,5,0,2" FontSize="12" Text="{x:Static res:Resources.strSizes}" FontWeight="Bold"/>
+        <Grid Height="30" HorizontalAlignment="Center">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="30"/>
+                <ColumnDefinition Width="30"/>
+                <ColumnDefinition Width="30"/>
+                <ColumnDefinition Width="30"/>
+                <ColumnDefinition Width="30"/>
+            </Grid.ColumnDefinitions>
+
+            <ToggleButton x:Name="btnSize1" Click="BtnSize1_Click" Grid.Column="0">
+                <Ellipse Margin="1" Stroke="Black" Fill="Black" Width="4" Height="4"/>
+            </ToggleButton>
+            <ToggleButton x:Name="btnSize2" Click="BtnSize2_Click"  Grid.Column="1">
+                <Ellipse Margin="1" Stroke="Black" Fill="Black" Width="6" Height="6"/>
+            </ToggleButton>
+            <ToggleButton x:Name="btnSize3" Click="BtnSize3_Click" Grid.Column="2">
+                <Ellipse Margin="1" Stroke="Black" Fill="Black" Width="8" Height="8"/>
+            </ToggleButton>
+            <ToggleButton x:Name="btnSize4" Click="BtnSize4_Click" Grid.Column="3">
+                <Ellipse Margin="1" Stroke="Black" Fill="Black" Width="9" Height="9"/>
+            </ToggleButton>
+            <ToggleButton x:Name="btnSize5" Click="BtnSize5_Click" Grid.Column="4">
+                <Ellipse Margin="1" Stroke="Black" Fill="Black" Width="10" Height="10"/>
+            </ToggleButton>
+        </Grid>
+    </StackPanel>
+</UserControl>
