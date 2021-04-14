@@ -24,6 +24,7 @@ Due to store-restrictions both versions are different: The normal version suppor
 ## What is "Disable Touch"
 This is a small solution making SimpleJournal more usable on devices which support touch input (not only pen input). A page in SimpleJournal is based on the WPF `InkCanvas` which doesn't makes a difference according to the input source, so if you'll write via mouse, touch or pen this control cannot distinguish which input you have used respectively I wasn't able to differentiate it in the control (the newer `InkCanvas` from UWP Framework can do this). The problem is if you are writing with a pen while you put down your hand on your touch screen, both inputs are recognized and drawn and that leads to annoying results.
 To prevent this I came up with a soultion which completely disables your touch screen based on `devcon`. This works the same way as your hardware manager do, as if you click on `Disable Device`. This is implemented as an option in the settings and it's not activated in the default settings. To enhance the usability your touch screen will be deactivated on the startup of SimpleJournal and will be reactivated if you close the last instance of SimpleJournal.
+
 For the non-store version I created a simple [tool](https://code-a-software.net/simplejournal/setups/tdm.zip) which you can use for en/disabling your touch screen.
 
 ## Thanks to
