@@ -73,10 +73,35 @@ namespace SimpleJournal.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Byte[].
         /// </summary>
+        public static byte[] SimpleJournal_Shared {
+            get {
+                object obj = ResourceManager.GetObject("SimpleJournal_Shared", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Byte[].
+        /// </summary>
         public static byte[] SJFileAssoc {
             get {
                 object obj = ResourceManager.GetObject("SJFileAssoc", resourceCulture);
                 return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+        ///&lt;configuration&gt;
+        ///    &lt;startup&gt; 
+        ///        &lt;supportedRuntime version=&quot;v4.0&quot; sku=&quot;.NETFramework,Version=v4.8&quot;/&gt;
+        ///    &lt;/startup&gt;
+        ///&lt;/configuration&gt;
+        /// ähnelt.
+        /// </summary>
+        public static string SJFileAssoc_exe {
+            get {
+                return ResourceManager.GetString("SJFileAssoc_exe", resourceCulture);
             }
         }
         

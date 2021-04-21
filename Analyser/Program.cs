@@ -1,4 +1,6 @@
-﻿using System;
+﻿using SimpleJournal.Shared;
+using SimpleJournal.Shared.Extensions;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -185,7 +187,7 @@ namespace Analyzer
                 if (currentNode is WritingRegionNode textNode)
                 {
                     textNode.PartiallyPopulated = true;
-                    if (StringsAreEqual(textNode.GetRecognizedString(), text))
+                    if (textNode.GetRecognizedString().AreEqual(text))
                     {
                         // Get position in text
                         string result = textNode.GetRecognizedString().ToLower();
@@ -267,17 +269,6 @@ namespace Analyzer
 
             foreach (ContextNode subNode in node.SubNodes)
                 AddShapes(subNode);
-        }
-
-        public static bool StringsAreEqual(string str1, string str2, bool ignoreCase = true)
-        {
-            if (str1 == str2)
-                return true;
-
-            if (ignoreCase)
-                return str1.ToLower().Contains(str2.ToLower());
-            else
-                return str1.Contains(str2);
         }
     }
 }

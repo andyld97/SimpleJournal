@@ -132,7 +132,7 @@
     </Reference>
     <Reference Include="Device, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>PrivateReferences\Device.dll</HintPath>
+      <HintPath>..\External Libraries\Device.dll</HintPath>
     </Reference>
     <Reference Include="Fluent, Version=8.0.0.0, Culture=neutral, PublicKeyToken=3e436e32a8c5546f, processorArchitecture=MSIL">
       <HintPath>..\packages\Fluent.Ribbon.8.0.3\lib\net462\Fluent.dll</HintPath>
@@ -148,7 +148,7 @@
     <Reference Include="PresentationFramework.Classic" />
     <Reference Include="Serialization, Version=1.0.0.1, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>F:\Andy's Dokumente\Eigene Librays\Serialization\Serialization\bin\Debug\Serialization.dll</HintPath>
+      <HintPath>..\External Libraries\Serialization.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -278,7 +278,6 @@
       <DependentUpon>ColorPicker.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\CustomListBoxItem.cs" />
-    <Compile Include="Helper\ConvexHull.cs" />
     <Compile Include="Data\JournalShape.cs" />
     <Compile Include="Data\JournalText.cs" />
     <Compile Include="Dialogs\SettingsDialog.xaml.cs">
@@ -500,6 +499,7 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="resources\SJFileAssoc.exe.config" />
     <None Include="Store Packages\ReferencePackage %28SimpleJournal%29 %2826%29 %281.2.418.0%29 %2830.03.19%29.msix" />
     <None Include="Store Packages\ReferencePackage %28SimpleJournal%29 %2827%29 %281.2.500.0%29 %2813.04.19%29.msix" />
     <None Include="Store Packages\ReferencePackage %28SimpleJournal%29 %2828%29 %281.2.501.0%29 %2815.04.19%29.msix" />
@@ -614,9 +614,6 @@
     <Resource Include="resources\undo.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="PrivateReferences\Serialization.dll" />
-  </ItemGroup>
-  <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
       <Visible>False</Visible>
       <ProductName>Microsoft .NET Framework 4.7.2 %28x86 und x64%29</ProductName>
@@ -701,9 +698,6 @@
     <Resource Include="resources\insertimgfromc.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="PrivateReferences\Device.dll" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="resources\backgrounds\sand.jpg" />
     <Resource Include="resources\backgrounds\wooden-1.jpg" />
   </ItemGroup>
@@ -714,19 +708,26 @@
     <Resource Include="resources\backgrounds\wooden-2.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Shared Libraries\SimpleJournal.Shared\SimpleJournal.Shared.csproj">
+      <Project>{079AFA71-58C5-4377-B2D6-B0218A66C0D9}</Project>
+      <Name>SimpleJournal.Shared</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SJFileAssoc\SJFileAssoc.csproj">
       <Project>{32f31565-e65e-4e7c-9a7f-90e26a1da287}</Project>
       <Name>SJFileAssoc</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="resources\SJFileAssoc.exe" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="resources\touch_off.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="resources\touch_on.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\SJFileAssoc.exe" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\SimpleJournal.Shared.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

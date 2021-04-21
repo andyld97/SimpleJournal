@@ -3,13 +3,14 @@ using Newtonsoft.Json;
 using SimpleJournal.Controls;
 using SimpleJournal.Data;
 using SimpleJournal.Dialogs;
+using SimpleJournal.Shared;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
-using System.Security.Cryptography;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -94,13 +95,13 @@ namespace SimpleJournal
             if (Settings.Instance.UseDarkMode)
             {
                 sidebarColor = (System.Windows.Media.Color)ColorConverter.ConvertFromString("#FF252525");
-                linkColor = System.Windows.Media.Colors.White; 
+                linkColor = System.Windows.Media.Colors.White;
             }
             else
             {
                 sidebarColor = (System.Windows.Media.Color)ColorConverter.ConvertFromString("#AFCECACA");
                 linkColor = System.Windows.Media.Colors.MediumBlue;
-            }           
+            }
 
             // Apply own theming colors
             App.Current.Resources["Item.SidebarBackgroundColor"] = new SolidColorBrush(sidebarColor);
@@ -135,10 +136,10 @@ namespace SimpleJournal
 
         public static (Point, Point) SortPoints(this Point p1, Point p2)
         {
-          //  if (p1.Distance() < p2.Distance())
-                return (p1, p2);
+            //  if (p1.Distance() < p2.Distance())
+            return (p1, p2);
             //else
-              //  return (p2, p1);
+            //  return (p2, p1);
         }
 
         public static byte[] ExportImage(BitmapSource bi)
@@ -239,17 +240,6 @@ namespace SimpleJournal
                 js.RotationAngle = (int)rt.Angle;
 
             return js;
-        }
-
-        public static bool StringsAreEqual(string str1, string str2, bool ignoreCase = true)
-        {
-            if (str1 == str2)
-                return true;
-
-            if (ignoreCase)
-                return str1.ToLower().Contains(str2.ToLower());
-            else
-                return str1.Contains(str2);
         }
 
         /// <summary>
@@ -484,38 +474,6 @@ namespace SimpleJournal
             return new Point();
         }
 
-        public static string BuildSHA1FromFile(string fileName)
-        {
-            try
-            {
-                byte[] data = System.IO.File.ReadAllBytes(fileName);
-                return SHA1(data);
-            }
-            catch
-            {
-                // ignore
-            }
-
-            return string.Empty;
-        }
-
-        public static string SHA1(byte[] input)
-        {
-            using (SHA1Managed sha1 = new SHA1Managed())
-            {
-                var hash = sha1.ComputeHash(input);
-                var sb = new StringBuilder(hash.Length * 2);
-
-                foreach (byte b in hash)
-                {
-                    // can be "x2" if you want lowercase
-                    sb.Append(b.ToString("x2"));
-                }
-
-                return sb.ToString();
-            }
-        }
-
         /// <summary>
         /// Determines if an ellipse is a circle
         /// </summary>
@@ -550,25 +508,11 @@ namespace SimpleJournal
             string pathUpdaterExe = System.IO.Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, "Updater.exe");
             string pathUpdateSystemDotNetDotControllerDotdll = System.IO.Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, "updateSystemDotNet.Controller.dll");
 
-            try
-            {
-                if (System.IO.File.Exists(pathUpdaterExe) && GeneralHelper.BuildSHA1FromFile(pathUpdaterExe) == Consts.UpdaterExe)
-                    System.IO.File.Delete(pathUpdaterExe);
-            }
-            catch
-            {
-                // ignore
-            }
+            if (System.IO.File.Exists(pathUpdaterExe) && FileSystem.BuildSHA1FromFile(pathUpdaterExe) == Consts.UpdaterExe)
+                FileSystem.TryDeleteFile(pathUpdaterExe);
 
-            try
-            {
-                if (System.IO.File.Exists(pathUpdateSystemDotNetDotControllerDotdll) && GeneralHelper.BuildSHA1FromFile(pathUpdateSystemDotNetDotControllerDotdll) == Consts.UpdateSystemDotNetDotControllerDotdll)
-                    System.IO.File.Decrypt(pathUpdateSystemDotNetDotControllerDotdll);
-            }
-            catch
-            {
-                // ignore
-            }
+            if (System.IO.File.Exists(pathUpdateSystemDotNetDotControllerDotdll) && FileSystem.BuildSHA1FromFile(pathUpdateSystemDotNetDotControllerDotdll) == Consts.UpdateSystemDotNetDotControllerDotdll)
+                FileSystem.TryDeleteFile(pathUpdateSystemDotNetDotControllerDotdll);
         }
 
         public static bool IsConnectedToInternet()
@@ -604,7 +548,7 @@ namespace SimpleJournal
                     using (WebClient wc = new WebClient())
                     {
                         string versionJSON = wc.DownloadString(Consts.GetVersionURL);
-                        dynamic versions = JsonConvert.DeserializeObject(versionJSON);                    
+                        dynamic versions = JsonConvert.DeserializeObject(versionJSON);
 
                         Version current = Version.Parse(versions.current.normal.Value);
 
@@ -671,27 +615,26 @@ namespace SimpleJournal
         {
 #if !UWP
              return false;
-#endif
-            var tempFile = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "journal", "SjFileAssoc.exe");
+#endif            
 
-            if (System.IO.File.Exists(tempFile))
-                return false;
-
-            try
+            Dictionary<string, byte[]> resourcesToDeploy = new Dictionary<string, byte[]>()
             {
-                
-                using (System.IO.FileStream fs = new FileStream(tempFile, FileMode.CreateNew))
-                {
-                    var data = Properties.Resources.SJFileAssoc;
-                    fs.Write(data, 0, data.Length);
-                }
+                {  System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "journal", "SjFileAssoc.exe"),   Properties.Resources.SJFileAssoc },
+                {  System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "journal", "SJFileAssoc.exe.config"),  System.Text.Encoding.Default.GetBytes(  Properties.Resources.SJFileAssoc_exe) },
+                {  System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "journal", "SimpleJournal.Shared.dll"),   Properties.Resources.SimpleJournal_Shared },
+            };
 
-                return true;
-            }
-            catch (Exception)
-            {
+            // If the file exists and if it's up to date no need to install
+            if (System.IO.File.Exists(resourcesToDeploy.Keys.FirstOrDefault()) && FileVersionInfo.GetVersionInfo(resourcesToDeploy.Keys.First()).FileVersion == "1.0.1.0")
                 return false;
-            }
+            else if (System.IO.File.Exists(resourcesToDeploy.Keys.FirstOrDefault()))
+                FileSystem.TryDeleteFile(resourcesToDeploy.Keys.FirstOrDefault());
+
+            bool result = true;
+            foreach (var file in resourcesToDeploy)
+                result &= FileSystem.TryWriteAllBytes(file.Key, file.Value);
+
+            return result;
         }
     }
 }

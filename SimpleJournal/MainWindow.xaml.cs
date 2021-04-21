@@ -6,6 +6,7 @@ using SimpleJournal.Controls.Templates;
 using SimpleJournal.Data;
 using SimpleJournal.Dialogs;
 using SimpleJournal.Helper;
+using SimpleJournal.Shared;
 using SimpleJournal.Templates;
 using System;
 using System.Collections.Generic;
