@@ -34,10 +34,10 @@ namespace SimpleJournal
     /// <summary>
     /// Interaktionslogik für Window2.xaml
     /// </summary>
-    public partial class Window2 : RibbonWindow
+    public partial class MainWindow : RibbonWindow
     {
         public ObservableCollection<IPaper> CurrentJournalPages { get; private set; } = new ObservableCollection<IPaper>();
-        public static Window2 W_INSTANCE = null;
+        public static MainWindow W_INSTANCE = null;
 
         #region Private Members
         private InkCanvasEditingMode currentkInkMode = InkCanvasEditingMode.Ink;
@@ -120,7 +120,7 @@ namespace SimpleJournal
         #endregion
 
         #region Constructor
-        public Window2()
+        public MainWindow()
         {
             W_INSTANCE = this;
             isInitalized = false;

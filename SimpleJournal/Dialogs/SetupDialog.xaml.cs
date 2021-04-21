@@ -228,7 +228,7 @@ namespace SimpleJournal.Dialogs
                 SaveSettings();
 
                 // Notify Window2 that the settings changed
-                Window2.W_INSTANCE.ApplySettings();
+                MainWindow.W_INSTANCE.ApplySettings();
 
                 clickedOnExit = true;
                 this.Close();

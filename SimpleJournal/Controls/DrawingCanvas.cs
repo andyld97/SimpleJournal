@@ -176,8 +176,8 @@ namespace SimpleJournal
                     base.Children.Add(ui);
                 }
 
-                if (Window2.W_INSTANCE.IsSideBarVisible)
-                    Window2.W_INSTANCE.preventSelection = false;
+                if (MainWindow.W_INSTANCE.IsSideBarVisible)
+                    MainWindow.W_INSTANCE.preventSelection = false;
 
                 if (notifiyActionManagerOnCollectionChanged)
                     OnChanged.Invoke(GetSelectedStrokes(), (UIElement)e.NewItems[0], Actions.Action.Type.AddedChild);
@@ -190,10 +190,10 @@ namespace SimpleJournal
                     base.Children.Remove(ui);
                 }
 
-                if (base.Children.Count > 0 && Window2.W_INSTANCE.IsSideBarVisible)
-                    Window2.W_INSTANCE.preventSelection = false;
-                else if (Window2.W_INSTANCE.IsSideBarVisible)
-                    Window2.W_INSTANCE.pnlSidebar.Visibility = Visibility.Collapsed;
+                if (base.Children.Count > 0 && MainWindow.W_INSTANCE.IsSideBarVisible)
+                    MainWindow.W_INSTANCE.preventSelection = false;
+                else if (MainWindow.W_INSTANCE.IsSideBarVisible)
+                    MainWindow.W_INSTANCE.pnlSidebar.Visibility = Visibility.Collapsed;
 
                 if (notifiyActionManagerOnCollectionChanged)
                     OnChanged.Invoke(GetSelectedStrokes(), (UIElement)e.OldItems[0], Actions.Action.Type.RemovedChild);
