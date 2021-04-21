@@ -1700,4 +1700,12 @@ Klicken Sie auf Nein, um diesen Hinweis weiterhin zu erhalten!</value>
   <data name="strUseNaturalScrollingDescription" xml:space="preserve">
     <value>Beim Scrollen per Ziehen/Schieben wird die natürliche Scrollrichtung verwendet</value>
   </data>
+  <data name="strDisableTouchscreen" xml:space="preserve">
+    <value>Touchscreen deaktivieren</value>
+    <comment>MainWindow.xaml</comment>
+  </data>
+  <data name="strEnableTouchScreen" xml:space="preserve">
+    <value>Touchscreen aktivieren</value>
+    <comment>MainWindow.xaml</comment>
+  </data>
 </root>

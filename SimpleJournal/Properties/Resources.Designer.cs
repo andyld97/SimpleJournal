@@ -626,6 +626,15 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Deactivate touch screen ähnelt.
+        /// </summary>
+        public static string strDisableTouchscreen {
+            get {
+                return ResourceManager.GetString("strDisableTouchscreen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Discard Backup ähnelt.
         /// </summary>
         public static string strDiscardBackupToolTip {
@@ -847,6 +856,15 @@ namespace SimpleJournal.Properties {
         public static string strEmptyText {
             get {
                 return ResourceManager.GetString("strEmptyText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Activate touch screen ähnelt.
+        /// </summary>
+        public static string strEnableTouchScreen {
+            get {
+                return ResourceManager.GetString("strEnableTouchScreen", resourceCulture);
             }
         }
         

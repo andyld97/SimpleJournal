@@ -24,6 +24,8 @@
         <CommandBinding x:Name="PrintCommand" Command="ApplicationCommands.Print" Executed="PrintCommand_Executed" CanExecute="PrintCommand_CanExecute" />
         <CommandBinding x:Name="InsertCommand" Command="ApplicationCommands.Paste" Executed="InsertCommand_Executed" CanExecute="InsertCommand_CanExecute" />
         <CommandBinding x:Name="InsertFromClipboardCommand" Command="local:Commands.InsertFromClipboard" CanExecute="InsertFromClipboardCommand_CanExecute" Executed="InsertFromClipboardCommand_Executed" />
+        <CommandBinding x:Name="DisableTouchScreenCommand" Command="local:Commands.DisableTouchScreen" Executed="DisableTouchScreenCommand_Executed" CanExecute="DisableTouchScreenCommand_CanExecute" />
+        <CommandBinding x:Name="EnableTouchScreenCommand" Command="local:Commands.EnableTouchScreen" Executed="EnableTouchScreenCommand_Executed" CanExecute="EnableTouchScreenCommand_CanExecute" />
     </Window.CommandBindings>
     <Grid>
         <Grid.RowDefinitions>
@@ -154,7 +156,7 @@
                     <Fluent:Button x:Name="btnCopy" Click="BtnCopy_Click_1" Size="Middle" Header="{x:Static res:Resources.strCopy}" ToolTip="{x:Static res:Resources.strCopyDescription}" Icon="pack://application:,,,/SimpleJournal;component/resources/copy.png"/>
                     <Fluent:Button x:Name="btnPaste" Click="BtnPaste_Click_1" Size="Middle" Header="{x:Static res:Resources.strPaste}" ToolTip="{x:Static res:Resources.strPasteDescription}" Icon="pack://application:,,,/SimpleJournal;component/resources/paste.png"/>
                 </Fluent:RibbonGroupBox>
-
+                
                 <Fluent:RibbonGroupBox x:Name="GroupForms" Header="{x:Static res:Resources.strShapesHeader}">
                     <controls:DropDownToggleButton x:Name="btnInsertSimpleForm" Click="btnInsertSimpleForm_Click_1" Header="{x:Static res:Resources.strToolFormFixed}" ToolTip="{x:Static res:Resources.strInsertSimpleFormToolTip}" Width="52">
                         <controls:DropDownToggleButton.LargeIcon>
@@ -185,7 +187,6 @@
                             </Viewbox>
                         </controls:DropDownToggleButton.LargeIcon>
                     </controls:DropDownToggleButton>
-
                 </Fluent:RibbonGroupBox>
                 
                 <Fluent:RibbonGroupBox x:Name="GroupPages" Header="{x:Static res:Resources.strPages}" KeyTip="S">
@@ -276,7 +277,13 @@
                 </Fluent:QuickAccessMenuItem>
                 <Fluent:QuickAccessMenuItem x:Name="QuickAccessButtonInsertFromClipboard" IsChecked="True">
                     <Fluent:Button Header="{x:Static res:Resources.strInsertFromClipboard}" Command="local:Commands.InsertFromClipboard" Icon="pack://application:,,,/SimpleJournal;component/resources/insertimgfromc.png" />
-                </Fluent:QuickAccessMenuItem>                               
+                </Fluent:QuickAccessMenuItem>
+                <Fluent:QuickAccessMenuItem x:Name="QuickAccessButtonTouchOn" IsChecked="True">
+                    <Fluent:Button Header="{x:Static res:Resources.strEnableTouchScreen}" Command="local:Commands.EnableTouchScreen" Icon="pack://application:,,,/SimpleJournal;component/resources/touch_on.png" />
+                </Fluent:QuickAccessMenuItem>
+                <Fluent:QuickAccessMenuItem x:Name="QuickAccessButtonTouchOff" IsChecked="True">
+                    <Fluent:Button Header="{x:Static res:Resources.strDisableTouchscreen}" Command="local:Commands.DisableTouchScreen" Icon="pack://application:,,,/SimpleJournal;component/resources/touch_off.png" />
+                </Fluent:QuickAccessMenuItem>
             </Fluent:Ribbon.QuickAccessItems>
         </Fluent:Ribbon>
         <Grid Grid.Row="1">

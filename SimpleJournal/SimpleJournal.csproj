@@ -722,5 +722,11 @@
   <ItemGroup>
     <None Include="resources\SJFileAssoc.exe" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resources\touch_off.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resources\touch_on.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

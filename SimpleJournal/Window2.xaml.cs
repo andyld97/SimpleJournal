@@ -1807,6 +1807,34 @@ namespace SimpleJournal
 
         #region Commands
 
+        private void DisableTouchScreenCommand_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            TouchHelper.SetTouchState(false);
+        }
+
+        private void DisableTouchScreenCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+#if UWP
+            e.CanExecute = false;
+#else
+            e.CanExecute = TouchHelper.HasTouchscreen(); 
+#endif
+        }
+
+        private void EnableTouchScreenCommand_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            TouchHelper.SetTouchState(true);
+        }
+
+        private void EnableTouchScreenCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+#if UWP
+            e.CanExecute = false;
+#else
+            e.CanExecute = TouchHelper.HasTouchscreen();
+#endif
+        }
+
         private void SaveCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             SaveProject();

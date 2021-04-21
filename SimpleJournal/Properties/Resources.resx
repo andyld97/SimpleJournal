@@ -1576,7 +1576,7 @@ Click on No to continue to receive this message!</value>
   </data>
   <data name="strEditObjects" xml:space="preserve">
     <value>Edit objects:</value>
-    <comment>Window2.xaml</comment>
+    <comment>MainWindow.xaml</comment>
   </data>
   <data name="strBringToFront" xml:space="preserve">
     <value>Bring to front</value>
@@ -1718,6 +1718,14 @@ Click on No to continue to receive this message!</value>
   </data>
   <data name="strUseNaturalScrollingDescription" xml:space="preserve">
     <value>When scrolling by dragging/pushing, the natural scroll direction is used</value>
+    <comment>MainWindow.xaml</comment>
+  </data>
+  <data name="strEnableTouchScreen" xml:space="preserve">
+    <value>Activate touch screen</value>
+    <comment>MainWindow.xaml</comment>
+  </data>
+  <data name="strDisableTouchscreen" xml:space="preserve">
+    <value>Deactivate touch screen</value>
     <comment>MainWindow.xaml</comment>
   </data>
 </root>

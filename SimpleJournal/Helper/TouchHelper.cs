@@ -7,17 +7,31 @@ namespace SimpleJournal.Helper
 {
     public static class TouchHelper
     {
+        private static readonly string[] TOUCH_SCREEN_NAMES = new string[] { "touchscreen", "touch screen" };
+
         public static void SetTouchState(bool state)
         {
             try
             {
-                var device = DeviceWMI.GetPNPDevicesWithNames(new string[] { "touchscreen", "touch screen" }).FirstOrDefault();
+                var device = DeviceWMI.GetPNPDevicesWithNames(TOUCH_SCREEN_NAMES).FirstOrDefault();
                 device?.SetDeviceEnabled(state);
             }
             catch
             {
 
             }
+        }
+
+        public static bool HasTouchscreen()
+        {
+            try
+            {
+                return DeviceWMI.GetPNPDevicesWithNames(TOUCH_SCREEN_NAMES).Any();
+            }
+            catch
+            { }
+
+            return false;
         }
 
         #region Powershell MECHANIC - OLD AND UNUSED
