@@ -7,19 +7,12 @@ namespace SimpleJournal.Helper
 {
     public static class ProcessHelper
     {
-
         [DllImport("user32.dll")]
         private static extern bool SetForegroundWindow(IntPtr hWnd);
 
-        public static int SimpleJournalProcessCount
-        {
-            get
-            {
-                return Process.GetProcesses().Where(p => p.ProcessName.Contains("SimpleJournal")).Count();
-            }
-        }
-
         public static int CurrentProcID => Process.GetCurrentProcess().Id;
+
+        public static int SimpleJournalProcessCount => Process.GetProcesses().Where(p => p.ProcessName.Contains("SimpleJournal")).Count();
 
         public static bool IsProcessActiveByTaskId(int taskID)
         {
@@ -29,7 +22,6 @@ namespace SimpleJournal.Helper
 
             return process.ProcessName.Contains("SimpleJournal");
         }
-
 
         public static bool BringProcessToFront(int taskID)
         {

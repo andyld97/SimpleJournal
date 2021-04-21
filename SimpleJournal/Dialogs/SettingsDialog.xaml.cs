@@ -1,6 +1,7 @@
 ﻿using ControlzEx.Theming;
 using SimpleJournal.Data;
 using SimpleJournal.Dialogs;
+using SJFileAssoc;
 using System;
 using System.ComponentModel;
 using System.Linq;
@@ -240,14 +241,6 @@ namespace SimpleJournal
             Settings.Instance.Save();
         }
 
-        private void CheckBoxDisplayRecoverDialog_Checked(object sender, RoutedEventArgs e)
-        {
-            if (editMode)
-                return;
-
-            // Settings.Instance.ShowRecoverDialogWithEmptyFile = CheckBoxDisplayRecoverDialog.IsChecked.Value;
-            Settings.Instance.Save();
-        }
 
         private void chkUseFitToCurve_Checked(object sender, RoutedEventArgs e)
         {
@@ -348,14 +341,7 @@ namespace SimpleJournal
 
         private void DownloadTDM_RequestNavigate(object sender, System.Windows.Navigation.RequestNavigateEventArgs e)
         {
-            try
-            {
-                System.Diagnostics.Process.Start(e.Uri.ToString());
-            }
-            catch
-            {
-
-            }
+            GeneralHelper.OpenUri(e.Uri);
         }
 
         private void rb_Checked(object sender, RoutedEventArgs e)

@@ -2425,7 +2425,7 @@ namespace SimpleJournal
 
         private async void btnAbout_Click(object sender, RoutedEventArgs e)
         {
-            About aboutDialog = new About();
+            AboutDialog aboutDialog = new AboutDialog();
             await aboutDialog.Initialize();
             aboutDialog.ShowDialog();
         }

@@ -252,6 +252,25 @@ namespace SimpleJournal
                 return str1.Contains(str2);
         }
 
+        /// <summary>
+        /// Opens the default system browser with the requested uri
+        /// </summary>
+        /// <param name="uri"></param>
+        /// <returns></returns>
+        public static bool OpenUri(Uri uri)
+        {
+            try
+            {
+                System.Diagnostics.Process.Start(uri.ToString());
+                return true;
+            }
+            catch
+            {
+                // ignore 
+                return false;
+            }
+        }
+
         public static JournalResource ConvertText(this TextBlock text)
         {
             JournalText jt = new JournalText();

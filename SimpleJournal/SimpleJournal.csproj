@@ -247,8 +247,8 @@
     <Compile Include="Data\JournalPlot.cs" />
     <Compile Include="Data\Pen.cs" />
     <Compile Include="Data\RecentlyOpenedDocument.cs" />
-    <Compile Include="Dialogs\About.xaml.cs">
-      <DependentUpon>About.xaml</DependentUpon>
+    <Compile Include="Dialogs\AboutDialog.xaml.cs">
+      <DependentUpon>AboutDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Actions\Action.cs" />
     <Compile Include="Actions\ActionManager.cs" />
@@ -379,7 +379,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Dialogs\About.xaml">
+    <Page Include="Dialogs\AboutDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -438,7 +438,6 @@
     <Compile Include="Data\JournalResource.cs" />
     <Compile Include="Data\Settings.cs" />
     <Compile Include="Controls\DrawingCanvas.cs" />
-    <Compile Include="Helper\FileAssociation.cs" />
     <Compile Include="Helper\GeneralHelper.cs" />
     <Compile Include="Templates\IPaper.cs" />
     <Compile Include="Data\JournalPage.cs" />
@@ -633,9 +632,6 @@
     <None Include="resources\journalicon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="resources\SJFileAssoc.exe" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="resources\polygon.png" />
   </ItemGroup>
   <ItemGroup>
@@ -716,6 +712,15 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="resources\backgrounds\wooden-2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SJFileAssoc\SJFileAssoc.csproj">
+      <Project>{32f31565-e65e-4e7c-9a7f-90e26a1da287}</Project>
+      <Name>SJFileAssoc</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\SJFileAssoc.exe" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

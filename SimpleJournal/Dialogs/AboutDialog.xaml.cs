@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
-using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
@@ -10,11 +10,11 @@ namespace SimpleJournal
     /// <summary>
     /// Interaktionslogik für About.xaml
     /// </summary>
-    public partial class About : Window
+    public partial class AboutDialog : Window
     {
-        private readonly WebClient wb = new WebClient();
+        private readonly HttpClient httpClient = new HttpClient();
 
-        public About()
+        public AboutDialog()
         {
             InitializeComponent();
 
@@ -36,7 +36,7 @@ namespace SimpleJournal
         {
             try
             {
-                string versionsJSON = await wb.DownloadStringTaskAsync(Consts.GetVersionURL);
+                string versionsJSON = await httpClient.GetStringAsync(Consts.GetVersionURL);
                 dynamic result = JsonConvert.DeserializeObject(versionsJSON);
 
                 string currentNormalVersion = result.current.normal;
@@ -72,17 +72,10 @@ namespace SimpleJournal
 
         private void Hyperlink_RequestNavigate(object sender, System.Windows.Navigation.RequestNavigateEventArgs e)
         {
-            try
-            {
-                System.Diagnostics.Process.Start(e.Uri.ToString());
-            }
-            catch
-            {
-                // ignore
-            }
+            GeneralHelper.OpenUri(e.Uri);
         }
 
-        private void btnSendFeedback_Click(object sender, RoutedEventArgs e)
+        private async void btnSendFeedback_Click(object sender, RoutedEventArgs e)
         {
             string name = txtName.Text;
             string mail = txtMail.Text;
@@ -103,12 +96,15 @@ namespace SimpleJournal
 
             try
             {
-                wb.DownloadString(url);
+                var result = await httpClient.GetAsync(url);
 
-                // If feedback was sended successfully, clear it
-                txtFeedback.Text = string.Empty;
+                if (result.IsSuccessStatusCode)
+                {
+                    // If feedback was sended successfully, clear it
+                    txtFeedback.Text = string.Empty;
 
-                MessageBox.Show(this, Properties.Resources.strFeedbackSent, Properties.Resources.strSuccess, MessageBoxButton.OK, MessageBoxImage.Information);
+                    MessageBox.Show(this, Properties.Resources.strFeedbackSent, Properties.Resources.strSuccess, MessageBoxButton.OK, MessageBoxImage.Information);
+                }
             }
             catch (Exception)
             {

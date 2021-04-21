@@ -1,25 +1,16 @@
 ﻿using Microsoft.Win32;
 using System;
-using System.Diagnostics;
+using System.Windows.Forms;
 
-namespace SimpleJournal
+namespace SJFileAssoc
 {
-    public class FileAssociation
-    {
-        public string Extension { get; set; }
-
-        public string ProgId { get; set; }
-
-        public string FileTypeDescription { get; set; }
-
-        public string ExecutableFilePath { get; set; }
-    }
-
     public class FileAssociations
     {
         // needed so that Explorer windows get refreshed after the registry is updated
         [System.Runtime.InteropServices.DllImport("Shell32.dll")]
         private static extern int SHChangeNotify(int eventId, int flags, IntPtr item1, IntPtr item2);
+
+        public static readonly string FileAssociationIconsPath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "journal", "icon.ico");
 
         private const int SHCNE_ASSOCCHANGED = 0x8000000;
         private const int SHCNF_FLUSH = 0x1000;
@@ -28,7 +19,11 @@ namespace SimpleJournal
         {
             try
             {
-                var filePath = Process.GetCurrentProcess().MainModule.FileName;
+
+                // var filePath = Process.GetCurrentProcess().MainModule.FileName;
+                //var filePath = @"explorer shell:appsFolder\26590AndreasLeopold.SimpleJournal_77rg7g3vwn6wg!SimpleJournal";
+                //var filePath = "26590AndreasLeopold.SimpleJournal_77rg7g3vwn6wg";
+                var filePath = "SimpleJournal";
 
                 EnsureAssociationsSet(new FileAssociation
                 {
@@ -38,9 +33,9 @@ namespace SimpleJournal
                     ExecutableFilePath = filePath
                 });
             }
-            catch (Exception)
+            catch (Exception e)
             {
-
+                MessageBox.Show(e.Message);
             }
         }
 
@@ -57,7 +52,9 @@ namespace SimpleJournal
             }
 
             if (madeChanges)
+            {
                 SHChangeNotify(SHCNE_ASSOCCHANGED, SHCNF_FLUSH, IntPtr.Zero, IntPtr.Zero);
+            }
         }
 
         public static bool SetAssociation(string extension, string progId, string fileTypeDescription, string applicationFilePath)
@@ -66,17 +63,17 @@ namespace SimpleJournal
             madeChanges |= SetKeyDefaultValue(@"Software\Classes\" + extension, progId);
             madeChanges |= SetKeyDefaultValue(@"Software\Classes\" + progId, fileTypeDescription);
             madeChanges |= SetKeyDefaultValue($@"Software\Classes\{progId}\shell\open\command", "\"" + applicationFilePath + "\" \"%1\"");
+            madeChanges |= SetKeyDefaultValue($@"Software\Classes\{progId}\DefaultIcon", FileAssociationIconsPath);
             return madeChanges;
         }
 
+
         private static bool SetKeyDefaultValue(string keyPath, string value)
-        {        
+        {
             try
             {
                 using (var key = Registry.CurrentUser.CreateSubKey(keyPath))
                 {
-                    var k = key.GetValue(null);
-
                     if (key.GetValue(null) as string != value)
                     {
                         key.SetValue(null, value);
@@ -86,7 +83,7 @@ namespace SimpleJournal
             }
             catch (Exception)
             {
-                return false;
+
             }
 
             return false;
