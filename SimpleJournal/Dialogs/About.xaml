@@ -25,17 +25,20 @@
                         <Run Text="{x:Static res:Resources.strAboutText1}"/>
                         <LineBreak/>
                         <Run Text="{x:Static res:Resources.strAboutTextIcons8_1}"/>
-                        <Hyperlink NavigateUri="https://icons8.com/" RequestNavigate="icons8_RequestNavigate">Icons8</Hyperlink>
+                        <Hyperlink NavigateUri="https://icons8.com/" RequestNavigate="Hyperlink_RequestNavigate">Icons8</Hyperlink>
                         <Run Text="{x:Static res:Resources.strAboutTextIcons8_2}" />
                         <LineBreak/>
                         <Run Text="{x:Static res:Resources.strAboutTextFluentRibbon_1}"/>
-                        <Hyperlink NavigateUri="https://github.com/fluentribbon/Fluent.Ribbon" RequestNavigate="FluentRibbonReference_RequestNavigate">Fluent.Ribbon (GitHub)</Hyperlink>
+                        <Hyperlink NavigateUri="https://github.com/fluentribbon/Fluent.Ribbon" RequestNavigate="Hyperlink_RequestNavigate">Fluent.Ribbon (GitHub)</Hyperlink>
                         <Run Text="{x:Static res:Resources.strAboutTextFluentRibbon_2}"/>
                         <LineBreak/>
+                        <LineBreak />
+                        <Run Text="Source Code:" />
+                        <Hyperlink NavigateUri="https://github.com/andyld97/SimpleJournal" RequestNavigate="Hyperlink_RequestNavigate">GitHub</Hyperlink>
+                        <LineBreak />
                         <LineBreak/>
                         <Run Text="Version:" />
                         <Run x:Name="TextVersion" Text="{x:Static res:Resources.strUnknownVersion}" FontWeight="Bold"/>
-                        <!--<Run Text="- Hotfix" Foreground="Red" FontWeight="Bold" />-->
                         <LineBreak />
                         <Run Text="Release:" />
                         <Run Text="{x:Static res:Resources.strReleaseDate}" FontWeight="Bold" />

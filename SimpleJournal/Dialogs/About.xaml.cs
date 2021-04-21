@@ -37,7 +37,6 @@ namespace SimpleJournal
             try
             {
                 string versionsJSON = await wb.DownloadStringTaskAsync(Consts.GetVersionURL);
-
                 dynamic result = JsonConvert.DeserializeObject(versionsJSON);
 
                 string currentNormalVersion = result.current.normal;
@@ -71,19 +70,7 @@ namespace SimpleJournal
             { }
         }
 
-        private void icons8_RequestNavigate(object sender, System.Windows.Navigation.RequestNavigateEventArgs e)
-        {
-            try
-            {
-                System.Diagnostics.Process.Start(e.Uri.ToString());
-            }
-            catch
-            {
-                // ignore
-            }
-        }
-
-        private void FluentRibbonReference_RequestNavigate(object sender, System.Windows.Navigation.RequestNavigateEventArgs e)
+        private void Hyperlink_RequestNavigate(object sender, System.Windows.Navigation.RequestNavigateEventArgs e)
         {
             try
             {

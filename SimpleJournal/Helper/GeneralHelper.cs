@@ -526,7 +526,6 @@ namespace SimpleJournal
             return new Rect();
         }
 
-
         public static void RemoveUpdaterIfAny()
         {
             string pathUpdaterExe = System.IO.Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, "Updater.exe");
