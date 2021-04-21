@@ -102,7 +102,7 @@ namespace SimpleJournal
                 linkColor = System.Windows.Media.Colors.MediumBlue;
             }           
 
-            // Own theming
+            // Apply own theming colors
             App.Current.Resources["Item.SidebarBackgroundColor"] = new SolidColorBrush(sidebarColor);
             App.Current.Resources["Link.Foreground"] = new SolidColorBrush(linkColor);
 

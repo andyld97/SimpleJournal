@@ -272,6 +272,7 @@
     <Compile Include="Dialogs\WaitingDialog.xaml.cs">
       <DependentUpon>WaitingDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Enums.cs" />
     <Compile Include="Helper\Consts.cs" />
     <Compile Include="Controls\Color\ColorPicker.xaml.cs">
       <DependentUpon>ColorPicker.xaml</DependentUpon>

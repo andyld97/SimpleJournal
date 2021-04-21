@@ -1420,22 +1420,6 @@ namespace SimpleJournal
         #region Toolbar Handling / Private Event Handling
 
         #region Tool Handling
-        public enum Tools
-        {
-            Pencil1 = 1,
-            Pencil2 = 2,
-            Pencil3 = 3,
-            Pencil4 = 4,
-            Select = 5,
-            RubberStrokes = 6,
-            RubberFree = 7,
-            Ruler = 8,
-            Recognization = 9,
-            TextMarker = 10,
-            FreeHandPolygon = 11,
-            Form = 12,
-            CooardinateSystem = 13
-        }
 
         private InkCanvasEditingMode ConvertTool(Tools tool)
         {
@@ -1598,6 +1582,35 @@ namespace SimpleJournal
             ApplyToAllCanvas(apply);
         }
 
+        private void ChangePenValues(int index, System.Windows.Media.Color? c, int sizeIndex)
+        {
+            if (c.HasValue)
+            {
+                CurrentDrawingAttributes.Color = c.Value;
+
+                if (SelectedPen != -1)
+                    currentPens[SelectedPen].FontColor = new Data.Color(c.Value.A, c.Value.R, c.Value.G, c.Value.B);
+                else
+                    currentPens[index].FontColor = new Data.Color(c.Value.A, c.Value.R, c.Value.G, c.Value.B);
+
+                rulerDropDownTemplate.SetColor(c.Value);
+            }
+
+            if (sizeIndex >= 0)
+            {
+                currentPens[index].Size = Consts.StrokeSizes[sizeIndex].Width;
+                CurrentDrawingAttributes.Width = currentPens[index].Size;
+                CurrentDrawingAttributes.Height = currentPens[index].Size;
+
+                ApplyToAllCanvas(new Action<InkCanvas>((InkCanvas canvas) =>
+                {
+                    canvas.DefaultDrawingAttributes = CurrentDrawingAttributes;
+                }));
+            }
+
+            UpdatePenButtons();
+        }
+
         private void btnPen1_Click(object sender, EventArgs e)
         {
             if (ignoreToggleButtonHandling || !isInitalized)
@@ -1636,6 +1649,26 @@ namespace SimpleJournal
             SetStateForToggleButton(sender as DropDownToggleButton, Tools.Pencil4);
             rulerDropDownTemplate.SetColor(currentPens[3].FontColor.ToColor());
             SwitchTool(Tools.Pencil4);
+        }
+
+        private void BtnPen1_OnChanged(System.Windows.Media.Color? c, int sizeIndex)
+        {
+            ChangePenValues(0, c, sizeIndex);
+        }
+
+        private void BtnPen2_OnChanged(System.Windows.Media.Color? c, int sizeIndex)
+        {
+            ChangePenValues(1, c, sizeIndex);
+        }
+
+        private void BtnPen3_OnChanged(System.Windows.Media.Color? c, int sizeIndex)
+        {
+            ChangePenValues(2, c, sizeIndex);
+        }
+
+        private void BtnPen4_OnChanged(System.Windows.Media.Color? c, int sizeIndex)
+        {
+            ChangePenValues(3, c, sizeIndex);
         }
 
         private void btnSelect_Click(object sender, EventArgs e)
@@ -1682,6 +1715,53 @@ namespace SimpleJournal
             SetStateForToggleButton<DropDownToggleButton>(btnTextMarker, Tools.TextMarker);
             SwitchTool(Tools.TextMarker);
         }
+
+        private void BtnTextMarker_OnChanged(System.Windows.Media.Color? c, int sizeIndex)
+        {
+            if (sizeIndex != -1)
+            {
+                var textMakerResult = Consts.TextMarkerSizes[sizeIndex];
+                Settings.Instance.TextMarkerSize = textMakerResult;
+                Settings.Instance.Save();
+                currentTextMarkerAttributes.Width = textMakerResult.Height;
+                currentTextMarkerAttributes.Height = textMakerResult.Width;
+            }
+
+            if (c != null)
+            {
+                Settings.Instance.TextMarkerColor = new Data.Color(c.Value.A, c.Value.R, c.Value.G, c.Value.B);
+                Settings.Instance.Save();
+                currentTextMarkerAttributes.Color = c.Value;
+            }
+
+            if (c != null || sizeIndex != -1)
+            {
+                ApplyToAllCanvas(new Action<InkCanvas>((InkCanvas canvas) =>
+                {
+                    canvas.DefaultDrawingAttributes = currentTextMarkerAttributes;
+                }));
+
+                UpdateTextMarker();
+            }
+        }
+
+        private void BtnRubberFine_OnChangedRubber(int sizeIndex, bool? rectangle)
+        {
+            if (sizeIndex != -1)
+                rubberSizeIndex = sizeIndex;
+
+            if (rectangle.HasValue)
+                rubberIsRectangle = rectangle.Value;
+
+            if (sizeIndex >= 0 || rectangle.HasValue)
+            {
+                ApplyToAllCanvas((DrawingCanvas dc) =>
+                {
+                    ApplyRubberSizeAndShape(dc);
+                });
+            }
+        }
+
 
         private void btnRubberGrob_Click(object sender, RoutedEventArgs e)
         {
@@ -1847,7 +1927,6 @@ namespace SimpleJournal
             }
         }
 
-
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (isInitalized && !preventPageBoxSelectionChanged && cmbPages.SelectedIndex != -1)
@@ -1953,7 +2032,6 @@ namespace SimpleJournal
             }
         }
 
-
         private void btnDisplaySidebar_Click(object sender, RoutedEventArgs e)
         {
             if (DrawingCanvas.LastModifiedCanvas.Children.Omit(typeof(Line)).ToList().Count > 0)
@@ -2009,6 +2087,91 @@ namespace SimpleJournal
                     DrawingCanvas.Change = true;
                 }
             }
+        }
+
+        private async void BtnManagePages_Click(object sender, RoutedEventArgs e)
+        {
+            var pgmd = new PageManagmentDialog(CurrentJournalPages.ToList());
+            var userResult = pgmd.ShowDialog();
+
+            if (userResult.HasValue && userResult.Value)
+            {
+                // Apply result
+                ClearJournal();
+
+                double currentScrollOffset = this.mainScrollView.VerticalOffset;
+                var dialog = new WaitingDialog(System.IO.Path.GetFileNameWithoutExtension(currentJournalTitle), 1) { Owner = this };
+                dialog.Show();
+
+                this.IsEnabled = false;
+                isInitalized = false;
+
+                try
+                {
+                    int countPages = 0;
+                    double progress = 0;
+
+                    // Load pages to iPages
+                    foreach (var page in pgmd.Result)
+                    {
+                        DrawingCanvas canvas = null;
+                        canvas = AddPage(GeneratePage(page.PaperPattern));
+
+                        if (countPages == 0)
+                        {
+                            // Set last modified canvas to this, because the old is non existing any more
+                            DrawingCanvas.LastModifiedCanvas = canvas;
+                        }
+
+                        progress = (countPages++ + 1) / (double)pgmd.Result.Count;
+                        dialog.SetProgress(progress, countPages, pgmd.Result.Count);
+
+                        StrokeCollection strokes = null;
+                        await Task.Run(() =>
+                        {
+                            using (System.IO.MemoryStream ms = new System.IO.MemoryStream())
+                            {
+                                ms.Write(page.Data, 0, page.Data.Length);
+                                ms.Position = 0;
+                                strokes = new StrokeCollection(ms);
+                            }
+                        }).ContinueWith(new Action<Task>((Task t) =>
+                        {
+                            Application.Current.Dispatcher.Invoke(new System.Action(() =>
+                            {
+                                canvas.Strokes = strokes;
+
+                                if (page.HasAdditionalResources)
+                                {
+                                    foreach (JournalResource jr in page.JournalResources)
+                                        JournalResource.AddJournalResourceToCanvas(jr, canvas);
+                                }
+                            }));
+                        }));
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(this, $"{Properties.Resources.strFailedToLoadJournal} {ex.Message}{Environment.NewLine}{Environment.NewLine}{ex.StackTrace}", Properties.Resources.strFailedToLoadJournalTitle, MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                finally
+                {
+                    this.IsEnabled = true;
+                    dialog.Close();
+                    isInitalized = true;
+
+                    // Make sure that user will be asked to save
+                    DrawingCanvas.Change = true;
+
+                    // Apply old offset
+                    this.mainScrollView.ScrollToVerticalOffset(currentScrollOffset);
+                }
+            }
+        }
+
+        private void BtnInsertNewPage_Click(object sender, EventArgs e)
+        {
+            AddNewPage(Settings.Instance.PaperTypeLastInserted);
         }
 
         private bool AskForOpeningAfterModifying()
@@ -2485,9 +2648,7 @@ namespace SimpleJournal
             catch (Exception ex)
             {
                 if (!saveAsBackup)
-                {
                     MessageBox.Show(this, $"{Properties.Resources.strFailedToSaveJournal} {ex.Message}{Environment.NewLine}{Environment.NewLine}{ex.StackTrace}", Properties.Resources.strFailedToSaveJournalTitle, MessageBoxButton.OK, MessageBoxImage.Error);
-                }
 
                 return false;
             }
@@ -2643,7 +2804,7 @@ namespace SimpleJournal
         }
 
 
-#endregion
+        #endregion
 
         #region Export
 
@@ -2857,7 +3018,7 @@ namespace SimpleJournal
 
 #endregion
 
-        #region Sidebar Changing Objects
+        #region Sidebar Handling
 
         private void Canvas_SelectionChanged(object sender, EventArgs e)
         {
@@ -2921,201 +3082,6 @@ namespace SimpleJournal
                     });
                 }
             }
-        }
-
-        private void ChangePenValues(int index, System.Windows.Media.Color? c, int sizeIndex)
-        {
-            if (c.HasValue)
-            {
-                CurrentDrawingAttributes.Color = c.Value;
-
-                if (SelectedPen != -1)
-                    currentPens[SelectedPen].FontColor = new Data.Color(c.Value.A, c.Value.R, c.Value.G, c.Value.B);
-                else
-                    currentPens[index].FontColor = new Data.Color(c.Value.A, c.Value.R, c.Value.G, c.Value.B);
-
-                rulerDropDownTemplate.SetColor(c.Value);
-            }
-
-            if (sizeIndex >= 0)
-            {
-                currentPens[index].Size = Consts.StrokeSizes[sizeIndex].Width;
-                CurrentDrawingAttributes.Width = currentPens[index].Size;
-                CurrentDrawingAttributes.Height = currentPens[index].Size;
-
-                ApplyToAllCanvas(new Action<InkCanvas>((InkCanvas canvas) =>
-                {
-                    canvas.DefaultDrawingAttributes = CurrentDrawingAttributes;
-                }));
-            }
-
-            UpdatePenButtons();
-        }
-
-        private void BtnPen1_OnChanged(System.Windows.Media.Color? c, int sizeIndex)
-        {
-            ChangePenValues(0, c, sizeIndex);
-        }
-
-        private void BtnPen2_OnChanged(System.Windows.Media.Color? c, int sizeIndex)
-        {
-            ChangePenValues(1, c, sizeIndex);
-        }
-
-        private void BtnPen3_OnChanged(System.Windows.Media.Color? c, int sizeIndex)
-        {
-            ChangePenValues(2, c, sizeIndex);
-        }
-
-        private void BtnPen4_OnChanged(System.Windows.Media.Color? c, int sizeIndex)
-        {
-            ChangePenValues(3, c, sizeIndex);
-        }
-
-        private void BtnTextMarker_OnChanged(System.Windows.Media.Color? c, int sizeIndex)
-        {
-            if (sizeIndex != -1)
-            {
-                var textMakerResult = Consts.TextMarkerSizes[sizeIndex];
-                Settings.Instance.TextMarkerSize = textMakerResult;
-                Settings.Instance.Save();
-                currentTextMarkerAttributes.Width = textMakerResult.Height;
-                currentTextMarkerAttributes.Height = textMakerResult.Width;
-            }
-
-            if (c != null)
-            {
-                Settings.Instance.TextMarkerColor = new Data.Color(c.Value.A, c.Value.R, c.Value.G, c.Value.B);
-                Settings.Instance.Save();
-                currentTextMarkerAttributes.Color = c.Value;
-            }
-
-            if (c != null || sizeIndex != -1)
-            {
-                ApplyToAllCanvas(new Action<InkCanvas>((InkCanvas canvas) =>
-                {
-                    canvas.DefaultDrawingAttributes = currentTextMarkerAttributes;
-                }));
-
-                UpdateTextMarker();
-            }
-        }
-
-        private void BtnRubberFine_OnChangedRubber(int sizeIndex, bool? rectangle)
-        {
-            if (sizeIndex != -1)
-                rubberSizeIndex = sizeIndex;
-
-            if (rectangle.HasValue)
-                rubberIsRectangle = rectangle.Value;
-
-            if (sizeIndex >= 0 || rectangle.HasValue)
-            {
-                ApplyToAllCanvas((DrawingCanvas dc) =>
-                {
-                    ApplyRubberSizeAndShape(dc);
-                });
-            }
-        }
-
-        private async void BtnManagePages_Click(object sender, RoutedEventArgs e)
-        {
-            var pgmd = new PageManagmentDialog(CurrentJournalPages.ToList());
-            var userResult = pgmd.ShowDialog();
-
-            if (userResult.HasValue && userResult.Value)
-            {
-                // Apply result
-                ClearJournal();
-
-                double currentScrollOffset = this.mainScrollView.VerticalOffset;
-                var dialog = new WaitingDialog(System.IO.Path.GetFileNameWithoutExtension(currentJournalTitle), 1) { Owner = this };
-                dialog.Show();
-
-                this.IsEnabled = false;
-                isInitalized = false;
-
-                try
-                {
-                    int countPages = 0;
-                    double progress = 0;
-
-                    // Load pages to iPages
-                    foreach (var page in pgmd.Result)
-                    {
-                        DrawingCanvas canvas = null;
-                        canvas = AddPage(GeneratePage(page.PaperPattern));
-
-                        if (countPages == 0)
-                        {
-                            // Set last modified canvas to this, because the old is non existing any more
-                            DrawingCanvas.LastModifiedCanvas = canvas;
-                        }
-
-                        progress = (countPages++ + 1) / (double)pgmd.Result.Count;
-                        dialog.SetProgress(progress, countPages, pgmd.Result.Count);
-
-                        StrokeCollection strokes = null;
-                        await Task.Run(() =>
-                        {
-                            using (System.IO.MemoryStream ms = new System.IO.MemoryStream())
-                            {
-                                ms.Write(page.Data, 0, page.Data.Length);
-                                ms.Position = 0;
-                                strokes = new StrokeCollection(ms);
-                            }
-                        }).ContinueWith(new Action<Task>((Task t) =>
-                        {
-                            Application.Current.Dispatcher.Invoke(new System.Action(() =>
-                            {
-                                canvas.Strokes = strokes;
-
-                                if (page.HasAdditionalResources)
-                                {
-                                    foreach (JournalResource jr in page.JournalResources)
-                                        JournalResource.AddJournalResourceToCanvas(jr, canvas);
-                                }
-                            }));
-                        }));
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(this, $"{Properties.Resources.strFailedToLoadJournal} {ex.Message}{Environment.NewLine}{Environment.NewLine}{ex.StackTrace}", Properties.Resources.strFailedToLoadJournalTitle, MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-                finally
-                {
-                    this.IsEnabled = true;
-                    dialog.Close();
-                    isInitalized = true;
-
-                    // Make sure that user will be asked to save
-                    DrawingCanvas.Change = true;
-
-                    // Apply old offset
-                    this.mainScrollView.ScrollToVerticalOffset(currentScrollOffset);
-                }            
-            }
-        }
-
-        private void BtnInsertNewPage_Click(object sender, EventArgs e)
-        {
-            AddNewPage(Settings.Instance.PaperTypeLastInserted);
-        }
-
-        private void ButtonBringToFront_Click(object sender, RoutedEventArgs e)
-        {
-            var can = DrawingCanvas.LastModifiedCanvas;
-
-            if (can == null || can.GetSelectedElements() == null)
-                return;
-
-            var elements = can.GetSelectedElements();
-
-            if (elements != null && elements.Count == 1)
-                elements.FirstOrDefault().BringToFront(DrawingCanvas.LastModifiedCanvas);
-            else
-                elements.BringToFront(DrawingCanvas.LastModifiedCanvas);
         }
 
         private void ObjTextSettings_OnChanged(TextData data)
@@ -3215,6 +3181,20 @@ namespace SimpleJournal
             }
         }
 
+        private void ButtonBringToFront_Click(object sender, RoutedEventArgs e)
+        {
+            var can = DrawingCanvas.LastModifiedCanvas;
+
+            if (can == null || can.GetSelectedElements() == null)
+                return;
+
+            var elements = can.GetSelectedElements();
+
+            if (elements != null && elements.Count == 1)
+                elements.FirstOrDefault().BringToFront(DrawingCanvas.LastModifiedCanvas);
+            else
+                elements.BringToFront(DrawingCanvas.LastModifiedCanvas);
+        }
 
         #endregion
 
@@ -3222,6 +3202,9 @@ namespace SimpleJournal
 
         public void ApplyBackground()
         {
+            if (Settings.Instance.PageBackground == Settings.Background.Default)
+                return;
+
             SolidColorBrush defaultBrush = new SolidColorBrush((System.Windows.Media.Color)(ColorConverter.ConvertFromString("#E1E1E1")));
 
             try
@@ -3235,10 +3218,7 @@ namespace SimpleJournal
                     case Settings.Background.Sand: imageFileName = "sand"; break;
                     case Settings.Background.Wooden1: imageFileName = "wooden-1"; break;
                     case Settings.Background.Wooden2: imageFileName = "wooden-2"; break;
-                }
-
-                if (Settings.Instance.PageBackground == Settings.Background.Default)
-                    return;
+                } 
 
                 if (Settings.Instance.PageBackground != Settings.Background.Custom)
                 {
@@ -3311,5 +3291,5 @@ namespace SimpleJournal
             throw new NotImplementedException();
         }
     }
-#endregion
+    #endregion
 }
