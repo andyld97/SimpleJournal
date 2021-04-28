@@ -496,7 +496,7 @@ namespace SimpleJournal
             }
             catch (Exception e)
             {
-                MessageBox.Show($"Beim Analyisieren ist ein Fehler aufgetreten: {e.Message}. Stellen Sie sicher, dass SimpleJournal richtig installiert ist!", "Fehler!", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(string.Format(Properties.Resources.strErrorMessageAnalyzingStrokes, e.Message), Properties.Resources.strError, MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
             return lines.ToArray();

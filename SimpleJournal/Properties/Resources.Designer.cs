@@ -912,6 +912,15 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die An error occurred while analysing: {0}. Make sure SimpleJournal is installed correctly! ähnelt.
+        /// </summary>
+        public static string strErrorMessageAnalyzingStrokes {
+            get {
+                return ResourceManager.GetString("strErrorMessageAnalyzingStrokes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Export ähnelt.
         /// </summary>
         public static string strExport {
@@ -2393,7 +2402,7 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die 12/28/2020 12:20 PM ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die 04/28/2020 10:27 PM ähnelt.
         /// </summary>
         public static string strReleaseDate {
             get {

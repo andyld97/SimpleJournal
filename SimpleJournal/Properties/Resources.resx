@@ -1535,7 +1535,7 @@ Your data will not be shared with third parties, but will only be used to give y
     <comment>About.xaml</comment>
   </data>
   <data name="strReleaseDate" xml:space="preserve">
-    <value>12/28/2020 12:20 PM</value>
+    <value>04/28/2020 10:27 PM</value>
     <comment>About.xaml</comment>
   </data>
   <data name="strHintInsert" xml:space="preserve">
@@ -1733,5 +1733,9 @@ Click on No to continue to receive this message!</value>
   </data>
   <data name="SJFileAssoc_exe" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\SJFileAssoc.exe.config;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="strErrorMessageAnalyzingStrokes" xml:space="preserve">
+    <value>An error occurred while analysing: {0}. Make sure SimpleJournal is installed correctly!</value>
+    <comment>DrawingCanvas.cs</comment>
   </data>
 </root>

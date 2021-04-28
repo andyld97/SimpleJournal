@@ -1526,7 +1526,7 @@ Ihre Daten werden nicht an Dritte weitergegeben, sondern auschließlich dazu ver
     <comment>About.xaml</comment>
   </data>
   <data name="strReleaseDate" xml:space="preserve">
-    <value>28.12.2020 12:20 Uhr</value>
+    <value>28.04.2021 10:29 Uhr</value>
     <comment>*</comment>
   </data>
   <data name="strHintInsert" xml:space="preserve">
@@ -1707,5 +1707,9 @@ Klicken Sie auf Nein, um diesen Hinweis weiterhin zu erhalten!</value>
   <data name="strEnableTouchScreen" xml:space="preserve">
     <value>Touchscreen aktivieren</value>
     <comment>MainWindow.xaml</comment>
+  </data>
+  <data name="strErrorMessageAnalyzingStrokes" xml:space="preserve">
+    <value>Beim Analyisieren ist ein Fehler aufgetreten: {0}. Stellen Sie sicher, dass SimpleJournal richtig installiert ist!</value>
+    <comment>DrawingCanvas.cs</comment>
   </data>
 </root>
