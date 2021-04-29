@@ -43,7 +43,7 @@ namespace SimpleJournal
         {
             try
             {
-                string versionsJSON = await httpClient.GetStringAsync(Consts.GetVersionURL);
+                string versionsJSON = await httpClient.GetStringAsync(Consts.VERSION_URL);
                 dynamic result = JsonConvert.DeserializeObject(versionsJSON);
 
                 string currentNormalVersion = result.current.normal;
@@ -67,7 +67,7 @@ namespace SimpleJournal
                     if (new Version(currentVersion) > new Version(newVersion))
                     {
                         TextNewVersionAvailable.Text = Properties.Resources.strUnpublishedDevVersion;
-                        TextNewVersionAvailable.Foreground = new System.Windows.Media.SolidColorBrush(Colors.Red);
+                        TextNewVersionAvailable.Foreground = new SolidColorBrush(Colors.Red);
                     }
                     else
                         TextNewVersionAvailable.Text = $"*** {Properties.Resources.strNewerVersionAvailable} {newVersion} ***";
@@ -98,8 +98,7 @@ namespace SimpleJournal
             string nameBase64 = Convert.ToBase64String(System.Text.Encoding.Default.GetBytes(name)).Replace("=", "µ");
             string mailBase64 = Convert.ToBase64String(System.Text.Encoding.Default.GetBytes(mail)).Replace("=", "µ");
             string contentBase64 = Convert.ToBase64String(System.Text.Encoding.Default.GetBytes(content)).Replace("=", "µ");
-
-            string url = $"https://code-a-software.net/simplejournal/feedback.php?name={nameBase64}&mail={mailBase64}&content={contentBase64}";
+            string url = string.Format(Consts.FEEDBACK_URL, nameBase64, mailBase64, contentBase64);
 
             try
             {

@@ -547,7 +547,7 @@ namespace SimpleJournal
                 {
                     using (WebClient wc = new WebClient())
                     {
-                        string versionJSON = wc.DownloadString(Consts.GetVersionURL);
+                        string versionJSON = wc.DownloadString(Consts.VERSION_URL);
                         dynamic versions = JsonConvert.DeserializeObject(versionJSON);
 
                         Version current = Version.Parse(versions.current.normal.Value);

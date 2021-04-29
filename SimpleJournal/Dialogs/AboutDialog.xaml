@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:SimpleJournal"
         xmlns:res="clr-namespace:SimpleJournal.Properties" xmlns:controls="clr-namespace:SimpleJournal.Controls"
         mc:Ignorable="d"
-        Title="{x:Static res:Resources.strAbout}" Height="600" Width="420"
+        Title="{x:Static res:Resources.strAbout}" Height="630" Width="420"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen">
     <Grid Background="{DynamicResource WhiteBrush}">
