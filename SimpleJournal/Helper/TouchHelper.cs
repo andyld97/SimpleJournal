@@ -8,6 +8,8 @@ namespace SimpleJournal.Helper
     public static class TouchHelper
     {
         private static readonly string[] TOUCH_SCREEN_NAMES = new string[] { "touchscreen", "touch screen" };
+        private static bool hasTouchscreenCachedResult = false;
+        private static bool isInitalized = false;
 
         public static void SetTouchState(bool state)
         {
@@ -26,7 +28,13 @@ namespace SimpleJournal.Helper
         {
             try
             {
-                return DeviceWMI.GetPNPDevicesWithNames(TOUCH_SCREEN_NAMES).Any();
+                if (!isInitalized)
+                {
+                    hasTouchscreenCachedResult = DeviceWMI.GetPNPDevicesWithNames(TOUCH_SCREEN_NAMES).Any();
+                    isInitalized = true;
+                }
+
+                return hasTouchscreenCachedResult;
             }
             catch
             { }
