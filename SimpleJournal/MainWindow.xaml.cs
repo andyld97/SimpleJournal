@@ -2839,7 +2839,7 @@ namespace SimpleJournal
 
         private void btnExport_Click(object sender, RoutedEventArgs e)
         {
-            new ExportDialog(CurrentJournalPages).ShowDialog();
+            new ExportDialog(CurrentJournalPages, CurrentJournalPages[cmbPages.SelectedIndex]).ShowDialog();
         }
 
 #endregion

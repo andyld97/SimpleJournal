@@ -1738,4 +1738,24 @@ Click on No to continue to receive this message!</value>
     <value>An error occurred while analysing: {0}. Make sure SimpleJournal is installed correctly!</value>
     <comment>DrawingCanvas.cs</comment>
   </data>
+  <data name="strPreview" xml:space="preserve">
+    <value>Preview:</value>
+    <comment>*</comment>
+  </data>
+  <data name="strExportAsJournalExplanation" xml:space="preserve">
+    <value>If this option is not selected, the pages are exported as images!</value>
+    <comment>ExportDialog.xaml.cs</comment>
+  </data>
+  <data name="strExportCurrentPage" xml:space="preserve">
+    <value>Current Page</value>
+    <comment>ExportDialog.xaml.cs</comment>
+  </data>
+  <data name="strExportDialogExpanderExplanation" xml:space="preserve">
+    <value>Fold out all the pages or hide all the pages!</value>
+    <comment>ExportDialog.xaml.cs</comment>
+  </data>
+  <data name="strExportDialogInvalidSettings" xml:space="preserve">
+    <value>Invalid settings!</value>
+    <comment>ExportDialog.xaml.cs</comment>
+  </data>
 </root>

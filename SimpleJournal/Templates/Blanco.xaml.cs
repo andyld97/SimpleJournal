@@ -1,7 +1,7 @@
 ﻿using SimpleJournal.Controls;
 using System.Windows.Controls;
 
-namespace SimpleJournal
+namespace SimpleJournal.Templates
 {
     /// <summary>
     /// Interaktionslogik für Blanco.xaml

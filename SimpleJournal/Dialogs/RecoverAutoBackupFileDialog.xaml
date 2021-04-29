@@ -42,9 +42,9 @@
                     <Run x:Name="RunAutoSaveRecoverInfo" Text="{x:Static res:Resources.strLabelBackups}"/>
                 </TextBlock>
 
-                <ListBox x:Name="ListBackupFiles" Background="Transparent" ItemContainerStyle="{DynamicResource _ListBoxItemStyle}" Margin="10" Height="200" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Grid.IsSharedSizeScope="False" HorizontalContentAlignment="Stretch" />
+                <ListBox x:Name="ListBackupFiles" Background="Transparent" ItemContainerStyle="{DynamicResource _ListBoxItemStyle}" Margin="10,10,10,0" Height="200" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Grid.IsSharedSizeScope="False" HorizontalContentAlignment="Stretch" />
 
-                <CheckBox x:Name="CheckBoxOpenBackupsAfterRestore" Margin="10,6,23,0" IsChecked="True" HorizontalAlignment="Left" Content="{x:Static res:Resources.strOpenBackupsAfterRecovery}"/>
+                <CheckBox x:Name="CheckBoxOpenBackupsAfterRestore" Margin="10,5,23,0" IsChecked="True" HorizontalAlignment="Left" Content="{x:Static res:Resources.strOpenBackupsAfterRecovery}"/>
                     <TextBlock Margin="10,8,23,0" Foreground="Red" TextWrapping="Wrap">
                     <Run Text="{x:Static res:Resources.strHint}" FontWeight="Bold"/><Run Text=":" FontWeight="Bold"/>
                     <LineBreak/>

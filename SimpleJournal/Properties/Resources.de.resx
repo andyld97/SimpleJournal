@@ -902,7 +902,7 @@ Ihre Daten werden nicht an Dritte weitergegeben, sondern auschließlich dazu ver
     <comment>*</comment>
   </data>
   <data name="strTo" xml:space="preserve">
-    <value>bis</value>
+    <value>Bis</value>
     <comment>*</comment>
   </data>
   <data name="strTransparent" xml:space="preserve">
@@ -1711,5 +1711,25 @@ Klicken Sie auf Nein, um diesen Hinweis weiterhin zu erhalten!</value>
   <data name="strErrorMessageAnalyzingStrokes" xml:space="preserve">
     <value>Beim Analyisieren ist ein Fehler aufgetreten: {0}. Stellen Sie sicher, dass SimpleJournal richtig installiert ist!</value>
     <comment>DrawingCanvas.cs</comment>
+  </data>
+  <data name="strPreview" xml:space="preserve">
+    <value>Vorschau:</value>
+    <comment>*</comment>
+  </data>
+  <data name="strExportAsJournalExplanation" xml:space="preserve">
+    <value>Wenn diese Option nicht ausgewählt ist, werden die Seiten als Bilder exportiert!</value>
+    <comment>ExportDialog.xaml.cs</comment>
+  </data>
+  <data name="strExportCurrentPage" xml:space="preserve">
+    <value>Ausgewählte Seite</value>
+    <comment>ExportDialog.xaml.cs</comment>
+  </data>
+  <data name="strExportDialogExpanderExplanation" xml:space="preserve">
+    <value>Klappt alle Seiten aus oder versteckt alle Seiten!</value>
+    <comment>ExportDialog.xaml.cs</comment>
+  </data>
+  <data name="strExportDialogInvalidSettings" xml:space="preserve">
+    <value>Ungültige Einstellungen!</value>
+    <comment>ExportDialog.xaml.cs</comment>
   </data>
 </root>

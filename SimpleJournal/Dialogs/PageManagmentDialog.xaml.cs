@@ -269,20 +269,7 @@ namespace SimpleJournal.Dialogs
             if (ListViewPages.SelectedIndex != -1)
             {
                 var page = pages[ListViewPages.SelectedIndex];
-                IPaper template = null;
-                switch (page.Type)
-                {
-                    case PaperType.Blanco: template = new Blanco(); break;
-                    case PaperType.Chequeued: template = new Chequered(); break;
-                    case PaperType.Ruled: template = new Ruled(); break;
-                }
-
-                // Make sure canvas is non editable
-                template.Canvas.EditingMode = InkCanvasEditingMode.None;
-                template.Canvas.Strokes = page.Canvas.Strokes.Clone();
-                foreach (var child in page.Canvas.Children)
-                    template.Canvas.Children.Add(GeneralHelper.CloneElement(child));
-
+                var template = PageHelper.ClonePage(page, true);
                 displayFrame.Content = template;
                 ignoreCheckedChanged = true;
 

@@ -948,6 +948,42 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die If this option is not selected, the pages are exported as images! ähnelt.
+        /// </summary>
+        public static string strExportAsJournalExplanation {
+            get {
+                return ResourceManager.GetString("strExportAsJournalExplanation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Current Page ähnelt.
+        /// </summary>
+        public static string strExportCurrentPage {
+            get {
+                return ResourceManager.GetString("strExportCurrentPage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Fold out all the pages or hide all the pages! ähnelt.
+        /// </summary>
+        public static string strExportDialogExpanderExplanation {
+            get {
+                return ResourceManager.GetString("strExportDialogExpanderExplanation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Invalid settings! ähnelt.
+        /// </summary>
+        public static string strExportDialogInvalidSettings {
+            get {
+                return ResourceManager.GetString("strExportDialogInvalidSettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Export ähnelt.
         /// </summary>
         public static string strExportDocument {
@@ -2317,6 +2353,15 @@ namespace SimpleJournal.Properties {
         public static string strPolygonToolTip {
             get {
                 return ResourceManager.GetString("strPolygonToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Preview: ähnelt.
+        /// </summary>
+        public static string strPreview {
+            get {
+                return ResourceManager.GetString("strPreview", resourceCulture);
             }
         }
         

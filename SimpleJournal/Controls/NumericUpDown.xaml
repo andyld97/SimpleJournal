@@ -74,7 +74,7 @@
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
-            <TextBox BorderBrush="Black" BorderThickness="2" Height="73" Margin="0" Grid.Column="0" Name="NUDTextBox" FontSize="48" Text="0" TextAlignment="Center" PreviewKeyDown="NUDTextBox_PreviewKeyDown" PreviewKeyUp="NUDTextBox_PreviewKeyUp" TextChanged="NUDTextBox_TextChanged"/>
+            <TextBox Background="{DynamicResource WhiteBrush}" Foreground="{DynamicResource BlackBrush}" BorderBrush="{DynamicResource BlackBrush}" BorderThickness="2" Height="73" Margin="0" Grid.Column="0" Name="NUDTextBox" FontSize="48" Text="0" TextAlignment="Center" PreviewKeyDown="NUDTextBox_PreviewKeyDown" PreviewKeyUp="NUDTextBox_PreviewKeyUp" TextChanged="NUDTextBox_TextChanged"/>
             <RepeatButton Style="{StaticResource ButtonStyle}" Margin="8,0,0,0" Grid.Column="1" Padding="0" Name="NUDButtonUP" Height="73" Width="80" FontSize="40" FontFamily="Marlett" Click="NUDButtonUP_Click">5</RepeatButton>
             <RepeatButton Style="{StaticResource ButtonStyle}" Padding="0" Grid.Column="2" Name="NUDButtonDown" Height="73" Width="80" FontSize="40" FontFamily="Marlett" Margin="6,0,0,0" Click="NUDButtonDown_Click">6</RepeatButton>
         </Grid>

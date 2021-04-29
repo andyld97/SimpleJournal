@@ -161,6 +161,11 @@ namespace SimpleJournal.Data
         /// </summary>
         public bool UseNaturalScrolling { get; set; } = false;
 
+        /// <summary>
+        /// Determines if the checkbox in the ExportDialog is checked or not 
+        /// </summary>
+        public bool ExportAsJournal { get; set; } = false;
+
         public enum RulerMode : int
         {
             /// <summary>
