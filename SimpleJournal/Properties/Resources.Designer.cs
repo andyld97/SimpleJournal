@@ -73,10 +73,35 @@ namespace SimpleJournal.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Byte[].
         /// </summary>
+        public static byte[] SimpleJournal_Shared {
+            get {
+                object obj = ResourceManager.GetObject("SimpleJournal_Shared", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Byte[].
+        /// </summary>
         public static byte[] SJFileAssoc {
             get {
                 object obj = ResourceManager.GetObject("SJFileAssoc", resourceCulture);
                 return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+        ///&lt;configuration&gt;
+        ///    &lt;startup&gt; 
+        ///        &lt;supportedRuntime version=&quot;v4.0&quot; sku=&quot;.NETFramework,Version=v4.8&quot;/&gt;
+        ///    &lt;/startup&gt;
+        ///&lt;/configuration&gt;
+        /// ähnelt.
+        /// </summary>
+        public static string SJFileAssoc_exe {
+            get {
+                return ResourceManager.GetString("SJFileAssoc_exe", resourceCulture);
             }
         }
         
@@ -626,6 +651,15 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Deactivate touch screen ähnelt.
+        /// </summary>
+        public static string strDisableTouchscreen {
+            get {
+                return ResourceManager.GetString("strDisableTouchscreen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Discard Backup ähnelt.
         /// </summary>
         public static string strDiscardBackupToolTip {
@@ -851,6 +885,15 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Activate touch screen ähnelt.
+        /// </summary>
+        public static string strEnableTouchScreen {
+            get {
+                return ResourceManager.GetString("strEnableTouchScreen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Please enter a valid text! ähnelt.
         /// </summary>
         public static string strEnterValidText {
@@ -865,6 +908,15 @@ namespace SimpleJournal.Properties {
         public static string strError {
             get {
                 return ResourceManager.GetString("strError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die An error occurred while analysing: {0}. Make sure SimpleJournal is installed correctly! ähnelt.
+        /// </summary>
+        public static string strErrorMessageAnalyzingStrokes {
+            get {
+                return ResourceManager.GetString("strErrorMessageAnalyzingStrokes", resourceCulture);
             }
         }
         
@@ -892,6 +944,42 @@ namespace SimpleJournal.Properties {
         public static string strExportAsJournal {
             get {
                 return ResourceManager.GetString("strExportAsJournal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die If this option is not selected, the pages are exported as images! ähnelt.
+        /// </summary>
+        public static string strExportAsJournalExplanation {
+            get {
+                return ResourceManager.GetString("strExportAsJournalExplanation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Current Page ähnelt.
+        /// </summary>
+        public static string strExportCurrentPage {
+            get {
+                return ResourceManager.GetString("strExportCurrentPage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Fold out all the pages or hide all the pages! ähnelt.
+        /// </summary>
+        public static string strExportDialogExpanderExplanation {
+            get {
+                return ResourceManager.GetString("strExportDialogExpanderExplanation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Invalid settings! ähnelt.
+        /// </summary>
+        public static string strExportDialogInvalidSettings {
+            get {
+                return ResourceManager.GetString("strExportDialogInvalidSettings", resourceCulture);
             }
         }
         
@@ -2269,6 +2357,15 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Preview: ähnelt.
+        /// </summary>
+        public static string strPreview {
+            get {
+                return ResourceManager.GetString("strPreview", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Print ähnelt.
         /// </summary>
         public static string strPrintDocument {
@@ -2350,7 +2447,7 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die 12/28/2020 12:20 PM ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die 04/29/2020 03:01 PM ähnelt.
         /// </summary>
         public static string strReleaseDate {
             get {

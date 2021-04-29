@@ -13,7 +13,8 @@ namespace SimpleJournal
 
         public static readonly string CHANGELOG_URL = "https://simplejournal.ca-soft.net/chg.php?lang={0}&dark={1}";
         public static readonly string DOWNLOAD_URL = "https://code-a-software.net/simplejournal/download.php";
-        public static readonly string GetVersionURL = "https://code-a-software.net/simplejournal/versions.json";
+        public static readonly string VERSION_URL = "https://code-a-software.net/simplejournal/versions.json";
+        public static readonly string FEEDBACK_URL = "https://code-a-software.net/simplejournal/feedback.php?name={0}&mail={1}&content={2}";
 
         public static readonly string UpdaterExe = "7244a3f048e82af354eb3cfa3089a3035ff8768f";
         public static readonly string UpdateSystemDotNetDotControllerDotdll = "bbc7224ccc544651d9d844f309721091860f0f92";

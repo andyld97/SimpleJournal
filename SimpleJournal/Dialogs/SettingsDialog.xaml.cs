@@ -1,6 +1,7 @@
 ﻿using ControlzEx.Theming;
 using SimpleJournal.Data;
 using SimpleJournal.Dialogs;
+using SJFileAssoc;
 using System;
 using System.ComponentModel;
 using System.Linq;
@@ -152,7 +153,7 @@ namespace SimpleJournal
             }
 
             // Notify main window to refresh pens
-            Window2.W_INSTANCE.UpdatePenButtons(true);
+            MainWindow.W_INSTANCE.UpdatePenButtons(true);
         }
 
         private void ChkUseInputPreasure_Checked(object sender, RoutedEventArgs e)
@@ -186,7 +187,7 @@ namespace SimpleJournal
         {
             base.OnClosing(e);
             // Notify Window2 that the settings changed
-            Window2.W_INSTANCE.ApplySettings();
+            MainWindow.W_INSTANCE.ApplySettings();
         }
 
         private void UseRotationCorrect_Checked(object sender, RoutedEventArgs e)
@@ -240,14 +241,6 @@ namespace SimpleJournal
             Settings.Instance.Save();
         }
 
-        private void CheckBoxDisplayRecoverDialog_Checked(object sender, RoutedEventArgs e)
-        {
-            if (editMode)
-                return;
-
-            // Settings.Instance.ShowRecoverDialogWithEmptyFile = CheckBoxDisplayRecoverDialog.IsChecked.Value;
-            Settings.Instance.Save();
-        }
 
         private void chkUseFitToCurve_Checked(object sender, RoutedEventArgs e)
         {
@@ -293,7 +286,7 @@ namespace SimpleJournal
 
             // Apply theming
             GeneralHelper.ApplyTheming();
-            Window2.W_INSTANCE.UpdateGlowingBrush();
+            MainWindow.W_INSTANCE.UpdateGlowingBrush();
         }
 
         private void ComboBoxThemeChooser_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -348,14 +341,7 @@ namespace SimpleJournal
 
         private void DownloadTDM_RequestNavigate(object sender, System.Windows.Navigation.RequestNavigateEventArgs e)
         {
-            try
-            {
-                System.Diagnostics.Process.Start(e.Uri.ToString());
-            }
-            catch
-            {
-
-            }
+            GeneralHelper.OpenUri(e.Uri);
         }
 
         private void rb_Checked(object sender, RoutedEventArgs e)
@@ -379,7 +365,7 @@ namespace SimpleJournal
                 if (rb.Name == RbCustom.Name)
                     Settings.Instance.PageBackground = Settings.Background.Custom;
 
-                Window2.W_INSTANCE.ApplyBackground();
+                MainWindow.W_INSTANCE.ApplyBackground();
                 Settings.Instance.Save();
             }
         }
@@ -391,7 +377,7 @@ namespace SimpleJournal
                 if (ofd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
                     TextCustomImagePath.Text = ofd.FileName;
-                    Window2.W_INSTANCE.ApplyBackground();
+                    MainWindow.W_INSTANCE.ApplyBackground();
                 }
             }
         }

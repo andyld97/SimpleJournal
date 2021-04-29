@@ -9,6 +9,19 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Analyzer", "Analyser\Analyz
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SJFileAssoc", "SJFileAssoc\SJFileAssoc.csproj", "{32F31565-E65E-4E7C-9A7F-90E26A1DA287}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "External Libraries", "External Libraries", "{1922C65D-E924-4958-B877-B2DFBF734EB7}"
+	ProjectSection(SolutionItems) = preProject
+		External Libraries\Device.dll = External Libraries\Device.dll
+		External Libraries\IACore.dll = External Libraries\IACore.dll
+		External Libraries\IALoader.dll = External Libraries\IALoader.dll
+		External Libraries\IAWinFX.dll = External Libraries\IAWinFX.dll
+		External Libraries\Serialization.dll = External Libraries\Serialization.dll
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared Libraries", "Shared Libraries", "{48624BDF-2689-480B-8213-DDE28D919BEA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleJournal.Shared", "Shared Libraries\SimpleJournal.Shared\SimpleJournal.Shared.csproj", "{079AFA71-58C5-4377-B2D6-B0218A66C0D9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,26 +82,30 @@ Global
 		{32F31565-E65E-4E7C-9A7F-90E26A1DA287}.UWP|Any CPU.Build.0 = UWP|Any CPU
 		{32F31565-E65E-4E7C-9A7F-90E26A1DA287}.UWP|x64.ActiveCfg = UWP|Any CPU
 		{32F31565-E65E-4E7C-9A7F-90E26A1DA287}.UWP|x64.Build.0 = UWP|Any CPU
+		{079AFA71-58C5-4377-B2D6-B0218A66C0D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{079AFA71-58C5-4377-B2D6-B0218A66C0D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{079AFA71-58C5-4377-B2D6-B0218A66C0D9}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{079AFA71-58C5-4377-B2D6-B0218A66C0D9}.Debug|x64.Build.0 = Debug|Any CPU
+		{079AFA71-58C5-4377-B2D6-B0218A66C0D9}.Normal|Any CPU.ActiveCfg = Debug|Any CPU
+		{079AFA71-58C5-4377-B2D6-B0218A66C0D9}.Normal|Any CPU.Build.0 = Debug|Any CPU
+		{079AFA71-58C5-4377-B2D6-B0218A66C0D9}.Normal|x64.ActiveCfg = Debug|Any CPU
+		{079AFA71-58C5-4377-B2D6-B0218A66C0D9}.Normal|x64.Build.0 = Debug|Any CPU
+		{079AFA71-58C5-4377-B2D6-B0218A66C0D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{079AFA71-58C5-4377-B2D6-B0218A66C0D9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{079AFA71-58C5-4377-B2D6-B0218A66C0D9}.Release|x64.ActiveCfg = Release|Any CPU
+		{079AFA71-58C5-4377-B2D6-B0218A66C0D9}.Release|x64.Build.0 = Release|Any CPU
+		{079AFA71-58C5-4377-B2D6-B0218A66C0D9}.UWP|Any CPU.ActiveCfg = Debug|Any CPU
+		{079AFA71-58C5-4377-B2D6-B0218A66C0D9}.UWP|Any CPU.Build.0 = Debug|Any CPU
+		{079AFA71-58C5-4377-B2D6-B0218A66C0D9}.UWP|x64.ActiveCfg = Debug|Any CPU
+		{079AFA71-58C5-4377-B2D6-B0218A66C0D9}.UWP|x64.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{079AFA71-58C5-4377-B2D6-B0218A66C0D9} = {48624BDF-2689-480B-8213-DDE28D919BEA}
+	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {58519301-A59B-4F8D-A7ED-59C7AED0CAC4}
-	EndGlobalSection
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 4
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = https://dev.azure.com/code-a-software
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = Analyser\\Analyzer.csproj
-		SccProjectName1 = Analyser
-		SccLocalPath1 = Analyser
-		SccProjectUniqueName2 = SimpleJournal\\SimpleJournal.csproj
-		SccProjectName2 = SimpleJournal
-		SccLocalPath2 = SimpleJournal
-		SccProjectUniqueName3 = SJFileAssoc\\SJFileAssoc.csproj
-		SccProjectName3 = SJFileAssoc
-		SccLocalPath3 = SJFileAssoc
 	EndGlobalSection
 EndGlobal

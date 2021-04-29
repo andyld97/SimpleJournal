@@ -200,11 +200,6 @@
                         <StackPanel Visibility="{Binding ElementName=CheckBoxUseAutoSave, Path=IsChecked, Converter={StaticResource BooleanToVisibility}}">
                             <TextBlock Text="{x:Static res:Resources.strAutoSaveInterval}" Margin="0,5,0,0"/>
                             <controls:NumericUpDown x:Name="NumericUpDownAutoSaveInteral" OnChanged="NumericUpDownAutoSaveInteral_OnChanged" Margin="0,2,0,0" Width="180" HorizontalAlignment="Left" Minimum="1" Maximum="60" Value="5"/>
-                            <CheckBox Visibility="Hidden" x:Name="CheckBoxDisplayRecoverDialog" Margin="0,9,0,0" IsChecked="True" Content="{x:Static res:Resources.strDisplayRecoverDialogTitle}" Checked="CheckBoxDisplayRecoverDialog_Checked" Unchecked="CheckBoxDisplayRecoverDialog_Checked" />
-                            <TextBlock Visibility="Hidden" Margin="0,5,0,0" TextWrapping="Wrap">
-                                <Run FontWeight="Bold" Text="{x:Static res:Resources.strDescription}" />
-                                <Run Text="{x:Static res:Resources.strDisplayRecoverDialogDescription}" />
-                            </TextBlock>
                         </StackPanel>
                     </StackPanel>
                 </ScrollViewer>

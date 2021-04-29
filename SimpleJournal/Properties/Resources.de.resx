@@ -902,7 +902,7 @@ Ihre Daten werden nicht an Dritte weitergegeben, sondern auschließlich dazu ver
     <comment>*</comment>
   </data>
   <data name="strTo" xml:space="preserve">
-    <value>bis</value>
+    <value>Bis</value>
     <comment>*</comment>
   </data>
   <data name="strTransparent" xml:space="preserve">
@@ -1526,7 +1526,7 @@ Ihre Daten werden nicht an Dritte weitergegeben, sondern auschließlich dazu ver
     <comment>About.xaml</comment>
   </data>
   <data name="strReleaseDate" xml:space="preserve">
-    <value>28.12.2020 12:20 Uhr</value>
+    <value>29.04.2021 15:01 Uhr</value>
     <comment>*</comment>
   </data>
   <data name="strHintInsert" xml:space="preserve">
@@ -1540,15 +1540,19 @@ Klicken Sie auf Nein, um diesen Hinweis weiterhin zu erhalten!</value>
   </data>
   <data name="strSetupDarkModeDescription" xml:space="preserve">
     <value>Der dunkle Modus betrifft momentan nur das Menü-Band. Die Dialoge bleiben normal. Die Einstellungen können alle auch später geändert werden!</value>
+    <comment>*</comment>
   </data>
   <data name="strSetupDarkModeTitle" xml:space="preserve">
     <value>Mögen Sie die Dunkelheit?</value>
+    <comment>*</comment>
   </data>
   <data name="strSetupDarkModeYes" xml:space="preserve">
     <value>Ja, ich mag es gerne dunkel</value>
+    <comment>*</comment>
   </data>
   <data name="strSetupDarModeNo" xml:space="preserve">
     <value>Nein, ich mag es lieber hell</value>
+    <comment>*</comment>
   </data>
   <data name="strDark" xml:space="preserve">
     <value>Dunkel</value>
@@ -1586,9 +1590,11 @@ Klicken Sie auf Nein, um diesen Hinweis weiterhin zu erhalten!</value>
   </data>
   <data name="strSettingsActivateGlowingEffect" xml:space="preserve">
     <value>Fensterleuchteffekt aktivieren</value>
+    <comment>*</comment>
   </data>
   <data name="strSettingsActivateGlowingEffectDescription" xml:space="preserve">
     <value>(kann beim Verkleinern/Vergrößern zu Performance-Problemen führen)</value>
+    <comment>*</comment>
   </data>
   <data name="strInsertFromClipboard" xml:space="preserve">
     <value>Bild aus Zwischenablage einfügen ...</value>
@@ -1601,84 +1607,109 @@ Klicken Sie auf Nein, um diesen Hinweis weiterhin zu erhalten!</value>
   </data>
   <data name="strSettingsFeatureBar" xml:space="preserve">
     <value>Weitere Funktionen:</value>
+    <comment>*</comment>
   </data>
   <data name="strSettingsSetFileAssoc" xml:space="preserve">
     <value>Dateitypzuordnung wiederherstellen</value>
+    <comment>*</comment>
   </data>
   <data name="strSettingsClearLastOpenedDocumentsToolTip" xml:space="preserve">
     <value>Leert die Liste, der zuletzt geöffneten Dokumente im Menü</value>
+    <comment>*</comment>
   </data>
   <data name="strSettingsOpenSetupAssistantTooltip" xml:space="preserve">
     <value>Bietet Ihnen die Möglichkeit, SimpleJournal erneut einzurichten</value>
+    <comment>*</comment>
   </data>
   <data name="strSettingsResetPensTooltip" xml:space="preserve">
     <value>Setzt die Stifte auf Ihre übersprüngliche Einstellung zurück</value>
+    <comment>*</comment>
   </data>
   <data name="strSettingsSetFileAssocToolTip" xml:space="preserve">
     <value>Setzt dieses Programm als Standard für .Journal-Dateien</value>
+    <comment>*</comment>
   </data>
   <data name="strSettingsTouchScreenExplanationNormal1" xml:space="preserve">
     <value>SimpleJournal kann nicht zwischen Stift und Fingereingaben differenzieren bzw. gibt es keine Möglichkeit, Fingereingaben vollständig zu deaktivieren. Daher gibt es nun die Option, dass beim Starten/Beenden von SimpleJournal ein Powershell-Skript ausgeführt wird, das die Toucheingabe systemweit deaktiviert/aktiviert.</value>
+    <comment>*</comment>
   </data>
   <data name="strSettingsDisableTouchscreenTitle" xml:space="preserve">
     <value>Touchscreen deaktivieren (Für Fortgeschrittene)</value>
+    <comment>*</comment>
   </data>
   <data name="strSettingsTouchScreenExplanationNormal2" xml:space="preserve">
     <value>Damit das Powershell-Skript ausgeführt werden kann, muss:</value>
+    <comment>*</comment>
   </data>
   <data name="strSettingsTouchScreenExplanationNormal3" xml:space="preserve">
     <value>1) SimpleJournal als Administrator ausgeführt werden (wird es standardmäßig)</value>
+    <comment>*</comment>
   </data>
   <data name="strSettingsTouchScreenExplanationNormal4" xml:space="preserve">
     <value>2) Das Powershell-Skript muss erlabut werden (führen Sie dazu den folgenden Befehl in Powershell aus und bestätigen ihn):</value>
+    <comment>*</comment>
   </data>
   <data name="strSettingsCeckBoxDisableTouchscreen" xml:space="preserve">
     <value>Windows Touchscreen beim Starten deaktivieren</value>
+    <comment>*</comment>
   </data>
   <data name="strSettingsDisableTouchUWP2" xml:space="preserve">
     <value>Allerdings gibt es die Möglichkeit, vor dem Start und nach dem Beenden von SimpleJournal jeweils ein Powershell-Skript auszuführen, das hier generiert werden kann!</value>
+    <comment>*</comment>
   </data>
   <data name="strSettingsDisableTouchUWP3" xml:space="preserve">
     <value>Um diese Skripts ausführen zu können, müssen 2 Bedingungen erfüllt sein: </value>
+    <comment>*</comment>
   </data>
   <data name="strSettingsDisableTouchUWP4" xml:space="preserve">
     <value>1) Führen Sie das Skript als Administartor aus!</value>
+    <comment>*</comment>
   </data>
   <data name="strSettingsDisableTouchUWP5" xml:space="preserve">
     <value>2) Sie müssen einmalig erlauben, dass Powershell das Skript ausführen darf (bitte dazu den folgenden Befehl bei Powershell eingeben und bestätigen)</value>
+    <comment>*</comment>
   </data>
   <data name="strCreateScripts" xml:space="preserve">
     <value>Skripts erstellen ...</value>
   </data>
   <data name="strSettingsDisableTouchUWP1" xml:space="preserve">
     <value>SimpleJournal kann nicht zwischen Stift- und Fingereingabe unterscheiden, bzw. gibt es keine Möglichkeit, die Fingereingabe vollständig zu deaktivieren.</value>
+    <comment>*</comment>
   </data>
   <data name="strSettingsDisableTouchExplanation" xml:space="preserve">
     <value>Deaktiviert den Touchscreen beim Starten und aktiviert ihn beim Beenden. Diese Option kann sinnvoll sein, wenn Sie mit einem Stift schreiben, dann können Sie die Hand auf das Display legen, ohne dass Ihre Hand als Eingabe erkannt wird. Dies ist in der Store-Version nicht möglich, allerdings gibt es auf meiner Homepage ein Tool dafür:</value>
+    <comment>*</comment>
   </data>
   <data name="strSettingsBackgroundCustom" xml:space="preserve">
     <value>Benutzerdefiniertes Hintergrundbild festlegen</value>
+    <comment>*</comment>
   </data>
   <data name="strSettingsBackgroundDefault" xml:space="preserve">
     <value>Kein Hintergrund (standard, grau)</value>
+    <comment>*</comment>
   </data>
   <data name="strSettingsBackgroundHeader" xml:space="preserve">
     <value>Hintergrund</value>
+    <comment>*</comment>
   </data>
   <data name="strShapesHeader" xml:space="preserve">
     <value>Formen</value>
+    <comment>*</comment>
   </data>
   <data name="strToolFormFixed" xml:space="preserve">
     <value>Fest</value>
+    <comment>*</comment>
   </data>
   <data name="strToolFormFree" xml:space="preserve">
     <value>Frei</value>
+    <comment>*</comment>
   </data>
   <data name="strInsertSimpleFormToolTip" xml:space="preserve">
     <value>Ziehen Sie eine Form auf, indem Sie einmal ein Punkt festlegen (klick) und dann können Sie mit der/dem Maus/Stift die Form aufziehen</value>
   </data>
   <data name="strPolygonToolTip" xml:space="preserve">
     <value>Zeichnen Sie ein Polygon, indem Sie einmal einen Startpunkt festlegen (klick). Dort entsteht ein Kreis, jetzt können Sie weitere Kanten hinzufügen, am Ende muss eine Kante beim Startpunkt wieder enden, damit eine Form entsteht</value>
+    <comment>*</comment>
   </data>
   <data name="strPlot" xml:space="preserve">
     <value>Kooardinatensystem</value>
@@ -1690,14 +1721,49 @@ Klicken Sie auf Nein, um diesen Hinweis weiterhin zu erhalten!</value>
   </data>
   <data name="strTrapeze" xml:space="preserve">
     <value>Trapez</value>
+    <comment>*</comment>
   </data>
   <data name="strInsertPlotToolTip" xml:space="preserve">
     <value>Ziehen Sie das Kooardinatensystem auf, indem Sie auf einen Punkt klicken und bewegen Sie dann die Maus/den Stift an die gewünschte Stelle und lassen Sie los</value>
   </data>
   <data name="strUseNaturalScrolling" xml:space="preserve">
     <value>Natürliches Scrollen verwenden</value>
+    <comment>*</comment>
   </data>
   <data name="strUseNaturalScrollingDescription" xml:space="preserve">
     <value>Beim Scrollen per Ziehen/Schieben wird die natürliche Scrollrichtung verwendet</value>
+    <comment>*</comment>
+  </data>
+  <data name="strDisableTouchscreen" xml:space="preserve">
+    <value>Touchscreen deaktivieren</value>
+    <comment>MainWindow.xaml</comment>
+  </data>
+  <data name="strEnableTouchScreen" xml:space="preserve">
+    <value>Touchscreen aktivieren</value>
+    <comment>MainWindow.xaml</comment>
+  </data>
+  <data name="strErrorMessageAnalyzingStrokes" xml:space="preserve">
+    <value>Beim Analyisieren ist ein Fehler aufgetreten: {0}. Stellen Sie sicher, dass SimpleJournal richtig installiert ist!</value>
+    <comment>DrawingCanvas.cs</comment>
+  </data>
+  <data name="strPreview" xml:space="preserve">
+    <value>Vorschau:</value>
+    <comment>*</comment>
+  </data>
+  <data name="strExportAsJournalExplanation" xml:space="preserve">
+    <value>Wenn diese Option nicht ausgewählt ist, werden die Seiten als Bilder exportiert!</value>
+    <comment>ExportDialog.xaml.cs</comment>
+  </data>
+  <data name="strExportCurrentPage" xml:space="preserve">
+    <value>Ausgewählte Seite</value>
+    <comment>ExportDialog.xaml.cs</comment>
+  </data>
+  <data name="strExportDialogExpanderExplanation" xml:space="preserve">
+    <value>Klappt alle Seiten aus oder versteckt alle Seiten!</value>
+    <comment>ExportDialog.xaml.cs</comment>
+  </data>
+  <data name="strExportDialogInvalidSettings" xml:space="preserve">
+    <value>Ungültige Einstellungen!</value>
+    <comment>ExportDialog.xaml.cs</comment>
   </data>
 </root>

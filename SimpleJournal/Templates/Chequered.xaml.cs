@@ -3,7 +3,7 @@ using SimpleJournal.Data;
 using System.Windows.Controls;
 using System.Windows.Media;
 
-namespace SimpleJournal
+namespace SimpleJournal.Templates
 {
     /// <summary>
     /// Interaktionslogik für Chequered.xaml

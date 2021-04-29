@@ -1,11 +1,11 @@
-﻿using System;
+﻿using SimpleJournal.Shared;
+using SimpleJournal.Shared.Extensions;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Forms;
 using System.Windows.Ink;
 using System.Windows.Input;
 using System.Windows.Markup;
@@ -16,8 +16,8 @@ namespace Analyzer
 {
     public static class Program
     {
-        private static List<Shape> shapes = new List<Shape>();
-        private static List<Rect> rects = new List<Rect>();
+        private static readonly List<Shape> shapes = new List<Shape>();
+        private static readonly List<Rect> rects = new List<Rect>();
 
         private static readonly string WRITING = "w";
         private static readonly string DRAWING = "d";
@@ -148,6 +148,7 @@ namespace Analyzer
                 WritingRegionNode textNode = node as WritingRegionNode;
                 target.Enqueue(textNode.GetRecognizedString() + "\n\n");
             }
+
             ContextNodeCollection.ContextNodeCollectionEnumerator enumerator = node.SubNodes.GetEnumerator();
             try
             {
@@ -183,11 +184,10 @@ namespace Analyzer
             {
                 var currentNode = nodesToSearch.Dequeue();
 
-                if (currentNode is WritingRegionNode)
+                if (currentNode is WritingRegionNode textNode)
                 {
-                    var textNode = (WritingRegionNode)currentNode;
                     textNode.PartiallyPopulated = true;
-                    if (StringsAreEqual(textNode.GetRecognizedString(), text))
+                    if (textNode.GetRecognizedString().AreEqual(text))
                     {
                         // Get position in text
                         string result = textNode.GetRecognizedString().ToLower();
@@ -269,17 +269,6 @@ namespace Analyzer
 
             foreach (ContextNode subNode in node.SubNodes)
                 AddShapes(subNode);
-        }
-
-        public static bool StringsAreEqual(string str1, string str2, bool ignoreCase = true)
-        {
-            if (str1 == str2)
-                return true;
-
-            if (ignoreCase)
-                return str1.ToLower().Contains(str2.ToLower());
-            else
-                return str1.Contains(str2);
         }
     }
 }

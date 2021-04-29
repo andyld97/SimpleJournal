@@ -1071,7 +1071,7 @@ Your data will not be shared with third parties, but will only be used to give y
   </data>
   <data name="strDate" xml:space="preserve">
     <value>Date:</value>
-    <comment>s</comment>
+    <comment>*</comment>
   </data>
   <data name="strDateFormat" xml:space="preserve">
     <value>MM/dd/yyyy</value>
@@ -1535,7 +1535,7 @@ Your data will not be shared with third parties, but will only be used to give y
     <comment>About.xaml</comment>
   </data>
   <data name="strReleaseDate" xml:space="preserve">
-    <value>12/28/2020 12:20 PM</value>
+    <value>04/29/2020 03:01 PM</value>
     <comment>About.xaml</comment>
   </data>
   <data name="strHintInsert" xml:space="preserve">
@@ -1567,19 +1567,23 @@ Click on No to continue to receive this message!</value>
   </data>
   <data name="strDarkModeSettingsTitle" xml:space="preserve">
     <value>Color mode:</value>
+    <comment>*</comment>
   </data>
   <data name="strLight" xml:space="preserve">
     <value>Light</value>
+    <comment>*</comment>
   </data>
   <data name="strDark" xml:space="preserve">
     <value>Dark</value>
+    <comment>*</comment>
   </data>
   <data name="strEditObjects" xml:space="preserve">
     <value>Edit objects:</value>
-    <comment>Window2.xaml</comment>
+    <comment>MainWindow.xaml</comment>
   </data>
   <data name="strBringToFront" xml:space="preserve">
     <value>Bring to front</value>
+    <comment>*</comment>
   </data>
   <data name="strFailedToLoadJournalFromNetwork" xml:space="preserve">
     <value>Error while loading the journal, make sure that the journal is located locally on your computer. No journal can be loaded from the network!</value>
@@ -1614,6 +1618,7 @@ Click on No to continue to receive this message!</value>
   </data>
   <data name="strLang" xml:space="preserve">
     <value>en</value>
+    <comment>*</comment>
   </data>
   <data name="strMessageFailedToExportPsScripts" xml:space="preserve">
     <value>Error while exporting the files: {0}</value>
@@ -1672,6 +1677,7 @@ Click on No to continue to receive this message!</value>
   </data>
   <data name="strCreateScripts" xml:space="preserve">
     <value>Create Scripts ...</value>
+    <comment>*</comment>
   </data>
   <data name="strSettingsDisableTouchExplanation" xml:space="preserve">
     <value>Deactivates the touch screen on startup and reactivates it on exit. This option can be useful if you write with a pen, then you can put your hand on the display without your hand being recognized as input. This is not possible in the store version, but there is a tool for this on my homepage:</value>
@@ -1696,18 +1702,22 @@ Click on No to continue to receive this message!</value>
   </data>
   <data name="strInsertSimpleFormToolTip" xml:space="preserve">
     <value>Drag a shape by clicking a point once and then you can drag the shape with the mouse/pen</value>
+    <comment>*</comment>
   </data>
   <data name="strPolygonToolTip" xml:space="preserve">
     <value>Draw a polygon by defining a starting point once (click). There you will get a circle, now you can add more edges, at the end an edge has to end at the starting point again to get a shape</value>
   </data>
   <data name="strPlot" xml:space="preserve">
     <value>Plot</value>
+    <comment>*</comment>
   </data>
   <data name="strPlotDrawNegativeAxis" xml:space="preserve">
     <value>Draw negative axes</value>
+    <comment>*</comment>
   </data>
   <data name="strInsertPlotToolTip" xml:space="preserve">
     <value>Drag the Kooardinate system open by clicking on a point and then move the mouse/pen to the desired location and release</value>
+    <comment>*</comment>
   </data>
   <data name="strTrapeze" xml:space="preserve">
     <value>Trapeze</value>
@@ -1719,5 +1729,43 @@ Click on No to continue to receive this message!</value>
   <data name="strUseNaturalScrollingDescription" xml:space="preserve">
     <value>When scrolling by dragging/pushing, the natural scroll direction is used</value>
     <comment>MainWindow.xaml</comment>
+  </data>
+  <data name="strEnableTouchScreen" xml:space="preserve">
+    <value>Activate touch screen</value>
+    <comment>MainWindow.xaml</comment>
+  </data>
+  <data name="strDisableTouchscreen" xml:space="preserve">
+    <value>Deactivate touch screen</value>
+    <comment>MainWindow.xaml</comment>
+  </data>
+  <data name="SimpleJournal_Shared" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\SimpleJournal.Shared.dll;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="SJFileAssoc_exe" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\SJFileAssoc.exe.config;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="strErrorMessageAnalyzingStrokes" xml:space="preserve">
+    <value>An error occurred while analysing: {0}. Make sure SimpleJournal is installed correctly!</value>
+    <comment>DrawingCanvas.cs</comment>
+  </data>
+  <data name="strPreview" xml:space="preserve">
+    <value>Preview:</value>
+    <comment>*</comment>
+  </data>
+  <data name="strExportAsJournalExplanation" xml:space="preserve">
+    <value>If this option is not selected, the pages are exported as images!</value>
+    <comment>ExportDialog.xaml.cs</comment>
+  </data>
+  <data name="strExportCurrentPage" xml:space="preserve">
+    <value>Current Page</value>
+    <comment>ExportDialog.xaml.cs</comment>
+  </data>
+  <data name="strExportDialogExpanderExplanation" xml:space="preserve">
+    <value>Fold out all the pages or hide all the pages!</value>
+    <comment>ExportDialog.xaml.cs</comment>
+  </data>
+  <data name="strExportDialogInvalidSettings" xml:space="preserve">
+    <value>Invalid settings!</value>
+    <comment>ExportDialog.xaml.cs</comment>
   </data>
 </root>

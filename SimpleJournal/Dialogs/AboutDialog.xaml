@@ -1,0 +1,82 @@
+﻿<Window x:Class="SimpleJournal.AboutDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SimpleJournal"
+        xmlns:res="clr-namespace:SimpleJournal.Properties" xmlns:controls="clr-namespace:SimpleJournal.Controls"
+        mc:Ignorable="d"
+        Title="{x:Static res:Resources.strAbout}" Height="630" Width="420"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen">
+    <Grid Background="{DynamicResource WhiteBrush}">
+        <TabControl Margin="5,5,5,5" Background="Transparent">
+            <TabControl.Resources>
+                <ResourceDictionary>
+                    <ResourceDictionary.MergedDictionaries>
+                        <ResourceDictionary Source="..\resources\TabControlStyle.xaml"/>
+                    </ResourceDictionary.MergedDictionaries>
+                </ResourceDictionary>
+            </TabControl.Resources>
+            <TabItem Header="{x:Static res:Resources.strAbout}">
+                <StackPanel>
+                    <Image Source="../resources/logo.png" Width="256" Margin="0,15,0,0"/>
+                    <TextBlock Margin="5,20,0,0" HorizontalAlignment="Center" Foreground="{DynamicResource BlackBrush}">
+                        <Run Text="{x:Static res:Resources.strAboutText1}"/>
+                        <LineBreak/>
+                        <Run Text="{x:Static res:Resources.strAboutTextIcons8_1}"/>
+                        <Hyperlink NavigateUri="https://icons8.com/" RequestNavigate="Hyperlink_RequestNavigate">Icons8</Hyperlink>
+                        <Run Text="{x:Static res:Resources.strAboutTextIcons8_2}" />
+                        <LineBreak/>
+                        <Run Text="{x:Static res:Resources.strAboutTextFluentRibbon_1}"/>
+                        <Hyperlink NavigateUri="https://github.com/fluentribbon/Fluent.Ribbon" RequestNavigate="Hyperlink_RequestNavigate">Fluent.Ribbon (GitHub)</Hyperlink>
+                        <Run Text="{x:Static res:Resources.strAboutTextFluentRibbon_2}"/>
+                        <LineBreak/>
+                        <LineBreak />
+                        <Run Text="Source Code:" />
+                        <Hyperlink NavigateUri="https://github.com/andyld97/SimpleJournal" RequestNavigate="Hyperlink_RequestNavigate">GitHub</Hyperlink>
+                        <LineBreak />
+                        <LineBreak/>
+                        <Run Text="Version:" />
+                        <Run x:Name="TextVersion" Text="{x:Static res:Resources.strUnknownVersion}" FontWeight="Bold"/>
+                        <LineBreak />
+                        <Run Text="Release:" />
+                        <Run Text="{x:Static res:Resources.strReleaseDate}" FontWeight="Bold" />
+                        <LineBreak />
+                        <LineBreak />
+                        <Run x:Name="TextNewVersionAvailable" FontWeight="Bold"/>
+                    </TextBlock>
+                </StackPanel>
+            </TabItem>
+            <TabItem Header="{x:Static res:Resources.strChangelog}">
+                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                    <WebBrowser x:Name="txtChangelog"/>
+                </ScrollViewer>
+            </TabItem>
+            <TabItem Header="{x:Static res:Resources.strFeedback}">
+                <StackPanel>
+                    <StackPanel.Resources>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="Foreground" Value="{DynamicResource BlackBrush}" />
+                        </Style>
+                        <Style TargetType="{x:Type TextBox}">
+                            <Setter Property="Foreground" Value="{DynamicResource BlackBrush}" />
+                            <Setter Property="Background" Value="{DynamicResource WhiteBrush}" />
+                        </Style>
+                    </StackPanel.Resources>
+                    
+                    <TextBlock TextWrapping="Wrap" Margin="5" Text="{x:Static res:Resources.strFeedbackDescription}"/>
+                    <TextBlock Text="{x:Static res:Resources.strName}" Margin="5,5,0,0"/>
+                    <TextBox x:Name="txtName" Text="Anonym" Margin="5,0,5,0" Padding="2"/>
+                    <TextBlock x:Name="txtMail" Text="{x:Static res:Resources.strMail}" Margin="5,5,0,0"/>
+                    <TextBox Margin="5,0,5,0" Padding="2"/>
+                    <TextBlock Text="{x:Static res:Resources.strContent}" Margin="5,5,0,0"/>
+                    <TextBox Margin="5,0,5,0" Padding="2" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" Height="200" x:Name="txtFeedback" AcceptsReturn="True"/>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                        <Button x:Name="btnSendFeedback" Click="btnSendFeedback_Click" Content="{x:Static res:Resources.strSend}" Padding="5" Margin="5" Width="100"/>
+                    </StackPanel>
+                </StackPanel>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>
