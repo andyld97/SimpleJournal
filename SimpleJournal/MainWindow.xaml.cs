@@ -8,6 +8,7 @@ using SimpleJournal.Dialogs;
 using SimpleJournal.Helper;
 using SimpleJournal.Shared;
 using SimpleJournal.Templates;
+using SJFileAssoc;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
