@@ -522,6 +522,7 @@
     <None Include="Store Packages\ReferencePackage %28SimpleJournal%29 %2846%29 %281.400.0.0%29 %2805.12.20%29.msix" />
     <None Include="Store Packages\ReferencePackage %28SimpleJournal%29 %2847%29 %281.410.0.0%29 %2815.12.20%29.msix" />
     <None Include="Store Packages\ReferencePackage %28SimpleJournal%29 %2848%29 %281.420.0.0%29 %2828.12.20%29.msix" />
+    <None Include="Store Packages\ReferencePackage %28SimpleJournal%29 %2849%29 %281.430.0.0%29 %2829.04.21%29.msix" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
