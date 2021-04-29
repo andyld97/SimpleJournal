@@ -30,6 +30,13 @@ namespace SimpleJournal
             }
             catch (Exception)
             { }
+
+            Loaded += AboutDialog_Loaded;
+        }
+
+        private async void AboutDialog_Loaded(object sender, RoutedEventArgs e)
+        {
+            await Initialize();
         }
 
         public async Task Initialize()

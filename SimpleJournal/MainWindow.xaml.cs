@@ -2452,10 +2452,9 @@ namespace SimpleJournal
 #endif
         }
 
-        private async void btnAbout_Click(object sender, RoutedEventArgs e)
+        private void btnAbout_Click(object sender, RoutedEventArgs e)
         {
             AboutDialog aboutDialog = new AboutDialog();
-            await aboutDialog.Initialize();
             aboutDialog.ShowDialog();
         }
 #endregion
