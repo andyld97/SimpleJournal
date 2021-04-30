@@ -21,17 +21,6 @@
       </requestedPrivileges>
     </security>
   </trustInfo>
-  <dependency>
-    <dependentAssembly>
-      <assemblyIdentity
-          type="win32"
-          name="Microsoft.Windows.Common-Controls"
-          version="6.0.0.0"
-          processorArchitecture="*"
-          publicKeyToken="6595b64144ccf1df"
-          language="*" />
-    </dependentAssembly>
-  </dependency>  
   <compatibility xmlns="urn:schemas-microsoft-com:compatibility.v1">
     <application>
       <!-- Eine Liste der Windows-Versionen, unter denen diese Anwendung getestet
@@ -69,7 +58,7 @@
   -->
 
   <!-- Designs für allgemeine Windows-Steuerelemente und -Dialogfelder (Windows XP und höher) aktivieren -->
-  <!--
+
   <dependency>
     <dependentAssembly>
       <assemblyIdentity
@@ -82,6 +71,6 @@
         />
     </dependentAssembly>
   </dependency>
-  -->
+
 
 </assembly>

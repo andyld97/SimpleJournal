@@ -112,18 +112,116 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="2. Wenn Sie ein Dokument als PDF exportieren möchten, klicken Sie im Menü auf &quot;Drucken&quot; und wählen als Drucker &quot;Microsoft Print To PDF&quot; aus. Dieser Drucker hat bislang nicht immer zuverlässig funktioniert, also falls damit Probleme auftreten sollten, können Sie sich einen alternativen PDF-Drucker herunterladen, der zuverlässig funktioniert. Sie können die Seiten aber auch als Bilder exportieren.&quot;" xml:space="preserve">
+    <value>SetupDialog.xaml</value>
+  </data>
+  <data name="strA4" xml:space="preserve">
+    <value>A4</value>
+    <comment>*</comment>
+  </data>
   <data name="strAbout" xml:space="preserve">
     <value>Über</value>
     <comment>MainWindow.xaml</comment>
   </data>
+  <data name="strAboutText1" xml:space="preserve">
+    <value>Idee von Daniel S.
+Programmiert von Andreas L.
+Vielen Dank ...
+... an Daniel S. und Stefan E. für die Ideen/Programmtests!</value>
+    <comment>About.xaml</comment>
+  </data>
+  <data name="strAboutTextFluentRibbon_1" xml:space="preserve">
+    <value>... an</value>
+    <comment>About.xaml</comment>
+  </data>
+  <data name="strAboutTextFluentRibbon_2" xml:space="preserve">
+    <value>für das Menü!</value>
+    <comment>About.xaml</comment>
+  </data>
+  <data name="strAboutTextIcons8_1" xml:space="preserve">
+    <value>... an</value>
+    <comment>About.xaml</comment>
+  </data>
+  <data name="strAboutTextIcons8_2" xml:space="preserve">
+    <value>für die kostenlosen Icons!</value>
+    <comment>About.xaml</comment>
+  </data>
   <data name="strAddPage" xml:space="preserve">
     <value>Seite einfügen</value>
     <comment>MainWindow.xaml</comment>
+  </data>
+  <data name="strAddPageHere" xml:space="preserve">
+    <value>Seite hier einfügen</value>
+    <comment>*</comment>
+  </data>
+  <data name="strAddPageTooltip" xml:space="preserve">
+    <value>Fügt eine neue Seite hinzu</value>
+    <comment>MainWindow.xaml</comment>
+  </data>
+  <data name="strAutoBackupDirectoryDoesNotExists" xml:space="preserve">
+    <value>Das Verzeichnis existiert derzeit nicht! Aber sobald ein Backup erstellt wird, wird der Ordner wieder angelegt!</value>
+    <comment>RecoverAutoBackupFileDialog.xaml.cs</comment>
+  </data>
+  <data name="strAutoBackupDirectoryDoesNotExistsTitle" xml:space="preserve">
+    <value>Verzeichnis existiert nicht!</value>
+    <comment>RecoverAutoBackupFileDialog.xaml.cs</comment>
+  </data>
+  <data name="strAutoSaveCouldRecoverThisFile" xml:space="preserve">
+    <value>AutoSave kann die folgende Datei wiederherstellen:</value>
+    <comment>RecoverAutoBackupFileDialog.xaml</comment>
+  </data>
+  <data name="strAutoSaveDateTimeFileFormat" xml:space="preserve">
+    <value>dd.MM.yyyy-HH.mm.ss.fff</value>
+    <comment>Window2.xaml</comment>
+  </data>
+  <data name="strAutoSaveDescription" xml:space="preserve">
+    <value>AutoSave ist ein Feature, das immer in einem vordefinierten Intervall (z.B. alle 5 Minuten) ein Backup macht. D.h. sollte SimpleJournal unerwartet beendet werden, können Sie von AutoSave das Dokument sichern und wieder laden.</value>
+    <comment>SettingsWindows.xaml</comment>
+  </data>
+  <data name="strAutoSaveDialogButtonDiscard" xml:space="preserve">
+    <value>Alle Verwerfen</value>
+    <comment>RecoverAutoBackupFileDialog.xaml</comment>
+  </data>
+  <data name="strAutoSaveDialogButtonRecover" xml:space="preserve">
+    <value>Alle Wiederherstellen</value>
+    <comment>RecoverAutoBackupFileDialog.xaml</comment>
+  </data>
+  <data name="strAutoSaveInterval" xml:space="preserve">
+    <value>AutoSave Intervall (Minuten):</value>
+    <comment>SettingsWindows.xaml</comment>
+  </data>
+  <data name="strAutoSaveNoBackupFileFound" xml:space="preserve">
+    <value>Keine Backup-Datei gefunden!</value>
+    <comment>RecoverAutoBackupFileDialog.xaml</comment>
+  </data>
+  <data name="strAutoSaveNoBackupFileFoundHint" xml:space="preserve">
+    <value>(Stellen Sie sicher, dass das Interval von AutoSave nicht zu hoch gewählt ist!)</value>
+    <comment>RecoverAutoBackupFileDialog.xaml</comment>
+  </data>
+  <data name="strBack" xml:space="preserve">
+    <value>Zurück</value>
+    <comment>*</comment>
+  </data>
+  <data name="strBackgroundColor" xml:space="preserve">
+    <value>Hintergrundfarbe:</value>
+    <comment>*</comment>
+  </data>
+  <data name="strBackupFileCannotBeOpened" xml:space="preserve">
+    <value>Dieses Journal kann nicht geöffnet werden, da es ein Backup ist!</value>
+    <comment>Window2.xaml.cs</comment>
+  </data>
+  <data name="strBackupFileCannotBeOpenedTitle" xml:space="preserve">
+    <value>Ein Backup kann nicht geöffnet werden!</value>
+    <comment>Window2.xaml.cs</comment>
+  </data>
+  <data name="strBackupOriginExplanation" xml:space="preserve">
+    <value>Backups, die einen Ursprung haben, werden an den Ursprungsort wiederhergestellt, für alle anderen Backups müssen Sie auswählen, in welchem Ordner die Backups wiederhergestellt werden sollen!</value>
+    <comment>RecoverAutoBackupFileDialog.xaml</comment>
   </data>
   <data name="strBackwards" xml:space="preserve">
     <value>Rück...</value>
@@ -132,6 +230,33 @@
   <data name="strBackwardsDescription" xml:space="preserve">
     <value>Macht die letzte Aktion rückgängig</value>
     <comment>MainWindow.xaml</comment>
+  </data>
+  <data name="strBehaviour" xml:space="preserve">
+    <value>Verhalten</value>
+    <comment>*</comment>
+  </data>
+  <data name="strBold" xml:space="preserve">
+    <value>F</value>
+    <comment>*</comment>
+  </data>
+  <data name="strBringToFront" xml:space="preserve">
+    <value>In den Vordergrund holen</value>
+  </data>
+  <data name="strButtonDisplayAutoSaveDirectory" xml:space="preserve">
+    <value>Im Explorer anzeigen</value>
+    <comment>RecoverAutoBackupFileDialog.xaml.cs</comment>
+  </data>
+  <data name="strCancel" xml:space="preserve">
+    <value>Abbrechen</value>
+    <comment>*</comment>
+  </data>
+  <data name="strChangelog" xml:space="preserve">
+    <value>Changelog</value>
+    <comment>About.xaml</comment>
+  </data>
+  <data name="strChequered" xml:space="preserve">
+    <value>Kariert</value>
+    <comment>*</comment>
   </data>
   <data name="strChoosePenColor" xml:space="preserve">
     <value>Stiftfarbe auswählen</value>
@@ -145,8 +270,23 @@
     <value>Sie können die Größe des Radiergummis auswählen</value>
     <comment>MainWindow.xaml</comment>
   </data>
+  <data name="strCircle" xml:space="preserve">
+    <value>Kreis</value>
+    <comment>*</comment>
+  </data>
+  <data name="strClear" xml:space="preserve">
+    <value>Leeren</value>
+    <comment>*</comment>
+  </data>
+  <data name="strClearLastOpenedDocuments" xml:space="preserve">
+    <value>Zuletzt geöffnete Dokumente zurücksetzen</value>
+  </data>
   <data name="strClearPage" xml:space="preserve">
     <value>Seite leeren</value>
+    <comment>MainWindow.xaml</comment>
+  </data>
+  <data name="strClearPageTooltip" xml:space="preserve">
+    <value>Leert die aktuelle Seite</value>
     <comment>MainWindow.xaml</comment>
   </data>
   <data name="strClipboard" xml:space="preserve">
@@ -161,6 +301,18 @@
     <value>Toolbar schließen</value>
     <comment>MainWindow.xaml</comment>
   </data>
+  <data name="strColor" xml:space="preserve">
+    <value>Farbe:</value>
+    <comment>*</comment>
+  </data>
+  <data name="strColors" xml:space="preserve">
+    <value>Farben:</value>
+    <comment>ColorPicker.xaml</comment>
+  </data>
+  <data name="strContent" xml:space="preserve">
+    <value>Inhalt:</value>
+    <comment>About.xaml</comment>
+  </data>
   <data name="strConvertToForm" xml:space="preserve">
     <value>In Form umwandeln</value>
     <comment>MainWindow.xaml</comment>
@@ -173,17 +325,102 @@
     <value>Kopiert alle ausgewählten Objekte/Striche</value>
     <comment>MainWindow.xaml</comment>
   </data>
+  <data name="strCreateScripts" xml:space="preserve">
+    <value>Skripts erstellen ...</value>
+  </data>
+  <data name="strDark" xml:space="preserve">
+    <value>Dunkel</value>
+  </data>
+  <data name="strDarkModeSettingsTitle" xml:space="preserve">
+    <value>Darstellung:</value>
+  </data>
+  <data name="strDate" xml:space="preserve">
+    <value>Datum:</value>
+    <comment>*</comment>
+  </data>
+  <data name="strDateFormat" xml:space="preserve">
+    <value>dd.MM.yyyy</value>
+    <comment>*</comment>
+  </data>
+  <data name="strDefaultColors" xml:space="preserve">
+    <value>Standard Farben:</value>
+    <comment>ColorPicker.xaml</comment>
+  </data>
   <data name="strDeletePage" xml:space="preserve">
     <value>Seite löschen</value>
     <comment>MainWindow.xaml</comment>
+  </data>
+  <data name="strDeletePageTooltip" xml:space="preserve">
+    <value>Löscht die aktuelle Seite</value>
+    <comment>MainWindow.xaml</comment>
+  </data>
+  <data name="strDescription" xml:space="preserve">
+    <value>Beschreibung:</value>
+    <comment>*</comment>
+  </data>
+  <data name="strDisableTouchscreen" xml:space="preserve">
+    <value>Touchscreen deaktivieren</value>
+    <comment>MainWindow.xaml</comment>
+  </data>
+  <data name="strDiscardBackupToolTip" xml:space="preserve">
+    <value>Backup verwerfen</value>
+    <comment>RecoverAutoBackupFileDialog.xaml</comment>
+  </data>
+  <data name="strDiscardQuestion" xml:space="preserve">
+    <value>Sind Sie sich wirklich sicher, dass Sie diese Datei verwerfen möchten?</value>
+    <comment>RecoverAutoBackupFileDialog.xaml</comment>
+  </data>
+  <data name="strDiscardQuestionAll" xml:space="preserve">
+    <value>Sind Sie sich wirklich sicher, dass Sie alle Dateien verwerfen möchten?</value>
+    <comment>RecoverAutoBackupFileDialog.xaml</comment>
+  </data>
+  <data name="strDiscardTitle" xml:space="preserve">
+    <value>Sicher?</value>
+    <comment>RecoverAutoBackupFileDialog.xaml</comment>
   </data>
   <data name="strDisplayObjects" xml:space="preserve">
     <value>Objekte anzeigen</value>
     <comment>MainWindow.xaml</comment>
   </data>
+  <data name="strDisplayRecoverDialogDescription" xml:space="preserve">
+    <value>Wenn AutoSave aktiviert ist und SimpleJournal unerwartet beendet wird kann es passieren, dass es keine Dateien zum Wiederherstellen gibt (z.B. bei einem leeren Dokument oder wenn keine Änderungen nach dem Speichern gemacht wurden). Die Meldung kann dennoch nützlich sein, weil Sie dann wissen, dass SimpleJournal unerwartet beendet wurde.</value>
+    <comment>SettingsWindows.xaml</comment>
+  </data>
+  <data name="strDisplayRecoverDialogTitle" xml:space="preserve">
+    <value>Absturz-Meldung auch anzeigen, wenn keine Dateien zum Wiederherstellen vorhanden sind</value>
+    <comment>SettingsWindows.xaml</comment>
+  </data>
+  <data name="strDisplaySidebarAutomatically" xml:space="preserve">
+    <value>Objektleiste automatisch einblenden</value>
+    <comment>*</comment>
+  </data>
+  <data name="strDisplaySidebarAutomaticallyDescription" xml:space="preserve">
+    <value>Die Objektleiste blendet sich immer automatisch ein, wenn Sie eine Form oder ein Bild auswählen. Dieses Verhalten kann bei kleineren Bildschirmen aber störend wirken, weil die Objektleiste dort das Blatt teilweise verdeckt.</value>
+    <comment>*</comment>
+  </data>
   <data name="strDocument" xml:space="preserve">
     <value>Dokument</value>
     <comment>MainWindow.xaml.cs</comment>
+  </data>
+  <data name="strDontReplaceEllipsesWithCircles" xml:space="preserve">
+    <value>Ellipsen nicht durch Kreise ersetzten</value>
+    <comment>*</comment>
+  </data>
+  <data name="strDontUseContatPressure" xml:space="preserve">
+    <value>Anpressdruck nicht verwenden</value>
+    <comment>*</comment>
+  </data>
+  <data name="strDontUseFitToCurve" xml:space="preserve">
+    <value>Bézierglättung nicht verwenden</value>
+    <comment>SetupDialog.xaml</comment>
+  </data>
+  <data name="strDontUseRotationCompensation" xml:space="preserve">
+    <value>Rotationsausgleich nicht verwenden</value>
+    <comment>*</comment>
+  </data>
+  <data name="strDraw" xml:space="preserve">
+    <value>Zeichnen</value>
+    <comment>SettingsWindows.xaml</comment>
   </data>
   <data name="strEdit" xml:space="preserve">
     <value>Bearbeiten</value>
@@ -197,17 +434,234 @@
     <value>Bearbeiten eines Objekts</value>
     <comment>MainWindow.xaml</comment>
   </data>
+  <data name="strEditObjects" xml:space="preserve">
+    <value>Objekt bearbeiten:</value>
+  </data>
   <data name="strEditPenSize" xml:space="preserve">
     <value>Stiftbreite ändern</value>
     <comment>MainWindow.xaml</comment>
+  </data>
+  <data name="strEllipse" xml:space="preserve">
+    <value>Ellipse</value>
+    <comment>*</comment>
+  </data>
+  <data name="strEmptyClipboard" xml:space="preserve">
+    <value>Die Zwischenablage ist leer. Es gibt keine Objekte zum Einfügen!</value>
+    <comment>*</comment>
+  </data>
+  <data name="strEmptyClipboardTitle" xml:space="preserve">
+    <value>Leere Zwischenablage!</value>
+  </data>
+  <data name="strEmptySelection" xml:space="preserve">
+    <value>Leere Auswahl!</value>
+    <comment>*</comment>
   </data>
   <data name="strEmptyText" xml:space="preserve">
     <value>Leerer Text</value>
     <comment>*</comment>
   </data>
+  <data name="strEnableTouchScreen" xml:space="preserve">
+    <value>Touchscreen aktivieren</value>
+    <comment>MainWindow.xaml</comment>
+  </data>
+  <data name="strEnterValidText" xml:space="preserve">
+    <value>Bitte geben Sie einen gültigen Text ein!</value>
+    <comment>About.xaml.cs</comment>
+  </data>
+  <data name="strError" xml:space="preserve">
+    <value>Fehler!</value>
+    <comment>*</comment>
+  </data>
+  <data name="strErrorMessageAnalyzingStrokes" xml:space="preserve">
+    <value>Beim Analyisieren ist ein Fehler aufgetreten: {0}. Stellen Sie sicher, dass SimpleJournal richtig installiert ist!</value>
+    <comment>DrawingCanvas.cs</comment>
+  </data>
+  <data name="strExport" xml:space="preserve">
+    <value>Exportieren</value>
+    <comment>*</comment>
+  </data>
+  <data name="strExportAllPages" xml:space="preserve">
+    <value>Alle Seiten</value>
+    <comment>*</comment>
+  </data>
+  <data name="strExportAsJournal" xml:space="preserve">
+    <value>Als Journal exportieren</value>
+    <comment>*</comment>
+  </data>
+  <data name="strExportAsJournalExplanation" xml:space="preserve">
+    <value>Wenn diese Option nicht ausgewählt ist, werden die Seiten als Bilder exportiert!</value>
+    <comment>ExportDialog.xaml.cs</comment>
+  </data>
+  <data name="strExportCurrentPage" xml:space="preserve">
+    <value>Ausgewählte Seite</value>
+    <comment>ExportDialog.xaml.cs</comment>
+  </data>
+  <data name="strExportDialogExpanderExplanation" xml:space="preserve">
+    <value>Klappt alle Seiten aus oder versteckt alle Seiten!</value>
+    <comment>ExportDialog.xaml.cs</comment>
+  </data>
+  <data name="strExportDialogInvalidSettings" xml:space="preserve">
+    <value>Ungültige Einstellungen!</value>
+    <comment>ExportDialog.xaml.cs</comment>
+  </data>
   <data name="strExportDocument" xml:space="preserve">
     <value>Exportieren</value>
     <comment>MainWindow.xaml</comment>
+  </data>
+  <data name="strExportFailed" xml:space="preserve">
+    <value>Fehler beim Exportieren der Seite</value>
+    <comment>*</comment>
+  </data>
+  <data name="strExportFinished" xml:space="preserve">
+    <value>Export abgeschlossen!</value>
+    <comment>*</comment>
+  </data>
+  <data name="strExportPageArea" xml:space="preserve">
+    <value>Seitenbereich (z.B. 3-5)</value>
+    <comment>*</comment>
+  </data>
+  <data name="strExportPages" xml:space="preserve">
+    <value>Seiten exportieren</value>
+    <comment>*</comment>
+  </data>
+  <data name="strFailedToCopyFile" xml:space="preserve">
+    <value>Fehler beim Kopieren der Datei! Bitte wählen Sie einen anderen Ort aus!</value>
+    <comment>RecoverAutoBackupFileDialog.xaml</comment>
+  </data>
+  <data name="strFailedToCopyFileTitle" xml:space="preserve">
+    <value>Fehler beim Kopieren!</value>
+    <comment>RecoverAutoBackupFileDialog.xaml</comment>
+  </data>
+  <data name="strFailedToDeleteFile" xml:space="preserve">
+    <value>Fehler beim Löschen der Datei!</value>
+    <comment>RecoverAutoBackupFileDialog.xaml.cs</comment>
+  </data>
+  <data name="strFailedToDeleteFileTitle" xml:space="preserve">
+    <value>Fehler!</value>
+    <comment>RecoverAutoBackupFileDialog.xaml.cs</comment>
+  </data>
+  <data name="strFailedToDeleteSomeBackups" xml:space="preserve">
+    <value>Fehler beim Löschen einiger Backups!</value>
+    <comment>RecoverAutoBackupFileDialog.xaml.cs</comment>
+  </data>
+  <data name="strFailedToDeleteSomeBackupsTitle" xml:space="preserve">
+    <value>Fehler!</value>
+    <comment>RecoverAutoBackupFileDialog.xaml.cs</comment>
+  </data>
+  <data name="strFailedToLoadImage" xml:space="preserve">
+    <value>Fehler beim Laden des Bildes:</value>
+    <comment>*</comment>
+  </data>
+  <data name="strFailedToLoadJournal" xml:space="preserve">
+    <value>Fehler beim Laden des Journals:</value>
+    <comment>*</comment>
+  </data>
+  <data name="strFailedToLoadJournalFromNetwork" xml:space="preserve">
+    <value>Fehler beim Laden des Journals, stellen Sie sicher, dass sich das Journal lokal auf Ihrem Computer befindet. Es kann kein Journal aus dem Netzwerk geladen werden!</value>
+  </data>
+  <data name="strFailedToLoadJournalTitle" xml:space="preserve">
+    <value>Kritischer Fehler!</value>
+    <comment>*</comment>
+  </data>
+  <data name="strFailedToLoadSettings" xml:space="preserve">
+    <value>Fehler beim Laden der Einstellungen:</value>
+    <comment>*</comment>
+  </data>
+  <data name="strFailedToOpenAutoBackupDirectory" xml:space="preserve">
+    <value>Fehler beim Öffnen des Verzeichnis im Explorer:</value>
+    <comment>RecoverAutoBackupFileDialog.xaml.cs</comment>
+  </data>
+  <data name="strFailedToOpenAutoBackupDirectoryTitle" xml:space="preserve">
+    <value>Fehler!</value>
+    <comment>RecoverAutoBackupFileDialog.xaml.cs</comment>
+  </data>
+  <data name="strFailedToOpenNewSJInstance" xml:space="preserve">
+    <value>Fehler beim Öffnen einer weiteren Instanz von SimpleJournal:</value>
+    <comment>RecoverAutoBackupFileDialog.xaml.cs</comment>
+  </data>
+  <data name="strFailedToOpenNewSJInstanceTitle" xml:space="preserve">
+    <value>Fehler!</value>
+    <comment>RecoverAutoBackupFileDialog.xaml.cs</comment>
+  </data>
+  <data name="strFailedToRecoverJournal" xml:space="preserve">
+    <value>Fehler beim Wiederherstellen des Journals:</value>
+    <comment>RecoverAutoBackupFileDialog.xaml.cs</comment>
+  </data>
+  <data name="strFailedToRecoverJournalTitle" xml:space="preserve">
+    <value>Fehler!</value>
+    <comment>RecoverAutoBackupFileDialog.xaml.cs</comment>
+  </data>
+  <data name="strFailedToResetPens" xml:space="preserve">
+    <value>Fehler beim Zurücksetzen der Stifte:</value>
+    <comment>*</comment>
+  </data>
+  <data name="strFailedToSaveImage" xml:space="preserve">
+    <value>Fehler beim Speichern des Bildes:</value>
+    <comment>*</comment>
+  </data>
+  <data name="strFailedToSaveJournal" xml:space="preserve">
+    <value>Fehler beim Speichern des Journals:</value>
+    <comment>*</comment>
+  </data>
+  <data name="strFailedToSaveJournalTitle" xml:space="preserve">
+    <value>Kritischer Fehler!</value>
+    <comment>*</comment>
+  </data>
+  <data name="strFailedToSaveSettings" xml:space="preserve">
+    <value>Fehler beim Speichern der Einstellungen:</value>
+    <comment>*</comment>
+  </data>
+  <data name="strFailedToSendFeedback" xml:space="preserve">
+    <value>Fehler beim Senden des Feedbacks, bitte prüfen Sie Ihre Interntverbindung!</value>
+    <comment>About.xaml.cs</comment>
+  </data>
+  <data name="strFailedToTransformShape" xml:space="preserve">
+    <value>Es ist ein Fehler beim Transformieren der Form aufgetreten:</value>
+    <comment>*</comment>
+  </data>
+  <data name="strFailedToUpdate" xml:space="preserve">
+    <value>Fehler beim Update:</value>
+    <comment>App.xaml.cs</comment>
+  </data>
+  <data name="strFailure" xml:space="preserve">
+    <value>Fehler!</value>
+    <comment>*</comment>
+  </data>
+  <data name="strFeedback" xml:space="preserve">
+    <value>Feedback</value>
+    <comment>About.xaml</comment>
+  </data>
+  <data name="strFeedbackDescription" xml:space="preserve">
+    <value>Haben Sie einen Fehler gefunden? Was würden Sie verbessern? 
+Ich würde mich über Ihr Feedback freuen!
+Ihre Daten werden nicht an Dritte weitergegeben, sondern auschließlich dazu verwendet, um Ihnen eventuell eine Rückmeldung zu geben.</value>
+    <comment>About.xaml</comment>
+  </data>
+  <data name="strFeedbackSent" xml:space="preserve">
+    <value>Ihr Feedback wurde erfolgreich gesendet. Vielen Dank!</value>
+    <comment>About.xaml.cs</comment>
+  </data>
+  <data name="strFile" xml:space="preserve">
+    <value>Datei</value>
+    <comment>Window2.xaml</comment>
+  </data>
+  <data name="strFinish" xml:space="preserve">
+    <value>Abschließen</value>
+    <comment>*</comment>
+  </data>
+  <data name="strFitToCurveDescription" xml:space="preserve">
+    <value>Gibt an, ob die Bézierglättung zum Rendern verwendet werden soll. Nachdem eine Kurve gezeichnet wurde, wird diese geglättet und sieht nicht mehr kantig aus (oft werden Kurven sehr kantig, vorallem wenn man mit der Maus zeichnet, dann ist diese Einstellung sinnvoll).</value>
+  </data>
+  <data name="strFitToCurveTitle" xml:space="preserve">
+    <value>Bézierglättung verwenden</value>
+  </data>
+  <data name="strFont" xml:space="preserve">
+    <value>Schriftart:</value>
+    <comment>*</comment>
+  </data>
+  <data name="strFontSize" xml:space="preserve">
+    <value>Schriftgröße:</value>
+    <comment>*</comment>
   </data>
   <data name="strFormat" xml:space="preserve">
     <value>Format</value>
@@ -221,6 +675,14 @@
     <value>Wiederholt die letzte Aktion</value>
     <comment>MainWindow.xaml</comment>
   </data>
+  <data name="strFrameColor" xml:space="preserve">
+    <value>Umrandungsfarbe:</value>
+    <comment>*</comment>
+  </data>
+  <data name="strFrameWidth" xml:space="preserve">
+    <value>Umrandungsbreite:</value>
+    <comment>*</comment>
+  </data>
   <data name="strFree" xml:space="preserve">
     <value>Frei</value>
     <comment>MainWindow.xaml</comment>
@@ -229,41 +691,175 @@
     <value>Sie können pixelgenau radieren</value>
     <comment>MainWindow.xaml</comment>
   </data>
+  <data name="strFrom" xml:space="preserve">
+    <value>Von</value>
+    <comment>*</comment>
+  </data>
   <data name="strFullscreen" xml:space="preserve">
     <value>Vollbild</value>
     <comment>MainWindow.xaml</comment>
+  </data>
+  <data name="strGeneral" xml:space="preserve">
+    <value>Allgemein</value>
+    <comment>*</comment>
+  </data>
+  <data name="strGUI" xml:space="preserve">
+    <value>Benutzeroberfläche</value>
+    <comment>SettingsWindows.xaml</comment>
   </data>
   <data name="strHelp" xml:space="preserve">
     <value>Hilfe</value>
     <comment>MainWindow.xaml</comment>
   </data>
+  <data name="strHelpLnk" xml:space="preserve">
+    <value>https://simplejournal.ca-soft.net/de/index.php?page=help</value>
+    <comment>MainWindow.xaml</comment>
+  </data>
+  <data name="strHelpText" xml:space="preserve">
+    <value>Weitere Informationen finden Sie in der</value>
+    <comment>SetupDialog.xaml</comment>
+  </data>
+  <data name="strHexagon" xml:space="preserve">
+    <value>Sechseck (Vieleck)</value>
+    <comment>*</comment>
+  </data>
   <data name="strHighlight" xml:space="preserve">
     <value>Markieren</value>
     <comment>MainWindow.xaml</comment>
+  </data>
+  <data name="strHint" xml:space="preserve">
+    <value>Hinweis</value>
+    <comment>*</comment>
+  </data>
+  <data name="strHintInsert" xml:space="preserve">
+    <value>Hinweis: Bitte klicken Sie nun an eine beliebige Stelle auf eine beliebige Seite, um das Objekt dort einzufügen.
+Klicken Sie auf Ja, um diesen Hinweis zu ignorieren!
+Klicken Sie auf Nein, um diesen Hinweis weiterhin zu erhalten!</value>
+  </data>
+  <data name="strHintTitle" xml:space="preserve">
+    <value>Hinweis</value>
   </data>
   <data name="strImage" xml:space="preserve">
     <value>Bild</value>
     <comment>MainWindow.xaml</comment>
   </data>
+  <data name="strImages" xml:space="preserve">
+    <value>Bilder</value>
+    <comment>*</comment>
+  </data>
   <data name="strInsertDate" xml:space="preserve">
     <value>Datum</value>
     <comment>MainWindow.xaml</comment>
+  </data>
+  <data name="strInsertFromClipboard" xml:space="preserve">
+    <value>Bild aus Zwischenablage einfügen ...</value>
   </data>
   <data name="strInsertImage" xml:space="preserve">
     <value>Neues Bild</value>
     <comment>MainWindow.xaml</comment>
   </data>
+  <data name="strInsertPlotToolTip" xml:space="preserve">
+    <value>Ziehen Sie das Kooardinatensystem auf, indem Sie auf einen Punkt klicken und bewegen Sie dann die Maus/den Stift an die gewünschte Stelle und lassen Sie los</value>
+  </data>
+  <data name="strInsertSimpleFormToolTip" xml:space="preserve">
+    <value>Ziehen Sie eine Form auf, indem Sie einmal ein Punkt festlegen (klick) und dann können Sie mit der/dem Maus/Stift die Form aufziehen</value>
+  </data>
   <data name="strInsertText" xml:space="preserve">
     <value>Neuer Text</value>
     <comment>MainWindow.xaml</comment>
+  </data>
+  <data name="strInvalidInput" xml:space="preserve">
+    <value>Sie haben ungültige Werte angegeben!</value>
+    <comment>*</comment>
+  </data>
+  <data name="strInvalidInputTitle" xml:space="preserve">
+    <value>Ungültige Eingaben!</value>
+    <comment>*</comment>
+  </data>
+  <data name="strIsColorfulTheme" xml:space="preserve">
+    <value>Akzentfarbe in der Titelleiste anzeigen</value>
+    <comment>SettingsDialog.xaml</comment>
+  </data>
+  <data name="strItalic" xml:space="preserve">
+    <value>K</value>
+    <comment>*</comment>
+  </data>
+  <data name="strJournalFile" xml:space="preserve">
+    <value>Journal-Datei</value>
+    <comment>*</comment>
+  </data>
+  <data name="strJournalIsAlreadyOpened" xml:space="preserve">
+    <value>Dieses Journal ist bereits in einer anderen Instanz von SimpleJournal geöffnet und kann deshalb nicht geöffnet werden!</value>
+    <comment>Window2.xaml.cs</comment>
+  </data>
+  <data name="strJournalIsAlreadyOpenedTitle" xml:space="preserve">
+    <value>Dokument bereits geöffnet!</value>
+    <comment>Window2.xaml.cs</comment>
+  </data>
+  <data name="strJournalNeedsOnePageMinimum" xml:space="preserve">
+    <value>Es muss mindestens eine Seite im Journal existieren!</value>
+    <comment>*</comment>
+  </data>
+  <data name="strJournalNeedsOnePageMinimumTitle" xml:space="preserve">
+    <value>Diese Seite kann nicht gelöscht werden!</value>
+    <comment>*</comment>
+  </data>
+  <data name="strLabelBackups" xml:space="preserve">
+    <value>Backups</value>
+    <comment>RecoverAutoBackupFileDialog.xaml</comment>
+  </data>
+  <data name="strLang" xml:space="preserve">
+    <value>de</value>
+  </data>
+  <data name="strLight" xml:space="preserve">
+    <value>Hell</value>
+  </data>
+  <data name="strMail" xml:space="preserve">
+    <value>E-Mail:</value>
+    <comment>About.xaml</comment>
+  </data>
+  <data name="strManagePage" xml:space="preserve">
+    <value>Seiten verwalten</value>
+    <comment>MainWindow.xaml</comment>
+  </data>
+  <data name="strManagePageTooltip" xml:space="preserve">
+    <value>Ermöglicht Ihnen die Seiten zu verwalten (z.B. die Reihenfolge verändern)</value>
+    <comment>MainWindow.xaml</comment>
+  </data>
+  <data name="strMessageFailedToExportPsScripts" xml:space="preserve">
+    <value>Fehler beim Exportieren der Dateien: {0}</value>
+  </data>
+  <data name="strName" xml:space="preserve">
+    <value>Name:</value>
+    <comment>About.xaml</comment>
   </data>
   <data name="strNewDocument" xml:space="preserve">
     <value>Neues Dokument</value>
     <comment>MainWindow.xaml</comment>
   </data>
+  <data name="strNewerVersionAvailable" xml:space="preserve">
+    <value>Es gibt eine neuere Version:</value>
+    <comment>9</comment>
+  </data>
   <data name="strNewJournal" xml:space="preserve">
     <value>Neues Journal</value>
     <comment>MainWindow.xaml.cs</comment>
+  </data>
+  <data name="strNext" xml:space="preserve">
+    <value>Weiter</value>
+    <comment>*</comment>
+  </data>
+  <data name="strNoObjectsToDelete" xml:space="preserve">
+    <value>Es sind keine Objekte zum Löschen ausgewählt!</value>
+    <comment>*</comment>
+  </data>
+  <data name="strNoShapeRecognized" xml:space="preserve">
+    <value>Der ausgewählte Bereich konnte nicht als Form erkannt werden!</value>
+    <comment>*</comment>
+  </data>
+  <data name="strNoShapeRecognizedTitle" xml:space="preserve">
+    <value>Keine Form erkannt!</value>
+    <comment>*</comment>
   </data>
   <data name="strObject" xml:space="preserve">
     <value>Objekt</value>
@@ -273,21 +869,125 @@
     <value>Objekte:</value>
     <comment>MainWindow.xaml</comment>
   </data>
+  <data name="strOCRCopyToClipboard" xml:space="preserve">
+    <value>In die Zwischenablage kopieren</value>
+    <comment>TextAnalyzer.xaml</comment>
+  </data>
+  <data name="strOCRLoading" xml:space="preserve">
+    <value>Texterkennung (OCR) - Wird geladen ...</value>
+    <comment>TextAnalyzer.xaml</comment>
+  </data>
+  <data name="strOCRTitle" xml:space="preserve">
+    <value>Texterkennung (OCR)</value>
+    <comment>TextAnalyzer.xaml</comment>
+  </data>
   <data name="strOK" xml:space="preserve">
     <value>OK</value>
     <comment>*</comment>
+  </data>
+  <data name="strOpenBackupsAfterRecovery" xml:space="preserve">
+    <value>Backup(s) nach dem Wiederherstellen öffnen</value>
+    <comment>RecoverAutoBackupFileDialog.xaml</comment>
   </data>
   <data name="strOpenDocument" xml:space="preserve">
     <value>Dokument öffnen</value>
     <comment>MainWindow.xaml</comment>
   </data>
+  <data name="strOpenSetupAssistant" xml:space="preserve">
+    <value>Einrichtungsassistent öffnen</value>
+    <comment>*</comment>
+  </data>
   <data name="strPage" xml:space="preserve">
     <value>Seite</value>
     <comment>MainWindow.xaml.cs</comment>
   </data>
+  <data name="strPageManagmentButtonClearPage" xml:space="preserve">
+    <value>Leert die aktuell ausgewählte Seite</value>
+    <comment>PageManagmentDialog.xaml.cs</comment>
+  </data>
+  <data name="strPageManagmentButtonDecreaseZoom" xml:space="preserve">
+    <value>Verringert den Zoom-Faktor der Vorschau</value>
+    <comment>PageManagmentDialog.xaml.cs</comment>
+  </data>
+  <data name="strPageManagmentButtonDeletePage" xml:space="preserve">
+    <value>Löscht die aktuell ausgewählte Seite</value>
+    <comment>PageManagmentDialog.xaml.cs</comment>
+  </data>
+  <data name="strPageManagmentButtonIncreaseZoom" xml:space="preserve">
+    <value>Erhöht den Zoom-Faktor der Vorschau</value>
+    <comment>PageManagmentDialog.xaml.cs</comment>
+  </data>
+  <data name="strPageManagmentButtonInsertBottom" xml:space="preserve">
+    <value>Verschiebt die aktuell ausgewählte Seite ganz nach unten</value>
+    <comment>PageManagmentDialog.xaml.cs</comment>
+  </data>
+  <data name="strPageManagmentButtonInsertPageAfterIndexBlanko" xml:space="preserve">
+    <value>Fügt nach der aktuellen Seite eine blanko Seite ein</value>
+    <comment>PageManagmentDialog.xaml.cs</comment>
+  </data>
+  <data name="strPageManagmentButtonInsertPageAfterIndexChequered" xml:space="preserve">
+    <value>Fügt nach der aktuellen Seite eine karierte Seite ein</value>
+    <comment>PageManagmentDialog.xaml.cs</comment>
+  </data>
+  <data name="strPageManagmentButtonInsertPageAfterIndexRuled" xml:space="preserve">
+    <value>Fügt nach der aktuellen Seite eine linierte Seite ein</value>
+    <comment>PageManagmentDialog.xaml.cs</comment>
+  </data>
+  <data name="strPageManagmentButtonInsertPageBeforeIndexBlanko" xml:space="preserve">
+    <value>Fügt bevor der aktuellen Seite eine blanko Seite ein</value>
+    <comment>PageManagmentDialog.xaml.cs</comment>
+  </data>
+  <data name="strPageManagmentButtonInsertPageBeforeIndexChequered" xml:space="preserve">
+    <value>Fügt bevor der aktuellen Seite eine karierte Seite ein</value>
+    <comment>PageManagmentDialog.xaml.cs</comment>
+  </data>
+  <data name="strPageManagmentButtonInsertPageBeforeIndexRuled" xml:space="preserve">
+    <value>Fügt bevor der aktuellen Seiten eine linierte Seite ein</value>
+    <comment>PageManagmentDialog.xaml.cs</comment>
+  </data>
+  <data name="strPageManagmentButtonInsertTop" xml:space="preserve">
+    <value>Verschiebt die aktuell ausgewählte Seite ganz nach oben</value>
+    <comment>PageManagmentDialog.xaml.cs</comment>
+  </data>
+  <data name="strPageManagmentButtonMovePageDown" xml:space="preserve">
+    <value>Verschiebt die aktuell ausgewählte Seite eins nach unten</value>
+    <comment>PageManagmentDialog.xaml.cs</comment>
+  </data>
+  <data name="strPageManagmentButtonMovePageUp" xml:space="preserve">
+    <value>Verschiebt die aktuell ausgewählte Seite eins nach oben</value>
+    <comment>PageManagmentDialog.xaml.cs</comment>
+  </data>
+  <data name="strPageManagmentTitle" xml:space="preserve">
+    <value>Seitenverwaltung</value>
+    <comment>PageManagmentDialog.xaml</comment>
+  </data>
+  <data name="strPageManagmentToggleButtonBlanko" xml:space="preserve">
+    <value>Ändert die aktuelle Seite auf das Papierformat: Blanko</value>
+    <comment>PageManagmentDialog.xaml.cs</comment>
+  </data>
+  <data name="strPageManagmentToggleButtonChequered" xml:space="preserve">
+    <value>Ändert die aktuelle Seite auf das Papierformat: Kariert</value>
+    <comment>PageManagmentDialog.xaml.cs</comment>
+  </data>
+  <data name="strPageManagmentToggleButtonRuled" xml:space="preserve">
+    <value>Ändert die aktuelle Seite auf das Papierformat: Liniert</value>
+    <comment>PageManagmentDialog.xaml.cs</comment>
+  </data>
+  <data name="strPageManagmentZoomLabel" xml:space="preserve">
+    <value>Vorschau (Zoom: {0}%)</value>
+    <comment>PageManagmentDialog.xaml.cs</comment>
+  </data>
   <data name="strPages" xml:space="preserve">
     <value>Seiten</value>
     <comment>MainWindow.xaml</comment>
+  </data>
+  <data name="strPaperFormat" xml:space="preserve">
+    <value>Papierformat:</value>
+    <comment>*</comment>
+  </data>
+  <data name="strPaperSize" xml:space="preserve">
+    <value>Papiergröße:</value>
+    <comment>*</comment>
   </data>
   <data name="strPaste" xml:space="preserve">
     <value>Einfügen</value>
@@ -297,193 +997,25 @@
     <value>Klicken Sie auf Einfügen und dann klicken Sie auf eine belibige Position und dort werden die Elemente aus der Zwischenablage dann eingefügt</value>
     <comment>MainWindow.xaml</comment>
   </data>
-  <data name="strPens" xml:space="preserve">
-    <value>Stifte</value>
-    <comment>MainWindow.xaml</comment>
+  <data name="strPatchDownload" xml:space="preserve">
+    <value>Patch herunterladen</value>
+    <comment>PatchDialog.xaml</comment>
   </data>
-  <data name="strPleaseEnterValidText" xml:space="preserve">
-    <value>Bitte geben Sie gültigen Text ein!</value>
-    <comment>*</comment>
+  <data name="strPatchFailedToOpenUrl" xml:space="preserve">
+    <value>Fehler beim Öffnen der Patch-URL:</value>
+    <comment>PatchDialog.xaml</comment>
   </data>
-  <data name="strPleaseWait" xml:space="preserve">
-    <value>Bitte warten Sie während {0} geladen wird (Seite {1}/{2}) ...</value>
-    <comment>WaitingDialog.xaml.cs</comment>
+  <data name="strPatchText" xml:space="preserve">
+    <value>Diese Version von SimpleJournal wird aufgrund einer Umstrukturierung keine Updates mehr erhalten, deswegen sollten Sie diesen Patch installieren, um auch weiterhin Updates zu erhalten:</value>
+    <comment>PatchDialog.xaml</comment>
   </data>
-  <data name="strPleaseWaitTitle" xml:space="preserve">
-    <value>Bitte warten ...</value>
-    <comment>WaitingDialog.xaml</comment>
+  <data name="strPathHasNoOrigin" xml:space="preserve">
+    <value>Kein Ursprung</value>
+    <comment>RecoverAutoBackupFileDialog.xaml.cs</comment>
   </data>
-  <data name="strPrintDocument" xml:space="preserve">
-    <value>Drucken</value>
-    <comment>MainWindow.xaml</comment>
-  </data>
-  <data name="strRecognization" xml:space="preserve">
-    <value>Formen</value>
-    <comment>MainWindow.xaml</comment>
-  </data>
-  <data name="strRecognizationDescription" xml:space="preserve">
-    <value>Zeichen Sie einfach eine gewünschte Form und sie wird automatisch in ein Polygon umgewandelt, wenn Sie erkannt wird</value>
-    <comment>MainWindow.xaml</comment>
-  </data>
-  <data name="strRemove" xml:space="preserve">
-    <value>Entfernen</value>
-    <comment>MainWindow.xaml</comment>
-  </data>
-  <data name="strRemoveDescription" xml:space="preserve">
-    <value>Löscht alle ausgewählten Objekte/Striche</value>
-    <comment>MainWindow.xaml</comment>
-  </data>
-  <data name="strRemoveObjectsDescription" xml:space="preserve">
-    <value>Ausgewähte Objekte löschen</value>
-    <comment>MainWindow.xaml</comment>
-  </data>
-  <data name="strRubber" xml:space="preserve">
-    <value>Radieren</value>
-    <comment>MainWindow.xaml</comment>
-  </data>
-  <data name="strRuler" xml:space="preserve">
-    <value>Lineal</value>
-    <comment>MainWindow.xaml</comment>
-  </data>
-  <data name="strRulerDescription" xml:space="preserve">
-    <value>Einfach auf einen Punkt klicken und die Maus bewegen und an die gewünschte Position klicken und es erscheint ein Strich</value>
-    <comment>MainWindow.xaml</comment>
-  </data>
-  <data name="strSaveAsDocument" xml:space="preserve">
-    <value>Speichern unter ...</value>
-    <comment>MainWindow.xaml</comment>
-  </data>
-  <data name="strSaveDocument" xml:space="preserve">
-    <value>Speichern</value>
-    <comment>MainWindow.xaml</comment>
-  </data>
-  <data name="strSelect" xml:space="preserve">
-    <value>Auswahl</value>
-    <comment>MainWindow.xaml</comment>
-  </data>
-  <data name="strSelectDescription" xml:space="preserve">
-    <value>Wählen Sie einen belibigen Bereich aus, um ihn zu bearbeiten</value>
-    <comment>MainWindow.xaml</comment>
-  </data>
-  <data name="strSelection" xml:space="preserve">
-    <value>Auswahl</value>
-    <comment>MainWindow.xaml</comment>
-  </data>
-  <data name="strSettings" xml:space="preserve">
-    <value>Einstellungen</value>
-    <comment>MainWindow.xaml</comment>
-  </data>
-  <data name="strSidepage" xml:space="preserve">
-    <value>Seitenbar</value>
-    <comment>MainWindow.xaml</comment>
-  </data>
-  <data name="strStart" xml:space="preserve">
-    <value>Start</value>
-    <comment>MainWindow.xaml</comment>
-  </data>
-  <data name="strStrokes" xml:space="preserve">
-    <value>Striche</value>
-    <comment>MainWindow.xaml</comment>
-  </data>
-  <data name="strStrokesDescription" xml:space="preserve">
-    <value>Sie können ganze Striche radieren</value>
-    <comment>MainWindow.xaml</comment>
-  </data>
-  <data name="strText" xml:space="preserve">
-    <value>Text</value>
-    <comment>MainWindow.xaml</comment>
-  </data>
-  <data name="strTextDectection" xml:space="preserve">
-    <value>Texterkennung</value>
-    <comment>MainWindow.xaml</comment>
-  </data>
-  <data name="strTextInput" xml:space="preserve">
-    <value>Bitte geben Sie den Text ein:</value>
-    <comment>TextInsertWindow.xaml.cs</comment>
-  </data>
-  <data name="strTextInputTitle" xml:space="preserve">
-    <value>Text einfügen</value>
-    <comment>TextInsertWindow.xaml.cs</comment>
-  </data>
-  <data name="strTextRecognization" xml:space="preserve">
-    <value>Textanalyse</value>
-    <comment>MainWindow.xaml</comment>
-  </data>
-  <data name="strTextSearch" xml:space="preserve">
-    <value>Suche</value>
-    <comment>MainWindow.xaml</comment>
-  </data>
-  <data name="strTools" xml:space="preserve">
-    <value>Werkzeuge</value>
-    <comment>MainWindow.xaml</comment>
-  </data>
-  <data name="strView" xml:space="preserve">
-    <value>Ansicht</value>
-    <comment>MainWindow.xaml</comment>
-  </data>
-  <data name="strWindow" xml:space="preserve">
-    <value>Fenster</value>
-    <comment>MainWindow.xaml</comment>
-  </data>
-  <data name="strZoom" xml:space="preserve">
-    <value>Zoom</value>
-    <comment>MainWindow.xaml</comment>
-  </data>
-  <data name="strA4" xml:space="preserve">
-    <value>A4</value>
-    <comment>*</comment>
-  </data>
-  <data name="strBack" xml:space="preserve">
-    <value>Zurück</value>
-    <comment>*</comment>
-  </data>
-  <data name="strChequered" xml:space="preserve">
-    <value>Kariert</value>
-    <comment>*</comment>
-  </data>
-  <data name="strClear" xml:space="preserve">
-    <value>Leeren</value>
-    <comment>*</comment>
-  </data>
-  <data name="strColors" xml:space="preserve">
-    <value>Farben:</value>
-    <comment>ColorPicker.xaml</comment>
-  </data>
-  <data name="strDefaultColors" xml:space="preserve">
-    <value>Standard Farben:</value>
-    <comment>ColorPicker.xaml</comment>
-  </data>
-  <data name="strDontReplaceEllipsesWithCircles" xml:space="preserve">
-    <value>Ellipsen nicht durch Kreise ersetzten</value>
-    <comment>*</comment>
-  </data>
-  <data name="strDontUseContatPressure" xml:space="preserve">
-    <value>Anpressdruck nicht verwenden</value>
-    <comment>*</comment>
-  </data>
-  <data name="strDontUseRotationCompensation" xml:space="preserve">
-    <value>Rotationsausgleich nicht verwenden</value>
-    <comment>*</comment>
-  </data>
-  <data name="strFinish" xml:space="preserve">
-    <value>Abschließen</value>
-    <comment>*</comment>
-  </data>
-  <data name="strHelpText" xml:space="preserve">
-    <value>Weitere Informationen finden Sie in der</value>
-    <comment>SetupDialog.xaml</comment>
-  </data>
-  <data name="strNext" xml:space="preserve">
-    <value>Weiter</value>
-    <comment>*</comment>
-  </data>
-  <data name="strPaperFormat" xml:space="preserve">
-    <value>Papierformat:</value>
-    <comment>*</comment>
-  </data>
-  <data name="strPaperSize" xml:space="preserve">
-    <value>Papiergröße:</value>
-    <comment>*</comment>
+  <data name="strPathHasOrigin" xml:space="preserve">
+    <value>Ursprung: </value>
+    <comment>RecoverAutoBackupFileDialog.xaml.cs</comment>
   </data>
   <data name="strPen1" xml:space="preserve">
     <value>Stift 1</value>
@@ -517,6 +1049,14 @@
     <value>Mittel</value>
     <comment>*</comment>
   </data>
+  <data name="strPens" xml:space="preserve">
+    <value>Stifte</value>
+    <comment>MainWindow.xaml</comment>
+  </data>
+  <data name="strPentagon" xml:space="preserve">
+    <value>Fünfeck (Vieleck)</value>
+    <comment>*</comment>
+  </data>
   <data name="strPenTiny" xml:space="preserve">
     <value>Klein</value>
     <comment>*</comment>
@@ -525,8 +1065,276 @@
     <value>Blanko</value>
     <comment>*</comment>
   </data>
+  <data name="strPleaseEnterValidText" xml:space="preserve">
+    <value>Bitte geben Sie gültigen Text ein!</value>
+    <comment>*</comment>
+  </data>
+  <data name="strPleaseInputText" xml:space="preserve">
+    <value>Bitte geben Sie ein Text ein:</value>
+    <comment>TextInsertWindow.xaml</comment>
+  </data>
+  <data name="strPleaseInputTextTitle" xml:space="preserve">
+    <value>Text einfügen</value>
+    <comment>TextInsertWindow.xaml</comment>
+  </data>
+  <data name="strPleaseWait" xml:space="preserve">
+    <value>Bitte warten Sie während {0} geladen wird (Seite {1}/{2}) ...</value>
+    <comment>WaitingDialog.xaml.cs</comment>
+  </data>
+  <data name="strPleaseWaitTitle" xml:space="preserve">
+    <value>Bitte warten ...</value>
+    <comment>WaitingDialog.xaml</comment>
+  </data>
+  <data name="strPlot" xml:space="preserve">
+    <value>Kooardinatensystem</value>
+    <comment>*</comment>
+  </data>
+  <data name="strPlotDrawNegativeAxis" xml:space="preserve">
+    <value>Negative Achsen zeichen</value>
+    <comment>*</comment>
+  </data>
+  <data name="strPolygon" xml:space="preserve">
+    <value>Vieleck</value>
+    <comment>*</comment>
+  </data>
+  <data name="strPolygonButton" xml:space="preserve">
+    <value>Vieleck</value>
+    <comment>Window2.xaml</comment>
+  </data>
+  <data name="strPolygonToolTip" xml:space="preserve">
+    <value>Zeichnen Sie ein Polygon, indem Sie einmal einen Startpunkt festlegen (klick). Dort entsteht ein Kreis, jetzt können Sie weitere Kanten hinzufügen, am Ende muss eine Kante beim Startpunkt wieder enden, damit eine Form entsteht</value>
+    <comment>*</comment>
+  </data>
+  <data name="strPreview" xml:space="preserve">
+    <value>Vorschau:</value>
+    <comment>*</comment>
+  </data>
+  <data name="strPrintDocument" xml:space="preserve">
+    <value>Drucken</value>
+    <comment>MainWindow.xaml</comment>
+  </data>
+  <data name="strPrinting" xml:space="preserve">
+    <value>Drucke Seite</value>
+    <comment>*</comment>
+  </data>
+  <data name="strQuad" xml:space="preserve">
+    <value>Viereck (Vieleck)</value>
+    <comment>*</comment>
+  </data>
+  <data name="strRecentFiles" xml:space="preserve">
+    <value>Zuletzt geöffnete Dateien</value>
+    <comment>Window2.xaml</comment>
+  </data>
+  <data name="strRecognization" xml:space="preserve">
+    <value>Formen</value>
+    <comment>MainWindow.xaml</comment>
+  </data>
+  <data name="strRecognizationDescription" xml:space="preserve">
+    <value>Zeichen Sie einfach eine gewünschte Form und sie wird automatisch in ein Polygon umgewandelt, wenn Sie erkannt wird</value>
+    <comment>MainWindow.xaml</comment>
+  </data>
+  <data name="strRecoverAutoBackupFileDialogTitle" xml:space="preserve">
+    <value>Backups wiederherstellen ...</value>
+    <comment>strRecoverAutoBackupFileDialog.xaml</comment>
+  </data>
+  <data name="strRectangle" xml:space="preserve">
+    <value>Rechteck</value>
+    <comment>*</comment>
+  </data>
+  <data name="strRedo" xml:space="preserve">
+    <value>Wiederholen</value>
+    <comment>MainWindow.xaml</comment>
+  </data>
+  <data name="strReleaseDate" xml:space="preserve">
+    <value>29.04.2021 15:01 Uhr</value>
+    <comment>*</comment>
+  </data>
+  <data name="strRemove" xml:space="preserve">
+    <value>Entfernen</value>
+    <comment>MainWindow.xaml</comment>
+  </data>
+  <data name="strRemoveDescription" xml:space="preserve">
+    <value>Löscht alle ausgewählten Objekte/Striche</value>
+    <comment>MainWindow.xaml</comment>
+  </data>
+  <data name="strRemoveObjectsDescription" xml:space="preserve">
+    <value>Ausgewähte Objekte löschen</value>
+    <comment>MainWindow.xaml</comment>
+  </data>
+  <data name="strResetPens" xml:space="preserve">
+    <value>Stifte zurücksetzen</value>
+    <comment>*</comment>
+  </data>
+  <data name="strRestoreBackupToolTip" xml:space="preserve">
+    <value>Backup wiederherstellen</value>
+    <comment>RecoverAutoBackupFileDialog.xaml</comment>
+  </data>
+  <data name="strRotation" xml:space="preserve">
+    <value>Drehung:</value>
+    <comment>*</comment>
+  </data>
+  <data name="strRubber" xml:space="preserve">
+    <value>Radieren</value>
+    <comment>MainWindow.xaml</comment>
+  </data>
   <data name="strRuled" xml:space="preserve">
     <value>Liniert</value>
+    <comment>*</comment>
+  </data>
+  <data name="strRuler" xml:space="preserve">
+    <value>Lineal</value>
+    <comment>MainWindow.xaml</comment>
+  </data>
+  <data name="strRulerDescription" xml:space="preserve">
+    <value>Einfach auf einen Punkt klicken und die Maus bewegen und an die gewünschte Position klicken und es erscheint ein Strich</value>
+    <comment>MainWindow.xaml</comment>
+  </data>
+  <data name="strSave" xml:space="preserve">
+    <value>Speichern</value>
+    <comment>*</comment>
+  </data>
+  <data name="strSaveAs" xml:space="preserve">
+    <value>Speichern unter ...</value>
+    <comment>*</comment>
+  </data>
+  <data name="strSaveAsDocument" xml:space="preserve">
+    <value>Speichern unter ...</value>
+    <comment>MainWindow.xaml</comment>
+  </data>
+  <data name="strSaveChanges" xml:space="preserve">
+    <value>Möchten Sie Ihre Änderungen speichern, bevor sie das Programm beenden?</value>
+    <comment>*</comment>
+  </data>
+  <data name="strSaveChangesTitle" xml:space="preserve">
+    <value>Speichern?</value>
+    <comment>*</comment>
+  </data>
+  <data name="strSaveDocument" xml:space="preserve">
+    <value>Speichern</value>
+    <comment>MainWindow.xaml</comment>
+  </data>
+  <data name="strSearch" xml:space="preserve">
+    <value>Suche ...</value>
+    <comment>*</comment>
+  </data>
+  <data name="strSelect" xml:space="preserve">
+    <value>Auswahl</value>
+    <comment>MainWindow.xaml</comment>
+  </data>
+  <data name="strSelectDescription" xml:space="preserve">
+    <value>Wählen Sie einen belibigen Bereich aus, um ihn zu bearbeiten</value>
+    <comment>MainWindow.xaml</comment>
+  </data>
+  <data name="strSelectedDocumentNotExisting" xml:space="preserve">
+    <value>Das ausgewählte Dokument existiert nicht mehr. Soll es aus der Liste entfernt werden?</value>
+    <comment>*</comment>
+  </data>
+  <data name="strSelectedDocumentNotExistingTitle" xml:space="preserve">
+    <value>Entfernen?</value>
+    <comment>*</comment>
+  </data>
+  <data name="strSelection" xml:space="preserve">
+    <value>Auswahl</value>
+    <comment>MainWindow.xaml</comment>
+  </data>
+  <data name="strSend" xml:space="preserve">
+    <value>Senden</value>
+    <comment>About.xaml</comment>
+  </data>
+  <data name="strSettings" xml:space="preserve">
+    <value>Einstellungen</value>
+    <comment>MainWindow.xaml</comment>
+  </data>
+  <data name="strSettingsActivateGlowingEffect" xml:space="preserve">
+    <value>Fensterleuchteffekt aktivieren</value>
+    <comment>*</comment>
+  </data>
+  <data name="strSettingsActivateGlowingEffectDescription" xml:space="preserve">
+    <value>(kann beim Verkleinern/Vergrößern zu Performance-Problemen führen)</value>
+    <comment>*</comment>
+  </data>
+  <data name="strSettingsBackgroundCustom" xml:space="preserve">
+    <value>Benutzerdefiniertes Hintergrundbild festlegen</value>
+    <comment>*</comment>
+  </data>
+  <data name="strSettingsBackgroundDefault" xml:space="preserve">
+    <value>Kein Hintergrund (standard, grau)</value>
+    <comment>*</comment>
+  </data>
+  <data name="strSettingsBackgroundHeader" xml:space="preserve">
+    <value>Hintergrund</value>
+    <comment>*</comment>
+  </data>
+  <data name="strSettingsCeckBoxDisableTouchscreen" xml:space="preserve">
+    <value>Windows Touchscreen beim Starten deaktivieren</value>
+    <comment>*</comment>
+  </data>
+  <data name="strSettingsClearLastOpenedDocumentsToolTip" xml:space="preserve">
+    <value>Leert die Liste, der zuletzt geöffneten Dokumente im Menü</value>
+    <comment>*</comment>
+  </data>
+  <data name="strSettingsDisableTouchExplanation" xml:space="preserve">
+    <value>Deaktiviert den Touchscreen beim Starten und aktiviert ihn beim Beenden. Diese Option kann sinnvoll sein, wenn Sie mit einem Stift schreiben, dann können Sie die Hand auf das Display legen, ohne dass Ihre Hand als Eingabe erkannt wird. Dies ist in der Store-Version nicht möglich, allerdings gibt es auf meiner Homepage ein Tool dafür:</value>
+    <comment>*</comment>
+  </data>
+  <data name="strSettingsDisableTouchscreenTitle" xml:space="preserve">
+    <value>Touchscreen deaktivieren (Für Fortgeschrittene)</value>
+    <comment>*</comment>
+  </data>
+  <data name="strSettingsDisableTouchUWP1" xml:space="preserve">
+    <value>SimpleJournal kann nicht zwischen Stift- und Fingereingabe unterscheiden, bzw. gibt es keine Möglichkeit, die Fingereingabe vollständig zu deaktivieren.</value>
+    <comment>*</comment>
+  </data>
+  <data name="strSettingsDisableTouchUWP2" xml:space="preserve">
+    <value>Allerdings gibt es die Möglichkeit, vor dem Start und nach dem Beenden von SimpleJournal jeweils ein Powershell-Skript auszuführen, das hier generiert werden kann!</value>
+    <comment>*</comment>
+  </data>
+  <data name="strSettingsDisableTouchUWP3" xml:space="preserve">
+    <value>Um diese Skripts ausführen zu können, müssen 2 Bedingungen erfüllt sein: </value>
+    <comment>*</comment>
+  </data>
+  <data name="strSettingsDisableTouchUWP4" xml:space="preserve">
+    <value>1) Führen Sie das Skript als Administartor aus!</value>
+    <comment>*</comment>
+  </data>
+  <data name="strSettingsDisableTouchUWP5" xml:space="preserve">
+    <value>2) Sie müssen einmalig erlauben, dass Powershell das Skript ausführen darf (bitte dazu den folgenden Befehl bei Powershell eingeben und bestätigen)</value>
+    <comment>*</comment>
+  </data>
+  <data name="strSettingsFeatureBar" xml:space="preserve">
+    <value>Weitere Funktionen:</value>
+    <comment>*</comment>
+  </data>
+  <data name="strSettingsOpenSetupAssistantTooltip" xml:space="preserve">
+    <value>Bietet Ihnen die Möglichkeit, SimpleJournal erneut einzurichten</value>
+    <comment>*</comment>
+  </data>
+  <data name="strSettingsResetPensTooltip" xml:space="preserve">
+    <value>Setzt die Stifte auf Ihre übersprüngliche Einstellung zurück</value>
+    <comment>*</comment>
+  </data>
+  <data name="strSettingsSetFileAssoc" xml:space="preserve">
+    <value>Dateitypzuordnung wiederherstellen</value>
+    <comment>*</comment>
+  </data>
+  <data name="strSettingsSetFileAssocToolTip" xml:space="preserve">
+    <value>Setzt dieses Programm als Standard für .Journal-Dateien</value>
+    <comment>*</comment>
+  </data>
+  <data name="strSettingsTouchScreenExplanationNormal1" xml:space="preserve">
+    <value>SimpleJournal kann nicht zwischen Stift und Fingereingaben differenzieren bzw. gibt es keine Möglichkeit, Fingereingaben vollständig zu deaktivieren. Daher gibt es nun die Option, dass beim Starten/Beenden von SimpleJournal ein Powershell-Skript ausgeführt wird, das die Toucheingabe systemweit deaktiviert/aktiviert.</value>
+    <comment>*</comment>
+  </data>
+  <data name="strSettingsTouchScreenExplanationNormal2" xml:space="preserve">
+    <value>Damit das Powershell-Skript ausgeführt werden kann, muss:</value>
+    <comment>*</comment>
+  </data>
+  <data name="strSettingsTouchScreenExplanationNormal3" xml:space="preserve">
+    <value>1) SimpleJournal als Administrator ausgeführt werden (wird es standardmäßig)</value>
+    <comment>*</comment>
+  </data>
+  <data name="strSettingsTouchScreenExplanationNormal4" xml:space="preserve">
+    <value>2) Das Powershell-Skript muss erlabut werden (führen Sie dazu den folgenden Befehl in Powershell aus und bestätigen ihn):</value>
     <comment>*</comment>
   </data>
   <data name="strSetupCompleted" xml:space="preserve">
@@ -541,6 +1349,22 @@ Hier möchte ich Ihnen noch ein paar wichtige Hinweise geben, die Ihnen helfen w
   <data name="strSetupCompletedTitle" xml:space="preserve">
     <value>Einrichtung erfolgreich abgeschlossen!</value>
     <comment>SetupDialog.xaml</comment>
+  </data>
+  <data name="strSetupDarkModeDescription" xml:space="preserve">
+    <value>Der dunkle Modus betrifft momentan nur das Menü-Band. Die Dialoge bleiben normal. Die Einstellungen können alle auch später geändert werden!</value>
+    <comment>*</comment>
+  </data>
+  <data name="strSetupDarkModeTitle" xml:space="preserve">
+    <value>Mögen Sie die Dunkelheit?</value>
+    <comment>*</comment>
+  </data>
+  <data name="strSetupDarkModeYes" xml:space="preserve">
+    <value>Ja, ich mag es gerne dunkel</value>
+    <comment>*</comment>
+  </data>
+  <data name="strSetupDarModeNo" xml:space="preserve">
+    <value>Nein, ich mag es lieber hell</value>
+    <comment>*</comment>
   </data>
   <data name="strSetupDialogTitle" xml:space="preserve">
     <value>SimpleJournal - Einrichtungsassistent</value>
@@ -590,6 +1414,10 @@ Hier möchte ich Ihnen noch ein paar wichtige Hinweise geben, die Ihnen helfen w
     <value>Schritt 3: Einstellung des Stifts</value>
     <comment>SetupDialog.xaml</comment>
   </data>
+  <data name="strSetupStep3ContactPressureTitle" xml:space="preserve">
+    <value>Anpressdruck</value>
+    <comment>SetupDialog.xaml</comment>
+  </data>
   <data name="strSetupStep3Description" xml:space="preserve">
     <value>Der Anpressdruck bezieht sich auf dem Stift, mit dem Sie schreiben. Desto fester Sie aufdrücken, desto dicker zeichnen Sie. Dieses Feature ist oft praktisch, wenn man etwas deutlicher abheben möchte und aus diesem Grund ist dieses Feature standardmäßig aktiviert. Aber es kann auch sinnvoll sein, dieses Feature zu deaktivieren.</value>
     <comment>SetupDialog.xaml</comment>
@@ -622,291 +1450,132 @@ Hier möchte ich Ihnen noch ein paar wichtige Hinweise geben, die Ihnen helfen w
     <value>Willkommen zum SimpleJournal Einrichtungsassistent!</value>
     <comment>SetupDialog.xaml</comment>
   </data>
+  <data name="strShape" xml:space="preserve">
+    <value>Form</value>
+    <comment>*</comment>
+  </data>
+  <data name="strShapes" xml:space="preserve">
+    <value>Formen:</value>
+    <comment>Templates</comment>
+  </data>
+  <data name="strShapesHeader" xml:space="preserve">
+    <value>Formen</value>
+    <comment>*</comment>
+  </data>
+  <data name="strSidepage" xml:space="preserve">
+    <value>Seitenbar</value>
+    <comment>MainWindow.xaml</comment>
+  </data>
+  <data name="strSinglePage" xml:space="preserve">
+    <value>Einzelne Seite</value>
+    <comment>*</comment>
+  </data>
+  <data name="strSizes" xml:space="preserve">
+    <value>Größen:</value>
+    <comment>Templates</comment>
+  </data>
+  <data name="strSJTerminated" xml:space="preserve">
+    <value>SimpleJournal wurde unerwartet beendet!</value>
+    <comment>RecoverAutoBackupFileDialog.xaml</comment>
+  </data>
   <data name="strSkip" xml:space="preserve">
     <value>Überspringen</value>
+    <comment>*</comment>
+  </data>
+  <data name="strSquare" xml:space="preserve">
+    <value>Quadrat</value>
+    <comment>*</comment>
+  </data>
+  <data name="strStart" xml:space="preserve">
+    <value>Start</value>
+    <comment>MainWindow.xaml</comment>
+  </data>
+  <data name="strStrikethrough" xml:space="preserve">
+    <value>S</value>
+    <comment>*</comment>
+  </data>
+  <data name="strStrokes" xml:space="preserve">
+    <value>Striche</value>
+    <comment>MainWindow.xaml</comment>
+  </data>
+  <data name="strStrokesDescription" xml:space="preserve">
+    <value>Sie können ganze Striche radieren</value>
+    <comment>MainWindow.xaml</comment>
+  </data>
+  <data name="strSuccess" xml:space="preserve">
+    <value>Erfolg!</value>
     <comment>*</comment>
   </data>
   <data name="strTestPreview" xml:space="preserve">
     <value>Vorschau - Hier können Sie testen!</value>
     <comment>PreviewCanvas.xaml.cs</comment>
   </data>
-  <data name="strTextToHightlight" xml:space="preserve">
-    <value>Dies ist ein zu makierender Text</value>
-    <comment>SetupDialog.xaml</comment>
-  </data>
-  <data name="strUseContactPressure" xml:space="preserve">
-    <value>Anpressdruck verwenden</value>
-    <comment>*</comment>
-  </data>
-  <data name="strUseReplaceEllipsesWithCircles" xml:space="preserve">
-    <value>Ellipsen durch Kreise ersetzen</value>
-    <comment>*</comment>
-  </data>
-  <data name="strUseRotationCompensation" xml:space="preserve">
-    <value>Rotationsausgleich verwenden</value>
-    <comment>*</comment>
-  </data>
-  <data name="strWrite" xml:space="preserve">
-    <value>Schreiben</value>
-    <comment>*</comment>
-  </data>
-  <data name="strGeneral" xml:space="preserve">
-    <value>Allgemein</value>
-    <comment>*</comment>
-  </data>
-  <data name="strBehaviour" xml:space="preserve">
-    <value>Verhalten</value>
-    <comment>*</comment>
-  </data>
-  <data name="strDescription" xml:space="preserve">
-    <value>Beschreibung:</value>
-    <comment>*</comment>
-  </data>
-  <data name="strDisplaySidebarAutomatically" xml:space="preserve">
-    <value>Objektleiste automatisch einblenden</value>
-    <comment>*</comment>
-  </data>
-  <data name="strDisplaySidebarAutomaticallyDescription" xml:space="preserve">
-    <value>Die Objektleiste blendet sich immer automatisch ein, wenn Sie eine Form oder ein Bild auswählen. Dieses Verhalten kann bei kleineren Bildschirmen aber störend wirken, weil die Objektleiste dort das Blatt teilweise verdeckt.</value>
-    <comment>*</comment>
-  </data>
-  <data name="strError" xml:space="preserve">
-    <value>Fehler!</value>
-    <comment>*</comment>
-  </data>
-  <data name="strFailedToLoadSettings" xml:space="preserve">
-    <value>Fehler beim Laden der Einstellungen:</value>
-    <comment>*</comment>
-  </data>
-  <data name="strFailedToResetPens" xml:space="preserve">
-    <value>Fehler beim Zurücksetzen der Stifte:</value>
-    <comment>*</comment>
-  </data>
-  <data name="strFailedToSaveSettings" xml:space="preserve">
-    <value>Fehler beim Speichern der Einstellungen:</value>
-    <comment>*</comment>
-  </data>
-  <data name="strOpenSetupAssistant" xml:space="preserve">
-    <value>Einrichtungsassistent öffnen</value>
-    <comment>*</comment>
-  </data>
-  <data name="strResetPens" xml:space="preserve">
-    <value>Stifte zurücksetzen</value>
-    <comment>*</comment>
-  </data>
-  <data name="strUseBigScrollbar" xml:space="preserve">
-    <value>Horizontale Bildlaufleiste vergrößern</value>
-    <comment>*</comment>
-  </data>
-  <data name="strUseBigScrollbarDescription" xml:space="preserve">
-    <value>Diese Einstellung ist sinnvoll, wenn Sie einen kleinen Bildschirm haben, dann können Sie mit dem Stift besser die Bildlaufleiste erreichen.</value>
-    <comment>*</comment>
-  </data>
-  <data name="strWindowMode" xml:space="preserve">
-    <value>Fenstermodus:</value>
-    <comment>*</comment>
-  </data>
-  <data name="strWindowModeFullscreen" xml:space="preserve">
-    <value>Vollbild</value>
-    <comment>*</comment>
-  </data>
-  <data name="strWindowModeMaximized" xml:space="preserve">
-    <value>Maximiert</value>
-    <comment>*</comment>
-  </data>
-  <data name="strWindowModeNormal" xml:space="preserve">
-    <value>Normal</value>
-    <comment>*</comment>
-  </data>
-  <data name="strWindowSize" xml:space="preserve">
-    <value>Fenstergröße:</value>
-    <comment>*</comment>
-  </data>
-  <data name="strAboutText1" xml:space="preserve">
-    <value>Idee von Daniel S.
-Programmiert von Andreas L.
-
-
-Vielen Dank ...
-... an Daniel S. und Stefan E. für die Ideen/Programmtests!</value>
-    <comment>About.xaml</comment>
-  </data>
-  <data name="strAboutTextIcons8_1" xml:space="preserve">
-    <value>... an</value>
-    <comment>About.xaml</comment>
-  </data>
-  <data name="strBackgroundColor" xml:space="preserve">
-    <value>Hintergrundfarbe:</value>
-    <comment>*</comment>
-  </data>
-  <data name="strBold" xml:space="preserve">
-    <value>F</value>
-    <comment>*</comment>
-  </data>
-  <data name="strChangelog" xml:space="preserve">
-    <value>Changelog</value>
-    <comment>About.xaml</comment>
-  </data>
-  <data name="strColor" xml:space="preserve">
-    <value>Farbe:</value>
-    <comment>*</comment>
-  </data>
-  <data name="strContent" xml:space="preserve">
-    <value>Inhalt:</value>
-    <comment>About.xaml</comment>
-  </data>
-  <data name="strEnterValidText" xml:space="preserve">
-    <value>Bitte geben Sie einen gültigen Text ein!</value>
-    <comment>About.xaml.cs</comment>
-  </data>
-  <data name="strExport" xml:space="preserve">
-    <value>Exportieren</value>
-    <comment>*</comment>
-  </data>
-  <data name="strExportAllPages" xml:space="preserve">
-    <value>Alle Seiten</value>
-    <comment>*</comment>
-  </data>
-  <data name="strExportAsJournal" xml:space="preserve">
-    <value>Als Journal exportieren</value>
-    <comment>*</comment>
-  </data>
-  <data name="strExportFailed" xml:space="preserve">
-    <value>Fehler beim Exportieren der Seite</value>
-    <comment>*</comment>
-  </data>
-  <data name="strExportFinished" xml:space="preserve">
-    <value>Export abgeschlossen!</value>
-    <comment>*</comment>
-  </data>
-  <data name="strExportPageArea" xml:space="preserve">
-    <value>Seitenbereich (z.B. 3-5)</value>
-    <comment>*</comment>
-  </data>
-  <data name="strExportPages" xml:space="preserve">
-    <value>Seiten exportieren</value>
-    <comment>*</comment>
-  </data>
-  <data name="strFailedToSendFeedback" xml:space="preserve">
-    <value>Fehler beim Senden des Feedbacks, bitte prüfen Sie Ihre Interntverbindung!</value>
-    <comment>About.xaml.cs</comment>
-  </data>
-  <data name="strFailure" xml:space="preserve">
-    <value>Fehler!</value>
-    <comment>*</comment>
-  </data>
-  <data name="strFeedback" xml:space="preserve">
-    <value>Feedback</value>
-    <comment>About.xaml</comment>
-  </data>
-  <data name="strFeedbackDescription" xml:space="preserve">
-    <value>Haben Sie einen Fehler gefunden? Was würden Sie verbessern? 
-Ich würde mich über Ihr Feedback freuen!
-Ihre Daten werden nicht an Dritte weitergegeben, sondern auschließlich dazu verwendet, um Ihnen eventuell eine Rückmeldung zu geben.</value>
-    <comment>About.xaml</comment>
-  </data>
-  <data name="strFeedbackSent" xml:space="preserve">
-    <value>Ihr Feedback wurde erfolgreich gesendet. Vielen Dank!</value>
-    <comment>About.xaml.cs</comment>
-  </data>
-  <data name="strFont" xml:space="preserve">
-    <value>Schriftart:</value>
-    <comment>*</comment>
-  </data>
-  <data name="strFontSize" xml:space="preserve">
-    <value>Schriftgröße:</value>
-    <comment>*</comment>
-  </data>
-  <data name="strFrameColor" xml:space="preserve">
-    <value>Umrandungsfarbe:</value>
-    <comment>*</comment>
-  </data>
-  <data name="strFrameWidth" xml:space="preserve">
-    <value>Umrandungsbreite:</value>
-    <comment>*</comment>
-  </data>
-  <data name="strFrom" xml:space="preserve">
-    <value>Von</value>
-    <comment>*</comment>
-  </data>
-  <data name="strHexagon" xml:space="preserve">
-    <value>Sechseck (Vieleck)</value>
-    <comment>*</comment>
-  </data>
-  <data name="strImages" xml:space="preserve">
-    <value>Bilder</value>
-    <comment>*</comment>
-  </data>
-  <data name="strInvalidInput" xml:space="preserve">
-    <value>Sie haben ungültige Werte angegeben!</value>
-    <comment>*</comment>
-  </data>
-  <data name="strInvalidInputTitle" xml:space="preserve">
-    <value>Ungültige Eingaben!</value>
-    <comment>*</comment>
-  </data>
-  <data name="strItalic" xml:space="preserve">
-    <value>K</value>
-    <comment>*</comment>
-  </data>
-  <data name="strJournalFile" xml:space="preserve">
-    <value>Journal-Datei</value>
-    <comment>*</comment>
-  </data>
-  <data name="strMail" xml:space="preserve">
-    <value>E-Mail:</value>
-    <comment>About.xaml</comment>
-  </data>
-  <data name="strName" xml:space="preserve">
-    <value>Name:</value>
-    <comment>About.xaml</comment>
-  </data>
-  <data name="strNewerVersionAvailable" xml:space="preserve">
-    <value>Es gibt eine neuere Version:</value>
-    <comment>9</comment>
-  </data>
-  <data name="strPentagon" xml:space="preserve">
-    <value>Fünfeck (Vieleck)</value>
-    <comment>*</comment>
-  </data>
-  <data name="strPolygon" xml:space="preserve">
-    <value>Vieleck</value>
-    <comment>*</comment>
-  </data>
-  <data name="strQuad" xml:space="preserve">
-    <value>Viereck (Vieleck)</value>
-    <comment>*</comment>
-  </data>
-  <data name="strRotation" xml:space="preserve">
-    <value>Drehung:</value>
-    <comment>*</comment>
-  </data>
-  <data name="strSend" xml:space="preserve">
-    <value>Senden</value>
-    <comment>About.xaml</comment>
-  </data>
-  <data name="strSinglePage" xml:space="preserve">
-    <value>Einzelne Seite</value>
-    <comment>*</comment>
-  </data>
-  <data name="strStrikethrough" xml:space="preserve">
-    <value>S</value>
-    <comment>*</comment>
-  </data>
-  <data name="strSuccess" xml:space="preserve">
-    <value>Erfolg!</value>
-    <comment>*</comment>
+  <data name="strText" xml:space="preserve">
+    <value>Text</value>
+    <comment>MainWindow.xaml</comment>
+  </data>
+  <data name="strTextDectection" xml:space="preserve">
+    <value>Texterkennung</value>
+    <comment>MainWindow.xaml</comment>
   </data>
   <data name="strTextDot" xml:space="preserve">
     <value>Text:</value>
     <comment>*</comment>
   </data>
+  <data name="strTextInput" xml:space="preserve">
+    <value>Bitte geben Sie den Text ein:</value>
+    <comment>TextInsertWindow.xaml.cs</comment>
+  </data>
+  <data name="strTextInputTitle" xml:space="preserve">
+    <value>Text einfügen</value>
+    <comment>TextInsertWindow.xaml.cs</comment>
+  </data>
+  <data name="strTextNotFound" xml:space="preserve">
+    <value>wurde nicht gefunden, entweder existiert der Text nicht, oder Sie müssen ordentlicher schreiben!</value>
+    <comment>*</comment>
+  </data>
+  <data name="strTextNotFoundTitle" xml:space="preserve">
+    <value>Keine Suchergebnisse!</value>
+    <comment>*</comment>
+  </data>
+  <data name="strTextRecognization" xml:space="preserve">
+    <value>Textanalyse</value>
+    <comment>MainWindow.xaml</comment>
+  </data>
+  <data name="strTextSearch" xml:space="preserve">
+    <value>Suche</value>
+    <comment>MainWindow.xaml</comment>
+  </data>
+  <data name="strTextToHightlight" xml:space="preserve">
+    <value>Dies ist ein zu makierender Text</value>
+    <comment>SetupDialog.xaml</comment>
+  </data>
+  <data name="strTheme" xml:space="preserve">
+    <value>Akzentfarbe:</value>
+    <comment>SettingsDialog.xaml</comment>
+  </data>
   <data name="strTo" xml:space="preserve">
     <value>Bis</value>
     <comment>*</comment>
   </data>
+  <data name="strToolFormFixed" xml:space="preserve">
+    <value>Fest</value>
+    <comment>*</comment>
+  </data>
+  <data name="strToolFormFree" xml:space="preserve">
+    <value>Frei</value>
+    <comment>*</comment>
+  </data>
+  <data name="strTools" xml:space="preserve">
+    <value>Werkzeuge</value>
+    <comment>MainWindow.xaml</comment>
+  </data>
   <data name="strTransparent" xml:space="preserve">
     <value>Transparent</value>
+    <comment>*</comment>
+  </data>
+  <data name="strTrapeze" xml:space="preserve">
+    <value>Trapez</value>
     <comment>*</comment>
   </data>
   <data name="strTriangle" xml:space="preserve">
@@ -917,6 +1586,22 @@ Ihre Daten werden nicht an Dritte weitergegeben, sondern auschließlich dazu ver
     <value>U</value>
     <comment>*</comment>
   </data>
+  <data name="strUndo" xml:space="preserve">
+    <value>Rückgängig</value>
+    <comment>MainWindow.xaml</comment>
+  </data>
+  <data name="strUnexceptedFailure" xml:space="preserve">
+    <value>Es ist ein unerwarterer Fehler aufgetreten!</value>
+    <comment>*</comment>
+  </data>
+  <data name="strUnexceptedFailureLine1" xml:space="preserve">
+    <value>SimpleJournal wird jetzt ein Backup erstellen, bitte warten Sie einen Augenblick. Danach wird das Programm beendet!</value>
+    <comment>Window2.xaml.cs</comment>
+  </data>
+  <data name="strUnexceptedFailureTitle" xml:space="preserve">
+    <value>Unerwarteter Fehler!</value>
+    <comment>*</comment>
+  </data>
   <data name="strUnknown" xml:space="preserve">
     <value>Unbekannt</value>
     <comment>*</comment>
@@ -925,109 +1610,89 @@ Ihre Daten werden nicht an Dritte weitergegeben, sondern auschließlich dazu ver
     <value>Version unbekannt</value>
     <comment>*</comment>
   </data>
+  <data name="strUnpublishedDevVersion" xml:space="preserve">
+    <value>Unveröffentlichte Entwicklungsversion!</value>
+    <comment>MainWindow.xaml</comment>
+  </data>
+  <data name="strUnssportedFormatTitle" xml:space="preserve">
+    <value>Falsches Format!</value>
+    <comment>*</comment>
+  </data>
+  <data name="strUnsupportedFormat" xml:space="preserve">
+    <value>Das Format wird derzeit nicht unterstüzt, bitte stellen Sie sicher, dass Sie ein gültiges Bild oder einen Text in der Zwischenablage haben!</value>
+    <comment>*</comment>
+  </data>
+  <data name="strUpdateDialogDownload" xml:space="preserve">
+    <value>Herunterladen</value>
+    <comment>UpdateDialog.xaml.cs</comment>
+  </data>
+  <data name="strUpdateDialogFailedToOpenBrowserAutomatically" xml:space="preserve">
+    <value>Ihr Browser konnte nicht automatisch geöffnet werden: {0}. Bitte öffnen Sie Ihren Browser und geben die folgende URL ein: {1}. Alternativ können Sie auch einfach auf {2} die aktuelleste Version downloaden!</value>
+    <comment>UpdateDialog.xaml.cs</comment>
+  </data>
+  <data name="strUpdateDialogNewVersionAvailable" xml:space="preserve">
+    <value>Ein neues Update ist verfügbar!</value>
+    <comment>UpdateDialog.xaml.cs</comment>
+  </data>
+  <data name="strUpdateDialogTitle" xml:space="preserve">
+    <value>Neues Update!</value>
+    <comment>UpdateDialog.xaml.cs</comment>
+  </data>
+  <data name="strUpdateDialogVersionText" xml:space="preserve">
+    <value>Version {0} ist jetzt verfügbar!</value>
+    <comment>UpdateDialog.xaml.cs</comment>
+  </data>
+  <data name="strUseAutoSave" xml:space="preserve">
+    <value>AutoSave verwenden</value>
+    <comment>SettingsWindows.xaml</comment>
+  </data>
+  <data name="strUseBigScrollbar" xml:space="preserve">
+    <value>Horizontale Bildlaufleiste vergrößern</value>
+    <comment>*</comment>
+  </data>
+  <data name="strUseBigScrollbarDescription" xml:space="preserve">
+    <value>Diese Einstellung ist sinnvoll, wenn Sie einen kleinen Bildschirm haben, dann können Sie mit dem Stift besser die Bildlaufleiste erreichen.</value>
+    <comment>*</comment>
+  </data>
+  <data name="strUseContactPressure" xml:space="preserve">
+    <value>Anpressdruck verwenden</value>
+    <comment>*</comment>
+  </data>
+  <data name="strUseFitToCurve" xml:space="preserve">
+    <value>Bézierglättung verwenden</value>
+    <comment>SetupDialog.xaml</comment>
+  </data>
+  <data name="strUseNaturalScrolling" xml:space="preserve">
+    <value>Natürliches Scrollen verwenden</value>
+    <comment>*</comment>
+  </data>
+  <data name="strUseNaturalScrollingDescription" xml:space="preserve">
+    <value>Beim Scrollen per Ziehen/Schieben wird die natürliche Scrollrichtung verwendet</value>
+    <comment>*</comment>
+  </data>
+  <data name="strUseOldChequeredPatternLine1" xml:space="preserve">
+    <value>Altes Muster für karierte Seiten verwenden (Für alte Dokumente)</value>
+    <comment>SettingsWindow.xaml</comment>
+  </data>
+  <data name="strUseOldChequeredPatternLine2" xml:space="preserve">
+    <value>Das Verändern dieser Einstellung wirkt sich eventuell nicht auf das aktuell geladene Dokument aus</value>
+    <comment>SettingsWindow.xaml</comment>
+  </data>
+  <data name="strUseReplaceEllipsesWithCircles" xml:space="preserve">
+    <value>Ellipsen durch Kreise ersetzen</value>
+    <comment>*</comment>
+  </data>
+  <data name="strUseRotationCompensation" xml:space="preserve">
+    <value>Rotationsausgleich verwenden</value>
+    <comment>*</comment>
+  </data>
   <data name="strVersionUpToDate" xml:space="preserve">
     <value>aktuell!</value>
     <comment>*</comment>
   </data>
-  <data name="strCircle" xml:space="preserve">
-    <value>Kreis</value>
-    <comment>*</comment>
-  </data>
-  <data name="strEllipse" xml:space="preserve">
-    <value>Ellipse</value>
-    <comment>*</comment>
-  </data>
-  <data name="strRectangle" xml:space="preserve">
-    <value>Rechteck</value>
-    <comment>*</comment>
-  </data>
-  <data name="strShape" xml:space="preserve">
-    <value>Form</value>
-    <comment>*</comment>
-  </data>
-  <data name="strSquare" xml:space="preserve">
-    <value>Quadrat</value>
-    <comment>*</comment>
-  </data>
-  <data name="strUnexceptedFailure" xml:space="preserve">
-    <value>Es ist ein unerwarterer Fehler aufgetreten!</value>
-    <comment>*</comment>
-  </data>
-  <data name="strUnexceptedFailureTitle" xml:space="preserve">
-    <value>Unerwarteter Fehler!</value>
-    <comment>*</comment>
-  </data>
-  <data name="strAddPageHere" xml:space="preserve">
-    <value>Seite hier einfügen</value>
-    <comment>*</comment>
-  </data>
-  <data name="strEmptySelection" xml:space="preserve">
-    <value>Leere Auswahl!</value>
-    <comment>*</comment>
-  </data>
-  <data name="strFailedToLoadJournal" xml:space="preserve">
-    <value>Fehler beim Laden des Journals:</value>
-    <comment>*</comment>
-  </data>
-  <data name="strFailedToLoadJournalTitle" xml:space="preserve">
-    <value>Kritischer Fehler!</value>
-    <comment>*</comment>
-  </data>
-  <data name="strFailedToSaveJournal" xml:space="preserve">
-    <value>Fehler beim Speichern des Journals:</value>
-    <comment>*</comment>
-  </data>
-  <data name="strFailedToSaveJournalTitle" xml:space="preserve">
-    <value>Kritischer Fehler!</value>
-    <comment>*</comment>
-  </data>
-  <data name="strJournalNeedsOnePageMinimum" xml:space="preserve">
-    <value>Es muss mindestens eine Seite im Journal existieren!</value>
-    <comment>*</comment>
-  </data>
-  <data name="strJournalNeedsOnePageMinimumTitle" xml:space="preserve">
-    <value>Diese Seite kann nicht gelöscht werden!</value>
-    <comment>*</comment>
-  </data>
-  <data name="strNoObjectsToDelete" xml:space="preserve">
-    <value>Es sind keine Objekte zum Löschen ausgewählt!</value>
-    <comment>*</comment>
-  </data>
-  <data name="strNoShapeRecognized" xml:space="preserve">
-    <value>Der ausgewählte Bereich konnte nicht als Form erkannt werden!</value>
-    <comment>*</comment>
-  </data>
-  <data name="strNoShapeRecognizedTitle" xml:space="preserve">
-    <value>Keine Form erkannt!</value>
-    <comment>*</comment>
-  </data>
-  <data name="strPrinting" xml:space="preserve">
-    <value>Drucke Seite</value>
-    <comment>*</comment>
-  </data>
-  <data name="strSave" xml:space="preserve">
-    <value>Speichern</value>
-    <comment>*</comment>
-  </data>
-  <data name="strSaveAs" xml:space="preserve">
-    <value>Speichern unter ...</value>
-    <comment>*</comment>
-  </data>
-  <data name="strSelectedDocumentNotExisting" xml:space="preserve">
-    <value>Das ausgewählte Dokument existiert nicht mehr. Soll es aus der Liste entfernt werden?</value>
-    <comment>*</comment>
-  </data>
-  <data name="strSelectedDocumentNotExistingTitle" xml:space="preserve">
-    <value>Entfernen?</value>
-    <comment>*</comment>
-  </data>
-  <data name="strTextNotFound" xml:space="preserve">
-    <value>wurde nicht gefunden, entweder existiert der Text nicht, oder Sie müssen ordentlicher schreiben!</value>
-    <comment>*</comment>
-  </data>
-  <data name="strTextNotFoundTitle" xml:space="preserve">
-    <value>Keine Suchergebnisse!</value>
-    <comment>*</comment>
+  <data name="strView" xml:space="preserve">
+    <value>Ansicht</value>
+    <comment>MainWindow.xaml</comment>
   </data>
   <data name="strWantToClearPage" xml:space="preserve">
     <value>Möchten Sie diese Seite wirklich leeren?</value>
@@ -1057,6 +1722,38 @@ Ihre Daten werden nicht an Dritte weitergegeben, sondern auschließlich dazu ver
     <value>Änderungen verwefen?</value>
     <comment>*</comment>
   </data>
+  <data name="strWatingText" xml:space="preserve">
+    <value>Bitte warten Sie während {0} geladen wird (Seite {1}/{2}) ...</value>
+    <comment>WaitingDialog.xaml</comment>
+  </data>
+  <data name="strWindow" xml:space="preserve">
+    <value>Fenster</value>
+    <comment>MainWindow.xaml</comment>
+  </data>
+  <data name="strWindowMode" xml:space="preserve">
+    <value>Fenstermodus:</value>
+    <comment>*</comment>
+  </data>
+  <data name="strWindowModeFullscreen" xml:space="preserve">
+    <value>Vollbild</value>
+    <comment>*</comment>
+  </data>
+  <data name="strWindowModeMaximized" xml:space="preserve">
+    <value>Maximiert</value>
+    <comment>*</comment>
+  </data>
+  <data name="strWindowModeNormal" xml:space="preserve">
+    <value>Normal</value>
+    <comment>*</comment>
+  </data>
+  <data name="strWindowSize" xml:space="preserve">
+    <value>Fenstergröße:</value>
+    <comment>*</comment>
+  </data>
+  <data name="strWrite" xml:space="preserve">
+    <value>Schreiben</value>
+    <comment>*</comment>
+  </data>
   <data name="strWrongFileFormat" xml:space="preserve">
     <value>Die angegebene Datei hat nicht das richtige Dateiformat!</value>
     <comment>*</comment>
@@ -1065,705 +1762,8 @@ Ihre Daten werden nicht an Dritte weitergegeben, sondern auschließlich dazu ver
     <value>Falsches Dateiformat!</value>
     <comment>*</comment>
   </data>
-  <data name="strSearch" xml:space="preserve">
-    <value>Suche ...</value>
-    <comment>*</comment>
-  </data>
-  <data name="strDate" xml:space="preserve">
-    <value>Datum:</value>
-    <comment>*</comment>
-  </data>
-  <data name="strDateFormat" xml:space="preserve">
-    <value>dd.MM.yyyy</value>
-    <comment>*</comment>
-  </data>
-  <data name="strEmptyClipboard" xml:space="preserve">
-    <value>Die Zwischenablage ist leer. Es gibt keine Objekte zum Einfügen!</value>
-    <comment>*</comment>
-  </data>
-  <data name="strEmptyClipboardTitle" xml:space="preserve">
-    <value>Leere Zwischenablage!</value>
-  </data>
-  <data name="strUnssportedFormatTitle" xml:space="preserve">
-    <value>Falsches Format!</value>
-    <comment>*</comment>
-  </data>
-  <data name="strUnsupportedFormat" xml:space="preserve">
-    <value>Das Format wird derzeit nicht unterstüzt, bitte stellen Sie sicher, dass Sie ein gültiges Bild oder einen Text in der Zwischenablage haben!</value>
-    <comment>*</comment>
-  </data>
-  <data name="strFailedToLoadImage" xml:space="preserve">
-    <value>Fehler beim Laden des Bildes:</value>
-    <comment>*</comment>
-  </data>
-  <data name="strFailedToSaveImage" xml:space="preserve">
-    <value>Fehler beim Speichern des Bildes:</value>
-    <comment>*</comment>
-  </data>
-  <data name="strFailedToTransformShape" xml:space="preserve">
-    <value>Es ist ein Fehler beim Transformieren der Form aufgetreten:</value>
-    <comment>*</comment>
-  </data>
-  <data name="strFailedToUpdate" xml:space="preserve">
-    <value>Fehler beim Update:</value>
-    <comment>App.xaml.cs</comment>
-  </data>
-  <data name="strOCRCopyToClipboard" xml:space="preserve">
-    <value>In die Zwischenablage kopieren</value>
-    <comment>TextAnalyzer.xaml</comment>
-  </data>
-  <data name="strOCRLoading" xml:space="preserve">
-    <value>Texterkennung (OCR) - Wird geladen ...</value>
-    <comment>TextAnalyzer.xaml</comment>
-  </data>
-  <data name="strOCRTitle" xml:space="preserve">
-    <value>Texterkennung (OCR)</value>
-    <comment>TextAnalyzer.xaml</comment>
-  </data>
-  <data name="strPatchDownload" xml:space="preserve">
-    <value>Patch herunterladen</value>
-    <comment>PatchDialog.xaml</comment>
-  </data>
-  <data name="strPatchFailedToOpenUrl" xml:space="preserve">
-    <value>Fehler beim Öffnen der Patch-URL:</value>
-    <comment>PatchDialog.xaml</comment>
-  </data>
-  <data name="strPatchText" xml:space="preserve">
-    <value>Diese Version von SimpleJournal wird aufgrund einer Umstrukturierung keine Updates mehr erhalten, deswegen sollten Sie diesen Patch installieren, um auch weiterhin Updates zu erhalten:</value>
-    <comment>PatchDialog.xaml</comment>
-  </data>
-  <data name="strPleaseInputText" xml:space="preserve">
-    <value>Bitte geben Sie ein Text ein:</value>
-    <comment>TextInsertWindow.xaml</comment>
-  </data>
-  <data name="strPleaseInputTextTitle" xml:space="preserve">
-    <value>Text einfügen</value>
-    <comment>TextInsertWindow.xaml</comment>
-  </data>
-  <data name="strSaveChanges" xml:space="preserve">
-    <value>Möchten Sie Ihre Änderungen speichern, bevor sie das Programm beenden?</value>
-    <comment>*</comment>
-  </data>
-  <data name="strSaveChangesTitle" xml:space="preserve">
-    <value>Speichern?</value>
-    <comment>*</comment>
-  </data>
-  <data name="strWatingText" xml:space="preserve">
-    <value>Bitte warten Sie während {0} geladen wird (Seite {1}/{2}) ...</value>
-    <comment>WaitingDialog.xaml</comment>
-  </data>
-  <data name="strHelpLnk" xml:space="preserve">
-    <value>https://simplejournal.ca-soft.net/de/index.php?page=help</value>
+  <data name="strZoom" xml:space="preserve">
+    <value>Zoom</value>
     <comment>MainWindow.xaml</comment>
-  </data>
-  <data name="strFile" xml:space="preserve">
-    <value>Datei</value>
-    <comment>Window2.xaml</comment>
-  </data>
-  <data name="strRecentFiles" xml:space="preserve">
-    <value>Zuletzt geöffnete Dateien</value>
-    <comment>Window2.xaml</comment>
-  </data>
-  <data name="strAboutTextFluentRibbon_1" xml:space="preserve">
-    <value>... an</value>
-    <comment>About.xaml</comment>
-  </data>
-  <data name="strCancel" xml:space="preserve">
-    <value>Abbrechen</value>
-    <comment>*</comment>
-  </data>
-  <data name="strUpdateDialogDownload" xml:space="preserve">
-    <value>Herunterladen</value>
-    <comment>UpdateDialog.xaml.cs</comment>
-  </data>
-  <data name="strUpdateDialogFailedToOpenBrowserAutomatically" xml:space="preserve">
-    <value>Ihr Browser konnte nicht automatisch geöffnet werden: {0}. Bitte öffnen Sie Ihren Browser und geben die folgende URL ein: {1}. Alternativ können Sie auch einfach auf {2} die aktuelleste Version downloaden!</value>
-    <comment>UpdateDialog.xaml.cs</comment>
-  </data>
-  <data name="strUpdateDialogNewVersionAvailable" xml:space="preserve">
-    <value>Ein neues Update ist verfügbar!</value>
-    <comment>UpdateDialog.xaml.cs</comment>
-  </data>
-  <data name="strUpdateDialogTitle" xml:space="preserve">
-    <value>Neues Update!</value>
-    <comment>UpdateDialog.xaml.cs</comment>
-  </data>
-  <data name="strUpdateDialogVersionText" xml:space="preserve">
-    <value>Version {0} ist jetzt verfügbar!</value>
-    <comment>UpdateDialog.xaml.cs</comment>
-  </data>
-  <data name="strClearLastOpenedDocuments" xml:space="preserve">
-    <value>Zuletzt geöffnete Dokumente zurücksetzen</value>
-  </data>
-  <data name="strShapes" xml:space="preserve">
-    <value>Formen:</value>
-    <comment>Templates</comment>
-  </data>
-  <data name="strSizes" xml:space="preserve">
-    <value>Größen:</value>
-    <comment>Templates</comment>
-  </data>
-  <data name="strPolygonButton" xml:space="preserve">
-    <value>Vieleck</value>
-    <comment>Window2.xaml</comment>
-  </data>
-  <data name="strHint" xml:space="preserve">
-    <value>Hinweis</value>
-    <comment>*</comment>
-  </data>
-  <data name="strPageManagmentButtonDeletePage" xml:space="preserve">
-    <value>Löscht die aktuell ausgewählte Seite</value>
-    <comment>PageManagmentDialog.xaml.cs</comment>
-  </data>
-  <data name="strPageManagmentButtonClearPage" xml:space="preserve">
-    <value>Leert die aktuell ausgewählte Seite</value>
-    <comment>PageManagmentDialog.xaml.cs</comment>
-  </data>
-  <data name="strPageManagmentButtonDecreaseZoom" xml:space="preserve">
-    <value>Verringert den Zoom-Faktor der Vorschau</value>
-    <comment>PageManagmentDialog.xaml.cs</comment>
-  </data>
-  <data name="strPageManagmentButtonIncreaseZoom" xml:space="preserve">
-    <value>Erhöht den Zoom-Faktor der Vorschau</value>
-    <comment>PageManagmentDialog.xaml.cs</comment>
-  </data>
-  <data name="strPageManagmentButtonInsertBottom" xml:space="preserve">
-    <value>Verschiebt die aktuell ausgewählte Seite ganz nach unten</value>
-    <comment>PageManagmentDialog.xaml.cs</comment>
-  </data>
-  <data name="strPageManagmentButtonInsertPageAfterIndexBlanko" xml:space="preserve">
-    <value>Fügt nach der aktuellen Seite eine blanko Seite ein</value>
-    <comment>PageManagmentDialog.xaml.cs</comment>
-  </data>
-  <data name="strPageManagmentButtonInsertPageAfterIndexChequered" xml:space="preserve">
-    <value>Fügt nach der aktuellen Seite eine karierte Seite ein</value>
-    <comment>PageManagmentDialog.xaml.cs</comment>
-  </data>
-  <data name="strPageManagmentButtonInsertPageAfterIndexRuled" xml:space="preserve">
-    <value>Fügt nach der aktuellen Seite eine linierte Seite ein</value>
-    <comment>PageManagmentDialog.xaml.cs</comment>
-  </data>
-  <data name="strPageManagmentButtonInsertPageBeforeIndexBlanko" xml:space="preserve">
-    <value>Fügt bevor der aktuellen Seite eine blanko Seite ein</value>
-    <comment>PageManagmentDialog.xaml.cs</comment>
-  </data>
-  <data name="strPageManagmentButtonInsertPageBeforeIndexChequered" xml:space="preserve">
-    <value>Fügt bevor der aktuellen Seite eine karierte Seite ein</value>
-    <comment>PageManagmentDialog.xaml.cs</comment>
-  </data>
-  <data name="strPageManagmentButtonInsertPageBeforeIndexRuled" xml:space="preserve">
-    <value>Fügt bevor der aktuellen Seiten eine linierte Seite ein</value>
-    <comment>PageManagmentDialog.xaml.cs</comment>
-  </data>
-  <data name="strPageManagmentButtonInsertTop" xml:space="preserve">
-    <value>Verschiebt die aktuell ausgewählte Seite ganz nach oben</value>
-    <comment>PageManagmentDialog.xaml.cs</comment>
-  </data>
-  <data name="strPageManagmentButtonMovePageDown" xml:space="preserve">
-    <value>Verschiebt die aktuell ausgewählte Seite eins nach unten</value>
-    <comment>PageManagmentDialog.xaml.cs</comment>
-  </data>
-  <data name="strPageManagmentButtonMovePageUp" xml:space="preserve">
-    <value>Verschiebt die aktuell ausgewählte Seite eins nach oben</value>
-    <comment>PageManagmentDialog.xaml.cs</comment>
-  </data>
-  <data name="strPageManagmentToggleButtonBlanko" xml:space="preserve">
-    <value>Ändert die aktuelle Seite auf das Papierformat: Blanko</value>
-    <comment>PageManagmentDialog.xaml.cs</comment>
-  </data>
-  <data name="strPageManagmentToggleButtonChequered" xml:space="preserve">
-    <value>Ändert die aktuelle Seite auf das Papierformat: Kariert</value>
-    <comment>PageManagmentDialog.xaml.cs</comment>
-  </data>
-  <data name="strPageManagmentToggleButtonRuled" xml:space="preserve">
-    <value>Ändert die aktuelle Seite auf das Papierformat: Liniert</value>
-    <comment>PageManagmentDialog.xaml.cs</comment>
-  </data>
-  <data name="strPageManagmentTitle" xml:space="preserve">
-    <value>Seitenverwaltung</value>
-    <comment>PageManagmentDialog.xaml</comment>
-  </data>
-  <data name="strPageManagmentZoomLabel" xml:space="preserve">
-    <value>Vorschau (Zoom: {0}%)</value>
-    <comment>PageManagmentDialog.xaml.cs</comment>
-  </data>
-  <data name="strAddPageTooltip" xml:space="preserve">
-    <value>Fügt eine neue Seite hinzu</value>
-    <comment>MainWindow.xaml</comment>
-  </data>
-  <data name="strClearPageTooltip" xml:space="preserve">
-    <value>Leert die aktuelle Seite</value>
-    <comment>MainWindow.xaml</comment>
-  </data>
-  <data name="strDeletePageTooltip" xml:space="preserve">
-    <value>Löscht die aktuelle Seite</value>
-    <comment>MainWindow.xaml</comment>
-  </data>
-  <data name="strManagePage" xml:space="preserve">
-    <value>Seiten verwalten</value>
-    <comment>MainWindow.xaml</comment>
-  </data>
-  <data name="strManagePageTooltip" xml:space="preserve">
-    <value>Ermöglicht Ihnen die Seiten zu verwalten (z.B. die Reihenfolge verändern)</value>
-    <comment>MainWindow.xaml</comment>
-  </data>
-  <data name="strUseOldChequeredPatternLine1" xml:space="preserve">
-    <value>Altes Muster für karierte Seiten verwenden (Für alte Dokumente)</value>
-    <comment>SettingsWindow.xaml</comment>
-  </data>
-  <data name="strUseOldChequeredPatternLine2" xml:space="preserve">
-    <value>Das Verändern dieser Einstellung wirkt sich eventuell nicht auf das aktuell geladene Dokument aus</value>
-    <comment>SettingsWindow.xaml</comment>
-  </data>
-  <data name="strUnpublishedDevVersion" xml:space="preserve">
-    <value>Unveröffentlichte Entwicklungsversion!</value>
-    <comment>MainWindow.xaml</comment>
-  </data>
-  <data name="strAutoSaveCouldRecoverThisFile" xml:space="preserve">
-    <value>AutoSave kann die folgende Datei wiederherstellen:</value>
-    <comment>RecoverAutoBackupFileDialog.xaml</comment>
-  </data>
-  <data name="strAutoSaveDateTimeFileFormat" xml:space="preserve">
-    <value>dd.MM.yyyy-HH.mm.ss.fff</value>
-    <comment>Window2.xaml</comment>
-  </data>
-  <data name="strAutoSaveDescription" xml:space="preserve">
-    <value>AutoSave ist ein Feature, das immer in einem vordefinierten Intervall (z.B. alle 5 Minuten) ein Backup macht. D.h. sollte SimpleJournal unerwartet beendet werden, können Sie von AutoSave das Dokument sichern und wieder laden.</value>
-    <comment>SettingsWindows.xaml</comment>
-  </data>
-  <data name="strAutoSaveDialogButtonDiscard" xml:space="preserve">
-    <value>Alle Verwerfen</value>
-    <comment>RecoverAutoBackupFileDialog.xaml</comment>
-  </data>
-  <data name="strAutoSaveDialogButtonRecover" xml:space="preserve">
-    <value>Alle Wiederherstellen</value>
-    <comment>RecoverAutoBackupFileDialog.xaml</comment>
-  </data>
-  <data name="strAutoSaveInterval" xml:space="preserve">
-    <value>AutoSave Intervall (Minuten):</value>
-    <comment>SettingsWindows.xaml</comment>
-  </data>
-  <data name="strAutoSaveNoBackupFileFound" xml:space="preserve">
-    <value>Keine Backup-Datei gefunden!</value>
-    <comment>RecoverAutoBackupFileDialog.xaml</comment>
-  </data>
-  <data name="strAutoSaveNoBackupFileFoundHint" xml:space="preserve">
-    <value>(Stellen Sie sicher, dass das Interval von AutoSave nicht zu hoch gewählt ist!)</value>
-    <comment>RecoverAutoBackupFileDialog.xaml</comment>
-  </data>
-  <data name="strDiscardQuestion" xml:space="preserve">
-    <value>Sind Sie sich wirklich sicher, dass Sie diese Datei verwerfen möchten?</value>
-    <comment>RecoverAutoBackupFileDialog.xaml</comment>
-  </data>
-  <data name="strDiscardTitle" xml:space="preserve">
-    <value>Sicher?</value>
-    <comment>RecoverAutoBackupFileDialog.xaml</comment>
-  </data>
-  <data name="strDisplayRecoverDialogDescription" xml:space="preserve">
-    <value>Wenn AutoSave aktiviert ist und SimpleJournal unerwartet beendet wird kann es passieren, dass es keine Dateien zum Wiederherstellen gibt (z.B. bei einem leeren Dokument oder wenn keine Änderungen nach dem Speichern gemacht wurden). Die Meldung kann dennoch nützlich sein, weil Sie dann wissen, dass SimpleJournal unerwartet beendet wurde.</value>
-    <comment>SettingsWindows.xaml</comment>
-  </data>
-  <data name="strDisplayRecoverDialogTitle" xml:space="preserve">
-    <value>Absturz-Meldung auch anzeigen, wenn keine Dateien zum Wiederherstellen vorhanden sind</value>
-    <comment>SettingsWindows.xaml</comment>
-  </data>
-  <data name="strDraw" xml:space="preserve">
-    <value>Zeichnen</value>
-    <comment>SettingsWindows.xaml</comment>
-  </data>
-  <data name="strFailedToCopyFile" xml:space="preserve">
-    <value>Fehler beim Kopieren der Datei! Bitte wählen Sie einen anderen Ort aus!</value>
-    <comment>RecoverAutoBackupFileDialog.xaml</comment>
-  </data>
-  <data name="strFailedToCopyFileTitle" xml:space="preserve">
-    <value>Fehler beim Kopieren!</value>
-    <comment>RecoverAutoBackupFileDialog.xaml</comment>
-  </data>
-  <data name="strGUI" xml:space="preserve">
-    <value>Benutzeroberfläche</value>
-    <comment>SettingsWindows.xaml</comment>
-  </data>
-  <data name="strSJTerminated" xml:space="preserve">
-    <value>SimpleJournal wurde unerwartet beendet!</value>
-    <comment>RecoverAutoBackupFileDialog.xaml</comment>
-  </data>
-  <data name="strUseAutoSave" xml:space="preserve">
-    <value>AutoSave verwenden</value>
-    <comment>SettingsWindows.xaml</comment>
-  </data>
-  <data name="strDiscardQuestionAll" xml:space="preserve">
-    <value>Sind Sie sich wirklich sicher, dass Sie alle Dateien verwerfen möchten?</value>
-    <comment>RecoverAutoBackupFileDialog.xaml</comment>
-  </data>
-  <data name="strBackupOriginExplanation" xml:space="preserve">
-    <value>Backups, die einen Ursprung haben, werden an den Ursprungsort wiederhergestellt, für alle anderen Backups müssen Sie auswählen, in welchem Ordner die Backups wiederhergestellt werden sollen!</value>
-    <comment>RecoverAutoBackupFileDialog.xaml</comment>
-  </data>
-  <data name="strDiscardBackupToolTip" xml:space="preserve">
-    <value>Backup verwerfen</value>
-    <comment>RecoverAutoBackupFileDialog.xaml</comment>
-  </data>
-  <data name="strLabelBackups" xml:space="preserve">
-    <value>Backups</value>
-    <comment>RecoverAutoBackupFileDialog.xaml</comment>
-  </data>
-  <data name="strOpenBackupsAfterRecovery" xml:space="preserve">
-    <value>Backup(s) nach dem Wiederherstellen öffnen</value>
-    <comment>RecoverAutoBackupFileDialog.xaml</comment>
-  </data>
-  <data name="strPathHasNoOrigin" xml:space="preserve">
-    <value>Kein Ursprung</value>
-    <comment>RecoverAutoBackupFileDialog.xaml.cs</comment>
-  </data>
-  <data name="strPathHasOrigin" xml:space="preserve">
-    <value>Ursprung: </value>
-    <comment>RecoverAutoBackupFileDialog.xaml.cs</comment>
-  </data>
-  <data name="strRecoverAutoBackupFileDialogTitle" xml:space="preserve">
-    <value>Backups wiederherstellen ...</value>
-    <comment>strRecoverAutoBackupFileDialog.xaml</comment>
-  </data>
-  <data name="strRestoreBackupToolTip" xml:space="preserve">
-    <value>Backup wiederherstellen</value>
-    <comment>RecoverAutoBackupFileDialog.xaml</comment>
-  </data>
-  <data name="strAutoBackupDirectoryDoesNotExists" xml:space="preserve">
-    <value>Das Verzeichnis existiert derzeit nicht! Aber sobald ein Backup erstellt wird, wird der Ordner wieder angelegt!</value>
-    <comment>RecoverAutoBackupFileDialog.xaml.cs</comment>
-  </data>
-  <data name="strAutoBackupDirectoryDoesNotExistsTitle" xml:space="preserve">
-    <value>Verzeichnis existiert nicht!</value>
-    <comment>RecoverAutoBackupFileDialog.xaml.cs</comment>
-  </data>
-  <data name="strBackupFileCannotBeOpened" xml:space="preserve">
-    <value>Dieses Journal kann nicht geöffnet werden, da es ein Backup ist!</value>
-    <comment>Window2.xaml.cs</comment>
-  </data>
-  <data name="strBackupFileCannotBeOpenedTitle" xml:space="preserve">
-    <value>Ein Backup kann nicht geöffnet werden!</value>
-    <comment>Window2.xaml.cs</comment>
-  </data>
-  <data name="strButtonDisplayAutoSaveDirectory" xml:space="preserve">
-    <value>Im Explorer anzeigen</value>
-    <comment>RecoverAutoBackupFileDialog.xaml.cs</comment>
-  </data>
-  <data name="strFailedToDeleteFile" xml:space="preserve">
-    <value>Fehler beim Löschen der Datei!</value>
-    <comment>RecoverAutoBackupFileDialog.xaml.cs</comment>
-  </data>
-  <data name="strFailedToDeleteFileTitle" xml:space="preserve">
-    <value>Fehler!</value>
-    <comment>RecoverAutoBackupFileDialog.xaml.cs</comment>
-  </data>
-  <data name="strFailedToDeleteSomeBackups" xml:space="preserve">
-    <value>Fehler beim Löschen einiger Backups!</value>
-    <comment>RecoverAutoBackupFileDialog.xaml.cs</comment>
-  </data>
-  <data name="strFailedToDeleteSomeBackupsTitle" xml:space="preserve">
-    <value>Fehler!</value>
-    <comment>RecoverAutoBackupFileDialog.xaml.cs</comment>
-  </data>
-  <data name="strFailedToOpenAutoBackupDirectory" xml:space="preserve">
-    <value>Fehler beim Öffnen des Verzeichnis im Explorer:</value>
-    <comment>RecoverAutoBackupFileDialog.xaml.cs</comment>
-  </data>
-  <data name="strFailedToOpenAutoBackupDirectoryTitle" xml:space="preserve">
-    <value>Fehler!</value>
-    <comment>RecoverAutoBackupFileDialog.xaml.cs</comment>
-  </data>
-  <data name="strFailedToOpenNewSJInstance" xml:space="preserve">
-    <value>Fehler beim Öffnen einer weiteren Instanz von SimpleJournal:</value>
-    <comment>RecoverAutoBackupFileDialog.xaml.cs</comment>
-  </data>
-  <data name="strFailedToOpenNewSJInstanceTitle" xml:space="preserve">
-    <value>Fehler!</value>
-    <comment>RecoverAutoBackupFileDialog.xaml.cs</comment>
-  </data>
-  <data name="strFailedToRecoverJournal" xml:space="preserve">
-    <value>Fehler beim Wiederherstellen des Journals:</value>
-    <comment>RecoverAutoBackupFileDialog.xaml.cs</comment>
-  </data>
-  <data name="strFailedToRecoverJournalTitle" xml:space="preserve">
-    <value>Fehler!</value>
-    <comment>RecoverAutoBackupFileDialog.xaml.cs</comment>
-  </data>
-  <data name="strJournalIsAlreadyOpened" xml:space="preserve">
-    <value>Dieses Journal ist bereits in einer anderen Instanz von SimpleJournal geöffnet und kann deshalb nicht geöffnet werden!</value>
-    <comment>Window2.xaml.cs</comment>
-  </data>
-  <data name="strJournalIsAlreadyOpenedTitle" xml:space="preserve">
-    <value>Dokument bereits geöffnet!</value>
-    <comment>Window2.xaml.cs</comment>
-  </data>
-  <data name="strUnexceptedFailureLine1" xml:space="preserve">
-    <value>SimpleJournal wird jetzt ein Backup erstellen, bitte warten Sie einen Augenblick. Danach wird das Programm beendet!</value>
-    <comment>Window2.xaml.cs</comment>
-  </data>
-  <data name="strFitToCurveTitle" xml:space="preserve">
-    <value>Bézierglättung verwenden</value>
-  </data>
-  <data name="strFitToCurveDescription" xml:space="preserve">
-    <value>Gibt an, ob die Bézierglättung zum Rendern verwendet werden soll. Nachdem eine Kurve gezeichnet wurde, wird diese geglättet und sieht nicht mehr kantig aus (oft werden Kurven sehr kantig, vorallem wenn man mit der Maus zeichnet, dann ist diese Einstellung sinnvoll).</value>
-  </data>
-  <data name="strSetupStep3ContactPressureTitle" xml:space="preserve">
-    <value>Anpressdruck</value>
-    <comment>SetupDialog.xaml</comment>
-  </data>
-  <data name="strDontUseFitToCurve" xml:space="preserve">
-    <value>Bézierglättung nicht verwenden</value>
-    <comment>SetupDialog.xaml</comment>
-  </data>
-  <data name="strUseFitToCurve" xml:space="preserve">
-    <value>Bézierglättung verwenden</value>
-    <comment>SetupDialog.xaml</comment>
-  </data>
-  <data name="strAboutTextFluentRibbon_2" xml:space="preserve">
-    <value>für das Menü!</value>
-    <comment>About.xaml</comment>
-  </data>
-  <data name="strAboutTextIcons8_2" xml:space="preserve">
-    <value>für die kostenlosen Icons!</value>
-    <comment>About.xaml</comment>
-  </data>
-  <data name="strReleaseDate" xml:space="preserve">
-    <value>29.04.2021 15:01 Uhr</value>
-    <comment>*</comment>
-  </data>
-  <data name="strHintInsert" xml:space="preserve">
-    <value>Hinweis: Bitte klicken Sie nun an eine beliebige Stelle auf eine beliebige Seite, um das Objekt dort einzufügen.
-
-Klicken Sie auf Ja, um diesen Hinweis zu ignorieren!
-Klicken Sie auf Nein, um diesen Hinweis weiterhin zu erhalten!</value>
-  </data>
-  <data name="strHintTitle" xml:space="preserve">
-    <value>Hinweis</value>
-  </data>
-  <data name="strSetupDarkModeDescription" xml:space="preserve">
-    <value>Der dunkle Modus betrifft momentan nur das Menü-Band. Die Dialoge bleiben normal. Die Einstellungen können alle auch später geändert werden!</value>
-    <comment>*</comment>
-  </data>
-  <data name="strSetupDarkModeTitle" xml:space="preserve">
-    <value>Mögen Sie die Dunkelheit?</value>
-    <comment>*</comment>
-  </data>
-  <data name="strSetupDarkModeYes" xml:space="preserve">
-    <value>Ja, ich mag es gerne dunkel</value>
-    <comment>*</comment>
-  </data>
-  <data name="strSetupDarModeNo" xml:space="preserve">
-    <value>Nein, ich mag es lieber hell</value>
-    <comment>*</comment>
-  </data>
-  <data name="strDark" xml:space="preserve">
-    <value>Dunkel</value>
-  </data>
-  <data name="strLight" xml:space="preserve">
-    <value>Hell</value>
-  </data>
-  <data name="strDarkModeSettingsTitle" xml:space="preserve">
-    <value>Darstellung:</value>
-  </data>
-  <data name="strBringToFront" xml:space="preserve">
-    <value>In den Vordergrund holen</value>
-  </data>
-  <data name="strEditObjects" xml:space="preserve">
-    <value>Objekt bearbeiten:</value>
-  </data>
-  <data name="strFailedToLoadJournalFromNetwork" xml:space="preserve">
-    <value>Fehler beim Laden des Journals, stellen Sie sicher, dass sich das Journal lokal auf Ihrem Computer befindet. Es kann kein Journal aus dem Netzwerk geladen werden!</value>
-  </data>
-  <data name="strRedo" xml:space="preserve">
-    <value>Wiederholen</value>
-    <comment>MainWindow.xaml</comment>
-  </data>
-  <data name="strUndo" xml:space="preserve">
-    <value>Rückgängig</value>
-    <comment>MainWindow.xaml</comment>
-  </data>
-  <data name="strIsColorfulTheme" xml:space="preserve">
-    <value>Akzentfarbe in der Titelleiste anzeigen</value>
-    <comment>SettingsDialog.xaml</comment>
-  </data>
-  <data name="strTheme" xml:space="preserve">
-    <value>Akzentfarbe:</value>
-    <comment>SettingsDialog.xaml</comment>
-  </data>
-  <data name="strSettingsActivateGlowingEffect" xml:space="preserve">
-    <value>Fensterleuchteffekt aktivieren</value>
-    <comment>*</comment>
-  </data>
-  <data name="strSettingsActivateGlowingEffectDescription" xml:space="preserve">
-    <value>(kann beim Verkleinern/Vergrößern zu Performance-Problemen führen)</value>
-    <comment>*</comment>
-  </data>
-  <data name="strInsertFromClipboard" xml:space="preserve">
-    <value>Bild aus Zwischenablage einfügen ...</value>
-  </data>
-  <data name="strLang" xml:space="preserve">
-    <value>de</value>
-  </data>
-  <data name="strMessageFailedToExportPsScripts" xml:space="preserve">
-    <value>Fehler beim Exportieren der Dateien: {0}</value>
-  </data>
-  <data name="strSettingsFeatureBar" xml:space="preserve">
-    <value>Weitere Funktionen:</value>
-    <comment>*</comment>
-  </data>
-  <data name="strSettingsSetFileAssoc" xml:space="preserve">
-    <value>Dateitypzuordnung wiederherstellen</value>
-    <comment>*</comment>
-  </data>
-  <data name="strSettingsClearLastOpenedDocumentsToolTip" xml:space="preserve">
-    <value>Leert die Liste, der zuletzt geöffneten Dokumente im Menü</value>
-    <comment>*</comment>
-  </data>
-  <data name="strSettingsOpenSetupAssistantTooltip" xml:space="preserve">
-    <value>Bietet Ihnen die Möglichkeit, SimpleJournal erneut einzurichten</value>
-    <comment>*</comment>
-  </data>
-  <data name="strSettingsResetPensTooltip" xml:space="preserve">
-    <value>Setzt die Stifte auf Ihre übersprüngliche Einstellung zurück</value>
-    <comment>*</comment>
-  </data>
-  <data name="strSettingsSetFileAssocToolTip" xml:space="preserve">
-    <value>Setzt dieses Programm als Standard für .Journal-Dateien</value>
-    <comment>*</comment>
-  </data>
-  <data name="strSettingsTouchScreenExplanationNormal1" xml:space="preserve">
-    <value>SimpleJournal kann nicht zwischen Stift und Fingereingaben differenzieren bzw. gibt es keine Möglichkeit, Fingereingaben vollständig zu deaktivieren. Daher gibt es nun die Option, dass beim Starten/Beenden von SimpleJournal ein Powershell-Skript ausgeführt wird, das die Toucheingabe systemweit deaktiviert/aktiviert.</value>
-    <comment>*</comment>
-  </data>
-  <data name="strSettingsDisableTouchscreenTitle" xml:space="preserve">
-    <value>Touchscreen deaktivieren (Für Fortgeschrittene)</value>
-    <comment>*</comment>
-  </data>
-  <data name="strSettingsTouchScreenExplanationNormal2" xml:space="preserve">
-    <value>Damit das Powershell-Skript ausgeführt werden kann, muss:</value>
-    <comment>*</comment>
-  </data>
-  <data name="strSettingsTouchScreenExplanationNormal3" xml:space="preserve">
-    <value>1) SimpleJournal als Administrator ausgeführt werden (wird es standardmäßig)</value>
-    <comment>*</comment>
-  </data>
-  <data name="strSettingsTouchScreenExplanationNormal4" xml:space="preserve">
-    <value>2) Das Powershell-Skript muss erlabut werden (führen Sie dazu den folgenden Befehl in Powershell aus und bestätigen ihn):</value>
-    <comment>*</comment>
-  </data>
-  <data name="strSettingsCeckBoxDisableTouchscreen" xml:space="preserve">
-    <value>Windows Touchscreen beim Starten deaktivieren</value>
-    <comment>*</comment>
-  </data>
-  <data name="strSettingsDisableTouchUWP2" xml:space="preserve">
-    <value>Allerdings gibt es die Möglichkeit, vor dem Start und nach dem Beenden von SimpleJournal jeweils ein Powershell-Skript auszuführen, das hier generiert werden kann!</value>
-    <comment>*</comment>
-  </data>
-  <data name="strSettingsDisableTouchUWP3" xml:space="preserve">
-    <value>Um diese Skripts ausführen zu können, müssen 2 Bedingungen erfüllt sein: </value>
-    <comment>*</comment>
-  </data>
-  <data name="strSettingsDisableTouchUWP4" xml:space="preserve">
-    <value>1) Führen Sie das Skript als Administartor aus!</value>
-    <comment>*</comment>
-  </data>
-  <data name="strSettingsDisableTouchUWP5" xml:space="preserve">
-    <value>2) Sie müssen einmalig erlauben, dass Powershell das Skript ausführen darf (bitte dazu den folgenden Befehl bei Powershell eingeben und bestätigen)</value>
-    <comment>*</comment>
-  </data>
-  <data name="strCreateScripts" xml:space="preserve">
-    <value>Skripts erstellen ...</value>
-  </data>
-  <data name="strSettingsDisableTouchUWP1" xml:space="preserve">
-    <value>SimpleJournal kann nicht zwischen Stift- und Fingereingabe unterscheiden, bzw. gibt es keine Möglichkeit, die Fingereingabe vollständig zu deaktivieren.</value>
-    <comment>*</comment>
-  </data>
-  <data name="strSettingsDisableTouchExplanation" xml:space="preserve">
-    <value>Deaktiviert den Touchscreen beim Starten und aktiviert ihn beim Beenden. Diese Option kann sinnvoll sein, wenn Sie mit einem Stift schreiben, dann können Sie die Hand auf das Display legen, ohne dass Ihre Hand als Eingabe erkannt wird. Dies ist in der Store-Version nicht möglich, allerdings gibt es auf meiner Homepage ein Tool dafür:</value>
-    <comment>*</comment>
-  </data>
-  <data name="strSettingsBackgroundCustom" xml:space="preserve">
-    <value>Benutzerdefiniertes Hintergrundbild festlegen</value>
-    <comment>*</comment>
-  </data>
-  <data name="strSettingsBackgroundDefault" xml:space="preserve">
-    <value>Kein Hintergrund (standard, grau)</value>
-    <comment>*</comment>
-  </data>
-  <data name="strSettingsBackgroundHeader" xml:space="preserve">
-    <value>Hintergrund</value>
-    <comment>*</comment>
-  </data>
-  <data name="strShapesHeader" xml:space="preserve">
-    <value>Formen</value>
-    <comment>*</comment>
-  </data>
-  <data name="strToolFormFixed" xml:space="preserve">
-    <value>Fest</value>
-    <comment>*</comment>
-  </data>
-  <data name="strToolFormFree" xml:space="preserve">
-    <value>Frei</value>
-    <comment>*</comment>
-  </data>
-  <data name="strInsertSimpleFormToolTip" xml:space="preserve">
-    <value>Ziehen Sie eine Form auf, indem Sie einmal ein Punkt festlegen (klick) und dann können Sie mit der/dem Maus/Stift die Form aufziehen</value>
-  </data>
-  <data name="strPolygonToolTip" xml:space="preserve">
-    <value>Zeichnen Sie ein Polygon, indem Sie einmal einen Startpunkt festlegen (klick). Dort entsteht ein Kreis, jetzt können Sie weitere Kanten hinzufügen, am Ende muss eine Kante beim Startpunkt wieder enden, damit eine Form entsteht</value>
-    <comment>*</comment>
-  </data>
-  <data name="strPlot" xml:space="preserve">
-    <value>Kooardinatensystem</value>
-    <comment>*</comment>
-  </data>
-  <data name="strPlotDrawNegativeAxis" xml:space="preserve">
-    <value>Negative Achsen zeichen</value>
-    <comment>*</comment>
-  </data>
-  <data name="strTrapeze" xml:space="preserve">
-    <value>Trapez</value>
-    <comment>*</comment>
-  </data>
-  <data name="strInsertPlotToolTip" xml:space="preserve">
-    <value>Ziehen Sie das Kooardinatensystem auf, indem Sie auf einen Punkt klicken und bewegen Sie dann die Maus/den Stift an die gewünschte Stelle und lassen Sie los</value>
-  </data>
-  <data name="strUseNaturalScrolling" xml:space="preserve">
-    <value>Natürliches Scrollen verwenden</value>
-    <comment>*</comment>
-  </data>
-  <data name="strUseNaturalScrollingDescription" xml:space="preserve">
-    <value>Beim Scrollen per Ziehen/Schieben wird die natürliche Scrollrichtung verwendet</value>
-    <comment>*</comment>
-  </data>
-  <data name="strDisableTouchscreen" xml:space="preserve">
-    <value>Touchscreen deaktivieren</value>
-    <comment>MainWindow.xaml</comment>
-  </data>
-  <data name="strEnableTouchScreen" xml:space="preserve">
-    <value>Touchscreen aktivieren</value>
-    <comment>MainWindow.xaml</comment>
-  </data>
-  <data name="strErrorMessageAnalyzingStrokes" xml:space="preserve">
-    <value>Beim Analyisieren ist ein Fehler aufgetreten: {0}. Stellen Sie sicher, dass SimpleJournal richtig installiert ist!</value>
-    <comment>DrawingCanvas.cs</comment>
-  </data>
-  <data name="strPreview" xml:space="preserve">
-    <value>Vorschau:</value>
-    <comment>*</comment>
-  </data>
-  <data name="strExportAsJournalExplanation" xml:space="preserve">
-    <value>Wenn diese Option nicht ausgewählt ist, werden die Seiten als Bilder exportiert!</value>
-    <comment>ExportDialog.xaml.cs</comment>
-  </data>
-  <data name="strExportCurrentPage" xml:space="preserve">
-    <value>Ausgewählte Seite</value>
-    <comment>ExportDialog.xaml.cs</comment>
-  </data>
-  <data name="strExportDialogExpanderExplanation" xml:space="preserve">
-    <value>Klappt alle Seiten aus oder versteckt alle Seiten!</value>
-    <comment>ExportDialog.xaml.cs</comment>
-  </data>
-  <data name="strExportDialogInvalidSettings" xml:space="preserve">
-    <value>Ungültige Einstellungen!</value>
-    <comment>ExportDialog.xaml.cs</comment>
   </data>
 </root>

@@ -61,6 +61,15 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die SetupDialog.xaml ähnelt.
+        /// </summary>
+        public static string _2__If_you_would_like_to_export_a_document_as_a_PDF__click_on__Print__in_the_menu_and_select__Microsoft_Print_To_PDF__as_the_printer__This_printer_has_not_always_worked_reliably__so_if_you_have_problems_with_it__you_can_download_an_alternative_PDF_printer_that_works_reliably__You_can_also_export_the_pages_as_images__ {
+            get {
+                return ResourceManager.GetString(@"2. If you would like to export a document as a PDF, click on ""Print"" in the menu and select ""Microsoft Print To PDF"" as the printer. This printer has not always worked reliably, so if you have problems with it, you can download an alternative PDF printer that works reliably. You can also export the pages as images.""", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Icon ähnlich wie (Symbol).
         /// </summary>
         public static System.Drawing.Icon journalicon {
@@ -126,8 +135,6 @@ namespace SimpleJournal.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Idea of Daniel S.
         ///Programmed by Andreas L.
-        ///
-        ///
         ///Many thanks ...
         ///... to Daniel S. and Stefan E. for the ideas/program tests! ähnelt.
         /// </summary>
@@ -1500,7 +1507,6 @@ namespace SimpleJournal.Properties {
         
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Note: Please click anywhere on any page to insert the object there.
-        ///
         ///Click on Yes to ignore this hint!
         ///Click on No to continue to receive this message! ähnelt.
         /// </summary>
