@@ -144,7 +144,9 @@
   <data name="strAboutText1" xml:space="preserve">
     <value>Idea of Daniel S.
 Programmed by Andreas L.
+
 Many thanks ...
+
 ... to Daniel S. and Stefan E. for the ideas/program tests!</value>
     <comment>About.xaml</comment>
   </data>

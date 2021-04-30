@@ -135,7 +135,9 @@ namespace SimpleJournal.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Idea of Daniel S.
         ///Programmed by Andreas L.
+        ///
         ///Many thanks ...
+        ///
         ///... to Daniel S. and Stefan E. for the ideas/program tests! ähnelt.
         /// </summary>
         public static string strAboutText1 {
