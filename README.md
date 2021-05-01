@@ -30,8 +30,6 @@ For the non-store version I created a simple [tool](https://code-a-software.net/
 ## Build
 In order to work with form or text-recognition you need to compile `Analyzer` and then you need to copy the output to your `Debug`, `Normal` or `UWP`-Build Folder of the `SimpleJournal`-Project!
 
-Due to .NET Core you need to select the right application manifest. Go to SimpleJournal -> Properties and there you can choose between `app.uwp. manifest` and `app.normal.manifest`. Select the manifest which equals your build configuration!
-
 ## Thanks to
 - Daniel S. for the great ideas and testing
 - Stefan E. for the great ideas and testing
