@@ -10,6 +10,10 @@ namespace SimpleJournal
         public const int LAST_RECENTLY_OPENED_DOCUMENT_LIMIT = 10;
         public const double SPACE_BETWEEN_SITES = 75D;
         public const int TRAPEZE_OFFSET = 30;
+        public const double MARKER_PATH_STROKE_THICKNESS = 0.4;
+        public const double DEFAULT_TEXT_SIZE = 15.0;
+
+        public static readonly SolidColorBrush DEFAULT_BACKGROUND_BRUSH = new SolidColorBrush((System.Windows.Media.Color)(ColorConverter.ConvertFromString("#E1E1E1")));
 
         public static readonly string CHANGELOG_URL = "https://simplejournal.ca-soft.net/chg.php?lang={0}&dark={1}";
         public static readonly string DOWNLOAD_URL = "https://code-a-software.net/simplejournal/download.php";

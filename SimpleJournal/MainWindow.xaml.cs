@@ -8,7 +8,9 @@ using SimpleJournal.Dialogs;
 using SimpleJournal.Helper;
 using SimpleJournal.Shared;
 using SimpleJournal.Templates;
+#if !UWP
 using SJFileAssoc;
+#endif
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -59,7 +61,7 @@ namespace SimpleJournal
         private string currentJournalName = string.Empty;
 
         /// <summary>
-        /// The time which runs in the background to make a backup
+        /// The timer which runs in the background to make a backup
         /// </summary>
         private readonly DispatcherTimer autoSaveBackupTimer = new DispatcherTimer(DispatcherPriority.Background);
 
@@ -373,9 +375,9 @@ namespace SimpleJournal
         {
             RefreshPages();
         }
-#endregion
+        #endregion
 
-#region AutoSave - Backup
+        #region AutoSave - Backup
 
         private string lastBackupFileName = string.Empty;
 
@@ -492,7 +494,8 @@ namespace SimpleJournal
 
                 }
             }
-            // Slighty notification that autosave failed (if result == FALSE)?
+
+            // ToDo: *** Slighty notification that autosave failed (if result == FALSE)?
 
             // Delete the old backup only if the new one was successfull
             if (!string.IsNullOrEmpty(lastBackupFileName) && result)
@@ -545,9 +548,9 @@ namespace SimpleJournal
             }
         }
 
-#endregion
-
-#region Error Handling
+        #endregion
+        
+        #region Error Handling
         private void Dispatcher_UnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
         {
             //MessageBox.Show($"{Properties.Resources.strUnexceptedFailure}{Environment.NewLine}{Environment.NewLine}{e.Exception.Message}", Properties.Resources.strUnexceptedFailureTitle, MessageBoxButton.OK, MessageBoxImage.Error);
@@ -565,9 +568,9 @@ namespace SimpleJournal
             // Try at least to create a backup - if SJ crashes - the user can restore the backup and everything is fine
             CreateBackup();
         }
-#endregion
+        #endregion
 
-#region Determine which Canvas is the last modifed while scrolling
+        #region Determine which Canvas is the last modifed while scrolling
 
         private void mainScrollView_ScrollChanged(object sender, ScrollChangedEventArgs e)
         {
@@ -620,9 +623,9 @@ namespace SimpleJournal
                     counter++;
             }
         }
-#endregion
+        #endregion
 
-#region Sidebar Handling
+        #region Sidebar Handling
 
         public bool IsSideBarVisible => pnlSidebar.IsVisible;
 
@@ -637,7 +640,7 @@ namespace SimpleJournal
             this.elements = elements;
 
             // Show sidebar only if there're elements to show (and also ignore lines)
-            if (elements.Count() == 0 || elements.Where(p => p is Line).Count() == elements.Count())
+            if (elements.Length == 0 || elements.Where(p => p is Line).Count() == elements.Length)
             {
                 this.pnlSidebar.Visibility = Visibility.Hidden;
                 return;
@@ -814,9 +817,9 @@ namespace SimpleJournal
                 MessageBox.Show(this, Properties.Resources.strNoObjectsToDelete, Properties.Resources.strEmptySelection, MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
-#endregion
+        #endregion
         
-#region Private Methods
+        #region Private Methods
 
         private void UpdateTextMarkerAttributes(bool reset = false)
         {
@@ -842,7 +845,7 @@ namespace SimpleJournal
 
             markerPath.Fill = new SolidColorBrush(currentTextMarkerAttributes.Color);
             markerPath.Stroke = Brushes.Black;
-            markerPath.StrokeThickness = 0.4;
+            markerPath.StrokeThickness = Consts.MARKER_PATH_STROKE_THICKNESS;
 
             if (currentTool == Tools.TextMarker)
             {
@@ -1432,11 +1435,11 @@ namespace SimpleJournal
 
             isInitalized = true;
         }
-#endregion
+        #endregion
 
-#region Toolbar Handling / Private Event Handling
+        #region Toolbar Handling / Private Event Handling
 
-#region Tool Handling
+        #region Tool Handling
 
         private InkCanvasEditingMode ConvertTool(Tools tool)
         {
@@ -1779,7 +1782,6 @@ namespace SimpleJournal
             }
         }
 
-
         private void btnRubberGrob_Click(object sender, RoutedEventArgs e)
         {
             if (ignoreToggleButtonHandling)
@@ -1818,11 +1820,11 @@ namespace SimpleJournal
         }
 
 
-#endregion
+        #endregion
 
-#region Event Handling / Menu
+        #region Event Handling / Menu
 
-#region Commands
+        #region Commands
 
         private void DisableTouchScreenCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
@@ -1953,7 +1955,7 @@ namespace SimpleJournal
             InsertImageFromClipboard();
         }
 
-#endregion
+        #endregion
 
         private async void ListRecentlyOpenedDocuments_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -2390,7 +2392,7 @@ namespace SimpleJournal
             }
         }
 
-#region Exit
+        #region Exit
         private bool closedButtonWasPressed = false;
 
         private void btnExit_Click(object sender, RoutedEventArgs e)
@@ -2473,13 +2475,13 @@ namespace SimpleJournal
             AboutDialog aboutDialog = new AboutDialog();
             aboutDialog.ShowDialog();
         }
-#endregion
+        #endregion
 
-#endregion
+        #endregion
 
-#endregion
+        #endregion
 
-#region Zoom
+        #region Zoom
 
         private void ZoomByScale(double scale)
         {
@@ -2541,9 +2543,9 @@ namespace SimpleJournal
         {
             ZoomByScale(1.8);
         }
-#endregion
+        #endregion
 
-#region Scroll Handling
+        #region Scroll Handling
         private Point p1 = new Point();
         private readonly Stopwatch timer = new Stopwatch();
         private Storyboard sbScrollViewerAnimation = new Storyboard();
@@ -2628,9 +2630,9 @@ namespace SimpleJournal
             mainScrollView.BeginStoryboard(sbScrollViewerAnimation);
         }
 
-#endregion
+        #endregion
 
-#region Internal Save and Load
+        #region Internal Save and Load
         private bool SaveJournal(string path, bool saveAsBackup = false)
         {
             try
@@ -2846,20 +2848,18 @@ namespace SimpleJournal
             }
             DrawingCanvas.Change = false;
         }
+        #endregion
 
-
-#endregion
-
-#region Export
+        #region Export
 
         private void btnExport_Click(object sender, RoutedEventArgs e)
         {
             new ExportDialog(CurrentJournalPages, CurrentJournalPages[cmbPages.SelectedIndex]).ShowDialog();
         }
 
-#endregion
+        #endregion
 
-#region Copy / Paste
+        #region Copy / Paste
         private Data.Clipboard clipboard = new Data.Clipboard();
         private bool waitingForClickToPaste = false;
         private Tools pasteBackupTool = Tools.Pencil1;
@@ -2956,9 +2956,9 @@ namespace SimpleJournal
             clipboard.Renew();
         }
 
-#endregion
+        #endregion
 
-#region Insert
+        #region Insert
 
         private UIElement insertClipboard = null;
 #pragma warning disable IDE0052 // Ungelesene private Member entfernen
@@ -3055,14 +3055,14 @@ namespace SimpleJournal
 
             textblock.Width = Consts.INSERT_TEXT_WIDTH;
             textblock.Height = Consts.INSERT_TEXT_HEIGHT;
-            textblock.FontSize = 15D;
+            textblock.FontSize = Consts.DEFAULT_TEXT_SIZE;
 
             InsertUIElement(textblock);
         }
 
-#endregion
+        #endregion
 
-#region Sidebar Handling
+        #region Sidebar Handling
 
         private void Canvas_SelectionChanged(object sender, EventArgs e)
         {
@@ -3188,7 +3188,7 @@ namespace SimpleJournal
                 {
                     if (item is Ellipse el && el.IsCricle())
                     {
-                        // Don't rotate circle
+                        // Don't rotate a circle
                     }
                     else
                     {
@@ -3240,16 +3240,14 @@ namespace SimpleJournal
                 elements.BringToFront(DrawingCanvas.LastModifiedCanvas);
         }
 
-#endregion
+        #endregion
 
-#region Background
+        #region Background
 
         public void ApplyBackground()
         {
             if (Settings.Instance.PageBackground == Settings.Background.Default)
                 return;
-
-            SolidColorBrush defaultBrush = new SolidColorBrush((System.Windows.Media.Color)(ColorConverter.ConvertFromString("#E1E1E1")));
 
             try
             {
@@ -3257,7 +3255,7 @@ namespace SimpleJournal
 
                 switch (Settings.Instance.PageBackground)
                 {
-                    case Settings.Background.Default: mainScrollView.Background = defaultBrush; break;
+                    case Settings.Background.Default: mainScrollView.Background = Consts.DEFAULT_BACKGROUND_BRUSH; break;
                     case Settings.Background.Blue: imageFileName = "blue"; break;
                     case Settings.Background.Sand: imageFileName = "sand"; break;
                     case Settings.Background.Wooden1: imageFileName = "wooden-1"; break;
@@ -3278,33 +3276,27 @@ namespace SimpleJournal
                         mainScrollView.Background = imageBrush;
                     }
                     else
-                        mainScrollView.Background = defaultBrush;
+                        mainScrollView.Background = Consts.DEFAULT_BACKGROUND_BRUSH;
                 }
             }
             catch
             {
-                // Fall back
-                mainScrollView.Background = defaultBrush;
+                // fallback
+                mainScrollView.Background = Consts.DEFAULT_BACKGROUND_BRUSH;
             }
         }
 
-#endregion
+        #endregion
     }
 
-#region Converters
+    #region Converters
 
     public class SelectedIndexToColumnSpanConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is int result)
-            {
-                if (result != -1)
-                    return 1;
-                else
-                    return 2;
-            }
-
+            if (value is int result && result != -1)
+                return 1;
 
             return 2;
         }
@@ -3319,13 +3311,8 @@ namespace SimpleJournal
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is int result)
-            {
-                if (result != -1)
-                    return Visibility.Visible;
-                else
-                    return Visibility.Collapsed;
-            }
+            if (value is int result && result != -1)
+                return Visibility.Visible;
 
             return Visibility.Collapsed;
         }
@@ -3335,5 +3322,5 @@ namespace SimpleJournal
             throw new NotImplementedException();
         }
     }
-#endregion
+    #endregion
 }
