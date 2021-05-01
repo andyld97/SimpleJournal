@@ -1282,6 +1282,10 @@ Click on No to continue to receive this message!</value>
   <data name="strSettingsActivateGlowingEffectDescription" xml:space="preserve">
     <value>(may cause performance problems when resizing)</value>
   </data>
+  <data name="strSettingsActivateTouchButtons" xml:space="preserve">
+    <value>Show touch buttons in the quick selection bar</value>
+    <comment>SettingsDialog.xaml</comment>
+  </data>
   <data name="strSettingsBackgroundCustom" xml:space="preserve">
     <value>Set custom background image</value>
   </data>

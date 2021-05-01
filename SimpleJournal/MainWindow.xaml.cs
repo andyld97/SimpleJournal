@@ -135,7 +135,8 @@ namespace SimpleJournal
 
             // Display last opened files
             RefreshRecentlyOpenedFiles();
-            RecentlyOpenedDocuments.DocumentsChanged += delegate () {
+            RecentlyOpenedDocuments.DocumentsChanged += delegate ()
+            {
                 RefreshRecentlyOpenedFiles();
             };
 
@@ -159,7 +160,7 @@ namespace SimpleJournal
                     }
                     catch (Exception)
                     {
-                        
+
                     }
                 }
             }
@@ -174,7 +175,7 @@ namespace SimpleJournal
             }
 
 #endif
-            
+
 
             // Register file association
             if (!Settings.Instance.FirstStart)
@@ -308,7 +309,7 @@ namespace SimpleJournal
             if (screen != null)
             {
                 var bounds = screen.DeviceBounds;
-
+                // ToDo: *** Fix #6
                 if (bounds.Width > bounds.Height)
                 {
                     this.Width = Math.Min(1130, bounds.Width);
@@ -322,6 +323,20 @@ namespace SimpleJournal
             }
 
             ApplyBackground();
+
+            // Disable / Enable touch buttons
+
+#if !UWP
+            QuickAccessButtonTouchOff.Visibility = ((TouchHelper.HasTouchscreen() && Settings.Instance.ShowTouchButtonsInQuickAccessBar) ? Visibility.Visible : Visibility.Collapsed);
+            QuickAccessButtonTouchOn.Visibility = ((TouchHelper.HasTouchscreen() && Settings.Instance.ShowTouchButtonsInQuickAccessBar) ? Visibility.Visible : Visibility.Collapsed);
+            QuickAccessButtonTouchOff.IsChecked = TouchHelper.HasTouchscreen() && Settings.Instance.ShowTouchButtonsInQuickAccessBar;
+            QuickAccessButtonTouchOn.IsChecked = TouchHelper.HasTouchscreen() && Settings.Instance.ShowTouchButtonsInQuickAccessBar;
+#else
+            QuickAccessButtonTouchOff.IsChecked = false;
+            QuickAccessButtonTouchOn.IsChecked = false;
+            QuickAccessButtonTouchOff.Visibility = Visibility.Collapsed;
+            QuickAccessButtonTouchOn.Visibility = Visibility.Collapsed;
+#endif
         }
 
         private void DrawingCanvas_OnChangedDocumentState(bool value)
@@ -358,9 +373,9 @@ namespace SimpleJournal
         {
             RefreshPages();
         }
-        #endregion
+#endregion
 
-        #region AutoSave - Backup
+#region AutoSave - Backup
 
         private string lastBackupFileName = string.Empty;
 
@@ -532,7 +547,7 @@ namespace SimpleJournal
 
 #endregion
 
-        #region Error Handling
+#region Error Handling
         private void Dispatcher_UnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
         {
             //MessageBox.Show($"{Properties.Resources.strUnexceptedFailure}{Environment.NewLine}{Environment.NewLine}{e.Exception.Message}", Properties.Resources.strUnexceptedFailureTitle, MessageBoxButton.OK, MessageBoxImage.Error);
@@ -552,7 +567,7 @@ namespace SimpleJournal
         }
 #endregion
 
-        #region Determine which Canvas is the last modifed while scrolling
+#region Determine which Canvas is the last modifed while scrolling
 
         private void mainScrollView_ScrollChanged(object sender, ScrollChangedEventArgs e)
         {
@@ -607,7 +622,7 @@ namespace SimpleJournal
         }
 #endregion
 
-        #region Sidebar Handling
+#region Sidebar Handling
 
         public bool IsSideBarVisible => pnlSidebar.IsVisible;
 
@@ -801,7 +816,7 @@ namespace SimpleJournal
 
 #endregion
         
-        #region Private Methods
+#region Private Methods
 
         private void UpdateTextMarkerAttributes(bool reset = false)
         {
@@ -1419,9 +1434,9 @@ namespace SimpleJournal
         }
 #endregion
 
-        #region Toolbar Handling / Private Event Handling
+#region Toolbar Handling / Private Event Handling
 
-        #region Tool Handling
+#region Tool Handling
 
         private InkCanvasEditingMode ConvertTool(Tools tool)
         {
@@ -1803,11 +1818,11 @@ namespace SimpleJournal
         }
 
 
-        #endregion
+#endregion
 
-        #region Event Handling / Menu
+#region Event Handling / Menu
 
-        #region Commands
+#region Commands
 
         private void DisableTouchScreenCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
@@ -2462,9 +2477,9 @@ namespace SimpleJournal
 
 #endregion
 
-        #endregion
+#endregion
 
-        #region Zoom
+#region Zoom
 
         private void ZoomByScale(double scale)
         {
@@ -2528,7 +2543,7 @@ namespace SimpleJournal
         }
 #endregion
 
-        #region Scroll Handling
+#region Scroll Handling
         private Point p1 = new Point();
         private readonly Stopwatch timer = new Stopwatch();
         private Storyboard sbScrollViewerAnimation = new Storyboard();
@@ -2615,7 +2630,7 @@ namespace SimpleJournal
 
 #endregion
 
-        #region Internal Save and Load
+#region Internal Save and Load
         private bool SaveJournal(string path, bool saveAsBackup = false)
         {
             try
@@ -2833,9 +2848,9 @@ namespace SimpleJournal
         }
 
 
-        #endregion
+#endregion
 
-        #region Export
+#region Export
 
         private void btnExport_Click(object sender, RoutedEventArgs e)
         {
@@ -2844,7 +2859,7 @@ namespace SimpleJournal
 
 #endregion
 
-        #region Copy / Paste
+#region Copy / Paste
         private Data.Clipboard clipboard = new Data.Clipboard();
         private bool waitingForClickToPaste = false;
         private Tools pasteBackupTool = Tools.Pencil1;
@@ -2943,7 +2958,7 @@ namespace SimpleJournal
 
 #endregion
 
-        #region Insert
+#region Insert
 
         private UIElement insertClipboard = null;
 #pragma warning disable IDE0052 // Ungelesene private Member entfernen
@@ -3047,7 +3062,7 @@ namespace SimpleJournal
 
 #endregion
 
-        #region Sidebar Handling
+#region Sidebar Handling
 
         private void Canvas_SelectionChanged(object sender, EventArgs e)
         {
@@ -3225,9 +3240,9 @@ namespace SimpleJournal
                 elements.BringToFront(DrawingCanvas.LastModifiedCanvas);
         }
 
-        #endregion
+#endregion
 
-        #region Background
+#region Background
 
         public void ApplyBackground()
         {
@@ -3273,10 +3288,10 @@ namespace SimpleJournal
             }
         }
 
-        #endregion
+#endregion
     }
 
-    #region Converters
+#region Converters
 
     public class SelectedIndexToColumnSpanConverter : IValueConverter
     {
@@ -3320,5 +3335,5 @@ namespace SimpleJournal
             throw new NotImplementedException();
         }
     }
-    #endregion
+#endregion
 }

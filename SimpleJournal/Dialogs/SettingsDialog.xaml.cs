@@ -20,7 +20,7 @@ namespace SimpleJournal
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public Theme[] Themes
+        public static Theme[] Themes
         {
             get
             {
@@ -67,6 +67,11 @@ namespace SimpleJournal
             CheckBoxActivateGlowingBrush.IsChecked = Settings.Instance.ActivateGlowingBrush;
             CheckBoxDisableTouchScreen.IsChecked = Settings.Instance.UseTouchScreenDisabling;
             chkScrollbarNatural.IsChecked = Settings.Instance.UseNaturalScrolling;
+            CheckBoxActivateTouchButtons.IsChecked = Settings.Instance.ShowTouchButtonsInQuickAccessBar;
+
+#if UWP
+            CheckBoxActivateTouchButtons.Visibility = Visibility.Collapsed;
+#endif
 
             // Apply background settings
             switch (Settings.Instance.PageBackground)
@@ -397,6 +402,15 @@ namespace SimpleJournal
                 return;
 
             Settings.Instance.UseNaturalScrolling = chkScrollbarNatural.IsChecked.Value;
+            Settings.Instance.Save();
+        }
+
+        private void CheckBoxActivateTouchButtons_Checked(object sender, RoutedEventArgs e)
+        {
+            if (editMode)
+                return;
+
+            Settings.Instance.ShowTouchButtonsInQuickAccessBar = CheckBoxActivateTouchButtons.IsChecked.Value;
             Settings.Instance.Save();
         }
     }

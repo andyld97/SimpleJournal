@@ -2698,6 +2698,15 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Show touch buttons in the quick selection bar ähnelt.
+        /// </summary>
+        public static string strSettingsActivateTouchButtons {
+            get {
+                return ResourceManager.GetString("strSettingsActivateTouchButtons", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Set custom background image ähnelt.
         /// </summary>
         public static string strSettingsBackgroundCustom {

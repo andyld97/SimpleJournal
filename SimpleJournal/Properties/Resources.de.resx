@@ -1255,6 +1255,10 @@ Klicken Sie auf Nein, um diesen Hinweis weiterhin zu erhalten!</value>
     <value>(kann beim Verkleinern/Vergrößern zu Performance-Problemen führen)</value>
     <comment>*</comment>
   </data>
+  <data name="strSettingsActivateTouchButtons" xml:space="preserve">
+    <value>Touch-Buttons in der Schnellwahlleiste anzeigen</value>
+    <comment>SettingsDialog.xaml</comment>
+  </data>
   <data name="strSettingsBackgroundCustom" xml:space="preserve">
     <value>Benutzerdefiniertes Hintergrundbild festlegen</value>
     <comment>*</comment>
