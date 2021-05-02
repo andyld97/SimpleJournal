@@ -15,9 +15,9 @@ namespace SimpleJournal.Helper
 
         public static WpfScreen Primary => new WpfScreen(System.Windows.Forms.Screen.PrimaryScreen);
 
-        public Rect DeviceBounds => this.GetRect(this.screen.Bounds);
+        public Rect DeviceBounds => GetRect(this.screen.Bounds);
 
-        public Rect WorkingArea => this.GetRect(this.screen.WorkingArea);
+        public Rect WorkingArea => GetRect(this.screen.WorkingArea);
 
         public bool IsPrimary => this.screen.Primary;
 
@@ -33,17 +33,14 @@ namespace SimpleJournal.Helper
         public static IEnumerable<WpfScreen> AllScreens()
         {
             foreach (Screen screen in System.Windows.Forms.Screen.AllScreens)
-            {
                 yield return new WpfScreen(screen);
-            }
         }
 
         public static WpfScreen GetScreenFrom(Window window)
         {
             WindowInteropHelper windowInteropHelper = new WindowInteropHelper(window);
             Screen screen = System.Windows.Forms.Screen.FromHandle(windowInteropHelper.Handle);
-            WpfScreen wpfScreen = new WpfScreen(screen);
-            return wpfScreen;
+            return new WpfScreen(screen);
         }
 
         public static WpfScreen GetScreenFrom(System.Windows.Point point)
@@ -54,12 +51,10 @@ namespace SimpleJournal.Helper
             // are x,y device-independent-pixels ??
             System.Drawing.Point drawingPoint = new System.Drawing.Point(x, y);
             Screen screen = System.Windows.Forms.Screen.FromPoint(drawingPoint);
-            WpfScreen wpfScreen = new WpfScreen(screen);
-
-            return wpfScreen;
+            return new WpfScreen(screen);
         }
 
-        private Rect GetRect(Rectangle value)
+        private static Rect GetRect(Rectangle value)
         {
             // should x, y, width, height be device-independent-pixels ??
             return new Rect

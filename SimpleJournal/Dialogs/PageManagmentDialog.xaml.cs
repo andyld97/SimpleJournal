@@ -358,7 +358,7 @@ namespace SimpleJournal.Dialogs
 
         private void ButtonOK_Click(object sender, RoutedEventArgs e)
         {
-            this.IsEnabled = false;
+            IsEnabled = false;
 
             // Convert pages to JournalPages for Result
             List<JournalPage> resultPages = new List<JournalPage>();
@@ -388,13 +388,13 @@ namespace SimpleJournal.Dialogs
                 Result = resultPages;
             }
 
-            this.IsEnabled = true;            
-            this.DialogResult = true;
+            IsEnabled = true;            
+            DialogResult = true;
         }
 
         private void ButtonCancel_Click(object sender, RoutedEventArgs e)
         {
-            this.DialogResult = false;
+            DialogResult = false;
         }
 
         #endregion

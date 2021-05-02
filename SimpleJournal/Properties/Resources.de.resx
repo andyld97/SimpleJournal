@@ -117,9 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="2. Wenn Sie ein Dokument als PDF exportieren möchten, klicken Sie im Menü auf &quot;Drucken&quot; und wählen als Drucker &quot;Microsoft Print To PDF&quot; aus. Dieser Drucker hat bislang nicht immer zuverlässig funktioniert, also falls damit Probleme auftreten sollten, können Sie sich einen alternativen PDF-Drucker herunterladen, der zuverlässig funktioniert. Sie können die Seiten aber auch als Bilder exportieren.&quot;" xml:space="preserve">
-    <value>SetupDialog.xaml</value>
-  </data>
   <data name="strA4" xml:space="preserve">
     <value>A4</value>
     <comment>*</comment>
@@ -1633,7 +1630,7 @@ Hier möchte ich Ihnen noch ein paar wichtige Hinweise geben, die Ihnen helfen w
     <comment>UpdateDialog.xaml.cs</comment>
   </data>
   <data name="strUpdateDialogFailedToOpenBrowserAutomatically" xml:space="preserve">
-    <value>Ihr Browser konnte nicht automatisch geöffnet werden: {0}. Bitte öffnen Sie Ihren Browser und geben die folgende URL ein: {1}. Alternativ können Sie auch einfach auf {2} die aktuelleste Version downloaden!</value>
+    <value>Ihr Browser konnte nicht automatisch geöffnet werden: {0}. Bitte öffnen Sie Ihren Browser und geben die folgende URL ein: {1}. Alternativ können Sie auch einfach auf {2} die aktuellste Version downloaden!</value>
     <comment>UpdateDialog.xaml.cs</comment>
   </data>
   <data name="strUpdateDialogNewVersionAvailable" xml:space="preserve">
