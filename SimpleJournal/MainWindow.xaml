@@ -9,7 +9,6 @@
         FlowDirection="LeftToRight"
         xmlns:controls="clr-namespace:SimpleJournal.Controls"
         mc:Ignorable="d"
-        WindowStartupLocation="CenterScreen"
         Title="SimpleJournal - Neues Journal"  Height="700"
         Width="1130">
     <Window.Resources>
