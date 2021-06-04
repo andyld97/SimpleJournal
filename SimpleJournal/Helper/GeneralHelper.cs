@@ -251,10 +251,10 @@ namespace SimpleJournal
         {
             try
             {
-                System.Diagnostics.Process.Start(uri.ToString());
+                System.Diagnostics.Process.Start("explorer.exe", $"\"{uri}\"");
                 return true;
             }
-            catch
+            catch (Exception)
             {
                 // ignore 
                 return false;

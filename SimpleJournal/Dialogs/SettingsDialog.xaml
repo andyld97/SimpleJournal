@@ -10,7 +10,7 @@
         xmlns:Fluent="urn:fluent-ribbon"
         mc:Ignorable="d"
         Title="{x:Static res:Resources.strSettings}"
-        Height="370" Width="650"
+        Height="385" Width="650"
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize">
     <Window.Resources>
@@ -190,7 +190,7 @@
                         <TextBlock Margin="0,5,0,0" TextWrapping="Wrap">
                             <Run FontWeight="Bold" Text="{x:Static res:Resources.strDescription}" />
                             <Run Text="{x:Static res:Resources.strSettingsDisableTouchExplanation}"/>
-                            <Hyperlink x:Name="DownloadTDM" RequestNavigate="DownloadTDM_RequestNavigate" NavigateUri="https://code-a-software.net/simplejournal/setups/tdm.zip">
+                            <Hyperlink x:Name="DownloadTDM" RequestNavigate="DownloadTDM_RequestNavigate" NavigateUri="https://simplejournal.ca-soft.net/download.php?tdm=1">
                                 <Run Text="Download" />
                             </Hyperlink>
                         </TextBlock>
