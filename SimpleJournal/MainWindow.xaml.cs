@@ -3247,7 +3247,10 @@ namespace SimpleJournal
         public void ApplyBackground()
         {
             if (Settings.Instance.PageBackground == Settings.Background.Default)
+            {
+                mainScrollView.Background = Consts.DEFAULT_BACKGROUND_BRUSH;
                 return;
+            }
 
             try
             {
