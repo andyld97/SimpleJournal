@@ -134,27 +134,27 @@ namespace SimpleJournal
         public DrawingCanvas(bool isPreview = false)
         {
             this.isPreview = isPreview;
-            this.RequestBringIntoView += DrawingCanvas_RequestBringIntoView;
+            RequestBringIntoView += DrawingCanvas_RequestBringIntoView;
 
             if (LastModifiedCanvas == null)
                 LastModifiedCanvas = this;
 
-            this.AllowDrop = true;
-            this.Strokes.StrokesChanged += Strokes_StrokesChanged;
-            this.SelectionChanged += DrawingCanvas_SelectionChanged;
+            AllowDrop = true;
+            Strokes.StrokesChanged += Strokes_StrokesChanged;
+            SelectionChanged += DrawingCanvas_SelectionChanged;
 
             // Try to get more shapeness
-            this.UseLayoutRounding = true;
-            this.SnapsToDevicePixels = true;
+            UseLayoutRounding = true;
+            SnapsToDevicePixels = true;
 
             // Manager of actions manges forward and backward actions
-            this.Manager = new ActionManager(this);
+            Manager = new ActionManager(this);
             Children.CollectionChanged += Childrens_CollectionChanged;
         }
 
         public void SetDebug(bool state = true)
         {
-            this.isPreview = state;
+            isPreview = state;
         }
 
         #region Event Handling SelectionChanged/CollectionChanged
@@ -204,7 +204,7 @@ namespace SimpleJournal
         {
             // Show sidebar
             // If a child is selected then show it in the sidebar
-            ChildElementsSelected?.Invoke(this.GetSelectedElements().ToArray());
+            ChildElementsSelected?.Invoke(GetSelectedElements().ToArray());
         }
 
         #endregion
@@ -219,13 +219,13 @@ namespace SimpleJournal
         {
             base.Children.Add(child);
             handleCollectionChanged = false;
-            this.Children.Add(child);
+            Children.Add(child);
             handleCollectionChanged = true;
         }
 
         public void SetRulerMode(Settings.RulerMode mode)
         {
-            this.rulerMode = mode;
+            rulerMode = mode;
             pointCounter = 0;
             IsInRulerMode = true;
         }
@@ -480,7 +480,8 @@ namespace SimpleJournal
                         CreateNoWindow = false,
                         FileName = path,
                         UseShellExecute = false,
-                        RedirectStandardOutput = true
+                        RedirectStandardOutput = true,
+                        RedirectStandardError = true,
                     }
                 };
 
@@ -493,12 +494,15 @@ namespace SimpleJournal
                     else
                         lines.Add(currentLine);
                 }
+
+                string error = analyzingProcess.StandardError.ReadToEnd();
+                if (!string.IsNullOrEmpty(error))
+                    throw new Exception(error);
             }
             catch (Exception e)
             {
                 MessageBox.Show(string.Format(Properties.Resources.strErrorMessageAnalyzingStrokes, e.Message), Properties.Resources.strError, MessageBoxButton.OK, MessageBoxImage.Error);
             }
-
             return lines.ToArray();
         }
 
@@ -509,7 +513,7 @@ namespace SimpleJournal
             if (result.Length == 0)
             {
                 preventCallingStrokesChangedTwice = true;
-                this.Strokes.Remove(sc);
+                Strokes.Remove(sc);
                 preventCallingStrokesChangedTwice = false;
                 return;
             }
@@ -534,8 +538,8 @@ namespace SimpleJournal
 
             if (elem is Shape sh)
             {
-                sh.StrokeThickness = this.DefaultDrawingAttributes.Width;
-                sh.Stroke = new SolidColorBrush(this.DefaultDrawingAttributes.Color);
+                sh.StrokeThickness = DefaultDrawingAttributes.Width;
+                sh.Stroke = new SolidColorBrush(DefaultDrawingAttributes.Color);
 
                 if (isPreview)
                 {
@@ -661,16 +665,16 @@ namespace SimpleJournal
             base.OnPreviewMouseLeftButtonDown(e);
             if (isInFreeHandPolygonMode)
             {
-                if (this.Children.Contains(startPointEllipse) && GeneralHelper.BoundsRelativeTo(startPointEllipse, this).Contains(e.GetPosition(this)))
+                if (Children.Contains(startPointEllipse) && GeneralHelper.BoundsRelativeTo(startPointEllipse, this).Contains(e.GetPosition(this)))
                 {
                     notifiyActionManagerOnCollectionChanged = false;
-                    this.Children.Remove(startPointEllipse);
-                    this.Children.Remove(polyline);
+                    Children.Remove(startPointEllipse);
+                    Children.Remove(polyline);
                     notifiyActionManagerOnCollectionChanged = true;
 
                     Polygon tmpPolygon = new Polygon
                     {
-                        StrokeThickness = this.DefaultDrawingAttributes.Height,
+                        StrokeThickness = DefaultDrawingAttributes.Height,
                         Stroke = new SolidColorBrush(polygonDropDownTemplate.BorderColor),
                         Points = polylinePoints.Clone()
                     };
@@ -698,7 +702,7 @@ namespace SimpleJournal
                     drawOnMove = false;
                     tmpPolygon.Fill = new SolidColorBrush(polygonDropDownTemplate.BackgroundColor);
 
-                    this.Children.Add(tmpPolygon);
+                    Children.Add(tmpPolygon);
 
                     // Reset all values
                     SetFreeHandPolygonMode(polygonDropDownTemplate);
@@ -708,7 +712,7 @@ namespace SimpleJournal
                     polylinePoints.Add(e.GetPosition(this));
                     polyline.Points = polylinePoints.Clone();
                     polyline.Stroke = new SolidColorBrush(polygonDropDownTemplate.BorderColor);
-                    polyline.StrokeThickness = this.DefaultDrawingAttributes.Height;
+                    polyline.StrokeThickness = DefaultDrawingAttributes.Height;
 
                     if (polyline.Points.Count == 1)
                     {
@@ -722,7 +726,7 @@ namespace SimpleJournal
                         };
                         startPointEllipse.Margin = new Thickness(left: polyline.Points[0].X - startPointEllipse.Width / 2, top: polyline.Points[0].Y - startPointEllipse.Height / 2, right: 0, bottom: 0);
                         notifiyActionManagerOnCollectionChanged = false;
-                        this.Children.Add(startPointEllipse);
+                        Children.Add(startPointEllipse);
                         notifiyActionManagerOnCollectionChanged = true;
                     }
 
@@ -779,7 +783,7 @@ namespace SimpleJournal
                     if (rulerMode == Settings.RulerMode.Normal)
                     {
                         Strokes.Remove(currentStroke);
-                        var stroke = new System.Windows.Ink.Stroke(pointCollection) { DrawingAttributes = this.DefaultDrawingAttributes.Clone() };
+                        var stroke = new System.Windows.Ink.Stroke(pointCollection) { DrawingAttributes = DefaultDrawingAttributes.Clone() };
                         Strokes.Add(stroke);
 
                         // Make sure Action-Manager is notfiyed about this change, because he can't be notifyed when the user is moving the mouse,
@@ -887,7 +891,7 @@ namespace SimpleJournal
                     {
                         if (currentStroke == null)
                         {
-                            currentStroke = new Stroke(pointCollection) { DrawingAttributes = this.DefaultDrawingAttributes.Clone() };
+                            currentStroke = new Stroke(pointCollection) { DrawingAttributes = DefaultDrawingAttributes.Clone() };
                             Strokes.Add(currentStroke);
                         }
                         else
@@ -899,8 +903,8 @@ namespace SimpleJournal
                     else
                     {
                         notifiyActionManagerOnCollectionChanged = false;
-                        if (!this.Children.Contains(line))
-                            this.Children.Add(line);
+                        if (!Children.Contains(line))
+                            Children.Add(line);
                         notifiyActionManagerOnCollectionChanged = true;
 
                         var points = pointCollection[0].ToPoint().SortPoints(pointCollection[1].ToPoint());
@@ -920,19 +924,19 @@ namespace SimpleJournal
                         {
                             case Settings.RulerMode.Dottet:
                                 {
-                                    line.StrokeDashArray = new DoubleCollection() { 0.03, 2 };
+                                    line.StrokeDashArray = Consts.LINE_STROKE_DOTTET_DASH_ARRAY;
                                     line.StrokeDashCap = PenLineCap.Round;
                                 }
                                 break;
                             case Settings.RulerMode.Dashed:
                                 {
-                                    line.StrokeDashArray = new DoubleCollection() { 4, 3 };
+                                    line.StrokeDashArray = Consts.LINE_STROKE_DASHED_DASH_ARRAY;
                                     line.StrokeDashCap = PenLineCap.Flat;
                                 }
                                 break;
                         }
 
-                        line.StrokeDashOffset = 1;
+                        line.StrokeDashOffset = Consts.DEFAULT_LINE_STROKE_DASH_OFFSET;
                         line.Stroke = new SolidColorBrush(DefaultDrawingAttributes.Color);
                         line.StrokeThickness = DefaultDrawingAttributes.Height;
                     }
@@ -1059,17 +1063,17 @@ namespace SimpleJournal
 
         protected override void OnPreviewKeyDown(KeyEventArgs e)
         {
-            if (e.Key == Key.Delete && this.GetSelectedElements().Count > 0)
+            if (e.Key == Key.Delete && GetSelectedElements().Count > 0)
             {
                 e.Handled = true;
                 // Handle to make sure object will disapear from object bar (side bar)
                 List<UIElement> temp = new List<UIElement>();
-                foreach (UIElement child in this.GetSelectedElements())
+                foreach (UIElement child in GetSelectedElements())
                 {
                     temp.Add(child);
                 }
                 foreach (UIElement elem in temp)
-                    this.Children.Remove(elem);
+                    Children.Remove(elem);
 
                 RemoveElementFromSidebar?.Invoke(temp);
             }
@@ -1086,7 +1090,7 @@ namespace SimpleJournal
 
             // Idea:
             // Get current positions and calculate the new ones to get all necessary values for the PropertyChangedAction
-            foreach (UIElement element in this.GetSelectedElements())
+            foreach (UIElement element in GetSelectedElements())
             {
                 Point currentPosition = GeneralHelper.DeterminePointFromUIElement(element, this);
                 Point selectionStart = new Point(e.OldRectangle.Left, e.OldRectangle.Top);
@@ -1105,7 +1109,7 @@ namespace SimpleJournal
                 actions.Add(pca);
             }
 
-            foreach (Stroke str in this.GetSelectedStrokes())
+            foreach (Stroke str in GetSelectedStrokes())
             {
                 Point currentPosition = new Point(str.GetBounds().Left, str.GetBounds().Top);
                 Point selectionStart = new Point(e.OldRectangle.Left, e.OldRectangle.Top);
@@ -1135,7 +1139,7 @@ namespace SimpleJournal
                 actions.Add(pca);
             }
 
-            this.Manager.AddSpecialAction(actions);
+            Manager.AddSpecialAction(actions);
         }
         #endregion
     }

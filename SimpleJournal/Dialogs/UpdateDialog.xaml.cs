@@ -12,17 +12,14 @@ namespace SimpleJournal.Dialogs
         public UpdateDialog(Version v)
         {
             InitializeComponent();
+
             webChangelog.Navigate(string.Format(Consts.CHANGELOG_URL, Properties.Resources.strLang, Settings.Instance.UseDarkMode ? 1 : 0));
-
-            string versionText = Properties.Resources.strUpdateDialogVersionText;
-            versionText = versionText.Replace("{0}", v.ToString());
-
-            this.txtVersion.Text = versionText;
+            txtVersion.Text = string.Format(Properties.Resources.strUpdateDialogVersionText, v.ToString(3));
         }
 
         private void BtnCancel_Click(object sender, RoutedEventArgs e)
         {
-            this.DialogResult = true;
+            DialogResult = true;
         }
 
         private void BtnOK_Click(object sender, RoutedEventArgs e)
@@ -30,18 +27,14 @@ namespace SimpleJournal.Dialogs
             try
             {
                 System.Diagnostics.Process.Start(Consts.DOWNLOAD_URL);
-                this.DialogResult = true;
+                DialogResult = true;
 
                 // Exit to make sure user can easily update without problems
                 System.Windows.Application.Current.Shutdown();
             }
             catch (Exception ex)
             {
-                string message = Properties.Resources.strUpdateDialogFailedToOpenBrowserAutomatically;
-                message = message.Replace("{0}", ex.Message);
-                message = message.Replace("{1}", Consts.DOWNLOAD_URL);
-                message = message.Replace("{2}", "https://simplejournal.ca-soft.net");
-
+                string message = string.Format(Properties.Resources.strUpdateDialogFailedToOpenBrowserAutomatically, ex.Message, Consts.DOWNLOAD_URL, Consts.HOMEPAGE_URL);
                 MessageBox.Show(this, message, Properties.Resources.strFailure, MessageBoxButton.OK, MessageBoxImage.Error);
             }             
         }

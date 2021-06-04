@@ -10,16 +10,25 @@ namespace SimpleJournal
         public const int LAST_RECENTLY_OPENED_DOCUMENT_LIMIT = 10;
         public const double SPACE_BETWEEN_SITES = 75D;
         public const int TRAPEZE_OFFSET = 30;
+        public const double MARKER_PATH_STROKE_THICKNESS = 0.4;
+        public const double DEFAULT_TEXT_SIZE = 15.0;
+
+        public static readonly DoubleCollection LINE_STROKE_DOTTET_DASH_ARRAY = new DoubleCollection() { 0.03, 2 };
+        public static readonly DoubleCollection LINE_STROKE_DASHED_DASH_ARRAY = new DoubleCollection() { 4, 3 };
+        public const int DEFAULT_LINE_STROKE_DASH_OFFSET = 1;
+
+        public static readonly SolidColorBrush DEFAULT_BACKGROUND_BRUSH = new SolidColorBrush((System.Windows.Media.Color)(ColorConverter.ConvertFromString("#E1E1E1")));
 
         public static readonly string CHANGELOG_URL = "https://simplejournal.ca-soft.net/chg.php?lang={0}&dark={1}";
         public static readonly string DOWNLOAD_URL = "https://code-a-software.net/simplejournal/download.php";
         public static readonly string VERSION_URL = "https://code-a-software.net/simplejournal/versions.json";
         public static readonly string FEEDBACK_URL = "https://code-a-software.net/simplejournal/feedback.php?name={0}&mail={1}&content={2}";
+        public static readonly string HOMEPAGE_URL = "https://simplejournal.ca-soft.net";
 
         public static readonly string UpdaterExe = "7244a3f048e82af354eb3cfa3089a3035ff8768f";
         public static readonly string UpdateSystemDotNetDotControllerDotdll = "bbc7224ccc544651d9d844f309721091860f0f92";
 
-        public static readonly Version StoreVersion = new Version("1.430.0.0");
+        public static readonly Version StoreVersion = new Version("1.432.0.0");
         public static readonly Version NormalVersion = typeof(Consts).Assembly.GetName().Version;
 
         #region Pens

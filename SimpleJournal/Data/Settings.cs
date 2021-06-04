@@ -166,6 +166,11 @@ namespace SimpleJournal.Data
         /// </summary>
         public bool ExportAsJournal { get; set; } = false;
 
+        /// <summary>
+        /// Determines if the touch buttons are checked and visible (only if the device has a touch screen
+        /// </summary>
+        public bool ShowTouchButtonsInQuickAccessBar { get; set; } = true;
+
         public enum RulerMode : int
         {
             /// <summary>

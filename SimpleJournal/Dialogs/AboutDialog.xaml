@@ -20,18 +20,18 @@
             </TabControl.Resources>
             <TabItem Header="{x:Static res:Resources.strAbout}">
                 <StackPanel>
-                    <Image Source="../resources/logo.png" Width="256" Margin="0,15,0,0"/>
+                    <Image Source="../resources/logo.png" Width="230" Margin="0,15,0,0"/>
                     <TextBlock Margin="5,20,0,0" HorizontalAlignment="Center" Foreground="{DynamicResource BlackBrush}">
                         <Run Text="{x:Static res:Resources.strAboutText1}"/>
-                        <LineBreak/>
+                        <LineBreak />
                         <Run Text="{x:Static res:Resources.strAboutTextIcons8_1}"/>
                         <Hyperlink NavigateUri="https://icons8.com/" RequestNavigate="Hyperlink_RequestNavigate">Icons8</Hyperlink>
                         <Run Text="{x:Static res:Resources.strAboutTextIcons8_2}" />
-                        <LineBreak/>
+                        <LineBreak />
                         <Run Text="{x:Static res:Resources.strAboutTextFluentRibbon_1}"/>
                         <Hyperlink NavigateUri="https://github.com/fluentribbon/Fluent.Ribbon" RequestNavigate="Hyperlink_RequestNavigate">Fluent.Ribbon (GitHub)</Hyperlink>
                         <Run Text="{x:Static res:Resources.strAboutTextFluentRibbon_2}"/>
-                        <LineBreak/>
+                        <LineBreak />
                         <LineBreak />
                         <Run Text="Source Code:" />
                         <Hyperlink NavigateUri="https://github.com/andyld97/SimpleJournal" RequestNavigate="Hyperlink_RequestNavigate">GitHub</Hyperlink>
@@ -44,7 +44,9 @@
                         <Run Text="{x:Static res:Resources.strReleaseDate}" FontWeight="Bold" />
                         <LineBreak />
                         <LineBreak />
-                        <Run x:Name="TextNewVersionAvailable" FontWeight="Bold"/>
+                        <Run x:Name="TextNewVersionAvailable" FontWeight="Bold" />
+                        <LineBreak />
+                        <Run Text="Powered by .NET 5.0.6" FontWeight="Bold" />
                     </TextBlock>
                 </StackPanel>
             </TabItem>

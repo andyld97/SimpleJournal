@@ -1,22 +1,7 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{1A9449F7-5161-4CF0-B07B-645327AB44AC}</ProjectGuid>
+    <TargetFramework>net5.0-windows</TargetFramework>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>SimpleJournal</RootNamespace>
-    <AssemblyName>SimpleJournal</AssemblyName>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <WarningLevel>4</WarningLevel>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-    <Deterministic>true</Deterministic>
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
-    <TargetFrameworkProfile />
     <SccProjectName>SAK</SccProjectName>
     <SccLocalPath>SAK</SccLocalPath>
     <SccAuxPath>SAK</SccAuxPath>
@@ -36,58 +21,50 @@
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <UseWindowsForms>true</UseWindowsForms>
+    <UseWPF>true</UseWPF>
+	<PublishReadyToRun>true</PublishReadyToRun>
+    <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
+    <Configurations>Debug;Release;UWPNew;Normal</Configurations>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
     <PlatformTarget>x64</PlatformTarget>
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>TRACE;DEBUG;UWP</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
     <PlatformTarget>x64</PlatformTarget>
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE;UWP</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
+    <ApplicationManifest>app.uwp.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Normal|AnyCPU'">
+    <PlatformTarget>x64</PlatformTarget>
+    <DefineConstants>TRACE</DefineConstants>
     <ApplicationManifest>app.uwp.manifest</ApplicationManifest>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>journalicon.ico</ApplicationIcon>
+    <ApplicationManifest>app.uwp.manifest</ApplicationManifest>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
-    <DebugSymbols>true</DebugSymbols>
     <OutputPath>bin\x64\Debug\</OutputPath>
-    <DefineConstants>TRACE;DEBUG</DefineConstants>
-    <DebugType>full</DebugType>
-    <PlatformTarget>x64</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
     <OutputPath>bin\x64\Release\</OutputPath>
     <DefineConstants>TRACE;PATCH_REQUIRED</DefineConstants>
-    <Optimize>true</Optimize>
-    <DebugType>pdbonly</DebugType>
-    <PlatformTarget>x64</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Normal|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE;PATCH_REQUIRED</DefineConstants>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'UWP|AnyCPU'">
     <OutputPath>bin\UWP\</OutputPath>
     <DefineConstants>TRACE;UWP</DefineConstants>
     <Optimize>true</Optimize>
-    <DebugType>pdbonly</DebugType>
     <PlatformTarget>x64</PlatformTarget>
-    <LangVersion>7.3</LangVersion>
-    <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <ApplicationManifest>app.uwp.manifest</ApplicationManifest>
   </PropertyGroup>
@@ -95,22 +72,13 @@
     <OutputPath>bin\x64\UWP\</OutputPath>
     <DefineConstants>TRACE;PATCH_REQUIRED</DefineConstants>
     <Optimize>true</Optimize>
-    <DebugType>pdbonly</DebugType>
-    <PlatformTarget>x64</PlatformTarget>
-    <LangVersion>7.3</LangVersion>
-    <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-    <Prefer32Bit>true</Prefer32Bit>
     <ApplicationManifest>app.uwp.manifest</ApplicationManifest>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Normal|AnyCPU'">
     <OutputPath>bin\Normal\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
     <Optimize>true</Optimize>
-    <DebugType>pdbonly</DebugType>
     <PlatformTarget>x64</PlatformTarget>
-    <LangVersion>7.3</LangVersion>
-    <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <ApplicationManifest>app.normal.manifest</ApplicationManifest>
   </PropertyGroup>
@@ -118,388 +86,29 @@
     <OutputPath>bin\x64\Normal\</OutputPath>
     <DefineConstants>TRACE;PATCH_REQUIRED</DefineConstants>
     <Optimize>true</Optimize>
-    <DebugType>pdbonly</DebugType>
-    <PlatformTarget>x64</PlatformTarget>
-    <LangVersion>7.3</LangVersion>
-    <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-    <Prefer32Bit>true</Prefer32Bit>
     <ApplicationManifest>app.normal.manifest</ApplicationManifest>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='UWPNew|AnyCPU'">
+    <DefineConstants>TRACE;UWP</DefineConstants>
+  </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ControlzEx, Version=4.0.0.0, Culture=neutral, PublicKeyToken=69f1c32f803d307e, processorArchitecture=MSIL">
-      <HintPath>..\packages\ControlzEx.4.4.0\lib\net462\ControlzEx.dll</HintPath>
-    </Reference>
     <Reference Include="Device, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\External Libraries\Device.dll</HintPath>
     </Reference>
-    <Reference Include="Fluent, Version=8.0.0.0, Culture=neutral, PublicKeyToken=3e436e32a8c5546f, processorArchitecture=MSIL">
-      <HintPath>..\packages\Fluent.Ribbon.8.0.3\lib\net462\Fluent.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Xaml.Behaviors, Version=1.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Xaml.Behaviors.Wpf.1.1.19\lib\net45\Microsoft.Xaml.Behaviors.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="PresentationFramework.Aero" />
-    <Reference Include="PresentationFramework.Aero2" />
-    <Reference Include="PresentationFramework.Classic" />
     <Reference Include="Serialization, Version=1.0.0.1, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\External Libraries\Serialization.dll</HintPath>
     </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Net" />
-    <Reference Include="System.Web" />
-    <Reference Include="System.Web.Extensions" />
-    <Reference Include="System.Windows" />
-    <Reference Include="System.Windows.Controls.Ribbon" />
-    <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xml" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Xaml">
-      <RequiredTargetFramework>4.0</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="UIAutomationProvider" />
-    <Reference Include="UIAutomationTypes" />
-    <Reference Include="WindowsBase" />
-    <Reference Include="PresentationCore" />
-    <Reference Include="PresentationFramework" />
-    <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
-    <ApplicationDefinition Include="App.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </ApplicationDefinition>
-    <Compile Include="Actions\PropertyChangedAction.cs" />
-    <Compile Include="Commands.cs" />
-    <Compile Include="Controls\AnimatedScrollViewer.cs" />
-    <Compile Include="Controls\BackupItem.xaml.cs">
-      <DependentUpon>BackupItem.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\Plot.cs" />
-    <Compile Include="Controls\Color\ColorPalette.xaml.cs">
-      <DependentUpon>ColorPalette.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\Design\ImageDesign.xaml.cs">
-      <DependentUpon>ImageDesign.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\FluentToggleButtonRemovedToggle.cs" />
-    <Compile Include="Controls\PageSplitter.xaml.cs">
-      <DependentUpon>PageSplitter.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\PenSizeControl.xaml.cs">
-      <DependentUpon>PenSizeControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\Templates\AddPageDropDownTemplate.xaml.cs">
-      <DependentUpon>AddPageDropDownTemplate.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\Templates\DropDownTemplate.cs" />
-    <Compile Include="Controls\Templates\PenDropDownTemplate.xaml.cs">
-      <DependentUpon>PenDropDownTemplate.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\DropDownToggleButton.cs" />
-    <Compile Include="Controls\FontChooseBox.xaml.cs">
-      <DependentUpon>FontChooseBox.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\ListBoxScroll.cs" />
-    <Compile Include="Controls\NumericUpDown.xaml.cs">
-      <DependentUpon>NumericUpDown.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\Templates\PlotDropDownTemplate.xaml.cs">
-      <DependentUpon>PlotDropDownTemplate.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\Templates\PolygonDropDownTemplate.xaml.cs">
-      <DependentUpon>PolygonDropDownTemplate.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\Templates\RubberDropDownItemTemplate.xaml.cs">
-      <DependentUpon>RubberDropDownItemTemplate.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\PreviewCanvas.xaml.cs">
-      <DependentUpon>PreviewCanvas.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\Design\ShapeDesign.xaml.cs">
-      <DependentUpon>ShapeDesign.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\Design\TextDesign.xaml.cs">
-      <DependentUpon>TextDesign.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\Templates\RulerDropDownTemplate.xaml.cs">
-      <DependentUpon>RulerDropDownTemplate.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\Templates\SelectDropDownTemplate.xaml.cs">
-      <DependentUpon>SelectDropDownTemplate.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\Templates\SimpleFormDropDown.xaml.cs">
-      <DependentUpon>SimpleFormDropDown.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Data\Clipboard.cs" />
-    <Compile Include="Data\Enums.cs" />
-    <Compile Include="Data\JournalPlot.cs" />
-    <Compile Include="Data\Pen.cs" />
-    <Compile Include="Data\RecentlyOpenedDocument.cs" />
-    <Compile Include="Dialogs\AboutDialog.xaml.cs">
-      <DependentUpon>AboutDialog.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Actions\Action.cs" />
-    <Compile Include="Actions\ActionManager.cs" />
-    <Compile Include="Actions\ChildAction.cs" />
-    <Compile Include="Actions\StrokeAction.cs" />
-    <Compile Include="Dialogs\ExportDialog.xaml.cs">
-      <DependentUpon>ExportDialog.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Dialogs\PageManagmentDialog.xaml.cs">
-      <DependentUpon>PageManagmentDialog.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Dialogs\RecoverAutoBackupFileDialog.xaml.cs">
-      <DependentUpon>RecoverAutoBackupFileDialog.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Dialogs\SetupDialog.xaml.cs">
-      <DependentUpon>SetupDialog.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Dialogs\UpdateDialog.xaml.cs">
-      <DependentUpon>UpdateDialog.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Dialogs\WaitingDialog.xaml.cs">
-      <DependentUpon>WaitingDialog.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Enums.cs" />
-    <Compile Include="Helper\Consts.cs" />
-    <Compile Include="Controls\Color\ColorPicker.xaml.cs">
-      <DependentUpon>ColorPicker.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\CustomListBoxItem.cs" />
-    <Compile Include="Data\JournalShape.cs" />
-    <Compile Include="Data\JournalText.cs" />
-    <Compile Include="Dialogs\SettingsDialog.xaml.cs">
-      <DependentUpon>SettingsDialog.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Helper\ProcessHelper.cs" />
-    <Compile Include="Helper\TouchHelper.cs" />
-    <Compile Include="Helper\WpfScreen.cs" />
-    <Compile Include="Properties\Resources.de.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.de.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Templates\Ruled.xaml.cs">
-      <DependentUpon>Ruled.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Dialogs\TextAnalyser.xaml.cs">
-      <DependentUpon>TextAnalyser.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Dialogs\TextInputWindow.xaml.cs">
-      <DependentUpon>TextInputWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Dialogs\TextInsertWindow.xaml.cs">
-      <DependentUpon>TextInsertWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
-    </Compile>
-    <Page Include="Controls\BackupItem.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\Color\ColorPalette.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\Design\ImageDesign.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\PageSplitter.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\PenSizeControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\Templates\AddPageDropDownTemplate.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\Templates\PenDropDownTemplate.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\FontChooseBox.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\NumericUpDown.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\PreviewCanvas.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\Design\ShapeDesign.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\Design\TextDesign.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\Templates\PlotDropDownTemplate.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\Templates\PolygonDropDownTemplate.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\Templates\RubberDropDownItemTemplate.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\Templates\RulerDropDownTemplate.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\Templates\SelectDropDownTemplate.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\Templates\SimpleFormDropDown.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Dialogs\AboutDialog.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\Color\ColorPicker.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Dialogs\ExportDialog.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Dialogs\PageManagmentDialog.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Dialogs\RecoverAutoBackupFileDialog.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Dialogs\SetupDialog.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Dialogs\UpdateDialog.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Dialogs\WaitingDialog.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="resources\TabControlStyle.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Templates\Blanco.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Templates\Chequered.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Compile Include="App.xaml.cs">
-      <DependentUpon>App.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Templates\Blanco.xaml.cs">
-      <DependentUpon>Blanco.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Templates\Chequered.xaml.cs">
-      <DependentUpon>Chequered.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Data\Journal.cs" />
-    <Compile Include="Data\JournalImage.cs" />
-    <Compile Include="Data\JournalResource.cs" />
-    <Compile Include="Data\Settings.cs" />
-    <Compile Include="Controls\DrawingCanvas.cs" />
-    <Compile Include="Helper\GeneralHelper.cs" />
-    <Compile Include="Templates\IPaper.cs" />
-    <Compile Include="Data\JournalPage.cs" />
-    <Page Include="Dialogs\SettingsDialog.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Templates\Ruled.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Dialogs\TextAnalyser.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Dialogs\TextInputWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Dialogs\TextInsertWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="MainWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Properties\AssemblyInfo.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Settings.settings</DependentUpon>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
-    <EmbeddedResource Include="Properties\Resources.de.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.de.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <None Include="app.normal.manifest">
+    <None Update="app.normal.manifest">
       <SubType>Designer</SubType>
     </None>
-    <None Include="app.uwp.manifest">
+    <None Update="app.uwp.manifest">
       <SubType>Designer</SubType>
     </None>
-    <None Include="packages.config" />
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="resources\SJFileAssoc.exe.config" />
     <None Include="Store Packages\ReferencePackage %28SimpleJournal%29 %2826%29 %281.2.418.0%29 %2830.03.19%29.msix" />
     <None Include="Store Packages\ReferencePackage %28SimpleJournal%29 %2827%29 %281.2.500.0%29 %2813.04.19%29.msix" />
     <None Include="Store Packages\ReferencePackage %28SimpleJournal%29 %2828%29 %281.2.501.0%29 %2815.04.19%29.msix" />
@@ -523,9 +132,6 @@
     <None Include="Store Packages\ReferencePackage %28SimpleJournal%29 %2847%29 %281.410.0.0%29 %2815.12.20%29.msix" />
     <None Include="Store Packages\ReferencePackage %28SimpleJournal%29 %2848%29 %281.420.0.0%29 %2828.12.20%29.msix" />
     <None Include="Store Packages\ReferencePackage %28SimpleJournal%29 %2849%29 %281.430.0.0%29 %2829.04.21%29.msix" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="resources\caslogo.ico" />
@@ -627,9 +233,6 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <None Include="resources\journalicon.ico" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="resources\polygon.png" />
   </ItemGroup>
   <ItemGroup>
@@ -709,26 +312,40 @@
     <Resource Include="resources\backgrounds\wooden-2.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Shared Libraries\SimpleJournal.Shared\SimpleJournal.Shared.csproj">
-      <Project>{079AFA71-58C5-4377-B2D6-B0218A66C0D9}</Project>
-      <Name>SimpleJournal.Shared</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SJFileAssoc\SJFileAssoc.csproj">
-      <Project>{32f31565-e65e-4e7c-9a7f-90e26a1da287}</Project>
-      <Name>SJFileAssoc</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="resources\touch_off.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="resources\touch_on.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="resources\SJFileAssoc.exe" />
+    <PackageReference Include="Fluent.Ribbon" Version="8.0.3" />
+    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="Microsoft.DotNet.UpgradeAssistant.Extensions.Default.Analyzers" Version="0.2.227701">
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Windows.Compatibility" Version="5.0.2" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="resources\SimpleJournal.Shared.dll" />
+    <ProjectReference Include="..\Shared Libraries\SimpleJournal.Shared\SimpleJournal.Shared.csproj" />
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.de.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Target Name="PostPublish" AfterTargets="Publish">
+	  <Exec Command="copy /Y &quot;$(SolutionDir)Analyzer\bin\$(ConfigurationName)\Analyzer.exe&quot; &quot;$(SolutionDir)$(ProjectName)\$(PublishDir)\Analyzer.exe&quot;&#xD;&#xA;copy /Y &quot;$(SolutionDir)Analyzer\bin\$(ConfigurationName)\Analyzer.exe.config&quot; &quot;$(SolutionDir)$(ProjectName)\$(PublishDir)\Analyzer.exe.config&quot;&#xD;&#xA;copy /Y &quot;$(SolutionDir)Analyzer\bin\$(ConfigurationName)\IACore.dll&quot; &quot;$(SolutionDir)$(ProjectName)\$(PublishDir)\IACore.dll&quot;&#xD;&#xA;copy /Y &quot;$(SolutionDir)Analyzer\bin\$(ConfigurationName)\IALoader.dll&quot; &quot;$(SolutionDir)$(ProjectName)\$(PublishDir)\IALoader.dll&quot;&#xD;&#xA;copy /Y &quot;$(SolutionDir)Analyzer\bin\$(ConfigurationName)\IAWinFX.dll&quot; &quot;$(SolutionDir)$(ProjectName)\$(PublishDir)\IAWinFX.dll&quot;&#xD;&#xA;copy /Y &quot;$(SolutionDir)Analyzer\bin\$(ConfigurationName)\Serialization.dll&quot; &quot;$(SolutionDir)$(ProjectName)\$(PublishDir)\Serialization.dll&quot;&#xD;&#xA;copy /Y &quot;$(SolutionDir)Analyzer\bin\$(ConfigurationName)\SimpleJournal.Shared.dll&quot; &quot;$(SolutionDir)$(ProjectName)\$(PublishDir)\SimpleJournal.Shared.dll&quot;" />
+  </Target>
 </Project>

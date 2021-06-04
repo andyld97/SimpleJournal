@@ -127,8 +127,8 @@ namespace SimpleJournal.Properties {
         ///   Sucht eine lokalisierte Zeichenfolge, die Idea of Daniel S.
         ///Programmed by Andreas L.
         ///
-        ///
         ///Many thanks ...
+        ///
         ///... to Daniel S. and Stefan E. for the ideas/program tests! ähnelt.
         /// </summary>
         public static string strAboutText1 {
@@ -1500,7 +1500,6 @@ namespace SimpleJournal.Properties {
         
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Note: Please click anywhere on any page to insert the object there.
-        ///
         ///Click on Yes to ignore this hint!
         ///Click on No to continue to receive this message! ähnelt.
         /// </summary>
@@ -2447,7 +2446,7 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die 04/29/2020 03:01 PM ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die 06/04/2021 5:57 PM ähnelt.
         /// </summary>
         public static string strReleaseDate {
             get {
@@ -2686,6 +2685,15 @@ namespace SimpleJournal.Properties {
         public static string strSettingsActivateGlowingEffectDescription {
             get {
                 return ResourceManager.GetString("strSettingsActivateGlowingEffectDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Show touch buttons in the quick selection bar ähnelt.
+        /// </summary>
+        public static string strSettingsActivateTouchButtons {
+            get {
+                return ResourceManager.GetString("strSettingsActivateTouchButtons", resourceCulture);
             }
         }
         

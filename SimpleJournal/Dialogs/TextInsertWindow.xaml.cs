@@ -22,13 +22,13 @@ namespace SimpleJournal
 
         private void btnOK_Click(object sender, RoutedEventArgs e)
         {
-            dismissDialog();
+            DismissDialog();
         }
 
-        private void dismissDialog()
+        private void DismissDialog()
         {
             if (!string.IsNullOrEmpty(Result))
-                this.DialogResult = true;
+                DialogResult = true;
             else
                 MessageBox.Show(this, Properties.Resources.strPleaseEnterValidText, Properties.Resources.strEmptyText, MessageBoxButton.OK, MessageBoxImage.Error);
         }
@@ -36,7 +36,7 @@ namespace SimpleJournal
         private void txtResult_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
-                dismissDialog();
+                DismissDialog();
         }
     }
 }

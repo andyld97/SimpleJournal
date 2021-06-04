@@ -3,12 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:SimpleJournal.Controls"
+             xmlns:local="clr-namespace:SimpleJournal.Controls" xmlns:fluent="urn:fluent-ribbon"
              mc:Ignorable="d" 
              d:DesignHeight="30" d:DesignWidth="250">
-    <ComboBox x:Name="cmbFont" xmlns:ComponentModel="clr-namespace:System.ComponentModel;assembly=WindowsBase"
-
-          ItemTemplate="{DynamicResource FontTemplate}" SelectionChanged="ComboBox_SelectionChanged">
+    <fluent:ComboBox x:Name="cmbFont" Margin="-9,0,0,0" IsEditable="False" xmlns:ComponentModel="clr-namespace:System.ComponentModel;assembly=WindowsBase" ItemTemplate="{DynamicResource FontTemplate}" SelectionChanged="ComboBox_SelectionChanged">
         <ComboBox.Resources>
 
             <CollectionViewSource x:Key="myFonts" Source="{Binding Source={x:Static Fonts.SystemFontFamilies}}">
@@ -35,5 +33,5 @@
         <ComboBox.ItemsSource>
             <Binding Source="{StaticResource myFonts}" />
         </ComboBox.ItemsSource>
-    </ComboBox>
+    </fluent:ComboBox>
 </UserControl>

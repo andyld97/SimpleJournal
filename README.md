@@ -7,7 +7,7 @@ Welcome to the offical GitHub-Repo of SimpleJournal. SimpleJournal is a simple t
 <a href='https://www.microsoft.com/en-US/p/simplejournal/9mv6j44m90n7?activetab=pivot:overviewtab'><img src='https://developer.microsoft.com/store/badges/images/English_get-it-from-MS.png' alt='English badge' width="150" /></a>
 
 There are two versions of SimpleJournal due to compability issues, e.g. like supporting older versions of Windows. So we have the `normal version` which is running also on Windows 7 and the `store version`. If you want to download the non-store version [click here.](https://simplejournal.ca-soft.net/en/index.php?page=downloads)
-Due to store-restrictions both versions are different: The normal version supports more features than the other, so therefore there are different builds: `UWP` and `Nornal`. As you might have noticed that SimpleJournal is written in `WPF` (`.NET 4.8`), the Store-Version is not a real UWP-App. It is converted with the `Desktop Brdige` (`MSIX Packaging Tool`)
+Due to store-restrictions both versions are different: The normal version supports more features than the other, so therefore there are different builds: `UWP` and `Nornal`. As you might have noticed that SimpleJournal is written in `WPF` (`.NET 5`), the Store-Version is not a real UWP-App. It is converted with the `Desktop Brdige` (`MSIX Packaging Tool`)
 
 ### Features & Version Differences
 
@@ -28,7 +28,7 @@ To prevent this I came up with a soultion which completely disables your touch s
 For the non-store version I created a simple [tool](https://code-a-software.net/simplejournal/setups/tdm.zip) which you can use for en/disabling your touch screen.
 
 ## Build
-In order to work with form or text-recognition you need to compile `Analyzer` and then you need to copy the output to your `Debug`, `Normal` or `UWP`-Build Folder of the `SimpleJournal`-Project!
+In order to work with form or text-recognition you need to compile `Analyzer` and then ~~you need to copy the output to your `Debug`, `Normal` or `UWP`-Build Folder of the `SimpleJournal`-Project!~~ all files should be copied automatically while publishing!
 
 ## Thanks to
 - Daniel S. for the great ideas and testing
