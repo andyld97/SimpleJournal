@@ -20,7 +20,7 @@
             </TabControl.Resources>
             <TabItem Header="{x:Static res:Resources.strAbout}">
                 <StackPanel>
-                    <Image Source="../resources/logo.png" Width="256" Margin="0,15,0,0"/>
+                    <Image Source="../resources/logo.png" Width="230" Margin="0,15,0,0"/>
                     <TextBlock Margin="5,20,0,0" HorizontalAlignment="Center" Foreground="{DynamicResource BlackBrush}">
                         <Run Text="{x:Static res:Resources.strAboutText1}"/>
                         <LineBreak />
@@ -44,7 +44,9 @@
                         <Run Text="{x:Static res:Resources.strReleaseDate}" FontWeight="Bold" />
                         <LineBreak />
                         <LineBreak />
-                        <Run x:Name="TextNewVersionAvailable" FontWeight="Bold"/>
+                        <Run x:Name="TextNewVersionAvailable" FontWeight="Bold" />
+                        <LineBreak />
+                        <Run Text="Powered by .NET 5.0.6" FontWeight="Bold" />
                     </TextBlock>
                 </StackPanel>
             </TabItem>

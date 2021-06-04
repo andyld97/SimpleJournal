@@ -2446,7 +2446,7 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die 04/29/2020 03:01 PM ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die 06/04/2021 12:47 AM ähnelt.
         /// </summary>
         public static string strReleaseDate {
             get {

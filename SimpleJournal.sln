@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.28407.52
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleJournal", "SimpleJournal\SimpleJournal.csproj", "{1A9449F7-5161-4CF0-B07B-645327AB44AC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Analyzer", "Analyser\Analyzer.csproj", "{FE0DD19A-1AAC-486F-9206-C8430AB8A25A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Analyzer", "Analyzer\Analyzer.csproj", "{FE0DD19A-1AAC-486F-9206-C8430AB8A25A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SJFileAssoc", "SJFileAssoc\SJFileAssoc.csproj", "{32F31565-E65E-4E7C-9A7F-90E26A1DA287}"
 EndProject

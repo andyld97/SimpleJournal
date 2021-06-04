@@ -312,10 +312,6 @@
     <Resource Include="resources\backgrounds\wooden-2.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Shared Libraries\SimpleJournal.Shared\SimpleJournal.Shared.csproj" />
-    <ProjectReference Include="..\SJFileAssoc\SJFileAssoc.csproj" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="resources\touch_off.png" />
   </ItemGroup>
   <ItemGroup>
@@ -325,13 +321,13 @@
     <PackageReference Include="Fluent.Ribbon" Version="8.0.3" />
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-    <PackageReference Include="Microsoft.DotNet.UpgradeAssistant.Extensions.Default.Analyzers" Version="0.2.222702">
+    <PackageReference Include="Microsoft.DotNet.UpgradeAssistant.Extensions.Default.Analyzers" Version="0.2.227701">
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.Windows.Compatibility" Version="5.0.2" />
   </ItemGroup>
   <ItemGroup>
-    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+    <ProjectReference Include="..\Shared Libraries\SimpleJournal.Shared\SimpleJournal.Shared.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="Properties\Resources.Designer.cs">
@@ -349,4 +345,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
+  <Target Name="PostPublish" AfterTargets="Publish">
+	  <Exec Command="copy /Y &quot;$(SolutionDir)Analyzer\bin\$(ConfigurationName)\Analyzer.exe&quot; &quot;$(SolutionDir)$(ProjectName)\$(PublishDir)\Analyzer.exe&quot;&#xD;&#xA;copy /Y &quot;$(SolutionDir)Analyzer\bin\$(ConfigurationName)\Analyzer.exe.config&quot; &quot;$(SolutionDir)$(ProjectName)\$(PublishDir)\Analyzer.exe.config&quot;&#xD;&#xA;copy /Y &quot;$(SolutionDir)Analyzer\bin\$(ConfigurationName)\IACore.dll&quot; &quot;$(SolutionDir)$(ProjectName)\$(PublishDir)\IACore.dll&quot;&#xD;&#xA;copy /Y &quot;$(SolutionDir)Analyzer\bin\$(ConfigurationName)\IALoader.dll&quot; &quot;$(SolutionDir)$(ProjectName)\$(PublishDir)\IALoader.dll&quot;&#xD;&#xA;copy /Y &quot;$(SolutionDir)Analyzer\bin\$(ConfigurationName)\IAWinFX.dll&quot; &quot;$(SolutionDir)$(ProjectName)\$(PublishDir)\IAWinFX.dll&quot;&#xD;&#xA;copy /Y &quot;$(SolutionDir)Analyzer\bin\$(ConfigurationName)\Serialization.dll&quot; &quot;$(SolutionDir)$(ProjectName)\$(PublishDir)\Serialization.dll&quot;&#xD;&#xA;copy /Y &quot;$(SolutionDir)Analyzer\bin\$(ConfigurationName)\SimpleJournal.Shared.dll&quot; &quot;$(SolutionDir)$(ProjectName)\$(PublishDir)\SimpleJournal.Shared.dll&quot;" />
+  </Target>
 </Project>

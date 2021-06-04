@@ -36,7 +36,7 @@ namespace Analyzer
                 try
                 {
                     var path = System.IO.Path.Combine(System.IO.Path.GetTempPath(), "SimpleJournal");
-                    if(System.IO.Directory.Exists(path))
+                    if (System.IO.Directory.Exists(path))
                     {
                         System.IO.Directory.CreateDirectory(path);
                     }
@@ -126,7 +126,7 @@ namespace Analyzer
                                     string result = XamlWriter.Save(s);
                                     Rect currentRectangle = rects[counter++];
 
-                                    var xmlRect = Serialization.Serialization.SaveToString<Rect>(currentRectangle, System.Text.Encoding.Default);
+                                    var xmlRect = Serialization.Serialization.SaveToString(currentRectangle, System.Text.Encoding.Default);
                                     Console.WriteLine($"{Convert.ToBase64String(System.Text.Encoding.Default.GetBytes(result + DELIMITTER + xmlRect))}{Environment.NewLine}");
                                 }
                             }

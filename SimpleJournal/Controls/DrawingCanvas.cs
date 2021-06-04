@@ -480,7 +480,8 @@ namespace SimpleJournal
                         CreateNoWindow = false,
                         FileName = path,
                         UseShellExecute = false,
-                        RedirectStandardOutput = true
+                        RedirectStandardOutput = true,
+                        RedirectStandardError = true,
                     }
                 };
 
@@ -493,12 +494,15 @@ namespace SimpleJournal
                     else
                         lines.Add(currentLine);
                 }
+
+                string error = analyzingProcess.StandardError.ReadToEnd();
+                if (!string.IsNullOrEmpty(error))
+                    throw new Exception(error);
             }
             catch (Exception e)
             {
                 MessageBox.Show(string.Format(Properties.Resources.strErrorMessageAnalyzingStrokes, e.Message), Properties.Resources.strError, MessageBoxButton.OK, MessageBoxImage.Error);
             }
-
             return lines.ToArray();
         }
 

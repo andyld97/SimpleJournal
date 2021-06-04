@@ -28,7 +28,7 @@ To prevent this I came up with a soultion which completely disables your touch s
 For the non-store version I created a simple [tool](https://code-a-software.net/simplejournal/setups/tdm.zip) which you can use for en/disabling your touch screen.
 
 ## Build
-In order to work with form or text-recognition you need to compile `Analyzer` and then you need to copy the output to your `Debug`, `Normal` or `UWP`-Build Folder of the `SimpleJournal`-Project!
+In order to work with form or text-recognition you need to compile `Analyzer` and then ~~you need to copy the output to your `Debug`, `Normal` or `UWP`-Build Folder of the `SimpleJournal`-Project!~~ all files should be copied automatically while publishing!
 
 ## Thanks to
 - Daniel S. for the great ideas and testing
