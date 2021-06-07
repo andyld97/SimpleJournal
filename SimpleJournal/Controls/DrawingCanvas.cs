@@ -324,6 +324,15 @@ namespace SimpleJournal
         {
             IsInRulerMode = false;
             pointCollection = new StylusPointCollection();
+
+            if (pointCounter == 1)
+            {
+                this.Children.Remove(line);
+                DrawingCanvas.LastModifiedCanvas = this;
+                DrawingCanvas.Change = true;
+            }
+
+            pointCounter = 0;
             line = new Line();
         }
 
