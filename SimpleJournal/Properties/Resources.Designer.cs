@@ -2671,6 +2671,24 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Disables the touchscreen when SimpleJournal is in the foreground, but also enables it when SimpleJournal is no longer in the foreground. This option is useful so that the touchscreen can still be used outside SimpleJournal, e.g. to scroll in PDF documents! ähnelt.
+        /// </summary>
+        public static string strSettings_DeactivateTouchScreenIfInForeground_Explanation {
+            get {
+                return ResourceManager.GetString("strSettings_DeactivateTouchScreenIfInForeground_Explanation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Disable Windows touchscreen only when SimpleJournal is in the foreground ähnelt.
+        /// </summary>
+        public static string strSettings_DisableTouchscreenIfInForeground {
+            get {
+                return ResourceManager.GetString("strSettings_DisableTouchscreenIfInForeground", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Active window glowing effect ähnelt.
         /// </summary>
         public static string strSettingsActivateGlowingEffect {
@@ -3401,6 +3419,15 @@ namespace SimpleJournal.Properties {
         public static string strTools {
             get {
                 return ResourceManager.GetString("strTools", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Touchscreen ähnelt.
+        /// </summary>
+        public static string strTouchScreen {
+            get {
+                return ResourceManager.GetString("strTouchScreen", resourceCulture);
             }
         }
         

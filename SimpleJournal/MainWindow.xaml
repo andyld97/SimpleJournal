@@ -9,7 +9,7 @@
         FlowDirection="LeftToRight"
         xmlns:controls="clr-namespace:SimpleJournal.Controls"
         mc:Ignorable="d"
-        Title="SimpleJournal - Neues Journal"  Height="700"
+        Title="SimpleJournal - Neues Journal"  Height="700" Activated="RibbonWindow_Activated" Deactivated="RibbonWindow_Deactivated"
         Width="1130">
     <Window.Resources>
         <BooleanToVisibilityConverter x:Key="boolToVisibilityConverter" />

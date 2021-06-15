@@ -115,10 +115,8 @@
                                 </DataTemplate>
                             </Fluent:ComboBox.ItemTemplate>
                         </Fluent:ComboBox>
-                        
-                        <CheckBox x:Name="CheckBoxThemeIsColorful" Content="{x:Static res:Resources.strIsColorfulTheme}" Checked="CheckBoxThemeIsColorful_Checked" Unchecked="CheckBoxThemeIsColorful_Unchecked" Margin="0,8,0,0" />
-                        <CheckBox x:Name="CheckBoxActivateTouchButtons" Content="{x:Static res:Resources.strSettingsActivateTouchButtons}" Checked="CheckBoxActivateTouchButtons_Checked" Unchecked="CheckBoxActivateTouchButtons_Checked" Margin="0,5,0,0" />
 
+                        <CheckBox x:Name="CheckBoxThemeIsColorful" Content="{x:Static res:Resources.strIsColorfulTheme}" Checked="CheckBoxThemeIsColorful_Checked" Unchecked="CheckBoxThemeIsColorful_Unchecked" Margin="0,8,0,0" />
                         <CheckBox x:Name="CheckBoxActivateGlowingBrush" Checked="CheckBoxActivateGlowingBrush_Checked" Unchecked="CheckBoxActivateGlowingBrush_Checked"  Margin="0,5,0,0">
                             <TextBlock TextWrapping="Wrap">
                                 <Run Text="{x:Static res:Resources.strSettingsActivateGlowingEffect}"/>
@@ -128,42 +126,42 @@
                     </StackPanel>
                 </Grid>
             </TabItem>
-            
-            <TabItem Header="{x:Static res:Resources.strSettingsBackgroundHeader}">
-                <StackPanel Margin="0,5,0,0">
-                    <RadioButton x:Name="RbDefault" Checked="rb_Checked" GroupName="background" Content="{x:Static res:Resources.strSettingsBackgroundDefault}" />
-                    
-                    <StackPanel Orientation="Horizontal" Margin="0,3,0,0">
-                        <RadioButton x:Name="RbWooden2" Checked="rb_Checked" GroupName="background" VerticalContentAlignment="Center" Margin="3">
-                            <Image Source="../../resources/backgrounds/wooden-2.jpg" Height="64" />
-                        </RadioButton>
-                        <RadioButton x:Name="RbWooden1" Checked="rb_Checked" GroupName="background" VerticalContentAlignment="Center" Margin="3">
-                            <Image Source="../../resources/backgrounds/wooden-1.jpg" Height="64" />
-                        </RadioButton>
-                        <RadioButton x:Name="RbSand" Checked="rb_Checked" GroupName="background" VerticalContentAlignment="Center" Margin="3">
-                            <Image Source="../../resources/backgrounds/sand.jpg" Height="64" />
-                        </RadioButton>
-                        <RadioButton x:Name="RbBlue" Checked="rb_Checked" GroupName="background" VerticalContentAlignment="Center" Margin="3">
-                            <Image Source="../../resources/backgrounds/blue.jpg" Height="64" />
-                        </RadioButton>
-                    </StackPanel>
-
-                    <RadioButton x:Name="RbCustom" Checked="rb_Checked" GroupName="background" Content="{x:Static res:Resources.strSettingsBackgroundCustom}" />
-
-                    <Grid Margin="0,3,0,0" Visibility="{Binding ElementName=RbCustom, Path=IsChecked, Converter={StaticResource BooleanToVisibility}}">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
-                        
-                        <TextBox x:Name="TextCustomImagePath" TextChanged="TextCustomImagePath_TextChanged"  Margin="3,0,0,0" Grid.Column="0" />
-                        <Button x:Name="ButtonSearchCustomImage" Click="ButtonSearchCustomImage_Click" Grid.Column="1" Content="..." Margin="3,0,3,0" Width="50" Height="25" />
-                    </Grid>
-                </StackPanel>
-            </TabItem>
             <TabItem Header="{x:Static res:Resources.strGUI}">
-                <ScrollViewer>
+                <ScrollViewer>                 
                     <StackPanel Margin="3,0,0,0">
+                        <GroupBox Header="Hintergrund" Margin="0,0,0,0">
+                            <StackPanel>
+                                <RadioButton x:Name="RbDefault" Margin="0,00,0,0" Checked="rb_Checked" GroupName="background" Content="{x:Static res:Resources.strSettingsBackgroundDefault}" />
+
+                                <StackPanel Orientation="Horizontal" Margin="0,3,0,0">
+                                    <RadioButton x:Name="RbWooden2" Checked="rb_Checked" GroupName="background" VerticalContentAlignment="Center" Margin="3">
+                                        <Image Source="../../resources/backgrounds/wooden-2.jpg" Height="64" />
+                                    </RadioButton>
+                                    <RadioButton x:Name="RbWooden1" Checked="rb_Checked" GroupName="background" VerticalContentAlignment="Center" Margin="3">
+                                        <Image Source="../../resources/backgrounds/wooden-1.jpg" Height="64" />
+                                    </RadioButton>
+                                    <RadioButton x:Name="RbSand" Checked="rb_Checked" GroupName="background" VerticalContentAlignment="Center" Margin="3">
+                                        <Image Source="../../resources/backgrounds/sand.jpg" Height="64" />
+                                    </RadioButton>
+                                    <RadioButton x:Name="RbBlue" Checked="rb_Checked" GroupName="background" VerticalContentAlignment="Center" Margin="3">
+                                        <Image Source="../../resources/backgrounds/blue.jpg" Height="64" />
+                                    </RadioButton>
+                                </StackPanel>
+
+                                <RadioButton x:Name="RbCustom" Checked="rb_Checked" GroupName="background" Content="{x:Static res:Resources.strSettingsBackgroundCustom}" />
+
+                                <Grid Margin="0,3,0,0" Visibility="{Binding ElementName=RbCustom, Path=IsChecked, Converter={StaticResource BooleanToVisibility}}">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <TextBox x:Name="TextCustomImagePath" TextChanged="TextCustomImagePath_TextChanged"  Margin="3,0,0,0" Grid.Column="0" />
+                                    <Button x:Name="ButtonSearchCustomImage" Click="ButtonSearchCustomImage_Click" Grid.Column="1" Content="..." Margin="3,0,3,0" Width="50" Height="25" />
+                                </Grid>
+                            </StackPanel>
+                        </GroupBox>
+
                         <CheckBox x:Name="chkScrollbar" Margin="0,9,0,0" Content="{x:Static res:Resources.strUseBigScrollbar}" Checked="ChkScrollbar_Checked_1" Unchecked="ChkScrollbar_Checked_1" />
                         <TextBlock Margin="0,5,0,0" TextWrapping="Wrap">
                             <Run FontWeight="Bold" Text="{x:Static res:Resources.strDescription}" />
@@ -186,14 +184,6 @@
                             <Run FontWeight="Bold" Text="{x:Static res:Resources.strDescription}" />
                             <Run Text="{x:Static res:Resources.strUseOldChequeredPatternLine2}" />
                         </TextBlock>
-                        <CheckBox x:Name="CheckBoxDisableTouchScreen" Content="{x:Static res:Resources.strSettingsCeckBoxDisableTouchscreen}" Checked="CheckBoxDisableTouchScreen_Checked" Unchecked="CheckBoxDisableTouchScreen_Checked" Margin="0,9,0,0" />
-                        <TextBlock Margin="0,5,0,0" TextWrapping="Wrap">
-                            <Run FontWeight="Bold" Text="{x:Static res:Resources.strDescription}" />
-                            <Run Text="{x:Static res:Resources.strSettingsDisableTouchExplanation}"/>
-                            <Hyperlink x:Name="DownloadTDM" RequestNavigate="DownloadTDM_RequestNavigate" NavigateUri="https://simplejournal.ca-soft.net/download.php?tdm=1">
-                                <Run Text="Download" />
-                            </Hyperlink>
-                        </TextBlock>
                         <CheckBox x:Name="CheckBoxUseAutoSave" IsChecked="True" Content="{x:Static res:Resources.strUseAutoSave}" Checked="CheckBoxUseAutoSave_Checked" Unchecked="CheckBoxUseAutoSave_Checked"  Margin="0,9,0,0"  />
                         <TextBlock Margin="0,5,0,0" TextWrapping="Wrap">
                             <Run FontWeight="Bold" Text="{x:Static res:Resources.strDescription}" />
@@ -209,7 +199,7 @@
             <TabItem Header="{x:Static res:Resources.strDraw}">
                 <ScrollViewer>
                     <StackPanel Margin="3,0,0,0">
-                        <CheckBox x:Name="chkUseFitToCurve" Margin="0,9,0,0" Content="{x:Static res:Resources.strFitToCurveTitle}" Checked="chkUseFitToCurve_Checked" Unchecked="chkUseFitToCurve_Checked" IsChecked="True" />
+                        <CheckBox x:Name="chkUseFitToCurve" Margin="0,3,0,0" Content="{x:Static res:Resources.strFitToCurveTitle}" Checked="chkUseFitToCurve_Checked" Unchecked="chkUseFitToCurve_Checked" IsChecked="True" />
                         <TextBlock Margin="0,5,0,0" TextWrapping="Wrap">
                             <Run FontWeight="Bold" Text="{x:Static res:Resources.strDescription}" />
                             <Run Text="{x:Static res:Resources.strFitToCurveDescription}"/>
@@ -231,6 +221,24 @@
                         </TextBlock>
                     </StackPanel>
                 </ScrollViewer>
+            </TabItem>
+            <TabItem x:Name="TabTouch" Header="{x:Static res:Resources.strTouchScreen}">
+                <StackPanel Margin="3">
+                    <CheckBox x:Name="CheckBoxDisableTouchScreen" Content="{x:Static res:Resources.strSettingsCeckBoxDisableTouchscreen}" Checked="CheckBoxDisableTouchScreen_Checked" Unchecked="CheckBoxDisableTouchScreen_Checked" Margin="0,0,0,0" />
+                    <TextBlock Margin="0,5,0,0" TextWrapping="Wrap"><Run FontWeight="Bold" Text="{x:Static res:Resources.strDescription}" />
+                        <Run Text="{x:Static res:Resources.strSettingsDisableTouchExplanation}"/>
+                        <Hyperlink x:Name="DownloadTDM" RequestNavigate="DownloadTDM_RequestNavigate" NavigateUri="https://simplejournal.ca-soft.net/download.php?tdm=1">
+                           <Run Text="Download" />
+                        </Hyperlink>
+                    </TextBlock>
+
+                    <CheckBox x:Name="CheckBoxEnableTouchScreenWhenInBackground" Content="{x:Static res:Resources.strSettings_DisableTouchscreenIfInForeground}" Unchecked="CheckBoxEnableTouchScreenWhenInBackground_Checked" Checked="CheckBoxEnableTouchScreenWhenInBackground_Checked" Margin="0,10,0,0" />
+                    <TextBlock Margin="0,5,0,0" TextWrapping="Wrap"><Run FontWeight="Bold" Text="{x:Static res:Resources.strDescription}" />
+                        <Run Text="{x:Static res:Resources.strSettings_DeactivateTouchScreenIfInForeground_Explanation}" />
+                    </TextBlock>
+
+                    <CheckBox x:Name="CheckBoxActivateTouchButtons" Content="{x:Static res:Resources.strSettingsActivateTouchButtons}" Checked="CheckBoxActivateTouchButtons_Checked" Unchecked="CheckBoxActivateTouchButtons_Checked" Margin="0,10,0,0" />
+                </StackPanel>
             </TabItem>
         </TabControl>
     </Grid>

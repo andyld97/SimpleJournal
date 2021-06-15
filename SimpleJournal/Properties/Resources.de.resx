@@ -1769,4 +1769,13 @@ Hier möchte ich Ihnen noch ein paar wichtige Hinweise geben, die Ihnen helfen w
     <value>Zoom</value>
     <comment>MainWindow.xaml</comment>
   </data>
+  <data name="strSettings_DeactivateTouchScreenIfInForeground_Explanation" xml:space="preserve">
+    <value>Deaktivert den Touchscreen, wenn SimpleJournal im Fordergrund ist, aber aktiviert ihn auch sobald SimpleJournal nicht mehr im Fordergrund ist. Diese Option ist nützlich, damit der Touchscreen außerhalb von SimpleJournal weiterhin verwendet werden kann, um z.B. in PDF-Dokumenten zu scrollen!</value>
+  </data>
+  <data name="strSettings_DisableTouchscreenIfInForeground" xml:space="preserve">
+    <value>Windows Touchscreen nur deaktiveren, wenn SimpleJournal im Fordergrund ist</value>
+  </data>
+  <data name="strTouchScreen" xml:space="preserve">
+    <value>Touchscreen</value>
+  </data>
 </root>

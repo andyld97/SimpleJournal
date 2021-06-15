@@ -3295,6 +3295,42 @@ namespace SimpleJournal
         }
 
         #endregion
+
+        #region General Events / Touch
+
+        private void RibbonWindow_Activated(object sender, EventArgs e)
+        {
+           if (WindowState == WindowState.Minimized)
+               return;
+
+            Console.WriteLine("MainWindow activated ....");
+
+#if !UWP
+
+            // Disable touch screen when window get reactivated ...
+            if (Settings.Instance.DisableTouchScreenIfInForeground && TouchHelper.HasTouchscreen())
+                TouchHelper.SetTouchState(false);
+
+#endif
+        }
+
+        private void RibbonWindow_Deactivated(object sender, EventArgs e)
+        {
+            if (WindowState == WindowState.Minimized)
+                return;
+
+
+            Console.WriteLine("MainWindow deactivated ....");
+#if !UWP
+
+            // Enable touch screen when windows gets deactivated ...
+            if (Settings.Instance.DisableTouchScreenIfInForeground && TouchHelper.HasTouchscreen())
+                TouchHelper.SetTouchState(true);
+
+#endif
+        }
+
+        #endregion
     }
 
     #region Converters

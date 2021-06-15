@@ -1,6 +1,7 @@
 ﻿using ControlzEx.Theming;
 using SimpleJournal.Data;
 using SimpleJournal.Dialogs;
+using SimpleJournal.Helper;
 using SJFileAssoc;
 using System;
 using System.ComponentModel;
@@ -40,7 +41,6 @@ namespace SimpleJournal
 #if UWP
             btnSetFileAssocText.Text = string.Empty;
             btnSetFileAssocPoint.Text = string.Empty;
-            CheckBoxDisableTouchScreen.IsEnabled = false;
 #endif
         }
 
@@ -68,9 +68,13 @@ namespace SimpleJournal
             CheckBoxDisableTouchScreen.IsChecked = Settings.Instance.UseTouchScreenDisabling;
             chkScrollbarNatural.IsChecked = Settings.Instance.UseNaturalScrolling;
             CheckBoxActivateTouchButtons.IsChecked = Settings.Instance.ShowTouchButtonsInQuickAccessBar;
+            CheckBoxEnableTouchScreenWhenInBackground.IsChecked = Settings.Instance.DisableTouchScreenIfInForeground;
 
 #if UWP
-            CheckBoxActivateTouchButtons.Visibility = Visibility.Collapsed;
+            TabTouch.Visibility = Visibility.Collapsed;
+#else
+            // if (!TouchHelper.HasTouchscreen())
+            //   TabTouch.Visibility = Visibility.Collapsed;
 #endif
 
             // Apply background settings
@@ -411,6 +415,15 @@ namespace SimpleJournal
                 return;
 
             Settings.Instance.ShowTouchButtonsInQuickAccessBar = CheckBoxActivateTouchButtons.IsChecked.Value;
+            Settings.Instance.Save();
+        }
+ 
+        private void CheckBoxEnableTouchScreenWhenInBackground_Checked(object sender, RoutedEventArgs e)
+        {
+            if (editMode)
+                return;
+
+            Settings.Instance.DisableTouchScreenIfInForeground = CheckBoxDisableTouchScreen.IsChecked.Value;
             Settings.Instance.Save();
         }
     }
