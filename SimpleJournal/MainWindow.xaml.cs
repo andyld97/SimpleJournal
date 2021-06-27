@@ -3295,7 +3295,7 @@ namespace SimpleJournal
         {
             if (WindowState == WindowState.Minimized && Settings.Instance.DisableTouchScreenIfInForeground)
                 TouchHelper.SetTouchState(true);
-            else if (WindowState == WindowState.Maximized && Settings.Instance.DisableTouchScreenIfInForeground)
+            else if ((WindowState == WindowState.Normal || WindowState == WindowState.Maximized) && Settings.Instance.DisableTouchScreenIfInForeground)
                 TouchHelper.SetTouchState(false);
         }
 
