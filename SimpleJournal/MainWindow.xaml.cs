@@ -173,17 +173,6 @@ namespace SimpleJournal
             }
 #endif
 
-#if !UWP
-
-            if (Settings.Instance.UseTouchScreenDisabling && ProcessHelper.SimpleJournalProcessCount == 1)
-            {
-                // If there are more than one process, don't start it
-                TouchHelper.SetTouchState(false);
-            }
-
-#endif
-
-
             // Register file association
             if (!Settings.Instance.FirstStart)
             {
@@ -330,20 +319,6 @@ namespace SimpleJournal
             }
 
             ApplyBackground();
-
-            // Disable / Enable touch buttons
-
-#if !UWP
-            QuickAccessButtonTouchOff.Visibility = ((TouchHelper.HasTouchscreen() && Settings.Instance.ShowTouchButtonsInQuickAccessBar) ? Visibility.Visible : Visibility.Collapsed);
-            QuickAccessButtonTouchOn.Visibility = ((TouchHelper.HasTouchscreen() && Settings.Instance.ShowTouchButtonsInQuickAccessBar) ? Visibility.Visible : Visibility.Collapsed);
-            QuickAccessButtonTouchOff.IsChecked = TouchHelper.HasTouchscreen() && Settings.Instance.ShowTouchButtonsInQuickAccessBar;
-            QuickAccessButtonTouchOn.IsChecked = TouchHelper.HasTouchscreen() && Settings.Instance.ShowTouchButtonsInQuickAccessBar;
-#else
-            QuickAccessButtonTouchOff.IsChecked = false;
-            QuickAccessButtonTouchOn.IsChecked = false;
-            QuickAccessButtonTouchOff.Visibility = Visibility.Collapsed;
-            QuickAccessButtonTouchOn.Visibility = Visibility.Collapsed;
-#endif
         }
 
         private void DrawingCanvas_OnChangedDocumentState(bool value)
@@ -374,6 +349,16 @@ namespace SimpleJournal
 
             if (Settings.Instance.UseAutoSave)
                 ShowRecoverAutoBackupFileDialog();
+
+#if !UWP
+
+            if (Settings.Instance.UseTouchScreenDisabling && ProcessHelper.SimpleJournalProcessCount == 1)
+            {
+                // If there are more than one process, don't start it
+                TouchHelper.SetTouchState(false);
+            }
+
+#endif
         }
 
         private void IPages_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
@@ -1833,30 +1818,7 @@ namespace SimpleJournal
 
         private void DisableTouchScreenCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            TouchHelper.SetTouchState(false);
-        }
-
-        private void DisableTouchScreenCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
-        {
-#if UWP
-            e.CanExecute = false;
-#else
-            e.CanExecute = TouchHelper.HasTouchscreen(); 
-#endif
-        }
-
-        private void EnableTouchScreenCommand_Executed(object sender, ExecutedRoutedEventArgs e)
-        {
-            TouchHelper.SetTouchState(true);
-        }
-
-        private void EnableTouchScreenCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
-        {
-#if UWP
-            e.CanExecute = false;
-#else
-            e.CanExecute = TouchHelper.HasTouchscreen();
-#endif
+            //TouchHelper.SetTouchState(false);
         }
 
         private void SaveCommand_Executed(object sender, ExecutedRoutedEventArgs e)
@@ -3304,11 +3266,10 @@ namespace SimpleJournal
                return;
 
             Console.WriteLine("MainWindow activated ....");
-
 #if !UWP
 
             // Disable touch screen when window get reactivated ...
-            if (Settings.Instance.DisableTouchScreenIfInForeground && TouchHelper.HasTouchscreen())
+            if (Settings.Instance.DisableTouchScreenIfInForeground)
                 TouchHelper.SetTouchState(false);
 
 #endif
@@ -3324,7 +3285,7 @@ namespace SimpleJournal
 #if !UWP
 
             // Enable touch screen when windows gets deactivated ...
-            if (Settings.Instance.DisableTouchScreenIfInForeground && TouchHelper.HasTouchscreen())
+            if (Settings.Instance.DisableTouchScreenIfInForeground)
                 TouchHelper.SetTouchState(true);
 
 #endif

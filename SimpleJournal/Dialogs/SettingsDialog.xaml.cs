@@ -67,7 +67,6 @@ namespace SimpleJournal
             CheckBoxActivateGlowingBrush.IsChecked = Settings.Instance.ActivateGlowingBrush;
             CheckBoxDisableTouchScreen.IsChecked = Settings.Instance.UseTouchScreenDisabling;
             chkScrollbarNatural.IsChecked = Settings.Instance.UseNaturalScrolling;
-            CheckBoxActivateTouchButtons.IsChecked = Settings.Instance.ShowTouchButtonsInQuickAccessBar;
             CheckBoxEnableTouchScreenWhenInBackground.IsChecked = Settings.Instance.DisableTouchScreenIfInForeground;
 
 #if UWP
@@ -409,15 +408,6 @@ namespace SimpleJournal
             Settings.Instance.Save();
         }
 
-        private void CheckBoxActivateTouchButtons_Checked(object sender, RoutedEventArgs e)
-        {
-            if (editMode)
-                return;
-
-            Settings.Instance.ShowTouchButtonsInQuickAccessBar = CheckBoxActivateTouchButtons.IsChecked.Value;
-            Settings.Instance.Save();
-        }
- 
         private void CheckBoxEnableTouchScreenWhenInBackground_Checked(object sender, RoutedEventArgs e)
         {
             if (editMode)
