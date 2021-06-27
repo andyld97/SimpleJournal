@@ -3291,6 +3291,14 @@ namespace SimpleJournal
 #endif
         }
 
+        private void RibbonWindow_StateChanged(object sender, EventArgs e)
+        {
+            if (WindowState == WindowState.Minimized && Settings.Instance.DisableTouchScreenIfInForeground)
+                TouchHelper.SetTouchState(true);
+            else if (WindowState == WindowState.Maximized && Settings.Instance.DisableTouchScreenIfInForeground)
+                TouchHelper.SetTouchState(false);
+        }
+
         #endregion
     }
 
