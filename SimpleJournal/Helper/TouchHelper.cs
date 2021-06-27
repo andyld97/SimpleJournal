@@ -10,9 +10,11 @@ namespace SimpleJournal.Helper
         {
             try
             {
+#if !UWP
                 //Consts.TouchExecutable
                 string path = Consts.TouchExecutable; // @"C:\Users\andre\source\repos\andyld97\SimpleJournal\Touch\bin\Debug\Touch.exe";
                 System.Diagnostics.Process.Start(path, state ? Consts.SetTouchOn : Consts.SetTouchOff);
+#endif
             }
             catch (Exception)
             {
