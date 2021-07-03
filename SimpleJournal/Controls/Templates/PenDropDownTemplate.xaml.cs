@@ -8,7 +8,7 @@ namespace SimpleJournal.Controls.Templates
     /// </summary>
     public partial class PenDropDownTemplate : Templates.DropDownTemplate
     {
-        private readonly bool isTextMarker = false;
+        private bool isTextMarker = false;
 
         #region Events
         public delegate void onChangedColorAndSize(Color? c, int sizeIndex);
@@ -25,6 +25,7 @@ namespace SimpleJournal.Controls.Templates
 
         public void SetTextMarker()
         {
+            isTextMarker = true;
             PenSize.SetTextMarker();
         }
 
@@ -33,9 +34,9 @@ namespace SimpleJournal.Controls.Templates
             int index;
 
             if (isTextMarker)
-                index = (int)p.Size;
+                index = Consts.TextMarkerSizes.IndexOf(new Size(p.Width, p.Height));
             else
-                index = Consts.StrokeSizes.IndexOf(new Size(p.Size, p.Size));
+                index = Consts.StrokeSizes.IndexOf(new Size(p.Width, p.Height));
 
             PenSize.SetColor(p.FontColor.ToColor());
             PenSize.SetIndex(index);

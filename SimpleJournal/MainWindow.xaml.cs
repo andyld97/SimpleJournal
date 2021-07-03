@@ -267,8 +267,8 @@ namespace SimpleJournal
 
             // Apply first and selected pen
             CurrentDrawingAttributes.Color = currentPens[0].FontColor.ToColor();
-            CurrentDrawingAttributes.Width = currentPens[0].Size;
-            CurrentDrawingAttributes.Height = currentPens[0].Size;
+            CurrentDrawingAttributes.Width = currentPens[0].Width;
+            CurrentDrawingAttributes.Height = currentPens[0].Height;
             RefreshSizeBar();
             UpdateGlowingBrush();
 
@@ -842,7 +842,7 @@ namespace SimpleJournal
             penTemplates[3].LoadPen(currentPens[3]);
 
             textMarkerTemplate.SetTextMarker();
-            textMarkerTemplate.LoadPen(new Pen(Settings.Instance.TextMarkerColor, Consts.TextMarkerSizes.IndexOf(Settings.Instance.TextMarkerSize)));
+            textMarkerTemplate.LoadPen(new Pen(Settings.Instance.TextMarkerColor, Settings.Instance.TextMarkerSize.Width, Settings.Instance.TextMarkerSize.Height));
             textMarkerTemplate.OnChangedColorAndSize += BtnTextMarker_OnChanged;
             btnTextMarker.DropDown = textMarkerTemplate;
 
@@ -1169,7 +1169,7 @@ namespace SimpleJournal
                 // Initalize pens
                 for (int i = 0; i < currentPens.Length; i++)
                 {
-                    currentPens[i] = new Pen(Consts.PEN_COLORS[i], Consts.StrokeSizes[0].Height);
+                    currentPens[i] = new Pen(Consts.PEN_COLORS[i], Consts.StrokeSizes[0].Width, Consts.StrokeSizes[0].Height);
                 }
 
                 // Initalize text marker (reset)
@@ -1558,8 +1558,8 @@ namespace SimpleJournal
                 {
                     // Apply 
                     CurrentDrawingAttributes.Color = currentPens[SelectedPen].FontColor.ToColor();
-                    CurrentDrawingAttributes.Width = currentPens[SelectedPen].Size;
-                    CurrentDrawingAttributes.Height = currentPens[SelectedPen].Size;
+                    CurrentDrawingAttributes.Width = currentPens[SelectedPen].Width;
+                    CurrentDrawingAttributes.Height = currentPens[SelectedPen].Height;
                 }
 
             });
@@ -1582,9 +1582,10 @@ namespace SimpleJournal
 
             if (sizeIndex >= 0)
             {
-                currentPens[index].Size = Consts.StrokeSizes[sizeIndex].Width;
-                CurrentDrawingAttributes.Width = currentPens[index].Size;
-                CurrentDrawingAttributes.Height = currentPens[index].Size;
+                currentPens[index].Width = Consts.StrokeSizes[sizeIndex].Width;
+                currentPens[index].Height = Consts.StrokeSizes[sizeIndex].Height;
+                CurrentDrawingAttributes.Width = currentPens[index].Width;
+                CurrentDrawingAttributes.Height = currentPens[index].Height;
 
                 ApplyToAllCanvas(new Action<InkCanvas>((InkCanvas canvas) =>
                 {

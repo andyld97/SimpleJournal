@@ -9,15 +9,18 @@
 
         public Color FontColor { get; set; }
 
-        public double Size { get; set; }
+        public double Width { get; set; }
 
-        public Pen(Color fontColor, double size)
+        public double Height { get; set; }
+
+        public Pen(Color fontColor, double width, double height)
         {
             FontColor = fontColor;
-            Size = size;
+            Width = width;
+            Height = height;
         }
 
-        public Pen() : this(new Color(), Consts.StrokeSizes[0].Height)
+        public Pen() : this(new Color(), Consts.StrokeSizes[0].Width, Consts.StrokeSizes[0].Height)
         { }
 
         public static Pen[] Load()
@@ -25,7 +28,7 @@
             // Initalize pens
             Pen[] pens = new Pen[Consts.AMOUNT_PENS];
             for (int i = 0; i < Consts.AMOUNT_PENS; i++)
-                pens[i] = new Pen(Consts.PEN_COLORS[i], Consts.StrokeSizes[0].Height);
+                pens[i] = new Pen(Consts.PEN_COLORS[i], Consts.StrokeSizes[0].Width, Consts.StrokeSizes[1].Height);
 
             try
             {

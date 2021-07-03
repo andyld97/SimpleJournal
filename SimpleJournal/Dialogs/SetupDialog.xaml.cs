@@ -25,6 +25,7 @@ namespace SimpleJournal.Dialogs
         private readonly int currentlySelectedPen;
         private readonly PreviewCanvas[] previewCanvas;
         private readonly PenDropDownTemplate[] penTemplates = new PenDropDownTemplate[] { new PenDropDownTemplate(), new PenDropDownTemplate(), new PenDropDownTemplate(), new PenDropDownTemplate() };
+        private readonly PenDropDownTemplate textMarkerTemplate = new PenDropDownTemplate();
 
         public SetupDialog()
         {
@@ -39,17 +40,29 @@ namespace SimpleJournal.Dialogs
                 previewInputGesture
             };
 
+            btnTextMarker.DropDown = textMarkerTemplate;
+
+            textMarkerTemplate.SetTextMarker();
+            textMarkerTemplate.LoadPen(new Pen(Settings.Instance.TextMarkerColor, Settings.Instance.TextMarkerSize.Width, Settings.Instance.TextMarkerSize.Height));
+            textMarkerTemplate.OnChangedColorAndSize += TextMarkerTemplate_OnChangedColorAndSize;          
+            markerPath.Fill = new SolidColorBrush(Settings.Instance.TextMarkerColor.ToColor());
             previewCanvasTextMarker.DrawingAttributes.IsHighlighter = true;
 
             InitalizePens();
             isInitalized = true;
 
-            colPickerTextMarker.SelectedColor = Consts.TextMarkerColor;
-            cmbStrokeSizeTextMarker.SelectedIndex = 0;
 
             LoadSettings();
             InitalizePreviewCanvasTextMarker();
             InitalizePreviewInputGesture();
+        }
+
+        private void TextMarkerTemplate_OnChangedColorAndSize(System.Windows.Media.Color? c, int sizeIndex)
+        {
+            if (c.HasValue)
+                markerPath.Fill = new SolidColorBrush(c.Value);
+
+            // ToDo: Apply size index & apply color and size to DrawingAttributes of previewPensCanvas
         }
 
         private void InitalizePreviewInputGesture()
@@ -61,7 +74,7 @@ namespace SimpleJournal.Dialogs
 
         private void InitalizePreviewCanvasTextMarker()
         {
-            var size = Consts.TextMarkerSizes[cmbStrokeSizeTextMarker.SelectedIndex];
+            var size = Consts.TextMarkerSizes[0]; // ToDo: *** cmbStrokeSizeTextMarker.SelectedIndex];
 
             previewCanvasTextMarker.DrawingAttributes.StylusTip = System.Windows.Ink.StylusTip.Rectangle;
             previewCanvasTextMarker.DrawingAttributes.IsHighlighter = true;
@@ -148,7 +161,7 @@ namespace SimpleJournal.Dialogs
             pensControls[index].IsChecked = true;
             ignorePenClickedEvent = false;
 
-            var size = Consts.StrokeSizes[Consts.StrokeSizes.IndexOf(new Size(pens[index].Size, pens[index].Size))];
+            var size = Consts.StrokeSizes[Consts.StrokeSizes.IndexOf(new Size(pens[index].Width, pens[index].Height))];
 
             var currentDrawingAttributes = previewPensCanvas.DrawingAttributes;
             currentDrawingAttributes.Color = pens[index].FontColor.ToColor();
@@ -196,9 +209,10 @@ namespace SimpleJournal.Dialogs
 
             if (sizeIndex >= 0)
             {
-                pens[index].Size = Consts.StrokeSizes[sizeIndex].Width;
-                currentDrawingAttributes.Width = pens[index].Size;
-                currentDrawingAttributes.Height = pens[index].Size;
+                pens[index].Width = Consts.StrokeSizes[sizeIndex].Width;
+                pens[index].Height = Consts.StrokeSizes[sizeIndex].Height;
+                currentDrawingAttributes.Width = pens[index].Width;
+                currentDrawingAttributes.Height = pens[index].Height;
 
                 previewPensCanvas.DrawingAttributes = currentDrawingAttributes;
             }
@@ -266,8 +280,9 @@ namespace SimpleJournal.Dialogs
             }
 
             // Apply text marker attributes
-            Settings.Instance.TextMarkerColor = new Data.Color(colPickerTextMarker.SelectedColor.R, colPickerTextMarker.SelectedColor.G, colPickerTextMarker.SelectedColor.B);
-            Settings.Instance.TextMarkerSize = Consts.TextMarkerSizes[cmbStrokeSizeTextMarker.SelectedIndex];
+            // ToDo: ***
+            //Settings.Instance.TextMarkerColor = new Data.Color(colPickerTextMarker.SelectedColor.R, colPickerTextMarker.SelectedColor.G, colPickerTextMarker.SelectedColor.B);
+            //Settings.Instance.TextMarkerSize = Consts.TextMarkerSizes[cmbStrokeSizeTextMarker.SelectedIndex];
 
             //Settings.Instance.PaperFormat = Format.A4;
             Settings.Instance.PaperType = (PaperType)cmbFormat.SelectedIndex;
@@ -402,18 +417,6 @@ namespace SimpleJournal.Dialogs
             }
             pens[currentlySelectedPen].FontColor = new Data.Color(c.A, c.R, c.G, c.B);
             SavePenSettings();
-        }
-
-
-        private void CmbStrokeSizeTextMarker_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (isInitalized)
-            {
-                var size = Consts.TextMarkerSizes[cmbStrokeSizeTextMarker.SelectedIndex];
-                previewCanvasTextMarker.DrawingAttributes.StylusTip = System.Windows.Ink.StylusTip.Rectangle;
-                previewCanvasTextMarker.DrawingAttributes.Width = size.Height;
-                previewCanvasTextMarker.DrawingAttributes.Height = size.Width;
-            }
         }
 
         private void ColPickerTextMarker_ColorChanged(System.Windows.Media.Color c)

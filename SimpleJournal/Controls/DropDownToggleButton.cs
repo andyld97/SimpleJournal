@@ -178,6 +178,7 @@ namespace SimpleJournal.Controls
             isPressed = false;
             RefreshStyle();
         }
+
         #endregion
     }
 }

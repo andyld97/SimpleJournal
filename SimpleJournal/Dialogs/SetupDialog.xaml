@@ -118,7 +118,7 @@
                     </Border>
                 </StackPanel>
             </Grid>
-            <Grid x:Name="page5" Visibility="Visible">
+            <Grid x:Name="page5" Visibility="Collapsed">
                 <StackPanel>
                     <TextBlock Margin="5" FontSize="15" TextWrapping="Wrap">
                         <Run FontWeight="Bold" Text="{x:Static res:Resources.strSetupStep5}"/>
@@ -180,9 +180,8 @@
                         </Border>
                     </Grid>
                 </StackPanel>
-
             </Grid>
-            <Grid x:Name="page6" Visibility="Collapsed">
+            <Grid x:Name="page6" Visibility="Visible">
                 <StackPanel>
                     <TextBlock Margin="5" FontSize="15" TextWrapping="Wrap">
                         <Run FontWeight="Bold" Text="{x:Static res:Resources.strSetupStep6}"/>
@@ -190,7 +189,7 @@
                     <TextBlock Margin="5" FontSize="15" TextWrapping="Wrap" Text="{x:Static res:Resources.strSetupStep6Description}"/>
                     <Grid>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="60"/>
+                            <RowDefinition Height="70"/>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
 
@@ -199,64 +198,15 @@
                                 <SolidColorBrush Color="LightGray"/>
                             </Grid.Background>
 
-                            <StackPanel Orientation="Horizontal">
-                                <ComboBox Margin="5,0,0,0" Width="86" Height="48" SelectedIndex="0" VerticalContentAlignment="Center" x:Name="cmbStrokeSizeTextMarker" SelectionChanged="CmbStrokeSizeTextMarker_SelectionChanged"  ToolTip="Textmarkerbreite ändern" Visibility="Visible">
-                                    <ComboBox.Items>
-                                        <ComboBoxItem>
-                                            <StackPanel Width="64" Orientation="Horizontal" VerticalAlignment="Center">
-                                                <Grid Margin="0">
-                                                    <Rectangle Width="2" Height="5">
-                                                        <Rectangle.Fill>
-                                                            <SolidColorBrush Color="{Binding Path=SelectedColor,ElementName=colPickerTextMarker}"/>
-                                                        </Rectangle.Fill>
-                                                    </Rectangle>
-                                                </Grid>
-                                                <TextBlock Text="{x:Static res:Resources.strPenFine}" Margin="3,0,0,0" Foreground="Black" VerticalAlignment="Center"/>
-                                            </StackPanel>
-                                        </ComboBoxItem>
-                                        <ComboBoxItem>
-                                            <StackPanel Width="64" Orientation="Horizontal" VerticalAlignment="Center">
-                                                <Grid Margin="0">
-                                                    <Grid Margin="0">
-                                                        <Rectangle Width="2" Height="10">
-                                                            <Rectangle.Fill>
-                                                                <SolidColorBrush Color="{Binding Path=SelectedColor,ElementName=colPickerTextMarker}"/>
-                                                            </Rectangle.Fill>
-                                                        </Rectangle>
-                                                    </Grid>
-                                                </Grid>
-                                                <TextBlock Text="{x:Static res:Resources.strPenTiny}" Margin="3,0,0,0" Foreground="Black" VerticalAlignment="Center"/>
-                                            </StackPanel>
-                                        </ComboBoxItem>
-                                        <ComboBoxItem>
-                                            <StackPanel Width="64" Orientation="Horizontal" VerticalAlignment="Center">
-                                                <Grid Margin="0">
-                                                    <Rectangle Width="2" Height="15">
-                                                        <Rectangle.Fill>
-                                                            <SolidColorBrush Color="{Binding Path=SelectedColor,ElementName=colPickerTextMarker}"/>
-                                                        </Rectangle.Fill>
-                                                    </Rectangle>
-                                                </Grid>
-                                                <TextBlock Text="{x:Static res:Resources.strPenMidsize}" Margin="3,0,0,0" Foreground="Black" VerticalAlignment="Center"/>
-                                            </StackPanel>
-                                        </ComboBoxItem>
-                                        <ComboBoxItem>
-                                            <StackPanel Width="64" Orientation="Horizontal" VerticalAlignment="Center">
-                                                <Grid Margin="0">
-                                                    <Rectangle Width="2" Height="20">
-                                                        <Rectangle.Fill>
-                                                            <SolidColorBrush Color="{Binding Path=SelectedColor,ElementName=colPickerTextMarker}"/>
-                                                        </Rectangle.Fill>
-                                                    </Rectangle>
-                                                </Grid>
-                                                <TextBlock Text="{x:Static res:Resources.strPenLarge}" Margin="3,0,0,0" Foreground="Black" VerticalAlignment="Center"/>
-                                            </StackPanel>
-                                        </ComboBoxItem>
-                                    </ComboBox.Items>
-                                </ComboBox>
-                                <!-- ToDo: Use highlighter control-->
-                                <controls:ColorPicker Margin="5,0,0,0" Width="48" Height="48" ToolTip="{x:Static res:Resources.strChoosePenColor}" x:Name="colPickerTextMarker" ColorChanged="ColPickerTextMarker_ColorChanged"/>
-                            </StackPanel>
+                            <controls:DropDownToggleButton x:Name="btnTextMarker" IsToggleable="False" Header="{x:Static res:Resources.strHighlight}" HorizontalAlignment="Left" Margin="3">
+                                <controls:DropDownToggleButton.LargeIcon>
+                                    <Viewbox Width="32" Height="32">
+                                        <Canvas Width="24" Height="24">
+                                            <Path x:Name="markerPath" Data="{StaticResource Marker.PathData}" Fill="Black" />
+                                        </Canvas>
+                                    </Viewbox>
+                                </controls:DropDownToggleButton.LargeIcon>
+                            </controls:DropDownToggleButton>
                         </Grid>
                         <Border BorderBrush="Black" Grid.Column="1" Grid.Row="1" BorderThickness="2" Margin="0" Height="200">
                             <controls:PreviewCanvas x:Name="previewCanvasTextMarker" Height="200"/>
