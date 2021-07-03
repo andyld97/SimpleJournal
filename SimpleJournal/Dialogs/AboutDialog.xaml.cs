@@ -26,7 +26,7 @@ namespace SimpleJournal
             // Load changelog
             try
             {
-                txtChangelog.Navigate(string.Format(Consts.CHANGELOG_URL, Properties.Resources.strLang, Data.Settings.Instance.UseDarkMode ? 1 : 0));
+                txtChangelog.Navigate(string.Format(Consts.ChangelogUrl, Properties.Resources.strLang, Data.Settings.Instance.UseDarkMode ? 1 : 0));
             }
             catch (Exception)
             { }
@@ -43,7 +43,7 @@ namespace SimpleJournal
         {
             try
             {
-                string versionsJSON = await httpClient.GetStringAsync(Consts.VERSION_URL);
+                string versionsJSON = await httpClient.GetStringAsync(Consts.VersionUrl);
                 dynamic result = JsonConvert.DeserializeObject(versionsJSON);
 
                 string currentNormalVersion = result.current.normal;
@@ -98,7 +98,7 @@ namespace SimpleJournal
             string nameBase64 = Convert.ToBase64String(System.Text.Encoding.Default.GetBytes(name)).Replace("=", "µ");
             string mailBase64 = Convert.ToBase64String(System.Text.Encoding.Default.GetBytes(mail)).Replace("=", "µ");
             string contentBase64 = Convert.ToBase64String(System.Text.Encoding.Default.GetBytes(content)).Replace("=", "µ");
-            string url = string.Format(Consts.FEEDBACK_URL, nameBase64, mailBase64, contentBase64);
+            string url = string.Format(Consts.FeedbackUrl, nameBase64, mailBase64, contentBase64);
 
             try
             {

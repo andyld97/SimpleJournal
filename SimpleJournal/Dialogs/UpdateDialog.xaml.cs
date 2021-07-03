@@ -13,7 +13,7 @@ namespace SimpleJournal.Dialogs
         {
             InitializeComponent();
 
-            webChangelog.Navigate(string.Format(Consts.CHANGELOG_URL, Properties.Resources.strLang, Settings.Instance.UseDarkMode ? 1 : 0));
+            webChangelog.Navigate(string.Format(Consts.ChangelogUrl, Properties.Resources.strLang, Settings.Instance.UseDarkMode ? 1 : 0));
             txtVersion.Text = string.Format(Properties.Resources.strUpdateDialogVersionText, v.ToString(3));
         }
 
@@ -26,7 +26,7 @@ namespace SimpleJournal.Dialogs
         {
             try
             {
-                System.Diagnostics.Process.Start(Consts.DOWNLOAD_URL);
+                System.Diagnostics.Process.Start(Consts.DonwloadUrl);
                 DialogResult = true;
 
                 // Exit to make sure user can easily update without problems
@@ -34,7 +34,7 @@ namespace SimpleJournal.Dialogs
             }
             catch (Exception ex)
             {
-                string message = string.Format(Properties.Resources.strUpdateDialogFailedToOpenBrowserAutomatically, ex.Message, Consts.DOWNLOAD_URL, Consts.HOMEPAGE_URL);
+                string message = string.Format(Properties.Resources.strUpdateDialogFailedToOpenBrowserAutomatically, ex.Message, Consts.DonwloadUrl, Consts.HomePageUrl);
                 MessageBox.Show(this, message, Properties.Resources.strFailure, MessageBoxButton.OK, MessageBoxImage.Error);
             }             
         }

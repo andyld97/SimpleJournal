@@ -933,19 +933,19 @@ namespace SimpleJournal
                         {
                             case Settings.RulerMode.Dottet:
                                 {
-                                    line.StrokeDashArray = Consts.LINE_STROKE_DOTTET_DASH_ARRAY;
+                                    line.StrokeDashArray = Consts.LineStrokeDottetDashArray;
                                     line.StrokeDashCap = PenLineCap.Round;
                                 }
                                 break;
                             case Settings.RulerMode.Dashed:
                                 {
-                                    line.StrokeDashArray = Consts.LINE_STROKE_DASHED_DASH_ARRAY;
+                                    line.StrokeDashArray = Consts.LineStrokeDashedDashArray;
                                     line.StrokeDashCap = PenLineCap.Flat;
                                 }
                                 break;
                         }
 
-                        line.StrokeDashOffset = Consts.DEFAULT_LINE_STROKE_DASH_OFFSET;
+                        line.StrokeDashOffset = Consts.DefaultLineStrokeDashOffset;
                         line.Stroke = new SolidColorBrush(DefaultDrawingAttributes.Color);
                         line.StrokeThickness = DefaultDrawingAttributes.Height;
                     }
@@ -1040,9 +1040,9 @@ namespace SimpleJournal
                             case ShapeType.Trapeze:
                                 {
                                     polygon.Points.Add(new Point(0, h));
-                                    polygon.Points.Add(new Point(Consts.TRAPEZE_OFFSET, 0));
+                                    polygon.Points.Add(new Point(Consts.TrapezeOffset, 0));
                                     polygon.Points.Add(new Point(w, 0));
-                                    polygon.Points.Add(new Point(w - Consts.TRAPEZE_OFFSET, h));
+                                    polygon.Points.Add(new Point(w - Consts.TrapezeOffset, h));
                                 }
                                 break;
                         }

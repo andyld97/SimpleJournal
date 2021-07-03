@@ -45,7 +45,7 @@ namespace SimpleJournal.Dialogs
             cmbPens.SelectedIndex = 1;
             cmbPens.SelectedIndex = 0;
 
-            colPickerTextMarker.SelectedColor = Consts.TEXT_MARKER_COLOR;
+            colPickerTextMarker.SelectedColor = Consts.TextMarkerColor;
             cmbStrokeSizeTextMarker.SelectedIndex = 0;
 
             LoadSettings();

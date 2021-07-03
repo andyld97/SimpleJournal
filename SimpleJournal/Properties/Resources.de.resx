@@ -1670,7 +1670,7 @@ Hier möchte ich Ihnen noch ein paar wichtige Hinweise geben, die Ihnen helfen w
     <comment>*</comment>
   </data>
   <data name="strUseNaturalScrollingDescription" xml:space="preserve">
-    <value>Beim Scrollen per Ziehen/Schieben wird die natürliche Scrollrichtung verwendet</value>
+    <value>Beim Scrollen per Ziehen/Schieben wird die natürliche Scrollrichtung verwendet.</value>
     <comment>*</comment>
   </data>
   <data name="strUseOldChequeredPatternLine1" xml:space="preserve">
@@ -1678,7 +1678,7 @@ Hier möchte ich Ihnen noch ein paar wichtige Hinweise geben, die Ihnen helfen w
     <comment>SettingsWindow.xaml</comment>
   </data>
   <data name="strUseOldChequeredPatternLine2" xml:space="preserve">
-    <value>Das Verändern dieser Einstellung wirkt sich eventuell nicht auf das aktuell geladene Dokument aus</value>
+    <value>Das Verändern dieser Einstellung wirkt sich nicht auf das aktuell geladene Dokument aus.</value>
     <comment>SettingsWindow.xaml</comment>
   </data>
   <data name="strUseReplaceEllipsesWithCircles" xml:space="preserve">
@@ -1750,7 +1750,7 @@ Hier möchte ich Ihnen noch ein paar wichtige Hinweise geben, die Ihnen helfen w
     <comment>*</comment>
   </data>
   <data name="strWindowSize" xml:space="preserve">
-    <value>Fenstergröße:</value>
+    <value>Fenstergröße beim Start:</value>
     <comment>*</comment>
   </data>
   <data name="strWrite" xml:space="preserve">
@@ -1779,5 +1779,9 @@ Hier möchte ich Ihnen noch ein paar wichtige Hinweise geben, die Ihnen helfen w
   </data>
   <data name="strTouchScreen" xml:space="preserve">
     <value>Touchscreen</value>
+  </data>
+  <data name="strBackground" xml:space="preserve">
+    <value>Hintergrund:</value>
+    <comment>SettingsDialog.xaml</comment>
   </data>
 </root>

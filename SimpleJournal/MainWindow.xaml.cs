@@ -698,11 +698,11 @@ namespace SimpleJournal
                 {
                     HorizontalContentAlignment = HorizontalAlignment.Left,
                     VerticalContentAlignment = VerticalAlignment.Top,
-                    Height = Consts.SIDEBAR_LISTBOX_ITEM_HEIGHT
+                    Height = Consts.SidebarListBoxItemHeight
                 };
 
-                v.Width = Consts.SIDEBAR_LISTBOX_ITEM_VIEWBOX_SIZE;
-                v.Height = Consts.SIDEBAR_LISTBOX_ITEM_VIEWBOX_SIZE;
+                v.Width = Consts.SidebarListBoxItemViewboxSize;
+                v.Height = Consts.SidebarListBoxItemViewboxSize;
 
                 StackPanel panel = new StackPanel { Orientation = Orientation.Horizontal };
                 panel.Background = new SolidColorBrush(Colors.Transparent);
@@ -822,7 +822,7 @@ namespace SimpleJournal
                 currentTextMarkerAttributes.Color = new Settings().TextMarkerColor.ToColor(); //Consts.TEXT_MARKER_COLOR;
 
                 Settings.Instance.TextMarkerSize = Consts.TextMarkerSizes[0];
-                Settings.Instance.TextMarkerColor = new Data.Color(Consts.TEXT_MARKER_COLOR.A, Consts.TEXT_MARKER_COLOR.R, Consts.TEXT_MARKER_COLOR.G, Consts.TEXT_MARKER_COLOR.B);
+                Settings.Instance.TextMarkerColor = new Data.Color(Consts.TextMarkerColor.A, Consts.TextMarkerColor.R, Consts.TextMarkerColor.G, Consts.TextMarkerColor.B);
                 Settings.Instance.Save();
             }
             else
@@ -835,7 +835,7 @@ namespace SimpleJournal
 
             markerPath.Fill = new SolidColorBrush(currentTextMarkerAttributes.Color);
             markerPath.Stroke = Brushes.Black;
-            markerPath.StrokeThickness = Consts.MARKER_PATH_STROKE_THICKNESS;
+            markerPath.StrokeThickness = Consts.MarkerPathStrokeThickness;
 
             if (currentTool == Tools.TextMarker)
             {
@@ -1038,7 +1038,7 @@ namespace SimpleJournal
             ScrollViewer scrollViewer = mainScrollView;
             scrollViewer.ApplyTemplate();
             ScrollBar scrollBar = (ScrollBar)scrollViewer.Template.FindName("PART_VerticalScrollBar", scrollViewer);
-            scrollBar.Width = (Settings.Instance.EnlargeScrollbar ? Consts.SCROLLBAR_EXTENDED_WIDTH : Consts.SCROLLBAR_DEFAULT_WIDTH);
+            scrollBar.Width = (Settings.Instance.EnlargeScrollbar ? Consts.ScrollBarExtendedWidth : Consts.ScrollBarDefaultWidth);
         }
 
         private Page GeneratePage(PaperType? paperType = null)
@@ -1952,9 +1952,9 @@ namespace SimpleJournal
 
         private void ScrollToPage(int pTarget)
         {
-            double resultOffset = (pTarget == 0 ? 0 : pTarget * (new Chequered().Height * currentScaleFactor) + ((pTarget - 1) * Consts.SPACE_BETWEEN_SITES * currentScaleFactor));
+            double resultOffset = (pTarget == 0 ? 0 : pTarget * (new Chequered().Height * currentScaleFactor) + ((pTarget - 1) * Consts.SpaceBetweenPages * currentScaleFactor));
             if (pTarget != 0)
-                mainScrollView.ScrollToVerticalOffset(resultOffset + (Consts.SPACE_BETWEEN_SITES * currentScaleFactor));
+                mainScrollView.ScrollToVerticalOffset(resultOffset + (Consts.SpaceBetweenPages * currentScaleFactor));
             else
                 mainScrollView.ScrollToVerticalOffset(0.0);
         }
@@ -2017,8 +2017,8 @@ namespace SimpleJournal
             if (System.Windows.Clipboard.ContainsImage())
             {
                 var img = new Image { Source = System.Windows.Clipboard.GetImage() };
-                img.Width = Consts.INSERT_IMAGE_WIDTH;
-                img.Height = Consts.INSERT_IMAGE_HEIGHT;
+                img.Width = Consts.InsertImageWidth;
+                img.Height = Consts.InsertImageHeight;
 
                 InsertUIElement(img);
             }
@@ -2037,8 +2037,8 @@ namespace SimpleJournal
             {
                 Image image = new Image
                 {
-                    Width = Consts.INSERT_IMAGE_WIDTH,
-                    Height = Consts.INSERT_IMAGE_HEIGHT,
+                    Width = Consts.InsertImageWidth,
+                    Height = Consts.InsertImageHeight,
                     Source = new BitmapImage(new Uri(ofd.FileName, UriKind.Absolute))
                 };
 
@@ -2996,8 +2996,8 @@ namespace SimpleJournal
             if (result.HasValue && result.Value)
             {
                 var textblock = new TextBlock() { Text = dialog.Result, TextWrapping = System.Windows.TextWrapping.Wrap };
-                textblock.Width = Consts.INSERT_TEXT_WIDTH;
-                textblock.Height = Consts.INSERT_TEXT_HEIGHT;
+                textblock.Width = Consts.InsertTextWidth;
+                textblock.Height = Consts.InsertTextHeight;
 
                 InsertUIElement(textblock);
             }
@@ -3020,9 +3020,9 @@ namespace SimpleJournal
 
             var textblock = new TextBlock() { Text = toInsert, TextWrapping = System.Windows.TextWrapping.Wrap };
 
-            textblock.Width = Consts.INSERT_TEXT_WIDTH;
-            textblock.Height = Consts.INSERT_TEXT_HEIGHT;
-            textblock.FontSize = Consts.DEFAULT_TEXT_SIZE;
+            textblock.Width = Consts.InsertTextWidth;
+            textblock.Height = Consts.InsertTextHeight;
+            textblock.FontSize = Consts.DefaultTextSize;
 
             InsertUIElement(textblock);
         }
@@ -3215,7 +3215,7 @@ namespace SimpleJournal
         {
             if (Settings.Instance.PageBackground == Settings.Background.Default)
             {
-                mainScrollView.Background = Consts.DEFAULT_BACKGROUND_BRUSH;
+                mainScrollView.Background = Consts.DefaultBackground;
                 return;
             }
 
@@ -3225,7 +3225,7 @@ namespace SimpleJournal
 
                 switch (Settings.Instance.PageBackground)
                 {
-                    case Settings.Background.Default: mainScrollView.Background = Consts.DEFAULT_BACKGROUND_BRUSH; break;
+                    case Settings.Background.Default: mainScrollView.Background = Consts.DefaultBackground; break;
                     case Settings.Background.Blue: imageFileName = "blue"; break;
                     case Settings.Background.Sand: imageFileName = "sand"; break;
                     case Settings.Background.Wooden1: imageFileName = "wooden-1"; break;
@@ -3246,13 +3246,13 @@ namespace SimpleJournal
                         mainScrollView.Background = imageBrush;
                     }
                     else
-                        mainScrollView.Background = Consts.DEFAULT_BACKGROUND_BRUSH;
+                        mainScrollView.Background = Consts.DefaultBackground;
                 }
             }
             catch
             {
                 // fallback
-                mainScrollView.Background = Consts.DEFAULT_BACKGROUND_BRUSH;
+                mainScrollView.Background = Consts.DefaultBackground;
             }
         }
 

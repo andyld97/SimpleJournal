@@ -1,14 +1,12 @@
 ﻿using ControlzEx.Theming;
 using SimpleJournal.Data;
 using SimpleJournal.Dialogs;
-using SimpleJournal.Helper;
 using SJFileAssoc;
 using System;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
 
 namespace SimpleJournal
 {
@@ -49,7 +47,6 @@ namespace SimpleJournal
             editMode = true;
 
             chkPaperType.SelectedIndex = (int)Settings.Instance.PaperType;
-            chkScrollbar.IsChecked = Settings.Instance.EnlargeScrollbar;
 
             if (Settings.Instance.WindowState == WindowState.Maximized)
                 chkWindowMode.SelectedIndex = 2;
@@ -58,22 +55,12 @@ namespace SimpleJournal
             else if (Settings.Instance.WindowState == WindowState.Minimized)
                 chkWindowMode.SelectedIndex = 0;
 
-            chkDisplaySidebarAutomatically.IsChecked = Settings.Instance.DisplaySidebarAutomatically;
-            chkUseInputPreasure.IsChecked = Settings.Instance.UsePreasure;
-            useCircleCorrect.IsChecked = Settings.Instance.UseCircleCorrection;
-            useRotationCorrect.IsChecked = Settings.Instance.UseRotateCorrection;
-            CheckBoxOldPattern.IsChecked = Settings.Instance.UseOldChequeredPattern;
-            chkUseFitToCurve.IsChecked = Settings.Instance.UseFitToCurve;
             CheckBoxActivateGlowingBrush.IsChecked = Settings.Instance.ActivateGlowingBrush;
             CheckBoxDisableTouchScreen.IsChecked = Settings.Instance.UseTouchScreenDisabling;
-            chkScrollbarNatural.IsChecked = Settings.Instance.UseNaturalScrolling;
             CheckBoxEnableTouchScreenWhenInBackground.IsChecked = Settings.Instance.DisableTouchScreenIfInForeground;
 
 #if UWP
             TabTouch.Visibility = Visibility.Collapsed;
-#else
-            // if (!TouchHelper.HasTouchscreen())
-            //   TabTouch.Visibility = Visibility.Collapsed;
 #endif
 
             // Apply background settings
@@ -92,8 +79,6 @@ namespace SimpleJournal
             SelectTheme();
 
             NumericUpDownAutoSaveInteral.Value = Settings.Instance.AutoSaveIntervalMinutes;
-            CheckBoxUseAutoSave.IsChecked = Settings.Instance.UseAutoSave;                        
-
             editMode = false;
         }
 
@@ -110,13 +95,6 @@ namespace SimpleJournal
         {
             this.Close();
         }
-
-        private void txtScrollbar_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            if (e.LeftButton == MouseButtonState.Pressed)
-                chkScrollbar.IsChecked = !chkScrollbar.IsChecked;
-        }
-
         private void chkPaperType_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (editMode)
@@ -153,7 +131,7 @@ namespace SimpleJournal
             // Delete Pen.xml
             try
             {
-                System.IO.File.Delete(System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Pen.xml"));
+                System.IO.File.Delete(Consts.PenSettingsFilePath);
             }
             catch (Exception ex)
             {
@@ -164,56 +142,11 @@ namespace SimpleJournal
             MainWindow.W_INSTANCE.UpdatePenButtons(true);
         }
 
-        private void ChkUseInputPreasure_Checked(object sender, RoutedEventArgs e)
-        {
-            if (editMode)
-                return;
-
-            Settings.Instance.UsePreasure = chkUseInputPreasure.IsChecked.Value;
-            Settings.Instance.Save();
-        }
-
-        private void ChkDisplaySidebarAutomatically_Checked(object sender, RoutedEventArgs e)
-        {
-            if (editMode)
-                return;
-
-            Settings.Instance.DisplaySidebarAutomatically = chkDisplaySidebarAutomatically.IsChecked.Value;
-            Settings.Instance.Save();
-        }
-
-        private void ChkScrollbar_Checked_1(object sender, RoutedEventArgs e)
-        {
-            if (editMode)
-                return;
-
-            Settings.Instance.EnlargeScrollbar = chkScrollbar.IsChecked.Value;
-            Settings.Instance.Save();
-        }
-
         protected override void OnClosing(CancelEventArgs e)
         {
             base.OnClosing(e);
             // Notify Window2 that the settings changed
             MainWindow.W_INSTANCE.ApplySettings();
-        }
-
-        private void UseRotationCorrect_Checked(object sender, RoutedEventArgs e)
-        {
-            if (editMode)
-                return;
-
-            Settings.Instance.UseRotateCorrection = useRotationCorrect.IsChecked.Value;
-            Settings.Instance.Save();
-        }
-
-        private void UseCircleCorrect_Checked(object sender, RoutedEventArgs e)
-        {
-            if (editMode)
-                return;
-
-            Settings.Instance.UseCircleCorrection = useCircleCorrect.IsChecked.Value;
-            Settings.Instance.Save();
         }
 
         private void BtnResetRecentlyOpenedDocuments_Click(object sender, RoutedEventArgs e)
@@ -222,43 +155,12 @@ namespace SimpleJournal
             RecentlyOpenedDocuments.Save();
         }
 
-        private void CheckBoxOldPattern_Checked(object sender, RoutedEventArgs e)
-        {
-            if (editMode)
-                return;
-
-            Settings.Instance.UseOldChequeredPattern = CheckBoxOldPattern.IsChecked.Value;
-            Settings.Instance.Save();
-        }
-
         private void NumericUpDownAutoSaveInteral_OnChanged(int oldValue, int newValue)
         {
             if (editMode)
                 return;
 
             Settings.Instance.AutoSaveIntervalMinutes = newValue;
-            Settings.Instance.Save();
-        }
-
-        private void CheckBoxUseAutoSave_Checked(object sender, RoutedEventArgs e)
-        {
-            if (editMode)
-                return;
-
-            Settings.Instance.UseAutoSave = CheckBoxUseAutoSave.IsChecked.Value;
-            Settings.Instance.Save();
-        }
-
-
-        private void chkUseFitToCurve_Checked(object sender, RoutedEventArgs e)
-        {
-            if (editMode)
-                return;
-
-            if (DrawingCanvas.LastModifiedCanvas != null)
-                DrawingCanvas.LastModifiedCanvas.DefaultDrawingAttributes.FitToCurve = chkUseFitToCurve.IsChecked.Value;
-
-            Settings.Instance.UseFitToCurve = chkUseFitToCurve.IsChecked.Value;
             Settings.Instance.Save();
         }
 
@@ -399,15 +301,6 @@ namespace SimpleJournal
             Settings.Instance.Save();
         }
 
-        private void chkScrollbarNatural_Checked(object sender, RoutedEventArgs e)
-        {
-            if (editMode)
-                return;
-
-            Settings.Instance.UseNaturalScrolling = chkScrollbarNatural.IsChecked.Value;
-            Settings.Instance.Save();
-        }
-
         private void CheckBoxEnableTouchScreenWhenInBackground_Checked(object sender, RoutedEventArgs e)
         {
             if (editMode)
@@ -415,6 +308,12 @@ namespace SimpleJournal
 
             Settings.Instance.DisableTouchScreenIfInForeground = CheckBoxDisableTouchScreen.IsChecked.Value;
             Settings.Instance.Save();
+        }
+
+        private void SettingFitToCurve_OnSettingChanged(object value)
+        {
+            if (DrawingCanvas.LastModifiedCanvas != null)
+                DrawingCanvas.LastModifiedCanvas.DefaultDrawingAttributes.FitToCurve = (bool)value;
         }
     }
 }
