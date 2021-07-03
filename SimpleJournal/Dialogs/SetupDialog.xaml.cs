@@ -1,5 +1,6 @@
 ﻿using SimpleJournal.Controls;
 using SimpleJournal.Data;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -14,14 +15,14 @@ namespace SimpleJournal.Dialogs
     /// </summary>
     public partial class SetupDialog : Window
     {
-        private readonly bool isInitalized = false;
-        private int currentPage = 0;
-        private bool clickedOnExit = false;
+        private readonly bool isInitalized;
+        private int currentPage;
+        private bool clickedOnExit;
 
-        public Grid[] pagesArr = null;
+        public Grid[] pagesArr;
         public Data.Pen[] pens = new Data.Pen[Consts.AMOUNT_PENS];
-        private int currentlySelectedPen = 0;
-        private readonly PreviewCanvas[] previewCanvas = null;
+        private int currentlySelectedPen;
+        private readonly PreviewCanvas[] previewCanvas;
 
         public SetupDialog()
         {
@@ -231,7 +232,7 @@ namespace SimpleJournal.Dialogs
                 MainWindow.W_INSTANCE.ApplySettings();
 
                 clickedOnExit = true;
-                this.Close();
+                Close();
             }
 
             CurrentPage++;
@@ -342,14 +343,7 @@ namespace SimpleJournal.Dialogs
 
         private void LnkHelp_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                System.Diagnostics.Process.Start("https://code-a-software.net/simplejournal/index.php?page=help");
-            }
-            catch
-            {
-
-            }
+            GeneralHelper.OpenUri(new Uri(Consts.HelpUrl));
         }
 
         private void cmbDarkMode_SelectionChanged(object sender, SelectionChangedEventArgs e)

@@ -103,7 +103,7 @@ namespace SimpleJournal.Controls
             if (value is bool b && b)
                 return new Thickness(5);
 
-            return new Thickness(5, 2, 5, 5); 
+            return new Thickness(5, 2, 5, 5);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

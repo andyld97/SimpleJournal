@@ -10,11 +10,11 @@ namespace SimpleJournal.Controls
     /// </summary>
     public partial class PreviewCanvas : UserControl
     {
-        private DrawingCanvas currentCanvas = null;
+        private DrawingCanvas currentCanvas;
         private PaperType currentPaperType = PaperType.Blanco;
         private readonly DrawingAttributes attributes = new DrawingAttributes();
-        private DrawingAttributes old = null;
-        private bool writing = false;
+        private DrawingAttributes old;
+        private bool writing;
         private bool enabledWriting;
 
         /// <summary>
@@ -94,6 +94,7 @@ namespace SimpleJournal.Controls
         {
             if (currentCanvas != null)
             {
+                // ToDo: Clear all but do not remove the text to test the text-marker!
                 currentCanvas.Children.ClearAll(currentCanvas);
                 currentCanvas.Strokes = new StrokeCollection();
             }
