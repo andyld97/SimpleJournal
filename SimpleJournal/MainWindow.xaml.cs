@@ -130,7 +130,7 @@ namespace SimpleJournal
             isInitalized = false;
             InitializeComponent();
 
-            var dpi =  VisualTreeHelper.GetDpi(this);
+            var dpi = VisualTreeHelper.GetDpi(this);
             if (dpi.PixelsPerInchX == 96 && WpfScreen.Primary.DeviceBounds.Width >= 1920 && WpfScreen.Primary.DeviceBounds.Height >= 1080)
                 WindowStartupLocation = WindowStartupLocation.CenterScreen;
 
@@ -255,29 +255,7 @@ namespace SimpleJournal
             // Apply default zoom factor
             ZoomByScale(Settings.Instance.Zoom / 100.0);
 
-            // Initalize pens
-            for (int i = 0; i < currentPens.Length; i++)
-            {
-                currentPens[i] = new Pen(Consts.PEN_COLORS[i], Consts.StrokeSizes[0].Height);
-            }
-
-            try
-            {
-                if (System.IO.File.Exists(Consts.PenSettingsFilePath))
-                {
-                    var result = Serialization.Serialization.Read<Pen[]>(Consts.PenSettingsFilePath, Serialization.Serialization.Mode.Normal);
-                    if (result != null)
-                        currentPens = result;
-                }
-                else
-                {
-                    SavePenSettings();
-                }
-            }
-            catch
-            {
-                // Do something?
-            }
+            currentPens = Data.Pen.Instance;
 
             // Apply pens to gui
             UpdatePenButtons();
@@ -470,7 +448,7 @@ namespace SimpleJournal
                 backupName = $"Backup {ProcessHelper.CurrentProcID} - ";
             backupName += $"{DateTime.Now.ToString(Properties.Resources.strAutoSaveDateTimeFileFormat)}.journal";
 
-            string path = System.IO.Path.Combine(Consts.AutoSaveDirectory, backupName);     
+            string path = System.IO.Path.Combine(Consts.AutoSaveDirectory, backupName);
             bool result = SaveJournal(path, true);
             if (!result)
             {
@@ -524,7 +502,7 @@ namespace SimpleJournal
 
             // Only the last instance can set the value
             if (onClosing && ProcessHelper.SimpleJournalProcessCount == 1)
-            {                
+            {
                 try
                 {
                     // Only delete empty directory (0 files and false (no recursive))
@@ -539,7 +517,7 @@ namespace SimpleJournal
         }
 
         #endregion
-        
+
         #region Error Handling
         private void Dispatcher_UnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
         {
@@ -589,7 +567,7 @@ namespace SimpleJournal
                             if (can.Children.Count > 0)
                             {
                                 can.Select(new UIElement[] { can.Children.First() });
-                                DrawingCanvas_ChildElementsSelected(DrawingCanvas.LastModifiedCanvas.GetSelectedElements().ToArray());                             
+                                DrawingCanvas_ChildElementsSelected(DrawingCanvas.LastModifiedCanvas.GetSelectedElements().ToArray());
                                 pnlSidebar.Visibility = Visibility.Visible;
                             }
                             else
@@ -620,7 +598,7 @@ namespace SimpleJournal
         public bool IsSideBarVisible => pnlSidebar.IsVisible;
 
         private void DrawingCanvas_ChildElementsSelected(UIElement[] elements)
-        { 
+        {
             if (preventSelection || (!Settings.Instance.DisplaySidebarAutomatically && !forceOpenSidebar))
                 return;
 
@@ -808,7 +786,7 @@ namespace SimpleJournal
         }
 
         #endregion
-        
+
         #region Private Methods
 
         private void UpdateTextMarkerAttributes(bool reset = false)
@@ -885,7 +863,7 @@ namespace SimpleJournal
             btnInsertPlot.DropDown = plotDropDownTemplate;
             plotDropDownTemplate.OnPlotModeChanged += PlotDropDownTemplate_OnPlotModeChanged;
             addPageDropDownTemplate.AddPage += AddPageDropDownTemplate_AddPage;
-            
+
             // polygonDropDownTemplate.OnChanged ...
         }
 
@@ -953,7 +931,7 @@ namespace SimpleJournal
                 }
                 DrawingAttributes newAttr = st.DrawingAttributes.Clone();
 
-                changedActions.Add(new StrokesChangedAction(st, old, newAttr));       
+                changedActions.Add(new StrokesChangedAction(st, old, newAttr));
             }
 
             // Add line/shape actions
@@ -1184,7 +1162,7 @@ namespace SimpleJournal
         }
 
         // Muste be public for accessing via singleton from the settings
-        public void UpdatePenButtons(bool reset = false)
+        public void UpdatePenButtons(Pen[] pens = null, bool reset = false)
         {
             if (reset)
             {
@@ -1197,7 +1175,18 @@ namespace SimpleJournal
                 // Initalize text marker (reset)
                 UpdateTextMarkerAttributes(true);
             }
-           
+
+            // Save applied values to make sure they are persisted
+            if (pens == null)
+                Pen.Instance = currentPens;
+            else
+            {
+                currentPens = pens;
+                Pen.Instance = pens;
+            }
+
+            Pen.Save();
+
             Path[] pathes = new Path[] { pathPen1, pathPen2, pathPen3, pathPen4 };
             for (int i = 0; i < currentPens.Length; i++)
             {
@@ -1206,10 +1195,7 @@ namespace SimpleJournal
                 currentPath.Fill = new SolidColorBrush(currentPens[i].FontColor.ToColor());
                 currentPath.Stroke = Brushes.Black;
                 currentPath.StrokeThickness = 0.4;
-            }
-
-            // Save applied values to make sure they are persisted
-            SavePenSettings();
+            }        
 
             if (reset && (currentTool == Tools.Pencil1 || currentTool == Tools.Pencil2 || currentTool == Tools.Pencil3 || currentTool == Tools.Pencil4))
             {
@@ -1257,18 +1243,6 @@ namespace SimpleJournal
             catch
             {
                 // just to be sure
-            }
-        }
-
-        private void SavePenSettings()
-        {
-            try
-            {
-                Serialization.Serialization.Save<Pen[]>(Consts.PenSettingsFilePath, currentPens, Serialization.Serialization.Mode.Normal);
-            }
-            catch
-            {
-
             }
         }
 
@@ -1405,7 +1379,7 @@ namespace SimpleJournal
             CurrentDrawingAttributes.IgnorePressure = !Settings.Instance.UsePreasure;
             CurrentDrawingAttributes.FitToCurve = Settings.Instance.UseFitToCurve;
 
-            UpdatePenButtons(false);
+            UpdatePenButtons();
 
             // Refresh Text marker
             UpdateTextMarkerAttributes();

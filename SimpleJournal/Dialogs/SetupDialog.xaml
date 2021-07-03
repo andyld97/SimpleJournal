@@ -124,15 +124,9 @@
                         <Run FontWeight="Bold" Text="{x:Static res:Resources.strSetupStep5}"/>
                     </TextBlock>
                     <TextBlock Margin="5" FontSize="15" TextWrapping="Wrap" Text="{x:Static res:Resources.strSetupStep5Description}"/>
-                    <Fluent:ComboBox IsEditable="False" x:Name="cmbPens" SelectionChanged="CmbPens_SelectionChanged" SelectedIndex="0" Margin="0,5,5,5" Padding="4">
-                        <TextBlock Text="{x:Static res:Resources.strPen1}"/>
-                        <TextBlock Text="{x:Static res:Resources.strPen2}"/>
-                        <TextBlock Text="{x:Static res:Resources.strPen3}"/>
-                        <TextBlock Text="{x:Static res:Resources.strPen4}"/>
-                    </Fluent:ComboBox>
                     <Grid>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="60"/>
+                            <RowDefinition Height="90"/>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
 
@@ -142,77 +136,45 @@
                             </Grid.Background>
 
                             <StackPanel Orientation="Horizontal">
-                                <ComboBox Margin="5,0,0,0" Width="86" Height="48" SelectedIndex="0" VerticalContentAlignment="Center" x:Name="cmbStrokeSize" SelectionChanged="CmbStrokeSize_SelectionChanged" ToolTip="Stiftbreite ändern">
-                                    <ComboBox.Resources>
-                                        <Style TargetType="{x:Type TextBlock}">
-                                            <Setter Property="Foreground" Value="Black" />
-                                        </Style>
-                                    </ComboBox.Resources>
-                                    <ComboBox.Items>
-                                        <ComboBoxItem>
-                                            <StackPanel Width="64" Orientation="Horizontal" VerticalAlignment="Center">
-                                                <Grid Margin="2">
-                                                    <Ellipse Width="2" Height="2">
-                                                        <Ellipse.Fill>
-                                                            <SolidColorBrush Color="{Binding Path=SelectedColor,ElementName=colorPicker}"/>
-                                                        </Ellipse.Fill>
-                                                    </Ellipse>
-                                                </Grid>
-                                                <TextBlock Text="{x:Static res:Resources.strPenDefault}" Margin="3,0,0,0" VerticalAlignment="Center"/>
-                                            </StackPanel>
-                                        </ComboBoxItem>
-                                        <ComboBoxItem>
-                                            <StackPanel Width="64" Orientation="Horizontal" VerticalAlignment="Center">
-                                                <Grid Margin="2">
-                                                    <Ellipse Width="2" Height="2">
-                                                        <Ellipse.Fill>
-                                                            <SolidColorBrush Color="{Binding Path=SelectedColor,ElementName=colorPicker}"/>
-                                                        </Ellipse.Fill>
-                                                    </Ellipse>
-                                                </Grid>
-                                                <TextBlock Text="{x:Static res:Resources.strPenFine}" Margin="3,0,0,0" VerticalAlignment="Center"/>
-                                            </StackPanel>
-                                        </ComboBoxItem>
-                                        <ComboBoxItem>
-                                            <StackPanel Width="64" Orientation="Horizontal" VerticalAlignment="Center">
-                                                <Grid Margin="2">
-                                                    <Ellipse Width="3" Height="3">
-                                                        <Ellipse.Fill>
-                                                            <SolidColorBrush Color="{Binding Path=SelectedColor,ElementName=colorPicker}"/>
-                                                        </Ellipse.Fill>
-                                                    </Ellipse>
-                                                </Grid>
-                                                <TextBlock Text="{x:Static res:Resources.strPenTiny}" Margin="3,0,0,0" VerticalAlignment="Center"/>
-                                            </StackPanel>
-                                        </ComboBoxItem>
-                                        <ComboBoxItem>
-                                            <StackPanel Width="64" Orientation="Horizontal" VerticalAlignment="Center">
-                                                <Grid Margin="2">
-                                                    <Ellipse Width="6" Height="6">
-                                                        <Ellipse.Fill>
-                                                            <SolidColorBrush Color="{Binding Path=SelectedColor,ElementName=colorPicker}"/>
-                                                        </Ellipse.Fill>
-                                                    </Ellipse>
-                                                </Grid>
-                                                <TextBlock Text="{x:Static res:Resources.strPenMidsize}" Margin="3,0,0,0" VerticalAlignment="Center"/>
-                                            </StackPanel>
-                                        </ComboBoxItem>
-                                        <ComboBoxItem>
-                                            <StackPanel Width="64" Orientation="Horizontal" VerticalAlignment="Center">
-                                                <Grid Margin="2">
-                                                    <Ellipse Width="9" Height="9">
-                                                        <Ellipse.Fill>
-                                                            <SolidColorBrush Color="{Binding Path=SelectedColor,ElementName=colorPicker}"/>
-                                                        </Ellipse.Fill>
-                                                    </Ellipse>
-                                                </Grid>
-                                                <TextBlock Text="{x:Static res:Resources.strPenLarge}" Margin="3,0,0,0" VerticalAlignment="Center"/>
-                                            </StackPanel>
-                                        </ComboBoxItem>
-                                    </ComboBox.Items>
-                                </ComboBox>
+
                                 <!-- ToDo: Use Pen Controls-->
-                                <controls:ColorPicker Margin="5,0,0,0" Width="48" Height="48" ToolTip="Stiftfarbe auswählen" x:Name="colorPicker" ColorChanged="ColorPicker_ColorChanged"/>
+                                <!-- ToDo: Put all pathes in resource file -->
+                                <controls:DropDownToggleButton x:Name="btnPen1" Margin="3" IsChecked="True" Click="btnPen1_Click" Header="1">
+                                    <controls:DropDownToggleButton.LargeIcon>
+                                        <Viewbox Width="32" Height="32">
+                                            <Canvas Width="24" Height="24">
+                                                <Path x:Name="pathPen1" Data="M20.71,7.04C20.37,7.38 20.04,7.71 20.03,8.04C20,8.36 20.34,8.69 20.66,9C21.14,9.5 21.61,9.95 21.59,10.44C21.57,10.93 21.06,11.44 20.55,11.94L16.42,16.08L15,14.66L19.25,10.42L18.29,9.46L16.87,10.87L13.12,7.12L16.96,3.29C17.35,2.9 18,2.9 18.37,3.29L20.71,5.63C21.1,6 21.1,6.65 20.71,7.04M3,17.25L12.56,7.68L16.31,11.43L6.75,21H3V17.25Z"  />
+                                            </Canvas>
+                                        </Viewbox>
+                                    </controls:DropDownToggleButton.LargeIcon>
+                                </controls:DropDownToggleButton>
+                                <controls:DropDownToggleButton x:Name="btnPen2" Margin="3" IsChecked="False" Click="btnPen2_Click" Header="2">
+                                    <controls:DropDownToggleButton.LargeIcon>
+                                        <Viewbox Width="32" Height="32">
+                                            <Canvas Width="24" Height="24">
+                                                <Path x:Name="pathPen2" Data="M20.71,7.04C20.37,7.38 20.04,7.71 20.03,8.04C20,8.36 20.34,8.69 20.66,9C21.14,9.5 21.61,9.95 21.59,10.44C21.57,10.93 21.06,11.44 20.55,11.94L16.42,16.08L15,14.66L19.25,10.42L18.29,9.46L16.87,10.87L13.12,7.12L16.96,3.29C17.35,2.9 18,2.9 18.37,3.29L20.71,5.63C21.1,6 21.1,6.65 20.71,7.04M3,17.25L12.56,7.68L16.31,11.43L6.75,21H3V17.25Z"  />
+                                            </Canvas>
+                                        </Viewbox>
+                                    </controls:DropDownToggleButton.LargeIcon>
+                                </controls:DropDownToggleButton>
+                                <controls:DropDownToggleButton x:Name="btnPen3" Margin="3" IsChecked="False" Click="btnPen3_Click" Header="3">
+                                    <controls:DropDownToggleButton.LargeIcon>
+                                        <Viewbox Width="32" Height="32">
+                                            <Canvas Width="24" Height="24">
+                                                <Path x:Name="pathPen3" Data="M20.71,7.04C20.37,7.38 20.04,7.71 20.03,8.04C20,8.36 20.34,8.69 20.66,9C21.14,9.5 21.61,9.95 21.59,10.44C21.57,10.93 21.06,11.44 20.55,11.94L16.42,16.08L15,14.66L19.25,10.42L18.29,9.46L16.87,10.87L13.12,7.12L16.96,3.29C17.35,2.9 18,2.9 18.37,3.29L20.71,5.63C21.1,6 21.1,6.65 20.71,7.04M3,17.25L12.56,7.68L16.31,11.43L6.75,21H3V17.25Z"  />
+                                            </Canvas>
+                                        </Viewbox>
+                                    </controls:DropDownToggleButton.LargeIcon>
+                                </controls:DropDownToggleButton>
+                                <controls:DropDownToggleButton x:Name="btnPen4" Margin="3" IsChecked="False" Click="btnPen4_Click" Header="4">
+                                    <controls:DropDownToggleButton.LargeIcon>
+                                        <Viewbox Width="32" Height="32">
+                                            <Canvas Width="24" Height="24">
+                                                <Path x:Name="pathPen4" Data="M20.71,7.04C20.37,7.38 20.04,7.71 20.03,8.04C20,8.36 20.34,8.69 20.66,9C21.14,9.5 21.61,9.95 21.59,10.44C21.57,10.93 21.06,11.44 20.55,11.94L16.42,16.08L15,14.66L19.25,10.42L18.29,9.46L16.87,10.87L13.12,7.12L16.96,3.29C17.35,2.9 18,2.9 18.37,3.29L20.71,5.63C21.1,6 21.1,6.65 20.71,7.04M3,17.25L12.56,7.68L16.31,11.43L6.75,21H3V17.25Z"  />
+                                            </Canvas>
+                                        </Viewbox>
+                                    </controls:DropDownToggleButton.LargeIcon>
+                                </controls:DropDownToggleButton>
                             </StackPanel>
                         </Grid>
 
