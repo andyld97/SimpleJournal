@@ -15,7 +15,7 @@ namespace SimpleJournal
     /// </summary>
     public partial class SettingsDialog : Window, INotifyPropertyChanged
     {
-        private bool editMode = false;
+        private bool editMode;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -56,8 +56,6 @@ namespace SimpleJournal
                 chkWindowMode.SelectedIndex = 0;
 
             CheckBoxActivateGlowingBrush.IsChecked = Settings.Instance.ActivateGlowingBrush;
-            CheckBoxDisableTouchScreen.IsChecked = Settings.Instance.UseTouchScreenDisabling;
-            CheckBoxEnableTouchScreenWhenInBackground.IsChecked = Settings.Instance.DisableTouchScreenIfInForeground;
 
 #if UWP
             TabTouch.Visibility = Visibility.Collapsed;
@@ -235,15 +233,6 @@ namespace SimpleJournal
             UpdateThemeSettings();
         }
 
-        private void CheckBoxDisableTouchScreen_Checked(object sender, RoutedEventArgs e)
-        {
-            if (editMode)
-                return;
-
-            Settings.Instance.UseTouchScreenDisabling = CheckBoxDisableTouchScreen.IsChecked.Value;
-            Settings.Instance.Save();
-        }
-
         private void btnSetFileAssoc_Click(object sender, RoutedEventArgs e)
         {
             FileAssociations.EnsureAssociationsSet();
@@ -298,15 +287,6 @@ namespace SimpleJournal
                 return;
 
             Settings.Instance.CustomBackgroundImagePath = TextCustomImagePath.Text;
-            Settings.Instance.Save();
-        }
-
-        private void CheckBoxEnableTouchScreenWhenInBackground_Checked(object sender, RoutedEventArgs e)
-        {
-            if (editMode)
-                return;
-
-            Settings.Instance.DisableTouchScreenIfInForeground = CheckBoxDisableTouchScreen.IsChecked.Value;
             Settings.Instance.Save();
         }
 

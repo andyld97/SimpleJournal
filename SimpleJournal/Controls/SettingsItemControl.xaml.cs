@@ -31,7 +31,7 @@ namespace SimpleJournal.Controls
         public SettingsItemControl()
         {
             InitializeComponent();
-            DataContext = this;       
+            DataContext = this;
             Loaded += SettingsItemControl_Loaded;
         }
 
