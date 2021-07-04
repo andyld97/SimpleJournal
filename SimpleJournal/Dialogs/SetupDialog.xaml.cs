@@ -43,8 +43,8 @@ namespace SimpleJournal.Dialogs
 
             textMarkerTemplate.SetTextMarker();
             textMarkerTemplate.LoadPen(new Pen(Settings.Instance.TextMarkerColor, Settings.Instance.TextMarkerSize.Width, Settings.Instance.TextMarkerSize.Height));
-            textMarkerTemplate.OnChangedColorAndSize += TextMarkerTemplate_OnChangedColorAndSize;          
-            markerPath.Fill = new SolidColorBrush(Settings.Instance.TextMarkerColor.ToColor());            
+            textMarkerTemplate.OnChangedColorAndSize += TextMarkerTemplate_OnChangedColorAndSize;
+            markerPath.Fill = new SolidColorBrush(Settings.Instance.TextMarkerColor.ToColor());
 
             InitalizePens();
             isInitalized = true;
