@@ -44,11 +44,6 @@ namespace SimpleJournal
         }
         #endregion
 
-        #region Public Members        
-        public bool PreviewCircleCorrection = false;
-        public bool PreviewRotationCorrection = false;
-        #endregion
-
         #region Private Members
 
         private PolygonDropDownTemplate polygonDropDownTemplate = null;
@@ -116,6 +111,10 @@ namespace SimpleJournal
         public new ObservableCollection<UIElement> Children { get; } = new ObservableCollection<UIElement>();
 
         public bool IsInRulerMode { get; private set; } = false;
+
+        public bool PreviewCircleCorrection { get; set; } = false;
+
+        public bool PreviewRotationCorrection { get; set; } = false;
         #endregion
 
         #region Events

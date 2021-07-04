@@ -90,14 +90,22 @@ namespace SimpleJournal.Controls
             this.currentCanvas.Children.Add(element);
         }
 
-        private void BtnClear_Click(object sender, RoutedEventArgs e)
+        public void ClearCanvas()
         {
             if (currentCanvas != null)
             {
-                // ToDo: Clear all but do not remove the text to test the text-marker!
-                currentCanvas.Children.ClearAll(currentCanvas);
+                // Only remove childrens if this preview canvas is not used to highlighting.
+                // This is necessary to ensure that the text added to this canvas will not be removed if the user clicks on "Clear"
+                if (!DrawingAttributes.IsHighlighter)
+                    currentCanvas.Children.ClearAll(currentCanvas);
+
                 currentCanvas.Strokes = new StrokeCollection();
             }
+        }
+
+        private void BtnClear_Click(object sender, RoutedEventArgs e)
+        {
+            ClearCanvas();  
         }
 
         private void BtnWrite_Click(object sender, RoutedEventArgs e)

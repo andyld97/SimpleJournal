@@ -789,7 +789,7 @@ namespace SimpleJournal
 
         #region Private Methods
 
-        private void UpdateTextMarkerAttributes(bool reset = false)
+        public void UpdateTextMarkerAttributes(bool reset = false)
         {
             if (reset)
             {

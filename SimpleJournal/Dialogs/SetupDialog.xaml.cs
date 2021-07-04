@@ -22,7 +22,6 @@ namespace SimpleJournal.Dialogs
 
         public Grid[] pagesArr;
         public Data.Pen[] pens = new Data.Pen[Consts.AMOUNT_PENS];
-        private readonly int currentlySelectedPen;
         private readonly PreviewCanvas[] previewCanvas;
         private readonly PenDropDownTemplate[] penTemplates = new PenDropDownTemplate[] { new PenDropDownTemplate(), new PenDropDownTemplate(), new PenDropDownTemplate(), new PenDropDownTemplate() };
         private readonly PenDropDownTemplate textMarkerTemplate = new PenDropDownTemplate();
@@ -45,44 +44,62 @@ namespace SimpleJournal.Dialogs
             textMarkerTemplate.SetTextMarker();
             textMarkerTemplate.LoadPen(new Pen(Settings.Instance.TextMarkerColor, Settings.Instance.TextMarkerSize.Width, Settings.Instance.TextMarkerSize.Height));
             textMarkerTemplate.OnChangedColorAndSize += TextMarkerTemplate_OnChangedColorAndSize;          
-            markerPath.Fill = new SolidColorBrush(Settings.Instance.TextMarkerColor.ToColor());
-            previewCanvasTextMarker.DrawingAttributes.IsHighlighter = true;
+            markerPath.Fill = new SolidColorBrush(Settings.Instance.TextMarkerColor.ToColor());            
 
             InitalizePens();
             isInitalized = true;
-
 
             LoadSettings();
             InitalizePreviewCanvasTextMarker();
             InitalizePreviewInputGesture();
         }
 
+        #region Text Marker
+
         private void TextMarkerTemplate_OnChangedColorAndSize(System.Windows.Media.Color? c, int sizeIndex)
         {
+            // Apply size index & apply color and size to DrawingAttributes of previewCanvasTextMarker
             if (c.HasValue)
+            {
                 markerPath.Fill = new SolidColorBrush(c.Value);
+                previewCanvasTextMarker.DrawingAttributes.Color = c.Value;
+                Settings.Instance.TextMarkerColor = new Data.Color(c.Value);
+            }
 
-            // ToDo: Apply size index & apply color and size to DrawingAttributes of previewPensCanvas
+            if (sizeIndex >= 0)
+            {
+                var size = Consts.TextMarkerSizes[sizeIndex];
+                previewCanvasTextMarker.DrawingAttributes.Width = size.Height;
+                previewCanvasTextMarker.DrawingAttributes.Height = size.Width;
+
+                Settings.Instance.TextMarkerSize = size;
+            }
+
+            Settings.Instance.Save();
+            MainWindow.W_INSTANCE.UpdateTextMarkerAttributes();
         }
+
+        private void InitalizePreviewCanvasTextMarker()
+        {
+            var size = Settings.Instance.TextMarkerSize;
+
+            previewCanvasTextMarker.ClearCanvas();
+            previewCanvasTextMarker.DrawingAttributes.StylusTip = System.Windows.Ink.StylusTip.Rectangle;
+            previewCanvasTextMarker.DrawingAttributes.IsHighlighter = true;
+            previewCanvasTextMarker.DrawingAttributes.Width = size.Height;
+            previewCanvasTextMarker.DrawingAttributes.Height = size.Width;
+            previewCanvasTextMarker.DrawingAttributes.Color = Settings.Instance.TextMarkerColor.ToColor();
+            previewCanvasTextMarker.EnableWriting = true;
+            previewCanvasTextMarker.AddChild(new TextBlock() { Text = Properties.Resources.strTextToHightlight, FontSize = 18 });
+        }
+
+        #endregion
 
         private void InitalizePreviewInputGesture()
         {
             previewInputGesture.Canvas.SetFreeHandDrawingMode();
             previewInputGesture.Canvas.PreviewCircleCorrection = (cmbCircleCorrection.SelectedIndex == 0);
             previewInputGesture.Canvas.PreviewRotationCorrection = (cmbRotationCorrection.SelectedIndex == 0);
-        }
-
-        private void InitalizePreviewCanvasTextMarker()
-        {
-            var size = Consts.TextMarkerSizes[0]; // ToDo: *** cmbStrokeSizeTextMarker.SelectedIndex];
-
-            previewCanvasTextMarker.DrawingAttributes.StylusTip = System.Windows.Ink.StylusTip.Rectangle;
-            previewCanvasTextMarker.DrawingAttributes.IsHighlighter = true;
-            previewCanvasTextMarker.DrawingAttributes.Width = size.Height;
-            previewCanvasTextMarker.DrawingAttributes.Height = size.Width;
-            previewCanvasTextMarker.DrawingAttributes.Color = Colors.Yellow;
-            previewCanvasTextMarker.EnableWriting = true;
-            previewCanvasTextMarker.AddChild(new TextBlock() { Text = Properties.Resources.strTextToHightlight, FontSize = 18 });
         }
 
         #region Pens
@@ -298,6 +315,8 @@ namespace SimpleJournal.Dialogs
         }
         #endregion
 
+        #region Navigation
+
         public int CurrentPage
         {
             get => currentPage;
@@ -377,6 +396,8 @@ namespace SimpleJournal.Dialogs
             CurrentPage++;
         }
 
+        #endregion
+
         private void CmbFormat_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (isInitalized)
@@ -407,21 +428,6 @@ namespace SimpleJournal.Dialogs
                 foreach (PreviewCanvas pc in previewCanvas)
                     pc.DrawingAttributes.FitToCurve = useFitToCurve;
             }
-        }
-
-        private void ColorPicker_ColorChanged(System.Windows.Media.Color c)
-        {
-            foreach (PreviewCanvas pc in previewCanvas)
-            {
-                pc.DrawingAttributes.Color = c;
-            }
-            pens[currentlySelectedPen].FontColor = new Data.Color(c.A, c.R, c.G, c.B);
-            SavePenSettings();
-        }
-
-        private void ColPickerTextMarker_ColorChanged(System.Windows.Media.Color c)
-        {
-            previewCanvasTextMarker.DrawingAttributes.Color = c;
         }
 
         private void CmbRotationCorrection_SelectionChanged(object sender, SelectionChangedEventArgs e)
