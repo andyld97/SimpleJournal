@@ -27,6 +27,6 @@
         Blanco,
         Chequeued,
         Ruled,
-        Dottet
+        Dotted
     }
 }

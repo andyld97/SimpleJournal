@@ -795,7 +795,7 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Dottet.
+        ///   Looks up a localized string similar to Dotted.
         /// </summary>
         public static string strDottet {
             get {

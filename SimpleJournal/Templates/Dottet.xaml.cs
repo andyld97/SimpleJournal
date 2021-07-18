@@ -15,7 +15,7 @@ namespace SimpleJournal.Templates
 
         public Format Format => Format.A4;
 
-        public PaperType Type => PaperType.Dottet;
+        public PaperType Type => PaperType.Dotted;
 
         public DrawingCanvas Canvas => canvas;
 

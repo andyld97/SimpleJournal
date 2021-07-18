@@ -1785,7 +1785,7 @@ Hier möchte ich Ihnen noch ein paar wichtige Hinweise geben, die Ihnen helfen w
     <comment>SettingsDialog.xaml</comment>
   </data>
   <data name="strDottet" xml:space="preserve">
-    <value>Punkte (Dottet)</value>
+    <value>Punkte (Dotted)</value>
     <comment>*</comment>
   </data>
 </root>
