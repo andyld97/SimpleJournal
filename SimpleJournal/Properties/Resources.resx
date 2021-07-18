@@ -1173,7 +1173,7 @@ Click on No to continue to receive this message!</value>
     <comment>MainWindow.xaml</comment>
   </data>
   <data name="strReleaseDate" xml:space="preserve">
-    <value>07/03/2021 4:10 PM</value>
+    <value>07/18/2021 4:04 PM</value>
     <comment>About.xaml</comment>
   </data>
   <data name="strRemove" xml:space="preserve">
@@ -1786,5 +1786,9 @@ Here I would like to give you some important hints, which will help you to handl
   <data name="strBackground" xml:space="preserve">
     <value>Background:</value>
     <comment>SettingsDialog.xaml</comment>
+  </data>
+  <data name="strDottet" xml:space="preserve">
+    <value>Dottet</value>
+    <comment>*</comment>
   </data>
 </root>

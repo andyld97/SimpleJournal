@@ -1,0 +1,31 @@
+﻿<Page x:Class="SimpleJournal.Templates.Dottet"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:SimpleJournal.Templates" xmlns:local1="clr-namespace:SimpleJournal"
+      mc:Ignorable="d" 
+      Height="29.7cm" Width="21cm"
+      Title="Dottet">
+    <Page.Resources>      
+        <DrawingBrush Stretch="None" TileMode="Tile" x:Key="DottetBrush" Viewport="0,0,40,40" ViewportUnits="Absolute">
+            <DrawingBrush.Drawing>
+                <GeometryDrawing>
+                    <GeometryDrawing.Geometry>
+                        <GeometryGroup>
+                            <EllipseGeometry RadiusX="1" RadiusY="1" />
+                        </GeometryGroup>
+                    </GeometryDrawing.Geometry>
+                    <GeometryDrawing.Pen>
+                        <Pen Thickness="4" Brush="Black" />
+                    </GeometryDrawing.Pen>
+                </GeometryDrawing>
+            </DrawingBrush.Drawing>
+        </DrawingBrush>
+    </Page.Resources>
+    <Grid>
+        <Border Background="White" UseLayoutRounding="True" SnapsToDevicePixels="True">
+            <local1:DrawingCanvas Background="{StaticResource DottetBrush}" x:Name="canvas" Height="29.7cm" Width="21cm"/>
+        </Border>
+    </Grid>
+</Page>

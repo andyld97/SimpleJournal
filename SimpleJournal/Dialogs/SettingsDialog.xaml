@@ -82,6 +82,7 @@
                                 <ComboBoxItem Content="{x:Static res:Resources.strPlain}"/>
                                 <ComboBoxItem Content="{x:Static res:Resources.strChequered}"/>
                                 <ComboBoxItem Content="{x:Static res:Resources.strRuled}"/>
+                                <ComboBoxItem Content="{x:Static res:Resources.strDottet}" />
                             </ComboBox.Items>
                         </Fluent:ComboBox>
                         <TextBlock Margin="0,5,0,0" Text="{x:Static res:Resources.strPaperSize}"/>

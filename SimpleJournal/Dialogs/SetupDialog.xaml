@@ -65,6 +65,7 @@
                         <TextBlock Text="{x:Static res:Resources.strPlain}"/>
                         <TextBlock Text="{x:Static res:Resources.strChequered}"/>
                         <TextBlock Text="{x:Static res:Resources.strRuled}"/>
+                        <TextBlock Text="{x:Static res:Resources.strDottet}"/>
                     </Fluent:ComboBox>
                     <TextBlock Margin="3" FontSize="15" Text="{x:Static res:Resources.strPaperSize}"/>
                     <Fluent:ComboBox IsEditable="False" Margin="0,4,4,4" Padding="4" HorizontalAlignment="Stretch" SelectedIndex="0">

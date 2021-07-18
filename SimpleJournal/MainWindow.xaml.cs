@@ -1033,7 +1033,9 @@ namespace SimpleJournal
                 case PaperType.Blanco: pageContent = new Blanco(); break;
                 case PaperType.Chequeued: pageContent = new Chequered(); break;
                 case PaperType.Ruled: pageContent = new Ruled(); break;
+                case PaperType.Dottet: pageContent = new Dottet(); break;
             }
+
             IPaper page = pageContent as IPaper;
             // Apply properties and events to the new canvas
             page.Canvas.EditingMode = currentkInkMode;

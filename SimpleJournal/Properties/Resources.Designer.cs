@@ -795,6 +795,15 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Dottet.
+        /// </summary>
+        public static string strDottet {
+            get {
+                return ResourceManager.GetString("strDottet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Draw.
         /// </summary>
         public static string strDraw {
@@ -2455,7 +2464,7 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 07/03/2021 4:10 PM.
+        ///   Looks up a localized string similar to 07/18/2021 4:04 PM.
         /// </summary>
         public static string strReleaseDate {
             get {
