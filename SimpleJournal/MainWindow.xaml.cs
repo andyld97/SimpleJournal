@@ -814,6 +814,7 @@ namespace SimpleJournal
             markerPath.Fill = new SolidColorBrush(currentTextMarkerAttributes.Color);
             markerPath.Stroke = Brushes.Black;
             markerPath.StrokeThickness = Consts.MarkerPathStrokeThickness;
+            textMarkerTemplate.LoadPen(new Pen(new Data.Color(currentTextMarkerAttributes.Color), Settings.Instance.TextMarkerSize.Width, Settings.Instance.TextMarkerSize.Height));
 
             if (currentTool == Tools.TextMarker)
             {
@@ -1187,6 +1188,11 @@ namespace SimpleJournal
 
             Pen.Save();
 
+            // Also load and refresh pens
+            for (int i = 0; i < Consts.AMOUNT_PENS; i++)
+                penTemplates[i].LoadPen(currentPens[i]);
+
+            // Refresh pathes displayed in the menu
             Path[] pathes = new Path[] { pathPen1, pathPen2, pathPen3, pathPen4 };
             for (int i = 0; i < currentPens.Length; i++)
             {
@@ -1195,14 +1201,24 @@ namespace SimpleJournal
                 currentPath.Fill = new SolidColorBrush(currentPens[i].FontColor.ToColor());
                 currentPath.Stroke = Brushes.Black;
                 currentPath.StrokeThickness = 0.4;
-            }        
+            }
 
-            if (reset && (currentTool == Tools.Pencil1 || currentTool == Tools.Pencil2 || currentTool == Tools.Pencil3 || currentTool == Tools.Pencil4))
+            // Also if currentTool is a selected pen or the text-marker the DrawingAttributes for all canvas needs to be updated!!!!
+            if (currentTool is Tools.Pencil1 or Tools.Pencil2 or Tools.Pencil3 or Tools.Pencil4)
             {
+                var pen = Pen.Instance[(int)currentTool - 1];
+                CurrentDrawingAttributes.Color = pen.FontColor.ToColor();
+                CurrentDrawingAttributes.Width = pen.Width;
+                CurrentDrawingAttributes.Height = pen.Height;
+                ApplyToAllCanvas(p => p.DefaultDrawingAttributes = CurrentDrawingAttributes);
+
                 UpdateDropDownButtons();
 
-                // In this case pen bar was resetted so we need to apply tool again to force canvas to apply to default pen
-                SwitchTool(Tools.Pencil1, true);
+                if (reset)
+                {
+                    // In this case pen bar was resetted so we need to apply tool again to force canvas to apply to default pen
+                    SwitchTool(Tools.Pencil1, true);
+                }
             }
         }
 
@@ -1714,7 +1730,7 @@ namespace SimpleJournal
 
             if (c != null)
             {
-                Settings.Instance.TextMarkerColor = new Data.Color(c.Value.A, c.Value.R, c.Value.G, c.Value.B);
+                Settings.Instance.TextMarkerColor = new Data.Color(c.Value);
                 Settings.Instance.Save();
                 currentTextMarkerAttributes.Color = c.Value;
             }

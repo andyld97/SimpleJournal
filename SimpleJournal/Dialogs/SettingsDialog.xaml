@@ -154,7 +154,7 @@
 
                                 <RadioButton x:Name="RbCustom" Margin="3,0,0,0" Checked="rb_Checked" GroupName="background" Content="{x:Static res:Resources.strSettingsBackgroundCustom}" />
 
-                                <Grid Margin="0,3,0,0" Visibility="{Binding ElementName=RbCustom, Path=IsChecked, Converter={StaticResource BooleanToVisibility}}">
+                                <Grid Margin="0,3,0,3" Visibility="{Binding ElementName=RbCustom, Path=IsChecked, Converter={StaticResource BooleanToVisibility}}">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*"/>
                                         <ColumnDefinition Width="Auto" />

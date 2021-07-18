@@ -8,7 +8,7 @@ namespace SimpleJournal.Controls.Templates
     /// </summary>
     public partial class PenDropDownTemplate : Templates.DropDownTemplate
     {
-        private bool isTextMarker = false;
+        private bool isTextMarker;
 
         #region Events
         public delegate void onChangedColorAndSize(Color? c, int sizeIndex);
@@ -18,7 +18,7 @@ namespace SimpleJournal.Controls.Templates
         #region Ctor
         public PenDropDownTemplate()
         {
-            InitializeComponent();        
+            InitializeComponent();
             colorPalette.OnColorChanged += ColorPalette_OnColorChanged;
         }
         #endregion
