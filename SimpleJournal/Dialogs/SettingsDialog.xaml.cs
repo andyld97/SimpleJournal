@@ -137,7 +137,7 @@ namespace SimpleJournal
             }
 
             // Notify main window to refresh pens
-            MainWindow.W_INSTANCE.UpdatePenButtons(true);
+            MainWindow.W_INSTANCE.UpdatePenButtons(reset: true);
         }
 
         protected override void OnClosing(CancelEventArgs e)

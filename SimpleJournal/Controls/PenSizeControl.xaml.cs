@@ -25,6 +25,10 @@ namespace SimpleJournal.Controls
 
         public void SetIndex(int index)
         {
+            // Prevent multiple selection
+            foreach (var btn in buttons)
+                btn.IsChecked = false;
+
             if (index != -1 && index < buttons.Length && IsToggleable)
                 buttons[index].IsChecked = true;
         }

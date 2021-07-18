@@ -19,8 +19,8 @@
             </Grid.Background>
             <TextBlock FontSize="14" Margin="5,0,0,0" Text="{x:Static res:Resources.strTestPreview}" VerticalAlignment="Center" Foreground="Black"/>
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right">
-                <Button x:Name="btnWrite" Content="{x:Static res:Resources.strWrite}" Margin="5" Width="80" Visibility="Collapsed" Click="BtnWrite_Click" />
-                <Button Content="{x:Static res:Resources.strClear}" Margin="0,0,15,0" Height="20" Width="80"  x:Name="btnClear" Click="BtnClear_Click"/>
+                <Button x:Name="btnWrite" Content="{x:Static res:Resources.strWrite}" FontWeight="Bold" Margin="5" Width="80" Visibility="Collapsed" Click="BtnWrite_Click" />
+                <Button Content="{x:Static res:Resources.strClear}" Margin="0,0,15,0" FontWeight="Bold" Height="20" Width="80"  x:Name="btnClear" Click="BtnClear_Click"/>
             </StackPanel>
         </Grid>
 

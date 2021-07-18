@@ -130,7 +130,7 @@ namespace SimpleJournal
             isInitalized = false;
             InitializeComponent();
 
-            var dpi =  VisualTreeHelper.GetDpi(this);
+            var dpi = VisualTreeHelper.GetDpi(this);
             if (dpi.PixelsPerInchX == 96 && WpfScreen.Primary.DeviceBounds.Width >= 1920 && WpfScreen.Primary.DeviceBounds.Height >= 1080)
                 WindowStartupLocation = WindowStartupLocation.CenterScreen;
 
@@ -255,29 +255,7 @@ namespace SimpleJournal
             // Apply default zoom factor
             ZoomByScale(Settings.Instance.Zoom / 100.0);
 
-            // Initalize pens
-            for (int i = 0; i < currentPens.Length; i++)
-            {
-                currentPens[i] = new Pen(Consts.PEN_COLORS[i], Consts.StrokeSizes[0].Height);
-            }
-
-            try
-            {
-                if (System.IO.File.Exists(Consts.PenSettingsFilePath))
-                {
-                    var result = Serialization.Serialization.Read<Pen[]>(Consts.PenSettingsFilePath, Serialization.Serialization.Mode.Normal);
-                    if (result != null)
-                        currentPens = result;
-                }
-                else
-                {
-                    SavePenSettings();
-                }
-            }
-            catch
-            {
-                // Do something?
-            }
+            currentPens = Data.Pen.Instance;
 
             // Apply pens to gui
             UpdatePenButtons();
@@ -289,8 +267,8 @@ namespace SimpleJournal
 
             // Apply first and selected pen
             CurrentDrawingAttributes.Color = currentPens[0].FontColor.ToColor();
-            CurrentDrawingAttributes.Width = currentPens[0].Size;
-            CurrentDrawingAttributes.Height = currentPens[0].Size;
+            CurrentDrawingAttributes.Width = currentPens[0].Width;
+            CurrentDrawingAttributes.Height = currentPens[0].Height;
             RefreshSizeBar();
             UpdateGlowingBrush();
 
@@ -470,7 +448,7 @@ namespace SimpleJournal
                 backupName = $"Backup {ProcessHelper.CurrentProcID} - ";
             backupName += $"{DateTime.Now.ToString(Properties.Resources.strAutoSaveDateTimeFileFormat)}.journal";
 
-            string path = System.IO.Path.Combine(Consts.AutoSaveDirectory, backupName);     
+            string path = System.IO.Path.Combine(Consts.AutoSaveDirectory, backupName);
             bool result = SaveJournal(path, true);
             if (!result)
             {
@@ -524,7 +502,7 @@ namespace SimpleJournal
 
             // Only the last instance can set the value
             if (onClosing && ProcessHelper.SimpleJournalProcessCount == 1)
-            {                
+            {
                 try
                 {
                     // Only delete empty directory (0 files and false (no recursive))
@@ -539,7 +517,7 @@ namespace SimpleJournal
         }
 
         #endregion
-        
+
         #region Error Handling
         private void Dispatcher_UnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
         {
@@ -589,7 +567,7 @@ namespace SimpleJournal
                             if (can.Children.Count > 0)
                             {
                                 can.Select(new UIElement[] { can.Children.First() });
-                                DrawingCanvas_ChildElementsSelected(DrawingCanvas.LastModifiedCanvas.GetSelectedElements().ToArray());                             
+                                DrawingCanvas_ChildElementsSelected(DrawingCanvas.LastModifiedCanvas.GetSelectedElements().ToArray());
                                 pnlSidebar.Visibility = Visibility.Visible;
                             }
                             else
@@ -620,7 +598,7 @@ namespace SimpleJournal
         public bool IsSideBarVisible => pnlSidebar.IsVisible;
 
         private void DrawingCanvas_ChildElementsSelected(UIElement[] elements)
-        { 
+        {
             if (preventSelection || (!Settings.Instance.DisplaySidebarAutomatically && !forceOpenSidebar))
                 return;
 
@@ -808,10 +786,10 @@ namespace SimpleJournal
         }
 
         #endregion
-        
+
         #region Private Methods
 
-        private void UpdateTextMarkerAttributes(bool reset = false)
+        public void UpdateTextMarkerAttributes(bool reset = false)
         {
             if (reset)
             {
@@ -836,6 +814,7 @@ namespace SimpleJournal
             markerPath.Fill = new SolidColorBrush(currentTextMarkerAttributes.Color);
             markerPath.Stroke = Brushes.Black;
             markerPath.StrokeThickness = Consts.MarkerPathStrokeThickness;
+            textMarkerTemplate.LoadPen(new Pen(new Data.Color(currentTextMarkerAttributes.Color), Settings.Instance.TextMarkerSize.Width, Settings.Instance.TextMarkerSize.Height));
 
             if (currentTool == Tools.TextMarker)
             {
@@ -864,7 +843,7 @@ namespace SimpleJournal
             penTemplates[3].LoadPen(currentPens[3]);
 
             textMarkerTemplate.SetTextMarker();
-            textMarkerTemplate.LoadPen(new Pen(Settings.Instance.TextMarkerColor, Consts.TextMarkerSizes.IndexOf(Settings.Instance.TextMarkerSize)));
+            textMarkerTemplate.LoadPen(new Pen(Settings.Instance.TextMarkerColor, Settings.Instance.TextMarkerSize.Width, Settings.Instance.TextMarkerSize.Height));
             textMarkerTemplate.OnChangedColorAndSize += BtnTextMarker_OnChanged;
             btnTextMarker.DropDown = textMarkerTemplate;
 
@@ -885,7 +864,7 @@ namespace SimpleJournal
             btnInsertPlot.DropDown = plotDropDownTemplate;
             plotDropDownTemplate.OnPlotModeChanged += PlotDropDownTemplate_OnPlotModeChanged;
             addPageDropDownTemplate.AddPage += AddPageDropDownTemplate_AddPage;
-            
+
             // polygonDropDownTemplate.OnChanged ...
         }
 
@@ -953,7 +932,7 @@ namespace SimpleJournal
                 }
                 DrawingAttributes newAttr = st.DrawingAttributes.Clone();
 
-                changedActions.Add(new StrokesChangedAction(st, old, newAttr));       
+                changedActions.Add(new StrokesChangedAction(st, old, newAttr));
             }
 
             // Add line/shape actions
@@ -1184,20 +1163,36 @@ namespace SimpleJournal
         }
 
         // Muste be public for accessing via singleton from the settings
-        public void UpdatePenButtons(bool reset = false)
+        public void UpdatePenButtons(Pen[] pens = null, bool reset = false)
         {
             if (reset)
             {
                 // Initalize pens
                 for (int i = 0; i < currentPens.Length; i++)
                 {
-                    currentPens[i] = new Pen(Consts.PEN_COLORS[i], Consts.StrokeSizes[0].Height);
+                    currentPens[i] = new Pen(Consts.PEN_COLORS[i], Consts.StrokeSizes[0].Width, Consts.StrokeSizes[0].Height);
                 }
 
                 // Initalize text marker (reset)
                 UpdateTextMarkerAttributes(true);
             }
-           
+
+            // Save applied values to make sure they are persisted
+            if (pens == null)
+                Pen.Instance = currentPens;
+            else
+            {
+                currentPens = pens;
+                Pen.Instance = pens;
+            }
+
+            Pen.Save();
+
+            // Also load and refresh pens
+            for (int i = 0; i < Consts.AMOUNT_PENS; i++)
+                penTemplates[i].LoadPen(currentPens[i]);
+
+            // Refresh pathes displayed in the menu
             Path[] pathes = new Path[] { pathPen1, pathPen2, pathPen3, pathPen4 };
             for (int i = 0; i < currentPens.Length; i++)
             {
@@ -1208,15 +1203,22 @@ namespace SimpleJournal
                 currentPath.StrokeThickness = 0.4;
             }
 
-            // Save applied values to make sure they are persisted
-            SavePenSettings();
-
-            if (reset && (currentTool == Tools.Pencil1 || currentTool == Tools.Pencil2 || currentTool == Tools.Pencil3 || currentTool == Tools.Pencil4))
+            // Also if currentTool is a selected pen or the text-marker the DrawingAttributes for all canvas needs to be updated!!!!
+            if (currentTool is Tools.Pencil1 or Tools.Pencil2 or Tools.Pencil3 or Tools.Pencil4)
             {
+                var pen = Pen.Instance[(int)currentTool - 1];
+                CurrentDrawingAttributes.Color = pen.FontColor.ToColor();
+                CurrentDrawingAttributes.Width = pen.Width;
+                CurrentDrawingAttributes.Height = pen.Height;
+                ApplyToAllCanvas(p => p.DefaultDrawingAttributes = CurrentDrawingAttributes);
+
                 UpdateDropDownButtons();
 
-                // In this case pen bar was resetted so we need to apply tool again to force canvas to apply to default pen
-                SwitchTool(Tools.Pencil1, true);
+                if (reset)
+                {
+                    // In this case pen bar was resetted so we need to apply tool again to force canvas to apply to default pen
+                    SwitchTool(Tools.Pencil1, true);
+                }
             }
         }
 
@@ -1257,18 +1259,6 @@ namespace SimpleJournal
             catch
             {
                 // just to be sure
-            }
-        }
-
-        private void SavePenSettings()
-        {
-            try
-            {
-                Serialization.Serialization.Save<Pen[]>(Consts.PenSettingsFilePath, currentPens, Serialization.Serialization.Mode.Normal);
-            }
-            catch
-            {
-
             }
         }
 
@@ -1405,7 +1395,7 @@ namespace SimpleJournal
             CurrentDrawingAttributes.IgnorePressure = !Settings.Instance.UsePreasure;
             CurrentDrawingAttributes.FitToCurve = Settings.Instance.UseFitToCurve;
 
-            UpdatePenButtons(false);
+            UpdatePenButtons();
 
             // Refresh Text marker
             UpdateTextMarkerAttributes();
@@ -1584,8 +1574,8 @@ namespace SimpleJournal
                 {
                     // Apply 
                     CurrentDrawingAttributes.Color = currentPens[SelectedPen].FontColor.ToColor();
-                    CurrentDrawingAttributes.Width = currentPens[SelectedPen].Size;
-                    CurrentDrawingAttributes.Height = currentPens[SelectedPen].Size;
+                    CurrentDrawingAttributes.Width = currentPens[SelectedPen].Width;
+                    CurrentDrawingAttributes.Height = currentPens[SelectedPen].Height;
                 }
 
             });
@@ -1608,9 +1598,10 @@ namespace SimpleJournal
 
             if (sizeIndex >= 0)
             {
-                currentPens[index].Size = Consts.StrokeSizes[sizeIndex].Width;
-                CurrentDrawingAttributes.Width = currentPens[index].Size;
-                CurrentDrawingAttributes.Height = currentPens[index].Size;
+                currentPens[index].Width = Consts.StrokeSizes[sizeIndex].Width;
+                currentPens[index].Height = Consts.StrokeSizes[sizeIndex].Height;
+                CurrentDrawingAttributes.Width = currentPens[index].Width;
+                CurrentDrawingAttributes.Height = currentPens[index].Height;
 
                 ApplyToAllCanvas(new Action<InkCanvas>((InkCanvas canvas) =>
                 {
@@ -1739,7 +1730,7 @@ namespace SimpleJournal
 
             if (c != null)
             {
-                Settings.Instance.TextMarkerColor = new Data.Color(c.Value.A, c.Value.R, c.Value.G, c.Value.B);
+                Settings.Instance.TextMarkerColor = new Data.Color(c.Value);
                 Settings.Instance.Save();
                 currentTextMarkerAttributes.Color = c.Value;
             }
