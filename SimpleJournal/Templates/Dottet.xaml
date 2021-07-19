@@ -13,11 +13,11 @@
                 <GeometryDrawing>
                     <GeometryDrawing.Geometry>
                         <GeometryGroup>
-                            <EllipseGeometry RadiusX="1" RadiusY="1" />
+                            <EllipseGeometry RadiusX="0.5" RadiusY="0.5" />
                         </GeometryGroup>
                     </GeometryDrawing.Geometry>
                     <GeometryDrawing.Pen>
-                        <Pen Thickness="4" Brush="Black" />
+                        <Pen Thickness="2" Brush="Black" />
                     </GeometryDrawing.Pen>
                 </GeometryDrawing>
             </DrawingBrush.Drawing>
