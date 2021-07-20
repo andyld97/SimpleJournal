@@ -237,7 +237,7 @@ Many thanks ...
   </data>
   <data name="strBackwards" xml:space="preserve">
     <value>Undo</value>
-    <comment>MainWindow.xaml</comment>
+    
   </data>
   <data name="strBackwardsDescription" xml:space="preserve">
     <value>Undos the last action</value>
@@ -1173,7 +1173,7 @@ Click on No to continue to receive this message!</value>
     <comment>MainWindow.xaml</comment>
   </data>
   <data name="strReleaseDate" xml:space="preserve">
-    <value>07/18/2021 4:04 PM</value>
+    <value>07/20/2021 3:25 PM</value>
     <comment>About.xaml</comment>
   </data>
   <data name="strRemove" xml:space="preserve">
@@ -1752,8 +1752,8 @@ Here I would like to give you some important hints, which will help you to handl
     <comment>*</comment>
   </data>
   <data name="strWindowSize" xml:space="preserve">
-    <value>Window Size At Startup</value>
-    <comment>*</comment>
+    <value>Window Size At Startup:</value>
+    <comment>SettingsDialog.xaml</comment>
   </data>
   <data name="strWrite" xml:space="preserve">
     <value>Pen</value>
