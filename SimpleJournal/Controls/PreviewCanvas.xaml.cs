@@ -38,7 +38,7 @@ namespace SimpleJournal.Controls
                         case PaperType.Blanco: control = new Blanco(); break;
                         case PaperType.Chequeued: control = new Chequered(); break;
                         case PaperType.Ruled: control = new Ruled(); break;
-                        case PaperType.Dotted: control = new Dottet(); break;
+                        case PaperType.Dotted: control = new Dotted(); break;
                     }
 
                     // Debug means that this is a preview canvas and e.g. Change will not be affected

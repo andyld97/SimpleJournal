@@ -6,9 +6,9 @@ namespace SimpleJournal.Templates
     /// <summary>
     /// Interaction logic for Dottet.xaml
     /// </summary>
-    public partial class Dottet : Page, IPaper
+    public partial class Dotted : Page, IPaper
     {
-        public Dottet()
+        public Dotted()
         {
             InitializeComponent();
         }

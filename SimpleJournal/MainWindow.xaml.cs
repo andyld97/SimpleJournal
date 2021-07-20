@@ -1033,7 +1033,7 @@ namespace SimpleJournal
                 case PaperType.Blanco: pageContent = new Blanco(); break;
                 case PaperType.Chequeued: pageContent = new Chequered(); break;
                 case PaperType.Ruled: pageContent = new Ruled(); break;
-                case PaperType.Dotted: pageContent = new Dottet(); break;
+                case PaperType.Dotted: pageContent = new Dotted(); break;
             }
 
             IPaper page = pageContent as IPaper;
