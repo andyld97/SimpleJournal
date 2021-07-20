@@ -1,11 +1,12 @@
 ﻿using SimpleJournal.Controls;
+using SimpleJournal.Controls.Templates;
 using SimpleJournal.Data;
-using System.Collections.Generic;
+using System;
 using System.ComponentModel;
-using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using Pen = SimpleJournal.Data.Pen;
 
 namespace SimpleJournal.Dialogs
 {
@@ -14,14 +15,16 @@ namespace SimpleJournal.Dialogs
     /// </summary>
     public partial class SetupDialog : Window
     {
-        private readonly bool isInitalized = false;
-        private int currentPage = 0;
-        private bool clickedOnExit = false;
+        private readonly bool isInitalized;
+        private int currentPage;
+        private bool clickedOnExit;
+        private bool ignorePenClickedEvent = false;
 
-        public Grid[] pagesArr = null;
+        public Grid[] pagesArr;
         public Data.Pen[] pens = new Data.Pen[Consts.AMOUNT_PENS];
-        private int currentlySelectedPen = 0;
-        private readonly PreviewCanvas[] previewCanvas = null;
+        private readonly PreviewCanvas[] previewCanvas;
+        private readonly PenDropDownTemplate[] penTemplates = new PenDropDownTemplate[] { new PenDropDownTemplate(), new PenDropDownTemplate(), new PenDropDownTemplate(), new PenDropDownTemplate() };
+        private readonly PenDropDownTemplate textMarkerTemplate = new PenDropDownTemplate();
 
         public SetupDialog()
         {
@@ -36,22 +39,61 @@ namespace SimpleJournal.Dialogs
                 previewInputGesture
             };
 
-            previewCanvasTextMarker.DrawingAttributes.IsHighlighter = true;
+            btnTextMarker.DropDown = textMarkerTemplate;
+
+            textMarkerTemplate.SetTextMarker();
+            textMarkerTemplate.LoadPen(new Pen(Settings.Instance.TextMarkerColor, Settings.Instance.TextMarkerSize.Width, Settings.Instance.TextMarkerSize.Height));
+            textMarkerTemplate.OnChangedColorAndSize += TextMarkerTemplate_OnChangedColorAndSize;
+            markerPath.Fill = new SolidColorBrush(Settings.Instance.TextMarkerColor.ToColor());
 
             InitalizePens();
             isInitalized = true;
-
-            // Make sure first pen is also applied to preview canvas6
-            cmbPens.SelectedIndex = 1;
-            cmbPens.SelectedIndex = 0;
-
-            colPickerTextMarker.SelectedColor = Consts.TEXT_MARKER_COLOR;
-            cmbStrokeSizeTextMarker.SelectedIndex = 0;
 
             LoadSettings();
             InitalizePreviewCanvasTextMarker();
             InitalizePreviewInputGesture();
         }
+
+        #region Text Marker
+
+        private void TextMarkerTemplate_OnChangedColorAndSize(System.Windows.Media.Color? c, int sizeIndex)
+        {
+            // Apply size index & apply color and size to DrawingAttributes of previewCanvasTextMarker
+            if (c.HasValue)
+            {
+                markerPath.Fill = new SolidColorBrush(c.Value);
+                previewCanvasTextMarker.DrawingAttributes.Color = c.Value;
+                Settings.Instance.TextMarkerColor = new Data.Color(c.Value);
+            }
+
+            if (sizeIndex >= 0)
+            {
+                var size = Consts.TextMarkerSizes[sizeIndex];
+                previewCanvasTextMarker.DrawingAttributes.Width = size.Height;
+                previewCanvasTextMarker.DrawingAttributes.Height = size.Width;
+
+                Settings.Instance.TextMarkerSize = size;
+            }
+
+            Settings.Instance.Save();
+            MainWindow.W_INSTANCE.UpdateTextMarkerAttributes();
+        }
+
+        private void InitalizePreviewCanvasTextMarker()
+        {
+            var size = Settings.Instance.TextMarkerSize;
+
+            previewCanvasTextMarker.ClearCanvas();
+            previewCanvasTextMarker.DrawingAttributes.StylusTip = System.Windows.Ink.StylusTip.Rectangle;
+            previewCanvasTextMarker.DrawingAttributes.IsHighlighter = true;
+            previewCanvasTextMarker.DrawingAttributes.Width = size.Height;
+            previewCanvasTextMarker.DrawingAttributes.Height = size.Width;
+            previewCanvasTextMarker.DrawingAttributes.Color = Settings.Instance.TextMarkerColor.ToColor();
+            previewCanvasTextMarker.EnableWriting = true;
+            previewCanvasTextMarker.AddChild(new TextBlock() { Text = Properties.Resources.strTextToHightlight, FontSize = 18 });
+        }
+
+        #endregion
 
         private void InitalizePreviewInputGesture()
         {
@@ -60,26 +102,26 @@ namespace SimpleJournal.Dialogs
             previewInputGesture.Canvas.PreviewRotationCorrection = (cmbRotationCorrection.SelectedIndex == 0);
         }
 
-        private void InitalizePreviewCanvasTextMarker()
-        {
-            var size = Consts.TextMarkerSizes[cmbStrokeSizeTextMarker.SelectedIndex];
+        #region Pens
 
-            previewCanvasTextMarker.DrawingAttributes.StylusTip = System.Windows.Ink.StylusTip.Rectangle;
-            previewCanvasTextMarker.DrawingAttributes.IsHighlighter = true;
-            previewCanvasTextMarker.DrawingAttributes.Width = size.Height;
-            previewCanvasTextMarker.DrawingAttributes.Height = size.Width;
-            previewCanvasTextMarker.DrawingAttributes.Color = Colors.Yellow;
-            previewCanvasTextMarker.EnableWriting = true;
-            previewCanvasTextMarker.AddChild(new TextBlock() { Text = Properties.Resources.strTextToHightlight, FontSize = 18 });
-        }
+        private int SelectedPen = 0;
 
         private void InitalizePens()
         {
             // Initalize pens
-            for (int i = 0; i < pens.Length; i++)
-            {
-                pens[i] = new Data.Pen(Consts.PEN_COLORS[i], Consts.StrokeSizes[0].Height);
-            }
+            pens = Pen.Instance;
+
+            btnPen1.DropDown = penTemplates[0];
+            btnPen2.DropDown = penTemplates[1];
+            btnPen3.DropDown = penTemplates[2];
+            btnPen4.DropDown = penTemplates[3];
+
+            penTemplates[0].OnChangedColorAndSize += BtnPen1_OnChanged;
+            penTemplates[1].OnChangedColorAndSize += BtnPen2_OnChanged;
+            penTemplates[2].OnChangedColorAndSize += BtnPen3_OnChanged;
+            penTemplates[3].OnChangedColorAndSize += BtnPen4_OnChanged;
+
+            UpdatePenButtons();
 
             try
             {
@@ -99,6 +141,120 @@ namespace SimpleJournal.Dialogs
                 // Do something?
             }
         }
+
+        private void BtnPen4_OnChanged(System.Windows.Media.Color? c, int sizeIndex)
+        {
+            ChangePenValues(3, c, sizeIndex);
+        }
+
+        private void BtnPen3_OnChanged(System.Windows.Media.Color? c, int sizeIndex)
+        {
+            ChangePenValues(2, c, sizeIndex);
+        }
+
+        private void BtnPen2_OnChanged(System.Windows.Media.Color? c, int sizeIndex)
+        {
+            ChangePenValues(1, c, sizeIndex);
+        }
+
+        private void BtnPen1_OnChanged(System.Windows.Media.Color? c, int sizeIndex)
+        {
+            ChangePenValues(0, c, sizeIndex);
+        }
+
+        private void SelectPen(int index)
+        {
+            if (!isInitalized || ignorePenClickedEvent)
+                return;
+
+            SelectedPen = index;
+
+            DropDownToggleButton[] pensControls = new DropDownToggleButton[] { btnPen1, btnPen2, btnPen3, btnPen4 };
+
+            ignorePenClickedEvent = true;
+            foreach (var pen in pensControls)
+                pen.IsChecked = false;
+
+            pensControls[index].IsChecked = true;
+            ignorePenClickedEvent = false;
+
+            var size = Consts.StrokeSizes[Consts.StrokeSizes.IndexOf(new Size(pens[index].Width, pens[index].Height))];
+
+            var currentDrawingAttributes = previewPensCanvas.DrawingAttributes;
+            currentDrawingAttributes.Color = pens[index].FontColor.ToColor();
+            currentDrawingAttributes.Width = size.Width;
+            currentDrawingAttributes.Height = size.Height;
+            previewPensCanvas.DrawingAttributes = currentDrawingAttributes;
+        }
+
+        private void btnPen1_Click(object sender, EventArgs e)
+        {
+            SelectPen(0);
+        }
+
+        private void btnPen2_Click(object sender, EventArgs e)
+        {
+            SelectPen(1);
+        }
+
+        private void btnPen3_Click(object sender, EventArgs e)
+        {
+            SelectPen(2);
+        }
+
+        private void btnPen4_Click(object sender, EventArgs e)
+        {
+            SelectPen(3);
+        }
+
+        private void ChangePenValues(int index, System.Windows.Media.Color? c, int sizeIndex)
+        {
+            var currentDrawingAttributes = previewPensCanvas.DrawingAttributes;
+
+            if (c.HasValue)
+            {
+                currentDrawingAttributes.Color = c.Value;
+
+                if (SelectedPen != -1)
+                    pens[SelectedPen].FontColor = new Data.Color(c.Value.A, c.Value.R, c.Value.G, c.Value.B);
+                else
+                    pens[index].FontColor = new Data.Color(c.Value.A, c.Value.R, c.Value.G, c.Value.B);
+
+
+                previewPensCanvas.DrawingAttributes = currentDrawingAttributes;
+            }
+
+            if (sizeIndex >= 0)
+            {
+                pens[index].Width = Consts.StrokeSizes[sizeIndex].Width;
+                pens[index].Height = Consts.StrokeSizes[sizeIndex].Height;
+                currentDrawingAttributes.Width = pens[index].Width;
+                currentDrawingAttributes.Height = pens[index].Height;
+
+                previewPensCanvas.DrawingAttributes = currentDrawingAttributes;
+            }
+
+            UpdatePenButtons();          
+        }
+
+        private void UpdatePenButtons()
+        {
+            pathPen1.Fill = new SolidColorBrush(pens[0].FontColor.ToColor());
+            pathPen2.Fill = new SolidColorBrush(pens[1].FontColor.ToColor());
+            pathPen3.Fill = new SolidColorBrush(pens[2].FontColor.ToColor());
+            pathPen4.Fill = new SolidColorBrush(pens[3].FontColor.ToColor());
+
+            penTemplates[0].LoadPen(pens[0]);
+            penTemplates[1].LoadPen(pens[1]);
+            penTemplates[2].LoadPen(pens[2]);
+            penTemplates[3].LoadPen(pens[3]);
+
+            Pen.Instance = pens;
+            Pen.Save();
+            MainWindow.W_INSTANCE.UpdatePenButtons(pens);
+        }
+
+        #endregion
 
         #region Settings: Load/Save
 
@@ -141,8 +297,9 @@ namespace SimpleJournal.Dialogs
             }
 
             // Apply text marker attributes
-            Settings.Instance.TextMarkerColor = new Data.Color(colPickerTextMarker.SelectedColor.R, colPickerTextMarker.SelectedColor.G, colPickerTextMarker.SelectedColor.B);
-            Settings.Instance.TextMarkerSize = Consts.TextMarkerSizes[cmbStrokeSizeTextMarker.SelectedIndex];
+            // ToDo: ***
+            //Settings.Instance.TextMarkerColor = new Data.Color(colPickerTextMarker.SelectedColor.R, colPickerTextMarker.SelectedColor.G, colPickerTextMarker.SelectedColor.B);
+            //Settings.Instance.TextMarkerSize = Consts.TextMarkerSizes[cmbStrokeSizeTextMarker.SelectedIndex];
 
             //Settings.Instance.PaperFormat = Format.A4;
             Settings.Instance.PaperType = (PaperType)cmbFormat.SelectedIndex;
@@ -157,6 +314,8 @@ namespace SimpleJournal.Dialogs
             GeneralHelper.ApplyTheming();
         }
         #endregion
+
+        #region Navigation
 
         public int CurrentPage
         {
@@ -231,11 +390,13 @@ namespace SimpleJournal.Dialogs
                 MainWindow.W_INSTANCE.ApplySettings();
 
                 clickedOnExit = true;
-                this.Close();
+                Close();
             }
 
             CurrentPage++;
         }
+
+        #endregion
 
         private void CmbFormat_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -269,65 +430,6 @@ namespace SimpleJournal.Dialogs
             }
         }
 
-        private void ColorPicker_ColorChanged(System.Windows.Media.Color c)
-        {
-            foreach (PreviewCanvas pc in previewCanvas)
-            {
-                pc.DrawingAttributes.Color = c;
-            }
-            pens[currentlySelectedPen].FontColor = new Data.Color(c.A, c.R, c.G, c.B);
-            SavePenSettings();
-        }
-
-        private void CmbStrokeSize_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (isInitalized)
-            {
-                var size = Consts.StrokeSizes[cmbStrokeSize.SelectedIndex].Width;
-                foreach (PreviewCanvas pc in previewCanvas.Except(new List<PreviewCanvas>() { previewCanvasTextMarker }))
-                    pc.DrawingAttributes.Width = pc.DrawingAttributes.Height = size;
-
-                pens[currentlySelectedPen].Size = size;
-                SavePenSettings();
-            }
-        }
-
-        private void CmbPens_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (isInitalized)
-            {
-                // Apply values to comboxbox
-                currentlySelectedPen = cmbPens.SelectedIndex;
-
-                Data.Pen currentPen = pens[currentlySelectedPen];
-
-                colorPicker.SelectedColor = currentPen.FontColor.ToColor();
-                cmbStrokeSize.SelectedIndex = Consts.StrokeSizes.IndexOf(new Size(currentPen.Size, currentPen.Size));
-
-                foreach (PreviewCanvas pc in previewCanvas.Except(new List<PreviewCanvas>() { previewCanvasTextMarker }))
-                {
-                    pc.DrawingAttributes.Width = pc.DrawingAttributes.Height = currentPen.Size;
-                    pc.DrawingAttributes.Color = currentPen.FontColor.ToColor();
-                }
-            }
-        }
-
-        private void CmbStrokeSizeTextMarker_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (isInitalized)
-            {
-                var size = Consts.TextMarkerSizes[cmbStrokeSizeTextMarker.SelectedIndex];
-                previewCanvasTextMarker.DrawingAttributes.StylusTip = System.Windows.Ink.StylusTip.Rectangle;
-                previewCanvasTextMarker.DrawingAttributes.Width = size.Height;
-                previewCanvasTextMarker.DrawingAttributes.Height = size.Width;
-            }
-        }
-
-        private void ColPickerTextMarker_ColorChanged(System.Windows.Media.Color c)
-        {
-            previewCanvasTextMarker.DrawingAttributes.Color = c;
-        }
-
         private void CmbRotationCorrection_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (isInitalized)
@@ -342,14 +444,7 @@ namespace SimpleJournal.Dialogs
 
         private void LnkHelp_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                System.Diagnostics.Process.Start("https://code-a-software.net/simplejournal/index.php?page=help");
-            }
-            catch
-            {
-
-            }
+            GeneralHelper.OpenUri(new Uri(Consts.HelpUrl));
         }
 
         private void cmbDarkMode_SelectionChanged(object sender, SelectionChangedEventArgs e)

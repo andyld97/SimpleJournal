@@ -16,4 +16,17 @@
         Form = 12,
         CooardinateSystem = 13
     }
+
+    public enum Format
+    {
+        A4
+    }
+
+    public enum PaperType
+    {
+        Blanco,
+        Chequeued,
+        Ruled,
+        Dotted
+    }
 }

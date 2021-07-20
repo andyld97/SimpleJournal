@@ -23,7 +23,7 @@ namespace SimpleJournal.Templates
 
         public void SetDebug(bool state = true)
         {
-            Canvas.SetDebug(state);   
+            Canvas.SetDebug(state);
         }
     }
 }

@@ -1145,7 +1145,7 @@ Klicken Sie auf Nein, um diesen Hinweis weiterhin zu erhalten!</value>
     <comment>MainWindow.xaml</comment>
   </data>
   <data name="strReleaseDate" xml:space="preserve">
-    <value>04.06.2021 17:57 Uhr</value>
+    <value>20.07.2021 15:25 Uhr</value>
     <comment>*</comment>
   </data>
   <data name="strRemove" xml:space="preserve">
@@ -1670,7 +1670,7 @@ Hier möchte ich Ihnen noch ein paar wichtige Hinweise geben, die Ihnen helfen w
     <comment>*</comment>
   </data>
   <data name="strUseNaturalScrollingDescription" xml:space="preserve">
-    <value>Beim Scrollen per Ziehen/Schieben wird die natürliche Scrollrichtung verwendet</value>
+    <value>Beim Scrollen per Ziehen/Schieben wird die natürliche Scrollrichtung verwendet.</value>
     <comment>*</comment>
   </data>
   <data name="strUseOldChequeredPatternLine1" xml:space="preserve">
@@ -1678,7 +1678,7 @@ Hier möchte ich Ihnen noch ein paar wichtige Hinweise geben, die Ihnen helfen w
     <comment>SettingsWindow.xaml</comment>
   </data>
   <data name="strUseOldChequeredPatternLine2" xml:space="preserve">
-    <value>Das Verändern dieser Einstellung wirkt sich eventuell nicht auf das aktuell geladene Dokument aus</value>
+    <value>Das Verändern dieser Einstellung wirkt sich nicht auf das aktuell geladene Dokument aus.</value>
     <comment>SettingsWindow.xaml</comment>
   </data>
   <data name="strUseReplaceEllipsesWithCircles" xml:space="preserve">
@@ -1750,7 +1750,7 @@ Hier möchte ich Ihnen noch ein paar wichtige Hinweise geben, die Ihnen helfen w
     <comment>*</comment>
   </data>
   <data name="strWindowSize" xml:space="preserve">
-    <value>Fenstergröße:</value>
+    <value>Fenstergröße beim Start:</value>
     <comment>*</comment>
   </data>
   <data name="strWrite" xml:space="preserve">
@@ -1768,5 +1768,24 @@ Hier möchte ich Ihnen noch ein paar wichtige Hinweise geben, die Ihnen helfen w
   <data name="strZoom" xml:space="preserve">
     <value>Zoom</value>
     <comment>MainWindow.xaml</comment>
+  </data>
+  <data name="strSettings_DeactivateTouchScreenIfInForeground_Explanation" xml:space="preserve">
+    <value>Deaktivert den Touchscreen, wenn SimpleJournal im Fordergrund ist, aber aktiviert ihn auch sobald SimpleJournal nicht mehr im Fordergrund ist. Diese Option ist nützlich, damit der Touchscreen außerhalb von SimpleJournal weiterhin verwendet werden kann, um z.B. in PDF-Dokumenten zu scrollen!</value>
+    <comment>*</comment>
+  </data>
+  <data name="strSettings_DisableTouchscreenIfInForeground" xml:space="preserve">
+    <value>Windows Touchscreen nur deaktiveren, wenn SimpleJournal im Vordergrund ist</value>
+    <comment>SettingsDialog.xaml</comment>
+  </data>
+  <data name="strTouchScreen" xml:space="preserve">
+    <value>Touchscreen</value>
+  </data>
+  <data name="strBackground" xml:space="preserve">
+    <value>Hintergrund:</value>
+    <comment>SettingsDialog.xaml</comment>
+  </data>
+  <data name="strDottet" xml:space="preserve">
+    <value>Punkte (Dotted)</value>
+    <comment>*</comment>
   </data>
 </root>

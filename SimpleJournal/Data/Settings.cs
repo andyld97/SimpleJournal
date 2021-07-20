@@ -167,9 +167,9 @@ namespace SimpleJournal.Data
         public bool ExportAsJournal { get; set; } = false;
 
         /// <summary>
-        /// Determines if the touch buttons are checked and visible (only if the device has a touch screen
+        /// Determines if the touch screen will be deactivated in foreground and activated in background
         /// </summary>
-        public bool ShowTouchButtonsInQuickAccessBar { get; set; } = true;
+        public bool DisableTouchScreenIfInForeground { get; set; } = false;
 
         public enum RulerMode : int
         {

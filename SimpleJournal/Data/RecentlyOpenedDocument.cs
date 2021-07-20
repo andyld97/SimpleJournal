@@ -82,7 +82,7 @@ namespace SimpleJournal.Data
             }
 
             // Limit to value of recently used docuemnts
-            if (Instance.Count > Consts.LAST_RECENTLY_OPENED_DOCUMENT_LIMIT)
+            if (Instance.Count > Consts.LastRecentlyOpenedDocuments)
                 Instance.RemoveAt(Instance.Count - 1);
 
             Save(Instance);

@@ -244,6 +244,7 @@ namespace SimpleJournal
 
         /// <summary>
         /// Opens the default system browser with the requested uri
+        /// https://stackoverflow.com/questions/4580263/how-to-open-in-default-browser-in-c-sharp/67838115#67838115
         /// </summary>
         /// <param name="uri"></param>
         /// <returns></returns>
@@ -293,7 +294,7 @@ namespace SimpleJournal
                 }
             }
 
-            if (containsAll && text.TextDecorations.Count() != 0)
+            if (containsAll && text.TextDecorations.Count != 0)
                 jt.IsUnderlined = true;
 
             containsAll = true;
@@ -547,7 +548,7 @@ namespace SimpleJournal
                 {
                     using (WebClient wc = new WebClient())
                     {
-                        string versionJSON = wc.DownloadString(Consts.VERSION_URL);
+                        string versionJSON = wc.DownloadString(Consts.VersionUrl);
                         dynamic versions = JsonConvert.DeserializeObject(versionJSON);
 
                         Version current = Version.Parse(versions.current.normal.Value);

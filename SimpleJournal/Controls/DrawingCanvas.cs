@@ -44,11 +44,6 @@ namespace SimpleJournal
         }
         #endregion
 
-        #region Public Members        
-        public bool PreviewCircleCorrection = false;
-        public bool PreviewRotationCorrection = false;
-        #endregion
-
         #region Private Members
 
         private PolygonDropDownTemplate polygonDropDownTemplate = null;
@@ -116,6 +111,10 @@ namespace SimpleJournal
         public new ObservableCollection<UIElement> Children { get; } = new ObservableCollection<UIElement>();
 
         public bool IsInRulerMode { get; private set; } = false;
+
+        public bool PreviewCircleCorrection { get; set; } = false;
+
+        public bool PreviewRotationCorrection { get; set; } = false;
         #endregion
 
         #region Events
@@ -324,6 +323,15 @@ namespace SimpleJournal
         {
             IsInRulerMode = false;
             pointCollection = new StylusPointCollection();
+
+            if (pointCounter == 1)
+            {
+                this.Children.Remove(line);
+                DrawingCanvas.LastModifiedCanvas = this;
+                DrawingCanvas.Change = true;
+            }
+
+            pointCounter = 0;
             line = new Line();
         }
 
@@ -924,19 +932,19 @@ namespace SimpleJournal
                         {
                             case Settings.RulerMode.Dottet:
                                 {
-                                    line.StrokeDashArray = Consts.LINE_STROKE_DOTTET_DASH_ARRAY;
+                                    line.StrokeDashArray = Consts.LineStrokeDottetDashArray;
                                     line.StrokeDashCap = PenLineCap.Round;
                                 }
                                 break;
                             case Settings.RulerMode.Dashed:
                                 {
-                                    line.StrokeDashArray = Consts.LINE_STROKE_DASHED_DASH_ARRAY;
+                                    line.StrokeDashArray = Consts.LineStrokeDashedDashArray;
                                     line.StrokeDashCap = PenLineCap.Flat;
                                 }
                                 break;
                         }
 
-                        line.StrokeDashOffset = Consts.DEFAULT_LINE_STROKE_DASH_OFFSET;
+                        line.StrokeDashOffset = Consts.DefaultLineStrokeDashOffset;
                         line.Stroke = new SolidColorBrush(DefaultDrawingAttributes.Color);
                         line.StrokeThickness = DefaultDrawingAttributes.Height;
                     }
@@ -1031,9 +1039,9 @@ namespace SimpleJournal
                             case ShapeType.Trapeze:
                                 {
                                     polygon.Points.Add(new Point(0, h));
-                                    polygon.Points.Add(new Point(Consts.TRAPEZE_OFFSET, 0));
+                                    polygon.Points.Add(new Point(Consts.TrapezeOffset, 0));
                                     polygon.Points.Add(new Point(w, 0));
-                                    polygon.Points.Add(new Point(w - Consts.TRAPEZE_OFFSET, h));
+                                    polygon.Points.Add(new Point(w - Consts.TrapezeOffset, h));
                                 }
                                 break;
                         }

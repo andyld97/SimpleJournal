@@ -22,6 +22,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared Libraries", "Shared 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleJournal.Shared", "Shared Libraries\SimpleJournal.Shared\SimpleJournal.Shared.csproj", "{079AFA71-58C5-4377-B2D6-B0218A66C0D9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Touch", "Touch\Touch.csproj", "{C41A1395-0B61-46A9-97EC-1DE46A25275E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -98,6 +100,22 @@ Global
 		{079AFA71-58C5-4377-B2D6-B0218A66C0D9}.UWPNew|Any CPU.Build.0 = UWPNew|Any CPU
 		{079AFA71-58C5-4377-B2D6-B0218A66C0D9}.UWPNew|x64.ActiveCfg = UWPNew|Any CPU
 		{079AFA71-58C5-4377-B2D6-B0218A66C0D9}.UWPNew|x64.Build.0 = UWPNew|Any CPU
+		{C41A1395-0B61-46A9-97EC-1DE46A25275E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C41A1395-0B61-46A9-97EC-1DE46A25275E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C41A1395-0B61-46A9-97EC-1DE46A25275E}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{C41A1395-0B61-46A9-97EC-1DE46A25275E}.Debug|x64.Build.0 = Debug|Any CPU
+		{C41A1395-0B61-46A9-97EC-1DE46A25275E}.Normal|Any CPU.ActiveCfg = Debug|Any CPU
+		{C41A1395-0B61-46A9-97EC-1DE46A25275E}.Normal|Any CPU.Build.0 = Debug|Any CPU
+		{C41A1395-0B61-46A9-97EC-1DE46A25275E}.Normal|x64.ActiveCfg = Debug|Any CPU
+		{C41A1395-0B61-46A9-97EC-1DE46A25275E}.Normal|x64.Build.0 = Debug|Any CPU
+		{C41A1395-0B61-46A9-97EC-1DE46A25275E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C41A1395-0B61-46A9-97EC-1DE46A25275E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C41A1395-0B61-46A9-97EC-1DE46A25275E}.Release|x64.ActiveCfg = Release|Any CPU
+		{C41A1395-0B61-46A9-97EC-1DE46A25275E}.Release|x64.Build.0 = Release|Any CPU
+		{C41A1395-0B61-46A9-97EC-1DE46A25275E}.UWPNew|Any CPU.ActiveCfg = Debug|Any CPU
+		{C41A1395-0B61-46A9-97EC-1DE46A25275E}.UWPNew|Any CPU.Build.0 = Debug|Any CPU
+		{C41A1395-0B61-46A9-97EC-1DE46A25275E}.UWPNew|x64.ActiveCfg = Debug|Any CPU
+		{C41A1395-0B61-46A9-97EC-1DE46A25275E}.UWPNew|x64.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

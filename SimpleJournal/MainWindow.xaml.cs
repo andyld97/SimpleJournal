@@ -130,7 +130,7 @@ namespace SimpleJournal
             isInitalized = false;
             InitializeComponent();
 
-            var dpi =  VisualTreeHelper.GetDpi(this);
+            var dpi = VisualTreeHelper.GetDpi(this);
             if (dpi.PixelsPerInchX == 96 && WpfScreen.Primary.DeviceBounds.Width >= 1920 && WpfScreen.Primary.DeviceBounds.Height >= 1080)
                 WindowStartupLocation = WindowStartupLocation.CenterScreen;
 
@@ -172,17 +172,6 @@ namespace SimpleJournal
                 }
             }
 #endif
-
-#if !UWP
-
-            if (Settings.Instance.UseTouchScreenDisabling && ProcessHelper.SimpleJournalProcessCount == 1)
-            {
-                // If there are more than one process, don't start it
-                TouchHelper.SetTouchState(false);
-            }
-
-#endif
-
 
             // Register file association
             if (!Settings.Instance.FirstStart)
@@ -266,29 +255,7 @@ namespace SimpleJournal
             // Apply default zoom factor
             ZoomByScale(Settings.Instance.Zoom / 100.0);
 
-            // Initalize pens
-            for (int i = 0; i < currentPens.Length; i++)
-            {
-                currentPens[i] = new Pen(Consts.PEN_COLORS[i], Consts.StrokeSizes[0].Height);
-            }
-
-            try
-            {
-                if (System.IO.File.Exists(Consts.PenSettingsFilePath))
-                {
-                    var result = Serialization.Serialization.Read<Pen[]>(Consts.PenSettingsFilePath, Serialization.Serialization.Mode.Normal);
-                    if (result != null)
-                        currentPens = result;
-                }
-                else
-                {
-                    SavePenSettings();
-                }
-            }
-            catch
-            {
-                // Do something?
-            }
+            currentPens = Data.Pen.Instance;
 
             // Apply pens to gui
             UpdatePenButtons();
@@ -300,8 +267,8 @@ namespace SimpleJournal
 
             // Apply first and selected pen
             CurrentDrawingAttributes.Color = currentPens[0].FontColor.ToColor();
-            CurrentDrawingAttributes.Width = currentPens[0].Size;
-            CurrentDrawingAttributes.Height = currentPens[0].Size;
+            CurrentDrawingAttributes.Width = currentPens[0].Width;
+            CurrentDrawingAttributes.Height = currentPens[0].Height;
             RefreshSizeBar();
             UpdateGlowingBrush();
 
@@ -330,20 +297,6 @@ namespace SimpleJournal
             }
 
             ApplyBackground();
-
-            // Disable / Enable touch buttons
-
-#if !UWP
-            QuickAccessButtonTouchOff.Visibility = ((TouchHelper.HasTouchscreen() && Settings.Instance.ShowTouchButtonsInQuickAccessBar) ? Visibility.Visible : Visibility.Collapsed);
-            QuickAccessButtonTouchOn.Visibility = ((TouchHelper.HasTouchscreen() && Settings.Instance.ShowTouchButtonsInQuickAccessBar) ? Visibility.Visible : Visibility.Collapsed);
-            QuickAccessButtonTouchOff.IsChecked = TouchHelper.HasTouchscreen() && Settings.Instance.ShowTouchButtonsInQuickAccessBar;
-            QuickAccessButtonTouchOn.IsChecked = TouchHelper.HasTouchscreen() && Settings.Instance.ShowTouchButtonsInQuickAccessBar;
-#else
-            QuickAccessButtonTouchOff.IsChecked = false;
-            QuickAccessButtonTouchOn.IsChecked = false;
-            QuickAccessButtonTouchOff.Visibility = Visibility.Collapsed;
-            QuickAccessButtonTouchOn.Visibility = Visibility.Collapsed;
-#endif
         }
 
         private void DrawingCanvas_OnChangedDocumentState(bool value)
@@ -374,6 +327,16 @@ namespace SimpleJournal
 
             if (Settings.Instance.UseAutoSave)
                 ShowRecoverAutoBackupFileDialog();
+
+#if !UWP
+
+            if (Settings.Instance.UseTouchScreenDisabling && ProcessHelper.SimpleJournalProcessCount == 1)
+            {
+                // If there are more than one process, don't start it
+                TouchHelper.SetTouchState(false);
+            }
+
+#endif
         }
 
         private void IPages_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
@@ -485,7 +448,7 @@ namespace SimpleJournal
                 backupName = $"Backup {ProcessHelper.CurrentProcID} - ";
             backupName += $"{DateTime.Now.ToString(Properties.Resources.strAutoSaveDateTimeFileFormat)}.journal";
 
-            string path = System.IO.Path.Combine(Consts.AutoSaveDirectory, backupName);     
+            string path = System.IO.Path.Combine(Consts.AutoSaveDirectory, backupName);
             bool result = SaveJournal(path, true);
             if (!result)
             {
@@ -539,7 +502,7 @@ namespace SimpleJournal
 
             // Only the last instance can set the value
             if (onClosing && ProcessHelper.SimpleJournalProcessCount == 1)
-            {                
+            {
                 try
                 {
                     // Only delete empty directory (0 files and false (no recursive))
@@ -554,7 +517,7 @@ namespace SimpleJournal
         }
 
         #endregion
-        
+
         #region Error Handling
         private void Dispatcher_UnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
         {
@@ -604,7 +567,7 @@ namespace SimpleJournal
                             if (can.Children.Count > 0)
                             {
                                 can.Select(new UIElement[] { can.Children.First() });
-                                DrawingCanvas_ChildElementsSelected(DrawingCanvas.LastModifiedCanvas.GetSelectedElements().ToArray());                             
+                                DrawingCanvas_ChildElementsSelected(DrawingCanvas.LastModifiedCanvas.GetSelectedElements().ToArray());
                                 pnlSidebar.Visibility = Visibility.Visible;
                             }
                             else
@@ -635,7 +598,7 @@ namespace SimpleJournal
         public bool IsSideBarVisible => pnlSidebar.IsVisible;
 
         private void DrawingCanvas_ChildElementsSelected(UIElement[] elements)
-        { 
+        {
             if (preventSelection || (!Settings.Instance.DisplaySidebarAutomatically && !forceOpenSidebar))
                 return;
 
@@ -713,11 +676,11 @@ namespace SimpleJournal
                 {
                     HorizontalContentAlignment = HorizontalAlignment.Left,
                     VerticalContentAlignment = VerticalAlignment.Top,
-                    Height = Consts.SIDEBAR_LISTBOX_ITEM_HEIGHT
+                    Height = Consts.SidebarListBoxItemHeight
                 };
 
-                v.Width = Consts.SIDEBAR_LISTBOX_ITEM_VIEWBOX_SIZE;
-                v.Height = Consts.SIDEBAR_LISTBOX_ITEM_VIEWBOX_SIZE;
+                v.Width = Consts.SidebarListBoxItemViewboxSize;
+                v.Height = Consts.SidebarListBoxItemViewboxSize;
 
                 StackPanel panel = new StackPanel { Orientation = Orientation.Horizontal };
                 panel.Background = new SolidColorBrush(Colors.Transparent);
@@ -823,10 +786,10 @@ namespace SimpleJournal
         }
 
         #endregion
-        
+
         #region Private Methods
 
-        private void UpdateTextMarkerAttributes(bool reset = false)
+        public void UpdateTextMarkerAttributes(bool reset = false)
         {
             if (reset)
             {
@@ -837,7 +800,7 @@ namespace SimpleJournal
                 currentTextMarkerAttributes.Color = new Settings().TextMarkerColor.ToColor(); //Consts.TEXT_MARKER_COLOR;
 
                 Settings.Instance.TextMarkerSize = Consts.TextMarkerSizes[0];
-                Settings.Instance.TextMarkerColor = new Data.Color(Consts.TEXT_MARKER_COLOR.A, Consts.TEXT_MARKER_COLOR.R, Consts.TEXT_MARKER_COLOR.G, Consts.TEXT_MARKER_COLOR.B);
+                Settings.Instance.TextMarkerColor = new Data.Color(Consts.TextMarkerColor.A, Consts.TextMarkerColor.R, Consts.TextMarkerColor.G, Consts.TextMarkerColor.B);
                 Settings.Instance.Save();
             }
             else
@@ -850,7 +813,8 @@ namespace SimpleJournal
 
             markerPath.Fill = new SolidColorBrush(currentTextMarkerAttributes.Color);
             markerPath.Stroke = Brushes.Black;
-            markerPath.StrokeThickness = Consts.MARKER_PATH_STROKE_THICKNESS;
+            markerPath.StrokeThickness = Consts.MarkerPathStrokeThickness;
+            textMarkerTemplate.LoadPen(new Pen(new Data.Color(currentTextMarkerAttributes.Color), Settings.Instance.TextMarkerSize.Width, Settings.Instance.TextMarkerSize.Height));
 
             if (currentTool == Tools.TextMarker)
             {
@@ -879,7 +843,7 @@ namespace SimpleJournal
             penTemplates[3].LoadPen(currentPens[3]);
 
             textMarkerTemplate.SetTextMarker();
-            textMarkerTemplate.LoadPen(new Pen(Settings.Instance.TextMarkerColor, Consts.TextMarkerSizes.IndexOf(Settings.Instance.TextMarkerSize)));
+            textMarkerTemplate.LoadPen(new Pen(Settings.Instance.TextMarkerColor, Settings.Instance.TextMarkerSize.Width, Settings.Instance.TextMarkerSize.Height));
             textMarkerTemplate.OnChangedColorAndSize += BtnTextMarker_OnChanged;
             btnTextMarker.DropDown = textMarkerTemplate;
 
@@ -900,7 +864,7 @@ namespace SimpleJournal
             btnInsertPlot.DropDown = plotDropDownTemplate;
             plotDropDownTemplate.OnPlotModeChanged += PlotDropDownTemplate_OnPlotModeChanged;
             addPageDropDownTemplate.AddPage += AddPageDropDownTemplate_AddPage;
-            
+
             // polygonDropDownTemplate.OnChanged ...
         }
 
@@ -968,7 +932,7 @@ namespace SimpleJournal
                 }
                 DrawingAttributes newAttr = st.DrawingAttributes.Clone();
 
-                changedActions.Add(new StrokesChangedAction(st, old, newAttr));       
+                changedActions.Add(new StrokesChangedAction(st, old, newAttr));
             }
 
             // Add line/shape actions
@@ -1053,7 +1017,7 @@ namespace SimpleJournal
             ScrollViewer scrollViewer = mainScrollView;
             scrollViewer.ApplyTemplate();
             ScrollBar scrollBar = (ScrollBar)scrollViewer.Template.FindName("PART_VerticalScrollBar", scrollViewer);
-            scrollBar.Width = (Settings.Instance.EnlargeScrollbar ? Consts.SCROLLBAR_EXTENDED_WIDTH : Consts.SCROLLBAR_DEFAULT_WIDTH);
+            scrollBar.Width = (Settings.Instance.EnlargeScrollbar ? Consts.ScrollBarExtendedWidth : Consts.ScrollBarDefaultWidth);
         }
 
         private Page GeneratePage(PaperType? paperType = null)
@@ -1069,7 +1033,9 @@ namespace SimpleJournal
                 case PaperType.Blanco: pageContent = new Blanco(); break;
                 case PaperType.Chequeued: pageContent = new Chequered(); break;
                 case PaperType.Ruled: pageContent = new Ruled(); break;
+                case PaperType.Dotted: pageContent = new Dotted(); break;
             }
+
             IPaper page = pageContent as IPaper;
             // Apply properties and events to the new canvas
             page.Canvas.EditingMode = currentkInkMode;
@@ -1199,20 +1165,36 @@ namespace SimpleJournal
         }
 
         // Muste be public for accessing via singleton from the settings
-        public void UpdatePenButtons(bool reset = false)
+        public void UpdatePenButtons(Pen[] pens = null, bool reset = false)
         {
             if (reset)
             {
                 // Initalize pens
                 for (int i = 0; i < currentPens.Length; i++)
                 {
-                    currentPens[i] = new Pen(Consts.PEN_COLORS[i], Consts.StrokeSizes[0].Height);
+                    currentPens[i] = new Pen(Consts.PEN_COLORS[i], Consts.StrokeSizes[0].Width, Consts.StrokeSizes[0].Height);
                 }
 
                 // Initalize text marker (reset)
                 UpdateTextMarkerAttributes(true);
             }
-           
+
+            // Save applied values to make sure they are persisted
+            if (pens == null)
+                Pen.Instance = currentPens;
+            else
+            {
+                currentPens = pens;
+                Pen.Instance = pens;
+            }
+
+            Pen.Save();
+
+            // Also load and refresh pens
+            for (int i = 0; i < Consts.AMOUNT_PENS; i++)
+                penTemplates[i].LoadPen(currentPens[i]);
+
+            // Refresh pathes displayed in the menu
             Path[] pathes = new Path[] { pathPen1, pathPen2, pathPen3, pathPen4 };
             for (int i = 0; i < currentPens.Length; i++)
             {
@@ -1223,15 +1205,22 @@ namespace SimpleJournal
                 currentPath.StrokeThickness = 0.4;
             }
 
-            // Save applied values to make sure they are persisted
-            SavePenSettings();
-
-            if (reset && (currentTool == Tools.Pencil1 || currentTool == Tools.Pencil2 || currentTool == Tools.Pencil3 || currentTool == Tools.Pencil4))
+            // Also if currentTool is a selected pen or the text-marker the DrawingAttributes for all canvas needs to be updated!!!!
+            if (currentTool is Tools.Pencil1 or Tools.Pencil2 or Tools.Pencil3 or Tools.Pencil4)
             {
+                var pen = Pen.Instance[(int)currentTool - 1];
+                CurrentDrawingAttributes.Color = pen.FontColor.ToColor();
+                CurrentDrawingAttributes.Width = pen.Width;
+                CurrentDrawingAttributes.Height = pen.Height;
+                ApplyToAllCanvas(p => p.DefaultDrawingAttributes = CurrentDrawingAttributes);
+
                 UpdateDropDownButtons();
 
-                // In this case pen bar was resetted so we need to apply tool again to force canvas to apply to default pen
-                SwitchTool(Tools.Pencil1, true);
+                if (reset)
+                {
+                    // In this case pen bar was resetted so we need to apply tool again to force canvas to apply to default pen
+                    SwitchTool(Tools.Pencil1, true);
+                }
             }
         }
 
@@ -1272,18 +1261,6 @@ namespace SimpleJournal
             catch
             {
                 // just to be sure
-            }
-        }
-
-        private void SavePenSettings()
-        {
-            try
-            {
-                Serialization.Serialization.Save<Pen[]>(Consts.PenSettingsFilePath, currentPens, Serialization.Serialization.Mode.Normal);
-            }
-            catch
-            {
-
             }
         }
 
@@ -1420,7 +1397,7 @@ namespace SimpleJournal
             CurrentDrawingAttributes.IgnorePressure = !Settings.Instance.UsePreasure;
             CurrentDrawingAttributes.FitToCurve = Settings.Instance.UseFitToCurve;
 
-            UpdatePenButtons(false);
+            UpdatePenButtons();
 
             // Refresh Text marker
             UpdateTextMarkerAttributes();
@@ -1599,8 +1576,8 @@ namespace SimpleJournal
                 {
                     // Apply 
                     CurrentDrawingAttributes.Color = currentPens[SelectedPen].FontColor.ToColor();
-                    CurrentDrawingAttributes.Width = currentPens[SelectedPen].Size;
-                    CurrentDrawingAttributes.Height = currentPens[SelectedPen].Size;
+                    CurrentDrawingAttributes.Width = currentPens[SelectedPen].Width;
+                    CurrentDrawingAttributes.Height = currentPens[SelectedPen].Height;
                 }
 
             });
@@ -1623,9 +1600,10 @@ namespace SimpleJournal
 
             if (sizeIndex >= 0)
             {
-                currentPens[index].Size = Consts.StrokeSizes[sizeIndex].Width;
-                CurrentDrawingAttributes.Width = currentPens[index].Size;
-                CurrentDrawingAttributes.Height = currentPens[index].Size;
+                currentPens[index].Width = Consts.StrokeSizes[sizeIndex].Width;
+                currentPens[index].Height = Consts.StrokeSizes[sizeIndex].Height;
+                CurrentDrawingAttributes.Width = currentPens[index].Width;
+                CurrentDrawingAttributes.Height = currentPens[index].Height;
 
                 ApplyToAllCanvas(new Action<InkCanvas>((InkCanvas canvas) =>
                 {
@@ -1754,7 +1732,7 @@ namespace SimpleJournal
 
             if (c != null)
             {
-                Settings.Instance.TextMarkerColor = new Data.Color(c.Value.A, c.Value.R, c.Value.G, c.Value.B);
+                Settings.Instance.TextMarkerColor = new Data.Color(c.Value);
                 Settings.Instance.Save();
                 currentTextMarkerAttributes.Color = c.Value;
             }
@@ -1833,30 +1811,7 @@ namespace SimpleJournal
 
         private void DisableTouchScreenCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            TouchHelper.SetTouchState(false);
-        }
-
-        private void DisableTouchScreenCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
-        {
-#if UWP
-            e.CanExecute = false;
-#else
-            e.CanExecute = TouchHelper.HasTouchscreen(); 
-#endif
-        }
-
-        private void EnableTouchScreenCommand_Executed(object sender, ExecutedRoutedEventArgs e)
-        {
-            TouchHelper.SetTouchState(true);
-        }
-
-        private void EnableTouchScreenCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
-        {
-#if UWP
-            e.CanExecute = false;
-#else
-            e.CanExecute = TouchHelper.HasTouchscreen();
-#endif
+            //TouchHelper.SetTouchState(false);
         }
 
         private void SaveCommand_Executed(object sender, ExecutedRoutedEventArgs e)
@@ -1990,9 +1945,9 @@ namespace SimpleJournal
 
         private void ScrollToPage(int pTarget)
         {
-            double resultOffset = (pTarget == 0 ? 0 : pTarget * (new Chequered().Height * currentScaleFactor) + ((pTarget - 1) * Consts.SPACE_BETWEEN_SITES * currentScaleFactor));
+            double resultOffset = (pTarget == 0 ? 0 : pTarget * (new Chequered().Height * currentScaleFactor) + ((pTarget - 1) * Consts.SpaceBetweenPages * currentScaleFactor));
             if (pTarget != 0)
-                mainScrollView.ScrollToVerticalOffset(resultOffset + (Consts.SPACE_BETWEEN_SITES * currentScaleFactor));
+                mainScrollView.ScrollToVerticalOffset(resultOffset + (Consts.SpaceBetweenPages * currentScaleFactor));
             else
                 mainScrollView.ScrollToVerticalOffset(0.0);
         }
@@ -2055,8 +2010,8 @@ namespace SimpleJournal
             if (System.Windows.Clipboard.ContainsImage())
             {
                 var img = new Image { Source = System.Windows.Clipboard.GetImage() };
-                img.Width = Consts.INSERT_IMAGE_WIDTH;
-                img.Height = Consts.INSERT_IMAGE_HEIGHT;
+                img.Width = Consts.InsertImageWidth;
+                img.Height = Consts.InsertImageHeight;
 
                 InsertUIElement(img);
             }
@@ -2075,8 +2030,8 @@ namespace SimpleJournal
             {
                 Image image = new Image
                 {
-                    Width = Consts.INSERT_IMAGE_WIDTH,
-                    Height = Consts.INSERT_IMAGE_HEIGHT,
+                    Width = Consts.InsertImageWidth,
+                    Height = Consts.InsertImageHeight,
                     Source = new BitmapImage(new Uri(ofd.FileName, UriKind.Absolute))
                 };
 
@@ -3034,8 +2989,8 @@ namespace SimpleJournal
             if (result.HasValue && result.Value)
             {
                 var textblock = new TextBlock() { Text = dialog.Result, TextWrapping = System.Windows.TextWrapping.Wrap };
-                textblock.Width = Consts.INSERT_TEXT_WIDTH;
-                textblock.Height = Consts.INSERT_TEXT_HEIGHT;
+                textblock.Width = Consts.InsertTextWidth;
+                textblock.Height = Consts.InsertTextHeight;
 
                 InsertUIElement(textblock);
             }
@@ -3058,9 +3013,9 @@ namespace SimpleJournal
 
             var textblock = new TextBlock() { Text = toInsert, TextWrapping = System.Windows.TextWrapping.Wrap };
 
-            textblock.Width = Consts.INSERT_TEXT_WIDTH;
-            textblock.Height = Consts.INSERT_TEXT_HEIGHT;
-            textblock.FontSize = Consts.DEFAULT_TEXT_SIZE;
+            textblock.Width = Consts.InsertTextWidth;
+            textblock.Height = Consts.InsertTextHeight;
+            textblock.FontSize = Consts.DefaultTextSize;
 
             InsertUIElement(textblock);
         }
@@ -3253,7 +3208,7 @@ namespace SimpleJournal
         {
             if (Settings.Instance.PageBackground == Settings.Background.Default)
             {
-                mainScrollView.Background = Consts.DEFAULT_BACKGROUND_BRUSH;
+                mainScrollView.Background = Consts.DefaultBackground;
                 return;
             }
 
@@ -3263,7 +3218,7 @@ namespace SimpleJournal
 
                 switch (Settings.Instance.PageBackground)
                 {
-                    case Settings.Background.Default: mainScrollView.Background = Consts.DEFAULT_BACKGROUND_BRUSH; break;
+                    case Settings.Background.Default: mainScrollView.Background = Consts.DefaultBackground; break;
                     case Settings.Background.Blue: imageFileName = "blue"; break;
                     case Settings.Background.Sand: imageFileName = "sand"; break;
                     case Settings.Background.Wooden1: imageFileName = "wooden-1"; break;
@@ -3284,14 +3239,57 @@ namespace SimpleJournal
                         mainScrollView.Background = imageBrush;
                     }
                     else
-                        mainScrollView.Background = Consts.DEFAULT_BACKGROUND_BRUSH;
+                        mainScrollView.Background = Consts.DefaultBackground;
                 }
             }
             catch
             {
                 // fallback
-                mainScrollView.Background = Consts.DEFAULT_BACKGROUND_BRUSH;
+                mainScrollView.Background = Consts.DefaultBackground;
             }
+        }
+
+        #endregion
+
+        #region General Events / Touch
+
+        private void RibbonWindow_Activated(object sender, EventArgs e)
+        {
+           if (WindowState == WindowState.Minimized)
+               return;
+
+            Console.WriteLine("MainWindow activated ....");
+#if !UWP
+
+            // Disable touch screen when window get reactivated ...
+            if (Settings.Instance.DisableTouchScreenIfInForeground)
+                TouchHelper.SetTouchState(false);
+
+#endif
+        }
+
+        private void RibbonWindow_Deactivated(object sender, EventArgs e)
+        {
+            if (WindowState == WindowState.Minimized)
+                return;
+
+
+            Console.WriteLine("MainWindow deactivated ....");
+#if !UWP
+
+            // Enable touch screen when windows gets deactivated ...
+            if (Settings.Instance.DisableTouchScreenIfInForeground)
+                TouchHelper.SetTouchState(true);
+
+#endif
+        }
+
+        private void RibbonWindow_StateChanged(object sender, EventArgs e)
+        {
+            if (WindowState == WindowState.Minimized && Settings.Instance.DisableTouchScreenIfInForeground)
+                TouchHelper.SetTouchState(true);
+            else if ((WindowState == WindowState.Normal || WindowState == WindowState.Maximized) && Settings.Instance.DisableTouchScreenIfInForeground)
+                TouchHelper.SetTouchState(false);
         }
 
         #endregion

@@ -64,6 +64,6 @@ namespace SimpleJournal.Helper
                 Width = value.Width,
                 Height = value.Height
             };
-        } 
+        }
     }
 }

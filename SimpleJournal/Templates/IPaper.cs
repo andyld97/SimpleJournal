@@ -17,19 +17,6 @@ namespace SimpleJournal
         void SetDebug(bool state = true);
     }
 
-    public enum Format
-    {
-        A4
-    }
-
-    public enum PaperType
-    {
-        Blanco,
-        Chequeued,
-        Ruled
-    }
-
-
     public static class PageHelper
     {
         public static IPaper ClonePage(IPaper page, bool isReadonly)
