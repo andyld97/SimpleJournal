@@ -66,7 +66,7 @@
                     <Fluent:MenuItem x:Name="btnSave" Command="ApplicationCommands.Save" Header="{x:Static res:Resources.strSaveAsDocument}" KeyTip="S" Icon="pack://application:,,,/SimpleJournal;component/resources/save.png"  />
                     <Fluent:MenuItem x:Name="btnPrint" Command="ApplicationCommands.Print" Header="{x:Static res:Resources.strPrintDocument}" KeyTip="D" Icon="pack://application:,,,/SimpleJournal;component/resources/print.png"  />
                     <Fluent:MenuItem x:Name="btnExport" Click="btnExport_Click" Header="{x:Static res:Resources.strExportDocument}" KeyTip="E" Icon="pack://application:,,,/SimpleJournal;component/resources/export.png"  />
-                    <Fluent:MenuItem x:Name="btnPageManagment" Click="btnPageManagment_Click"  Header="Seiten verwalten" Icon="pack://application:,,,/SimpleJournal;component/resources/editpage.png" />
+                    <Fluent:MenuItem x:Name="btnPageManagment" Click="btnPageManagment_Click"  Header="{x:Static res:Resources.strManagePage}" Icon="pack://application:,,,/SimpleJournal;component/resources/editpage.png" />
                     <Fluent:MenuItem x:Name="btnSettings" Click="btnSettings_Click" Header="{x:Static res:Resources.strSettings}" KeyTip="S" Icon="pack://application:,,,/SimpleJournal;component/resources/settings.png"  />
                     <Fluent:MenuItem x:Name="btnAbout" Click="btnAbout_Click" Header="{x:Static res:Resources.strAbout}" KeyTip="A" Icon="pack://application:,,,/SimpleJournal;component/resources/about.png"  />
                     <Fluent:MenuItem x:Name="btnClose" Click="btnExit_Click" Header="{x:Static res:Resources.strClose}" KeyTip="E" Icon="pack://application:,,,/SimpleJournal;component/resources/close.png"  />
