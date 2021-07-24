@@ -95,6 +95,9 @@
     <DefineConstants>TRACE;UWP</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
+    <AdditionalFiles Remove="C:\Users\andre\.nuget\packages\microsoft.dotnet.upgradeassistant.extensions.default.analyzers\0.2.231403\build\\WebTypeReplacements.typemap" />
+  </ItemGroup>
+  <ItemGroup>
     <None Remove="resources\adddotted.png" />
     <None Remove="resources\dotted.png" />
   </ItemGroup>
