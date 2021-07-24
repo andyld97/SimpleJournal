@@ -529,9 +529,14 @@ namespace SimpleJournal
             string message = string.Empty;
 
             if (e.ExceptionObject != null && e.ExceptionObject is Exception ex)
-                message = ex.Message;
+            {
+                message = ex.ToString();
 
+                if (ex.InnerException != null)
+                    message += Environment.NewLine + Environment.NewLine + ex.InnerException.ToString();
+            }
             MessageBox.Show($"{Properties.Resources.strUnexceptedFailure}{Environment.NewLine}{Environment.NewLine}{message}{Environment.NewLine}{Environment.NewLine}{Properties.Resources.strUnexceptedFailureLine1}", Properties.Resources.strUnexceptedFailureTitle, MessageBoxButton.OK, MessageBoxImage.Error);
+
 
             // Try at least to create a backup - if SJ crashes - the user can restore the backup and everything is fine
             CreateBackup();
