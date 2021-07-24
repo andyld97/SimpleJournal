@@ -30,5 +30,10 @@ namespace SimpleJournal.Controls
         {
             OnPageAdded?.Invoke(this, PaperType.Blanco);
         }
+
+        private void ButtonDotted_Click(object sender, RoutedEventArgs e)
+        {
+            OnPageAdded?.Invoke(this, PaperType.Dotted);
+        }
     }
 }

@@ -884,6 +884,7 @@ namespace SimpleJournal
         private void RefreshInsertIcon()
         {
             string resourceImageName = string.Empty;
+            // Switch icon to paperType
             switch (Settings.Instance.PaperTypeLastInserted)
             {
                 case PaperType.Blanco: resourceImageName = "addblankopage.png"; break;
@@ -892,13 +893,23 @@ namespace SimpleJournal
                 case PaperType.Dotted: resourceImageName = "adddotted.png"; break;
             }
 
-            // Switch icon to paperType
-            BitmapImage bitmapImage = new BitmapImage();
-            bitmapImage.BeginInit();
-            bitmapImage.UriSource = new Uri($"pack://application:,,,/SimpleJournal;component/resources/{resourceImageName}");
-            bitmapImage.EndInit();
+            // In case of a new PaperType is not 100% supported/implemented
+            if (string.IsNullOrEmpty(resourceImageName))
+                return;
 
-            ButtonInsertNewPageIcon.Source = bitmapImage;
+            try
+            {
+                BitmapImage bitmapImage = new BitmapImage();
+                bitmapImage.BeginInit();
+                bitmapImage.UriSource = new Uri($"pack://application:,,,/SimpleJournal;component/resources/{resourceImageName}");
+                bitmapImage.EndInit();
+
+                ButtonInsertNewPageIcon.Source = bitmapImage;
+            }
+            catch
+            {
+                // ignore - it's just an image which is empty then.
+            }
         }
 
         private void AddPageDropDownTemplate_AddPage(PaperType paperType)

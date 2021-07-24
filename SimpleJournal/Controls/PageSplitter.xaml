@@ -12,6 +12,9 @@
                 <Button x:Name="ButtonChequered" Click="ButtonChequered_Click"  Width="48" Height="48" Margin="5,0,0,0" ToolTip="{x:Static res:Resources.strChequered}">
                     <Image Source="pack://application:,,,/SimpleJournal;component/resources/addchequeredpage.png"/>
                 </Button>
+                <ToggleButton x:Name="ButtonDotted" Click="ButtonDotted_Click"  Width="48" Height="48" Margin="5,0,0,0" ToolTip="{x:Static res:Resources.strDottet}">
+                    <Image Source="pack://application:,,,/SimpleJournal;component/resources/adddotted.png"/>
+                </ToggleButton>
                 <Button x:Name="ButtonRuled" Click="ButtonRuled_Click" Width="48" Height="48" Margin="5,0,0,0" ToolTip="{x:Static res:Resources.strRuled}">
                     <Image Source="pack://application:,,,/SimpleJournal;component/resources/addruledpage.png"/>
                 </Button>

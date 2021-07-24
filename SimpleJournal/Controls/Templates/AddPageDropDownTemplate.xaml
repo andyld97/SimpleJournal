@@ -11,14 +11,14 @@
             <ListBoxItem ToolTip="{x:Static res:Resources.strChequered}">
                 <Image Source="pack://application:,,,/SimpleJournal;component/resources/managment/chequred.png"  Width="48" Height="48" Margin="5"/>
             </ListBoxItem>
+            <ListBoxItem ToolTip="{x:Static res:Resources.strDottet}">
+                <Image Source="pack://application:,,,/SimpleJournal;component/resources/dotted.png"  Width="48" Height="48" Margin="5"/>
+            </ListBoxItem>
             <ListBoxItem ToolTip="{x:Static res:Resources.strRuled}">
                 <Image Source="pack://application:,,,/SimpleJournal;component/resources/managment/ruled.png"  Width="48" Height="48" Margin="5"/>
             </ListBoxItem>
             <ListBoxItem ToolTip="{x:Static res:Resources.strPlain}">
                 <Image Source="pack://application:,,,/SimpleJournal;component/resources/clear.png"  Width="48" Height="48" Margin="5"/>
-            </ListBoxItem>
-            <ListBoxItem ToolTip="{x:Static res:Resources.strDottet}">
-                <Image Source="pack://application:,,,/SimpleJournal;component/resources/dotted.png"  Width="48" Height="48" Margin="5"/>
             </ListBoxItem>
         </ListBox.Items>
     </ListBox>
