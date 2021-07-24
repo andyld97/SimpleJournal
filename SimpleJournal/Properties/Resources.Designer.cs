@@ -1978,6 +1978,15 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Inserts a dotted page after the current page.
+        /// </summary>
+        public static string strPageManagmentButtonInsertPageAfterIndexDotted {
+            get {
+                return ResourceManager.GetString("strPageManagmentButtonInsertPageAfterIndexDotted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Inserts a ruled page after the current page.
         /// </summary>
         public static string strPageManagmentButtonInsertPageAfterIndexRuled {
@@ -2001,6 +2010,15 @@ namespace SimpleJournal.Properties {
         public static string strPageManagmentButtonInsertPageBeforeIndexChequered {
             get {
                 return ResourceManager.GetString("strPageManagmentButtonInsertPageBeforeIndexChequered", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Inserts a dotted page before the current page.
+        /// </summary>
+        public static string strPageManagmentButtonInsertPageBeforeIndexDotted {
+            get {
+                return ResourceManager.GetString("strPageManagmentButtonInsertPageBeforeIndexDotted", resourceCulture);
             }
         }
         
@@ -2064,6 +2082,15 @@ namespace SimpleJournal.Properties {
         public static string strPageManagmentToggleButtonChequered {
             get {
                 return ResourceManager.GetString("strPageManagmentToggleButtonChequered", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ändert die aktuelle Seite auf das Papierformat: Dotted (Gepunkted).
+        /// </summary>
+        public static string strPageManagmentToggleButtonDotted {
+            get {
+                return ResourceManager.GetString("strPageManagmentToggleButtonDotted", resourceCulture);
             }
         }
         
@@ -2464,7 +2491,7 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 07/20/2021 3:25 PM.
+        ///   Looks up a localized string similar to 07/24/2021 12:05 AM.
         /// </summary>
         public static string strReleaseDate {
             get {

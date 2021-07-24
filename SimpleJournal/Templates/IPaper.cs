@@ -27,6 +27,7 @@ namespace SimpleJournal
                 case PaperType.Blanco: template = new Blanco(); break;
                 case PaperType.Chequeued: template = new Chequered(); break;
                 case PaperType.Ruled: template = new Ruled(); break;
+                case PaperType.Dotted: template = new Dotted(); break;  
             }
 
             // Make sure canvas is non editable

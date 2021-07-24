@@ -100,6 +100,8 @@
   <ItemGroup>
     <None Remove="resources\adddotted.png" />
     <None Remove="resources\dotted.png" />
+    <None Remove="resources\managment\adddottedpagedown.png" />
+    <None Remove="resources\managment\adddottedpageup.png" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Serialization, Version=1.0.0.1, Culture=neutral, processorArchitecture=MSIL">
@@ -140,6 +142,8 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="resources\caslogo.ico" />
+    <Resource Include="resources\managment\adddottedpagedown.png" />
+    <Resource Include="resources\managment\adddottedpageup.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="resources\selectarea.png" />

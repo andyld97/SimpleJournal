@@ -10,6 +10,7 @@ using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Shapes;
 
 namespace SimpleJournal.Dialogs
 {
@@ -45,8 +46,11 @@ namespace SimpleJournal.Dialogs
                     return PaperType.Blanco;
                 else if (ToggleButtonChequered.IsChecked.Value)
                     return PaperType.Chequeued;
-                else
-                    return PaperType.Ruled;
+                else if (ToggleButtonDotted.IsChecked.Value)
+                    return PaperType.Dotted;
+
+
+                return PaperType.Ruled;
             }
         }
 
@@ -83,7 +87,7 @@ namespace SimpleJournal.Dialogs
         {
             InitializeComponent();
             HideMinimizeButton(this);
-            toggleButtons = new ToggleButton[] { ToggleButtonBlanko, ToggleButtonChequered, ToggleButtonRuled };
+            toggleButtons = new ToggleButton[] { ToggleButtonDotted, ToggleButtonChequered, ToggleButtonRuled, ToggleButtonBlanko };
             this.pages = pages;
 
             RefreshListView();
@@ -93,6 +97,7 @@ namespace SimpleJournal.Dialogs
                 case PaperType.Blanco: ToggleButtonBlanko.IsChecked = true; break;
                 case PaperType.Chequeued: ToggleButtonChequered.IsChecked = true; break;
                 case PaperType.Ruled: ToggleButtonRuled.IsChecked = true; break;
+                case PaperType.Dotted: ToggleButtonDotted.IsChecked = true; break;
             }
 
             // Select first page at start
@@ -105,16 +110,19 @@ namespace SimpleJournal.Dialogs
                 ToggleButtonBlanko,
                 ToggleButtonChequered,
                 ToggleButtonRuled,
+                ToggleButtonDotted,
                 btnIncreaseZoom,
                 btnDecreaseZoom,
                 ButtonClearPage,
                 ButtonDeletePage,
 
                 ButtonInsertPageBeforeIndexChequered,
+                ButtonInsertPageBeforeIndexDotted,
                 ButtonInsertPageBeforeIndexBlanko,
                 ButtonInsertPageBeforeIndexRuled,
 
                 ButtonInsertPageAfterIndexChequered,
+                ButtonInsertPageAfterIndexDotted,
                 ButtonInsertPageAfterIndexBlanko,
                 ButtonInsertPageAfterIndexRuled,
 
@@ -177,6 +185,8 @@ namespace SimpleJournal.Dialogs
                 result = Properties.Resources.strPageManagmentToggleButtonChequered;
             else if (sender == ToggleButtonRuled)
                 result = Properties.Resources.strPageManagmentToggleButtonRuled;
+            else if (sender == ToggleButtonDotted)
+                result = Properties.Resources.strPageManagmentToggleButtonDotted;
             else if (sender == btnIncreaseZoom)
                 result = Properties.Resources.strPageManagmentButtonIncreaseZoom;
             else if (sender == btnDecreaseZoom)
@@ -187,12 +197,16 @@ namespace SimpleJournal.Dialogs
                 result = Properties.Resources.strPageManagmentButtonDeletePage;
             else if (sender == ButtonInsertPageBeforeIndexChequered)
                 result = Properties.Resources.strPageManagmentButtonInsertPageBeforeIndexChequered;
+            else if (sender == ButtonInsertPageBeforeIndexDotted)
+                result = Properties.Resources.strPageManagmentButtonInsertPageBeforeIndexDotted;
             else if (sender == ButtonInsertPageBeforeIndexBlanko)
                 result = Properties.Resources.strPageManagmentButtonInsertPageBeforeIndexBlanko;
             else if (sender == ButtonInsertPageBeforeIndexRuled)
                 result = Properties.Resources.strPageManagmentButtonInsertPageBeforeIndexRuled;
             else if (sender == ButtonInsertPageAfterIndexChequered)
                 result = Properties.Resources.strPageManagmentButtonInsertPageAfterIndexChequered;
+            else if (sender == ButtonInsertPageAfterIndexDotted)
+                result = Properties.Resources.strPageManagmentButtonInsertPageAfterIndexDotted;
             else if (sender == ButtonInsertPageAfterIndexBlanko)
                 result = Properties.Resources.strPageManagmentButtonInsertPageAfterIndexBlanko;
             else if (sender == ButtonInsertPageAfterIndexRuled)
@@ -223,6 +237,7 @@ namespace SimpleJournal.Dialogs
                 case PaperType.Blanco: template = new Blanco(); break;
                 case PaperType.Chequeued: template = new Chequered(); break;
                 case PaperType.Ruled: template = new Ruled(); break;
+                case PaperType.Dotted: template = new Dotted(); break;
             }
 
             // Make sure canvas is non editable
@@ -279,6 +294,7 @@ namespace SimpleJournal.Dialogs
                     case PaperType.Blanco: tb = ToggleButtonBlanko; break;
                     case PaperType.Chequeued: tb = ToggleButtonChequered; break;
                     case PaperType.Ruled: tb = ToggleButtonRuled; break;
+                    case PaperType.Dotted: tb = ToggleButtonDotted; break;
                 }
 
                 tb.IsChecked = true;
@@ -516,6 +532,11 @@ namespace SimpleJournal.Dialogs
             InsertPageBeforeIndex(PaperType.Chequeued);
         }
 
+        private void ButtonInsertPageBeforeIndexDotted_Click(object sender, RoutedEventArgs e)
+        {
+            InsertPageBeforeIndex(PaperType.Dotted);
+        }
+
         private void ButtonInsertPageBeforeIndexRuled_Click(object sender, RoutedEventArgs e)
         {
             InsertPageBeforeIndex(PaperType.Ruled);
@@ -531,6 +552,11 @@ namespace SimpleJournal.Dialogs
         private void ButtonInsertPageAfterIndexBlanko_Click(object sender, RoutedEventArgs e)
         {
             InsertPageAfterIndex(PaperType.Blanco);
+        }
+
+        private void ButtonInsertPageAfterIndexDotted_Click(object sender, RoutedEventArgs e)
+        {
+            InsertPageAfterIndex(PaperType.Dotted);
         }
 
         private void ButtonInsertPageAfterIndexRuled_Click(object sender, RoutedEventArgs e)

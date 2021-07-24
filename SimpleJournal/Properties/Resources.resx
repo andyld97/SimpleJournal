@@ -237,7 +237,6 @@ Many thanks ...
   </data>
   <data name="strBackwards" xml:space="preserve">
     <value>Undo</value>
-    
   </data>
   <data name="strBackwardsDescription" xml:space="preserve">
     <value>Undos the last action</value>
@@ -1173,7 +1172,7 @@ Click on No to continue to receive this message!</value>
     <comment>MainWindow.xaml</comment>
   </data>
   <data name="strReleaseDate" xml:space="preserve">
-    <value>07/20/2021 3:25 PM</value>
+    <value>07/24/2021 12:05 AM</value>
     <comment>About.xaml</comment>
   </data>
   <data name="strRemove" xml:space="preserve">
@@ -1790,5 +1789,14 @@ Here I would like to give you some important hints, which will help you to handl
   <data name="strDottet" xml:space="preserve">
     <value>Dotted</value>
     <comment>*</comment>
+  </data>
+  <data name="strPageManagmentButtonInsertPageBeforeIndexDotted" xml:space="preserve">
+    <value>Inserts a dotted page before the current page</value>
+  </data>
+  <data name="strPageManagmentButtonInsertPageAfterIndexDotted" xml:space="preserve">
+    <value>Inserts a dotted page after the current page</value>
+  </data>
+  <data name="strPageManagmentToggleButtonDotted" xml:space="preserve">
+    <value>Changes the current page to the paper format: Dotted</value>
   </data>
 </root>
