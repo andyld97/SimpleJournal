@@ -884,6 +884,7 @@ namespace SimpleJournal
                 case PaperType.Blanco: resourceImageName = "addblankopage.png"; break;
                 case PaperType.Chequeued: resourceImageName = "addchequeredpage.png"; break;
                 case PaperType.Ruled: resourceImageName = "addruledpage.png"; break;
+                case PaperType.Dotted: resourceImageName = "adddotted.png"; break;
             }
 
             // Switch icon to paperType

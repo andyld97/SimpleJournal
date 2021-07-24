@@ -25,7 +25,8 @@ namespace SimpleJournal.Controls.Templates
             int index;
             if (Settings.Instance.PaperTypeLastInserted == PaperType.Chequeued) index = 0;
             else if (Settings.Instance.PaperTypeLastInserted == PaperType.Ruled) index = 1;
-            else index = 2;
+            else if (Settings.Instance.PaperTypeLastInserted == PaperType.Blanco) index = 2;
+            else index = 3;
 
             ListBoxPageType.SelectedIndex = index;
         }
@@ -50,6 +51,7 @@ namespace SimpleJournal.Controls.Templates
                 case 0: Settings.Instance.PaperTypeLastInserted = PaperType.Chequeued; break;
                 case 1: Settings.Instance.PaperTypeLastInserted = PaperType.Ruled; break;
                 case 2: Settings.Instance.PaperTypeLastInserted = PaperType.Blanco; break;
+                case 3: Settings.Instance.PaperTypeLastInserted = PaperType.Dotted; break;
             }
             Settings.Instance.Save();
 

@@ -95,6 +95,10 @@
     <DefineConstants>TRACE;UWP</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="resources\adddotted.png" />
+    <None Remove="resources\dotted.png" />
+  </ItemGroup>
+  <ItemGroup>
     <Reference Include="Serialization, Version=1.0.0.1, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\External Libraries\Serialization.dll</HintPath>
@@ -229,6 +233,12 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resources\adddotted.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resources\dotted.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="resources\polygon.png" />
