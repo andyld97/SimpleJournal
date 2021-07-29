@@ -1770,7 +1770,7 @@ Hier möchte ich Ihnen noch ein paar wichtige Hinweise geben, die Ihnen helfen w
     <comment>MainWindow.xaml</comment>
   </data>
   <data name="strSettings_DeactivateTouchScreenIfInForeground_Explanation" xml:space="preserve">
-    <value>Deaktivert den Touchscreen, wenn SimpleJournal im Fordergrund ist, aber aktiviert ihn auch sobald SimpleJournal nicht mehr im Fordergrund ist. Diese Option ist nützlich, damit der Touchscreen außerhalb von SimpleJournal weiterhin verwendet werden kann, um z.B. in PDF-Dokumenten zu scrollen!</value>
+    <value>Deaktivert den Touchscreen, wenn SimpleJournal im Vordergrund ist, aber aktiviert ihn auch sobald SimpleJournal nicht mehr im Vordergrund ist. Diese Option ist nützlich, damit der Touchscreen außerhalb von SimpleJournal weiterhin verwendet werden kann, um z.B. in PDF-Dokumenten zu scrollen!</value>
     <comment>*</comment>
   </data>
   <data name="strSettings_DisableTouchscreenIfInForeground" xml:space="preserve">

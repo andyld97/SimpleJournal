@@ -2086,7 +2086,7 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Ändert die aktuelle Seite auf das Papierformat: Dotted (Gepunkted).
+        ///   Looks up a localized string similar to Changes the current page to the paper format: Dotted.
         /// </summary>
         public static string strPageManagmentToggleButtonDotted {
             get {

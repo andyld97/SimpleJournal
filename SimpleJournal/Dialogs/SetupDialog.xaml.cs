@@ -39,6 +39,9 @@ namespace SimpleJournal.Dialogs
                 previewInputGesture
             };
 
+            foreach (var prev in previewCanvas)
+                prev.PaperType = PaperType.Chequeued;
+
             btnTextMarker.DropDown = textMarkerTemplate;
 
             textMarkerTemplate.SetTextMarker();
