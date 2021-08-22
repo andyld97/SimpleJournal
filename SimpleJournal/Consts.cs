@@ -35,7 +35,8 @@ namespace SimpleJournal
         #region Pens
         public const int AMOUNT_PENS = 4;
 
-        public static Data.Color[] PEN_COLORS = new Data.Color[] {
+        public static Data.Color[] PEN_COLORS = new Data.Color[] 
+        {
             new Data.Color(0, 0, 0), // black
             new Data.Color(180, 30, 40), // red
             new Data.Color(30, 190, 20), // green
@@ -79,7 +80,7 @@ namespace SimpleJournal
         #region Scrollbar
         public const int ScrollBarDefaultWidth = 17;
         public const int ScrollBarExtendedWidth = 30;
-#endregion
+        #endregion
 
         #region Insert
         public const double InsertImagePositionX = 200D;
@@ -88,7 +89,7 @@ namespace SimpleJournal
         public const double InsertImageHeight = 200D;
         public const double InsertTextWidth = 50D;
         public const double InsertTextHeight = 50D;
-#endregion
+        #endregion
 
         #region TextMarker
         public const double TextMarkerHeight = 30.0;

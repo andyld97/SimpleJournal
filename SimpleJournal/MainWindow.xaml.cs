@@ -30,7 +30,6 @@ using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Windows.Threading;
-using static SimpleJournal.Data.Enums;
 using Pen = SimpleJournal.Data.Pen;
 
 namespace SimpleJournal
@@ -991,7 +990,7 @@ namespace SimpleJournal
             RefreshSideBar();
         }
 
-        private void RulerDropDownTemplate_OnChangedRulerMode(Settings.RulerMode mode)
+        private void RulerDropDownTemplate_OnChangedRulerMode(RulerMode mode)
         {
             ApplyToAllCanvas((DrawingCanvas dc) => {
                 dc.SetRulerMode(mode);
@@ -1082,7 +1081,7 @@ namespace SimpleJournal
                 page.Canvas.SetInsertMode(); // Something to insert
 
             if (currentTool == Tools.Ruler)
-                page.Canvas.SetRulerMode(Settings.RulerMode.Normal);
+                page.Canvas.SetRulerMode(RulerMode.Normal);
             else if (currentTool == Tools.FreeHandPolygon)
                 page.Canvas.SetFreeHandPolygonMode(polygonDropDownTemplate);
             else if (currentTool == Tools.Form)
@@ -3236,7 +3235,7 @@ namespace SimpleJournal
 
         public void ApplyBackground()
         {
-            if (Settings.Instance.PageBackground == Settings.Background.Default)
+            if (Settings.Instance.PageBackground == SimpleJournal.Background.Default)
             {
                 mainScrollView.Background = Consts.DefaultBackground;
                 return;
@@ -3248,14 +3247,14 @@ namespace SimpleJournal
 
                 switch (Settings.Instance.PageBackground)
                 {
-                    case Settings.Background.Default: mainScrollView.Background = Consts.DefaultBackground; break;
-                    case Settings.Background.Blue: imageFileName = "blue"; break;
-                    case Settings.Background.Sand: imageFileName = "sand"; break;
-                    case Settings.Background.Wooden1: imageFileName = "wooden-1"; break;
-                    case Settings.Background.Wooden2: imageFileName = "wooden-2"; break;
+                    case SimpleJournal.Background.Default: mainScrollView.Background = Consts.DefaultBackground; break;
+                    case SimpleJournal.Background.Blue: imageFileName = "blue"; break;
+                    case SimpleJournal.Background.Sand: imageFileName = "sand"; break;
+                    case SimpleJournal.Background.Wooden1: imageFileName = "wooden-1"; break;
+                    case SimpleJournal.Background.Wooden2: imageFileName = "wooden-2"; break;
                 } 
 
-                if (Settings.Instance.PageBackground != Settings.Background.Custom)
+                if (Settings.Instance.PageBackground != SimpleJournal.Background.Custom)
                 {
                     string uri = $"pack://application:,,,/SimpleJournal;component/resources/backgrounds/{imageFileName}.jpg";
                     ImageBrush imageBrush = new ImageBrush(new BitmapImage(new Uri(uri))) { Stretch = Stretch.UniformToFill };

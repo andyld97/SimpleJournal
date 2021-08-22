@@ -1,6 +1,4 @@
-﻿using static SimpleJournal.Data.Enums;
-
-namespace SimpleJournal.Controls.Templates
+﻿namespace SimpleJournal.Controls.Templates
 {
     /// <summary>
     /// Interaktionslogik für PlotDropDownTemplate.xaml

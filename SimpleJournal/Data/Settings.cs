@@ -171,58 +171,6 @@ namespace SimpleJournal.Data
         /// </summary>
         public bool DisableTouchScreenIfInForeground { get; set; } = false;
 
-        public enum RulerMode : int
-        {
-            /// <summary>
-            /// Just a normal Stroke which will be added to the StrokeCollection
-            /// </summary>
-            Normal = 0,
-
-            /// <summary>
-            /// It's a line like this: ------- --------- --------
-            /// </summary>
-            Dashed = 1,
-
-            /// <summary>
-            /// /// It's a line like this: .......................
-            /// </summary>
-            Dottet = 2,
-        }
-
-        public enum Background : int
-        {
-            /// <summary>
-            /// The normal default background
-            /// </summary>
-            Default = 0,
-
-            /// <summary>
-            /// A wooden texture as background
-            /// </summary>
-            Wooden1 = 1,
-
-            /// <summary>
-            /// Another wooden texture as background
-            /// </summary>
-            Wooden2 = 2,
-
-            /// <summary>
-            /// Sand from a beach as background
-            /// </summary>
-            Sand = 3,
-
-            /// <summary>
-            /// A simple blue background, which looks like water
-            /// </summary>
-            Blue = 4,
-
-
-            /// <summary>
-            /// A custom defined background
-            /// </summary>
-            Custom = 100
-        }
-
         public Settings()
         {
 

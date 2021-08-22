@@ -9,7 +9,7 @@ namespace SimpleJournal.Controls.Templates
     /// </summary>
     public partial class RulerDropDownTemplate : DropDownTemplate
     {
-        public delegate void onChangedRulerMode(Settings.RulerMode mode);
+        public delegate void onChangedRulerMode(RulerMode mode);
         public event onChangedRulerMode OnChangedRulerMode;
 
         private readonly bool isInitalized = false;
@@ -35,7 +35,7 @@ namespace SimpleJournal.Controls.Templates
             if (lstBoxChooseRulerMode.SelectedIndex == -1)
                 return;
 
-            OnChangedRulerMode?.Invoke((Settings.RulerMode)lstBoxChooseRulerMode.SelectedIndex);
+            OnChangedRulerMode?.Invoke((RulerMode)lstBoxChooseRulerMode.SelectedIndex);
             this.CloseDropDown();
         }
 
