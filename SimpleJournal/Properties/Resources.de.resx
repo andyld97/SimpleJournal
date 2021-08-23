@@ -1268,7 +1268,7 @@ Klicken Sie auf Nein, um diesen Hinweis weiterhin zu erhalten!</value>
     <value>Hintergrund</value>
     <comment>*</comment>
   </data>
-  <data name="strSettingsCeckBoxDisableTouchscreen" xml:space="preserve">
+  <data name="strSettingsCheckBoxDisableTouchscreen" xml:space="preserve">
     <value>Windows Touchscreen beim Starten deaktivieren</value>
     <comment>*</comment>
   </data>
@@ -1277,7 +1277,7 @@ Klicken Sie auf Nein, um diesen Hinweis weiterhin zu erhalten!</value>
     <comment>*</comment>
   </data>
   <data name="strSettingsDisableTouchExplanation" xml:space="preserve">
-    <value>Deaktiviert den Touchscreen beim Starten und aktiviert ihn beim Beenden. Diese Option kann sinnvoll sein, wenn Sie mit einem Stift schreiben, dann können Sie die Hand auf das Display legen, ohne dass Ihre Hand als Eingabe erkannt wird. Dies ist in der Store-Version nicht möglich, allerdings gibt es auf meiner Homepage ein Tool dafür:</value>
+    <value>Deaktiviert den Touchscreen beim Starten und aktiviert ihn beim Beenden. Diese Option kann sinnvoll sein, wenn Sie mit einem Stift schreiben, dann können Sie die Hand auf das Display legen, ohne dass Ihre Hand als Eingabe erkannt wird.</value>
     <comment>*</comment>
   </data>
   <data name="strSettingsDisableTouchscreenTitle" xml:space="preserve">
@@ -1796,5 +1796,11 @@ Hier möchte ich Ihnen noch ein paar wichtige Hinweise geben, die Ihnen helfen w
   </data>
   <data name="strPageManagmentToggleButtonDotted" xml:space="preserve">
     <value>Ändert die aktuelle Seite auf das Papierformat: Dotted (Gepunkted)</value>
+  </data>
+  <data name="strSettingsDialogTouchDeviceManagerDescription" xml:space="preserve">
+    <value>Aufgrund von fehlenden Berechtigungen ist es in dieser Version leider nicht möglich, den Touchscreen automatisch zu deaktivieren. Daher gibt des hier den Touchscreen Device Manager zum Download. Damit können Sie den Touchscreen vor dem Arbeiten deaktivieren und danach wieder aktivieren (sofern dies notwendig ist). Das Programm funktioniert analog zum Geräte-Manager und benötigt Administrator-Rechte!</value>
+  </data>
+  <data name="strSettingsDownloadTouchDeviceManager" xml:space="preserve">
+    <value>Touchscreen Device Manager herunterladen</value>
   </data>
 </root>

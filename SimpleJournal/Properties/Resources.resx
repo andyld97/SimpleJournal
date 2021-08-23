@@ -1291,17 +1291,18 @@ Click on No to continue to receive this message!</value>
   <data name="strSettingsBackgroundHeader" xml:space="preserve">
     <value>Background</value>
   </data>
-  <data name="strSettingsCeckBoxDisableTouchscreen" xml:space="preserve">
+  <data name="strSettingsCheckBoxDisableTouchscreen" xml:space="preserve">
     <value>Disable Windows touchscreen at startup</value>
   </data>
   <data name="strSettingsClearLastOpenedDocumentsToolTip" xml:space="preserve">
     <value>Clears the list of recently opened documents in the menu</value>
   </data>
   <data name="strSettingsDisableTouchExplanation" xml:space="preserve">
-    <value>Deactivates the touch screen on startup and reactivates it on exit. This option can be useful if you write with a pen, then you can put your hand on the display without your hand being recognized as input. This is not possible in the store version, but there is a tool for this on my homepage:</value>
+    <value>Deactivates the touch screen on startup and reactivates it on exit. This option can be useful if you write with a pen, then you can put your hand on the display without your hand being recognized as input.</value>
   </data>
   <data name="strSettingsDisableTouchscreenTitle" xml:space="preserve">
     <value>Disable Touchscreen (For advanced users)Disable Touchscreen (For advanced users)</value>
+    <comment>SettingsDialog.xaml</comment>
   </data>
   <data name="strSettingsDisableTouchUWP1" xml:space="preserve">
     <value>SimpleJournal cannot differentiate between pen and finger input or there is no way to disable finger input completely.</value>
@@ -1798,5 +1799,11 @@ Here I would like to give you some important hints, which will help you to handl
   </data>
   <data name="strPageManagmentToggleButtonDotted" xml:space="preserve">
     <value>Changes the current page to the paper format: Dotted</value>
+  </data>
+  <data name="strSettingsDownloadTouchDeviceManager" xml:space="preserve">
+    <value>Download Touchscreen Device Manager</value>
+  </data>
+  <data name="strSettingsDialogTouchDeviceManagerDescription" xml:space="preserve">
+    <value>Due to missing permissions, it is unfortunately not possible to automatically deactivate the touchscreen in this version. Therefore, the Touchscreen Device Manager is available for download here. This allows you to deactivate the touchscreen before working and activate it again afterwards (if necessary). The tool works in the same way as the device manager and requires administrator rights!</value>
   </data>
 </root>

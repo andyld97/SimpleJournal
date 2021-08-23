@@ -59,6 +59,10 @@ namespace SimpleJournal
 
 #if UWP
             TabTouch.Visibility = Visibility.Collapsed;
+            TabTouchUWP.Visibility = Visibility.Visible;
+#else 
+            TabTouch.Visibility = Visibility.Visible;
+            TabTouchUWP.Visibility = Visibility.Collapsed;
 #endif
 
             // Apply background settings

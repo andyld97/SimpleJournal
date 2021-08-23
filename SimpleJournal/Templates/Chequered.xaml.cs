@@ -17,12 +17,12 @@ namespace SimpleJournal.Templates
             // Load the correct drawing brush for the canvas
             if (Settings.Instance.UseOldChequeredPattern)
             {
-                if (this.FindResource("OldChequeredBrush") is DrawingBrush drawingBrush)
+                if (FindResource("OldChequeredBrush") is DrawingBrush drawingBrush)
                     canvas.Background = drawingBrush;
             }
             else
             {
-                if (this.FindResource("CurrentChequeredBrush") is DrawingBrush drawingBrush)
+                if (FindResource("CurrentChequeredBrush") is DrawingBrush drawingBrush)
                     canvas.Background = drawingBrush;
             }
         }

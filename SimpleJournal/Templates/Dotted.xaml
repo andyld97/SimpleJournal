@@ -8,7 +8,7 @@
       Height="29.7cm" Width="21cm"
       Title="Dottet">
     <Page.Resources>      
-        <DrawingBrush Stretch="None" TileMode="Tile" x:Key="DottetBrush" Viewport="0,0,40,40" ViewportUnits="Absolute">
+        <DrawingBrush Stretch="None" TileMode="Tile" x:Key="DottetBrush" Viewport="0,0,20,20" ViewportUnits="Absolute">
             <DrawingBrush.Drawing>
                 <GeometryDrawing>
                     <GeometryDrawing.Geometry>
