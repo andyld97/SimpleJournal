@@ -1,5 +1,4 @@
 ﻿using System.Windows.Controls.Primitives;
-using static SimpleJournal.Data.Enums;
 
 namespace SimpleJournal.Controls.Templates
 {

@@ -16,7 +16,6 @@ using System.Windows.Markup;
 using System.Windows.Media;
 using System.Windows.Shapes;
 using System.Xml;
-using static SimpleJournal.Data.Enums;
 using Action = SimpleJournal.Actions.Action;
 
 namespace SimpleJournal
@@ -72,7 +71,7 @@ namespace SimpleJournal
         private Point p1 = new Point();
         private Point p2 = new Point();
         private int pointCounter = 0;
-        private Settings.RulerMode rulerMode = Settings.RulerMode.Normal;
+        private RulerMode rulerMode = RulerMode.Normal;
         private Line line = new Line();
         private Shape currentShape = new Rectangle();
         private Plot plot = new Plot();
@@ -222,7 +221,7 @@ namespace SimpleJournal
             handleCollectionChanged = true;
         }
 
-        public void SetRulerMode(Settings.RulerMode mode)
+        public void SetRulerMode(RulerMode mode)
         {
             rulerMode = mode;
             pointCounter = 0;
@@ -788,7 +787,7 @@ namespace SimpleJournal
                         pointCollection.RemoveAt(1);
                     pointCollection.Add(new StylusPoint(p2.X, p2.Y));
 
-                    if (rulerMode == Settings.RulerMode.Normal)
+                    if (rulerMode == RulerMode.Normal)
                     {
                         Strokes.Remove(currentStroke);
                         var stroke = new System.Windows.Ink.Stroke(pointCollection) { DrawingAttributes = DefaultDrawingAttributes.Clone() };
@@ -895,7 +894,7 @@ namespace SimpleJournal
                 }
                 else if (!isInFormMode)
                 {
-                    if (rulerMode == Settings.RulerMode.Normal)
+                    if (rulerMode == RulerMode.Normal)
                     {
                         if (currentStroke == null)
                         {
@@ -930,13 +929,13 @@ namespace SimpleJournal
                         // *** </Workaround>
                         switch (rulerMode)
                         {
-                            case Settings.RulerMode.Dottet:
+                            case RulerMode.Dottet:
                                 {
                                     line.StrokeDashArray = Consts.LineStrokeDottetDashArray;
                                     line.StrokeDashCap = PenLineCap.Round;
                                 }
                                 break;
-                            case Settings.RulerMode.Dashed:
+                            case RulerMode.Dashed:
                                 {
                                     line.StrokeDashArray = Consts.LineStrokeDashedDashArray;
                                     line.StrokeDashCap = PenLineCap.Flat;

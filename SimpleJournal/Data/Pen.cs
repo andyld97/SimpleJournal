@@ -1,7 +1,10 @@
-﻿namespace SimpleJournal.Data
+﻿using System.Linq;
+using System.Windows;
+
+namespace SimpleJournal.Data
 {
     /// <summary>
-    /// Represents a pencil in simplejournal
+    /// Represents a pencil in SimpleJournal
     /// </summary>
     public class Pen
     {
@@ -20,15 +23,19 @@
             Height = height;
         }
 
-        public Pen() : this(new Color(), Consts.StrokeSizes[0].Width, Consts.StrokeSizes[0].Height)
+        public Pen() : this(new Color(), Consts.StrokeSizes.FirstOrDefault())
+        { }
+
+        public Pen(Color fontColor, Size size) : this(fontColor, size.Width, size.Height)
         { }
 
         public static Pen[] Load()
         {
             // Initalize pens
             Pen[] pens = new Pen[Consts.AMOUNT_PENS];
+            var firstSize = Consts.StrokeSizes.FirstOrDefault();
             for (int i = 0; i < Consts.AMOUNT_PENS; i++)
-                pens[i] = new Pen(Consts.PEN_COLORS[i], Consts.StrokeSizes[0].Width, Consts.StrokeSizes[1].Height);
+                pens[i] = new Pen(Consts.PEN_COLORS[i], firstSize);
 
             try
             {
@@ -66,34 +73,5 @@
 
             return pens;
         }
-    }
-
-    public class Color
-    {
-        public byte A { get; set; }
-
-        public byte R { get; set; }
-
-        public byte G { get; set; }
-
-        public byte B { get; set; }
-
-        public Color(byte a, byte r, byte g, byte b)
-        {
-            A = a;
-            R = r;
-            G = g;
-            B = b;
-        }
-
-        public Color(byte r, byte g, byte b) : this(255, r, g, b)
-        { }
-
-        // Black
-        public Color() : this(255, 0, 0, 0)
-        { }
-
-        public Color(System.Windows.Media.Color color) : this(color.A, color.R, color.G, color.B)
-        { }
     }
 }

@@ -1978,6 +1978,15 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Inserts a dotted page after the current page.
+        /// </summary>
+        public static string strPageManagmentButtonInsertPageAfterIndexDotted {
+            get {
+                return ResourceManager.GetString("strPageManagmentButtonInsertPageAfterIndexDotted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Inserts a ruled page after the current page.
         /// </summary>
         public static string strPageManagmentButtonInsertPageAfterIndexRuled {
@@ -2001,6 +2010,15 @@ namespace SimpleJournal.Properties {
         public static string strPageManagmentButtonInsertPageBeforeIndexChequered {
             get {
                 return ResourceManager.GetString("strPageManagmentButtonInsertPageBeforeIndexChequered", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Inserts a dotted page before the current page.
+        /// </summary>
+        public static string strPageManagmentButtonInsertPageBeforeIndexDotted {
+            get {
+                return ResourceManager.GetString("strPageManagmentButtonInsertPageBeforeIndexDotted", resourceCulture);
             }
         }
         
@@ -2064,6 +2082,15 @@ namespace SimpleJournal.Properties {
         public static string strPageManagmentToggleButtonChequered {
             get {
                 return ResourceManager.GetString("strPageManagmentToggleButtonChequered", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Changes the current page to the paper format: Dotted.
+        /// </summary>
+        public static string strPageManagmentToggleButtonDotted {
+            get {
+                return ResourceManager.GetString("strPageManagmentToggleButtonDotted", resourceCulture);
             }
         }
         
@@ -2464,7 +2491,7 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 07/20/2021 3:25 PM.
+        ///   Looks up a localized string similar to 08/24/2021 5:08 PM.
         /// </summary>
         public static string strReleaseDate {
             get {
@@ -2763,9 +2790,9 @@ namespace SimpleJournal.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Disable Windows touchscreen at startup.
         /// </summary>
-        public static string strSettingsCeckBoxDisableTouchscreen {
+        public static string strSettingsCheckBoxDisableTouchscreen {
             get {
-                return ResourceManager.GetString("strSettingsCeckBoxDisableTouchscreen", resourceCulture);
+                return ResourceManager.GetString("strSettingsCheckBoxDisableTouchscreen", resourceCulture);
             }
         }
         
@@ -2779,7 +2806,16 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Deactivates the touch screen on startup and reactivates it on exit. This option can be useful if you write with a pen, then you can put your hand on the display without your hand being recognized as input. This is not possible in the store version, but there is a tool for this on my homepage:.
+        ///   Looks up a localized string similar to Due to missing permissions, it is unfortunately not possible to automatically deactivate the touchscreen in this version. Therefore, the Touchscreen Device Manager is available for download here. This allows you to deactivate the touchscreen before working and activate it again afterwards (if necessary). The tool works in the same way as the device manager and requires administrator rights!.
+        /// </summary>
+        public static string strSettingsDialogTouchDeviceManagerDescription {
+            get {
+                return ResourceManager.GetString("strSettingsDialogTouchDeviceManagerDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Deactivates the touch screen on startup and reactivates it on exit. This option can be useful if you write with a pen, then you can put your hand on the display without your hand being recognized as input..
         /// </summary>
         public static string strSettingsDisableTouchExplanation {
             get {
@@ -2838,6 +2874,15 @@ namespace SimpleJournal.Properties {
         public static string strSettingsDisableTouchUWP5 {
             get {
                 return ResourceManager.GetString("strSettingsDisableTouchUWP5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Download Touchscreen Device Manager.
+        /// </summary>
+        public static string strSettingsDownloadTouchDeviceManager {
+            get {
+                return ResourceManager.GetString("strSettingsDownloadTouchDeviceManager", resourceCulture);
             }
         }
         

@@ -194,18 +194,24 @@
                 </ScrollViewer>
             </TabItem>
             <TabItem x:Name="TabTouch" Header="{x:Static res:Resources.strTouchScreen}">
-                <StackPanel Margin="3">
-                    <Border BorderThickness="1" BorderBrush="LightGray" CornerRadius="3" Margin="0,2,0,0">
+                <StackPanel Margin="3,0,0,0">
+                    <controls:SettingsItemControl SettingName="{x:Static res:Resources.strSettingsCheckBoxDisableTouchscreen}" Description="{x:Static res:Resources.strSettingsDisableTouchExplanation}" SettingPropertyName="UseTouchScreenDisabling" UseBorder="True" />
+                    <controls:SettingsItemControl SettingName="{x:Static res:Resources.strSettings_DisableTouchscreenIfInForeground}" Description="{x:Static res:Resources.strSettings_DeactivateTouchScreenIfInForeground_Explanation}" SettingPropertyName="DisableTouchScreenIfInForeground" />
+                </StackPanel>
+            </TabItem>
+            <TabItem x:Name="TabTouchUWP" Header="{x:Static res:Resources.strTouchScreen}" Visibility="Collapsed">
+                <StackPanel Margin="0,2,-3,0">
+                    <Border BorderBrush="LightGray" BorderThickness="1" CornerRadius="3" Margin="3">
                         <StackPanel>
-                            <controls:SettingsItemControl SettingName="{x:Static res:Resources.strSettingsCeckBoxDisableTouchscreen}" Description="{x:Static res:Resources.strSettingsDisableTouchExplanation}" SettingPropertyName="UseTouchScreenDisabling" UseBorder="False" />
                             <TextBlock Margin="5,2,2,5">
                                 <Hyperlink x:Name="DownloadTDM" RequestNavigate="DownloadTDM_RequestNavigate" NavigateUri="https://simplejournal.ca-soft.net/download.php?tdm=1">
-                                    <Run Text="Download" />
+                                    <Run Text="{x:Static res:Resources.strSettingsDownloadTouchDeviceManager}" />
                                 </Hyperlink>
                             </TextBlock>
+
+                            <TextBlock TextWrapping="Wrap" Text="{x:Static res:Resources.strSettingsDialogTouchDeviceManagerDescription}" Margin="5,2,2,5" />
                         </StackPanel>
                     </Border>
-                    <controls:SettingsItemControl SettingName="{x:Static res:Resources.strSettings_DisableTouchscreenIfInForeground}" Description="{x:Static res:Resources.strSettings_DeactivateTouchScreenIfInForeground_Explanation}" SettingPropertyName="DisableTouchScreenIfInForeground" />
                 </StackPanel>
             </TabItem>
         </TabControl>

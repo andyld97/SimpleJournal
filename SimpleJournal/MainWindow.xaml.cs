@@ -30,7 +30,6 @@ using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Windows.Threading;
-using static SimpleJournal.Data.Enums;
 using Pen = SimpleJournal.Data.Pen;
 
 namespace SimpleJournal
@@ -529,9 +528,14 @@ namespace SimpleJournal
             string message = string.Empty;
 
             if (e.ExceptionObject != null && e.ExceptionObject is Exception ex)
-                message = ex.Message;
+            {
+                message = ex.ToString();
 
+                if (ex.InnerException != null)
+                    message += Environment.NewLine + Environment.NewLine + ex.InnerException.ToString();
+            }
             MessageBox.Show($"{Properties.Resources.strUnexceptedFailure}{Environment.NewLine}{Environment.NewLine}{message}{Environment.NewLine}{Environment.NewLine}{Properties.Resources.strUnexceptedFailureLine1}", Properties.Resources.strUnexceptedFailureTitle, MessageBoxButton.OK, MessageBoxImage.Error);
+
 
             // Try at least to create a backup - if SJ crashes - the user can restore the backup and everything is fine
             CreateBackup();
@@ -879,20 +883,32 @@ namespace SimpleJournal
         private void RefreshInsertIcon()
         {
             string resourceImageName = string.Empty;
+            // Switch icon to paperType
             switch (Settings.Instance.PaperTypeLastInserted)
             {
                 case PaperType.Blanco: resourceImageName = "addblankopage.png"; break;
                 case PaperType.Chequeued: resourceImageName = "addchequeredpage.png"; break;
                 case PaperType.Ruled: resourceImageName = "addruledpage.png"; break;
+                case PaperType.Dotted: resourceImageName = "adddotted.png"; break;
             }
 
-            // Switch icon to paperType
-            BitmapImage bitmapImage = new BitmapImage();
-            bitmapImage.BeginInit();
-            bitmapImage.UriSource = new Uri($"pack://application:,,,/SimpleJournal;component/resources/{resourceImageName}");
-            bitmapImage.EndInit();
+            // In case of a new PaperType is not 100% supported/implemented
+            if (string.IsNullOrEmpty(resourceImageName))
+                return;
 
-            ButtonInsertNewPageIcon.Source = bitmapImage;
+            try
+            {
+                BitmapImage bitmapImage = new BitmapImage();
+                bitmapImage.BeginInit();
+                bitmapImage.UriSource = new Uri($"pack://application:,,,/SimpleJournal;component/resources/{resourceImageName}");
+                bitmapImage.EndInit();
+
+                ButtonInsertNewPageIcon.Source = bitmapImage;
+            }
+            catch
+            {
+                // ignore - it's just an image which is empty then.
+            }
         }
 
         private void AddPageDropDownTemplate_AddPage(PaperType paperType)
@@ -974,7 +990,7 @@ namespace SimpleJournal
             RefreshSideBar();
         }
 
-        private void RulerDropDownTemplate_OnChangedRulerMode(Settings.RulerMode mode)
+        private void RulerDropDownTemplate_OnChangedRulerMode(RulerMode mode)
         {
             ApplyToAllCanvas((DrawingCanvas dc) => {
                 dc.SetRulerMode(mode);
@@ -1065,7 +1081,7 @@ namespace SimpleJournal
                 page.Canvas.SetInsertMode(); // Something to insert
 
             if (currentTool == Tools.Ruler)
-                page.Canvas.SetRulerMode(Settings.RulerMode.Normal);
+                page.Canvas.SetRulerMode(RulerMode.Normal);
             else if (currentTool == Tools.FreeHandPolygon)
                 page.Canvas.SetFreeHandPolygonMode(polygonDropDownTemplate);
             else if (currentTool == Tools.Form)
@@ -2095,87 +2111,6 @@ namespace SimpleJournal
                 }
             }
         }
-
-        private async void BtnManagePages_Click(object sender, RoutedEventArgs e)
-        {
-            var pgmd = new PageManagmentDialog(CurrentJournalPages.ToList());
-            var userResult = pgmd.ShowDialog();
-
-            if (userResult.HasValue && userResult.Value)
-            {
-                // Apply result
-                ClearJournal();
-
-                double currentScrollOffset = this.mainScrollView.VerticalOffset;
-                var dialog = new WaitingDialog(System.IO.Path.GetFileNameWithoutExtension(currentJournalTitle), 1) { Owner = this };
-                dialog.Show();
-
-                this.IsEnabled = false;
-                isInitalized = false;
-
-                try
-                {
-                    int countPages = 0;
-                    double progress = 0;
-
-                    // Load pages to iPages
-                    foreach (var page in pgmd.Result)
-                    {
-                        DrawingCanvas canvas = null;
-                        canvas = AddPage(GeneratePage(page.PaperPattern));
-
-                        if (countPages == 0)
-                        {
-                            // Set last modified canvas to this, because the old is non existing any more
-                            DrawingCanvas.LastModifiedCanvas = canvas;
-                        }
-
-                        progress = (countPages++ + 1) / (double)pgmd.Result.Count;
-                        dialog.SetProgress(progress, countPages, pgmd.Result.Count);
-
-                        StrokeCollection strokes = null;
-                        await Task.Run(() =>
-                        {
-                            using (System.IO.MemoryStream ms = new System.IO.MemoryStream())
-                            {
-                                ms.Write(page.Data, 0, page.Data.Length);
-                                ms.Position = 0;
-                                strokes = new StrokeCollection(ms);
-                            }
-                        }).ContinueWith(new Action<Task>((Task t) =>
-                        {
-                            Application.Current.Dispatcher.Invoke(new System.Action(() =>
-                            {
-                                canvas.Strokes = strokes;
-
-                                if (page.HasAdditionalResources)
-                                {
-                                    foreach (JournalResource jr in page.JournalResources)
-                                        JournalResource.AddJournalResourceToCanvas(jr, canvas);
-                                }
-                            }));
-                        }));
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(this, $"{Properties.Resources.strFailedToLoadJournal} {ex.Message}{Environment.NewLine}{Environment.NewLine}{ex.StackTrace}", Properties.Resources.strFailedToLoadJournalTitle, MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-                finally
-                {
-                    this.IsEnabled = true;
-                    dialog.Close();
-                    isInitalized = true;
-
-                    // Make sure that user will be asked to save
-                    DrawingCanvas.Change = true;
-
-                    // Apply old offset
-                    this.mainScrollView.ScrollToVerticalOffset(currentScrollOffset);
-                }
-            }
-        }
-
         private void BtnInsertNewPage_Click(object sender, EventArgs e)
         {
             AddNewPage(Settings.Instance.PaperTypeLastInserted);
@@ -2810,6 +2745,100 @@ namespace SimpleJournal
         }
         #endregion
 
+        #region Pagemanagment Dialog
+
+        private async Task ShowAndApplyPageManagmentDialog()
+        {
+            var pgmd = new PageManagmentDialog(CurrentJournalPages.ToList());
+            var userResult = pgmd.ShowDialog();
+
+            if (userResult.HasValue && userResult.Value)
+            {
+                // Apply result
+                ClearJournal();
+
+                double currentScrollOffset = this.mainScrollView.VerticalOffset;
+                var dialog = new WaitingDialog(System.IO.Path.GetFileNameWithoutExtension(currentJournalTitle), 1) { Owner = this };
+                dialog.Show();
+
+                this.IsEnabled = false;
+                isInitalized = false;
+
+                try
+                {
+                    int countPages = 0;
+                    double progress = 0;
+
+                    // Load pages to iPages
+                    foreach (var page in pgmd.Result)
+                    {
+                        DrawingCanvas canvas = null;
+                        canvas = AddPage(GeneratePage(page.PaperPattern));
+
+                        if (countPages == 0)
+                        {
+                            // Set last modified canvas to this, because the old is non existing any more
+                            DrawingCanvas.LastModifiedCanvas = canvas;
+                        }
+
+                        progress = (countPages++ + 1) / (double)pgmd.Result.Count;
+                        dialog.SetProgress(progress, countPages, pgmd.Result.Count);
+
+                        StrokeCollection strokes = null;
+                        await Task.Run(() =>
+                        {
+                            using (System.IO.MemoryStream ms = new System.IO.MemoryStream())
+                            {
+                                ms.Write(page.Data, 0, page.Data.Length);
+                                ms.Position = 0;
+                                strokes = new StrokeCollection(ms);
+                            }
+                        }).ContinueWith(new Action<Task>((Task t) =>
+                        {
+                            Application.Current.Dispatcher.Invoke(new System.Action(() =>
+                            {
+                                canvas.Strokes = strokes;
+
+                                if (page.HasAdditionalResources)
+                                {
+                                    foreach (JournalResource jr in page.JournalResources)
+                                        JournalResource.AddJournalResourceToCanvas(jr, canvas);
+                                }
+                            }));
+                        }));
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(this, $"{Properties.Resources.strFailedToLoadJournal} {ex.Message}{Environment.NewLine}{Environment.NewLine}{ex.StackTrace}", Properties.Resources.strFailedToLoadJournalTitle, MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                finally
+                {
+                    this.IsEnabled = true;
+                    dialog.Close();
+                    isInitalized = true;
+
+                    // Make sure that user will be asked to save
+                    DrawingCanvas.Change = true;
+
+                    // Apply old offset
+                    mainScrollView.ScrollToVerticalOffset(currentScrollOffset);
+                }
+            }
+        }
+
+        private async void BtnManagePages_Click(object sender, RoutedEventArgs e)
+        {
+            await ShowAndApplyPageManagmentDialog();
+        }
+
+        private async void btnPageManagment_Click(object sender, RoutedEventArgs e)
+        {
+            await ShowAndApplyPageManagmentDialog();
+        }
+
+        #endregion
+
         #region Export
 
         private void btnExport_Click(object sender, RoutedEventArgs e)
@@ -3206,7 +3235,7 @@ namespace SimpleJournal
 
         public void ApplyBackground()
         {
-            if (Settings.Instance.PageBackground == Settings.Background.Default)
+            if (Settings.Instance.PageBackground == SimpleJournal.Background.Default)
             {
                 mainScrollView.Background = Consts.DefaultBackground;
                 return;
@@ -3218,14 +3247,14 @@ namespace SimpleJournal
 
                 switch (Settings.Instance.PageBackground)
                 {
-                    case Settings.Background.Default: mainScrollView.Background = Consts.DefaultBackground; break;
-                    case Settings.Background.Blue: imageFileName = "blue"; break;
-                    case Settings.Background.Sand: imageFileName = "sand"; break;
-                    case Settings.Background.Wooden1: imageFileName = "wooden-1"; break;
-                    case Settings.Background.Wooden2: imageFileName = "wooden-2"; break;
+                    case SimpleJournal.Background.Default: mainScrollView.Background = Consts.DefaultBackground; break;
+                    case SimpleJournal.Background.Blue: imageFileName = "blue"; break;
+                    case SimpleJournal.Background.Sand: imageFileName = "sand"; break;
+                    case SimpleJournal.Background.Wooden1: imageFileName = "wooden-1"; break;
+                    case SimpleJournal.Background.Wooden2: imageFileName = "wooden-2"; break;
                 } 
 
-                if (Settings.Instance.PageBackground != Settings.Background.Custom)
+                if (Settings.Instance.PageBackground != SimpleJournal.Background.Custom)
                 {
                     string uri = $"pack://application:,,,/SimpleJournal;component/resources/backgrounds/{imageFileName}.jpg";
                     ImageBrush imageBrush = new ImageBrush(new BitmapImage(new Uri(uri))) { Stretch = Stretch.UniformToFill };

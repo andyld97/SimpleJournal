@@ -2,7 +2,6 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using static SimpleJournal.Data.Enums;
 
 namespace SimpleJournal.Data
 {

@@ -1,8 +1,6 @@
 ﻿using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
-using static SimpleJournal.Data.Enums;
-
 namespace SimpleJournal.Controls
 {
     public class Plot : Canvas
