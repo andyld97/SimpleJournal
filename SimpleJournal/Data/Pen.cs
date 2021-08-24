@@ -1,4 +1,7 @@
-﻿namespace SimpleJournal.Data
+﻿using System.Linq;
+using System.Windows;
+
+namespace SimpleJournal.Data
 {
     /// <summary>
     /// Represents a pencil in SimpleJournal
@@ -20,15 +23,19 @@
             Height = height;
         }
 
-        public Pen() : this(new Color(), Consts.StrokeSizes[0].Width, Consts.StrokeSizes[0].Height)
+        public Pen() : this(new Color(), Consts.StrokeSizes.FirstOrDefault())
+        { }
+
+        public Pen(Color fontColor, Size size) : this(fontColor, size.Width, size.Height)
         { }
 
         public static Pen[] Load()
         {
             // Initalize pens
             Pen[] pens = new Pen[Consts.AMOUNT_PENS];
+            var firstSize = Consts.StrokeSizes.FirstOrDefault();
             for (int i = 0; i < Consts.AMOUNT_PENS; i++)
-                pens[i] = new Pen(Consts.PEN_COLORS[i], Consts.StrokeSizes[0].Width, Consts.StrokeSizes[1].Height);
+                pens[i] = new Pen(Consts.PEN_COLORS[i], firstSize);
 
             try
             {
