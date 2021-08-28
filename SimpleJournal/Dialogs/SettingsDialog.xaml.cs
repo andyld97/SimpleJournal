@@ -175,6 +175,7 @@ namespace SimpleJournal
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Themes"));
 
             string value = Settings.Instance.UseDarkMode ? "Dark" : "Light";
+            ComboBoxThemeChooser.ItemsSource = Themes;
             ComboBoxThemeChooser.SelectedItem = Themes.Where(p => p.DisplayName.Contains(Settings.Instance.Theme.Replace(".Colorful", string.Empty)) && p.DisplayName.Contains(value)).FirstOrDefault();
 
             Settings.Instance.Save();
