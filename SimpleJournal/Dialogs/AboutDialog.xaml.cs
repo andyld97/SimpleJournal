@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.Web.WebView2.Core;
+using Newtonsoft.Json;
 using System;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -13,6 +14,7 @@ namespace SimpleJournal
     public partial class AboutDialog : Window
     {
         private readonly HttpClient httpClient = new HttpClient();
+        private bool isLoaded = false;
 
         public AboutDialog()
         {
@@ -23,19 +25,17 @@ namespace SimpleJournal
             TextVersion.Text = $"{Consts.StoreVersion} (Store)";
 #endif
 
-            // Load changelog
-            try
-            {
-                txtChangelog.Navigate(string.Format(Consts.ChangelogUrl, Properties.Resources.strLang, Data.Settings.Instance.UseDarkMode ? 1 : 0));
-            }
-            catch (Exception)
-            { }
-
             Loaded += AboutDialog_Loaded;
         }
 
         private async void AboutDialog_Loaded(object sender, RoutedEventArgs e)
         {
+            // Prevent multiple calls
+            if (isLoaded)
+                return;
+
+            isLoaded = true;
+
             await Initialize();
         }
 
@@ -43,6 +43,17 @@ namespace SimpleJournal
         {
             try
             {
+                try
+                {
+                    // Load changelog
+                    var webView2Envoirnment = await CoreWebView2Environment.CreateAsync(null, Consts.WebView2CachePath);
+                    await BrowserChangelog.EnsureCoreWebView2Async(webView2Envoirnment);
+                    BrowserChangelog.Source = new Uri(string.Format(Consts.ChangelogUrl, Properties.Resources.strLang, Data.Settings.Instance.UseDarkMode ? 1 : 0));
+                }
+                catch (Exception)
+                { }
+
+                // Load version
                 string versionsJSON = await httpClient.GetStringAsync(Consts.VersionUrl);
                 dynamic result = JsonConvert.DeserializeObject(versionsJSON);
 
@@ -56,7 +67,7 @@ namespace SimpleJournal
                 newVersion = currentStoreVersion;
                 currentVersion = Consts.StoreVersion.ToString();
 #else
-                currentVersion = Consts.NormalVersion.ToString(); 
+                currentVersion = Consts.NormalVersion.ToString();
                 newVersion = currentNormalVersion;
 #endif
 
