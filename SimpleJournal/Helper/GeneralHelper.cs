@@ -616,9 +616,11 @@ namespace SimpleJournal
         {
 #if !UWP
              return false;
-#endif            
+#endif
 
+#pragma warning disable CS0162 // Unreachable code detected
             Dictionary<string, byte[]> resourcesToDeploy = new Dictionary<string, byte[]>()
+#pragma warning restore CS0162 // Unreachable code detected
             {
                 {  System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "journal", "SjFileAssoc.exe"),   Properties.Resources.SJFileAssoc },
                 {  System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "journal", "SJFileAssoc.exe.config"),  System.Text.Encoding.Default.GetBytes(  Properties.Resources.SJFileAssoc_exe) },

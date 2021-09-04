@@ -20,11 +20,11 @@ namespace SimpleJournal
         public static readonly SolidColorBrush DefaultBackground = new SolidColorBrush((System.Windows.Media.Color)(ColorConverter.ConvertFromString("#E1E1E1")));
 
         public static readonly string ChangelogUrl = "https://simplejournal.ca-soft.net/chg.php?lang={0}&dark={1}";
-        public static readonly string DonwloadUrl = "https://code-a-software.net/simplejournal/download.php";
-        public static readonly string VersionUrl = "https://code-a-software.net/simplejournal/versions.json";
-        public static readonly string FeedbackUrl = "https://code-a-software.net/simplejournal/feedback.php?name={0}&mail={1}&content={2}";
+        public static readonly string DonwloadUrl = "https://simplejournal.ca-soft.net/download.php";
+        public static readonly string VersionUrl = "https://simplejournal.ca-soft.net/versions.json";
+        public static readonly string FeedbackUrl = "https://simplejournal.ca-soft.net/feedback.php?name={0}&mail={1}&content={2}";
         public static readonly string HomePageUrl = "https://simplejournal.ca-soft.net";
-        public static readonly string HelpUrl = "https://code-a-software.net/simplejournal/index.php?page=help";
+        public static readonly string HelpUrl = "https://simplejournal.ca-soft.net/faq";
 
         public static readonly string UpdaterExe = "7244a3f048e82af354eb3cfa3089a3035ff8768f";
         public static readonly string UpdateSystemDotNetDotControllerDotdll = "bbc7224ccc544651d9d844f309721091860f0f92";
