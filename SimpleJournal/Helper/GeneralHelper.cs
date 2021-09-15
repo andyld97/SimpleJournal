@@ -615,7 +615,7 @@ namespace SimpleJournal
         public static bool InstallFileAssoc()
         {
 #if !UWP
-             return false;
+            return false;
 #endif
 
 #pragma warning disable CS0162 // Unreachable code detected
