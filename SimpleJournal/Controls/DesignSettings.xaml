@@ -1,0 +1,70 @@
+﻿<UserControl x:Class="SimpleJournal.Controls.DesignSettings"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SimpleJournal.Controls" xmlns:fluent="urn:fluent-ribbon"
+             mc:Ignorable="d" 
+             xmlns:controlzEx="urn:controlzex"
+             xmlns:res="clr-namespace:SimpleJournal.Properties" xmlns:simplejournal="clr-namespace:SimpleJournal" xmlns:templates="clr-namespace:SimpleJournal.Templates"
+             d:DesignWidth="400" d:DesignHeight="500">
+    <Border BorderBrush="{DynamicResource Fluent.Ribbon.Brushes.AccentBaseColorBrush}" BorderThickness="0">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Grid x:Name="GridTitleBar" Background="{DynamicResource WhiteBrush}">
+                <TextBlock Text="SimpleJournal" TextAlignment="Center" />
+            </Grid>
+
+            <DockPanel Background="#E1E1E1" Grid.Row="1">
+                <fluent:Ribbon IsMouseWheelScrollingEnabled="False" DockPanel.Dock="Top" BorderThickness="0">
+                    <fluent:Ribbon.Menu>
+                        <fluent:ApplicationMenu Header="{x:Static res:Resources.strFile}" DropDownHeight="0" MaxDropDownHeight="500" BorderBrush="Blue" />
+                    </fluent:Ribbon.Menu>
+
+                    <fluent:RibbonTabItem Header="Farben">
+                        <fluent:RibbonGroupBox Header="Darstellung">
+                            <fluent:ComboBox IsEditable="False" Header="Design:" Padding="4" SelectedIndex="0" Margin="0,8,0,0" x:Name="CheckBoxDisplayMode" SelectionChanged="CheckBoxDisplayMode_SelectionChanged">
+                                <ComboBox.Items>
+                                    <ComboBoxItem Content="{x:Static res:Resources.strLight}" />
+                                    <ComboBoxItem Content="{x:Static res:Resources.strDark}" />
+                                </ComboBox.Items>
+                            </fluent:ComboBox>
+
+                            <fluent:ComboBox x:Name="ComboBoxThemeChooser" Header="Akzent:" Margin="0,8,0,0" SelectionChanged="ComboBoxThemeChooser_SelectionChanged" MinWidth="200" IsEditable="False" ItemsSource="{Binding Themes}">
+                                <fluent:ComboBox.ItemTemplate>
+                                    <DataTemplate DataType="{x:Type controlzEx:Theme}">
+                                        <StackPanel Orientation="Horizontal">
+                                            <Ellipse Width="16" Height="16" Fill="{Binding ShowcaseBrush, Mode=OneWay}" />
+                                            <TextBlock Margin="5,0,0,0" Text="{Binding DisplayName}" />
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </fluent:ComboBox.ItemTemplate>
+                            </fluent:ComboBox>
+                        </fluent:RibbonGroupBox>
+                        <fluent:RibbonGroupBox Header="Weitere Einstellungen">
+                            <fluent:CheckBox x:Name="CheckBoxThemeIsColorful" Header="Akzentfarbe in der Titelleiste anzeigen" Checked="CheckBoxThemeIsColorful_Checked" Unchecked="CheckBoxThemeIsColorful_Checked" Margin="0,7,0,0" />
+                            <fluent:CheckBox Header="Fensterglowing-Effekt aktivieren" Margin="0,5,0,0" />
+                            <fluent:CheckBox Header="Scrollleiste vergrößern" Margin="0,5,0,0" />
+                        </fluent:RibbonGroupBox>
+                    </fluent:RibbonTabItem>
+
+                    <fluent:RibbonTabItem Header="Hintergrund">
+
+                    </fluent:RibbonTabItem>
+                </fluent:Ribbon>
+                
+                <ScrollViewer>
+                    <Frame>
+                        <Frame.Content>
+                            <templates:Chequered Background="White" Margin="50,0,50,0" />
+                        </Frame.Content>
+                    </Frame>
+                </ScrollViewer>
+            </DockPanel>
+        </Grid>
+    </Border>
+</UserControl>

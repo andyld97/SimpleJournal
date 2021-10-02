@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.Web.WebView2.Core;
+using Newtonsoft.Json;
 using System;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -12,7 +13,7 @@ namespace SimpleJournal
     /// </summary>
     public partial class AboutDialog : Window
     {
-        private readonly HttpClient httpClient = new HttpClient();
+        private bool isLoaded;
 
         public AboutDialog()
         {
@@ -23,55 +24,67 @@ namespace SimpleJournal
             TextVersion.Text = $"{Consts.StoreVersion} (Store)";
 #endif
 
-            // Load changelog
-            try
-            {
-                txtChangelog.Navigate(string.Format(Consts.ChangelogUrl, Properties.Resources.strLang, Data.Settings.Instance.UseDarkMode ? 1 : 0));
-            }
-            catch (Exception)
-            { }
-
             Loaded += AboutDialog_Loaded;
         }
 
         private async void AboutDialog_Loaded(object sender, RoutedEventArgs e)
         {
+            // Prevent multiple calls
+            if (isLoaded)
+                return;
+
+            isLoaded = true;
+
             await Initialize();
         }
 
         public async Task Initialize()
         {
             try
-            {
-                string versionsJSON = await httpClient.GetStringAsync(Consts.VersionUrl);
-                dynamic result = JsonConvert.DeserializeObject(versionsJSON);
+            {           
+                // Load version
+                using (HttpClient httpClient = new HttpClient())
+                {
+                    string versionsJSON = await httpClient.GetStringAsync(Consts.VersionUrl);
+                    dynamic result = JsonConvert.DeserializeObject(versionsJSON);
 
-                string currentNormalVersion = result.current.normal;
-                string currentStoreVersion = result.current.store;
+                    string currentNormalVersion = result.current.normal;
+                    string currentStoreVersion = result.current.store;
 
-                string currentVersion = string.Empty;
-                string newVersion = null;
+                    string currentVersion = string.Empty;
+                    string newVersion = null;
 
 #if UWP
-                newVersion = currentStoreVersion;
-                currentVersion = Consts.StoreVersion.ToString();
+                    newVersion = currentStoreVersion;
+                    currentVersion = Consts.StoreVersion.ToString();
 #else
-                currentVersion = Consts.NormalVersion.ToString(); 
-                newVersion = currentNormalVersion;
+                    currentVersion = Consts.NormalVersion.ToString();
+                    newVersion = currentNormalVersion;
 #endif
 
-                if (currentVersion == newVersion)
-                    TextVersion.Text += $" - {Properties.Resources.strVersionUpToDate}";
-                else
-                {
-                    if (new Version(currentVersion) > new Version(newVersion))
-                    {
-                        TextNewVersionAvailable.Text = Properties.Resources.strUnpublishedDevVersion;
-                        TextNewVersionAvailable.Foreground = new SolidColorBrush(Colors.Red);
-                    }
+                    if (currentVersion == newVersion)
+                        TextVersion.Text += $" - {Properties.Resources.strVersionUpToDate}";
                     else
-                        TextNewVersionAvailable.Text = $"*** {Properties.Resources.strNewerVersionAvailable} {newVersion} ***";
+                    {
+                        if (new Version(currentVersion) > new Version(newVersion))
+                        {
+                            TextNewVersionAvailable.Text = Properties.Resources.strUnpublishedDevVersion;
+                            TextNewVersionAvailable.Foreground = new SolidColorBrush(Colors.Red);
+                        }
+                        else
+                            TextNewVersionAvailable.Text = $"*** {Properties.Resources.strNewerVersionAvailable} {newVersion} ***";
+                    }
                 }
+            }
+            catch (Exception)
+            { }
+
+            try
+            {
+                // Load changelog
+                var webView2Envoirnment = await CoreWebView2Environment.CreateAsync(null, Consts.WebView2CachePath);
+                await BrowserChangelog.EnsureCoreWebView2Async(webView2Envoirnment);
+                BrowserChangelog.Source = new Uri(string.Format(Consts.ChangelogUrl, Properties.Resources.strLang, Data.Settings.Instance.UseDarkMode ? 1 : 0));
             }
             catch (Exception)
             { }
@@ -102,14 +115,17 @@ namespace SimpleJournal
 
             try
             {
-                var result = await httpClient.GetAsync(url);
-
-                if (result.IsSuccessStatusCode)
+                using (HttpClient httpClient = new HttpClient())
                 {
-                    // If feedback was sended successfully, clear it
-                    txtFeedback.Text = string.Empty;
+                    var result = await httpClient.GetAsync(url);
 
-                    MessageBox.Show(this, Properties.Resources.strFeedbackSent, Properties.Resources.strSuccess, MessageBoxButton.OK, MessageBoxImage.Information);
+                    if (result.IsSuccessStatusCode)
+                    {
+                        // If feedback was sended successfully, clear it
+                        txtFeedback.Text = string.Empty;
+
+                        MessageBox.Show(this, Properties.Resources.strFeedbackSent, Properties.Resources.strSuccess, MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
                 }
             }
             catch (Exception)

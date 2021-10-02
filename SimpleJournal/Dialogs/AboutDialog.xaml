@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SimpleJournal"
-        xmlns:res="clr-namespace:SimpleJournal.Properties" xmlns:controls="clr-namespace:SimpleJournal.Controls"
+        xmlns:res="clr-namespace:SimpleJournal.Properties" xmlns:controls="clr-namespace:SimpleJournal.Controls" xmlns:wpf="clr-namespace:Microsoft.Web.WebView2.Wpf;assembly=Microsoft.Web.WebView2.Wpf"
         mc:Ignorable="d"
         Title="{x:Static res:Resources.strAbout}" Height="630" Width="420"
         ResizeMode="NoResize"
@@ -46,13 +46,13 @@
                         <LineBreak />
                         <Run x:Name="TextNewVersionAvailable" FontWeight="Bold" />
                         <LineBreak />
-                        <Run Text="Powered by .NET 5.0.9" FontWeight="Bold" />
+                        <Run Text="Powered by .NET 5.0.10" FontWeight="Bold" />
                     </TextBlock>
                 </StackPanel>
             </TabItem>
             <TabItem Header="{x:Static res:Resources.strChangelog}">
                 <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                    <WebBrowser x:Name="txtChangelog"/>
+                    <wpf:WebView2 x:Name="BrowserChangelog" Grid.Row="0" />
                 </ScrollViewer>
             </TabItem>
             <TabItem Header="{x:Static res:Resources.strFeedback}">

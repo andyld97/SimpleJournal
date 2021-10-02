@@ -30,7 +30,7 @@ namespace SimpleJournal.Dialogs
                 DialogResult = true;
 
                 // Exit to make sure user can easily update without problems
-                System.Windows.Application.Current.Shutdown();
+                Application.Current.Shutdown();
             }
             catch (Exception ex)
             {

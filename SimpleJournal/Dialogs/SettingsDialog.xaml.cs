@@ -56,6 +56,7 @@ namespace SimpleJournal
                 chkWindowMode.SelectedIndex = 0;
 
             CheckBoxActivateGlowingBrush.IsChecked = Settings.Instance.ActivateGlowingBrush;
+            CheckBoxUseNewMenu.IsChecked = Settings.Instance.UseNewMenu;
 
 #if UWP
             TabTouch.Visibility = Visibility.Collapsed;
@@ -77,7 +78,6 @@ namespace SimpleJournal
             }
 
             TextCustomImagePath.Text = Settings.Instance.CustomBackgroundImagePath;
-
             SelectTheme();
 
             NumericUpDownAutoSaveInteral.Value = Settings.Instance.AutoSaveIntervalMinutes;
@@ -175,6 +175,7 @@ namespace SimpleJournal
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Themes"));
 
             string value = Settings.Instance.UseDarkMode ? "Dark" : "Light";
+            ComboBoxThemeChooser.ItemsSource = Themes;
             ComboBoxThemeChooser.SelectedItem = Themes.Where(p => p.DisplayName.Contains(Settings.Instance.Theme.Replace(".Colorful", string.Empty)) && p.DisplayName.Contains(value)).FirstOrDefault();
 
             Settings.Instance.Save();
@@ -298,6 +299,15 @@ namespace SimpleJournal
         {
             if (DrawingCanvas.LastModifiedCanvas != null)
                 DrawingCanvas.LastModifiedCanvas.DefaultDrawingAttributes.FitToCurve = (bool)value;
+        }
+
+        private void CheckBoxUseNewMenu_Checked(object sender, RoutedEventArgs e)
+        {
+            if (editMode)
+                return;
+
+            Settings.Instance.UseNewMenu = CheckBoxUseNewMenu.IsChecked.Value;
+            Settings.Instance.Save();
         }
     }
 }

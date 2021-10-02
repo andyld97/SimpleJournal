@@ -1121,7 +1121,7 @@ Klicken Sie auf Nein, um diesen Hinweis weiterhin zu erhalten!</value>
     <comment>*</comment>
   </data>
   <data name="strRecentFiles" xml:space="preserve">
-    <value>Zuletzt geöffnete Dateien</value>
+    <value>Zuletzt geöffnete Dokumente</value>
     <comment>Window2.xaml</comment>
   </data>
   <data name="strRecognization" xml:space="preserve">
@@ -1145,7 +1145,7 @@ Klicken Sie auf Nein, um diesen Hinweis weiterhin zu erhalten!</value>
     <comment>MainWindow.xaml</comment>
   </data>
   <data name="strReleaseDate" xml:space="preserve">
-    <value>24.08.2021 17:08 Uhr</value>
+    <value>02.10.2021 22:16 Uhr</value>
     <comment>*</comment>
   </data>
   <data name="strRemove" xml:space="preserve">
@@ -1802,5 +1802,11 @@ Hier möchte ich Ihnen noch ein paar wichtige Hinweise geben, die Ihnen helfen w
   </data>
   <data name="strSettingsDownloadTouchDeviceManager" xml:space="preserve">
     <value>Touchscreen Device Manager herunterladen</value>
+  </data>
+  <data name="strJournalIsAlreadyOpenedInTheSameWindow" xml:space="preserve">
+    <value>Das Dokument ist bereits geöffnet!</value>
+  </data>
+  <data name="strSettingsUseBackstageMenu" xml:space="preserve">
+    <value>Modernes Menü verwenden</value>
   </data>
 </root>

@@ -10,12 +10,31 @@
         xmlns:controls="clr-namespace:SimpleJournal.Controls"
         StateChanged="RibbonWindow_StateChanged"
         mc:Ignorable="d"
+        xmlns:gl="clr-namespace:System.Globalization;assembly=mscorlib"
         Title="SimpleJournal - Neues Journal" Height="700" Activated="RibbonWindow_Activated" Deactivated="RibbonWindow_Deactivated"
         Width="1130">
     <Window.Resources>
         <BooleanToVisibilityConverter x:Key="boolToVisibilityConverter" />
         <local:SelectedIndexToColumnSpanConverter x:Key="indexToColumn"/>
-        <local:SelectedIndexToVisiblityConverter x:Key="indexToVisibilty"/>   
+        <local:SelectedIndexToVisiblityConverter x:Key="indexToVisibilty"/>
+
+        <DataTemplate x:Key="RecentlyOpenedDocumentsTemplate">
+            <Grid Background="Transparent" Height="40" ToolTip="{Binding Path}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="35" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Image Source="pack://application:,,,/SimpleJournal;component/resources/journalicon.png" />
+                <StackPanel VerticalAlignment="Center" Grid.Column="1" Margin="10,0,0,0">
+                    <TextBlock Text="{Binding Name}" FontWeight="Bold" Foreground="{DynamicResource BlackBrush}" />
+                    <TextBlock Foreground="{DynamicResource BlackBrush}">
+                        <Run Text="Zuletzt geändert:" />
+                        <Run Text="{Binding LastModified, StringFormat=d, ConverterCulture={x:Static gl:CultureInfo.CurrentCulture}}" />
+                        <Run Text="{Binding LastModified, StringFormat=t, ConverterCulture={x:Static gl:CultureInfo.CurrentCulture}}" />
+                    </TextBlock>
+                </StackPanel>
+            </Grid>
+        </DataTemplate>
     </Window.Resources>
     <Window.CommandBindings>
         <CommandBinding x:Name="NewCommand" Command="ApplicationCommands.New" Executed="NewCommand_Executed" CanExecute="NewCommand_CanExecute" />        
@@ -31,46 +50,55 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <Fluent:Ribbon x:Name="ribbon" AutomaticStateManagement="True" >
+        <Fluent:Ribbon x:Name="ribbon" AutomaticStateManagement="True">
             <Fluent:Ribbon.Menu>
-                <Fluent:ApplicationMenu Header="{x:Static res:Resources.strFile}" MaxDropDownHeight="500" BorderBrush="Blue">
-                    <Fluent:ApplicationMenu.RightPaneContent>
-                        <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Orientation="Vertical" CanVerticallyScroll="True">
-                            <Border HorizontalAlignment="Stretch" BorderBrush="#64647F" BorderThickness="0,0,0,0">
-                                <TextBlock Text="{x:Static res:Resources.strRecentFiles}" Background="{DynamicResource Fluent.Ribbon.Brushes.MenuItem.Background}" Foreground="#64647F" TextAlignment="Left" Padding="12,4,4,4" FontWeight="SemiBold" FontSize="12" />
-                            </Border>
-                            <StackPanel HorizontalAlignment="Stretch" Height="2">
-                                <Border Height="1" BorderThickness="1" HorizontalAlignment="Stretch" BorderBrush="#DCDDDE" />
-                                <Border Height="1" BorderThickness="1" HorizontalAlignment="Stretch" BorderBrush="#FEFEFF" />
+                <Grid>
+                    <Fluent:ApplicationMenu x:Name="MenuApplication" Visibility="Collapsed" Header="{x:Static res:Resources.strFile}" MaxDropDownHeight="500" BorderBrush="Blue">
+                        <Fluent:ApplicationMenu.RightPaneContent>
+                            <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Orientation="Vertical" CanVerticallyScroll="True">
+                                <Border HorizontalAlignment="Stretch" BorderBrush="#64647F" BorderThickness="0,0,0,0">
+                                    <TextBlock Text="{x:Static res:Resources.strRecentFiles}" Background="{DynamicResource Fluent.Ribbon.Brushes.MenuItem.Background}" Foreground="#64647F" TextAlignment="Left" Padding="12,4,4,4" FontWeight="SemiBold" FontSize="12" />
+                                </Border>
+                                <StackPanel HorizontalAlignment="Stretch" Height="2">
+                                    <Border Height="1" BorderThickness="1" HorizontalAlignment="Stretch" BorderBrush="#DCDDDE" />
+                                    <Border Height="1" BorderThickness="1" HorizontalAlignment="Stretch" BorderBrush="#FEFEFF" />
+                                </StackPanel>
+                                <ListBox x:Name="ListRecentlyOpenedDocuments" ItemTemplate="{StaticResource RecentlyOpenedDocumentsTemplate}" ItemContainerStyle="{DynamicResource _ListBoxItemStyle}" Background="Transparent" BorderThickness="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" SelectionChanged="ListRecentlyOpenedDocuments_SelectionChanged" />
                             </StackPanel>
+                        </Fluent:ApplicationMenu.RightPaneContent>
+                        <Fluent:MenuItem x:Name="btnNew" Command="ApplicationCommands.New" Header="{x:Static res:Resources.strNewDocument}" KeyTip="N" Icon="pack://application:,,,/SimpleJournal;component/resources/add.png"  />
+                        <Fluent:MenuItem x:Name="btnOpen" Click="btnOpen_Click" Header="{x:Static res:Resources.strOpenDocument}" KeyTip="O" Icon="pack://application:,,,/SimpleJournal;component/resources/open.png"  />
+                        <Fluent:MenuItem x:Name="btnSaveProject" Click="btnSaveProject_Click" Header="{x:Static res:Resources.strSaveDocument}" KeyTip="S" Icon="pack://application:,,,/SimpleJournal;component/resources/save.png"  />
+                        <Fluent:MenuItem x:Name="btnSave" Command="ApplicationCommands.Save" Header="{x:Static res:Resources.strSaveAsDocument}" KeyTip="S" Icon="pack://application:,,,/SimpleJournal;component/resources/save.png"  />
+                        <Fluent:MenuItem x:Name="btnPrint" Command="ApplicationCommands.Print" Header="{x:Static res:Resources.strPrintDocument}" KeyTip="D" Icon="pack://application:,,,/SimpleJournal;component/resources/print.png"  />
+                        <Fluent:MenuItem x:Name="btnExport" Click="btnExport_Click" Header="{x:Static res:Resources.strExportDocument}" KeyTip="E" Icon="pack://application:,,,/SimpleJournal;component/resources/export.png"  />
+                        <Fluent:MenuItem x:Name="btnPageManagment" Click="btnPageManagment_Click" Header="{x:Static res:Resources.strManagePage}" Icon="pack://application:,,,/SimpleJournal;component/resources/editpage.png" />
+                        <Fluent:MenuItem x:Name="btnSettings" Click="btnSettings_Click" Header="{x:Static res:Resources.strSettings}" KeyTip="S" Icon="pack://application:,,,/SimpleJournal;component/resources/settings.png"  />
+                        <Fluent:MenuItem x:Name="btnAbout" Click="btnAbout_Click" Header="{x:Static res:Resources.strAbout}" KeyTip="A" Icon="pack://application:,,,/SimpleJournal;component/resources/about.png"  />
+                        <Fluent:MenuItem x:Name="btnClose" Click="btnExit_Click" Header="{x:Static res:Resources.strClose}" KeyTip="E" Icon="pack://application:,,,/SimpleJournal;component/resources/close.png"  />
+                    </Fluent:ApplicationMenu>
 
-                            <ListBox x:Name="ListRecentlyOpenedDocuments" ItemContainerStyle="{DynamicResource _ListBoxItemStyle}" Background="Transparent" BorderThickness="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" SelectionChanged="ListRecentlyOpenedDocuments_SelectionChanged">
-                                <ListBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <Grid Background="Transparent" Height="40" ToolTip="{Binding Path}">
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="35" />
-                                                <ColumnDefinition Width="*" />
-                                            </Grid.ColumnDefinitions>
-                                            <Image Source="pack://application:,,,/SimpleJournal;component/resources/journalicon.png" />
-                                            <TextBlock Grid.Column="1" Text="{Binding Name}" Foreground="{DynamicResource BlackBrush}" VerticalAlignment="Center" Margin="10,0,0,0" />
-                                        </Grid>
-                                    </DataTemplate>
-                                </ListBox.ItemTemplate>
-                            </ListBox>
-                        </StackPanel>
-                    </Fluent:ApplicationMenu.RightPaneContent>
-                    <Fluent:MenuItem x:Name="btnNew" Command="ApplicationCommands.New" Header="{x:Static res:Resources.strNewDocument}" KeyTip="N" Icon="pack://application:,,,/SimpleJournal;component/resources/add.png"  />
-                    <Fluent:MenuItem x:Name="btnOpen" Click="btnOpen_Click" Header="{x:Static res:Resources.strOpenDocument}" KeyTip="O" Icon="pack://application:,,,/SimpleJournal;component/resources/open.png"  />
-                    <Fluent:MenuItem x:Name="btnSaveProject" Click="btnSaveProject_Click" Header="{x:Static res:Resources.strSaveDocument}" KeyTip="S" Icon="pack://application:,,,/SimpleJournal;component/resources/save.png"  />
-                    <Fluent:MenuItem x:Name="btnSave" Command="ApplicationCommands.Save" Header="{x:Static res:Resources.strSaveAsDocument}" KeyTip="S" Icon="pack://application:,,,/SimpleJournal;component/resources/save.png"  />
-                    <Fluent:MenuItem x:Name="btnPrint" Command="ApplicationCommands.Print" Header="{x:Static res:Resources.strPrintDocument}" KeyTip="D" Icon="pack://application:,,,/SimpleJournal;component/resources/print.png"  />
-                    <Fluent:MenuItem x:Name="btnExport" Click="btnExport_Click" Header="{x:Static res:Resources.strExportDocument}" KeyTip="E" Icon="pack://application:,,,/SimpleJournal;component/resources/export.png"  />
-                    <Fluent:MenuItem x:Name="btnPageManagment" Click="btnPageManagment_Click"  Header="{x:Static res:Resources.strManagePage}" Icon="pack://application:,,,/SimpleJournal;component/resources/editpage.png" />
-                    <Fluent:MenuItem x:Name="btnSettings" Click="btnSettings_Click" Header="{x:Static res:Resources.strSettings}" KeyTip="S" Icon="pack://application:,,,/SimpleJournal;component/resources/settings.png"  />
-                    <Fluent:MenuItem x:Name="btnAbout" Click="btnAbout_Click" Header="{x:Static res:Resources.strAbout}" KeyTip="A" Icon="pack://application:,,,/SimpleJournal;component/resources/about.png"  />
-                    <Fluent:MenuItem x:Name="btnClose" Click="btnExit_Click" Header="{x:Static res:Resources.strClose}" KeyTip="E" Icon="pack://application:,,,/SimpleJournal;component/resources/close.png"  />
-                </Fluent:ApplicationMenu>
+                    <Fluent:Backstage x:Name="MenuBackstage" Margin="0,1,0,1" IsOpenChanged="Backstage_IsOpenChanged" BorderBrush="Blue" Background="{DynamicResource Fluent.Ribbon.Brushes.AccentBaseColorBrush}">
+                        <Fluent:BackstageTabControl x:Name="MenuBackstageTabControl">
+                            <Fluent:BackstageTabItem x:Name="MenuBackstageNewFile" MouseDown="BackstageTabItem_MouseDown" Icon="/resources/add.png" Header="{x:Static res:Resources.strNewDocument}">
+                                <GroupBox Header="{x:Static res:Resources.strRecentFiles}" Margin="10" BorderThickness="0">
+                                    <ListBox x:Name="RecentlyOpenedDocumentsBackstage" ItemTemplate="{StaticResource RecentlyOpenedDocumentsTemplate}" ItemContainerStyle="{DynamicResource _ListBoxItemStyle}" Background="Transparent" BorderThickness="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" SelectionChanged="RecentlyOpenedDocumentsBackstage_SelectionChanged" />
+                                </GroupBox>                            
+                            </Fluent:BackstageTabItem>
+                            <Fluent:Button Icon="/resources/open.png" Header="{x:Static res:Resources.strOpenDocument}" Click="btnOpen_Click" />
+                            <Fluent:Button Icon="/resources/save.png" Header="{x:Static res:Resources.strSaveDocument}" Click="btnSaveProject_Click"/>
+                            <Fluent:Button Icon="/resources/save.png" Header="{x:Static res:Resources.strSaveAsDocument}" Command="ApplicationCommands.Save"  />
+                            <Fluent:SeparatorTabItem />
+                            <Fluent:Button Icon="/resources/print.png" Header="{x:Static res:Resources.strPrintDocument}" Command="ApplicationCommands.Print" />
+                            <Fluent:Button Icon="/resources/export.png" Header="{x:Static res:Resources.strExportDocument}"  Click="btnExport_Click"  />
+                            <Fluent:Button Icon="/resources/editpage.png" Header="{x:Static res:Resources.strManagePage}" Click="btnPageManagment_Click"  />
+                            <Fluent:SeparatorTabItem />
+                            <Fluent:Button Icon="/resources/settings.png" Header="{x:Static res:Resources.strSettings}" Click="btnSettings_Click"/>
+                            <Fluent:Button Icon="/resources/about.png" Header="{x:Static res:Resources.strAbout}" Click="btnAbout_Click" />
+                            <Fluent:Button Icon="/resources/close.png" Header="{x:Static res:Resources.strClose}" Click="btnExit_Click" />
+                        </Fluent:BackstageTabControl>
+                    </Fluent:Backstage>
+                </Grid>
             </Fluent:Ribbon.Menu>
             <Fluent:RibbonTabItem Header="{x:Static res:Resources.strStart}" ReduceOrder="(GroupEdit),(GroupPens),(GroupRubber),(GroupTools),(GroupPages)" KeyTip="ST">
                 <Fluent:RibbonTabItem.HeaderTemplate>
@@ -288,7 +316,7 @@
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
                 <DockPanel Grid.Row="0" HorizontalAlignment="Stretch">
-                    <TextBlock Margin="5,10,0,0" FontWeight="Bold" Foreground="{DynamicResource BlackBrush}">
+                    <TextBlock Margin="5,0,0,0" FontWeight="Bold" Foreground="{DynamicResource BlackBrush}" VerticalAlignment="Center">
                         <Run Text="{x:Static res:Resources.strObjects}" />
                         <Run x:Name="TextObjectCounter" Text="0" />
                     </TextBlock>
