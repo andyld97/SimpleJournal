@@ -52,7 +52,7 @@
             </TabItem>
             <TabItem Header="{x:Static res:Resources.strChangelog}">
                 <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                    <wpf:WebView2 x:Name="BrowserChangelog" />
+                    <wpf:WebView2 x:Name="BrowserChangelog" Grid.Row="0" />
                 </ScrollViewer>
             </TabItem>
             <TabItem Header="{x:Static res:Resources.strFeedback}">

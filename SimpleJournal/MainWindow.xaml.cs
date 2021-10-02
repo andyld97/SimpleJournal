@@ -270,6 +270,7 @@ namespace SimpleJournal
             CurrentDrawingAttributes.Height = currentPens[0].Height;
             RefreshSizeBar();
             UpdateGlowingBrush();
+            UpdateMenu();
 
 #if !UWP
             GeneralHelper.RemoveUpdaterIfAny();
@@ -308,6 +309,10 @@ namespace SimpleJournal
             ListRecentlyOpenedDocuments.ItemsSource = null;
             ListRecentlyOpenedDocuments.Items.Clear();
             ListRecentlyOpenedDocuments.ItemsSource = RecentlyOpenedDocuments.Instance;
+
+            RecentlyOpenedDocumentsBackstage.ItemsSource = null;
+            RecentlyOpenedDocumentsBackstage.Items.Clear();
+            RecentlyOpenedDocumentsBackstage.ItemsSource = RecentlyOpenedDocuments.Instance;
         }
 
         protected override async void OnContentRendered(EventArgs e)
@@ -1406,9 +1411,25 @@ namespace SimpleJournal
             canvas.EditingMode = before;
         }
 
+        private void UpdateMenu()
+        {
+            if (Settings.Instance.UseNewMenu)
+            {
+                MenuBackstage.Visibility = Visibility.Visible;
+                MenuApplication.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                MenuBackstage.Visibility = Visibility.Collapsed;
+                MenuApplication.Visibility = Visibility.Visible;
+            }
+        }
+
         public void ApplySettings()
         {
             isInitalized = false;
+
+            UpdateMenu();
             RefreshVerticalScrollbarSize();
             CurrentDrawingAttributes.IgnorePressure = !Settings.Instance.UsePreasure;
             CurrentDrawingAttributes.FitToCurve = Settings.Instance.UseFitToCurve;
@@ -1947,6 +1968,33 @@ namespace SimpleJournal
                     await LoadJournal(d.Path);
 
                 ListRecentlyOpenedDocuments.SelectedItem = null;
+            }
+        }
+
+        private async void RecentlyOpenedDocumentsBackstage_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (RecentlyOpenedDocumentsBackstage.SelectedItem is Document d)
+            {
+                // Check if file exists
+                if (!System.IO.File.Exists(d.Path))
+                {
+                    if (MessageBox.Show(this, Properties.Resources.strSelectedDocumentNotExisting, Properties.Resources.strSelectedDocumentNotExistingTitle, MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                        RecentlyOpenedDocuments.Remove(d.Path);
+                }
+                else if (AskForOpeningAfterModifying())
+                {
+                    MenuBackstage.IsOpen = false;
+                    await Task.Delay(500).ContinueWith(async delegate (Task t)
+                     {
+                         Dispatcher.Invoke(new System.Action(async () =>
+                        {
+                            await LoadJournal(d.Path);
+                        }));
+                     });
+                }
+
+                RecentlyOpenedDocumentsBackstage.SelectedItem = null;
+                MenuBackstage.IsOpen = false;
             }
         }
 
@@ -2638,11 +2686,19 @@ namespace SimpleJournal
                         // A process id is set.
                         if (ProcessHelper.IsProcessActiveByTaskId(currentJournal.ProcessID))
                         {
-                            MessageBox.Show(Properties.Resources.strJournalIsAlreadyOpened, Properties.Resources.strJournalIsAlreadyOpenedTitle, MessageBoxButton.OK, MessageBoxImage.Error);
+                            if (currentJournal.ProcessID != Process.GetCurrentProcess().Id)
+                            {
+                                MessageBox.Show(Properties.Resources.strJournalIsAlreadyOpened, Properties.Resources.strJournalIsAlreadyOpenedTitle, MessageBoxButton.OK, MessageBoxImage.Error);
 
-                            // Try to focus the instance where it is
-                            ProcessHelper.BringProcessToFront(currentJournal.ProcessID);
-                            return;
+                                // Try to focus the instance where it is
+                                ProcessHelper.BringProcessToFront(currentJournal.ProcessID);
+                                return;
+                            }
+                            else
+                            {
+                                MessageBox.Show(Properties.Resources.strJournalIsAlreadyOpenedInTheSameWindow, Properties.Resources.strJournalIsAlreadyOpenedTitle, MessageBoxButton.OK, MessageBoxImage.Error);
+                                return;
+                            }
                         }
                     }
 
@@ -3278,6 +3334,17 @@ namespace SimpleJournal
             }
         }
 
+        private void Backstage_IsOpenChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if (MenuBackstage.IsOpen)
+                MenuBackstageTabControl.SelectedIndex = 0;
+        }
+
+        private void BackstageTabItem_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            ApplicationCommands.New.Execute(null, null);
+            MenuBackstage.IsOpen = false;
+        }
         #endregion
 
         #region General Events / Touch

@@ -73,12 +73,13 @@ namespace SimpleJournal.Data
             var result = Instance.Where(d => d.Path == filePath).FirstOrDefault();
 
             if (result == null)
-                Instance.Insert(0, new Document() { Path = filePath });
+                Instance.Insert(0, new Document() { Path = filePath, LastModified = DateTime.Now });
             else
             {
                 // Place it to top
                 Instance.Remove(result);
                 Instance.Insert(0, result);
+                result.LastModified = DateTime.Now;
             }
 
             // Limit to value of recently used docuemnts
@@ -101,6 +102,8 @@ namespace SimpleJournal.Data
     public class Document
     {
         public string Path { get; set; }
+
+        public DateTime LastModified { get; set; }
 
         public string Name => System.IO.Path.GetFileNameWithoutExtension(Path);
     }

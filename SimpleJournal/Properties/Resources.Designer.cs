@@ -1663,6 +1663,15 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This document is already open!.
+        /// </summary>
+        public static string strJournalIsAlreadyOpenedInTheSameWindow {
+            get {
+                return ResourceManager.GetString("strJournalIsAlreadyOpenedInTheSameWindow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Dokument bereits geöffnet!.
         /// </summary>
         public static string strJournalIsAlreadyOpenedTitle {
@@ -2437,7 +2446,7 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Recent files.
+        ///   Looks up a localized string similar to Recent documents.
         /// </summary>
         public static string strRecentFiles {
             get {
@@ -2491,7 +2500,7 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 08/24/2021 5:08 PM.
+        ///   Looks up a localized string similar to 10/02/2021 10:16 PM.
         /// </summary>
         public static string strReleaseDate {
             get {
@@ -2964,6 +2973,15 @@ namespace SimpleJournal.Properties {
         public static string strSettingsTouchScreenExplanationNormal4 {
             get {
                 return ResourceManager.GetString("strSettingsTouchScreenExplanationNormal4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Use modern menu.
+        /// </summary>
+        public static string strSettingsUseBackstageMenu {
+            get {
+                return ResourceManager.GetString("strSettingsUseBackstageMenu", resourceCulture);
             }
         }
         

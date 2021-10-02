@@ -110,6 +110,11 @@ namespace SimpleJournal.Data
         /// If true "FitToCurve" will be activated in the drawing attributes
         /// </summary>
         public bool UseFitToCurve { get; set; } = false;
+
+        /// <summary>
+        /// Determines if the Fluent.Ribbon Backstackage Menu (true) is used, or the default application menu
+        /// </summary>
+        public bool UseNewMenu { get; set; } = true;
         
         /// <summary>
         /// The interval (in minutes) which will be used for AutoSave - default value is every 5 minutes
@@ -129,7 +134,7 @@ namespace SimpleJournal.Data
         /// <summary>
         /// The theme which is used in SimpleJournal (hard to describe, because Theme is enogugh)
         /// </summary>
-        public string Theme { get; set; } = "Cobalt"; // cobalt is the default one used in SJ
+        public string Theme { get; set; } = "Cobalt"; // Cobalt is the default one used in SJ
 
         /// <summary>
         /// Determines if the message (inserting an ui element) will be ignored or not!

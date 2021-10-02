@@ -1148,7 +1148,7 @@ Click on No to continue to receive this message!</value>
     <comment>*</comment>
   </data>
   <data name="strRecentFiles" xml:space="preserve">
-    <value>Recent files</value>
+    <value>Recent documents</value>
     <comment>Window2.xaml</comment>
   </data>
   <data name="strRecognization" xml:space="preserve">
@@ -1172,7 +1172,7 @@ Click on No to continue to receive this message!</value>
     <comment>MainWindow.xaml</comment>
   </data>
   <data name="strReleaseDate" xml:space="preserve">
-    <value>08/24/2021 5:08 PM</value>
+    <value>10/02/2021 10:16 PM</value>
     <comment>About.xaml</comment>
   </data>
   <data name="strRemove" xml:space="preserve">
@@ -1805,5 +1805,12 @@ Here I would like to give you some important hints, which will help you to handl
   </data>
   <data name="strSettingsDialogTouchDeviceManagerDescription" xml:space="preserve">
     <value>Due to missing permissions, it is unfortunately not possible to automatically deactivate the touchscreen in this version. Therefore, the Touchscreen Device Manager is available for download here. This allows you to deactivate the touchscreen before working and activate it again afterwards (if necessary). The tool works in the same way as the device manager and requires administrator rights!</value>
+  </data>
+  <data name="strJournalIsAlreadyOpenedInTheSameWindow" xml:space="preserve">
+    <value>This document is already open!</value>
+    <comment>MainWindow.xaml.cs</comment>
+  </data>
+  <data name="strSettingsUseBackstageMenu" xml:space="preserve">
+    <value>Use modern menu</value>
   </data>
 </root>

@@ -41,17 +41,7 @@ namespace SimpleJournal
         public async Task Initialize()
         {
             try
-            {
-                try
-                {
-                    // Load changelog
-                    var webView2Envoirnment = await CoreWebView2Environment.CreateAsync(null, Consts.WebView2CachePath);
-                    await BrowserChangelog.EnsureCoreWebView2Async(webView2Envoirnment);
-                    BrowserChangelog.Source = new Uri(string.Format(Consts.ChangelogUrl, Properties.Resources.strLang, Data.Settings.Instance.UseDarkMode ? 1 : 0));
-                }
-                catch (Exception)
-                { }
-
+            {           
                 // Load version
                 using (HttpClient httpClient = new HttpClient())
                 {
@@ -85,6 +75,16 @@ namespace SimpleJournal
                             TextNewVersionAvailable.Text = $"*** {Properties.Resources.strNewerVersionAvailable} {newVersion} ***";
                     }
                 }
+            }
+            catch (Exception)
+            { }
+
+            try
+            {
+                // Load changelog
+                var webView2Envoirnment = await CoreWebView2Environment.CreateAsync(null, Consts.WebView2CachePath);
+                await BrowserChangelog.EnsureCoreWebView2Async(webView2Envoirnment);
+                BrowserChangelog.Source = new Uri(string.Format(Consts.ChangelogUrl, Properties.Resources.strLang, Data.Settings.Instance.UseDarkMode ? 1 : 0));
             }
             catch (Exception)
             { }
