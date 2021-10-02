@@ -50,7 +50,7 @@ namespace SimpleJournal
         public static readonly string PenSettingsFilePath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Pen.xml");
         public static readonly string AutoSaveDirectory = System.IO.Path.Combine(System.IO.Path.GetTempPath(), "SimpleJournal", "AutoSave");
         public static readonly string TouchExecutable = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Touch.exe");
-        public static readonly string WebView2CachePath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "SimpleJournal", "WebView2");
+        public static readonly string WebView2CachePath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "SimpleJournal", "WebView2");
 
         public static readonly string SetTouchOn = "/on";
         public static readonly string SetTouchOff = "/off";
