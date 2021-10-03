@@ -260,7 +260,7 @@
                     </DataTemplate>
                 </Fluent:RibbonTabItem.HeaderTemplate>
                 <Fluent:RibbonGroupBox Header="{x:Static res:Resources.strTextRecognization}">
-                    <Fluent:Button x:Name="btnTextDetection" Click="test_Click" Header="{x:Static res:Resources.strTextDectection}" LargeIcon="pack://application:,,,/SimpleJournal;component/resources/textdetection.png"/>
+                    <Fluent:Button x:Name="btnTextDetection" Click="btnTextDetection_Click" Header="{x:Static res:Resources.strTextDectection}" LargeIcon="pack://application:,,,/SimpleJournal;component/resources/textdetection.png"/>
                     <Fluent:Button x:Name="btnSearch" Click="btnSearch_Click" Header="{x:Static res:Resources.strTextSearch}" LargeIcon="pack://application:,,,/SimpleJournal;component/resources/search.png"/>
                 </Fluent:RibbonGroupBox>
             </Fluent:RibbonTabItem>

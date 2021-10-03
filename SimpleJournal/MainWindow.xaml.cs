@@ -137,7 +137,7 @@ namespace SimpleJournal
             isInitalized = true;
 
             AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
-            this.Dispatcher.UnhandledException += Dispatcher_UnhandledException;
+            Dispatcher.UnhandledException += Dispatcher_UnhandledException;
 
             // Display last opened files
             RefreshRecentlyOpenedFiles();
@@ -209,7 +209,7 @@ namespace SimpleJournal
 
 
             // Handle keydown
-            this.PreviewKeyDown += (s, e) =>
+            PreviewKeyDown += (s, e) =>
             {
                 if (e.Key == Key.F11)
                 {
@@ -228,10 +228,10 @@ namespace SimpleJournal
             };
 
             // Boot with fullscreen
-            left = this.Left;
-            top = this.Top;
-            width = this.Width;
-            height = this.Height;
+            left = Left;
+            top = Top;
+            width = Width;
+            height = Height;
 
             // Maximized = Full screen
             // Normal = Maximized
@@ -239,7 +239,7 @@ namespace SimpleJournal
             if (Settings.Instance.WindowState == WindowState.Maximized)
                 ToggleFullscreen();
             else if (Settings.Instance.WindowState == WindowState.Normal)
-                this.WindowState = WindowState.Maximized;
+                WindowState = WindowState.Maximized;
 
             // Call other init methods
             RefreshVerticalScrollbarSize();
@@ -283,16 +283,15 @@ namespace SimpleJournal
             if (screen != null)
             {
                 var bounds = screen.DeviceBounds;
-                // ToDo: *** Fix #6
                 if (bounds.Width > bounds.Height)
                 {
-                    this.Width = Math.Min(1130, bounds.Width);
-                    this.Height = Math.Min(800, bounds.Height);
+                    Width = Math.Min(1130, bounds.Width);
+                    Height = Math.Min(800, bounds.Height);
                 }
                 else
                 {
-                    this.Height = Math.Min(800, bounds.Height);
-                    this.Width = bounds.Width;
+                    Height = Math.Min(800, bounds.Height);
+                    Width = bounds.Width;
                 }
             }
 
@@ -402,15 +401,15 @@ namespace SimpleJournal
                 if (result.HasValue && result.Value)
                 {
                     // If result was successfully, there is a new file, so we can delete the old backup file
-                    this.DeleteAutoSaveBackup();
+                    DeleteAutoSaveBackup();
 
                     // Bring this window to the front
-                    this.Topmost = true;
-                    this.Topmost = false;
-                    this.Activate();
+                    Topmost = true;
+                    Topmost = false;
+                    Activate();
                 }
                 else
-                    this.DeleteAutoSaveBackup();
+                    DeleteAutoSaveBackup();
             }
 
             // Start timer just after the dialog is appeard (or not)
@@ -560,7 +559,7 @@ namespace SimpleJournal
             preventPageBoxSelectionChanged = false;
 
             int counter = 0;
-            foreach (FrameworkElement child in this.pages.Children)
+            foreach (FrameworkElement child in pages.Children)
             {
                 if (child != null && child is Frame && counter == index)
                 {
@@ -619,13 +618,13 @@ namespace SimpleJournal
             // Show sidebar only if there're elements to show (and also ignore lines)
             if (elements.Length == 0 || elements.Where(p => p is Line).Count() == elements.Length)
             {
-                this.pnlSidebar.Visibility = Visibility.Hidden;
+                pnlSidebar.Visibility = Visibility.Hidden;
                 return;
             }
 
             // Display ui elements in sidebar
-            this.pnlItems.Items.Clear();
-            this.pnlSidebar.Visibility = Visibility.Visible;
+            pnlItems.Items.Clear();
+            pnlSidebar.Visibility = Visibility.Visible;
 
             foreach (UIElement element in DrawingCanvas.LastModifiedCanvas.Children.Omit(typeof(Line)))
             {
@@ -708,7 +707,7 @@ namespace SimpleJournal
                 panel.Children.Add(textBlock);
 
                 item.Content = panel;
-                this.pnlItems.Items.Add(item);
+                pnlItems.Items.Add(item);
             }
 
             preventSelection = true;
@@ -723,7 +722,7 @@ namespace SimpleJournal
             }
 
             if (pnlItems.Items.Count == 0)
-                this.pnlSidebar.Visibility = Visibility.Hidden;
+                pnlSidebar.Visibility = Visibility.Hidden;
             preventSelection = false;
             preventSelectionChanged = false;
         }
@@ -758,7 +757,7 @@ namespace SimpleJournal
             else if (pnlItems.SelectedItems.Count == 0 && pnlItems.Items.Count == 0)
             {
                 // Hide sidebar
-                this.pnlSidebar.Visibility = Visibility.Hidden;
+                pnlSidebar.Visibility = Visibility.Hidden;
             }
         }
 
@@ -787,7 +786,7 @@ namespace SimpleJournal
                 preventSelectionChanged = false;
 
                 if (pnlItems.Items.Count == 0)
-                    this.pnlSidebar.Visibility = Visibility.Hidden;
+                    pnlSidebar.Visibility = Visibility.Hidden;
 
             }
             else
@@ -1121,10 +1120,10 @@ namespace SimpleJournal
             if (index == -1)
             {
                 CurrentJournalPages.Add(paper);
-                this.pages.Children.Add(elementToAdd);
+                pages.Children.Add(elementToAdd);
             }
             else
-                this.pages.Children.Insert(index, elementToAdd);
+                pages.Children.Insert(index, elementToAdd);
 
             double offset = mainScrollView.VerticalOffset;
 
@@ -1146,9 +1145,9 @@ namespace SimpleJournal
             };
 
             if (index == -1)
-                this.pages.Children.Add(pageSplitter);
+                pages.Children.Add(pageSplitter);
             else
-                this.pages.Children.Insert(index + 1, pageSplitter);
+                pages.Children.Insert(index + 1, pageSplitter);
 
             mainScrollView.ScrollToVerticalOffset(offset);
 
@@ -1192,9 +1191,7 @@ namespace SimpleJournal
             {
                 // Initalize pens
                 for (int i = 0; i < currentPens.Length; i++)
-                {
                     currentPens[i] = new Pen(Consts.PEN_COLORS[i], Consts.StrokeSizes[0].Width, Consts.StrokeSizes[0].Height);
-                }
 
                 // Initalize text marker (reset)
                 UpdateTextMarkerAttributes(true);
@@ -1820,7 +1817,6 @@ namespace SimpleJournal
             SwitchTool(Tools.RubberFree);
         }
 
-
         private void btnInsertSimpleForm_Click_1(object sender, EventArgs e)
         {
             if (ignoreToggleButtonHandling)
@@ -1984,7 +1980,7 @@ namespace SimpleJournal
                 else if (AskForOpeningAfterModifying())
                 {
                     MenuBackstage.IsOpen = false;
-                    await Task.Delay(500).ContinueWith(async delegate (Task t)
+                    await Task.Delay(500).ContinueWith(delegate (Task t)
                      {
                          Dispatcher.Invoke(new System.Action(async () =>
                         {
@@ -2063,9 +2059,7 @@ namespace SimpleJournal
             {
                 int pageCount = 1;
                 for (int i = from; i <= to; i++)
-                {
                     pd.PrintVisual(CurrentJournalPages[i].Canvas, $"{Properties.Resources.strPrinting} {pageCount++}");
-                }
             }
         }
 
@@ -2159,6 +2153,7 @@ namespace SimpleJournal
                 }
             }
         }
+
         private void BtnInsertNewPage_Click(object sender, EventArgs e)
         {
             AddNewPage(Settings.Instance.PaperTypeLastInserted);
@@ -2233,7 +2228,7 @@ namespace SimpleJournal
             }
         }
 
-        private async void test_Click(object sender, RoutedEventArgs e)
+        private async void btnTextDetection_Click(object sender, RoutedEventArgs e)
         {
             if (textAnalyserInstance == null)
             {
@@ -2323,9 +2318,9 @@ namespace SimpleJournal
                     can.Children.Remove(element);
 
                 // Refresh list
-                if (this.pnlSidebar.IsVisible)
+                if (pnlSidebar.IsVisible)
                 {
-                    this.pnlSidebar.Visibility = Visibility.Collapsed;
+                    pnlSidebar.Visibility = Visibility.Collapsed;
                     if (can.Children.Count > 0)
                         can.Select(new UIElement[] { can.Children[0] });
                 }
@@ -2721,7 +2716,7 @@ namespace SimpleJournal
 
                     currentJournalPath = fileName;
 
-                    this.IsEnabled = false;
+                    IsEnabled = false;
                     isInitalized = false;
                     dialog.Show();
 
@@ -2773,7 +2768,7 @@ namespace SimpleJournal
                     SwitchTool(currentTool, true);
 
                     // Set title due to new document
-                    this.UpdateTitle(System.IO.Path.GetFileNameWithoutExtension(fileName));
+                    UpdateTitle(System.IO.Path.GetFileNameWithoutExtension(fileName));
 
                     // Delete old auto save files
                     DeleteAutoSaveBackup();
@@ -2788,7 +2783,7 @@ namespace SimpleJournal
                 }
                 finally
                 {
-                    this.IsEnabled = true;
+                    IsEnabled = true;
                     dialog.Close();
                     isInitalized = true;
                 }
@@ -2817,7 +2812,7 @@ namespace SimpleJournal
                 var dialog = new WaitingDialog(System.IO.Path.GetFileNameWithoutExtension(currentJournalTitle), 1) { Owner = this };
                 dialog.Show();
 
-                this.IsEnabled = false;
+                IsEnabled = false;
                 isInitalized = false;
 
                 try
@@ -2870,7 +2865,7 @@ namespace SimpleJournal
                 }
                 finally
                 {
-                    this.IsEnabled = true;
+                    IsEnabled = true;
                     dialog.Close();
                     isInitalized = true;
 
@@ -2978,7 +2973,6 @@ namespace SimpleJournal
                 child.SetValue(InkCanvas.LeftProperty, newPoint.X);
                 child.SetValue(InkCanvas.TopProperty, newPoint.Y);
 
-
                 DrawingCanvas.LastModifiedCanvas.Children.Add(child);
                 counter++;
             }
@@ -3085,7 +3079,6 @@ namespace SimpleJournal
         {
             InsertImageFromClipboard();
         }
-
 
         private void btnInsertImage_Click(object sender, RoutedEventArgs e)
         {
@@ -3368,7 +3361,6 @@ namespace SimpleJournal
         {
             if (WindowState == WindowState.Minimized)
                 return;
-
 
             Console.WriteLine("MainWindow deactivated ....");
 #if !UWP
