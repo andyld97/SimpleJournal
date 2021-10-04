@@ -26,6 +26,7 @@ namespace SimpleJournal.Dialogs
         private readonly bool isInitalized = false;
         private bool ignoreCheckedChanged = false;
         private readonly ToggleButton[] toggleButtons = null;
+        private static Dictionary<UIElement, string> toolTips = new Dictionary<UIElement, string>();
         #endregion
 
         #region Properties
@@ -48,7 +49,6 @@ namespace SimpleJournal.Dialogs
                     return PaperType.Chequeued;
                 else if (ToggleButtonDotted.IsChecked.Value)
                     return PaperType.Dotted;
-
 
                 return PaperType.Ruled;
             }
@@ -133,6 +133,30 @@ namespace SimpleJournal.Dialogs
                 ButtonInsertDown
             };
 
+            toolTips = new Dictionary<UIElement, string>()
+            {
+                { ToggleButtonBlanko, Properties.Resources.strPageManagmentToggleButtonBlanko },
+                { ToggleButtonChequered, Properties.Resources.strPageManagmentToggleButtonChequered },
+                { ToggleButtonRuled, Properties.Resources.strPageManagmentToggleButtonRuled },
+                { ToggleButtonDotted, Properties.Resources.strPageManagmentToggleButtonDotted },
+                { btnIncreaseZoom, Properties.Resources.strPageManagmentButtonIncreaseZoom },
+                { btnDecreaseZoom, Properties.Resources.strPageManagmentButtonDecreaseZoom },
+                { ButtonClearPage, Properties.Resources.strPageManagmentButtonClearPage },
+                { ButtonDeletePage, Properties.Resources.strPageManagmentButtonDeletePage },
+                { ButtonInsertPageBeforeIndexChequered, Properties.Resources.strPageManagmentButtonInsertPageBeforeIndexChequered },
+                { ButtonInsertPageBeforeIndexDotted, Properties.Resources.strPageManagmentButtonInsertPageBeforeIndexDotted },
+                { ButtonInsertPageBeforeIndexBlanko, Properties.Resources.strPageManagmentButtonInsertPageBeforeIndexBlanko },
+                { ButtonInsertPageBeforeIndexRuled, Properties.Resources.strPageManagmentButtonInsertPageBeforeIndexRuled },
+                { ButtonInsertPageAfterIndexChequered, Properties.Resources.strPageManagmentButtonInsertPageAfterIndexChequered },
+                { ButtonInsertPageAfterIndexDotted, Properties.Resources.strPageManagmentButtonInsertPageAfterIndexDotted },
+                { ButtonInsertPageAfterIndexBlanko, Properties.Resources.strPageManagmentButtonInsertPageAfterIndexBlanko },
+                { ButtonInsertPageAfterIndexRuled, Properties.Resources.strPageManagmentButtonInsertPageAfterIndexRuled },
+                { ButtonMovePageUp, Properties.Resources.strPageManagmentButtonMovePageUp },
+                { ButtonMovePageDown, Properties.Resources.strPageManagmentButtonMovePageDown },
+                { ButtonInsertTop, Properties.Resources.strPageManagmentButtonInsertTop },
+                { ButtonInsertDown, Properties.Resources.strPageManagmentButtonInsertBottom },
+            };
+
             // Add events for buttons (tooltip)
             foreach (var element in btns)
             {
@@ -174,51 +198,12 @@ namespace SimpleJournal.Dialogs
             scaleFactor = scale;
         }
 
+
+
         private void OnMouseHover(object sender)
         {
             // Display a kind of a tooltip at the bottom, right gray bar (when hovering buttons to explain them)
-
-            string result = string.Empty;
-            if (sender == ToggleButtonBlanko)
-                result = Properties.Resources.strPageManagmentToggleButtonBlanko;
-            else if (sender == ToggleButtonChequered)
-                result = Properties.Resources.strPageManagmentToggleButtonChequered;
-            else if (sender == ToggleButtonRuled)
-                result = Properties.Resources.strPageManagmentToggleButtonRuled;
-            else if (sender == ToggleButtonDotted)
-                result = Properties.Resources.strPageManagmentToggleButtonDotted;
-            else if (sender == btnIncreaseZoom)
-                result = Properties.Resources.strPageManagmentButtonIncreaseZoom;
-            else if (sender == btnDecreaseZoom)
-                result = Properties.Resources.strPageManagmentButtonDecreaseZoom;
-            else if (sender == ButtonClearPage)
-                result = Properties.Resources.strPageManagmentButtonClearPage;
-            else if (sender == ButtonDeletePage)
-                result = Properties.Resources.strPageManagmentButtonDeletePage;
-            else if (sender == ButtonInsertPageBeforeIndexChequered)
-                result = Properties.Resources.strPageManagmentButtonInsertPageBeforeIndexChequered;
-            else if (sender == ButtonInsertPageBeforeIndexDotted)
-                result = Properties.Resources.strPageManagmentButtonInsertPageBeforeIndexDotted;
-            else if (sender == ButtonInsertPageBeforeIndexBlanko)
-                result = Properties.Resources.strPageManagmentButtonInsertPageBeforeIndexBlanko;
-            else if (sender == ButtonInsertPageBeforeIndexRuled)
-                result = Properties.Resources.strPageManagmentButtonInsertPageBeforeIndexRuled;
-            else if (sender == ButtonInsertPageAfterIndexChequered)
-                result = Properties.Resources.strPageManagmentButtonInsertPageAfterIndexChequered;
-            else if (sender == ButtonInsertPageAfterIndexDotted)
-                result = Properties.Resources.strPageManagmentButtonInsertPageAfterIndexDotted;
-            else if (sender == ButtonInsertPageAfterIndexBlanko)
-                result = Properties.Resources.strPageManagmentButtonInsertPageAfterIndexBlanko;
-            else if (sender == ButtonInsertPageAfterIndexRuled)
-                result = Properties.Resources.strPageManagmentButtonInsertPageAfterIndexRuled;
-            else if (sender == ButtonMovePageUp)
-                result = Properties.Resources.strPageManagmentButtonMovePageUp;
-            else if (sender == ButtonMovePageDown)
-                result = Properties.Resources.strPageManagmentButtonMovePageDown;
-            else if (sender == ButtonInsertTop)
-                result = Properties.Resources.strPageManagmentButtonInsertTop;
-            else if (sender == ButtonInsertDown)
-                result = Properties.Resources.strPageManagmentButtonInsertBottom;
+            string result = toolTips[sender as UIElement];
 
             TextInfoLabel.Text = $"{Properties.Resources.strHint}: {result}";
             TextInfoLabel.Visibility = Visibility.Visible;
