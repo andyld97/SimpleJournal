@@ -21,7 +21,7 @@
             <TabItem Header="{x:Static res:Resources.strAbout}">
                 <StackPanel>
                     <Image Source="../resources/logo.png" Width="230" Margin="0,15,0,0"/>
-                    <TextBlock Margin="5,20,0,0" HorizontalAlignment="Center" Foreground="{DynamicResource BlackBrush}">
+                    <TextBlock Margin="5,10,0,0" HorizontalAlignment="Center" Foreground="{DynamicResource BlackBrush}">
                         <Run Text="{x:Static res:Resources.strAboutText1}"/>
                         <LineBreak />
                         <Run Text="{x:Static res:Resources.strAboutTextIcons8_1}"/>
@@ -33,10 +33,11 @@
                         <Run Text="{x:Static res:Resources.strAboutTextFluentRibbon_2}"/>
                         <LineBreak />
                         <LineBreak />
-                        <Run Text="Source Code:" />
-                        <Hyperlink NavigateUri="https://github.com/andyld97/SimpleJournal" RequestNavigate="Hyperlink_RequestNavigate">GitHub</Hyperlink>
+                        <Hyperlink NavigateUri="https://simplejournal.ca-soft.net/" RequestNavigate="Hyperlink_RequestNavigate">Homepage</Hyperlink>
+                        <Run Text="|" />
+                        <Hyperlink NavigateUri="https://github.com/andyld97/SimpleJournal" RequestNavigate="Hyperlink_RequestNavigate">Source Code</Hyperlink>
                         <LineBreak />
-                        <LineBreak/>
+                        <LineBreak />
                         <Run Text="Version:" />
                         <Run x:Name="TextVersion" Text="{x:Static res:Resources.strUnknownVersion}" FontWeight="Bold"/>
                         <LineBreak />
