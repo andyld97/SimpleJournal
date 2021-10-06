@@ -26,7 +26,7 @@ This is a small solution making SimpleJournal more usable on devices which suppo
 To prevent this I came up with a soultion which completely disables your touch screen based on `devcon`. This works the same way as your device manager do, as if you click on `Disable Device`. This is implemented as an option in the settings and it's not activated in the default settings. To enhance the usability your touch screen will be deactivated on the startup of SimpleJournal and will be reactivated if you close the last instance of SimpleJournal.
 
 For the non-store version I created a simple [tool](https://simplejournal.ca-soft.net/download.php?tdm=1) which you can use for en/disabling your touch screen.
-The reason why this feature is only integrated in the non-store version is, that this feature requires administrator privileges and currently I don't how to aquire administrator privileges in the Store app!
+The reason why this feature is only integrated in the non-store version is, that this feature requires administrator privileges and currently I don't know how to aquire administrator privileges in the Store app!
 
 ## Build
 In order to work with form or text-recognition you need to compile `Analyzer` and then all files should be copied automatically while publishing!
