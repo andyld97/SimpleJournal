@@ -228,6 +228,19 @@ namespace SimpleJournal
                 }
             };
 
+            ExportControl.DialogClosed += delegate (object sender, bool e)
+            {
+                MenuBackstage.IsOpen = false;
+            };
+
+            ExportControl.TitleChanged += delegate (object sender, string e)
+            {
+                if (e == Properties.Resources.strExportPages)
+                    TextExportStatus.Text = String.Empty;
+                else 
+                    TextExportStatus.Text = e;
+            };
+
             // Boot with fullscreen
             left = Left;
             top = Top;
@@ -835,7 +848,7 @@ namespace SimpleJournal
         }
 
         public void UpdateDropDownButtons()
-        {           
+        {
             if (!arePensInitalized)
             {
                 arePensInitalized = true;
@@ -928,14 +941,16 @@ namespace SimpleJournal
 
         private void SimpleFormDropDown_OnSimpleFormDropDownChanged(ShapeType shapeType)
         {
-            ApplyToAllCanvas((DrawingCanvas dc) => {
+            ApplyToAllCanvas((DrawingCanvas dc) =>
+            {
                 dc.SetFormMode(shapeType);
             });
         }
 
         private void PlotDropDownTemplate_OnPlotModeChanged(PlotMode plotMode)
         {
-            ApplyToAllCanvas((DrawingCanvas dc) => {
+            ApplyToAllCanvas((DrawingCanvas dc) =>
+            {
                 dc.SetPlotMode(plotMode);
             });
         }
@@ -1002,7 +1017,8 @@ namespace SimpleJournal
 
         private void RulerDropDownTemplate_OnChangedRulerMode(RulerMode mode)
         {
-            ApplyToAllCanvas((DrawingCanvas dc) => {
+            ApplyToAllCanvas((DrawingCanvas dc) =>
+            {
                 dc.SetRulerMode(mode);
             });
 
@@ -1070,7 +1086,8 @@ namespace SimpleJournal
             page.Canvas.OnInsertPositionIsKnown += Canvas_OnInsertPositionIsKnown;
             page.Canvas.SelectionChanged += Canvas_SelectionChanged;
             page.Canvas.Children.CollectionChanged += Children_CollectionChanged;
-            page.Canvas.RemoveElementFromSidebar += delegate (List<UIElement> temp) {
+            page.Canvas.RemoveElementFromSidebar += delegate (List<UIElement> temp)
+            {
 
                 List<CustomListBoxItem> toRemove = new List<CustomListBoxItem>();
                 foreach (CustomListBoxItem item in pnlItems.Items)
@@ -2300,7 +2317,7 @@ namespace SimpleJournal
                     autoSaveBackupTimer.Start();
                 }
             }
-            
+
             RefreshVerticalScrollbarSize();
         }
 
@@ -2900,7 +2917,16 @@ namespace SimpleJournal
 
         private void btnExport_Click(object sender, RoutedEventArgs e)
         {
-            new ExportDialog(CurrentJournalPages, CurrentJournalPages[cmbPages.SelectedIndex]).ShowDialog();
+            var exportDialog = new ExportDialog();
+
+            exportDialog.exportControl.Initalize(CurrentJournalPages, CurrentJournalPages[cmbPages.SelectedIndex]);
+            exportDialog.ShowDialog();
+        }
+
+        private void MenuBackstageExport_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            TextExportStatus.Text = string.Empty;
+            ExportControl.Initalize(CurrentJournalPages, CurrentJournalPages[cmbPages.SelectedIndex]);
         }
 
         #endregion
@@ -3032,7 +3058,7 @@ namespace SimpleJournal
             DrawingCanvas.LastModifiedCanvas.Select(null, new UIElement[] { insertClipboard });
             SetStateForToggleButton(btnSelect, Tools.Select);
             SwitchTool(Tools.Select, true);
-           
+
             insertClipboard = null;
         }
 
@@ -3186,9 +3212,9 @@ namespace SimpleJournal
                     tb.TextDecorations.Clear();
 
                     // UnDo/ReDo Idea. Works but see Bug 39 in DevOps
-                   /* DrawingCanvas.LastModifiedCanvas.Manager.RunSpecialAction<PropertyChangedAction>(new List<PropertyChangedAction>() {
-                        new PropertyChangedAction(data.Content, tb.Text, (object s) => { tb.Text = s.ToString(); })
-                    });*/
+                    /* DrawingCanvas.LastModifiedCanvas.Manager.RunSpecialAction<PropertyChangedAction>(new List<PropertyChangedAction>() {
+                         new PropertyChangedAction(data.Content, tb.Text, (object s) => { tb.Text = s.ToString(); })
+                     });*/
 
                     tb.Text = data.Content;
                     tb.FontFamily = new FontFamily(data.FontFamily);
@@ -3307,7 +3333,7 @@ namespace SimpleJournal
                     case SimpleJournal.Background.Sand: imageFileName = "sand"; break;
                     case SimpleJournal.Background.Wooden1: imageFileName = "wooden-1"; break;
                     case SimpleJournal.Background.Wooden2: imageFileName = "wooden-2"; break;
-                } 
+                }
 
                 if (Settings.Instance.PageBackground != SimpleJournal.Background.Custom)
                 {
@@ -3350,8 +3376,8 @@ namespace SimpleJournal
 
         private void RibbonWindow_Activated(object sender, EventArgs e)
         {
-           if (WindowState == WindowState.Minimized)
-               return;
+            if (WindowState == WindowState.Minimized)
+                return;
 
             Console.WriteLine("MainWindow activated ....");
 #if !UWP
@@ -3380,10 +3406,13 @@ namespace SimpleJournal
 
         private void RibbonWindow_StateChanged(object sender, EventArgs e)
         {
+#if !UWP
+
             if (WindowState == WindowState.Minimized && Settings.Instance.DisableTouchScreenIfInForeground)
                 TouchHelper.SetTouchState(true);
             else if ((WindowState == WindowState.Normal || WindowState == WindowState.Maximized) && Settings.Instance.DisableTouchScreenIfInForeground)
                 TouchHelper.SetTouchState(false);
+#endif
         }
 
         #endregion
@@ -3412,6 +3441,22 @@ namespace SimpleJournal
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if (value is int result && result != -1)
+                return Visibility.Visible;
+
+            return Visibility.Collapsed;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public class StringToVisiblityConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value is string str && !string.IsNullOrEmpty(str))
                 return Visibility.Visible;
 
             return Visibility.Collapsed;

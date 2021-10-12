@@ -15,8 +15,9 @@
         Width="1130">
     <Window.Resources>
         <BooleanToVisibilityConverter x:Key="boolToVisibilityConverter" />
-        <local:SelectedIndexToColumnSpanConverter x:Key="indexToColumn"/>
-        <local:SelectedIndexToVisiblityConverter x:Key="indexToVisibilty"/>
+        <local:SelectedIndexToColumnSpanConverter x:Key="indexToColumn" />
+        <local:SelectedIndexToVisiblityConverter x:Key="indexToVisibilty" />
+        <local:StringToVisiblityConverter x:Key="stringToVisilbity" />
 
         <DataTemplate x:Key="RecentlyOpenedDocumentsTemplate">
             <Grid Background="Transparent" Height="40" ToolTip="{Binding Path}">
@@ -90,7 +91,14 @@
                             <Fluent:Button Icon="/resources/save.png" Header="{x:Static res:Resources.strSaveAsDocument}" Command="ApplicationCommands.Save"  />
                             <Fluent:SeparatorTabItem />
                             <Fluent:Button Icon="/resources/print.png" Header="{x:Static res:Resources.strPrintDocument}" Command="ApplicationCommands.Print" />
-                            <Fluent:Button Icon="/resources/export.png" Header="{x:Static res:Resources.strExportDocument}"  Click="btnExport_Click"  />
+                            <Fluent:BackstageTabItem x:Name="MenuBackstageExport" Icon="/resources/export.png" Header="{x:Static res:Resources.strExportDocument}" MouseDown="MenuBackstageExport_MouseDown">
+                                <DockPanel LastChildFill="True">
+                                    <StatusBar DockPanel.Dock="Top" Visibility="{Binding ElementName=TextExportStatus, Path=Text, Converter={StaticResource stringToVisilbity}}" Background="{DynamicResource WhiteBrush20}">
+                                        <TextBlock x:Name="TextExportStatus" Padding="2" Foreground="{DynamicResource BlackBrush}" />
+                                    </StatusBar>
+                                    <controls:ExportControl x:Name="ExportControl" />
+                                </DockPanel>
+                            </Fluent:BackstageTabItem>
                             <Fluent:Button Icon="/resources/editpage.png" Header="{x:Static res:Resources.strManagePage}" Click="btnPageManagment_Click"  />
                             <Fluent:SeparatorTabItem />
                             <Fluent:Button Icon="/resources/settings.png" Header="{x:Static res:Resources.strSettings}" Click="btnSettings_Click"/>

@@ -198,7 +198,6 @@ namespace SimpleJournal.Dialogs
             scaleFactor = scale;
         }
 
-
         private void OnMouseHover(object sender)
         {
             // Display a kind of a tooltip at the bottom, right gray bar (when hovering buttons to explain them)
