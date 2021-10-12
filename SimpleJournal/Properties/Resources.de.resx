@@ -1145,7 +1145,7 @@ Klicken Sie auf Nein, um diesen Hinweis weiterhin zu erhalten!</value>
     <comment>MainWindow.xaml</comment>
   </data>
   <data name="strReleaseDate" xml:space="preserve">
-    <value>02.10.2021 22:16 Uhr</value>
+    <value>12.10.2021 16:31 Uhr</value>
     <comment>*</comment>
   </data>
   <data name="strRemove" xml:space="preserve">
@@ -1798,7 +1798,9 @@ Hier möchte ich Ihnen noch ein paar wichtige Hinweise geben, die Ihnen helfen w
     <value>Ändert die aktuelle Seite auf das Papierformat: Dotted (Gepunkted)</value>
   </data>
   <data name="strSettingsDialogTouchDeviceManagerDescription" xml:space="preserve">
-    <value>Aufgrund von fehlenden Berechtigungen ist es in dieser Version leider nicht möglich, den Touchscreen automatisch zu deaktivieren. Daher gibt des hier den Touchscreen Device Manager zum Download. Damit können Sie den Touchscreen vor dem Arbeiten deaktivieren und danach wieder aktivieren (sofern dies notwendig ist). Das Programm funktioniert analog zum Geräte-Manager und benötigt Administrator-Rechte!</value>
+    <value>Aufgrund von fehlenden Berechtigungen ist es in dieser Version leider nicht möglich, den Touchscreen automatisch zu deaktivieren. Daher gibt des hier den Touchscreen Device Manager zum Download. Damit können Sie den Touchscreen vor dem Arbeiten deaktivieren und danach wieder aktivieren (sofern dies notwendig ist). Das Programm funktioniert analog zum Geräte-Manager und benötigt Administrator-Rechte!
+
+Alternativ können Sie die normale Version von SimpleJournal verwenden!</value>
   </data>
   <data name="strSettingsDownloadTouchDeviceManager" xml:space="preserve">
     <value>Touchscreen Device Manager herunterladen</value>
@@ -1808,5 +1810,8 @@ Hier möchte ich Ihnen noch ein paar wichtige Hinweise geben, die Ihnen helfen w
   </data>
   <data name="strSettingsUseBackstageMenu" xml:space="preserve">
     <value>Modernes Menü verwenden</value>
+  </data>
+  <data name="strRecentlyOpenedDocuments_No" xml:space="preserve">
+    <value>Keine</value>
   </data>
 </root>

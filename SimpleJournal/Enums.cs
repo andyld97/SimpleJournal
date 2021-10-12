@@ -106,4 +106,12 @@
         /// </summary>
         Custom = 100
     }
+
+    public enum ExportMode
+    {
+        AllPages,
+        CurrentPage,
+        SelectedPageRange,
+        SinglePage
+    }
 }

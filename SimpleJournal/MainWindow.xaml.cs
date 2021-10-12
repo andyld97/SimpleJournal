@@ -50,6 +50,7 @@ namespace SimpleJournal
         private string currentJournalTitle = string.Empty;
         private bool isFullScreen = false;
         private bool isInitalized = false;
+        private bool arePensInitalized = false;
         private bool startSetupDialog = false;
         private bool preventPageBoxSelectionChanged = false;
         private bool forceOpenSidebar = false;
@@ -137,7 +138,7 @@ namespace SimpleJournal
             isInitalized = true;
 
             AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
-            this.Dispatcher.UnhandledException += Dispatcher_UnhandledException;
+            Dispatcher.UnhandledException += Dispatcher_UnhandledException;
 
             // Display last opened files
             RefreshRecentlyOpenedFiles();
@@ -209,7 +210,7 @@ namespace SimpleJournal
 
 
             // Handle keydown
-            this.PreviewKeyDown += (s, e) =>
+            PreviewKeyDown += (s, e) =>
             {
                 if (e.Key == Key.F11)
                 {
@@ -227,11 +228,32 @@ namespace SimpleJournal
                 }
             };
 
+            PageManagementControl.DialogClosed += async delegate (object semder, bool e)
+            {
+                if (e)
+                    await ApplyPageManagmentDialog(PageManagementControl.Result);
+
+                MenuBackstage.IsOpen = false;
+            };
+
+            ExportControl.DialogClosed += delegate (object sender, bool e)
+            {
+                MenuBackstage.IsOpen = false;
+            };
+
+            ExportControl.TitleChanged += delegate (object sender, string e)
+            {
+                if (e == Properties.Resources.strExportPages)
+                    TextExportStatus.Text = String.Empty;
+                else 
+                    TextExportStatus.Text = e;
+            };
+
             // Boot with fullscreen
-            left = this.Left;
-            top = this.Top;
-            width = this.Width;
-            height = this.Height;
+            left = Left;
+            top = Top;
+            width = Width;
+            height = Height;
 
             // Maximized = Full screen
             // Normal = Maximized
@@ -239,7 +261,7 @@ namespace SimpleJournal
             if (Settings.Instance.WindowState == WindowState.Maximized)
                 ToggleFullscreen();
             else if (Settings.Instance.WindowState == WindowState.Normal)
-                this.WindowState = WindowState.Maximized;
+                WindowState = WindowState.Maximized;
 
             // Call other init methods
             RefreshVerticalScrollbarSize();
@@ -283,16 +305,15 @@ namespace SimpleJournal
             if (screen != null)
             {
                 var bounds = screen.DeviceBounds;
-                // ToDo: *** Fix #6
                 if (bounds.Width > bounds.Height)
                 {
-                    this.Width = Math.Min(1130, bounds.Width);
-                    this.Height = Math.Min(800, bounds.Height);
+                    Width = Math.Min(1130, bounds.Width);
+                    Height = Math.Min(800, bounds.Height);
                 }
                 else
                 {
-                    this.Height = Math.Min(800, bounds.Height);
-                    this.Width = bounds.Width;
+                    Height = Math.Min(800, bounds.Height);
+                    Width = bounds.Width;
                 }
             }
 
@@ -313,6 +334,12 @@ namespace SimpleJournal
             RecentlyOpenedDocumentsBackstage.ItemsSource = null;
             RecentlyOpenedDocumentsBackstage.Items.Clear();
             RecentlyOpenedDocumentsBackstage.ItemsSource = RecentlyOpenedDocuments.Instance;
+
+            int entries = RecentlyOpenedDocuments.Instance.Count();
+            string text = entries > 0 ? entries.ToString() : Properties.Resources.strRecentlyOpenedDocuments_No;
+
+            MenuAppRecentlyOpendedFilesCount.Text = text;
+            MenuBackstageRecentlyOpendedFilesCount.Text = text;
         }
 
         protected override async void OnContentRendered(EventArgs e)
@@ -402,15 +429,15 @@ namespace SimpleJournal
                 if (result.HasValue && result.Value)
                 {
                     // If result was successfully, there is a new file, so we can delete the old backup file
-                    this.DeleteAutoSaveBackup();
+                    DeleteAutoSaveBackup();
 
                     // Bring this window to the front
-                    this.Topmost = true;
-                    this.Topmost = false;
-                    this.Activate();
+                    Topmost = true;
+                    Topmost = false;
+                    Activate();
                 }
                 else
-                    this.DeleteAutoSaveBackup();
+                    DeleteAutoSaveBackup();
             }
 
             // Start timer just after the dialog is appeard (or not)
@@ -560,7 +587,7 @@ namespace SimpleJournal
             preventPageBoxSelectionChanged = false;
 
             int counter = 0;
-            foreach (FrameworkElement child in this.pages.Children)
+            foreach (FrameworkElement child in pages.Children)
             {
                 if (child != null && child is Frame && counter == index)
                 {
@@ -619,13 +646,13 @@ namespace SimpleJournal
             // Show sidebar only if there're elements to show (and also ignore lines)
             if (elements.Length == 0 || elements.Where(p => p is Line).Count() == elements.Length)
             {
-                this.pnlSidebar.Visibility = Visibility.Hidden;
+                pnlSidebar.Visibility = Visibility.Hidden;
                 return;
             }
 
             // Display ui elements in sidebar
-            this.pnlItems.Items.Clear();
-            this.pnlSidebar.Visibility = Visibility.Visible;
+            pnlItems.Items.Clear();
+            pnlSidebar.Visibility = Visibility.Visible;
 
             foreach (UIElement element in DrawingCanvas.LastModifiedCanvas.Children.Omit(typeof(Line)))
             {
@@ -708,7 +735,7 @@ namespace SimpleJournal
                 panel.Children.Add(textBlock);
 
                 item.Content = panel;
-                this.pnlItems.Items.Add(item);
+                pnlItems.Items.Add(item);
             }
 
             preventSelection = true;
@@ -723,7 +750,7 @@ namespace SimpleJournal
             }
 
             if (pnlItems.Items.Count == 0)
-                this.pnlSidebar.Visibility = Visibility.Hidden;
+                pnlSidebar.Visibility = Visibility.Hidden;
             preventSelection = false;
             preventSelectionChanged = false;
         }
@@ -758,7 +785,7 @@ namespace SimpleJournal
             else if (pnlItems.SelectedItems.Count == 0 && pnlItems.Items.Count == 0)
             {
                 // Hide sidebar
-                this.pnlSidebar.Visibility = Visibility.Hidden;
+                pnlSidebar.Visibility = Visibility.Hidden;
             }
         }
 
@@ -787,7 +814,7 @@ namespace SimpleJournal
                 preventSelectionChanged = false;
 
                 if (pnlItems.Items.Count == 0)
-                    this.pnlSidebar.Visibility = Visibility.Hidden;
+                    pnlSidebar.Visibility = Visibility.Hidden;
 
             }
             else
@@ -836,45 +863,50 @@ namespace SimpleJournal
 
         public void UpdateDropDownButtons()
         {
-            btnPen1.DropDown = penTemplates[0];
-            btnPen2.DropDown = penTemplates[1];
-            btnPen3.DropDown = penTemplates[2];
-            btnPen4.DropDown = penTemplates[3];
+            if (!arePensInitalized)
+            {
+                arePensInitalized = true;
 
-            penTemplates[0].OnChangedColorAndSize += BtnPen1_OnChanged;
-            penTemplates[1].OnChangedColorAndSize += BtnPen2_OnChanged;
-            penTemplates[2].OnChangedColorAndSize += BtnPen3_OnChanged;
-            penTemplates[3].OnChangedColorAndSize += BtnPen4_OnChanged;
+                btnPen1.DropDown = penTemplates[0];
+                btnPen2.DropDown = penTemplates[1];
+                btnPen3.DropDown = penTemplates[2];
+                btnPen4.DropDown = penTemplates[3];
+
+                penTemplates[0].OnChangedColorAndSize += BtnPen1_OnChanged;
+                penTemplates[1].OnChangedColorAndSize += BtnPen2_OnChanged;
+                penTemplates[2].OnChangedColorAndSize += BtnPen3_OnChanged;
+                penTemplates[3].OnChangedColorAndSize += BtnPen4_OnChanged;
+
+                textMarkerTemplate.SetTextMarker();
+                textMarkerTemplate.LoadPen(new Pen(Settings.Instance.TextMarkerColor, Settings.Instance.TextMarkerSize.Width, Settings.Instance.TextMarkerSize.Height));
+                textMarkerTemplate.OnChangedColorAndSize += BtnTextMarker_OnChanged;
+                btnTextMarker.DropDown = textMarkerTemplate;
+
+                btnRubberFine.DropDown = rubberDropDownTemplate;
+                rubberDropDownTemplate.OnChangedRubber += BtnRubberFine_OnChangedRubber;
+
+                btnRuler.DropDown = rulerDropDownTemplate;
+                rulerDropDownTemplate.OnChangedRulerMode += RulerDropDownTemplate_OnChangedRulerMode;
+                rulerDropDownTemplate.SetColor(currentPens[0].FontColor.ToColor());
+
+                btnSelect.DropDown = selectDropDownTemplate;
+                selectDropDownTemplate.OnColorAndSizeChanged += SelectDropDownTemplate_OnColorAndSizeChanged;
+
+                btnFreeHandPolygon.DropDown = polygonDropDownTemplate;
+                btnInsertNewPage.DropDown = addPageDropDownTemplate;
+                btnInsertSimpleForm.DropDown = simpleFormDropDown;
+                simpleFormDropDown.OnSimpleFormDropDownChanged += SimpleFormDropDown_OnSimpleFormDropDownChanged;
+                btnInsertPlot.DropDown = plotDropDownTemplate;
+                plotDropDownTemplate.OnPlotModeChanged += PlotDropDownTemplate_OnPlotModeChanged;
+                addPageDropDownTemplate.AddPage += AddPageDropDownTemplate_AddPage;
+
+                // polygonDropDownTemplate.OnChanged ...
+            }
 
             penTemplates[0].LoadPen(currentPens[0]);
             penTemplates[1].LoadPen(currentPens[1]);
             penTemplates[2].LoadPen(currentPens[2]);
             penTemplates[3].LoadPen(currentPens[3]);
-
-            textMarkerTemplate.SetTextMarker();
-            textMarkerTemplate.LoadPen(new Pen(Settings.Instance.TextMarkerColor, Settings.Instance.TextMarkerSize.Width, Settings.Instance.TextMarkerSize.Height));
-            textMarkerTemplate.OnChangedColorAndSize += BtnTextMarker_OnChanged;
-            btnTextMarker.DropDown = textMarkerTemplate;
-
-            btnRubberFine.DropDown = rubberDropDownTemplate;
-            rubberDropDownTemplate.OnChangedRubber += BtnRubberFine_OnChangedRubber;
-
-            btnRuler.DropDown = rulerDropDownTemplate;
-            rulerDropDownTemplate.OnChangedRulerMode += RulerDropDownTemplate_OnChangedRulerMode;
-            rulerDropDownTemplate.SetColor(currentPens[0].FontColor.ToColor());
-
-            btnSelect.DropDown = selectDropDownTemplate;
-            selectDropDownTemplate.OnColorAndSizeChanged += SelectDropDownTemplate_OnColorAndSizeChanged;
-
-            btnFreeHandPolygon.DropDown = polygonDropDownTemplate;
-            btnInsertNewPage.DropDown = addPageDropDownTemplate;
-            btnInsertSimpleForm.DropDown = simpleFormDropDown;
-            simpleFormDropDown.OnSimpleFormDropDownChanged += SimpleFormDropDown_OnSimpleFormDropDownChanged;
-            btnInsertPlot.DropDown = plotDropDownTemplate;
-            plotDropDownTemplate.OnPlotModeChanged += PlotDropDownTemplate_OnPlotModeChanged;
-            addPageDropDownTemplate.AddPage += AddPageDropDownTemplate_AddPage;
-
-            // polygonDropDownTemplate.OnChanged ...
         }
 
         private void AddNewPage(PaperType paperType)
@@ -923,14 +955,16 @@ namespace SimpleJournal
 
         private void SimpleFormDropDown_OnSimpleFormDropDownChanged(ShapeType shapeType)
         {
-            ApplyToAllCanvas((DrawingCanvas dc) => {
+            ApplyToAllCanvas((DrawingCanvas dc) =>
+            {
                 dc.SetFormMode(shapeType);
             });
         }
 
         private void PlotDropDownTemplate_OnPlotModeChanged(PlotMode plotMode)
         {
-            ApplyToAllCanvas((DrawingCanvas dc) => {
+            ApplyToAllCanvas((DrawingCanvas dc) =>
+            {
                 dc.SetPlotMode(plotMode);
             });
         }
@@ -997,7 +1031,8 @@ namespace SimpleJournal
 
         private void RulerDropDownTemplate_OnChangedRulerMode(RulerMode mode)
         {
-            ApplyToAllCanvas((DrawingCanvas dc) => {
+            ApplyToAllCanvas((DrawingCanvas dc) =>
+            {
                 dc.SetRulerMode(mode);
             });
 
@@ -1065,7 +1100,8 @@ namespace SimpleJournal
             page.Canvas.OnInsertPositionIsKnown += Canvas_OnInsertPositionIsKnown;
             page.Canvas.SelectionChanged += Canvas_SelectionChanged;
             page.Canvas.Children.CollectionChanged += Children_CollectionChanged;
-            page.Canvas.RemoveElementFromSidebar += delegate (List<UIElement> temp) {
+            page.Canvas.RemoveElementFromSidebar += delegate (List<UIElement> temp)
+            {
 
                 List<CustomListBoxItem> toRemove = new List<CustomListBoxItem>();
                 foreach (CustomListBoxItem item in pnlItems.Items)
@@ -1121,10 +1157,10 @@ namespace SimpleJournal
             if (index == -1)
             {
                 CurrentJournalPages.Add(paper);
-                this.pages.Children.Add(elementToAdd);
+                pages.Children.Add(elementToAdd);
             }
             else
-                this.pages.Children.Insert(index, elementToAdd);
+                pages.Children.Insert(index, elementToAdd);
 
             double offset = mainScrollView.VerticalOffset;
 
@@ -1146,9 +1182,9 @@ namespace SimpleJournal
             };
 
             if (index == -1)
-                this.pages.Children.Add(pageSplitter);
+                pages.Children.Add(pageSplitter);
             else
-                this.pages.Children.Insert(index + 1, pageSplitter);
+                pages.Children.Insert(index + 1, pageSplitter);
 
             mainScrollView.ScrollToVerticalOffset(offset);
 
@@ -1192,9 +1228,7 @@ namespace SimpleJournal
             {
                 // Initalize pens
                 for (int i = 0; i < currentPens.Length; i++)
-                {
                     currentPens[i] = new Pen(Consts.PEN_COLORS[i], Consts.StrokeSizes[0].Width, Consts.StrokeSizes[0].Height);
-                }
 
                 // Initalize text marker (reset)
                 UpdateTextMarkerAttributes(true);
@@ -1820,7 +1854,6 @@ namespace SimpleJournal
             SwitchTool(Tools.RubberFree);
         }
 
-
         private void btnInsertSimpleForm_Click_1(object sender, EventArgs e)
         {
             if (ignoreToggleButtonHandling)
@@ -1984,7 +2017,7 @@ namespace SimpleJournal
                 else if (AskForOpeningAfterModifying())
                 {
                     MenuBackstage.IsOpen = false;
-                    await Task.Delay(500).ContinueWith(async delegate (Task t)
+                    await Task.Delay(500).ContinueWith(delegate (Task t)
                      {
                          Dispatcher.Invoke(new System.Action(async () =>
                         {
@@ -2063,9 +2096,7 @@ namespace SimpleJournal
             {
                 int pageCount = 1;
                 for (int i = from; i <= to; i++)
-                {
                     pd.PrintVisual(CurrentJournalPages[i].Canvas, $"{Properties.Resources.strPrinting} {pageCount++}");
-                }
             }
         }
 
@@ -2159,6 +2190,7 @@ namespace SimpleJournal
                 }
             }
         }
+
         private void BtnInsertNewPage_Click(object sender, EventArgs e)
         {
             AddNewPage(Settings.Instance.PaperTypeLastInserted);
@@ -2233,7 +2265,7 @@ namespace SimpleJournal
             }
         }
 
-        private async void test_Click(object sender, RoutedEventArgs e)
+        private async void btnTextDetection_Click(object sender, RoutedEventArgs e)
         {
             if (textAnalyserInstance == null)
             {
@@ -2299,7 +2331,7 @@ namespace SimpleJournal
                     autoSaveBackupTimer.Start();
                 }
             }
-            
+
             RefreshVerticalScrollbarSize();
         }
 
@@ -2323,9 +2355,9 @@ namespace SimpleJournal
                     can.Children.Remove(element);
 
                 // Refresh list
-                if (this.pnlSidebar.IsVisible)
+                if (pnlSidebar.IsVisible)
                 {
-                    this.pnlSidebar.Visibility = Visibility.Collapsed;
+                    pnlSidebar.Visibility = Visibility.Collapsed;
                     if (can.Children.Count > 0)
                         can.Select(new UIElement[] { can.Children[0] });
                 }
@@ -2721,7 +2753,7 @@ namespace SimpleJournal
 
                     currentJournalPath = fileName;
 
-                    this.IsEnabled = false;
+                    IsEnabled = false;
                     isInitalized = false;
                     dialog.Show();
 
@@ -2773,7 +2805,7 @@ namespace SimpleJournal
                     SwitchTool(currentTool, true);
 
                     // Set title due to new document
-                    this.UpdateTitle(System.IO.Path.GetFileNameWithoutExtension(fileName));
+                    UpdateTitle(System.IO.Path.GetFileNameWithoutExtension(fileName));
 
                     // Delete old auto save files
                     DeleteAutoSaveBackup();
@@ -2788,7 +2820,7 @@ namespace SimpleJournal
                 }
                 finally
                 {
-                    this.IsEnabled = true;
+                    IsEnabled = true;
                     dialog.Close();
                     isInitalized = true;
                 }
@@ -2803,103 +2835,121 @@ namespace SimpleJournal
 
         #region Pagemanagment Dialog
 
-        private async Task ShowAndApplyPageManagmentDialog()
+        private async Task ApplyPageManagmentDialog(List<JournalPage> result)
         {
-            var pgmd = new PageManagmentDialog(CurrentJournalPages.ToList());
-            var userResult = pgmd.ShowDialog();
+            // Apply result
+            ClearJournal();
 
-            if (userResult.HasValue && userResult.Value)
+            double currentScrollOffset = this.mainScrollView.VerticalOffset;
+            var dialog = new WaitingDialog(System.IO.Path.GetFileNameWithoutExtension(currentJournalTitle), 1) { Owner = this };
+            dialog.Show();
+
+            IsEnabled = false;
+            isInitalized = false;
+
+            try
             {
-                // Apply result
-                ClearJournal();
+                int countPages = 0;
+                double progress = 0;
 
-                double currentScrollOffset = this.mainScrollView.VerticalOffset;
-                var dialog = new WaitingDialog(System.IO.Path.GetFileNameWithoutExtension(currentJournalTitle), 1) { Owner = this };
-                dialog.Show();
-
-                this.IsEnabled = false;
-                isInitalized = false;
-
-                try
+                // Load pages to iPages
+                foreach (var page in result)
                 {
-                    int countPages = 0;
-                    double progress = 0;
+                    DrawingCanvas canvas = null;
+                    canvas = AddPage(GeneratePage(page.PaperPattern));
 
-                    // Load pages to iPages
-                    foreach (var page in pgmd.Result)
+                    if (countPages == 0)
                     {
-                        DrawingCanvas canvas = null;
-                        canvas = AddPage(GeneratePage(page.PaperPattern));
-
-                        if (countPages == 0)
-                        {
-                            // Set last modified canvas to this, because the old is non existing any more
-                            DrawingCanvas.LastModifiedCanvas = canvas;
-                        }
-
-                        progress = (countPages++ + 1) / (double)pgmd.Result.Count;
-                        dialog.SetProgress(progress, countPages, pgmd.Result.Count);
-
-                        StrokeCollection strokes = null;
-                        await Task.Run(() =>
-                        {
-                            using (System.IO.MemoryStream ms = new System.IO.MemoryStream())
-                            {
-                                ms.Write(page.Data, 0, page.Data.Length);
-                                ms.Position = 0;
-                                strokes = new StrokeCollection(ms);
-                            }
-                        }).ContinueWith(new Action<Task>((Task t) =>
-                        {
-                            Application.Current.Dispatcher.Invoke(new System.Action(() =>
-                            {
-                                canvas.Strokes = strokes;
-
-                                if (page.HasAdditionalResources)
-                                {
-                                    foreach (JournalResource jr in page.JournalResources)
-                                        JournalResource.AddJournalResourceToCanvas(jr, canvas);
-                                }
-                            }));
-                        }));
+                        // Set last modified canvas to this, because the old is non existing any more
+                        DrawingCanvas.LastModifiedCanvas = canvas;
                     }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(this, $"{Properties.Resources.strFailedToLoadJournal} {ex.Message}{Environment.NewLine}{Environment.NewLine}{ex.StackTrace}", Properties.Resources.strFailedToLoadJournalTitle, MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-                finally
-                {
-                    this.IsEnabled = true;
-                    dialog.Close();
-                    isInitalized = true;
 
-                    // Make sure that user will be asked to save
-                    DrawingCanvas.Change = true;
+                    progress = (countPages++ + 1) / (double)result.Count;
+                    dialog.SetProgress(progress, countPages, result.Count);
 
-                    // Apply old offset
-                    mainScrollView.ScrollToVerticalOffset(currentScrollOffset);
+                    StrokeCollection strokes = null;
+                    await Task.Run(() =>
+                    {
+                        using (System.IO.MemoryStream ms = new System.IO.MemoryStream())
+                        {
+                            ms.Write(page.Data, 0, page.Data.Length);
+                            ms.Position = 0;
+                            strokes = new StrokeCollection(ms);
+                        }
+                    }).ContinueWith(new Action<Task>((Task t) =>
+                    {
+                        Application.Current.Dispatcher.Invoke(new System.Action(() =>
+                        {
+                            canvas.Strokes = strokes;
+
+                            if (page.HasAdditionalResources)
+                            {
+                                foreach (JournalResource jr in page.JournalResources)
+                                    JournalResource.AddJournalResourceToCanvas(jr, canvas);
+                            }
+                        }));
+                    }));
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(this, $"{Properties.Resources.strFailedToLoadJournal} {ex.Message}{Environment.NewLine}{Environment.NewLine}{ex.StackTrace}", Properties.Resources.strFailedToLoadJournalTitle, MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            finally
+            {
+                IsEnabled = true;
+                dialog.Close();
+                isInitalized = true;
+
+                // Make sure that user will be asked to save
+                DrawingCanvas.Change = true;
+
+                // Apply old offset
+                mainScrollView.ScrollToVerticalOffset(currentScrollOffset);
             }
         }
 
-        private async void BtnManagePages_Click(object sender, RoutedEventArgs e)
+        private async Task ShowPageManagmentDialog()
         {
-            await ShowAndApplyPageManagmentDialog();
+            var pgmd = new PageManagmentDialog();
+            pgmd.PageManagmentControl.Initalize(CurrentJournalPages.ToList(), pgmd);
+            var userResult = pgmd.ShowDialog();
+
+            if (userResult.HasValue && userResult.Value)
+                await ApplyPageManagmentDialog(pgmd.PageManagmentControl.Result);
+        }
+
+        private async void btnManagePages_Click(object sender, RoutedEventArgs e)
+        {
+            await ShowPageManagmentDialog();
         }
 
         private async void btnPageManagment_Click(object sender, RoutedEventArgs e)
         {
-            await ShowAndApplyPageManagmentDialog();
+            await ShowPageManagmentDialog();
         }
 
+        private void MenuBackstageEditPages_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            PageManagementControl.Initalize(CurrentJournalPages.ToList(), this);
+        }
+    
         #endregion
 
         #region Export
 
         private void btnExport_Click(object sender, RoutedEventArgs e)
         {
-            new ExportDialog(CurrentJournalPages, CurrentJournalPages[cmbPages.SelectedIndex]).ShowDialog();
+            var exportDialog = new ExportDialog();
+
+            exportDialog.exportControl.Initalize(CurrentJournalPages, CurrentJournalPages[cmbPages.SelectedIndex], exportDialog);
+            exportDialog.ShowDialog();
+        }
+
+        private void MenuBackstageExport_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            TextExportStatus.Text = string.Empty;
+            ExportControl.Initalize(CurrentJournalPages, CurrentJournalPages[cmbPages.SelectedIndex], this);
         }
 
         #endregion
@@ -2978,7 +3028,6 @@ namespace SimpleJournal
                 child.SetValue(InkCanvas.LeftProperty, newPoint.X);
                 child.SetValue(InkCanvas.TopProperty, newPoint.Y);
 
-
                 DrawingCanvas.LastModifiedCanvas.Children.Add(child);
                 counter++;
             }
@@ -3032,7 +3081,7 @@ namespace SimpleJournal
             DrawingCanvas.LastModifiedCanvas.Select(null, new UIElement[] { insertClipboard });
             SetStateForToggleButton(btnSelect, Tools.Select);
             SwitchTool(Tools.Select, true);
-           
+
             insertClipboard = null;
         }
 
@@ -3085,7 +3134,6 @@ namespace SimpleJournal
         {
             InsertImageFromClipboard();
         }
-
 
         private void btnInsertImage_Click(object sender, RoutedEventArgs e)
         {
@@ -3187,11 +3235,11 @@ namespace SimpleJournal
                     tb.TextDecorations.Clear();
 
                     // UnDo/ReDo Idea. Works but see Bug 39 in DevOps
-                   /* DrawingCanvas.LastModifiedCanvas.Manager.RunSpecialAction<PropertyChangedAction>(new List<PropertyChangedAction>() {
-                        new PropertyChangedAction(data.Content, tb.Text, (object s) => { tb.Text = s.ToString(); })
-                    });*/
+                    /* DrawingCanvas.LastModifiedCanvas.Manager.RunSpecialAction<PropertyChangedAction>(new List<PropertyChangedAction>() {
+                         new PropertyChangedAction(data.Content, tb.Text, (object s) => { tb.Text = s.ToString(); })
+                     });*/
 
-                    tb.Text = data.Content;
+        tb.Text = data.Content;
                     tb.FontFamily = new FontFamily(data.FontFamily);
                     tb.FontSize = data.FontSize;
                     tb.Foreground = new SolidColorBrush(data.FontColor);
@@ -3308,7 +3356,7 @@ namespace SimpleJournal
                     case SimpleJournal.Background.Sand: imageFileName = "sand"; break;
                     case SimpleJournal.Background.Wooden1: imageFileName = "wooden-1"; break;
                     case SimpleJournal.Background.Wooden2: imageFileName = "wooden-2"; break;
-                } 
+                }
 
                 if (Settings.Instance.PageBackground != SimpleJournal.Background.Custom)
                 {
@@ -3345,14 +3393,15 @@ namespace SimpleJournal
             ApplicationCommands.New.Execute(null, null);
             MenuBackstage.IsOpen = false;
         }
+
         #endregion
 
         #region General Events / Touch
 
         private void RibbonWindow_Activated(object sender, EventArgs e)
         {
-           if (WindowState == WindowState.Minimized)
-               return;
+            if (WindowState == WindowState.Minimized)
+                return;
 
             Console.WriteLine("MainWindow activated ....");
 #if !UWP
@@ -3369,7 +3418,6 @@ namespace SimpleJournal
             if (WindowState == WindowState.Minimized)
                 return;
 
-
             Console.WriteLine("MainWindow deactivated ....");
 #if !UWP
 
@@ -3382,10 +3430,13 @@ namespace SimpleJournal
 
         private void RibbonWindow_StateChanged(object sender, EventArgs e)
         {
+#if !UWP
+
             if (WindowState == WindowState.Minimized && Settings.Instance.DisableTouchScreenIfInForeground)
                 TouchHelper.SetTouchState(true);
             else if ((WindowState == WindowState.Normal || WindowState == WindowState.Maximized) && Settings.Instance.DisableTouchScreenIfInForeground)
                 TouchHelper.SetTouchState(false);
+#endif
         }
 
         #endregion
@@ -3414,6 +3465,22 @@ namespace SimpleJournal
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if (value is int result && result != -1)
+                return Visibility.Visible;
+
+            return Visibility.Collapsed;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public class StringToVisiblityConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value is string str && !string.IsNullOrEmpty(str))
                 return Visibility.Visible;
 
             return Visibility.Collapsed;
