@@ -23,6 +23,7 @@ namespace SimpleJournal.Controls
         private IPaper currentPage;
         private bool isInitalized;
         private string title;
+        private Window owner;
 
         public event PropertyChangedEventHandler PropertyChanged;
         private List<Expander> expanders = new List<Expander>();
@@ -62,11 +63,12 @@ namespace SimpleJournal.Controls
             InitializeComponent();
         }
 
-        public void Initalize(ObservableCollection<IPaper> pages, IPaper currentPage)
+        public void Initalize(ObservableCollection<IPaper> pages, IPaper currentPage, Window owner)
         {
             DataContext = this;
             this.currentPage = currentPage;
             this.pages = pages;
+            this.owner = owner;
 
             UpDownFrom.Maximum = pages.Count;
             UpDownTo.Maximum = pages.Count;
@@ -171,7 +173,7 @@ namespace SimpleJournal.Controls
 
         private void DisplayInvalidInput()
         {
-            MessageBox.Show(Properties.Resources.strInvalidInput, Properties.Resources.strInvalidInputTitle, MessageBoxButton.OK, MessageBoxImage.Error);
+            MessageBox.Show(owner, Properties.Resources.strInvalidInput, Properties.Resources.strInvalidInputTitle, MessageBoxButton.OK, MessageBoxImage.Error);
         }
 
         #region Export
@@ -229,7 +231,7 @@ namespace SimpleJournal.Controls
 
             MainGrid.IsEnabled = true;
             Title = Properties.Resources.strExportPages;
-            MessageBox.Show(Properties.Resources.strExportFinished, Properties.Resources.strSuccess, MessageBoxButton.OK, MessageBoxImage.Information);
+            MessageBox.Show(owner, Properties.Resources.strExportFinished, Properties.Resources.strSuccess, MessageBoxButton.OK, MessageBoxImage.Information);
             return true;
         }
 
@@ -269,7 +271,7 @@ namespace SimpleJournal.Controls
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show($"{Properties.Resources.strExportFailed} {i + 1}: {ex.Message}", Properties.Resources.strFailure, MessageBoxButton.OK, MessageBoxImage.Error);
+                        MessageBox.Show(owner, $"{Properties.Resources.strExportFailed} {i + 1}: {ex.Message}", Properties.Resources.strFailure, MessageBoxButton.OK, MessageBoxImage.Error);
                         return false;
                     }
 
@@ -281,7 +283,7 @@ namespace SimpleJournal.Controls
                 journal.Save(ofd.FileName);
                 MainGrid.IsEnabled = true;
                 Title = Properties.Resources.strExportPages;
-                MessageBox.Show(Properties.Resources.strExportFinished, Properties.Resources.strSuccess, MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show(owner, Properties.Resources.strExportFinished, Properties.Resources.strSuccess, MessageBoxButton.OK, MessageBoxImage.Information);
                 return true;
             }
             else
@@ -345,7 +347,7 @@ namespace SimpleJournal.Controls
             }
             catch (Exception e)
             {
-                MessageBox.Show($"{Properties.Resources.strExportFailed} {page}: {e.Message}", Properties.Resources.strFailure, MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(owner, $"{Properties.Resources.strExportFailed} {page}: {e.Message}", Properties.Resources.strFailure, MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
             return false;

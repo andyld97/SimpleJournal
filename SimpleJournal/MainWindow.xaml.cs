@@ -228,6 +228,14 @@ namespace SimpleJournal
                 }
             };
 
+            PageManagementControl.DialogClosed += async delegate (object semder, bool e)
+            {
+                if (e)
+                    await ApplyPageManagmentDialog(PageManagementControl.Result);
+
+                MenuBackstage.IsOpen = false;
+            };
+
             ExportControl.DialogClosed += delegate (object sender, bool e)
             {
                 MenuBackstage.IsOpen = false;
@@ -2821,96 +2829,105 @@ namespace SimpleJournal
 
         #region Pagemanagment Dialog
 
-        private async Task ShowAndApplyPageManagmentDialog()
+        private async Task ApplyPageManagmentDialog(List<JournalPage> result)
         {
-            var pgmd = new PageManagmentDialog(CurrentJournalPages.ToList());
-            var userResult = pgmd.ShowDialog();
+            // Apply result
+            ClearJournal();
 
-            if (userResult.HasValue && userResult.Value)
+            double currentScrollOffset = this.mainScrollView.VerticalOffset;
+            var dialog = new WaitingDialog(System.IO.Path.GetFileNameWithoutExtension(currentJournalTitle), 1) { Owner = this };
+            dialog.Show();
+
+            IsEnabled = false;
+            isInitalized = false;
+
+            try
             {
-                // Apply result
-                ClearJournal();
+                int countPages = 0;
+                double progress = 0;
 
-                double currentScrollOffset = this.mainScrollView.VerticalOffset;
-                var dialog = new WaitingDialog(System.IO.Path.GetFileNameWithoutExtension(currentJournalTitle), 1) { Owner = this };
-                dialog.Show();
-
-                IsEnabled = false;
-                isInitalized = false;
-
-                try
+                // Load pages to iPages
+                foreach (var page in result)
                 {
-                    int countPages = 0;
-                    double progress = 0;
+                    DrawingCanvas canvas = null;
+                    canvas = AddPage(GeneratePage(page.PaperPattern));
 
-                    // Load pages to iPages
-                    foreach (var page in pgmd.Result)
+                    if (countPages == 0)
                     {
-                        DrawingCanvas canvas = null;
-                        canvas = AddPage(GeneratePage(page.PaperPattern));
-
-                        if (countPages == 0)
-                        {
-                            // Set last modified canvas to this, because the old is non existing any more
-                            DrawingCanvas.LastModifiedCanvas = canvas;
-                        }
-
-                        progress = (countPages++ + 1) / (double)pgmd.Result.Count;
-                        dialog.SetProgress(progress, countPages, pgmd.Result.Count);
-
-                        StrokeCollection strokes = null;
-                        await Task.Run(() =>
-                        {
-                            using (System.IO.MemoryStream ms = new System.IO.MemoryStream())
-                            {
-                                ms.Write(page.Data, 0, page.Data.Length);
-                                ms.Position = 0;
-                                strokes = new StrokeCollection(ms);
-                            }
-                        }).ContinueWith(new Action<Task>((Task t) =>
-                        {
-                            Application.Current.Dispatcher.Invoke(new System.Action(() =>
-                            {
-                                canvas.Strokes = strokes;
-
-                                if (page.HasAdditionalResources)
-                                {
-                                    foreach (JournalResource jr in page.JournalResources)
-                                        JournalResource.AddJournalResourceToCanvas(jr, canvas);
-                                }
-                            }));
-                        }));
+                        // Set last modified canvas to this, because the old is non existing any more
+                        DrawingCanvas.LastModifiedCanvas = canvas;
                     }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(this, $"{Properties.Resources.strFailedToLoadJournal} {ex.Message}{Environment.NewLine}{Environment.NewLine}{ex.StackTrace}", Properties.Resources.strFailedToLoadJournalTitle, MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-                finally
-                {
-                    IsEnabled = true;
-                    dialog.Close();
-                    isInitalized = true;
 
-                    // Make sure that user will be asked to save
-                    DrawingCanvas.Change = true;
+                    progress = (countPages++ + 1) / (double)result.Count;
+                    dialog.SetProgress(progress, countPages, result.Count);
 
-                    // Apply old offset
-                    mainScrollView.ScrollToVerticalOffset(currentScrollOffset);
+                    StrokeCollection strokes = null;
+                    await Task.Run(() =>
+                    {
+                        using (System.IO.MemoryStream ms = new System.IO.MemoryStream())
+                        {
+                            ms.Write(page.Data, 0, page.Data.Length);
+                            ms.Position = 0;
+                            strokes = new StrokeCollection(ms);
+                        }
+                    }).ContinueWith(new Action<Task>((Task t) =>
+                    {
+                        Application.Current.Dispatcher.Invoke(new System.Action(() =>
+                        {
+                            canvas.Strokes = strokes;
+
+                            if (page.HasAdditionalResources)
+                            {
+                                foreach (JournalResource jr in page.JournalResources)
+                                    JournalResource.AddJournalResourceToCanvas(jr, canvas);
+                            }
+                        }));
+                    }));
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(this, $"{Properties.Resources.strFailedToLoadJournal} {ex.Message}{Environment.NewLine}{Environment.NewLine}{ex.StackTrace}", Properties.Resources.strFailedToLoadJournalTitle, MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            finally
+            {
+                IsEnabled = true;
+                dialog.Close();
+                isInitalized = true;
+
+                // Make sure that user will be asked to save
+                DrawingCanvas.Change = true;
+
+                // Apply old offset
+                mainScrollView.ScrollToVerticalOffset(currentScrollOffset);
             }
         }
 
-        private async void BtnManagePages_Click(object sender, RoutedEventArgs e)
+        private async Task ShowPageManagmentDialog()
         {
-            await ShowAndApplyPageManagmentDialog();
+            var pgmd = new PageManagmentDialog();
+            pgmd.PageManagmentControl.Initalize(CurrentJournalPages.ToList(), pgmd);
+            var userResult = pgmd.ShowDialog();
+
+            if (userResult.HasValue && userResult.Value)
+                await ApplyPageManagmentDialog(pgmd.PageManagmentControl.Result);
+        }
+
+        private async void btnManagePages_Click(object sender, RoutedEventArgs e)
+        {
+            await ShowPageManagmentDialog();
         }
 
         private async void btnPageManagment_Click(object sender, RoutedEventArgs e)
         {
-            await ShowAndApplyPageManagmentDialog();
+            await ShowPageManagmentDialog();
         }
 
+        private void MenuBackstageEditPages_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            PageManagementControl.Initalize(CurrentJournalPages.ToList(), this);
+        }
+    
         #endregion
 
         #region Export
@@ -2919,14 +2936,14 @@ namespace SimpleJournal
         {
             var exportDialog = new ExportDialog();
 
-            exportDialog.exportControl.Initalize(CurrentJournalPages, CurrentJournalPages[cmbPages.SelectedIndex]);
+            exportDialog.exportControl.Initalize(CurrentJournalPages, CurrentJournalPages[cmbPages.SelectedIndex], exportDialog);
             exportDialog.ShowDialog();
         }
 
         private void MenuBackstageExport_MouseDown(object sender, MouseButtonEventArgs e)
         {
             TextExportStatus.Text = string.Empty;
-            ExportControl.Initalize(CurrentJournalPages, CurrentJournalPages[cmbPages.SelectedIndex]);
+            ExportControl.Initalize(CurrentJournalPages, CurrentJournalPages[cmbPages.SelectedIndex], this);
         }
 
         #endregion
@@ -3216,7 +3233,7 @@ namespace SimpleJournal
                          new PropertyChangedAction(data.Content, tb.Text, (object s) => { tb.Text = s.ToString(); })
                      });*/
 
-                    tb.Text = data.Content;
+        tb.Text = data.Content;
                     tb.FontFamily = new FontFamily(data.FontFamily);
                     tb.FontSize = data.FontSize;
                     tb.Foreground = new SolidColorBrush(data.FontColor);
@@ -3370,6 +3387,7 @@ namespace SimpleJournal
             ApplicationCommands.New.Execute(null, null);
             MenuBackstage.IsOpen = false;
         }
+
         #endregion
 
         #region General Events / Touch

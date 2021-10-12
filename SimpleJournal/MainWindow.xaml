@@ -99,7 +99,9 @@
                                     <controls:ExportControl x:Name="ExportControl" />
                                 </DockPanel>
                             </Fluent:BackstageTabItem>
-                            <Fluent:Button Icon="/resources/editpage.png" Header="{x:Static res:Resources.strManagePage}" Click="btnPageManagment_Click"  />
+                            <Fluent:BackstageTabItem x:Name="MenuBackstageEditPages" Icon="/resources/editpage.png" Header="{x:Static res:Resources.strManagePage}" MouseDown="MenuBackstageEditPages_MouseDown">
+                                <controls:PageManagmentControl x:Name="PageManagementControl" />
+                            </Fluent:BackstageTabItem>
                             <Fluent:SeparatorTabItem />
                             <Fluent:Button Icon="/resources/settings.png" Header="{x:Static res:Resources.strSettings}" Click="btnSettings_Click"/>
                             <Fluent:Button Icon="/resources/about.png" Header="{x:Static res:Resources.strAbout}" Click="btnAbout_Click" />
@@ -235,7 +237,7 @@
                     </controls:DropDownToggleButton>
                     <controls:FluentToggleButtonRemovedToggle x:Name="btnDeletePage" Click="btnDeletePage_Click"  Header="{x:Static res:Resources.strDeletePage}" ToolTip="{x:Static res:Resources.strDeletePageTooltip}" Width="55" LargeIcon="pack://application:,,,/SimpleJournal;component/resources/deletepage.png"/>
                     <controls:FluentToggleButtonRemovedToggle x:Name="btnClearPage" Click="btnClearPage_Click" Header="{x:Static res:Resources.strClearPage}" ToolTip="{x:Static res:Resources.strClearPageTooltip}" Width="55" LargeIcon="pack://application:,,,/SimpleJournal;component/resources/clear.png"/>
-                    <controls:FluentToggleButtonRemovedToggle x:Name="btnManagePages" Click="BtnManagePages_Click" Header="{x:Static res:Resources.strManagePage}" ToolTip="{x:Static res:Resources.strManagePageTooltip}" Width="60" LargeIcon="pack://application:,,,/SimpleJournal;component/resources/editpage.png"/>
+                    <controls:FluentToggleButtonRemovedToggle x:Name="btnManagePages" Click="btnManagePages_Click"  Header="{x:Static res:Resources.strManagePage}" ToolTip="{x:Static res:Resources.strManagePageTooltip}" Width="60" LargeIcon="pack://application:,,,/SimpleJournal;component/resources/editpage.png"/>
                     <!-- Make some space for the combobox-->
                     <Fluent:Button Size="Middle" Visibility="Hidden"/>
                     <Fluent:ComboBox x:Name="cmbPages" Size="Large" Width="93" IsEditable="False" SelectionChanged="ComboBox_SelectionChanged" HorizontalContentAlignment="Center" />
