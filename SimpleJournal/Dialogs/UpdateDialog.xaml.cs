@@ -26,7 +26,7 @@ namespace SimpleJournal.Dialogs
         {
             try
             {
-                System.Diagnostics.Process.Start(Consts.DonwloadUrl);
+                GeneralHelper.OpenUri(new Uri(Consts.DonwloadUrl));    
                 DialogResult = true;
 
                 // Exit to make sure user can easily update without problems
