@@ -121,7 +121,7 @@
                         </Fluent:ComboBox>
 
                         <CheckBox x:Name="CheckBoxUseNewMenu" Content="{x:Static res:Resources.strSettingsUseBackstageMenu}" Margin="0,8,0,0" Checked="CheckBoxUseNewMenu_Checked" Unchecked="CheckBoxUseNewMenu_Checked" />
-                        <CheckBox x:Name="CheckBoxThemeIsColorful" Content="{x:Static res:Resources.strIsColorfulTheme}" Checked="CheckBoxThemeIsColorful_Checked" Unchecked="CheckBoxThemeIsColorful_Unchecked" Margin="0,8,0,0" />
+                        <CheckBox x:Name="CheckBoxThemeIsColorful" Content="{x:Static res:Resources.strIsColorfulTheme}" Checked="CheckBoxThemeIsColorful_Checked" Unchecked="CheckBoxThemeIsColorful_Unchecked" Margin="0,5,0,0" />
                         <CheckBox x:Name="CheckBoxActivateGlowingBrush" Checked="CheckBoxActivateGlowingBrush_Checked" Unchecked="CheckBoxActivateGlowingBrush_Checked"  Margin="0,5,0,0">
                             <TextBlock TextWrapping="Wrap">
                                 <Run Text="{x:Static res:Resources.strSettingsActivateGlowingEffect}"/>

@@ -58,7 +58,10 @@
                         <Fluent:ApplicationMenu.RightPaneContent>
                             <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Orientation="Vertical" CanVerticallyScroll="True">
                                 <Border HorizontalAlignment="Stretch" BorderBrush="#64647F" BorderThickness="0,0,0,0">
-                                    <TextBlock Text="{x:Static res:Resources.strRecentFiles}" Background="{DynamicResource Fluent.Ribbon.Brushes.MenuItem.Background}" Foreground="#64647F" TextAlignment="Left" Padding="12,4,4,4" FontWeight="SemiBold" FontSize="12" />
+                                    <TextBlock Background="{DynamicResource Fluent.Ribbon.Brushes.MenuItem.Background}" Foreground="{DynamicResource BlackBrush}" TextAlignment="Left" Padding="12,4,4,4" FontWeight="SemiBold" FontSize="12">
+                                        <Run Text="{x:Static res:Resources.strRecentFiles}" /><Run Text=":" />
+                                        <Run x:Name="MenuAppRecentlyOpendedFilesCount" Text="0" />
+                                    </TextBlock>
                                 </Border>
                                 <StackPanel HorizontalAlignment="Stretch" Height="2">
                                     <Border Height="1" BorderThickness="1" HorizontalAlignment="Stretch" BorderBrush="#DCDDDE" />
@@ -82,7 +85,13 @@
                     <Fluent:Backstage x:Name="MenuBackstage" Margin="0,1,0,1" IsOpenChanged="Backstage_IsOpenChanged" BorderBrush="Blue" Background="{DynamicResource Fluent.Ribbon.Brushes.AccentBaseColorBrush}">
                         <Fluent:BackstageTabControl x:Name="MenuBackstageTabControl">
                             <Fluent:BackstageTabItem x:Name="MenuBackstageNewFile" MouseDown="BackstageTabItem_MouseDown" Icon="/resources/add.png" Header="{x:Static res:Resources.strNewDocument}">
-                                <GroupBox Header="{x:Static res:Resources.strRecentFiles}" Margin="10" BorderThickness="0">
+                                <GroupBox Margin="10" BorderThickness="0">
+                                    <GroupBox.Header>
+                                        <TextBlock Foreground="{DynamicResource BlackBrush}">
+                                           <Run Text="{x:Static res:Resources.strRecentFiles}" /><Run Text=":" />
+                                           <Run x:Name="MenuBackstageRecentlyOpendedFilesCount" Text="0" />
+                                        </TextBlock>
+                                    </GroupBox.Header>
                                     <ListBox x:Name="RecentlyOpenedDocumentsBackstage" ItemTemplate="{StaticResource RecentlyOpenedDocumentsTemplate}" ItemContainerStyle="{DynamicResource _ListBoxItemStyle}" Background="Transparent" BorderThickness="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" SelectionChanged="RecentlyOpenedDocumentsBackstage_SelectionChanged" />
                                 </GroupBox>                            
                             </Fluent:BackstageTabItem>

@@ -334,6 +334,12 @@ namespace SimpleJournal
             RecentlyOpenedDocumentsBackstage.ItemsSource = null;
             RecentlyOpenedDocumentsBackstage.Items.Clear();
             RecentlyOpenedDocumentsBackstage.ItemsSource = RecentlyOpenedDocuments.Instance;
+
+            int entries = RecentlyOpenedDocuments.Instance.Count();
+            string text = entries > 0 ? entries.ToString() : Properties.Resources.strRecentlyOpenedDocuments_No;
+
+            MenuAppRecentlyOpendedFilesCount.Text = text;
+            MenuBackstageRecentlyOpendedFilesCount.Text = text;
         }
 
         protected override async void OnContentRendered(EventArgs e)

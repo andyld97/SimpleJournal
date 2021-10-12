@@ -124,12 +124,7 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Idea of Daniel S.
-        ///Programmed by Andreas L.
-        ///
-        ///Many thanks ...
-        ///
-        ///... to Daniel S. and Stefan E. for the ideas/program tests!.
+        ///   Looks up a localized string similar to .
         /// </summary>
         public static string strAboutText1 {
             get {
@@ -2455,6 +2450,15 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to None.
+        /// </summary>
+        public static string strRecentlyOpenedDocuments_No {
+            get {
+                return ResourceManager.GetString("strRecentlyOpenedDocuments_No", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Shapes.
         /// </summary>
         public static string strRecognization {
@@ -2500,7 +2504,7 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 10/02/2021 10:16 PM.
+        ///   Looks up a localized string similar to 10/12/2021 4:31 PM.
         /// </summary>
         public static string strReleaseDate {
             get {
@@ -2815,7 +2819,9 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Due to missing permissions, it is unfortunately not possible to automatically deactivate the touchscreen in this version. Therefore, the Touchscreen Device Manager is available for download here. This allows you to deactivate the touchscreen before working and activate it again afterwards (if necessary). The tool works in the same way as the device manager and requires administrator rights!.
+        ///   Looks up a localized string similar to Due to missing permissions, it is unfortunately not possible to automatically deactivate the touchscreen in this version. Therefore, the Touchscreen Device Manager is available for download here. With it you can deactivate the touch screen before working and activate it again afterwards (if this is necessary). The programme works in the same way as the device manager and requires administrator rights!
+        ///
+        ///Alternatively, you can use the normal version of SimpleJournal!.
         /// </summary>
         public static string strSettingsDialogTouchDeviceManagerDescription {
             get {
