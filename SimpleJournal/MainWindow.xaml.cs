@@ -50,6 +50,7 @@ namespace SimpleJournal
         private string currentJournalTitle = string.Empty;
         private bool isFullScreen = false;
         private bool isInitalized = false;
+        private bool arePensInitalized = false;
         private bool startSetupDialog = false;
         private bool preventPageBoxSelectionChanged = false;
         private bool forceOpenSidebar = false;
@@ -834,46 +835,51 @@ namespace SimpleJournal
         }
 
         public void UpdateDropDownButtons()
-        {
-            btnPen1.DropDown = penTemplates[0];
-            btnPen2.DropDown = penTemplates[1];
-            btnPen3.DropDown = penTemplates[2];
-            btnPen4.DropDown = penTemplates[3];
+        {           
+            if (!arePensInitalized)
+            {
+                arePensInitalized = true;
 
-            penTemplates[0].OnChangedColorAndSize += BtnPen1_OnChanged;
-            penTemplates[1].OnChangedColorAndSize += BtnPen2_OnChanged;
-            penTemplates[2].OnChangedColorAndSize += BtnPen3_OnChanged;
-            penTemplates[3].OnChangedColorAndSize += BtnPen4_OnChanged;
+                btnPen1.DropDown = penTemplates[0];
+                btnPen2.DropDown = penTemplates[1];
+                btnPen3.DropDown = penTemplates[2];
+                btnPen4.DropDown = penTemplates[3];
+
+                penTemplates[0].OnChangedColorAndSize += BtnPen1_OnChanged;
+                penTemplates[1].OnChangedColorAndSize += BtnPen2_OnChanged;
+                penTemplates[2].OnChangedColorAndSize += BtnPen3_OnChanged;
+                penTemplates[3].OnChangedColorAndSize += BtnPen4_OnChanged;
+
+                textMarkerTemplate.SetTextMarker();
+                textMarkerTemplate.LoadPen(new Pen(Settings.Instance.TextMarkerColor, Settings.Instance.TextMarkerSize.Width, Settings.Instance.TextMarkerSize.Height));
+                textMarkerTemplate.OnChangedColorAndSize += BtnTextMarker_OnChanged;
+                btnTextMarker.DropDown = textMarkerTemplate;
+
+                btnRubberFine.DropDown = rubberDropDownTemplate;
+                rubberDropDownTemplate.OnChangedRubber += BtnRubberFine_OnChangedRubber;
+
+                btnRuler.DropDown = rulerDropDownTemplate;
+                rulerDropDownTemplate.OnChangedRulerMode += RulerDropDownTemplate_OnChangedRulerMode;
+                rulerDropDownTemplate.SetColor(currentPens[0].FontColor.ToColor());
+
+                btnSelect.DropDown = selectDropDownTemplate;
+                selectDropDownTemplate.OnColorAndSizeChanged += SelectDropDownTemplate_OnColorAndSizeChanged;
+
+                btnFreeHandPolygon.DropDown = polygonDropDownTemplate;
+                btnInsertNewPage.DropDown = addPageDropDownTemplate;
+                btnInsertSimpleForm.DropDown = simpleFormDropDown;
+                simpleFormDropDown.OnSimpleFormDropDownChanged += SimpleFormDropDown_OnSimpleFormDropDownChanged;
+                btnInsertPlot.DropDown = plotDropDownTemplate;
+                plotDropDownTemplate.OnPlotModeChanged += PlotDropDownTemplate_OnPlotModeChanged;
+                addPageDropDownTemplate.AddPage += AddPageDropDownTemplate_AddPage;
+
+                // polygonDropDownTemplate.OnChanged ...
+            }
 
             penTemplates[0].LoadPen(currentPens[0]);
             penTemplates[1].LoadPen(currentPens[1]);
             penTemplates[2].LoadPen(currentPens[2]);
             penTemplates[3].LoadPen(currentPens[3]);
-
-            textMarkerTemplate.SetTextMarker();
-            textMarkerTemplate.LoadPen(new Pen(Settings.Instance.TextMarkerColor, Settings.Instance.TextMarkerSize.Width, Settings.Instance.TextMarkerSize.Height));
-            textMarkerTemplate.OnChangedColorAndSize += BtnTextMarker_OnChanged;
-            btnTextMarker.DropDown = textMarkerTemplate;
-
-            btnRubberFine.DropDown = rubberDropDownTemplate;
-            rubberDropDownTemplate.OnChangedRubber += BtnRubberFine_OnChangedRubber;
-
-            btnRuler.DropDown = rulerDropDownTemplate;
-            rulerDropDownTemplate.OnChangedRulerMode += RulerDropDownTemplate_OnChangedRulerMode;
-            rulerDropDownTemplate.SetColor(currentPens[0].FontColor.ToColor());
-
-            btnSelect.DropDown = selectDropDownTemplate;
-            selectDropDownTemplate.OnColorAndSizeChanged += SelectDropDownTemplate_OnColorAndSizeChanged;
-
-            btnFreeHandPolygon.DropDown = polygonDropDownTemplate;
-            btnInsertNewPage.DropDown = addPageDropDownTemplate;
-            btnInsertSimpleForm.DropDown = simpleFormDropDown;
-            simpleFormDropDown.OnSimpleFormDropDownChanged += SimpleFormDropDown_OnSimpleFormDropDownChanged;
-            btnInsertPlot.DropDown = plotDropDownTemplate;
-            plotDropDownTemplate.OnPlotModeChanged += PlotDropDownTemplate_OnPlotModeChanged;
-            addPageDropDownTemplate.AddPage += AddPageDropDownTemplate_AddPage;
-
-            // polygonDropDownTemplate.OnChanged ...
         }
 
         private void AddNewPage(PaperType paperType)
