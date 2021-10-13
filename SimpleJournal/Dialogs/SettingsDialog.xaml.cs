@@ -40,6 +40,10 @@ namespace SimpleJournal
             btnSetFileAssocText.Text = string.Empty;
             btnSetFileAssocPoint.Text = string.Empty;
 #endif
+
+#if DEBUG
+            DebugTestButton.Visibility = Visibility.Visible;
+#endif
         }
 
         private void LoadSettings()
@@ -308,6 +312,12 @@ namespace SimpleJournal
 
             Settings.Instance.UseNewMenu = CheckBoxUseNewMenu.IsChecked.Value;
             Settings.Instance.Save();
+        }
+
+        private void DebugTestButton_Click(object sender, RoutedEventArgs e)
+        {
+            // This is just for debugging purposes
+            new UpdateDialog(Consts.StoreVersion).ShowDialog();
         }
     }
 }
