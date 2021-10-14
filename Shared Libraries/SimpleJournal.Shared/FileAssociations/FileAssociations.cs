@@ -15,7 +15,7 @@ namespace SJFileAssoc
         private const int SHCNE_ASSOCCHANGED = 0x8000000;
         private const int SHCNF_FLUSH = 0x1000;
 
-        public static void EnsureAssociationsSet()
+        public static void EnsureAssociationsSet(string executable, string progId = "SimpleJournal")
         {
             try
             {
@@ -23,12 +23,12 @@ namespace SJFileAssoc
                 // var filePath = Process.GetCurrentProcess().MainModule.FileName;
                 //var filePath = @"explorer shell:appsFolder\26590AndreasLeopold.SimpleJournal_77rg7g3vwn6wg!SimpleJournal";
                 //var filePath = "26590AndreasLeopold.SimpleJournal_77rg7g3vwn6wg";
-                var filePath = "SimpleJournal";
+                var filePath = executable;
 
                 EnsureAssociationsSet(new FileAssociation
                 {
                     Extension = ".journal",
-                    ProgId = "SimpleJournal",
+                    ProgId = progId,
                     FileTypeDescription = "Journal",
                     ExecutableFilePath = filePath
                 });

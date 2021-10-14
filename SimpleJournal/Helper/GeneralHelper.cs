@@ -623,7 +623,7 @@ namespace SimpleJournal
 #pragma warning restore CS0162 // Unreachable code detected
             {
                 {  System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "journal", "SjFileAssoc.exe"),   Properties.Resources.SJFileAssoc },
-                {  System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "journal", "SJFileAssoc.exe.config"),  System.Text.Encoding.Default.GetBytes(  Properties.Resources.SJFileAssoc_exe) },
+                {  System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "journal", "SJFileAssoc.exe.config"),  System.Text.Encoding.Default.GetBytes(Properties.Resources.SJFileAssoc_exe) },
                 {  System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "journal", "SimpleJournal.Shared.dll"),   Properties.Resources.SimpleJournal_Shared },
             };
 
@@ -638,6 +638,29 @@ namespace SimpleJournal
                 result &= FileSystem.TryWriteAllBytes(file.Key, file.Value);
 
             return result;
+        }
+
+        public static bool InstallUWPFileAssoc()
+        {
+            GeneralHelper.InstallApplicationIconForFileAssociation();
+            if (GeneralHelper.InstallFileAssoc())
+            {
+                var tempFile = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "journal", "SjFileAssoc.exe");
+                if (System.IO.File.Exists(tempFile))
+                {
+                    try
+                    {
+                        System.Diagnostics.Process.Start(tempFile);
+                        return true;
+                    }
+                    catch (Exception)
+                    {
+
+                    }
+                }
+            }
+
+            return false;
         }
     }
 }

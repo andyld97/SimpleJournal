@@ -154,25 +154,6 @@ namespace SimpleJournal
 
             CurrentDrawingAttributes = (page as IPaper).Canvas.DefaultDrawingAttributes;
 
-#if UWP
-            GeneralHelper.InstallApplicationIconForFileAssociation();
-            if (GeneralHelper.InstallFileAssoc())
-            {
-                var tempFile = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "journal", "SjFileAssoc.exe");
-                if (System.IO.File.Exists(tempFile))
-                {
-                    try
-                    {
-                        System.Diagnostics.Process.Start(tempFile);
-                    }
-                    catch (Exception)
-                    {
-
-                    }
-                }
-            }
-#endif
-
             // Register file association
             if (!Settings.Instance.FirstStart)
             {
@@ -180,7 +161,10 @@ namespace SimpleJournal
                 Settings.Instance.Save();
 
 #if !UWP
-                FileAssociations.EnsureAssociationsSet();
+                string executable = Consts.Executable;
+                FileAssociations.EnsureAssociationsSet(executable);
+#else
+                GeneralHelper.InstallUWPFileAssoc();
 #endif
 
                 // Display Setup Dialog

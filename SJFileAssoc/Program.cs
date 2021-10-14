@@ -10,7 +10,7 @@ namespace SJFileAssoc
         [STAThread]
         static void Main()
         {
-            FileAssociations.EnsureAssociationsSet();
+            FileAssociations.EnsureAssociationsSet("SimpleJournal UWP", "SimpleJournal UWP");
         }
     }
 }
