@@ -1,9 +1,11 @@
-﻿using System;
+﻿using SimpleJournal.Data;
+using System;
 using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Media;
+using Color = System.Windows.Media.Color;
 
 namespace SimpleJournal.Controls
 {
@@ -98,30 +100,7 @@ namespace SimpleJournal.Controls
         }
     }
 
-    public class ShapeInfo
-    {
-        public Color BackgroundColor;
-
-        public Color BorderColor;
-
-        public int BorderWidth;
-
-        public int Angle;
-
-        public ShapeInfo()
-        {
-
-        }
-
-        public ShapeInfo(Color background, Color borderColor, int borderWidth, int angle)
-        {
-            this.BackgroundColor = background;
-            this.BorderColor = borderColor;
-            this.BorderWidth = borderWidth;
-            this.Angle = angle;
-        }
-    }
-
+    #region Converter
     public class InverseBooleanConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
@@ -137,4 +116,5 @@ namespace SimpleJournal.Controls
             throw new NotImplementedException();
         }
     }
+    #endregion
 }

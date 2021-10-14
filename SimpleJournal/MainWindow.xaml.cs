@@ -68,8 +68,8 @@ namespace SimpleJournal
         public int CurrentPages => CurrentJournalPages.Count;
 
         // Buttons
-        private readonly Fluent.ToggleButton[] toggleButtons = { };
-        private readonly DropDownToggleButton[] dropDownToggleButtons = { };
+        private readonly Fluent.ToggleButton[] toggleButtons = Array.Empty<Fluent.ToggleButton>();
+        private readonly DropDownToggleButton[] dropDownToggleButtons = Array.Empty<DropDownToggleButton>();
 
         // Templates
         private readonly PenDropDownTemplate[] penTemplates = new PenDropDownTemplate[] { new PenDropDownTemplate(), new PenDropDownTemplate(), new PenDropDownTemplate(), new PenDropDownTemplate() };
@@ -2718,7 +2718,7 @@ namespace SimpleJournal
                         // A process id is set.
                         if (ProcessHelper.IsProcessActiveByTaskId(currentJournal.ProcessID))
                         {
-                            if (currentJournal.ProcessID != Process.GetCurrentProcess().Id)
+                            if (currentJournal.ProcessID != Environment.ProcessId)
                             {
                                 MessageBox.Show(Properties.Resources.strJournalIsAlreadyOpened, Properties.Resources.strJournalIsAlreadyOpenedTitle, MessageBoxButton.OK, MessageBoxImage.Error);
 

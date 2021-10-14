@@ -10,7 +10,7 @@ namespace SimpleJournal.Controls
     public partial class ColorPalette : UserControl
     {
         #region Color Definitons
-        private readonly Color[] colors = new Color[]
+        private readonly Color[] colorMatrix = new Color[]
         {
             Colors.White,
             Colors.Black,
@@ -84,7 +84,7 @@ namespace SimpleJournal.Controls
             Color.FromRgb(152,72,7),
    };
 
-        private readonly Color[] standartColors = new Color[]
+        private readonly Color[] standardColors = new Color[]
         {
             Color.FromRgb(192,0,0),
             Color.FromRgb(255,0,0),
@@ -113,7 +113,7 @@ namespace SimpleJournal.Controls
             for (int i = 0; i < 60; i++)
             {
                 Button template = GenerateTemplate();
-                template.Background = new SolidColorBrush(colors[i]);
+                template.Background = new SolidColorBrush(colorMatrix[i]);
                 template.Click += Template_Click;
 
                 // Add to colors grid and make sure that just every second row and column is used.
@@ -138,7 +138,7 @@ namespace SimpleJournal.Controls
             for (int i = 0; i < 10; i++)
             {
                 Button template = GenerateTemplate();
-                template.Background = new SolidColorBrush(standartColors[i]);
+                template.Background = new SolidColorBrush(standardColors[i]);
                 template.Click += Template_Click;
 
                 var grd = gridStandartColors;
@@ -150,13 +150,12 @@ namespace SimpleJournal.Controls
 
         public Button GenerateTemplate()
         {
-            Button template = new Button
+            return new Button
             {
                 BorderBrush = Brushes.Gray,
                 BorderThickness = new Thickness(0.6),
                 Style = Application.Current.Resources["buttonWithoutSelection"] as Style
             };
-            return template;
         }
 
         private void Template_Click(object sender, RoutedEventArgs e)
