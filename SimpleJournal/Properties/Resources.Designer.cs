@@ -124,7 +124,12 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Idea by Daniel S.
+        ///Programmed by Andreas L.
+        ///
+        ///Many thanks ...
+        ///
+        ///... to Daniel S. and Stefan E. for the ideas/programm tests!.
         /// </summary>
         public static string strAboutText1 {
             get {
@@ -804,6 +809,15 @@ namespace SimpleJournal.Properties {
         public static string strDraw {
             get {
                 return ResourceManager.GetString("strDraw", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mode:.
+        /// </summary>
+        public static string strDropDownTemplateMode {
+            get {
+                return ResourceManager.GetString("strDropDownTemplateMode", resourceCulture);
             }
         }
         
@@ -2374,6 +2388,33 @@ namespace SimpleJournal.Properties {
         public static string strPlotDrawNegativeAxis {
             get {
                 return ResourceManager.GetString("strPlotDrawNegativeAxis", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to All axles.
+        /// </summary>
+        public static string strPlotDropDownTemplateAllAxes {
+            get {
+                return ResourceManager.GetString("strPlotDropDownTemplateAllAxes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to All axes (without negative Y-axis).
+        /// </summary>
+        public static string strPlotDropDownTemplateAllAxesButWithoutNegativeYAxis {
+            get {
+                return ResourceManager.GetString("strPlotDropDownTemplateAllAxesButWithoutNegativeYAxis", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Positive axes only.
+        /// </summary>
+        public static string strPlotDropDownTemplateOnlyPositiveAxes {
+            get {
+                return ResourceManager.GetString("strPlotDropDownTemplateOnlyPositiveAxes", resourceCulture);
             }
         }
         

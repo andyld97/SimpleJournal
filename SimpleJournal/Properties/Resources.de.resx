@@ -1814,4 +1814,16 @@ Alternativ können Sie die normale Version von SimpleJournal verwenden!</value>
   <data name="strRecentlyOpenedDocuments_No" xml:space="preserve">
     <value>Keine</value>
   </data>
+  <data name="strPlotDropDownTemplateAllAxes" xml:space="preserve">
+    <value>Alle Achsen</value>
+  </data>
+  <data name="strPlotDropDownTemplateAllAxesButWithoutNegativeYAxis" xml:space="preserve">
+    <value>Alle Achsen (ohne negative Y-Achse)</value>
+  </data>
+  <data name="strPlotDropDownTemplateOnlyPositiveAxes" xml:space="preserve">
+    <value>Nur positive Achsen</value>
+  </data>
+  <data name="strDropDownTemplateMode" xml:space="preserve">
+    <value>Modus:</value>
+  </data>
 </root>

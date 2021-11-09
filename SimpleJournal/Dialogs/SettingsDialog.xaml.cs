@@ -96,6 +96,7 @@ namespace SimpleJournal
         {
             this.Close();
         }
+
         private void chkPaperType_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (editMode)

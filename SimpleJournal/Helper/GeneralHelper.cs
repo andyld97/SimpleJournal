@@ -541,7 +541,7 @@ namespace SimpleJournal
                 // Display all changes from current version till new version (changelog is enough)
 
                 // 1) Get current version
-                var version = Consts.NormalVersion;
+                var currentVersion = Consts.NormalVersion;
 
                 // 2) Download version
                 try
@@ -551,13 +551,13 @@ namespace SimpleJournal
                         string versionJSON = wc.DownloadString(Consts.VersionUrl);
                         dynamic versions = JsonConvert.DeserializeObject(versionJSON);
 
-                        Version current = Version.Parse(versions.current.normal.Value);
+                        Version onlineVersion = Version.Parse(versions.current.normal.Value);
 
-                        var result = current.CompareTo(version);
+                        var result = onlineVersion.CompareTo(currentVersion);
                         if (result > 0)
                         {
                             // There is a new version
-                            UpdateDialog ud = new UpdateDialog(current);
+                            UpdateDialog ud = new UpdateDialog(onlineVersion);
                             ud.ShowDialog();
                         }
                         else if (result < 0)

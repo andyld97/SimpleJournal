@@ -97,6 +97,11 @@ namespace SimpleJournal.Data
         public RulerMode RulerStrokeMode { get; set; } = RulerMode.Normal;
 
         /// <summary>
+        /// Defines the last selected mode to select in the DropDown
+        /// </summary>
+        public PlotMode LastSelectedPlotMode { get; set; } = PlotMode.Positive;
+
+        /// <summary>
         /// If this settings is true, the old chequered pattern must be used!
         /// </summary>
         public bool UseOldChequeredPattern { get; set; } = false;

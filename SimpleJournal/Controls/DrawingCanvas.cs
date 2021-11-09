@@ -250,12 +250,8 @@ namespace SimpleJournal
 
         public void SetPlotMode(PlotMode plotMode)
         {
-            this.plotMode = plotMode;
-        }
-
-        public void SetPlotMode()
-        {
             isInPlotMode = true;
+            this.plotMode = plotMode;
         }
 
         public void UnsetPlotMode()

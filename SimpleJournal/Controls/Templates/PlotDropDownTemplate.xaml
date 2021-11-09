@@ -4,10 +4,16 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SimpleJournal.Controls.Templates"
-             xmlns:res="clr-namespace:SimpleJournal.Properties"
-             mc:Ignorable="d" Width="165" Height="30" BorderBrush="Black" BorderThickness="1"
+             xmlns:res="clr-namespace:SimpleJournal.Properties" xmlns:fluent="urn:fluent-ribbon"
+                        mc:Ignorable="d" Width="195" Height="60" BorderBrush="Black" BorderThickness="1"
              Background="{DynamicResource Fluent.Ribbon.Brushes.RibbonTabItem.Active.Background}">
     <StackPanel>
-        <CheckBox x:Name="CheckBoxNegativePlot" Checked="CheckBoxNegativePlot_Checked" Unchecked="CheckBoxNegativePlot_Checked" Margin="5,5,0,2" FontSize="12" Content="{x:Static res:Resources.strPlotDrawNegativeAxis}" Foreground="{DynamicResource BlackBrush}"/>
+        <TextBlock Text="{x:Static res:Resources.strDropDownTemplateMode}" Margin="5,5,0,0" />
+
+        <fluent:ComboBox x:Name="CmbChoosePlotMode" SelectionChanged="CmbChoosePlotMode_SelectionChanged" IsEditable="False" Margin="-5,5,5,0" SelectedIndex="0">
+            <ComboBoxItem Content="{x:Static res:Resources.strPlotDropDownTemplateOnlyPositiveAxes}" />
+            <ComboBoxItem Content="{x:Static res:Resources.strPlotDropDownTemplateAllAxes}" />
+            <ComboBoxItem Content="{x:Static res:Resources.strPlotDropDownTemplateAllAxesButWithoutNegativeYAxis}" />
+        </fluent:ComboBox>
     </StackPanel>
 </local:DropDownTemplate>
