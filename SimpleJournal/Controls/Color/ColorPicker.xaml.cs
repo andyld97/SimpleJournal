@@ -69,13 +69,12 @@ namespace SimpleJournal.Controls
 
         public Button GenerateTemplate()
         {
-            Button template = new Button
+            return new Button
             {
                 BorderBrush = Brushes.Gray,
                 BorderThickness = new Thickness(0.6),
                 Style = Application.Current.Resources["buttonWithoutSelection"] as Style
-            };
-            return template;       
+            };     
         }
 
         private void Border_MouseDown(object sender, MouseButtonEventArgs e)

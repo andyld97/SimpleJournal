@@ -64,7 +64,8 @@
     public enum PlotMode
     {
         Positive,
-        Negative
+        Negative,
+        AxisXPosNegYPos
     }
 
     public enum Direction

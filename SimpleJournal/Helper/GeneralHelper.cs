@@ -541,7 +541,7 @@ namespace SimpleJournal
                 // Display all changes from current version till new version (changelog is enough)
 
                 // 1) Get current version
-                var version = Consts.NormalVersion;
+                var currentVersion = Consts.NormalVersion;
 
                 // 2) Download version
                 try
@@ -551,13 +551,13 @@ namespace SimpleJournal
                         string versionJSON = wc.DownloadString(Consts.VersionUrl);
                         dynamic versions = JsonConvert.DeserializeObject(versionJSON);
 
-                        Version current = Version.Parse(versions.current.normal.Value);
+                        Version onlineVersion = Version.Parse(versions.current.normal.Value);
 
-                        var result = current.CompareTo(version);
+                        var result = onlineVersion.CompareTo(currentVersion);
                         if (result > 0)
                         {
                             // There is a new version
-                            UpdateDialog ud = new UpdateDialog(current);
+                            UpdateDialog ud = new UpdateDialog(onlineVersion);
                             ud.ShowDialog();
                         }
                         else if (result < 0)
@@ -623,7 +623,7 @@ namespace SimpleJournal
 #pragma warning restore CS0162 // Unreachable code detected
             {
                 {  System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "journal", "SjFileAssoc.exe"),   Properties.Resources.SJFileAssoc },
-                {  System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "journal", "SJFileAssoc.exe.config"),  System.Text.Encoding.Default.GetBytes(  Properties.Resources.SJFileAssoc_exe) },
+                {  System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "journal", "SJFileAssoc.exe.config"),  System.Text.Encoding.Default.GetBytes(Properties.Resources.SJFileAssoc_exe) },
                 {  System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "journal", "SimpleJournal.Shared.dll"),   Properties.Resources.SimpleJournal_Shared },
             };
 
@@ -638,6 +638,29 @@ namespace SimpleJournal
                 result &= FileSystem.TryWriteAllBytes(file.Key, file.Value);
 
             return result;
+        }
+
+        public static bool InstallUWPFileAssoc()
+        {
+            GeneralHelper.InstallApplicationIconForFileAssociation();
+            if (GeneralHelper.InstallFileAssoc())
+            {
+                var tempFile = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "journal", "SjFileAssoc.exe");
+                if (System.IO.File.Exists(tempFile))
+                {
+                    try
+                    {
+                        System.Diagnostics.Process.Start(tempFile);
+                        return true;
+                    }
+                    catch (Exception)
+                    {
+
+                    }
+                }
+            }
+
+            return false;
         }
     }
 }

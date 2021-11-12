@@ -1,4 +1,6 @@
-﻿namespace SimpleJournal.Controls.Templates
+﻿using SimpleJournal.Data;
+
+namespace SimpleJournal.Controls.Templates
 {
     /// <summary>
     /// Interaktionslogik für PlotDropDownTemplate.xaml
@@ -8,14 +10,27 @@
         public delegate void onPlotModeChanged(PlotMode plotMode);
         public event onPlotModeChanged OnPlotModeChanged;
 
+        private readonly bool isInitalized = false;
+
         public PlotDropDownTemplate()
         {
             InitializeComponent();
+            isInitalized = true;
+
+            CmbChoosePlotMode.SelectedIndex = (int)Settings.Instance.LastSelectedPlotMode;
         }
 
-        private void CheckBoxNegativePlot_Checked(object sender, System.Windows.RoutedEventArgs e)
+        private void CmbChoosePlotMode_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
-            OnPlotModeChanged?.Invoke(CheckBoxNegativePlot.IsChecked.Value ? PlotMode.Negative : PlotMode.Positive);
+            if (!isInitalized)
+                return;
+
+            PlotMode mode = (PlotMode)CmbChoosePlotMode.SelectedIndex;
+
+            Settings.Instance.LastSelectedPlotMode = mode;
+            Settings.Instance.Save();
+
+            OnPlotModeChanged?.Invoke(mode);
         }
     }
 }

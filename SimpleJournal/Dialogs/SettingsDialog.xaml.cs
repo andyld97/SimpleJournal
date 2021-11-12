@@ -36,9 +36,8 @@ namespace SimpleJournal
 
             ComboBoxThemeChooser.DataContext = this;
 
-#if UWP
-            btnSetFileAssocText.Text = string.Empty;
-            btnSetFileAssocPoint.Text = string.Empty;
+#if DEBUG
+            DebugTestButton.Visibility = Visibility.Visible;
 #endif
         }
 
@@ -97,6 +96,7 @@ namespace SimpleJournal
         {
             this.Close();
         }
+
         private void chkPaperType_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (editMode)
@@ -240,7 +240,11 @@ namespace SimpleJournal
 
         private void btnSetFileAssoc_Click(object sender, RoutedEventArgs e)
         {
-            FileAssociations.EnsureAssociationsSet();
+#if UWP
+            GeneralHelper.InstallUWPFileAssoc();
+#else
+            FileAssociations.EnsureAssociationsSet(Consts.Executable);
+#endif
         }
 
         private void DownloadTDM_RequestNavigate(object sender, System.Windows.Navigation.RequestNavigateEventArgs e)
@@ -308,6 +312,12 @@ namespace SimpleJournal
 
             Settings.Instance.UseNewMenu = CheckBoxUseNewMenu.IsChecked.Value;
             Settings.Instance.Save();
+        }
+
+        private void DebugTestButton_Click(object sender, RoutedEventArgs e)
+        {
+            // This is just for debugging purposes
+            new UpdateDialog(Consts.StoreVersion).ShowDialog();
         }
     }
 }

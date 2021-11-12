@@ -92,6 +92,57 @@ namespace SimpleJournal.Controls
                 pathTriangleTop.SetValue(TopProperty, (double)space - 1.0);
                 Children.Add(pathTriangleTop);
             }
+            else if (DrawingMode == PlotMode.AxisXPosNegYPos)
+            {
+                // Vertical line
+                Line verticalLine = new Line()
+                {
+                    Stroke = new SolidColorBrush(Foreground),
+                    StrokeThickness = StrokeThickness,
+                    X1 = width / 2.0,
+                    X2 = width / 2.0,
+                    Y1 = space,
+                    Y2 = height - space
+                };
+
+                // Horizontal line
+                Line horizontalLine = new Line()
+                {
+                    Stroke = new SolidColorBrush(Foreground),
+                    StrokeThickness = StrokeThickness,
+                    X1 = space,
+                    X2 = width - space,
+                    Y1 = height,
+                    Y2 = height
+                };
+
+                Children.Add(verticalLine);
+                Children.Add(horizontalLine);
+
+                Path pathTriangleTop = new Path()
+                {
+                    Data = PathGeometry.Parse(pathUP),
+                    Stroke = new SolidColorBrush(Foreground),
+                    Fill = new SolidColorBrush(Foreground),
+                    StrokeThickness = StrokeThickness + 1
+                };
+
+                Path pathTriangleRight = new Path()
+                {
+                    Data = PathGeometry.Parse(pathRight),
+                    Stroke = new SolidColorBrush(Foreground),
+                    Fill = new SolidColorBrush(Foreground),
+                    StrokeThickness = StrokeThickness + 1
+                };
+
+                pathTriangleRight.SetValue(LeftProperty, width - (double)space);
+                pathTriangleRight.SetValue(TopProperty, height - 4.0);
+                Children.Add(pathTriangleRight);
+
+                pathTriangleTop.SetValue(LeftProperty, (width / 2.0) - 4.0);
+                pathTriangleTop.SetValue(TopProperty, (double)space - 1.0);
+                Children.Add(pathTriangleTop);
+            }
             else
             {
                 // Vertical line

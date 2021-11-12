@@ -250,12 +250,8 @@ namespace SimpleJournal
 
         public void SetPlotMode(PlotMode plotMode)
         {
-            this.plotMode = plotMode;
-        }
-
-        public void SetPlotMode()
-        {
             isInPlotMode = true;
+            this.plotMode = plotMode;
         }
 
         public void UnsetPlotMode()
@@ -687,7 +683,7 @@ namespace SimpleJournal
                     };
                     polylinePoints.Clear();
 
-                    // Lowest X and lowest Y Points needed to be caculated to get the actual point in the canvas
+                    // Lowest X and lowest Y Points needed to be calculated to get the actual point in the canvas
                     double lowestX = polyline.Points[0].X;
                     double lowestY = polyline.Points[0].Y;
 
@@ -921,7 +917,7 @@ namespace SimpleJournal
                         line.X2 = points.Item2.X;
                         line.Y2 = points.Item2.Y;
 
-                        // *** Workaround to make sure the line can be accessed easily via user (no big selection rectangle)
+                        // *** Workaround to make sure the line can be easily accessed via user (no big selection rectangle)
                         line.Stretch = Stretch.Fill;
                         line.SetValue(InkCanvas.LeftProperty, Math.Min(line.X1, line.X2) - 1);
                         line.SetValue(InkCanvas.TopProperty, Math.Min(line.Y1, line.Y2) - line.StrokeThickness / 2 - 1);

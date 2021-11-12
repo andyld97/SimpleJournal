@@ -73,6 +73,7 @@
                                     <Run x:Name="btnSetFileAssocText" Text="{x:Static res:Resources.strSettingsSetFileAssoc}" />
                                 </Hyperlink>
                             </TextBlock>
+                            <Button x:Name="DebugTestButton" Click="DebugTestButton_Click" Visibility="Hidden">Show UpdateDialog</Button>
                         </StackPanel>
                     </Border>
                     <StackPanel Margin="3,0,0,0" Background="Transparent">

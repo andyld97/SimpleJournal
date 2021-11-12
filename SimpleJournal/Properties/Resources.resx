@@ -112,12 +112,12 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="journalicon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\journalicon.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -139,7 +139,12 @@
     <comment>MainWindow.xaml</comment>
   </data>
   <data name="strAboutText1" xml:space="preserve">
-    <value />
+    <value>Idea by Daniel S.
+Programmed by Andreas L.
+
+Many thanks ...
+
+... to Daniel S. and Stefan E. for the ideas/programm tests!</value>
     <comment>About.xaml</comment>
   </data>
   <data name="strAboutTextFluentRibbon_1" xml:space="preserve">
@@ -1167,7 +1172,7 @@ Click on No to continue to receive this message!</value>
     <comment>MainWindow.xaml</comment>
   </data>
   <data name="strReleaseDate" xml:space="preserve">
-    <value>10/12/2021 4:31 PM</value>
+    <value>11/11/2021 2:56 PM</value>
     <comment>About.xaml</comment>
   </data>
   <data name="strRemove" xml:space="preserve">
@@ -1812,5 +1817,17 @@ Alternatively, you can use the normal version of SimpleJournal!</value>
   </data>
   <data name="strRecentlyOpenedDocuments_No" xml:space="preserve">
     <value>None</value>
+  </data>
+  <data name="strPlotDropDownTemplateOnlyPositiveAxes" xml:space="preserve">
+    <value>Positive axes only</value>
+  </data>
+  <data name="strPlotDropDownTemplateAllAxes" xml:space="preserve">
+    <value>All axles</value>
+  </data>
+  <data name="strPlotDropDownTemplateAllAxesButWithoutNegativeYAxis" xml:space="preserve">
+    <value>All axes (without negative Y-axis)</value>
+  </data>
+  <data name="strDropDownTemplateMode" xml:space="preserve">
+    <value>Mode:</value>
   </data>
 </root>

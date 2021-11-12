@@ -57,6 +57,7 @@ namespace SimpleJournal
         private double currentScaleFactor = 1.0;
         private Tools currentTool = Tools.Pencil1;
         private Tools lastSelectedPencil = Tools.Pencil1;
+        private PlotMode plotMode;
         private TextAnalyser textAnalyserInstance = null;
         private string currentJournalName = string.Empty;
 
@@ -68,8 +69,8 @@ namespace SimpleJournal
         public int CurrentPages => CurrentJournalPages.Count;
 
         // Buttons
-        private readonly Fluent.ToggleButton[] toggleButtons = { };
-        private readonly DropDownToggleButton[] dropDownToggleButtons = { };
+        private readonly Fluent.ToggleButton[] toggleButtons = Array.Empty<Fluent.ToggleButton>();
+        private readonly DropDownToggleButton[] dropDownToggleButtons = Array.Empty<DropDownToggleButton>();
 
         // Templates
         private readonly PenDropDownTemplate[] penTemplates = new PenDropDownTemplate[] { new PenDropDownTemplate(), new PenDropDownTemplate(), new PenDropDownTemplate(), new PenDropDownTemplate() };
@@ -154,33 +155,18 @@ namespace SimpleJournal
 
             CurrentDrawingAttributes = (page as IPaper).Canvas.DefaultDrawingAttributes;
 
-#if UWP
-            GeneralHelper.InstallApplicationIconForFileAssociation();
-            if (GeneralHelper.InstallFileAssoc())
-            {
-                var tempFile = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "journal", "SjFileAssoc.exe");
-                if (System.IO.File.Exists(tempFile))
-                {
-                    try
-                    {
-                        System.Diagnostics.Process.Start(tempFile);
-                    }
-                    catch (Exception)
-                    {
-
-                    }
-                }
-            }
-#endif
-
             // Register file association
             if (!Settings.Instance.FirstStart)
             {
                 Settings.Instance.FirstStart = true;
                 Settings.Instance.Save();
 
+                // ToDo: *** Move this out of first start (so that this is checked on every start?)
 #if !UWP
-                FileAssociations.EnsureAssociationsSet();
+                string executable = Consts.Executable;
+                FileAssociations.EnsureAssociationsSet(executable);
+#else
+                GeneralHelper.InstallUWPFileAssoc();
 #endif
 
                 // Display Setup Dialog
@@ -290,6 +276,7 @@ namespace SimpleJournal
             CurrentDrawingAttributes.Color = currentPens[0].FontColor.ToColor();
             CurrentDrawingAttributes.Width = currentPens[0].Width;
             CurrentDrawingAttributes.Height = currentPens[0].Height;
+            plotMode = Settings.Instance.LastSelectedPlotMode;
             RefreshSizeBar();
             UpdateGlowingBrush();
             UpdateMenu();
@@ -965,6 +952,7 @@ namespace SimpleJournal
         {
             ApplyToAllCanvas((DrawingCanvas dc) =>
             {
+                this.plotMode = plotMode;
                 dc.SetPlotMode(plotMode);
             });
         }
@@ -1128,7 +1116,7 @@ namespace SimpleJournal
             else if (currentTool == Tools.Form)
                 page.Canvas.SetFormMode(simpleFormDropDown.ShapeType);
             else if (currentTool == Tools.CooardinateSystem)
-                page.Canvas.SetPlotMode();
+                page.Canvas.SetPlotMode(plotMode);
             else if (currentTool == Tools.TextMarker)
                 page.Canvas.DefaultDrawingAttributes = currentTextMarkerAttributes;
 
@@ -1635,7 +1623,7 @@ namespace SimpleJournal
                 else if (currentTool == Tools.Form)
                     target.SetFormMode();
                 else if (currentTool == Tools.CooardinateSystem)
-                    target.SetPlotMode();
+                    target.SetPlotMode(plotMode);
                 else if (currentTool == Tools.RubberStrokes)
                 {
                     // Reset rubber size
@@ -2718,7 +2706,7 @@ namespace SimpleJournal
                         // A process id is set.
                         if (ProcessHelper.IsProcessActiveByTaskId(currentJournal.ProcessID))
                         {
-                            if (currentJournal.ProcessID != Process.GetCurrentProcess().Id)
+                            if (currentJournal.ProcessID != Environment.ProcessId)
                             {
                                 MessageBox.Show(Properties.Resources.strJournalIsAlreadyOpened, Properties.Resources.strJournalIsAlreadyOpenedTitle, MessageBoxButton.OK, MessageBoxImage.Error);
 
