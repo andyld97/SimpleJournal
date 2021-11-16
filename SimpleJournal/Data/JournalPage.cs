@@ -4,31 +4,11 @@ using System.Xml.Serialization;
 
 namespace SimpleJournal.Data
 {
+    [Serializable]
+    [XmlInclude(typeof(PdfJournalPage))]
     public class JournalPage
     {
-        private bool cacheIsValid = false;
         private byte[] cache = null;
-
-        [XmlIgnore]
-        public byte[] Data
-        {
-            get
-            {
-                if (cacheIsValid)
-                    return cache;
-                else
-                {
-                    if (string.IsNullOrEmpty(Base64Data))
-                        return null;
-                    else
-                    {
-                        cache = Convert.FromBase64String(Base64Data);
-                        cacheIsValid = true;
-                        return cache;
-                    }
-                }
-            }
-        }
 
         /// <summary>
         /// Determines if there are any resources to display
@@ -36,9 +16,17 @@ namespace SimpleJournal.Data
         public bool HasAdditionalResources => JournalResources.Count != 0;
 
         /// <summary>
-        /// Represents stroke collection of InkCanvas as base64
+        /// Represents stroke collection of InkCanvas as base64 (only used for converting old documents)
         /// </summary>
-        public string Base64Data = string.Empty;
+        public string Base64Data
+        {
+            get => string.Empty;
+            set
+            {
+                if (!string.IsNullOrEmpty(value))
+                    Data = Convert.FromBase64String(value);
+            }
+        }
 
         /// <summary>
         /// Additonal data e.g images, text
@@ -55,11 +43,14 @@ namespace SimpleJournal.Data
         /// </summary>
         public PaperType PaperPattern { get; set; } = PaperType.Chequeued;
 
-        public void SetData(byte[] data)
+        public byte[] Data
         {
-            Base64Data = Convert.ToBase64String(data);
-            cache = data;
-            cacheIsValid = true;
+            get => cache;
+            set
+            {
+                if (value != null)
+                    cache = value;
+            }
         }
     }
 }

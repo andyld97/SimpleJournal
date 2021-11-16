@@ -35,6 +35,19 @@ namespace SimpleJournal.Templates
 
         public PageSplitter Border { get; set; }
 
+        public IPaper ClonePage(bool isReadonly)
+        {
+            Chequered chq = new Chequered();
+
+            if (isReadonly)
+                chq.Canvas.EditingMode = InkCanvasEditingMode.None;
+            chq.Canvas.Strokes = Canvas.Strokes.Clone();
+            foreach (var child in Canvas.Children)
+                chq.Canvas.Children.Add(GeneralHelper.CloneElement(child));
+
+            return chq;
+        }
+
         public void SetDebug(bool state = true)
         {
             Canvas.SetDebug(state);

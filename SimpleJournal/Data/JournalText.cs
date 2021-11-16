@@ -6,6 +6,7 @@ using System.Windows.Media;
 
 namespace SimpleJournal.Data
 {
+    [Serializable]
     public class JournalText : JournalResource
     {
         public override Type JournalResourceType => Type.Text;
@@ -30,7 +31,7 @@ namespace SimpleJournal.Data
 
         public override UIElement ConvertToUiElement()
         {
-            TextBlock text = new TextBlock() { Text = Encoding.Default.GetString(Convert.FromBase64String(this.DataBase64)) };
+            TextBlock text = new TextBlock() { Text = Encoding.Default.GetString(Data) };
             text.TextWrapping = TextWrapping.Wrap;
             text.SetValue(InkCanvas.LeftProperty, this.Left);
             text.SetValue(InkCanvas.TopProperty, this.Top);

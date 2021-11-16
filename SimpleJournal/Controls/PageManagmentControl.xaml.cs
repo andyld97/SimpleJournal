@@ -249,9 +249,12 @@ namespace SimpleJournal.Controls
             if (ListViewPages.SelectedIndex != -1)
             {
                 var page = pages[ListViewPages.SelectedIndex];
-                var template = PageHelper.ClonePage(page, true);
+                var template = page.ClonePage(true);
                 displayFrame.Content = template;
                 ignoreCheckedChanged = true;
+
+                if (template.Type == PaperType.Custom)
+                    return;
 
                 ToggleButton tb = null;
                 switch (template.Type)
@@ -272,7 +275,7 @@ namespace SimpleJournal.Controls
 
         private void ToggleButton_Checked(object sender, RoutedEventArgs e)
         {
-            if (!isInitalized || ignoreCheckedChanged)
+            if (!isInitalized || ignoreCheckedChanged || CurrentSelectedPaperType == PaperType.Custom)
                 return;
 
             var tbSender = (sender as ToggleButton);
@@ -351,7 +354,7 @@ namespace SimpleJournal.Controls
                 using (MemoryStream ms = new MemoryStream())
                 {
                     page.Canvas.Strokes.Save(ms);
-                    jp.SetData(ms.ToArray());
+                    jp.Data = ms.ToArray();
 
                     // Check for additional ressources
                     if (page.Canvas.Children.Count > 0)

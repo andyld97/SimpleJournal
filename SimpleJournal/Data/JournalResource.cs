@@ -10,14 +10,15 @@ namespace SimpleJournal.Data
     /// <summary>
     /// Represents a journal resource to save and load journals
     /// </summary>
+    [Serializable]
     [XmlInclude(typeof(JournalImage))]
     [XmlInclude(typeof(JournalText))]
     [XmlInclude(typeof(JournalShape))]
     [XmlInclude(typeof(JournalPlot))]
     public abstract class JournalResource
     {
+        [XmlIgnore]
         protected byte[] cache = null;
-        private bool cacheIsValid = false;
 
         /// <summary>
         /// Type of this resource
@@ -48,51 +49,42 @@ namespace SimpleJournal.Data
         /// <summary>
         /// Represents the X-Coardinate
         /// </summary>
-        public double Left;
+        public double Left { get; set; }
 
         /// <summary>
         /// Represents the Y-Coardinate
         /// </summary>
-        public double Top;
+        public double Top { get; set; }
 
         /// <summary>
         /// Represents the size.width of this resource if any
         /// </summary>
-        public double Width;
+        public double Width { get; set; }
 
         /// <summary>
         /// Represents the size.height of this resource if any
         /// </summary>
-        public double Height;
+        public double Height { get; set; }
 
         /// <summary>
-        /// Journal-Data in Base64-String representation
+        /// Journal-Data in Base64-String representation (only used for converting old documents)
         /// </summary>
-        public string DataBase64;
+        public string DataBase64
+        {
+            get => string.Empty;
+            set
+            {
+                if (!string.IsNullOrEmpty(value))
+                    Data = Convert.FromBase64String(value);
+            }
+        }
 
         public abstract Type JournalResourceType { get; }
 
         public virtual byte[] Data
         {
-            get
-            {
-                if (cacheIsValid && cache != null)
-                    return cache;
-                else
-                {
-                    cache = Convert.FromBase64String(DataBase64);
-                    cacheIsValid = true;
-
-                    return cache;
-                }
-            }
-        }
-
-        public virtual void SetData(byte[] data)
-        {
-            DataBase64 = Convert.ToBase64String(data);
-            cache = data;
-            cacheIsValid = true;
+            get => cache;
+            set => cache = value;
         }
 
         public abstract UIElement ConvertToUiElement();

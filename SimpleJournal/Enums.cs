@@ -27,7 +27,8 @@
         Blanco,
         Chequeued,
         Ruled,
-        Dotted
+        Dotted,
+        Custom
     }
 
     public enum RulerMode : int

@@ -1064,7 +1064,7 @@ namespace SimpleJournal
             scrollBar.Width = (Settings.Instance.EnlargeScrollbar ? Consts.ScrollBarExtendedWidth : Consts.ScrollBarDefaultWidth);
         }
 
-        private Page GeneratePage(PaperType? paperType = null)
+        private Page GeneratePage(PaperType? paperType = null, byte[] background = null)
         {
             Page pageContent = null;
             PaperType paperPattern = Settings.Instance.PaperType;
@@ -1078,6 +1078,7 @@ namespace SimpleJournal
                 case PaperType.Chequeued: pageContent = new Chequered(); break;
                 case PaperType.Ruled: pageContent = new Ruled(); break;
                 case PaperType.Dotted: pageContent = new Dotted(); break;
+                case PaperType.Custom: pageContent = new Custom(background); break;
             }
 
             IPaper page = pageContent as IPaper;
@@ -1090,7 +1091,6 @@ namespace SimpleJournal
             page.Canvas.Children.CollectionChanged += Children_CollectionChanged;
             page.Canvas.RemoveElementFromSidebar += delegate (List<UIElement> temp)
             {
-
                 List<CustomListBoxItem> toRemove = new List<CustomListBoxItem>();
                 foreach (CustomListBoxItem item in pnlItems.Items)
                 {
@@ -2203,7 +2203,7 @@ namespace SimpleJournal
         {
             if (AskForOpeningAfterModifying())
             {
-                OpenFileDialog ofd = new OpenFileDialog() { Filter = $"{Properties.Resources.strJournalFile}|*.journal|{Properties.Resources.strImages}|*.png;*.tif;*.bmp;*.jpg;*.jpeg" }; // .journal or images
+                OpenFileDialog ofd = new OpenFileDialog() { Filter = $"{Properties.Resources.strJournalFile}|*.journal;*.pdf" }; // .journal or pdf
                 var result = ofd.ShowDialog();
 
                 if (result.HasValue && result.Value)
@@ -2624,8 +2624,13 @@ namespace SimpleJournal
                     using (System.IO.MemoryStream ms = new System.IO.MemoryStream())
                     {
                         currentCanvas.Strokes.Save(ms);
-                        JournalPage jp = new JournalPage { PaperPattern = paper.Type };
-                        jp.SetData(ms.ToArray());
+
+                        JournalPage jp = new JournalPage();
+                        if (paper is Custom custom)
+                            jp = new PdfJournalPage() { PageBackground = custom.PageBackground };
+
+                        jp.PaperPattern = paper.Type;
+                        jp.Data = ms.ToArray();
 
                         // Check for additional ressources
                         if (currentCanvas.Children.Count > 0)
@@ -2680,14 +2685,21 @@ namespace SimpleJournal
             GC.WaitForPendingFinalizers();
         }
 
-        private async Task LoadJournal(string fileName)
+        private async Task LoadJournal(string fileName = "", Journal preparedJournal = null)
         {
-            if (fileName.EndsWith(".journal"))
+            if (fileName.EndsWith(".pdf"))
+            {
+                // ToDo: Show conversation dialog (and ask the user to save the journal directly)
+
+                var result = await PdfHelper.ConvertPDFToJournal(fileName);
+                await LoadJournal(preparedJournal: result);
+            }
+            else if (fileName.EndsWith(".journal") || preparedJournal != null)
             {
                 var dialog = new WaitingDialog(System.IO.Path.GetFileNameWithoutExtension(fileName), 1) { Owner = this };
                 try
                 {
-                    var currentJournal = Journal.LoadJournal(fileName);
+                    Journal currentJournal = (preparedJournal == null ? Journal.LoadJournal(fileName) : preparedJournal);
 
                     if (currentJournal == null)
                     {
@@ -2754,7 +2766,12 @@ namespace SimpleJournal
                     foreach (JournalPage jp in currentJournal.Pages)
                     {
                         DrawingCanvas canvas = null;
-                        canvas = AddPage(GeneratePage(jp.PaperPattern));
+                        byte[] background = null;
+
+                        if (jp is PdfJournalPage pdf)
+                            background = pdf.PageBackground;
+
+                        canvas = AddPage(GeneratePage(jp.PaperPattern, background));
 
                         if (countPages == 0)
                         {
@@ -2770,9 +2787,14 @@ namespace SimpleJournal
                         {
                             using (System.IO.MemoryStream ms = new System.IO.MemoryStream())
                             {
-                                ms.Write(jp.Data, 0, jp.Data.Length);
-                                ms.Position = 0;
-                                strokes = new StrokeCollection(ms);
+                                if (jp.Data != null)
+                                {
+                                    ms.Write(jp.Data, 0, jp.Data.Length);
+                                    ms.Position = 0;
+                                    strokes = new StrokeCollection(ms);
+                                }
+                                else
+                                    strokes = new StrokeCollection();
                             }
                         }).ContinueWith(new Action<Task>((Task t) =>
                         {
@@ -2800,7 +2822,10 @@ namespace SimpleJournal
 
                     // Set process id to document and save it to make sure other instances cannot load this journal
                     currentJournal.ProcessID = ProcessHelper.CurrentProcID;
-                    currentJournal.Save(fileName);
+
+                    // ToDo: *** Handle pdf file (fileName is empty then)
+                    if (!string.IsNullOrEmpty(fileName))
+                        currentJournal.Save(fileName);
                 }
                 catch (Exception ex)
                 {

@@ -6,6 +6,7 @@ using System.Xml.Serialization;
 
 namespace SimpleJournal.Data
 {
+    [Serializable]
     public class Journal
     {
         public List<JournalPage> Pages { get; set; } = new List<JournalPage>();
@@ -35,6 +36,11 @@ namespace SimpleJournal.Data
             try
             {
                 var result = Serialization.Serialization.Read<Journal>(path, Serialization.Serialization.Mode.Normal);
+                if (result == null)
+                {
+                    result = Serialization.Serialization.Read<Journal>(path, Serialization.Serialization.Mode.Binary);
+                }
+
                 return result;
             }
             catch (Exception e)
@@ -50,7 +56,7 @@ namespace SimpleJournal.Data
         {
             try
             {
-                Serialization.Serialization.Save(filePath, this, Serialization.Serialization.Mode.Normal);
+                Serialization.Serialization.Save(filePath, this, Serialization.Serialization.Mode.Binary);
             }
             catch (Exception e)
             {

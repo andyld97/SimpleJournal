@@ -146,16 +146,18 @@ namespace SimpleJournal
         {
             try
             {
-                MemoryStream memStream = new MemoryStream();
-                PngBitmapEncoder encoder = new PngBitmapEncoder();
-                encoder.Frames.Add(BitmapFrame.Create(bi));
-                encoder.Save(memStream);
-                return memStream.ToArray();
+                using (MemoryStream memStream = new MemoryStream())
+                {
+                    PngBitmapEncoder encoder = new PngBitmapEncoder();
+                    encoder.Frames.Add(BitmapFrame.Create(bi));
+                    encoder.Save(memStream);
+                    return memStream.ToArray();
+                }
             }
             catch (Exception e)
             {
                 MessageBox.Show($"{Properties.Resources.strFailedToSaveImage} {e.Message}", Properties.Resources.strFailure, MessageBoxButton.OK, MessageBoxImage.Error);
-                return new byte[] { };
+                return Array.Empty<byte>();
             }
         }
 
@@ -194,7 +196,7 @@ namespace SimpleJournal
         public static JournalResource ConvertImage(this Image img)
         {
             JournalImage ji = new JournalImage();
-            ji.SetData(GeneralHelper.ExportImage((BitmapSource)img.Source));
+            ji.Data = GeneralHelper.ExportImage((BitmapSource)img.Source);
             ji.Left = (double)img.GetValue(InkCanvas.LeftProperty);
             ji.Top = (double)img.GetValue(InkCanvas.TopProperty);
             ji.ZIndex = Canvas.GetZIndex(img);
@@ -213,7 +215,7 @@ namespace SimpleJournal
             JournalShape js = new JournalShape();
 
             string shapeData = XamlWriter.Save(shape);
-            js.SetData(Encoding.Default.GetBytes(Convert.ToBase64String(Encoding.Default.GetBytes(shapeData))));
+            js.Data = Encoding.Default.GetBytes(Convert.ToBase64String(Encoding.Default.GetBytes(shapeData)));
 
             return js;
         }
@@ -264,17 +266,20 @@ namespace SimpleJournal
 
         public static JournalResource ConvertText(this TextBlock text)
         {
-            JournalText jt = new JournalText();
-            jt.SetData(Encoding.Default.GetBytes(text.Text));
-            jt.Left = (double)text.GetValue(InkCanvas.LeftProperty);
-            jt.Top = (double)text.GetValue(InkCanvas.TopProperty);
-            jt.ZIndex = Canvas.GetZIndex(text);
-            jt.Width = text.Width;
-            jt.Height = text.Height;
+            JournalText jt = new JournalText
+            {
+                Data = Encoding.Default.GetBytes(text.Text),
+                Left = (double)text.GetValue(InkCanvas.LeftProperty),
+                Top = (double)text.GetValue(InkCanvas.TopProperty),
+                ZIndex = Canvas.GetZIndex(text),
+                Width = text.Width,
+                Height = text.Height,
 
-            // Set speical button
-            jt.FontSize = text.FontSize;
-            jt.FontFamily = text.FontFamily.ToString();
+                // Set speical button
+                FontSize = text.FontSize,
+                FontFamily = text.FontFamily.ToString()
+            };
+
             var foregroundBrush = (text.Foreground as SolidColorBrush);
 
             jt.A = foregroundBrush.Color.A;
@@ -307,7 +312,7 @@ namespace SimpleJournal
                 }
             }
 
-            if (containsAll && text.TextDecorations.Count() != 0)
+            if (containsAll && text.TextDecorations.Count != 0)
                 jt.IsStrikeout = true;
 
             if (text.RenderTransform != null && text.RenderTransform is RotateTransform rt)

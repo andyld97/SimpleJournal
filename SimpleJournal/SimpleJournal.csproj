@@ -104,12 +104,6 @@
     <None Remove="resources\managment\adddottedpageup.png" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Serialization, Version=1.0.0.1, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\External Libraries\Serialization.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup>
     <None Update="app.normal.manifest">
       <SubType>Designer</SubType>
     </None>
@@ -334,6 +328,8 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Fluent.Ribbon" Version="8.0.3" />
+    <PackageReference Include="Magick.NET-Q16-AnyCPU" Version="8.4.0" />
+    <PackageReference Include="Magick.NET.Core" Version="8.4.0" />
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.902.49" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
@@ -341,6 +337,11 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Shared Libraries\SimpleJournal.Shared\SimpleJournal.Shared.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Serialization">
+      <HintPath>F:\Andy's Dokumente\Eigene Librays\Serialization\Serialization\bin\Debug\netstandard2.0\Serialization.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Update="Properties\Resources.Designer.cs">

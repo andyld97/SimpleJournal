@@ -107,7 +107,7 @@ namespace SimpleJournal.Controls
                 {
                     var page = pages[i];
                     int pageIndex = pages.IndexOf(page) + 1;
-                    var frame = new Frame() { Content = PageHelper.ClonePage(page, true) };
+                    var frame = new Frame() { Content = page.ClonePage(true) };
                     var expander = new Expander()
                     {
                         Header = $"{Properties.Resources.strPage} {pageIndex}",
@@ -254,7 +254,7 @@ namespace SimpleJournal.Controls
                         {
                             currentCanvas.Strokes.Save(ms);
                             JournalPage journalPage = new JournalPage();
-                            journalPage.SetData(ms.ToArray());
+                            journalPage.Data = ms.ToArray();
 
                             // Check for additional ressources
                             if (currentCanvas.Children.Count > 0)

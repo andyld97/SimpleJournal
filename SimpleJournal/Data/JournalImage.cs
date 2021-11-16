@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
@@ -7,6 +8,7 @@ namespace SimpleJournal.Data
     /// <summary>
     /// A journal image resouce
     /// </summary>
+    [Serializable]
     public class JournalImage : JournalResource
     {
         public override Type JournalResourceType => Type.Image;
@@ -19,7 +21,7 @@ namespace SimpleJournal.Data
 
         public override UIElement ConvertToUiElement()
         {
-            Image img = new Image() { Source = GeneralHelper.ImageFromBase64(this.DataBase64), Stretch = (IsUniform ? Stretch.Uniform : Stretch.Fill)};
+            Image img = new Image() { Source = GeneralHelper.ImageFromBase64(Convert.ToBase64String(this.Data)), Stretch = (IsUniform ? Stretch.Uniform : Stretch.Fill) };
             img.SetValue(InkCanvas.LeftProperty, this.Left);
             img.SetValue(InkCanvas.TopProperty, this.Top);
             img.Width = this.Width;

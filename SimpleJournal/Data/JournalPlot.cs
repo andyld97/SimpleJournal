@@ -1,10 +1,12 @@
 ﻿using SimpleJournal.Controls;
+using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
 namespace SimpleJournal.Data
 {
+    [Serializable]
     public class JournalPlot : JournalResource
     {
         public override Type JournalResourceType => Type.Plot;
