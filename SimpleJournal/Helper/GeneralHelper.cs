@@ -166,7 +166,7 @@ namespace SimpleJournal
             return LoadImage(Convert.FromBase64String(data));
         }
 
-        private static BitmapImage LoadImage(byte[] imageData)
+        public static BitmapImage LoadImage(byte[] imageData)
         {
             if (imageData == null || imageData.Length == 0) return null;
 

@@ -20,26 +20,11 @@ namespace SimpleJournal.Templates
             if (background != null)
             {
                 PageBackground = background;
-                canvas.Background = new ImageBrush() { ImageSource = LoadImage(background) };
-            }
-        }
+                // canvas.Background = new ImageBrush() { ImageSource = GeneralHelper.LoadImage(background), Stretch = Stretch.UniformToFill };
 
-        private static BitmapImage LoadImage(byte[] imageData)
-        {
-            if (imageData == null || imageData.Length == 0) return null;
-            var image = new BitmapImage();
-            using (var mem = new System.IO.MemoryStream(imageData))
-            {
-                mem.Position = 0;
-                image.BeginInit();
-                image.CreateOptions = BitmapCreateOptions.PreservePixelFormat;
-                image.CacheOption = BitmapCacheOption.OnLoad;
-                image.UriSource = null;
-                image.StreamSource = mem;
-                image.EndInit();
+                ImageBackground.Source = GeneralHelper.LoadImage(background);
+                canvas.Background = new SolidColorBrush(Colors.Transparent);
             }
-            image.Freeze();
-            return image;
         }
 
         public Format Format => Format.A4;

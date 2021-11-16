@@ -8,6 +8,7 @@
       Height="29.7cm" Width="21cm" Background="White"
       Title="Custom">
     <Grid>
+        <Image x:Name="ImageBackground" />
         <sj:DrawingCanvas x:Name="canvas" Height="29.7cm" Width="21cm" />
     </Grid>
 </Page>
