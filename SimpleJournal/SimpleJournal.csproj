@@ -340,7 +340,7 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Serialization">
-      <HintPath>F:\Andy's Dokumente\Eigene Librays\Serialization\Serialization\bin\Debug\netstandard2.0\Serialization.dll</HintPath>
+      <HintPath>..\External Libraries\Serialization.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
