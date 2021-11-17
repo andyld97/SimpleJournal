@@ -52,17 +52,20 @@ namespace SimpleJournal.Data
             return new Journal();
         }
 
-        public void Save(string filePath, bool quiet = false)
+        public bool Save(string filePath, bool quiet = false)
         {
             try
             {
                 Serialization.Serialization.Save(filePath, this, Serialization.Serialization.Mode.Binary);
+                return true;
             }
             catch (Exception e)
             {
                 if (!quiet)
                     MessageBox.Show($"{Properties.Resources.strFailedToSaveJournal} {e.Message}", Properties.Resources.strFailedToSaveJournalTitle, MessageBoxButton.OK, MessageBoxImage.Error);
             }
+
+            return false;
         }
     }
 }

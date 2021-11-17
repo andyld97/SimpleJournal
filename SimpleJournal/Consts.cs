@@ -25,6 +25,7 @@ namespace SimpleJournal
         public static readonly string FeedbackUrl = "https://simplejournal.ca-soft.net/feedback.php?name={0}&mail={1}&content={2}";
         public static readonly string HomePageUrl = "https://simplejournal.ca-soft.net";
         public static readonly string HelpUrl = "https://simplejournal.ca-soft.net/faq";
+        public static readonly string GhostScriptDownloadUrl = "https://ghostscript.com/releases/gsdnld.html";
 
         public static readonly string UpdaterExe = "7244a3f048e82af354eb3cfa3089a3035ff8768f";
         public static readonly string UpdateSystemDotNetDotControllerDotdll = "bbc7224ccc544651d9d844f309721091860f0f92";

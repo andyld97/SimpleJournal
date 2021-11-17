@@ -1,0 +1,68 @@
+﻿<Window x:Class="SimpleJournal.Dialogs.PDFConversationDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Background="{DynamicResource WhiteBrush}"
+        Title="PDF Dokument als Journal umwandeln" Height="280"  Width="500">
+
+    <Window.Resources>
+        <Style TargetType="{x:Type TextBlock}">
+            <Setter Property="Foreground" Value="{DynamicResource BlackBrush}" />
+            <Setter Property="Margin" Value="3" />
+        </Style>
+        <Style TargetType="{x:Type TextBox}">
+            <Setter Property="Background" Value="{DynamicResource WhiteBrush}" />
+            <Setter Property="Foreground" Value="{DynamicResource BlackBrush}" />
+            <Setter Property="Margin" Value="3" />
+            <Setter Property="Padding" Value="3" />
+        </Style>
+        <Style TargetType="{x:Type Hyperlink}">
+            <Setter Property="Foreground" Value="{DynamicResource BlackBrush}" />
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <StackPanel x:Name="PanelProgress" Margin="2" Visibility="Collapsed" VerticalAlignment="Center">
+            <TextBlock>
+                <Run Text="Status:" FontWeight="Bold" />
+                <Run x:Name="TextState" />
+            </TextBlock>
+            <ProgressBar x:Name="Progress" Height="20" Margin="5" />
+        </StackPanel>
+
+        <StackPanel x:Name="PanelInput" Margin="2" Visibility="Visible">
+            <Border BorderThickness="1" BorderBrush="{DynamicResource BlackBrush}" CornerRadius="5">
+                <TextBlock TextWrapping="Wrap" FontSize="12">
+                <Run Text="Um ein PDF Dokuemnt in SimpleJournal verwenden zu können, muss es zunächst in ein Journal-Dokument konvertiert werden. Dazu wird ImageMagick.NET in Kombination mit " /><Hyperlink NavigateUri="https://google.de" RequestNavigate="Hyperlink_RequestNavigate">Ghostscript</Hyperlink>
+                <Run Text="verwendet. Bitte stellen Sie sicher, dass " /><Hyperlink RequestNavigate="Hyperlink_RequestNavigate">Ghostscript</Hyperlink>
+                <Run Text="installiert ist, sonst funktioniert die Umwandlung nicht!" />
+                <LineBreak />
+                <Run Foreground="Orange" FontWeight="Bold" Text="Achtung: Das originale PDF Dokument bleibt unverändert!" />
+                </TextBlock>
+            </Border>
+
+            <TextBlock Text="Quellpfad:" />
+            <TextBox x:Name="TextSource" IsReadOnly="True" />
+
+            <TextBlock Text="Zielpfad:" FontWeight="Bold" />
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <TextBox x:Name="TextDestination" IsReadOnly="True" />
+                <Button x:Name="ButtonSearch" Click="ButtonSearch_Click" Content="..." Grid.Column="1" FontWeight="Bold" Margin="3" Width="50" ToolTip="Wählen Sie einen Pfad aus, an dem das Journal gespeichert werden soll!" />
+            </Grid>
+
+            <Button x:Name="ButtonConvert" Click="ButtonConvert_Click" Width="150" HorizontalAlignment="Right" Margin="3">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="../resources/redo.png" Height="32" />
+                    <TextBlock Text="Umwandeln" Foreground="Black" FontWeight="Bold" VerticalAlignment="Center" />
+                </StackPanel>
+            </Button>
+        </StackPanel>
+    </Grid>
+</Window>

@@ -2209,6 +2209,19 @@ namespace SimpleJournal
                 if (result.HasValue && result.Value)
                 {
                     pnlSidebar.Visibility = Visibility.Hidden;
+
+                    if (System.IO.Path.GetExtension(ofd.FileName).Contains("pdf"))
+                    {
+                        PDFConversationDialog pdfConversationDialog = new PDFConversationDialog(ofd.FileName);
+                        bool? res = pdfConversationDialog.ShowDialog();
+
+                        if (res.HasValue && res.Value)
+                            await LoadJournal(pdfConversationDialog.DestinationFileName);
+
+                        return;
+                    }
+
+
                     await LoadJournal(ofd.FileName);
                 }
             }
@@ -2668,38 +2681,14 @@ namespace SimpleJournal
             }
         }
 
-        private void ClearJournal()
+        private async Task LoadJournal(string fileName)
         {
-            List<IPaper> toClear = new List<IPaper>();
-            foreach (IPaper page in CurrentJournalPages)
-            {
-                page.Canvas.Strokes = new StrokeCollection();
-                page.Canvas.Children.ClearAll(page.Canvas);
-                toClear.Add(page);
-            }
-            foreach (IPaper page in toClear)
-                CurrentJournalPages.Remove(page);
-            pages.Children.Clear();
-            CurrentJournalPages.Clear();
-            GC.Collect();
-            GC.WaitForPendingFinalizers();
-        }
-
-        private async Task LoadJournal(string fileName = "", Journal preparedJournal = null)
-        {
-            if (fileName.EndsWith(".pdf"))
-            {
-                // ToDo: Show conversation dialog (and ask the user to save the journal directly)
-
-                var result = await PdfHelper.ConvertPDFToJournal(fileName);
-                await LoadJournal(preparedJournal: result);
-            }
-            else if (fileName.EndsWith(".journal") || preparedJournal != null)
+            if (fileName.EndsWith(".journal"))
             {
                 var dialog = new WaitingDialog(System.IO.Path.GetFileNameWithoutExtension(fileName), 1) { Owner = this };
                 try
                 {
-                    Journal currentJournal = (preparedJournal == null ? Journal.LoadJournal(fileName) : preparedJournal);
+                    Journal currentJournal = Journal.LoadJournal(fileName);
 
                     if (currentJournal == null)
                     {
@@ -2844,6 +2833,24 @@ namespace SimpleJournal
             }
             DrawingCanvas.Change = false;
         }
+
+        private void ClearJournal()
+        {
+            List<IPaper> toClear = new List<IPaper>();
+            foreach (IPaper page in CurrentJournalPages)
+            {
+                page.Canvas.Strokes = new StrokeCollection();
+                page.Canvas.Children.ClearAll(page.Canvas);
+                toClear.Add(page);
+            }
+            foreach (IPaper page in toClear)
+                CurrentJournalPages.Remove(page);
+            pages.Children.Clear();
+            CurrentJournalPages.Clear();
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
+        }
+
         #endregion
 
         #region Pagemanagment Dialog
