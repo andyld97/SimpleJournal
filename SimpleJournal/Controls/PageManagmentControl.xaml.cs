@@ -349,7 +349,11 @@ namespace SimpleJournal.Controls
 
             foreach (var page in pages)
             {
-                JournalPage jp = new JournalPage { PaperPattern = page.Type };
+                JournalPage jp = null;
+                if (page is Custom pdf)
+                    jp = new PdfJournalPage { PaperPattern = PaperType.Custom, PageBackground = pdf.PageBackground };
+                else
+                    jp = new JournalPage { PaperPattern = page.Type };
 
                 using (MemoryStream ms = new MemoryStream())
                 {

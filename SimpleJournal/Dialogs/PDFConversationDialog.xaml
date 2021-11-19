@@ -3,9 +3,10 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:res="clr-namespace:SimpleJournal.Properties"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Background="{DynamicResource WhiteBrush}"
-        Title="PDF Dokument als Journal umwandeln" Height="280"  Width="500">
+        Title="{x:Static res:Resources.strPDFConversationDialog_Title}" Height="280"  Width="500">
 
     <Window.Resources>
         <Style TargetType="{x:Type TextBlock}">
@@ -25,7 +26,7 @@
 
     <Grid>
         <StackPanel x:Name="PanelProgress" Margin="2" Visibility="Collapsed" VerticalAlignment="Center">
-            <TextBlock>
+            <TextBlock Margin="5">
                 <Run Text="Status:" FontWeight="Bold" />
                 <Run x:Name="TextState" />
             </TextBlock>
@@ -35,18 +36,20 @@
         <StackPanel x:Name="PanelInput" Margin="2" Visibility="Visible">
             <Border BorderThickness="1" BorderBrush="{DynamicResource BlackBrush}" CornerRadius="5">
                 <TextBlock TextWrapping="Wrap" FontSize="12">
-                <Run Text="Um ein PDF Dokuemnt in SimpleJournal verwenden zu können, muss es zunächst in ein Journal-Dokument konvertiert werden. Dazu wird ImageMagick.NET in Kombination mit " /><Hyperlink NavigateUri="https://google.de" RequestNavigate="Hyperlink_RequestNavigate">Ghostscript</Hyperlink>
-                <Run Text="verwendet. Bitte stellen Sie sicher, dass " /><Hyperlink RequestNavigate="Hyperlink_RequestNavigate">Ghostscript</Hyperlink>
-                <Run Text="installiert ist, sonst funktioniert die Umwandlung nicht!" />
-                <LineBreak />
-                <Run Foreground="Orange" FontWeight="Bold" Text="Achtung: Das originale PDF Dokument bleibt unverändert!" />
+                    <Run Text="{x:Static res:Resources.strPDFConversationDialog_Explanation_Line1}" />
+                    <Hyperlink NavigateUri="https://google.de" RequestNavigate="Hyperlink_RequestNavigate">Ghostscript</Hyperlink>
+                    <Run Text="{x:Static res:Resources.strPDFConversationDialog_Explanation_Line2}"/>
+                    <Hyperlink RequestNavigate="Hyperlink_RequestNavigate">Ghostscript</Hyperlink>
+                    <Run Text="{x:Static res:Resources.strPDFConversationDialog_Explanation_Line3}" />
+                    <LineBreak />
+                    <Run Foreground="Orange" FontWeight="Bold" Text="{x:Static res:Resources.strPDFConversationDialog_Hint}" />
                 </TextBlock>
             </Border>
 
-            <TextBlock Text="Quellpfad:" />
+            <TextBlock Text="{x:Static res:Resources.strPDFConversationDialog_SourcePath}" />
             <TextBox x:Name="TextSource" IsReadOnly="True" />
 
-            <TextBlock Text="Zielpfad:" FontWeight="Bold" />
+            <TextBlock Text="{x:Static res:Resources.strPDFConversationDialog_DestinationPath}" FontWeight="Bold" />
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
@@ -60,7 +63,7 @@
             <Button x:Name="ButtonConvert" Click="ButtonConvert_Click" Width="150" HorizontalAlignment="Right" Margin="3">
                 <StackPanel Orientation="Horizontal">
                     <Image Source="../resources/redo.png" Height="32" />
-                    <TextBlock Text="Umwandeln" Foreground="Black" FontWeight="Bold" VerticalAlignment="Center" />
+                    <TextBlock Text="{x:Static res:Resources.strPDFConversationDialog_Convert}" Foreground="Black" FontWeight="Bold" VerticalAlignment="Center" />
                 </StackPanel>
             </Button>
         </StackPanel>

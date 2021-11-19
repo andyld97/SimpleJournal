@@ -1830,4 +1830,56 @@ Alternatively, you can use the normal version of SimpleJournal!</value>
   <data name="strDropDownTemplateMode" xml:space="preserve">
     <value>Mode:</value>
   </data>
+  <data name="strPDFConversationDialog_Title" xml:space="preserve">
+    <value>Convert PDF document as journal</value>
+    <comment>PDFConversationDialog.xaml</comment>
+  </data>
+  <data name="strPDFConversationDialog_SourcePath" xml:space="preserve">
+    <value>Source path:</value>
+    <comment>PDFConversationDialog.xaml</comment>
+  </data>
+  <data name="strPDFConversationDialog_DestinationPath" xml:space="preserve">
+    <value>Target path:</value>
+    <comment>PDFConversationDialog.xaml.cs</comment>
+  </data>
+  <data name="strPDFConversationDialog_Convert" xml:space="preserve">
+    <value>Convert</value>
+    <comment>PDFConversationDialog.xaml</comment>
+  </data>
+  <data name="strPDFConversationDialog_Explanation_Line1" xml:space="preserve">
+    <value>To use a PDF docuemnt in SimpleJournal, it must first be converted to a journal document. This is done using ImageMagick.NET in combination with</value>
+    <comment>PDFConversationDialog.xaml.cs</comment>
+  </data>
+  <data name="strPDFConversationDialog_Explanation_Line2" xml:space="preserve">
+    <value>Please make sure that</value>
+    <comment>PDFConversationDialog.xaml.cs</comment>
+  </data>
+  <data name="strPDFConversationDialog_Explanation_Line3" xml:space="preserve">
+    <value>is installed, otherwise the conversion will not work!</value>
+    <comment>PDFConversationDialog.xaml.cs</comment>
+  </data>
+  <data name="strPDFConversationDialog_Hint" xml:space="preserve">
+    <value>Attention: The original PDF document remains unchanged!</value>
+    <comment>PDFConversationDialog.xaml.cs</comment>
+  </data>
+  <data name="strPDFConversationDialog_InvalidInputMessage" xml:space="preserve">
+    <value>Please specify valid paths!</value>
+    <comment>PDFConversationDialog.xaml.cs</comment>
+  </data>
+  <data name="strPDFConversationDialog_GhostscriptMessage" xml:space="preserve">
+    <value>An error occurred during conversion. Make sure that Ghostscript is installed!</value>
+    <comment>PDFConversationDialog.xaml.cs</comment>
+  </data>
+  <data name="strPDFConversationDialog_ReadingPDFDocument" xml:space="preserve">
+    <value>Reading PDF Document "{0}" ...</value>
+    <comment>PDFConversationDialog.xaml.cs</comment>
+  </data>
+  <data name="strPDFConversationDialog_Ready" xml:space="preserve">
+    <value>Ready</value>
+    <comment>PDFConversationDialog.xaml.cs</comment>
+  </data>
+  <data name="strPDFConversationDialog_ConversationStatusMessage" xml:space="preserve">
+    <value>Converting page {0} from {1} ...</value>
+    <comment>PDFConversationDialog.xaml</comment>
+  </data>
 </root>

@@ -2876,7 +2876,11 @@ namespace SimpleJournal
                 foreach (var page in result)
                 {
                     DrawingCanvas canvas = null;
-                    canvas = AddPage(GeneratePage(page.PaperPattern));
+                    byte[] background = null;
+                    if (page is PdfJournalPage pdf)
+                        background = pdf.PageBackground;
+
+                    canvas = AddPage(GeneratePage(page.PaperPattern, background));
 
                     if (countPages == 0)
                     {

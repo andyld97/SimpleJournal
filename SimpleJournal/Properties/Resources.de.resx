@@ -1826,4 +1826,56 @@ Alternativ können Sie die normale Version von SimpleJournal verwenden!</value>
   <data name="strDropDownTemplateMode" xml:space="preserve">
     <value>Modus:</value>
   </data>
+  <data name="strPDFConversationDialog_Convert" xml:space="preserve">
+    <value>Umwandeln</value>
+    <comment>PDFConversationDialog.xaml.cs</comment>
+  </data>
+  <data name="strPDFConversationDialog_DestinationPath" xml:space="preserve">
+    <value>Zielpfad:</value>
+    <comment>PDFConversationDialog.xaml.cs</comment>
+  </data>
+  <data name="strPDFConversationDialog_SourcePath" xml:space="preserve">
+    <value>Quellpfad:</value>
+    <comment>PDFConversationDialog.xaml.cs</comment>
+  </data>
+  <data name="strPDFConversationDialog_Title" xml:space="preserve">
+    <value>PDF-Dokument als Journal umwandeln</value>
+    <comment>PDFConversationDialog.xaml.cs</comment>
+  </data>
+  <data name="strPDFConversationDialog_Explanation_Line2" xml:space="preserve">
+    <value>verwendet. Bitte stellen Sie sicher, dass</value>
+    <comment>PDFConversationDialog.xaml.cs</comment>
+  </data>
+  <data name="strPDFConversationDialog_Explanation_Line1" xml:space="preserve">
+    <value>Um ein PDF Dokuemnt in SimpleJournal verwenden zu können, muss es zunächst in ein Journal-Dokument konvertiert werden. Dazu wird ImageMagick.NET in Kombination mit</value>
+    <comment>PDFConversationDialog.xaml.cs</comment>
+  </data>
+  <data name="strPDFConversationDialog_Explanation_Line3" xml:space="preserve">
+    <value>installiert ist, sonst funktioniert die Umwandlung nicht!</value>
+    <comment>PDFConversationDialog.xaml.cs</comment>
+  </data>
+  <data name="strPDFConversationDialog_Hint" xml:space="preserve">
+    <value>Achtung: Das originale PDF Dokument bleibt unverändert!</value>
+    <comment>PDFConversationDialog.xaml.cs</comment>
+  </data>
+  <data name="strPDFConversationDialog_ReadingPDFDocument" xml:space="preserve">
+    <value>Lese PDF Dokument "{0}" ...</value>
+    <comment>PDFConversationDialog.xaml.cs</comment>
+  </data>
+  <data name="strPDFConversationDialog_InvalidInputMessage" xml:space="preserve">
+    <value>Bitte geben Sie gültige Pfade an!</value>
+    <comment>PDFConversationDialog.xaml.cs</comment>
+  </data>
+  <data name="strPDFConversationDialog_GhostscriptMessage" xml:space="preserve">
+    <value>Es ist ein Fehler beim Konvertieren aufgetreten. Stellen Sie sicher, dass Ghostscript installiert ist!</value>
+    <comment>PDFConversationDialog.xaml.cs</comment>
+  </data>
+  <data name="strPDFConversationDialog_Ready" xml:space="preserve">
+    <value>Fertig</value>
+    <comment>PDFConversationDialog.xaml.cs</comment>
+  </data>
+  <data name="strPDFConversationDialog_ConversationStatusMessage" xml:space="preserve">
+    <value>Konvertiere Seite {0} von {1} ...</value>
+    <comment>PDFConversationDialog.xaml.cs</comment>
+  </data>
 </root>

@@ -2221,6 +2221,123 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Converting page {0} from {1} ....
+        /// </summary>
+        public static string strPDFConversationDialog_ConversationStatusMessage {
+            get {
+                return ResourceManager.GetString("strPDFConversationDialog_ConversationStatusMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Convert.
+        /// </summary>
+        public static string strPDFConversationDialog_Convert {
+            get {
+                return ResourceManager.GetString("strPDFConversationDialog_Convert", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Target path:.
+        /// </summary>
+        public static string strPDFConversationDialog_DestinationPath {
+            get {
+                return ResourceManager.GetString("strPDFConversationDialog_DestinationPath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to To use a PDF docuemnt in SimpleJournal, it must first be converted to a journal document. This is done using ImageMagick.NET in combination with.
+        /// </summary>
+        public static string strPDFConversationDialog_Explanation_Line1 {
+            get {
+                return ResourceManager.GetString("strPDFConversationDialog_Explanation_Line1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please make sure that.
+        /// </summary>
+        public static string strPDFConversationDialog_Explanation_Line2 {
+            get {
+                return ResourceManager.GetString("strPDFConversationDialog_Explanation_Line2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to is installed, otherwise the conversion will not work!.
+        /// </summary>
+        public static string strPDFConversationDialog_Explanation_Line3 {
+            get {
+                return ResourceManager.GetString("strPDFConversationDialog_Explanation_Line3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An error occurred during conversion. Make sure that Ghostscript is installed!.
+        /// </summary>
+        public static string strPDFConversationDialog_GhostscriptMessage {
+            get {
+                return ResourceManager.GetString("strPDFConversationDialog_GhostscriptMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Attention: The original PDF document remains unchanged!.
+        /// </summary>
+        public static string strPDFConversationDialog_Hint {
+            get {
+                return ResourceManager.GetString("strPDFConversationDialog_Hint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please specify valid paths!.
+        /// </summary>
+        public static string strPDFConversationDialog_InvalidInputMessage {
+            get {
+                return ResourceManager.GetString("strPDFConversationDialog_InvalidInputMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reading PDF Document &quot;{0}&quot; ....
+        /// </summary>
+        public static string strPDFConversationDialog_ReadingPDFDocument {
+            get {
+                return ResourceManager.GetString("strPDFConversationDialog_ReadingPDFDocument", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ready.
+        /// </summary>
+        public static string strPDFConversationDialog_Ready {
+            get {
+                return ResourceManager.GetString("strPDFConversationDialog_Ready", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Source path:.
+        /// </summary>
+        public static string strPDFConversationDialog_SourcePath {
+            get {
+                return ResourceManager.GetString("strPDFConversationDialog_SourcePath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Convert PDF document as journal.
+        /// </summary>
+        public static string strPDFConversationDialog_Title {
+            get {
+                return ResourceManager.GetString("strPDFConversationDialog_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Pen 1.
         /// </summary>
         public static string strPen1 {

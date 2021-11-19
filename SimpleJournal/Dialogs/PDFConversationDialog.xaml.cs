@@ -28,7 +28,7 @@ namespace SimpleJournal.Dialogs
 
         private void ButtonSearch_Click(object sender, RoutedEventArgs e)
         {
-            using (SaveFileDialog sfd = new SaveFileDialog() { Filter = "Journal|*.journal" })
+            using (SaveFileDialog sfd = new SaveFileDialog() { Filter = $"{Properties.Resources.strJournalFile}|*.journal" })
             {
                 if (sfd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
@@ -47,17 +47,16 @@ namespace SimpleJournal.Dialogs
             // Validate input params
             if (string.IsNullOrEmpty(destinationFileName) || string.IsNullOrEmpty(sourceFileName) || !System.IO.File.Exists(sourceFileName))
             {
-                MessageBox.Show(this, "Bitte geben Sie gültige Pfade an!", "Ungültige Angaben!", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(this, Properties.Resources.strPDFConversationDialog_InvalidInputMessage, Properties.Resources.strError, MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
             PanelInput.Visibility = Visibility.Hidden;
             PanelProgress.Visibility = Visibility.Visible;
             PanelInput.IsEnabled = false;
-
-
             Progress.IsIndeterminate = true;
-            TextState.Text = "Lese PDF Datei ...";
+
+            TextState.Text = string.Format(Properties.Resources.strPDFConversationDialog_ReadingPDFDocument, System.IO.Path.GetFileName(sourceFileName));
 
             // Read PDF Document
             MagickImageCollection images = null;
@@ -66,8 +65,8 @@ namespace SimpleJournal.Dialogs
                 images = await PdfHelper.ReadPDFFileAsync(sourceFileName);
             }
             catch (Exception ex)
-            {
-                MessageBox.Show(this, $"Es ist ein Fehler beim Konvertieren aufgetreten. Stellen Sie sicher, dass Ghostscript installiert ist!\n\n{ex.Message}", "Fehler!", MessageBoxButton.OK, MessageBoxImage.Error);
+            { 
+                MessageBox.Show(this, $"{Properties.Resources.strPDFConversationDialog_GhostscriptMessage}\n\n{ex.Message}", Properties.Resources.strError, MessageBoxButton.OK, MessageBoxImage.Error);
                 PanelInput.Visibility = Visibility.Visible;
                 PanelProgress.Visibility = Visibility.Collapsed;
                 PanelInput.IsEnabled = true;
@@ -80,24 +79,25 @@ namespace SimpleJournal.Dialogs
             if (images != null)
             {
                 Progress.IsIndeterminate = false;
-                int page = images.Count;
+                int count = images.Count;
 
-                for (int i = 0; i < page; i++)
+                for (int i = 0; i < count; i++)
                 {
                     var image = images[i];
                     int pg = i + 1;
              
-                    double percentage = Math.Round((pg / (double)page) * 100.0);
+                    double percentage = Math.Round((pg / (double)count) * 100.0);
 
                     // Update gui status message
-                    Dispatcher.Invoke(new Action(() => {
-                        TextState.Text = $"Konvertiere Seite {pg} von {page} ...";
+                    Dispatcher.Invoke(new Action(() => 
+                    {
+                        TextState.Text = string.Format(Properties.Resources.strPDFConversationDialog_ConversationStatusMessage, pg, count);
                         Progress.Value = percentage;
                     }));
 
                     // Create a journal page using image
-                    await Task.Run(() => {
-
+                    await Task.Run(() => 
+                    {
                         PdfJournalPage pdfJournalPage = new PdfJournalPage
                         {
                             PageBackground = image.ToByteArray(MagickFormat.Png),
@@ -108,7 +108,7 @@ namespace SimpleJournal.Dialogs
                     });                  
                 }
 
-                TextState.Text = "Fertig";
+                TextState.Text = Properties.Resources.strPDFConversationDialog_Ready;
             }
             
             // Free resources
