@@ -1847,7 +1847,7 @@ Alternatively, you can use the normal version of SimpleJournal!</value>
     <comment>PDFConversationDialog.xaml</comment>
   </data>
   <data name="strPDFConversationDialog_Explanation_Line1" xml:space="preserve">
-    <value>To use a PDF docuemnt in SimpleJournal, it must first be converted to a journal document. This is done using ImageMagick.NET in combination with</value>
+    <value>To use a PDF docuemnt in SimpleJournal, it must first be converted to a journal document. This is done using Magick.NET in combination with</value>
     <comment>PDFConversationDialog.xaml.cs</comment>
   </data>
   <data name="strPDFConversationDialog_Explanation_Line2" xml:space="preserve">
@@ -1881,5 +1881,11 @@ Alternatively, you can use the normal version of SimpleJournal!</value>
   <data name="strPDFConversationDialog_ConversationStatusMessage" xml:space="preserve">
     <value>Converting page {0} from {1} ...</value>
     <comment>PDFConversationDialog.xaml</comment>
+  </data>
+  <data name="strPDFConversationDialog_ButtonSearchToolTip" xml:space="preserve">
+    <value>Select a path where the journal should be saved!</value>
+  </data>
+  <data name="strAboutTextMagickNET" xml:space="preserve">
+    <value>... to</value>
   </data>
 </root>

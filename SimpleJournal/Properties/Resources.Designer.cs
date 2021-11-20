@@ -174,6 +174,15 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ... to.
+        /// </summary>
+        public static string strAboutTextMagickNET {
+            get {
+                return ResourceManager.GetString("strAboutTextMagickNET", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add Page.
         /// </summary>
         public static string strAddPage {
@@ -2221,6 +2230,15 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Select a path where the journal should be saved!.
+        /// </summary>
+        public static string strPDFConversationDialog_ButtonSearchToolTip {
+            get {
+                return ResourceManager.GetString("strPDFConversationDialog_ButtonSearchToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Converting page {0} from {1} ....
         /// </summary>
         public static string strPDFConversationDialog_ConversationStatusMessage {
@@ -2248,7 +2266,7 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to To use a PDF docuemnt in SimpleJournal, it must first be converted to a journal document. This is done using ImageMagick.NET in combination with.
+        ///   Looks up a localized string similar to To use a PDF docuemnt in SimpleJournal, it must first be converted to a journal document. This is done using Magick.NET in combination with.
         /// </summary>
         public static string strPDFConversationDialog_Explanation_Line1 {
             get {

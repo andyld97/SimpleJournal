@@ -39,7 +39,7 @@
                     <Run Text="{x:Static res:Resources.strPDFConversationDialog_Explanation_Line1}" />
                     <Hyperlink NavigateUri="https://google.de" RequestNavigate="Hyperlink_RequestNavigate">Ghostscript</Hyperlink>
                     <Run Text="{x:Static res:Resources.strPDFConversationDialog_Explanation_Line2}"/>
-                    <Hyperlink RequestNavigate="Hyperlink_RequestNavigate">Ghostscript</Hyperlink>
+                    <Hyperlink NavigateUri="https://google.de" RequestNavigate="Hyperlink_RequestNavigate">Ghostscript</Hyperlink>
                     <Run Text="{x:Static res:Resources.strPDFConversationDialog_Explanation_Line3}" />
                     <LineBreak />
                     <Run Foreground="Orange" FontWeight="Bold" Text="{x:Static res:Resources.strPDFConversationDialog_Hint}" />
@@ -57,7 +57,7 @@
                 </Grid.ColumnDefinitions>
 
                 <TextBox x:Name="TextDestination" IsReadOnly="True" />
-                <Button x:Name="ButtonSearch" Click="ButtonSearch_Click" Content="..." Grid.Column="1" FontWeight="Bold" Margin="3" Width="50" ToolTip="Wählen Sie einen Pfad aus, an dem das Journal gespeichert werden soll!" />
+                <Button x:Name="ButtonSearch" Click="ButtonSearch_Click" Content="..." Grid.Column="1" FontWeight="Bold" Margin="3" Width="50" ToolTip="{x:Static res:Resources.strPDFConversationDialog_ButtonSearchToolTip}" />
             </Grid>
 
             <Button x:Name="ButtonConvert" Click="ButtonConvert_Click" Width="150" HorizontalAlignment="Right" Margin="3">
