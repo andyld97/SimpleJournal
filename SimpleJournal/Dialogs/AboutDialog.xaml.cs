@@ -126,11 +126,13 @@ namespace SimpleJournal
 
                         MessageBox.Show(this, Properties.Resources.strFeedbackSent, Properties.Resources.strSuccess, MessageBoxButton.OK, MessageBoxImage.Information);
                     }
+                    else 
+                        throw new Exception($"HTTP Status Code: {result.StatusCode}");
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                MessageBox.Show(this, Properties.Resources.strFailedToSendFeedback, Properties.Resources.strFailure, MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(this, $"{Properties.Resources.strFailedToSendFeedback}\n\n{ex.Message}", Properties.Resources.strFailure, MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }
