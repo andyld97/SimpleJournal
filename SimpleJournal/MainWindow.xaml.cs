@@ -149,7 +149,7 @@ namespace SimpleJournal
             };
 
             CurrentJournalPages.CollectionChanged += IPages_CollectionChanged;
-            Page page = GeneratePage();
+            var page = GeneratePage();
             DrawingCanvas.LastModifiedCanvas = AddPage(page);
             cmbPages.SelectedIndex = 0;
 
@@ -576,9 +576,8 @@ namespace SimpleJournal
             int counter = 0;
             foreach (FrameworkElement child in pages.Children)
             {
-                if (child != null && child is Frame && counter == index)
+                if (child != null && child is UserControl && child is IPaper paper && counter == index)
                 {
-                    var paper = (child as Frame).Content as IPaper;
                     var can = paper.Canvas;
 
                     if (DrawingCanvas.LastModifiedCanvas != can)
@@ -610,7 +609,7 @@ namespace SimpleJournal
                     }
                     break;
                 }
-                else if (child is Frame)
+                else if (child is IPaper)
                     counter++;
             }
         }
@@ -1064,9 +1063,9 @@ namespace SimpleJournal
             scrollBar.Width = (Settings.Instance.EnlargeScrollbar ? Consts.ScrollBarExtendedWidth : Consts.ScrollBarDefaultWidth);
         }
 
-        private Page GeneratePage(PaperType? paperType = null)
+        private UserControl GeneratePage(PaperType? paperType = null)
         {
-            Page pageContent = null;
+            UserControl pageContent = null;
             PaperType paperPattern = Settings.Instance.PaperType;
 
             if (paperType.HasValue)
@@ -1134,12 +1133,9 @@ namespace SimpleJournal
             TextObjectCounter.Text = DrawingCanvas.LastModifiedCanvas.Children.Count.ToString();
         }
 
-        private DrawingCanvas AddPage(Page page, int index = -1)
+        private DrawingCanvas AddPage(UserControl page, int index = -1)
         {
-            Frame elementToAdd = new Frame() { Content = page };
-            elementToAdd.Background = new SolidColorBrush(Colors.Transparent);
-            // This is needed to have something to click on for scrolling
-            elementToAdd.Background = new SolidColorBrush(Colors.Transparent);
+            var elementToAdd = page;
             var paper = page as IPaper;
 
             if (index == -1)
@@ -2226,12 +2222,12 @@ namespace SimpleJournal
                     var canvasToRemove = CurrentJournalPages[index].Canvas;
                     var borderToRemove = CurrentJournalPages[index].Border;
 
-                    Frame result = null;
-                    foreach (Frame frame in pages.Children.OfType<Frame>())
+                    UserControl result = null;
+                    foreach (UserControl control in pages.Children.OfType<UserControl>())
                     {
-                        if ((frame.Content as IPaper).Canvas.Equals(canvasToRemove))
+                        if (control is IPaper p && p.Canvas.Equals(canvasToRemove))
                         {
-                            result = frame;
+                            result = control;
                             break;
                         }
                     }
@@ -2517,7 +2513,7 @@ namespace SimpleJournal
         private void Pages_MouseDown(object sender, MouseButtonEventArgs e)
         {
             var p = e.GetPosition(pages);
-            if (!DetermineIfMouseIsInChildFrame(pages.Children, p))
+            if (!DetermineIfMouseIsInChildIPaper(pages.Children, p))
             {
                 timer.Stop();
                 timer.Reset();
@@ -2531,7 +2527,7 @@ namespace SimpleJournal
         private void Pages_PreviewMouseUp(object sender, MouseButtonEventArgs e)
         {
             var p = e.GetPosition(pages);
-            if (!DetermineIfMouseIsInChildFrame(pages.Children, p) && p1.X != double.MinValue && p1.Y != double.MinValue)
+            if (!DetermineIfMouseIsInChildIPaper(pages.Children, p) && p1.X != double.MinValue && p1.Y != double.MinValue)
             {
                 double deltaO = Math.Abs(p.Y - p1.Y) * 4;
                 handledMouseUp = false;
@@ -2556,11 +2552,11 @@ namespace SimpleJournal
                 Pages_PreviewMouseUp(sender, new MouseButtonEventArgs(e.MouseDevice, e.Timestamp, MouseButton.Left));
         }
 
-        private bool DetermineIfMouseIsInChildFrame(UIElementCollection collection, Point ps)
+        private bool DetermineIfMouseIsInChildIPaper(UIElementCollection collection, Point ps)
         {
             foreach (UIElement uIElement in collection)
             {
-                if (uIElement is Frame f && f.Content is Page p && p is IPaper ip)
+                if (uIElement is UserControl p && p is IPaper ip)
                 {
                     var bounds = ip.Canvas.BoundsRelativeTo(pages);
                     if (bounds.Contains(ps))
