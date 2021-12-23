@@ -333,7 +333,7 @@
     <Resource Include="resources\touch_on.png" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="DotnetRuntimeBootstrapper" Version="2.0.2">
+    <PackageReference Include="DotnetRuntimeBootstrapper" Version="2.0.3">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
