@@ -1,13 +1,12 @@
-﻿<Page x:Class="SimpleJournal.Templates.Chequered"
+﻿<UserControl x:Class="SimpleJournal.Templates.Chequered"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:SimpleJournal"
       mc:Ignorable="d" 
-         Height="29.7cm" Width="21cm"
-      Title="Chequered">
-    <Page.Resources>
+         Height="29.7cm" Width="21cm">
+    <UserControl.Resources>
         <DrawingBrush x:Key="CurrentChequeredBrush"
                       Stretch="Fill"
                       TileMode="Tile" 
@@ -49,10 +48,10 @@
                 </GeometryDrawing>
             </DrawingBrush.Drawing>
         </DrawingBrush>
-    </Page.Resources>
+    </UserControl.Resources>
     <Grid>
         <Border Background="White">
             <local:DrawingCanvas x:Name="canvas" Height="29.7cm" Width="21cm"/>
         </Border>
     </Grid>
-</Page>
+</UserControl>

@@ -167,7 +167,7 @@ namespace SimpleJournal.Controls
             double centerX = 0.0;
             double centerY = 0.0;
 
-            if (displayFrame.Content is IPaper paper)
+            if (displayFrame.Child is IPaper paper)
             {
                 centerX = paper.Canvas.ActualWidth * 0.5;
                 centerY = paper.Canvas.ActualHeight * 0.5;
@@ -250,7 +250,7 @@ namespace SimpleJournal.Controls
             {
                 var page = pages[ListViewPages.SelectedIndex];
                 var template = PageHelper.ClonePage(page, true);
-                displayFrame.Content = template;
+                displayFrame.Child = template as UserControl;
                 ignoreCheckedChanged = true;
 
                 ToggleButton tb = null;

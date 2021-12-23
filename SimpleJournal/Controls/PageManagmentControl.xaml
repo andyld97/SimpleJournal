@@ -111,7 +111,7 @@
             <TextBlock x:Name="TextZoomLabel" FontWeight="Bold" Margin="5,5,2,2" FontSize="16" Grid.Row="0" Text="{x:Static res:Resources.strPageManagmentZoomLabel}"/>
             <Border Grid.Row="1" BorderBrush="Black" BorderThickness="0 0 0 1">
                 <ScrollViewer x:Name="displayFrameScrollViewer" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                    <Frame x:Name="displayFrame" Margin="5" Background="#e1e1e1" NavigationUIVisibility="Hidden"/>
+                    <Border x:Name="displayFrame" Margin="5" Background="#e1e1e1" />
                 </ScrollViewer>
             </Border>
             <Grid Grid.Row="2">

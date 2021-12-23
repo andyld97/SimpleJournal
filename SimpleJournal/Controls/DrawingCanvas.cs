@@ -210,7 +210,7 @@ namespace SimpleJournal
         #region Public Methods (For setting canvas-drawing-mode)
 
         /// <summary>
-        /// Call this on load, because childs were added can't be removed with backwards
+        /// Call this on load, because childs were added can't be removed with undo
         /// </summary>
         /// <param name="child"></param>
         public void LoadChildren(UIElement child)
@@ -809,6 +809,8 @@ namespace SimpleJournal
                 }
                 else if (isInFormMode)
                 {
+                    // Remove MouseLeftButton event after adding the control finally (to ensure the ruler works properly again on the border of this control - after adding the control, the events are properly working again)
+                    Children.Last().MouseLeftButtonDown -= Control_MouseLeftButtonDown;
                     OnChanged?.Invoke(null, Children.Last(), Actions.Action.Type.AddedChild);
 
                     // Add rectangle
@@ -821,6 +823,8 @@ namespace SimpleJournal
                 }
                 else if (isInPlotMode)
                 {
+                    // Remove MouseLeftButton event after adding the control finally (to ensure the ruler works properly again on the border of this control - after adding the control, the events are properly working again)
+                    Children.Last().MouseLeftButtonDown -= Control_MouseLeftButtonDown;
                     OnChanged?.Invoke(null, Children.Last(), Actions.Action.Type.AddedChild);
 
                     // Add rectangle
@@ -884,7 +888,8 @@ namespace SimpleJournal
                     plot.DrawingMode = plotMode;
 
                     // Ensure that if the mouse/pointer lands on the rectangle, that the event will be redirected to OnMouseLeftButtonDown!
-                    plot.MouseLeftButtonDown += (s, p) => OnMouseLeftButtonDown(p);
+                    plot.MouseLeftButtonDown += Control_MouseLeftButtonDown;
+
                     Children.Add(plot);
                     notifiyActionManagerOnCollectionChanged = true;
                 }
@@ -1049,12 +1054,17 @@ namespace SimpleJournal
                     }
 
                     // Ensure that if the mouse/pointer lands on the rectangle, that the event will be redirected to OnMouseLeftButtonDown!
-                    currentShape.MouseLeftButtonDown += (s, p) => OnMouseLeftButtonDown(p);
+                    currentShape.MouseLeftButtonDown += Control_MouseLeftButtonDown;
 
                     Children.Add(currentShape);
                     notifiyActionManagerOnCollectionChanged = true;
                 }
             }
+        }
+
+        private void Control_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            OnMouseLeftButtonDown(e);
         }
 
         #endregion
