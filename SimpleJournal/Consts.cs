@@ -91,7 +91,7 @@ namespace SimpleJournal
         public const double InsertImagePositionY = 200D;
         public const double InsertImageWidth = 200D;
         public const double InsertImageHeight = 200D;
-        public const double InsertTextWidth = 50D;
+        public const double InsertTextWidth = 150D;
         public const double InsertTextHeight = 50D;
         #endregion
 
