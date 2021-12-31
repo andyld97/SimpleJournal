@@ -29,7 +29,7 @@ namespace SimpleJournal
         public static readonly string UpdaterExe = "7244a3f048e82af354eb3cfa3089a3035ff8768f";
         public static readonly string UpdateSystemDotNetDotControllerDotdll = "bbc7224ccc544651d9d844f309721091860f0f92";
 
-        public static readonly Version StoreVersion = new Version("1.490.0.0");
+        public static readonly Version StoreVersion = new Version("1.491.0.0");
         public static readonly Version NormalVersion = typeof(Consts).Assembly.GetName().Version;
 
         #region Pens
@@ -91,7 +91,7 @@ namespace SimpleJournal
         public const double InsertImagePositionY = 200D;
         public const double InsertImageWidth = 200D;
         public const double InsertImageHeight = 200D;
-        public const double InsertTextWidth = 50D;
+        public const double InsertTextWidth = 150D;
         public const double InsertTextHeight = 50D;
         #endregion
 

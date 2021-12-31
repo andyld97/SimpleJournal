@@ -260,16 +260,14 @@
                     </DataTemplate>
                 </Fluent:RibbonTabItem.HeaderTemplate>
                 <Fluent:RibbonGroupBox Header="{x:Static res:Resources.strClipboard}" KeyTip="ZW" Width="100">
-                    <Fluent:Button x:Name="btnInsertFromClipboard" Click="btnInsertFromClipboard_Click" Header="{x:Static res:Resources.strObject}" LargeIcon="pack://application:,,,/SimpleJournal;component/resources/paste.png"/>
+                    <Fluent:Button x:Name="btnInsertFromClipboard" Click="btnInsertFromClipboard_Click" Header="{x:Static res:Resources.strInsertImageOrText}" LargeIcon="pack://application:,,,/SimpleJournal;component/resources/paste.png"/>
                 </Fluent:RibbonGroupBox>
                 <Fluent:RibbonGroupBox Header="{x:Static res:Resources.strSelection}" KeyTip="AU">
                     <Fluent:Button x:Name="btnCreateForm" Click="btnCreateForm_Click" Header="{x:Static res:Resources.strConvertToForm}" LargeIcon="pack://application:,,,/SimpleJournal;component/resources/shapes.png"/>
                 </Fluent:RibbonGroupBox>
-                <Fluent:RibbonGroupBox Header="{x:Static res:Resources.strText}" KeyTip="TE">
+                <Fluent:RibbonGroupBox Header="{x:Static res:Resources.strInsertNewObjects}" KeyTip="NE">
                     <Fluent:Button x:Name="btnInsertText" Click="btnInsertText_Click" Header="{x:Static res:Resources.strInsertText}" LargeIcon="pack://application:,,,/SimpleJournal;component/resources/text.png"/>
                     <Fluent:Button x:Name="btnInsertDate" Click="btnInsertDate_Click" Header="{x:Static res:Resources.strInsertDate}" LargeIcon="pack://application:,,,/SimpleJournal;component/resources/text.png"/>
-                </Fluent:RibbonGroupBox>
-                <Fluent:RibbonGroupBox Header="{x:Static res:Resources.strImage}" KeyTip="BI">
                     <Fluent:Button x:Name="btnInsertImage" Click="btnInsertImage_Click" Header="{x:Static res:Resources.strInsertImage}" LargeIcon="pack://application:,,,/SimpleJournal;component/resources/image.png"/>
                 </Fluent:RibbonGroupBox>
             </Fluent:RibbonTabItem>

@@ -777,11 +777,11 @@ Click on No to continue to receive this message!</value>
     <comment>Window2.xaml</comment>
   </data>
   <data name="strInsertImage" xml:space="preserve">
-    <value>New Image</value>
+    <value>Image</value>
     <comment>MainWindow.xaml</comment>
   </data>
   <data name="strInsertPlotToolTip" xml:space="preserve">
-    <value>Drag the Kooardinate system open by clicking on a point and then move the mouse/pen to the desired location and release</value>
+    <value>Drag the coordinate system open by clicking on a point and then move the mouse/pen to the desired location and release</value>
     <comment>*</comment>
   </data>
   <data name="strInsertSimpleFormToolTip" xml:space="preserve">
@@ -789,7 +789,7 @@ Click on No to continue to receive this message!</value>
     <comment>*</comment>
   </data>
   <data name="strInsertText" xml:space="preserve">
-    <value>New Text</value>
+    <value>Text</value>
     <comment>MainWindow.xaml</comment>
   </data>
   <data name="strInvalidInput" xml:space="preserve">
@@ -1172,7 +1172,7 @@ Click on No to continue to receive this message!</value>
     <comment>MainWindow.xaml</comment>
   </data>
   <data name="strReleaseDate" xml:space="preserve">
-    <value>12/23/2021 12:54 AM</value>
+    <value>12/31/2021 3:36 PM</value>
     <comment>About.xaml</comment>
   </data>
   <data name="strRemove" xml:space="preserve">
@@ -1829,5 +1829,13 @@ Alternatively, you can use the normal version of SimpleJournal!</value>
   </data>
   <data name="strDropDownTemplateMode" xml:space="preserve">
     <value>Mode:</value>
+  </data>
+  <data name="strInsertNewObjects" xml:space="preserve">
+    <value>New Objects</value>
+    <comment>*</comment>
+  </data>
+  <data name="strInsertImageOrText" xml:space="preserve">
+    <value>Image/Text</value>
+    <comment>*</comment>
   </data>
 </root>
