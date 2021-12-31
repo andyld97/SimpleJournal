@@ -1582,7 +1582,7 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to New Image.
+        ///   Looks up a localized string similar to Image.
         /// </summary>
         public static string strInsertImage {
             get {
@@ -1591,7 +1591,25 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Drag the Kooardinate system open by clicking on a point and then move the mouse/pen to the desired location and release.
+        ///   Looks up a localized string similar to Image/Text.
+        /// </summary>
+        public static string strInsertImageOrText {
+            get {
+                return ResourceManager.GetString("strInsertImageOrText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New Objects.
+        /// </summary>
+        public static string strInsertNewObjects {
+            get {
+                return ResourceManager.GetString("strInsertNewObjects", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Drag the coordinate system open by clicking on a point and then move the mouse/pen to the desired location and release.
         /// </summary>
         public static string strInsertPlotToolTip {
             get {
@@ -1609,7 +1627,7 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to New Text.
+        ///   Looks up a localized string similar to Text.
         /// </summary>
         public static string strInsertText {
             get {
@@ -2545,7 +2563,7 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 12/23/2021 12:54 AM.
+        ///   Looks up a localized string similar to 12/31/2021 3:36 PM.
         /// </summary>
         public static string strReleaseDate {
             get {

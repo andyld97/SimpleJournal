@@ -754,17 +754,17 @@ Klicken Sie auf Nein, um diesen Hinweis weiterhin zu erhalten!</value>
     <value>Bild aus Zwischenablage einfügen ...</value>
   </data>
   <data name="strInsertImage" xml:space="preserve">
-    <value>Neues Bild</value>
+    <value>Bild</value>
     <comment>MainWindow.xaml</comment>
   </data>
   <data name="strInsertPlotToolTip" xml:space="preserve">
-    <value>Ziehen Sie das Kooardinatensystem auf, indem Sie auf einen Punkt klicken und bewegen Sie dann die Maus/den Stift an die gewünschte Stelle und lassen Sie los</value>
+    <value>Ziehen Sie das Koordinatensystem auf, indem Sie auf einen Punkt klicken und bewegen Sie dann die Maus/den Stift an die gewünschte Stelle und lassen Sie los</value>
   </data>
   <data name="strInsertSimpleFormToolTip" xml:space="preserve">
     <value>Ziehen Sie eine Form auf, indem Sie einmal ein Punkt festlegen (klick) und dann können Sie mit der/dem Maus/Stift die Form aufziehen</value>
   </data>
   <data name="strInsertText" xml:space="preserve">
-    <value>Neuer Text</value>
+    <value>Text</value>
     <comment>MainWindow.xaml</comment>
   </data>
   <data name="strInvalidInput" xml:space="preserve">
@@ -1145,7 +1145,7 @@ Klicken Sie auf Nein, um diesen Hinweis weiterhin zu erhalten!</value>
     <comment>MainWindow.xaml</comment>
   </data>
   <data name="strReleaseDate" xml:space="preserve">
-    <value>23.12.2021 12:54 Uhr</value>
+    <value>31.12.2021 15:37 Uhr</value>
     <comment>*</comment>
   </data>
   <data name="strRemove" xml:space="preserve">
@@ -1825,5 +1825,11 @@ Alternativ können Sie die normale Version von SimpleJournal verwenden!</value>
   </data>
   <data name="strDropDownTemplateMode" xml:space="preserve">
     <value>Modus:</value>
+  </data>
+  <data name="strInsertImageOrText" xml:space="preserve">
+    <value>Bild/Text</value>
+  </data>
+  <data name="strInsertNewObjects" xml:space="preserve">
+    <value>Neue Objekte</value>
   </data>
 </root>
