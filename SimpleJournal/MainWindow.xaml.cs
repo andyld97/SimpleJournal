@@ -1253,7 +1253,7 @@ namespace SimpleJournal
             scrollBar.Width = (Settings.Instance.EnlargeScrollbar ? Consts.ScrollBarExtendedWidth : Consts.ScrollBarDefaultWidth);
         }
 
-        private UserControl GeneratePage(PaperType? paperType = null)
+        private UserControl GeneratePage(PaperType? paperType = null, byte[] background = null)
         {
             UserControl pageContent = null;
             PaperType paperPattern = Settings.Instance.PaperType;

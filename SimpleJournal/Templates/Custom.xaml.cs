@@ -9,7 +9,7 @@ namespace SimpleJournal.Templates
     /// <summary>
     /// Interaction logic for Custom.xaml
     /// </summary>
-    public partial class Custom : Page, IPaper
+    public partial class Custom : UserControl, IPaper
     {
         public byte[] PageBackground { get; private set; }
 

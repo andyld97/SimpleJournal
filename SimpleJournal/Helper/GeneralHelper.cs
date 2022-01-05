@@ -296,14 +296,16 @@ namespace SimpleJournal
 
         public static JournalResource ConvertImage(this Image img)
         {
-            JournalImage ji = new JournalImage();
-            ji.SetData(GeneralHelper.ExportImage((BitmapSource)img.Source));
-            ji.Left = (double)img.GetValue(InkCanvas.LeftProperty);
-            ji.Top = (double)img.GetValue(InkCanvas.TopProperty);
-            ji.ZIndex = Canvas.GetZIndex(img);
-            ji.Width = img.Width;
-            ji.Height = img.Height;
-            ji.IsUniform = (img.Stretch == Stretch.Uniform);
+            JournalImage ji = new JournalImage
+            {
+                Data = GeneralHelper.ExportImage((BitmapSource)img.Source),
+                Left = (double)img.GetValue(InkCanvas.LeftProperty),
+                Top = (double)img.GetValue(InkCanvas.TopProperty),
+                ZIndex = Canvas.GetZIndex(img),
+                Width = img.Width,
+                Height = img.Height,
+                IsUniform = (img.Stretch == Stretch.Uniform)
+            };
 
             if (img.RenderTransform != null && img.RenderTransform is RotateTransform rt)
                 ji.RotationAngle = (int)rt.Angle;
@@ -316,7 +318,7 @@ namespace SimpleJournal
             JournalShape js = new JournalShape();
 
             string shapeData = XamlWriter.Save(shape);
-            js.SetData(Encoding.Default.GetBytes(Convert.ToBase64String(Encoding.Default.GetBytes(shapeData))));
+            js.Data = Encoding.Default.GetBytes(Convert.ToBase64String(Encoding.Default.GetBytes(shapeData)));
 
             return js;
         }
