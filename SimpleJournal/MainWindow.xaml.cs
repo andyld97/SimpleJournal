@@ -2984,7 +2984,7 @@ namespace SimpleJournal
             DrawingCanvas.Change = false;
         }
 
-        private void ClearJournal()
+        private void ClearJournalOld()
         {
             List<IPaper> toClear = new List<IPaper>();
             foreach (IPaper page in CurrentJournalPages)
@@ -3000,6 +3000,38 @@ namespace SimpleJournal
             GC.Collect();
             GC.WaitForPendingFinalizers();
         }
+
+        private void ClearJournal()
+        {
+            List<UIElement> toRemove = new List<UIElement>();
+
+            foreach (var item in pages.Children)
+            {
+                if (item is IPaper page)
+                {
+                    page.Dispose();
+                    toRemove.Add(item as UIElement);
+                }
+                else if (item is PageSplitter ps)
+                    toRemove.Add(ps);
+            }
+
+            foreach (var item in toRemove)
+                pages.Children.Remove(item);
+
+            pages.Children.Clear();
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
+            GC.Collect();
+
+            CurrentJournalPages.Clear();
+            UpdateLayout();
+
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
+            GC.Collect();
+        }
+
 
         #endregion
 

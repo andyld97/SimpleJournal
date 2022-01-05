@@ -150,6 +150,23 @@ namespace SimpleJournal
             Children.CollectionChanged += Childrens_CollectionChanged;
         }
 
+        public void Dispose()
+        {
+            // Unassign all events to ensure gc can clean up 
+            OnChanged = null;
+            OnChangedDocumentState = null;
+            OnInsertPositionIsKnown = null;
+            OnCopyPositionIsKnown = null;
+            ChildElementsSelected = null;
+
+            RequestBringIntoView -= DrawingCanvas_RequestBringIntoView;
+            Strokes.StrokesChanged -= Strokes_StrokesChanged;
+            SelectionChanged -= DrawingCanvas_SelectionChanged;
+            Children.CollectionChanged -= Childrens_CollectionChanged;
+            base.Strokes.StrokesChanged -= Strokes_StrokesChanged;
+        }
+
+
         public void SetDebug(bool state = true)
         {
             isPreview = state;

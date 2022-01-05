@@ -1,10 +1,11 @@
 ﻿using SimpleJournal.Controls;
 using SimpleJournal.Templates;
+using System;
 using System.Windows.Controls;
 
 namespace SimpleJournal
 {
-    public interface IPaper
+    public interface IPaper : IDisposable
     {
         Format Format { get;  }
 
@@ -30,6 +31,7 @@ namespace SimpleJournal
                 case PaperType.Chequeued: template = new Chequered(); break;
                 case PaperType.Ruled: template = new Ruled(); break;
                 case PaperType.Dotted: template = new Dotted(); break;
+                case PaperType.Custom: return (page as Custom).ClonePage(isReadonly); break;
             }
 
             // Make sure canvas is non editable

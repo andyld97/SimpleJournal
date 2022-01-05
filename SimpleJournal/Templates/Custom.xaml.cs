@@ -52,5 +52,15 @@ namespace SimpleJournal.Templates
         {
             Canvas.SetDebug(state);
         }
+
+        public void Dispose()
+        {
+            Content = null;
+            Border = null;
+            ImageBackground.Source = null;
+            PageBackground = null;
+            Canvas.Strokes.Clear();
+            Canvas.Children.Clear();
+        }
     }
 }
