@@ -721,7 +721,7 @@ namespace SimpleJournal
                 previewViewBox.Width = Consts.SidebarListBoxItemViewboxSize;
                 previewViewBox.Height = Consts.SidebarListBoxItemViewboxSize;
 
-                StackPanel panel = new StackPanel { Orientation = Orientation.Horizontal };
+                StackPanel panel = new StackPanel { Orientation = System.Windows.Controls.Orientation.Horizontal };
                 panel.Background = new SolidColorBrush(Colors.Transparent);
                 panel.Children.Add(previewViewBox);
 
@@ -1253,13 +1253,13 @@ namespace SimpleJournal
             scrollBar.Width = (Settings.Instance.EnlargeScrollbar ? Consts.ScrollBarExtendedWidth : Consts.ScrollBarDefaultWidth);
         }
 
-        private UserControl GeneratePage(PaperType? paperType = null, byte[] background = null)
+        private UserControl GeneratePage(PaperType? paperType = null, byte[] background = null,   Orientation orientation = Orientation.Portrait)
         {
             UserControl pageContent = null;
             PaperType paperPattern = Settings.Instance.PaperType;
 
             if (paperType.HasValue)
-                paperPattern = paperType.Value;
+                paperPattern = paperType.Value;        
 
             switch (paperPattern)
             {
@@ -1267,7 +1267,7 @@ namespace SimpleJournal
                 case PaperType.Chequeued: pageContent = new Chequered(); break;
                 case PaperType.Ruled: pageContent = new Ruled(); break;
                 case PaperType.Dotted: pageContent = new Dotted(); break;
-                case PaperType.Custom: pageContent = new Custom(background); break;
+                case PaperType.Custom: pageContent = new Custom(background, orientation); break;
             }
 
             IPaper page = pageContent as IPaper;
@@ -2899,27 +2899,31 @@ namespace SimpleJournal
                     ClearJournal();
                     RecentlyOpenedDocuments.AddDocument(fileName);
 
-                    int countPages = 0;
+                    int pageCount = 0;
                     double progress = 0;
 
                     foreach (JournalPage jp in currentJournal.Pages)
                     {
                         DrawingCanvas canvas = null;
                         byte[] background = null;
+                        Orientation orientation = Orientation.Portrait;
 
                         if (jp is PdfJournalPage pdf)
+                        {
                             background = pdf.PageBackground;
+                            orientation = pdf.Orientation;
+                        }
 
-                        canvas = AddPage(GeneratePage(jp.PaperPattern, background));
+                        canvas = AddPage(GeneratePage(jp.PaperPattern, background, orientation));
 
-                        if (countPages == 0)
+                        if (pageCount == 0)
                         {
                             // Set last modified canvas to this, because the old is non existing any more
                             DrawingCanvas.LastModifiedCanvas = canvas;
                         }
 
-                        progress = (countPages++ + 1) / (double)currentJournal.Pages.Count;
-                        dialog.SetProgress(progress, countPages, currentJournal.Pages.Count());
+                        progress = (pageCount++ + 1) / (double)currentJournal.Pages.Count;
+                        dialog.SetProgress(progress, pageCount, currentJournal.Pages.Count);
 
                         StrokeCollection strokes = null;
                         await Task.Run(() =>

@@ -95,13 +95,16 @@ namespace SimpleJournal.Dialogs
                         Progress.Value = percentage;
                     }));
 
+                    Orientation orientation = image.Width >= image.Height ? Orientation.Landscape : Orientation.Portrait;
+
                     // Create a journal page using image
                     await Task.Run(() => 
                     {
                         PdfJournalPage pdfJournalPage = new PdfJournalPage
                         {
                             PageBackground = image.ToByteArray(MagickFormat.Png),
-                            PaperPattern = PaperType.Custom
+                            PaperPattern = PaperType.Custom,
+                            Orientation = orientation
                         };
 
                         journal.Pages.Add(pdfJournalPage);

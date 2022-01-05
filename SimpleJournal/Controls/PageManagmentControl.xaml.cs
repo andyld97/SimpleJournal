@@ -249,7 +249,7 @@ namespace SimpleJournal.Controls
             if (ListViewPages.SelectedIndex != -1)
             {
                 var page = pages[ListViewPages.SelectedIndex];
-                var template = PageHelper.ClonePage(page, true);
+                var template = page.ClonePage(true);
                 displayFrame.Child = template as UserControl;
                 ignoreCheckedChanged = true;
 

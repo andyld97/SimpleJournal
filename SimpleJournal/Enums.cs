@@ -22,6 +22,12 @@
         A4
     }
 
+    public enum Orientation
+    {
+        Landscape,
+        Portrait, // default
+    }
+
     public enum PaperType
     {
         Blanco,

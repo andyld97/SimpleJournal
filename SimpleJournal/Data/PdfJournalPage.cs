@@ -6,5 +6,7 @@ namespace SimpleJournal.Data
     public class PdfJournalPage : JournalPage
     {
         public byte[] PageBackground { get; set; }
+
+        public Orientation Orientation { get; set; }    
     }
 }

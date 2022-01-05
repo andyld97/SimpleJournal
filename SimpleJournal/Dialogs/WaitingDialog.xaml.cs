@@ -14,16 +14,19 @@ namespace SimpleJournal.Dialogs
         {
             InitializeComponent();
             this.documentName = documentName;
-            this.txtInfo.Text = text.Replace("{0}", documentName).Replace("{1}", "1").Replace("{2}", pages.ToString());
+            txtInfo.Text = text.Replace("{0}", documentName).Replace("{1}", "1").Replace("{2}", pages.ToString());
         }
 
         public void SetProgress(double d, int pageFrom, int pageTo)
         {
-            this.prgProgress.IsIndeterminate = false;
-            this.prgProgress.Maximum = 1;
-            this.prgProgress.Value = d;
+            Dispatcher.Invoke(() => {
 
-            this.txtInfo.Text = text.Replace("{0}", documentName).Replace("{1}", pageFrom.ToString()).Replace("{2}", pageTo.ToString());
+                prgProgress.IsIndeterminate = false;
+                prgProgress.Maximum = 1;
+                prgProgress.Value = d;
+
+                txtInfo.Text = text.Replace("{0}", documentName).Replace("{1}", pageFrom.ToString()).Replace("{2}", pageTo.ToString());
+            });            
         }
     }
 }

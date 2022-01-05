@@ -13,9 +13,12 @@ namespace SimpleJournal.Templates
     {
         public byte[] PageBackground { get; private set; }
 
-        public Custom(byte[] background)
+        public Orientation Orientation { get; private set; }
+
+        public Custom(byte[] background, Orientation orientation)
         {
             InitializeComponent();
+            this.Orientation = orientation;
 
             if (background != null)
             {
@@ -24,6 +27,14 @@ namespace SimpleJournal.Templates
 
                 ImageBackground.Source = GeneralHelper.LoadImage(background);
                 canvas.Background = new SolidColorBrush(Colors.Transparent);
+            }
+
+            if (orientation == Orientation.Landscape)
+            {
+                // Swap width and height
+                double temp = Width;
+                Width = Height;
+                Height = temp;
             }
         }
 
@@ -37,7 +48,7 @@ namespace SimpleJournal.Templates
 
         public IPaper ClonePage(bool isReadonly)
         {
-            Custom custom = new Custom(PageBackground);
+            Custom custom = new Custom(PageBackground, Orientation);
 
             if (isReadonly)
                 custom.Canvas.EditingMode = InkCanvasEditingMode.None;
