@@ -1,6 +1,7 @@
 ﻿using SimpleJournal.Controls;
 using SimpleJournal.Data;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 
 namespace SimpleJournal.Templates
@@ -8,7 +9,7 @@ namespace SimpleJournal.Templates
     /// <summary>
     /// Interaktionslogik für Chequered.xaml
     /// </summary>
-    public partial class Chequered : Page, IPaper
+    public partial class Chequered : UserControl, IPaper
     {
         public Chequered()
         {

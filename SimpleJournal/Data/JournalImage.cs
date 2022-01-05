@@ -21,7 +21,7 @@ namespace SimpleJournal.Data
 
         public override UIElement ConvertToUiElement()
         {
-            Image img = new Image() { Source = GeneralHelper.ImageFromBase64(Convert.ToBase64String(this.Data)), Stretch = (IsUniform ? Stretch.Uniform : Stretch.Fill) };
+            Image img = new Image() { Source = GeneralHelper.LoadImageFromBase64(Convert.ToBase64String(this.Data)), Stretch = (IsUniform ? Stretch.Uniform : Stretch.Fill) };
             img.SetValue(InkCanvas.LeftProperty, this.Left);
             img.SetValue(InkCanvas.TopProperty, this.Top);
             img.Width = this.Width;

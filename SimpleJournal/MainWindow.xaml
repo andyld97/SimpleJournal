@@ -199,9 +199,9 @@
                             </Viewbox>
                         </controls:DropDownToggleButton.LargeIcon>
                     </controls:DropDownToggleButton>
-                    <Fluent:Button x:Name="btnRemoveSelectedStrokes" Click="btnRemoveSelectedStrokes_Click" Size="Middle" ToolTip="{x:Static res:Resources.strRemoveDescription}" Header="{x:Static res:Resources.strRemove}" Icon="pack://application:,,,/SimpleJournal;component/resources/delete.png"/>
-                    <Fluent:Button x:Name="btnCopy" Click="BtnCopy_Click_1" Size="Middle" Header="{x:Static res:Resources.strCopy}" ToolTip="{x:Static res:Resources.strCopyDescription}" Icon="pack://application:,,,/SimpleJournal;component/resources/copy.png"/>
-                    <Fluent:Button x:Name="btnPaste" Click="BtnPaste_Click_1" Size="Middle" Header="{x:Static res:Resources.strPaste}" ToolTip="{x:Static res:Resources.strPasteDescription}" Icon="pack://application:,,,/SimpleJournal;component/resources/paste.png"/>
+                    <Fluent:Button x:Name="btnRemoveSelectedStrokes" Click="btnRemoveSelectedStrokes_Click" SizeDefinition="Middle,Small" ToolTip="{x:Static res:Resources.strRemoveDescription}" Header="{x:Static res:Resources.strRemove}" Icon="pack://application:,,,/SimpleJournal;component/resources/delete.png"/>
+                    <Fluent:Button x:Name="btnCopy" Click="BtnCopy_Click_1" SizeDefinition="Middle,Small" Header="{x:Static res:Resources.strCopy}" ToolTip="{x:Static res:Resources.strCopyDescription}" Icon="pack://application:,,,/SimpleJournal;component/resources/copy.png"/>
+                    <Fluent:Button x:Name="btnPaste" Click="BtnPaste_Click_1" SizeDefinition="Middle,Small" Header="{x:Static res:Resources.strPaste}" ToolTip="{x:Static res:Resources.strPasteDescription}" Icon="pack://application:,,,/SimpleJournal;component/resources/paste.png"/>
                 </Fluent:RibbonGroupBox>
                 
                 <Fluent:RibbonGroupBox x:Name="GroupForms" Header="{x:Static res:Resources.strShapesHeader}">
@@ -247,8 +247,9 @@
                     <controls:FluentToggleButtonRemovedToggle x:Name="btnDeletePage" Click="btnDeletePage_Click"  Header="{x:Static res:Resources.strDeletePage}" ToolTip="{x:Static res:Resources.strDeletePageTooltip}" Width="55" LargeIcon="pack://application:,,,/SimpleJournal;component/resources/deletepage.png"/>
                     <controls:FluentToggleButtonRemovedToggle x:Name="btnClearPage" Click="btnClearPage_Click" Header="{x:Static res:Resources.strClearPage}" ToolTip="{x:Static res:Resources.strClearPageTooltip}" Width="55" LargeIcon="pack://application:,,,/SimpleJournal;component/resources/clear.png"/>
                     <controls:FluentToggleButtonRemovedToggle x:Name="btnManagePages" Click="btnManagePages_Click"  Header="{x:Static res:Resources.strManagePage}" ToolTip="{x:Static res:Resources.strManagePageTooltip}" Width="60" LargeIcon="pack://application:,,,/SimpleJournal;component/resources/editpage.png"/>
-                    <!-- Make some space for the combobox-->
-                    <Fluent:Button Size="Middle" Visibility="Hidden"/>
+
+                    <!-- Make some space for the ComboBox-->
+                    <Fluent:ComboBox Visibility="Hidden" />
                     <Fluent:ComboBox x:Name="cmbPages" Size="Large" Width="93" IsEditable="False" SelectionChanged="ComboBox_SelectionChanged" HorizontalContentAlignment="Center" />
                 </Fluent:RibbonGroupBox>
             </Fluent:RibbonTabItem>
@@ -259,16 +260,14 @@
                     </DataTemplate>
                 </Fluent:RibbonTabItem.HeaderTemplate>
                 <Fluent:RibbonGroupBox Header="{x:Static res:Resources.strClipboard}" KeyTip="ZW" Width="100">
-                    <Fluent:Button x:Name="btnInsertFromClipboard" Click="btnInsertFromClipboard_Click" Header="{x:Static res:Resources.strObject}" LargeIcon="pack://application:,,,/SimpleJournal;component/resources/paste.png"/>
+                    <Fluent:Button x:Name="btnInsertFromClipboard" Click="btnInsertFromClipboard_Click" Header="{x:Static res:Resources.strInsertImageOrText}" LargeIcon="pack://application:,,,/SimpleJournal;component/resources/paste.png"/>
                 </Fluent:RibbonGroupBox>
                 <Fluent:RibbonGroupBox Header="{x:Static res:Resources.strSelection}" KeyTip="AU">
                     <Fluent:Button x:Name="btnCreateForm" Click="btnCreateForm_Click" Header="{x:Static res:Resources.strConvertToForm}" LargeIcon="pack://application:,,,/SimpleJournal;component/resources/shapes.png"/>
                 </Fluent:RibbonGroupBox>
-                <Fluent:RibbonGroupBox Header="{x:Static res:Resources.strText}" KeyTip="TE">
+                <Fluent:RibbonGroupBox Header="{x:Static res:Resources.strInsertNewObjects}" KeyTip="NE">
                     <Fluent:Button x:Name="btnInsertText" Click="btnInsertText_Click" Header="{x:Static res:Resources.strInsertText}" LargeIcon="pack://application:,,,/SimpleJournal;component/resources/text.png"/>
                     <Fluent:Button x:Name="btnInsertDate" Click="btnInsertDate_Click" Header="{x:Static res:Resources.strInsertDate}" LargeIcon="pack://application:,,,/SimpleJournal;component/resources/text.png"/>
-                </Fluent:RibbonGroupBox>
-                <Fluent:RibbonGroupBox Header="{x:Static res:Resources.strImage}" KeyTip="BI">
                     <Fluent:Button x:Name="btnInsertImage" Click="btnInsertImage_Click" Header="{x:Static res:Resources.strInsertImage}" LargeIcon="pack://application:,,,/SimpleJournal;component/resources/image.png"/>
                 </Fluent:RibbonGroupBox>
             </Fluent:RibbonTabItem>

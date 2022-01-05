@@ -161,7 +161,7 @@ namespace SimpleJournal
             }
         }
 
-        public static BitmapImage ImageFromBase64(string data)
+        public static BitmapImage LoadImageFromBase64(string data)
         {
             return LoadImage(Convert.FromBase64String(data));
         }
@@ -193,55 +193,27 @@ namespace SimpleJournal
             }
         }
 
-        public static JournalResource ConvertImage(this Image img)
+        public static BitmapImage LoadImage(Uri url)
         {
-            JournalImage ji = new JournalImage();
-            ji.Data = GeneralHelper.ExportImage((BitmapSource)img.Source);
-            ji.Left = (double)img.GetValue(InkCanvas.LeftProperty);
-            ji.Top = (double)img.GetValue(InkCanvas.TopProperty);
-            ji.ZIndex = Canvas.GetZIndex(img);
-            ji.Width = img.Width;
-            ji.Height = img.Height;
-            ji.IsUniform = (img.Stretch == Stretch.Uniform);
+            if (url == null) return null;
 
-            if (img.RenderTransform != null && img.RenderTransform is RotateTransform rt)
-                ji.RotationAngle = (int)rt.Angle;
-
-            return ji;
-        }
-
-        public static JournalResource ConvertShape(this Shape shape)
-        {
-            JournalShape js = new JournalShape();
-
-            string shapeData = XamlWriter.Save(shape);
-            js.Data = Encoding.Default.GetBytes(Convert.ToBase64String(Encoding.Default.GetBytes(shapeData)));
-
-            return js;
-        }
-
-        public static JournalResource ConvertPlot(this Plot plot)
-        {
-            JournalPlot js = new JournalPlot
+            try
             {
-                Left = (double)plot.GetValue(DrawingCanvas.LeftProperty),
-                Top = (double)plot.GetValue(DrawingCanvas.TopProperty),
-                PlotDirection = plot.DrawingDirection,
-                PlotMode = plot.DrawingMode,
-                StrokeThickness = plot.StrokeThickness,
-                ForegroundA = plot.Foreground.A,
-                ForegroundB = plot.Foreground.B,
-                ForegroundG = plot.Foreground.G,
-                ForegroundR = plot.Foreground.R,
-                Width = plot.Width,
-                Height = plot.Height,
-                ZIndex = Canvas.GetZIndex(plot)
-            };
-
-            if (plot.RenderTransform != null && plot.RenderTransform is RotateTransform rt)
-                js.RotationAngle = (int)rt.Angle;
-
-            return js;
+                var image = new BitmapImage();
+                image.BeginInit();
+                image.CreateOptions = BitmapCreateOptions.PreservePixelFormat;
+                image.CacheOption = BitmapCacheOption.OnLoad;
+                image.UriSource = url;
+                image.StreamSource = null;
+                image.EndInit();
+                image.Freeze();
+                return image;
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show($"{Properties.Resources.strFailedToLoadImage} {e.Message}", Properties.Resources.strFailure, MessageBoxButton.OK, MessageBoxImage.Error);
+                return null;
+            }
         }
 
         /// <summary>
@@ -264,6 +236,7 @@ namespace SimpleJournal
             }
         }
 
+        #region Convert
         public static JournalResource ConvertText(this TextBlock text)
         {
             JournalText jt = new JournalText
@@ -320,6 +293,58 @@ namespace SimpleJournal
 
             return jt;
         }
+
+        public static JournalResource ConvertImage(this Image img)
+        {
+            JournalImage ji = new JournalImage();
+            ji.SetData(GeneralHelper.ExportImage((BitmapSource)img.Source));
+            ji.Left = (double)img.GetValue(InkCanvas.LeftProperty);
+            ji.Top = (double)img.GetValue(InkCanvas.TopProperty);
+            ji.ZIndex = Canvas.GetZIndex(img);
+            ji.Width = img.Width;
+            ji.Height = img.Height;
+            ji.IsUniform = (img.Stretch == Stretch.Uniform);
+
+            if (img.RenderTransform != null && img.RenderTransform is RotateTransform rt)
+                ji.RotationAngle = (int)rt.Angle;
+
+            return ji;
+        }
+
+        public static JournalResource ConvertShape(this Shape shape)
+        {
+            JournalShape js = new JournalShape();
+
+            string shapeData = XamlWriter.Save(shape);
+            js.SetData(Encoding.Default.GetBytes(Convert.ToBase64String(Encoding.Default.GetBytes(shapeData))));
+
+            return js;
+        }
+
+        public static JournalResource ConvertPlot(this Plot plot)
+        {
+            JournalPlot js = new JournalPlot
+            {
+                Left = (double)plot.GetValue(DrawingCanvas.LeftProperty),
+                Top = (double)plot.GetValue(DrawingCanvas.TopProperty),
+                PlotDirection = plot.DrawingDirection,
+                PlotMode = plot.DrawingMode,
+                StrokeThickness = plot.StrokeThickness,
+                ForegroundA = plot.Foreground.A,
+                ForegroundB = plot.Foreground.B,
+                ForegroundG = plot.Foreground.G,
+                ForegroundR = plot.Foreground.R,
+                Width = plot.Width,
+                Height = plot.Height,
+                ZIndex = Canvas.GetZIndex(plot)
+            };
+
+            if (plot.RenderTransform != null && plot.RenderTransform is RotateTransform rt)
+                js.RotationAngle = (int)rt.Angle;
+
+            return js;
+        }
+        #endregion
 
         /// <summary>
         /// Create a screenshof of UI element

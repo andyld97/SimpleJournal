@@ -6,7 +6,7 @@ namespace SimpleJournal.Templates
     /// <summary>
     /// Interaktionslogik für Ruled.xaml
     /// </summary>
-    public partial class Ruled : Page, IPaper 
+    public partial class Ruled : UserControl, IPaper 
     {
         public Ruled()
         {

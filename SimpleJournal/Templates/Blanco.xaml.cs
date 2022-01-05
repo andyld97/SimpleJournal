@@ -6,7 +6,7 @@ namespace SimpleJournal.Templates
     /// <summary>
     /// Interaktionslogik für Blanco.xaml
     /// </summary>
-    public partial class Blanco : Page, IPaper
+    public partial class Blanco : UserControl, IPaper
     {
         public Blanco()
         {

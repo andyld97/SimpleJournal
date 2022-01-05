@@ -54,6 +54,7 @@ namespace SimpleJournal
         private bool startSetupDialog = false;
         private bool preventPageBoxSelectionChanged = false;
         private bool forceOpenSidebar = false;
+        private bool ignoreToggleButtonHandling = false;
         private double currentScaleFactor = 1.0;
         private Tools currentTool = Tools.Pencil1;
         private Tools lastSelectedPencil = Tools.Pencil1;
@@ -149,7 +150,7 @@ namespace SimpleJournal
             };
 
             CurrentJournalPages.CollectionChanged += IPages_CollectionChanged;
-            Page page = GeneratePage();
+            var page = GeneratePage();
             DrawingCanvas.LastModifiedCanvas = AddPage(page);
             cmbPages.SelectedIndex = 0;
 
@@ -576,9 +577,8 @@ namespace SimpleJournal
             int counter = 0;
             foreach (FrameworkElement child in pages.Children)
             {
-                if (child != null && child is Frame && counter == index)
+                if (child != null && child is UserControl && child is IPaper paper && counter == index)
                 {
-                    var paper = (child as Frame).Content as IPaper;
                     var can = paper.Canvas;
 
                     if (DrawingCanvas.LastModifiedCanvas != can)
@@ -610,7 +610,7 @@ namespace SimpleJournal
                     }
                     break;
                 }
-                else if (child is Frame)
+                else if (child is IPaper)
                     counter++;
             }
         }
@@ -644,6 +644,7 @@ namespace SimpleJournal
             foreach (UIElement element in DrawingCanvas.LastModifiedCanvas.Children.Omit(typeof(Line)))
             {
                 string text = Properties.Resources.strUnknown;
+                bool isTextBlock = false;
 
                 if (element is Shape shape)
                 {
@@ -684,30 +685,45 @@ namespace SimpleJournal
                 else if (element is Image)
                     text = Properties.Resources.strImage;
                 else if (element is TextBlock)
+                {
                     text = Properties.Resources.strText;
+                    isTextBlock = true;
+                }
                 else if (element is Plot)
                     text = Properties.Resources.strPlot;
 
-                Viewbox v = new Viewbox
+                Viewbox previewViewBox = new Viewbox
                 {
                     Stretch = Stretch.Uniform,
-                    StretchDirection = StretchDirection.Both,
-                    Child = GeneralHelper.CloneElement(element),
+                    StretchDirection = StretchDirection.Both                 
                 };
 
-                var item = new CustomListBoxItem(element, v)
+                if (!isTextBlock)
+                    previewViewBox.Child = GeneralHelper.CloneElement(element);
+                else
+                {
+                    var img = new Image
+                    {
+                        Source = GeneralHelper.LoadImage(new Uri($"pack://application:,,,/SimpleJournal;component/resources/text.png")),
+                        Width = Consts.SidebarListBoxItemViewboxSize,
+                        Height = Consts.SidebarListBoxItemViewboxSize
+                    };
+                    previewViewBox.Child = img;
+                }
+
+                var item = new CustomListBoxItem(element, previewViewBox)
                 {
                     HorizontalContentAlignment = HorizontalAlignment.Left,
                     VerticalContentAlignment = VerticalAlignment.Top,
                     Height = Consts.SidebarListBoxItemHeight
                 };
 
-                v.Width = Consts.SidebarListBoxItemViewboxSize;
-                v.Height = Consts.SidebarListBoxItemViewboxSize;
+                previewViewBox.Width = Consts.SidebarListBoxItemViewboxSize;
+                previewViewBox.Height = Consts.SidebarListBoxItemViewboxSize;
 
                 StackPanel panel = new StackPanel { Orientation = Orientation.Horizontal };
                 panel.Background = new SolidColorBrush(Colors.Transparent);
-                panel.Children.Add(v);
+                panel.Children.Add(previewViewBox);
 
                 var textBlock = new TextBlock()
                 {
@@ -807,6 +823,183 @@ namespace SimpleJournal
             else
                 MessageBox.Show(this, Properties.Resources.strNoObjectsToDelete, Properties.Resources.strEmptySelection, MessageBoxButton.OK, MessageBoxImage.Information);
         }
+
+        private void Canvas_SelectionChanged(object sender, EventArgs e)
+        {
+            var items = pnlItems.SelectedItems;
+            if (items.Count == 0 || items.Count > 1)
+            {
+                objImgSettings.Visibility = Visibility.Collapsed;
+                objShapeSettings.Visibility = Visibility.Collapsed;
+                objTextSettings.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                var item = (items[0] as CustomListBoxItem).AssociativeRelation;
+
+                if (item is Shape sh)
+                {
+                    objShapeSettings.Visibility = Visibility.Visible;
+                    objImgSettings.Visibility = Visibility.Collapsed;
+                    objTextSettings.Visibility = Visibility.Collapsed;
+
+                    GeneralHelper.ConvertTransformToProperties(sh, DrawingCanvas.LastModifiedCanvas);
+
+                    int angle = 0;
+                    if (sh.RenderTransform is RotateTransform rt)
+                        angle = (int)rt.Angle;
+
+                    objShapeSettings.Load(new ShapeInfo((sh.Fill == null ? Colors.Transparent : (sh.Fill as SolidColorBrush).Color), (sh.Stroke as SolidColorBrush).Color, (int)sh.StrokeThickness, angle));
+                }
+                else if (item is Image im)
+                {
+                    objImgSettings.Visibility = Visibility.Visible;
+                    objShapeSettings.Visibility = Visibility.Collapsed;
+                    objTextSettings.Visibility = Visibility.Collapsed;
+
+                    GeneralHelper.ConvertTransformToProperties(im, DrawingCanvas.LastModifiedCanvas);
+                }
+                else if (item is TextBlock tb)
+                {
+                    objTextSettings.Visibility = Visibility.Visible;
+                    objShapeSettings.Visibility = Visibility.Collapsed;
+                    objImgSettings.Visibility = Visibility.Collapsed;
+
+                    GeneralHelper.ConvertTransformToProperties(tb, DrawingCanvas.LastModifiedCanvas);
+
+                    int angle = 0;
+                    if (tb.RenderTransform != null && tb.RenderTransform is RotateTransform rt)
+                        angle = (int)rt.Angle;
+
+                    var jrText = tb.ConvertText() as JournalText;
+                    objTextSettings.Load(new TextData()
+                    {
+                        Angle = angle,
+                        Content = tb.Text,
+                        FontColor = (tb.Foreground as SolidColorBrush).Color,
+                        FontSize = tb.FontSize,
+                        FontFamily = tb.FontFamily.ToString(),
+                        IsBold = jrText.IsBold,
+                        IsItalic = jrText.IsItalic,
+                        IsStrikeout = jrText.IsStrikeout,
+                        IsUnderlined = jrText.IsUnderlined
+                    });
+                }
+            }
+        }
+
+        private void ObjTextSettings_OnChanged(TextData data)
+        {
+            var can = DrawingCanvas.LastModifiedCanvas;
+            DrawingCanvas.Change = true;
+
+            if (can.GetSelectedElements().Count > 0)
+            {
+                var item = (pnlItems.Items[pnlItems.SelectedIndex] as CustomListBoxItem).AssociativeRelation;
+
+                if (item is TextBlock tb)
+                {
+                    tb.TextDecorations.Clear();
+
+                    // UnDo/ReDo Idea. Works but see Bug 39 in DevOps
+                    /* DrawingCanvas.LastModifiedCanvas.Manager.RunSpecialAction<PropertyChangedAction>(new List<PropertyChangedAction>() {
+                         new PropertyChangedAction(data.Content, tb.Text, (object s) => { tb.Text = s.ToString(); })
+                     });*/
+
+                    tb.Text = data.Content;
+                    tb.FontFamily = new FontFamily(data.FontFamily);
+                    tb.FontSize = data.FontSize;
+                    tb.Foreground = new SolidColorBrush(data.FontColor);
+                    tb.RenderTransform = new RotateTransform(data.Angle);
+                    tb.RenderTransformOrigin = new Point(0.5, 0.5);
+
+                    if (data.IsBold)
+                        tb.FontWeight = FontWeights.Bold;
+                    else
+                        tb.FontWeight = FontWeights.Normal;
+
+                    if (data.IsItalic)
+                        tb.FontStyle = FontStyles.Italic;
+                    else
+                        tb.FontStyle = FontStyles.Normal;
+
+                    if (data.IsUnderlined)
+                        tb.TextDecorations.Add(TextDecorations.Underline);
+
+                    if (data.IsStrikeout)
+                        tb.TextDecorations.Add(TextDecorations.Strikethrough);
+                }
+
+                (pnlItems.Items[pnlItems.SelectedIndex] as CustomListBoxItem).Refresh();
+            }
+        }
+
+        private void ObjShapeSettings_OnChanged_1(ShapeInfo info)
+        {
+            var can = DrawingCanvas.LastModifiedCanvas;
+            DrawingCanvas.Change = true;
+            Point center = new Point(0.5, 0.5);
+
+            if (can.GetSelectedElements().Count > 0)
+            {
+                var item = (pnlItems.Items[pnlItems.SelectedIndex] as CustomListBoxItem).AssociativeRelation;
+
+                if (item is Shape sh)
+                {
+                    if (item is Ellipse el && el.IsCricle())
+                    {
+                        // Don't rotate a circle
+                    }
+                    else
+                    {
+                        sh.RenderTransform = new RotateTransform(info.Angle);
+                        sh.RenderTransformOrigin = center;
+                    }
+                    sh.Fill = new SolidColorBrush(info.BackgroundColor);
+                    sh.Stroke = new SolidColorBrush(info.BorderColor);
+                    sh.StrokeThickness = info.BorderWidth;
+                }
+
+                (pnlItems.Items[pnlItems.SelectedIndex] as CustomListBoxItem).Refresh();
+            }
+        }
+
+        private void ObjImgSettings_Changed(int angle)
+        {
+            // Rotate image with it's origin in the center
+            var can = DrawingCanvas.LastModifiedCanvas;
+            DrawingCanvas.Change = true;
+            Point center = new Point(0.5, 0.5);
+
+            if (can.GetSelectedElements().Count > 0)
+            {
+                var item = (pnlItems.Items[pnlItems.SelectedIndex] as CustomListBoxItem).AssociativeRelation;
+
+                if (item is Image im)
+                {
+                    im.RenderTransform = new RotateTransform(angle);
+                    im.RenderTransformOrigin = center;
+                }
+
+                (pnlItems.Items[pnlItems.SelectedIndex] as CustomListBoxItem).Refresh();
+            }
+        }
+
+        private void ButtonBringToFront_Click(object sender, RoutedEventArgs e)
+        {
+            var can = DrawingCanvas.LastModifiedCanvas;
+
+            if (can == null || can.GetSelectedElements() == null)
+                return;
+
+            var elements = can.GetSelectedElements();
+
+            if (elements != null && elements.Count == 1)
+                elements.FirstOrDefault().BringToFront(DrawingCanvas.LastModifiedCanvas);
+            else
+                elements.BringToFront(DrawingCanvas.LastModifiedCanvas);
+        }
+
 
         #endregion
 
@@ -922,12 +1115,8 @@ namespace SimpleJournal
 
             try
             {
-                BitmapImage bitmapImage = new BitmapImage();
-                bitmapImage.BeginInit();
-                bitmapImage.UriSource = new Uri($"pack://application:,,,/SimpleJournal;component/resources/{resourceImageName}");
-                bitmapImage.EndInit();
 
-                ButtonInsertNewPageIcon.Source = bitmapImage;
+                ButtonInsertNewPageIcon.Source = GeneralHelper.LoadImage(new Uri($"pack://application:,,,/SimpleJournal;component/resources/{resourceImageName}"));
             }
             catch
             {
@@ -1064,9 +1253,9 @@ namespace SimpleJournal
             scrollBar.Width = (Settings.Instance.EnlargeScrollbar ? Consts.ScrollBarExtendedWidth : Consts.ScrollBarDefaultWidth);
         }
 
-        private Page GeneratePage(PaperType? paperType = null, byte[] background = null)
+        private UserControl GeneratePage(PaperType? paperType = null)
         {
-            Page pageContent = null;
+            UserControl pageContent = null;
             PaperType paperPattern = Settings.Instance.PaperType;
 
             if (paperType.HasValue)
@@ -1134,12 +1323,9 @@ namespace SimpleJournal
             TextObjectCounter.Text = DrawingCanvas.LastModifiedCanvas.Children.Count.ToString();
         }
 
-        private DrawingCanvas AddPage(Page page, int index = -1)
+        private DrawingCanvas AddPage(UserControl page, int index = -1)
         {
-            Frame elementToAdd = new Frame() { Content = page };
-            elementToAdd.Background = new SolidColorBrush(Colors.Transparent);
-            // This is needed to have something to click on for scrolling
-            elementToAdd.Background = new SolidColorBrush(Colors.Transparent);
+            var elementToAdd = page;
             var paper = page as IPaper;
 
             if (index == -1)
@@ -1342,8 +1528,6 @@ namespace SimpleJournal
             foreach (IPaper paper in CurrentJournalPages)
                 action.Invoke(paper.Canvas);
         }
-
-        private bool ignoreToggleButtonHandling = false;
 
         private void SetStateForToggleButton<T>(T bt, Tools tool) where T : UIElement
         {
@@ -1970,7 +2154,7 @@ namespace SimpleJournal
 
         private void InsertFromClipboardCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            InsertImageFromClipboard();
+            InsertFromClipboard();
         }
 
         #endregion
@@ -2085,40 +2269,6 @@ namespace SimpleJournal
                 int pageCount = 1;
                 for (int i = from; i <= to; i++)
                     pd.PrintVisual(CurrentJournalPages[i].Canvas, $"{Properties.Resources.strPrinting} {pageCount++}");
-            }
-        }
-
-        private void InsertImageFromClipboard()
-        {
-            if (System.Windows.Clipboard.ContainsImage())
-            {
-                var img = new Image { Source = System.Windows.Clipboard.GetImage() };
-                img.Width = Consts.InsertImageWidth;
-                img.Height = Consts.InsertImageHeight;
-
-                InsertUIElement(img);
-            }
-            else
-            {
-                MessageBox.Show(Properties.Resources.strUnsupportedFormat, Properties.Resources.strUnssportedFormatTitle, MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-        }
-
-        private void InsertImageFromFile()
-        {
-            OpenFileDialog ofd = new OpenFileDialog() { Filter = $"{Properties.Resources.strImages}|*.png;*.tif;*.bmp;*.jpg;*.jpeg" };
-            var result = ofd.ShowDialog();
-
-            if (result.HasValue && result.Value)
-            {
-                Image image = new Image
-                {
-                    Width = Consts.InsertImageWidth,
-                    Height = Consts.InsertImageHeight,
-                    Source = new BitmapImage(new Uri(ofd.FileName, UriKind.Absolute))
-                };
-
-                InsertUIElement(image);
             }
         }
 
@@ -2239,12 +2389,12 @@ namespace SimpleJournal
                     var canvasToRemove = CurrentJournalPages[index].Canvas;
                     var borderToRemove = CurrentJournalPages[index].Border;
 
-                    Frame result = null;
-                    foreach (Frame frame in pages.Children.OfType<Frame>())
+                    UserControl result = null;
+                    foreach (UserControl control in pages.Children.OfType<UserControl>())
                     {
-                        if ((frame.Content as IPaper).Canvas.Equals(canvasToRemove))
+                        if (control is IPaper p && p.Canvas.Equals(canvasToRemove))
                         {
-                            result = frame;
+                            result = control;
                             break;
                         }
                     }
@@ -2530,7 +2680,7 @@ namespace SimpleJournal
         private void Pages_MouseDown(object sender, MouseButtonEventArgs e)
         {
             var p = e.GetPosition(pages);
-            if (!DetermineIfMouseIsInChildFrame(pages.Children, p))
+            if (!DetermineIfMouseIsInChildIPaper(pages.Children, p))
             {
                 timer.Stop();
                 timer.Reset();
@@ -2544,7 +2694,7 @@ namespace SimpleJournal
         private void Pages_PreviewMouseUp(object sender, MouseButtonEventArgs e)
         {
             var p = e.GetPosition(pages);
-            if (!DetermineIfMouseIsInChildFrame(pages.Children, p) && p1.X != double.MinValue && p1.Y != double.MinValue)
+            if (!DetermineIfMouseIsInChildIPaper(pages.Children, p) && p1.X != double.MinValue && p1.Y != double.MinValue)
             {
                 double deltaO = Math.Abs(p.Y - p1.Y) * 4;
                 handledMouseUp = false;
@@ -2569,11 +2719,11 @@ namespace SimpleJournal
                 Pages_PreviewMouseUp(sender, new MouseButtonEventArgs(e.MouseDevice, e.Timestamp, MouseButton.Left));
         }
 
-        private bool DetermineIfMouseIsInChildFrame(UIElementCollection collection, Point ps)
+        private bool DetermineIfMouseIsInChildIPaper(UIElementCollection collection, Point ps)
         {
             foreach (UIElement uIElement in collection)
             {
-                if (uIElement is Frame f && f.Content is Page p && p is IPaper ip)
+                if (uIElement is UserControl p && p is IPaper ip)
                 {
                     var bounds = ip.Canvas.BoundsRelativeTo(pages);
                     if (bounds.Contains(ps))
@@ -3109,6 +3259,23 @@ namespace SimpleJournal
             insertClipboard = null;
         }
 
+        private void InsertText(string text)
+        {
+            // Determine foreground from last selected pencil
+            SolidColorBrush foreground = new SolidColorBrush(Pen.Instance[(int)lastSelectedPencil - 1].FontColor.ToColor());
+
+            var textblock = new TextBlock
+            {
+                Text = text,
+                TextWrapping = System.Windows.TextWrapping.Wrap,
+                Width = Consts.InsertTextWidth,
+                Height = Consts.InsertTextHeight,
+                Foreground = foreground
+            };
+
+            InsertUIElement(textblock);
+        }
+
         public void InsertUIElement(UIElement elem)
         {
             if (elem == null)
@@ -3127,6 +3294,42 @@ namespace SimpleJournal
             }));
         }
 
+        private void InsertFromClipboard()
+        {
+            if (System.Windows.Clipboard.ContainsImage())
+            {
+                var img = new Image { Source = System.Windows.Clipboard.GetImage() };
+                img.Width = Consts.InsertImageWidth;
+                img.Height = Consts.InsertImageHeight;
+
+                InsertUIElement(img);
+            }
+            else if (System.Windows.Clipboard.ContainsText())
+                InsertText(System.Windows.Clipboard.GetText());
+            else
+            {
+                MessageBox.Show(Properties.Resources.strUnsupportedFormat, Properties.Resources.strUnssportedFormatTitle, MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void InsertImageFromFile()
+        {
+            OpenFileDialog ofd = new OpenFileDialog() { Filter = $"{Properties.Resources.strImages}|*.png;*.tif;*.bmp;*.jpg;*.jpeg" };
+            var result = ofd.ShowDialog();
+
+            if (result.HasValue && result.Value)
+            {
+                Image image = new Image
+                {
+                    Width = Consts.InsertImageWidth,
+                    Height = Consts.InsertImageHeight,
+                    Source = new BitmapImage(new Uri(ofd.FileName, UriKind.Absolute))
+                };
+
+                InsertUIElement(image);
+            }
+        }
+
         private void ShowInsertHint()
         {
             if (!Settings.Instance.DoesNotShowInsertHint)
@@ -3139,24 +3342,9 @@ namespace SimpleJournal
             }
         }
 
-        private void btnInsertText_Click(object sender, RoutedEventArgs e)
-        {
-            TextInsertWindow dialog = new TextInsertWindow();
-            var result = dialog.ShowDialog();
-
-            if (result.HasValue && result.Value)
-            {
-                var textblock = new TextBlock() { Text = dialog.Result, TextWrapping = System.Windows.TextWrapping.Wrap };
-                textblock.Width = Consts.InsertTextWidth;
-                textblock.Height = Consts.InsertTextHeight;
-
-                InsertUIElement(textblock);
-            }
-        }
-
         private void btnInsertFromClipboard_Click(object sender, RoutedEventArgs e)
         {
-            InsertImageFromClipboard();
+            InsertFromClipboard();
         }
 
         private void btnInsertImage_Click(object sender, RoutedEventArgs e)
@@ -3164,197 +3352,19 @@ namespace SimpleJournal
             InsertImageFromFile();
         }
 
+        private void btnInsertText_Click(object sender, RoutedEventArgs e)
+        {
+            TextInsertWindow dialog = new TextInsertWindow();
+            var result = dialog.ShowDialog();
+
+            if (result.HasValue && result.Value)
+                InsertText(dialog.Result);
+        }
+
         private void btnInsertDate_Click(object sender, RoutedEventArgs e)
         {
             string toInsert = $"{Properties.Resources.strDate} {DateTime.Now.ToString(Properties.Resources.strDateFormat)}";
-
-            var textblock = new TextBlock() { Text = toInsert, TextWrapping = System.Windows.TextWrapping.Wrap };
-
-            textblock.Width = Consts.InsertTextWidth;
-            textblock.Height = Consts.InsertTextHeight;
-            textblock.FontSize = Consts.DefaultTextSize;
-
-            InsertUIElement(textblock);
-        }
-
-        #endregion
-
-        #region Sidebar Handling
-
-        private void Canvas_SelectionChanged(object sender, EventArgs e)
-        {
-            var items = pnlItems.SelectedItems;
-            if (items.Count == 0 || items.Count > 1)
-            {
-                objImgSettings.Visibility = Visibility.Collapsed;
-                objShapeSettings.Visibility = Visibility.Collapsed;
-                objTextSettings.Visibility = Visibility.Collapsed;
-            }
-            else
-            {
-                var item = (items[0] as CustomListBoxItem).AssociativeRelation;
-
-                if (item is Shape sh)
-                {
-                    objShapeSettings.Visibility = Visibility.Visible;
-                    objImgSettings.Visibility = Visibility.Collapsed;
-                    objTextSettings.Visibility = Visibility.Collapsed;
-
-                    GeneralHelper.ConvertTransformToProperties(sh, DrawingCanvas.LastModifiedCanvas);
-
-                    int angle = 0;
-                    if (sh.RenderTransform is RotateTransform rt)
-                        angle = (int)rt.Angle;
-
-                    objShapeSettings.Load(new ShapeInfo((sh.Fill == null ? Colors.Transparent : (sh.Fill as SolidColorBrush).Color), (sh.Stroke as SolidColorBrush).Color, (int)sh.StrokeThickness, angle));
-                }
-                else if (item is Image im)
-                {
-                    objImgSettings.Visibility = Visibility.Visible;
-                    objShapeSettings.Visibility = Visibility.Collapsed;
-                    objTextSettings.Visibility = Visibility.Collapsed;
-
-                    GeneralHelper.ConvertTransformToProperties(im, DrawingCanvas.LastModifiedCanvas);
-                }
-                else if (item is TextBlock tb)
-                {
-                    objTextSettings.Visibility = Visibility.Visible;
-                    objShapeSettings.Visibility = Visibility.Collapsed;
-                    objImgSettings.Visibility = Visibility.Collapsed;
-
-                    GeneralHelper.ConvertTransformToProperties(tb, DrawingCanvas.LastModifiedCanvas);
-
-                    int angle = 0;
-                    if (tb.RenderTransform != null && tb.RenderTransform is RotateTransform rt)
-                        angle = (int)rt.Angle;
-
-                    var jrText = tb.ConvertText() as JournalText;
-                    objTextSettings.Load(new TextData()
-                    {
-                        Angle = angle,
-                        Content = tb.Text,
-                        FontColor = (tb.Foreground as SolidColorBrush).Color,
-                        FontSize = tb.FontSize,
-                        FontFamily = tb.FontFamily.ToString(),
-                        IsBold = jrText.IsBold,
-                        IsItalic = jrText.IsItalic,
-                        IsStrikeout = jrText.IsStrikeout,
-                        IsUnderlined = jrText.IsUnderlined
-                    });
-                }
-            }
-        }
-
-        private void ObjTextSettings_OnChanged(TextData data)
-        {
-            var can = DrawingCanvas.LastModifiedCanvas;
-            DrawingCanvas.Change = true;
-
-            if (can.GetSelectedElements().Count > 0)
-            {
-                var item = (pnlItems.Items[pnlItems.SelectedIndex] as CustomListBoxItem).AssociativeRelation;
-
-                if (item is TextBlock tb)
-                {
-                    tb.TextDecorations.Clear();
-
-                    // UnDo/ReDo Idea. Works but see Bug 39 in DevOps
-                    /* DrawingCanvas.LastModifiedCanvas.Manager.RunSpecialAction<PropertyChangedAction>(new List<PropertyChangedAction>() {
-                         new PropertyChangedAction(data.Content, tb.Text, (object s) => { tb.Text = s.ToString(); })
-                     });*/
-
-        tb.Text = data.Content;
-                    tb.FontFamily = new FontFamily(data.FontFamily);
-                    tb.FontSize = data.FontSize;
-                    tb.Foreground = new SolidColorBrush(data.FontColor);
-                    tb.RenderTransform = new RotateTransform(data.Angle);
-                    tb.RenderTransformOrigin = new Point(0.5, 0.5);
-
-                    if (data.IsBold)
-                        tb.FontWeight = FontWeights.Bold;
-                    else
-                        tb.FontWeight = FontWeights.Normal;
-
-                    if (data.IsItalic)
-                        tb.FontStyle = FontStyles.Italic;
-                    else
-                        tb.FontStyle = FontStyles.Normal;
-
-                    if (data.IsUnderlined)
-                        tb.TextDecorations.Add(TextDecorations.Underline);
-
-                    if (data.IsStrikeout)
-                        tb.TextDecorations.Add(TextDecorations.Strikethrough);
-                }
-
-                (pnlItems.Items[pnlItems.SelectedIndex] as CustomListBoxItem).Refresh();
-            }
-        }
-
-        private void ObjShapeSettings_OnChanged_1(ShapeInfo info)
-        {
-            var can = DrawingCanvas.LastModifiedCanvas;
-            DrawingCanvas.Change = true;
-            Point center = new Point(0.5, 0.5);
-
-            if (can.GetSelectedElements().Count > 0)
-            {
-                var item = (pnlItems.Items[pnlItems.SelectedIndex] as CustomListBoxItem).AssociativeRelation;
-
-                if (item is Shape sh)
-                {
-                    if (item is Ellipse el && el.IsCricle())
-                    {
-                        // Don't rotate a circle
-                    }
-                    else
-                    {
-                        sh.RenderTransform = new RotateTransform(info.Angle);
-                        sh.RenderTransformOrigin = center;
-                    }
-                    sh.Fill = new SolidColorBrush(info.BackgroundColor);
-                    sh.Stroke = new SolidColorBrush(info.BorderColor);
-                    sh.StrokeThickness = info.BorderWidth;
-                }
-
-                (pnlItems.Items[pnlItems.SelectedIndex] as CustomListBoxItem).Refresh();
-            }
-        }
-
-        private void ObjImgSettings_Changed(int angle)
-        {
-            // Rotate image with it's origin in the center
-            var can = DrawingCanvas.LastModifiedCanvas;
-            DrawingCanvas.Change = true;
-            Point center = new Point(0.5, 0.5);
-
-            if (can.GetSelectedElements().Count > 0)
-            {
-                var item = (pnlItems.Items[pnlItems.SelectedIndex] as CustomListBoxItem).AssociativeRelation;
-
-                if (item is Image im)
-                {
-                    im.RenderTransform = new RotateTransform(angle);
-                    im.RenderTransformOrigin = center;
-                }
-
-                (pnlItems.Items[pnlItems.SelectedIndex] as CustomListBoxItem).Refresh();
-            }
-        }
-
-        private void ButtonBringToFront_Click(object sender, RoutedEventArgs e)
-        {
-            var can = DrawingCanvas.LastModifiedCanvas;
-
-            if (can == null || can.GetSelectedElements() == null)
-                return;
-
-            var elements = can.GetSelectedElements();
-
-            if (elements != null && elements.Count == 1)
-                elements.FirstOrDefault().BringToFront(DrawingCanvas.LastModifiedCanvas);
-            else
-                elements.BringToFront(DrawingCanvas.LastModifiedCanvas);
+            InsertText(toInsert);
         }
 
         #endregion

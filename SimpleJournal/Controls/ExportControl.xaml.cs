@@ -112,7 +112,7 @@ namespace SimpleJournal.Controls
                     {
                         Header = $"{Properties.Resources.strPage} {pageIndex}",
                         Foreground = new SolidColorBrush(Colors.Black),
-                        HorizontalAlignment = HorizontalAlignment.Center,
+                        HorizontalAlignment = HorizontalAlignment.Left,
                         Width = page.Canvas.Width
                     };
                     expander.IsExpanded = false;

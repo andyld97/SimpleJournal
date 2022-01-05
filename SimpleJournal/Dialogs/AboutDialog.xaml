@@ -40,6 +40,9 @@
                         <Hyperlink NavigateUri="https://github.com/dlemstra/Magick.NET" RequestNavigate="Hyperlink_RequestNavigate">Magick.NET</Hyperlink>
                         <Run Text="(PDF Support)!" />                                                                    
                         <LineBreak />
+                        <Run Text="{x:Static res:Resources.strAboutTextFluentRibbon_1}"/>
+                        <Hyperlink NavigateUri="https://github.com/Tyrrrz/DotnetRuntimeBootstrapper" RequestNavigate="Hyperlink_RequestNavigate">Tyrrrz/DotnetRuntimeBootstrapper (GitHub)</Hyperlink>
+                        <LineBreak />
                         <LineBreak />
                         <Hyperlink NavigateUri="https://simplejournal.ca-soft.net/" RequestNavigate="Hyperlink_RequestNavigate">Homepage</Hyperlink>
                         <Run Text="|" />
