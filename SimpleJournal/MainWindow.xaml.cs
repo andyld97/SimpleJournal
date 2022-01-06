@@ -18,18 +18,23 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
+using System.Printing;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Data;
+using System.Windows.Documents;
 using System.Windows.Ink;
 using System.Windows.Input;
+using System.Windows.Markup;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Windows.Threading;
+using System.Windows.Xps;
+using System.Windows.Xps.Packaging;
 using Pen = SimpleJournal.Data.Pen;
 
 namespace SimpleJournal
@@ -232,7 +237,7 @@ namespace SimpleJournal
             {
                 if (e == Properties.Resources.strExportPages)
                     TextExportStatus.Text = String.Empty;
-                else 
+                else
                     TextExportStatus.Text = e;
             };
 
@@ -695,7 +700,7 @@ namespace SimpleJournal
                 Viewbox previewViewBox = new Viewbox
                 {
                     Stretch = Stretch.Uniform,
-                    StretchDirection = StretchDirection.Both                 
+                    StretchDirection = StretchDirection.Both
                 };
 
                 if (!isTextBlock)
@@ -1234,7 +1239,7 @@ namespace SimpleJournal
 
         private int CalculateCurrentPageIndexOnScrollPosition()
         {
-            // Do not divide with zero!
+            // Do not divide by zero!
             if (mainScrollView.ScrollableHeight == 0)
                 return 0;
 
@@ -1245,6 +1250,25 @@ namespace SimpleJournal
             return (int)result;
         }
 
+        private void ScrollToPage(int pTarget)
+        {
+            double cumulatedHeight = 0;
+
+            // Cumulate size height foreach page (because each page can have a different height due to landscape/portrait)
+            for (int i = 0; i < pTarget; i++)
+                cumulatedHeight += CurrentJournalPages[i].Canvas.ActualHeight * currentScaleFactor;
+
+            // Add space
+            cumulatedHeight += ((pTarget - 1) * Consts.SpaceBetweenPages * currentScaleFactor);
+
+            double resultOffset = (pTarget == 0 ? 0 : cumulatedHeight);
+
+            if (pTarget != 0)
+                mainScrollView.ScrollToVerticalOffset(resultOffset + (Consts.SpaceBetweenPages * currentScaleFactor));
+            else
+                mainScrollView.ScrollToVerticalOffset(0.0);
+        }
+
         private void RefreshVerticalScrollbarSize()
         {
             ScrollViewer scrollViewer = mainScrollView;
@@ -1253,13 +1277,13 @@ namespace SimpleJournal
             scrollBar.Width = (Settings.Instance.EnlargeScrollbar ? Consts.ScrollBarExtendedWidth : Consts.ScrollBarDefaultWidth);
         }
 
-        private UserControl GeneratePage(PaperType? paperType = null, byte[] background = null,   Orientation orientation = Orientation.Portrait)
+        private UserControl GeneratePage(PaperType? paperType = null, byte[] background = null, Orientation orientation = Orientation.Portrait)
         {
             UserControl pageContent = null;
             PaperType paperPattern = Settings.Instance.PaperType;
 
             if (paperType.HasValue)
-                paperPattern = paperType.Value;        
+                paperPattern = paperType.Value;
 
             switch (paperPattern)
             {
@@ -2092,9 +2116,9 @@ namespace SimpleJournal
                 e.CanExecute = DrawingCanvas.LastModifiedCanvas.CanRedo();
         }
 
-        private void PrintCommand_Executed(object sender, ExecutedRoutedEventArgs e)
+        private async void PrintCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            Print();
+            await Print();
         }
 
         private void PrintCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
@@ -2212,15 +2236,6 @@ namespace SimpleJournal
             }
         }
 
-        private void ScrollToPage(int pTarget)
-        {
-            double resultOffset = (pTarget == 0 ? 0 : pTarget * (new Chequered().Height * currentScaleFactor) + ((pTarget - 1) * Consts.SpaceBetweenPages * currentScaleFactor));
-            if (pTarget != 0)
-                mainScrollView.ScrollToVerticalOffset(resultOffset + (Consts.SpaceBetweenPages * currentScaleFactor));
-            else
-                mainScrollView.ScrollToVerticalOffset(0.0);
-        }
-
         private void SaveProject()
         {
             if (string.IsNullOrEmpty(currentJournalPath))
@@ -2237,7 +2252,7 @@ namespace SimpleJournal
                 SaveJournal(currentJournalPath);
         }
 
-        private void Print()
+        private async Task Print()
         {
             PrintDialog pd = new PrintDialog() { MinPage = 1, MaxPage = (uint)CurrentJournalPages.Count, UserPageRangeEnabled = true, SelectedPagesEnabled = false, CurrentPageEnabled = true };
             int from = 0; int to = CurrentJournalPages.Count - 1;
@@ -2266,9 +2281,87 @@ namespace SimpleJournal
 
             if (result.HasValue && result.Value)
             {
-                int pageCount = 1;
-                for (int i = from; i <= to; i++)
-                    pd.PrintVisual(CurrentJournalPages[i].Canvas, $"{Properties.Resources.strPrinting} {pageCount++}");
+                // Determine if we need to print a pdf or not
+                bool printToFilePDF = (pd.PrintQueue.Name.ToLower().Contains("pdf"));
+
+                if (printToFilePDF)
+                {
+                    // Prevent printing through printQueue instead create a pdf file directly
+                    // ToDo: *** Localize strings
+                    SaveFileDialog dialog = new SaveFileDialog() { Filter = $"PDF-Datei|*.pdf", Title = "Als PDF speichern ..." };
+                    var dialogResult = dialog.ShowDialog();
+
+                    if (dialogResult.HasValue && dialogResult.Value)
+                    {
+                        List<IPaper> pages = new List<IPaper>();
+                        for (int i = from; i <= to; i++)
+                            pages.Add(CurrentJournalPages[i]);
+
+                        await PdfHelper.ExportJournalAsPDF(dialog.FileName, pages);
+                    }
+                }
+                else
+                {
+                    // https://stackoverflow.com/a/10139076/6237448
+                    // https://stackoverflow.com/questions/8230090/printdialog-with-landscape-and-portrait-pages
+                    // ToDo: *** Find out a way to notify the user when printing is done
+                    // ToDo: *** Try-Catch
+
+                    List<IPaper> pages = new List<IPaper>();
+         
+                    for (int i = from; i <= to; i++)
+                        pages.Add(CurrentJournalPages[i]);          
+   
+                    var document = new FixedDocument();
+                    Blanco bl = new Blanco();
+
+                    foreach (var item in pages)
+                    {
+                        var ui = item.Canvas;            
+
+                        var pageSize = new Size(bl.Width, bl.Height);
+                        if (item is Custom c && c.Orientation == Orientation.Landscape)
+                            pageSize = new Size(bl.Height, bl.Width);
+
+                        // Create FixedPage
+                        var fixedPage = new FixedPage
+                        {
+                            Width = pageSize.Width,
+                            Height = pageSize.Height
+                        };
+
+                        // Add visual, measure/arrange page.
+                        fixedPage.Children.Add((UIElement)item.ClonePage(true));
+                        fixedPage.Measure(pageSize);
+                        fixedPage.Arrange(new Rect(new Point(), pageSize));
+                        fixedPage.UpdateLayout();
+
+                        // Add page to document
+                        var pageContent = new PageContent();
+                        ((IAddChild)pageContent).AddChild(fixedPage);
+                        document.Pages.Add(pageContent);
+                    }
+
+                    XpsDocumentWriter xpsWriter = PrintQueue.CreateXpsDocumentWriter(pd.PrintQueue);
+                    xpsWriter.WritingPrintTicketRequired += (s, e) =>
+                    {
+                        Orientation orientation = Orientation.Portrait;
+                        var page = pages[e.Sequence - 1];
+
+                        if (page is Custom c)
+                            orientation = c.Orientation;
+
+                        e.CurrentPrintTicket = new PrintTicket();
+                        if (orientation == Orientation.Landscape)
+                            e.CurrentPrintTicket.PageOrientation = PageOrientation.Landscape;
+                        else
+                            e.CurrentPrintTicket.PageOrientation = PageOrientation.Portrait;
+                    };
+
+                    // Use xpsWriter directly instead of pd.PrintDocument - this way, we can print multiple orientations in one printing ticket!!!
+                    // pd.PrintDocument(document.DocumentPaginator, "My Document");
+                    xpsWriter.Write(document.DocumentPaginator);
+                }
             }
         }
 
@@ -2767,7 +2860,7 @@ namespace SimpleJournal
 
                 if (saveAsBackup)
                 {
-                    // Claim this journal as a backup - the document needs also a process ID to determine if this is an active backup (see 112 in Azure for details)
+                    // Claim this journal as a backup - the document needs also a process ID to determine if this is an active backup
                     journal.IsBackup = true;
                     journal.ProcessID = ProcessHelper.CurrentProcID;
 
@@ -2894,10 +2987,13 @@ namespace SimpleJournal
 
                     IsEnabled = false;
                     isInitalized = false;
-                    dialog.Show();
-
+                    
                     ClearJournal();
                     RecentlyOpenedDocuments.AddDocument(fileName);
+                    dialog.Show();
+
+                    // Wait for the dialog being loaded
+                    while (!dialog.IsLoaded) { }
 
                     int pageCount = 0;
                     double progress = 0;
@@ -2924,6 +3020,9 @@ namespace SimpleJournal
 
                         progress = (pageCount++ + 1) / (double)currentJournal.Pages.Count;
                         dialog.SetProgress(progress, pageCount, currentJournal.Pages.Count);
+
+                        // Delay 1ms to ensure the dialog will be displayed correctly
+                        await Task.Delay(1);
 
                         StrokeCollection strokes = null;
                         await Task.Run(() =>
@@ -3076,6 +3175,9 @@ namespace SimpleJournal
 
                     progress = (countPages++ + 1) / (double)result.Count;
                     dialog.SetProgress(progress, countPages, result.Count);
+
+                    // Delay 1ms to ensure the dialog will be displayed correctly
+                    await Task.Delay(1);
 
                     StrokeCollection strokes = null;
                     await Task.Run(() =>

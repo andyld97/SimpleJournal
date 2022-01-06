@@ -107,7 +107,6 @@ namespace SimpleJournal.Controls
                 {
                     var page = pages[i];
                     int pageIndex = pages.IndexOf(page) + 1;
-                    var frame = new Frame() { Content = page.ClonePage(true) };
                     var expander = new Expander()
                     {
                         Header = $"{Properties.Resources.strPage} {pageIndex}",
@@ -116,7 +115,7 @@ namespace SimpleJournal.Controls
                         Width = page.Canvas.Width
                     };
                     expander.IsExpanded = false;
-                    expander.Content = frame;
+                    expander.Content = page.ClonePage(true);
 
                     expanders.Add(expander);
                     Pages.Children.Add(expander);
@@ -250,6 +249,8 @@ namespace SimpleJournal.Controls
 
                     try
                     {
+                        // ToDo: *** Handle PDF pages and test if the result is working
+
                         using (System.IO.MemoryStream ms = new System.IO.MemoryStream())
                         {
                             currentCanvas.Strokes.Save(ms);
@@ -290,44 +291,12 @@ namespace SimpleJournal.Controls
                 return false;
         }
 
-        /// <summary>
-        /// See https://stackoverflow.com/a/19534008/6237448
-        /// </summary>
-        /// <param name="element"></param>
-        /// <param name="scale"></param>
-        /// <param name="background"></param>
-        /// <returns></returns>
-        public static RenderTargetBitmap RenderToBitmap(UIElement element, double scale, Brush background)
-        {
-            var renderWidth = (int)(element.RenderSize.Width * scale);
-            var renderHeight = (int)(element.RenderSize.Height * scale);
-
-            var renderTarget = new RenderTargetBitmap(renderWidth, renderHeight, 96, 96, PixelFormats.Default);
-            var sourceBrush = new VisualBrush(element);
-
-            var drawingVisual = new DrawingVisual();
-            var drawingContext = drawingVisual.RenderOpen();
-
-            var rect = new Rect(0, 0, element.RenderSize.Width, element.RenderSize.Height);
-
-            using (drawingContext)
-            {
-                drawingContext.PushTransform(new ScaleTransform(scale, scale));
-                drawingContext.DrawRectangle(background, null, rect);
-                drawingContext.DrawRectangle(sourceBrush, null, rect);
-            }
-
-            renderTarget.Render(drawingVisual);
-
-            return renderTarget;
-        }
-
         private bool ExportPageAsImage(DrawingCanvas canvas, string path, int page)
         {
             try
             {
                 BmpBitmapEncoder encoder = new BmpBitmapEncoder();
-                RenderTargetBitmap rtb = RenderToBitmap(canvas, 1.0, new SolidColorBrush(Colors.White));
+                RenderTargetBitmap rtb = GeneralHelper.RenderToBitmap(canvas, 1.0, new SolidColorBrush(Colors.White));
 
                 encoder.Frames.Add(BitmapFrame.Create(rtb));
                 using (System.IO.FileStream fs = System.IO.File.Open(path, System.IO.FileMode.Create))

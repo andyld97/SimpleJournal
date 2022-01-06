@@ -1726,7 +1726,7 @@ Hier möchte ich Ihnen noch ein paar wichtige Hinweise geben, die Ihnen helfen w
     <comment>*</comment>
   </data>
   <data name="strWatingText" xml:space="preserve">
-    <value>Bitte warten Sie während {0} geladen wird (Seite {1}/{2}) ...</value>
+    <value>Bitte warten Sie während "{0}" geladen wird (Seite {1}/{2}) ...</value>
     <comment>WaitingDialog.xaml</comment>
   </data>
   <data name="strWindow" xml:space="preserve">

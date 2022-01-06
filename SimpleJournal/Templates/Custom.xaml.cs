@@ -23,10 +23,10 @@ namespace SimpleJournal.Templates
             if (background != null)
             {
                 PageBackground = background;
-                // canvas.Background = new ImageBrush() { ImageSource = GeneralHelper.LoadImage(background), Stretch = Stretch.UniformToFill };
+                canvas.Background = new ImageBrush() { ImageSource = GeneralHelper.LoadImage(background), Stretch = Stretch.Uniform };
 
-                ImageBackground.Source = GeneralHelper.LoadImage(background);
-                canvas.Background = new SolidColorBrush(Colors.Transparent);
+                //ImageBackground.Source = GeneralHelper.LoadImage(background);
+             //   canvas.Background = new SolidColorBrush(Colors.Transparent);
             }
 
             if (orientation == Orientation.Landscape)
@@ -68,7 +68,7 @@ namespace SimpleJournal.Templates
         {
             Content = null;
             Border = null;
-            ImageBackground.Source = null;
+            Canvas.Background = null;//   ImageBackground.Source = null;
             PageBackground = null;
             Canvas.Strokes.Clear();
             Canvas.Children.Clear();

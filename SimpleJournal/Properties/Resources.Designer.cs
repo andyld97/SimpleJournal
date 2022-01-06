@@ -4055,7 +4055,7 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please wait while {0} is loading (page {1}/{2}) ....
+        ///   Looks up a localized string similar to Please wait while &quot;{0}&quot; is loading (page {1}/{2}) ....
         /// </summary>
         public static string strWatingText {
             get {

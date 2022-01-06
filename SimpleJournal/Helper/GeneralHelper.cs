@@ -142,6 +142,61 @@ namespace SimpleJournal
             //  return (p2, p1);
         }
 
+        #region Images
+
+
+        /// <summary>
+        /// See https://stackoverflow.com/a/19534008/6237448
+        /// </summary>
+        /// <param name="element"></param>
+        /// <param name="scale"></param>
+        /// <param name="background"></param>
+        /// <returns></returns>
+        public static RenderTargetBitmap RenderToBitmap(UIElement element, double scale, Brush background)
+        {
+            var renderWidth = (int)(element.RenderSize.Width * scale);
+            var renderHeight = (int)(element.RenderSize.Height * scale);
+
+            var renderTarget = new RenderTargetBitmap(renderWidth, renderHeight, 96, 96, PixelFormats.Default);
+            var sourceBrush = new VisualBrush(element);
+
+            var drawingVisual = new DrawingVisual();
+            var drawingContext = drawingVisual.RenderOpen();
+
+            var rect = new Rect(0, 0, element.RenderSize.Width, element.RenderSize.Height);
+
+            using (drawingContext)
+            {
+                drawingContext.PushTransform(new ScaleTransform(scale, scale));
+                drawingContext.DrawRectangle(background, null, rect);
+                drawingContext.DrawRectangle(sourceBrush, null, rect);
+            }
+
+            renderTarget.Render(drawingVisual);
+
+            return renderTarget;
+        }
+
+        /// <summary>
+        /// Create a screenshof of UI element
+        /// </summary>
+        /// <param name="element">The element to copy.</param>
+        public static RenderTargetBitmap CreateScreenshotOfElement(FrameworkElement element)
+        {
+            double width = double.IsNaN(element.Width) ? element.ActualWidth : element.Width;
+            double height = double.IsNaN(element.Height) ? element.ActualHeight : element.Height;
+
+            RenderTargetBitmap bmpCopied = new RenderTargetBitmap((int)Math.Round(width), (int)Math.Round(height), 96, 96, PixelFormats.Default);
+            DrawingVisual dv = new DrawingVisual();
+            using (DrawingContext dc = dv.RenderOpen())
+            {
+                VisualBrush vb = new VisualBrush(element);
+                dc.DrawRectangle(vb, null, new Rect(new Point(), new Size(width, height)));
+            }
+            bmpCopied.Render(dv);
+            return bmpCopied;
+        }
+
         public static byte[] ExportImage(BitmapSource bi)
         {
             try
@@ -215,6 +270,8 @@ namespace SimpleJournal
                 return null;
             }
         }
+
+        #endregion
 
         /// <summary>
         /// Opens the default system browser with the requested uri
@@ -347,26 +404,6 @@ namespace SimpleJournal
             return js;
         }
         #endregion
-
-        /// <summary>
-        /// Create a screenshof of UI element
-        /// </summary>
-        /// <param name="element">The element to copy.</param>
-        public static RenderTargetBitmap CreateScreenshotOfElement(FrameworkElement element)
-        {
-            double width = double.IsNaN(element.Width) ? element.ActualWidth : element.Width;
-            double height = double.IsNaN(element.Height) ? element.ActualHeight : element.Height;
-
-            RenderTargetBitmap bmpCopied = new RenderTargetBitmap((int)Math.Round(width), (int)Math.Round(height), 96, 96, PixelFormats.Default);
-            DrawingVisual dv = new DrawingVisual();
-            using (DrawingContext dc = dv.RenderOpen())
-            {
-                VisualBrush vb = new VisualBrush(element);
-                dc.DrawRectangle(vb, null, new Rect(new Point(), new Size(width, height)));
-            }
-            bmpCopied.Render(dv);
-            return bmpCopied;
-        }
 
         /// <summary>
         /// Determines if an element is visible to the user in relation to it's container (e.g. ScrollViewer)
