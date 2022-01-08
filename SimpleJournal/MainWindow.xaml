@@ -54,7 +54,7 @@
         <Fluent:Ribbon x:Name="ribbon" AutomaticStateManagement="True">
             <Fluent:Ribbon.Menu>
                 <Grid>
-                    <Fluent:ApplicationMenu x:Name="MenuApplication" Visibility="Collapsed" Header="{x:Static res:Resources.strFile}" MaxDropDownHeight="500" BorderBrush="Blue">
+                    <Fluent:ApplicationMenu x:Name="MenuApplication" Visibility="Collapsed" Header="{x:Static res:Resources.strFile}" MaxDropDownHeight="520" BorderBrush="Blue">
                         <Fluent:ApplicationMenu.RightPaneContent>
                             <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Orientation="Vertical" CanVerticallyScroll="True">
                                 <Border HorizontalAlignment="Stretch" BorderBrush="#64647F" BorderThickness="0,0,0,0">
@@ -75,6 +75,8 @@
                         <Fluent:MenuItem x:Name="btnSaveProject" Click="btnSaveProject_Click" Header="{x:Static res:Resources.strSaveDocument}" KeyTip="S" Icon="pack://application:,,,/SimpleJournal;component/resources/save.png"  />
                         <Fluent:MenuItem x:Name="btnSave" Command="ApplicationCommands.Save" Header="{x:Static res:Resources.strSaveAsDocument}" KeyTip="S" Icon="pack://application:,,,/SimpleJournal;component/resources/save.png"  />
                         <Fluent:MenuItem x:Name="btnPrint" Command="ApplicationCommands.Print" Header="{x:Static res:Resources.strPrintDocument}" KeyTip="D" Icon="pack://application:,,,/SimpleJournal;component/resources/print.png"  />
+                        <!-- ToDO: Localize-->
+                        <Fluent:MenuItem Icon="/resources/print.png" Header="Als PDF exportieren" Click="MenuButtonBackstageExportPdf_Click" />
                         <Fluent:MenuItem x:Name="btnExport" Click="btnExport_Click" Header="{x:Static res:Resources.strExportDocument}" KeyTip="E" Icon="pack://application:,,,/SimpleJournal;component/resources/export.png"  />
                         <Fluent:MenuItem x:Name="btnPageManagment" Click="btnPageManagment_Click" Header="{x:Static res:Resources.strManagePage}" Icon="pack://application:,,,/SimpleJournal;component/resources/editpage.png" />
                         <Fluent:MenuItem x:Name="btnSettings" Click="btnSettings_Click" Header="{x:Static res:Resources.strSettings}" KeyTip="S" Icon="pack://application:,,,/SimpleJournal;component/resources/settings.png"  />
@@ -100,6 +102,7 @@
                             <Fluent:Button Icon="/resources/save.png" Header="{x:Static res:Resources.strSaveAsDocument}" Command="ApplicationCommands.Save"  />
                             <Fluent:SeparatorTabItem />
                             <Fluent:Button Icon="/resources/print.png" Header="{x:Static res:Resources.strPrintDocument}" Command="ApplicationCommands.Print" />
+                            <Fluent:Button x:Name="MenuButtonBackstageExportPdf" Icon="/resources/print.png" Header="Als PDF exportieren" Click="MenuButtonBackstageExportPdf_Click" />
                             <Fluent:BackstageTabItem x:Name="MenuBackstageExport" Icon="/resources/export.png" Header="{x:Static res:Resources.strExportDocument}" MouseDown="MenuBackstageExport_MouseDown">
                                 <DockPanel LastChildFill="True">
                                     <StatusBar DockPanel.Dock="Top" Visibility="{Binding ElementName=TextExportStatus, Path=Text, Converter={StaticResource stringToVisilbity}}" Background="{DynamicResource WhiteBrush20}">

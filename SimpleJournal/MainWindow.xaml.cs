@@ -2252,6 +2252,16 @@ namespace SimpleJournal
                 SaveJournal(currentJournalPath);
         }
 
+        private async void MenuButtonBackstageExportPdf_Click(object sender, RoutedEventArgs e)
+        {
+            // ToDo: *** Localize strings
+            SaveFileDialog dialog = new SaveFileDialog() { Filter = $"PDF-Datei|*.pdf", Title = "Als PDF speichern ..." };
+            var dialogResult = dialog.ShowDialog();
+
+            if (dialogResult.HasValue && dialogResult.Value)
+                await PdfHelper.ExportJournalAsPDF(dialog.FileName, CurrentJournalPages.ToList());
+        }
+
         private async Task Print()
         {
             PrintDialog pd = new PrintDialog() { MinPage = 1, MaxPage = (uint)CurrentJournalPages.Count, UserPageRangeEnabled = true, SelectedPagesEnabled = false, CurrentPageEnabled = true };
