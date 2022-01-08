@@ -41,7 +41,7 @@ namespace SimpleJournal.Data
             {
                 if (System.IO.File.Exists(Consts.PenSettingsFilePath))
                 {
-                    var result = Serialization.Serialization.Read<Pen[]>(Consts.PenSettingsFilePath, Serialization.Serialization.Mode.Normal);
+                    var result = Serialization.Serialization.Read<Pen[]>(Consts.PenSettingsFilePath, Serialization.Serialization.Mode.XML);
                     if (result != null)
                         return result;
                 }
@@ -56,7 +56,7 @@ namespace SimpleJournal.Data
         {
             try
             {
-                Serialization.Serialization.Save(Consts.PenSettingsFilePath, Pen.Instance, Serialization.Serialization.Mode.Normal);
+                Serialization.Serialization.Save(Consts.PenSettingsFilePath, Pen.Instance, Serialization.Serialization.Mode.XML);
             }
             catch
             { }
@@ -66,7 +66,7 @@ namespace SimpleJournal.Data
         {
             try
             {
-                Serialization.Serialization.Save(Consts.PenSettingsFilePath, pens, Serialization.Serialization.Mode.Normal);
+                Serialization.Serialization.Save(Consts.PenSettingsFilePath, pens, Serialization.Serialization.Mode.XML);
             }
             catch
             { }

@@ -118,7 +118,7 @@ namespace SimpleJournal.Dialogs
             images.Dispose();
 
             // Save the journal and quit (only on success)
-            if (journal.Save(destinationFileName))
+            if (await journal.SaveAsync(destinationFileName))
                 DialogResult = true;
             else
             {

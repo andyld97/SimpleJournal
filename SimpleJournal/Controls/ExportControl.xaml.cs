@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Globalization;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -234,7 +235,7 @@ namespace SimpleJournal.Controls
             return true;
         }
 
-        private bool ExportJournal(int from, int to)
+        private async Task<bool> ExportJournal(int from, int to)
         {
             SaveFileDialog ofd = new SaveFileDialog() { Filter = $"{Properties.Resources.strJournalFile}|*.journal;" };
             var dialogResult = ofd.ShowDialog();
@@ -281,7 +282,7 @@ namespace SimpleJournal.Controls
                 }
                 Title = $"{Properties.Resources.strExport} ({Properties.Resources.strPage} {to + 1}/{to + 1})";
 
-                journal.Save(ofd.FileName);
+                await journal.SaveAsync(ofd.FileName);
                 MainGrid.IsEnabled = true;
                 Title = Properties.Resources.strExportPages;
                 MessageBox.Show(owner, Properties.Resources.strExportFinished, Properties.Resources.strSuccess, MessageBoxButton.OK, MessageBoxImage.Information);
@@ -324,7 +325,7 @@ namespace SimpleJournal.Controls
 
         #endregion
 
-        private void ButtonOK_Click(object sender, RoutedEventArgs e)
+        private async void ButtonOK_Click(object sender, RoutedEventArgs e)
         {
             var range = GetPageRange();
             if (!ValidatePageRange(range))
@@ -339,10 +340,10 @@ namespace SimpleJournal.Controls
 
             switch (SelectedExportMode)
             {
-                case ExportMode.AllPages: result = (exportAsJournal ? ExportJournal(0, pages.Count - 1) : Export(0, pages.Count - 1)); break;
-                case ExportMode.CurrentPage: result = (exportAsJournal ? ExportJournal(currentPageIdx, currentPageIdx) : Export(currentPageIdx, currentPageIdx)); break;
+                case ExportMode.AllPages: result = (exportAsJournal ? await ExportJournal(0, pages.Count - 1) : Export(0, pages.Count - 1)); break;
+                case ExportMode.CurrentPage: result = (exportAsJournal ? await ExportJournal(currentPageIdx, currentPageIdx) : Export(currentPageIdx, currentPageIdx)); break;
                 case ExportMode.SinglePage:
-                case ExportMode.SelectedPageRange: result = (exportAsJournal ? ExportJournal(range.Item1 - 1, range.Item2 - 1) : Export(range.Item1 - 1, range.Item2 - 1)); break;
+                case ExportMode.SelectedPageRange: result = (exportAsJournal ? await ExportJournal(range.Item1 - 1, range.Item2 - 1) : Export(range.Item1 - 1, range.Item2 - 1)); break;
             }
 
             // Update title (reset)

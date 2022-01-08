@@ -220,6 +220,8 @@ namespace SimpleJournal
                 }
             };
 
+
+            // Handle events
             PageManagementControl.DialogClosed += async delegate (object semder, bool e)
             {
                 if (e)
@@ -240,6 +242,17 @@ namespace SimpleJournal
                 else
                     TextExportStatus.Text = e;
             };
+
+            Journal.OnSaving += delegate (object sender, EventArgs e)
+            {
+                MainStatusBar.Visibility = Visibility.Visible;
+            };
+
+            Journal.OnSavingFinished += delegate (object sender, EventArgs e)
+            {
+                MainStatusBar.Visibility = Visibility.Collapsed;
+            };
+
 
             // Boot with fullscreen
             left = Left;
@@ -350,7 +363,7 @@ namespace SimpleJournal
                 await LoadJournal(App.Path);
 
             if (Settings.Instance.UseAutoSave)
-                ShowRecoverAutoBackupFileDialog();
+                await ShowRecoverAutoBackupFileDialog();
 
 #if !UWP
 
@@ -373,7 +386,7 @@ namespace SimpleJournal
 
         private string lastBackupFileName = string.Empty;
 
-        private void ShowRecoverAutoBackupFileDialog()
+        private async Task ShowRecoverAutoBackupFileDialog()
         {
             // Show this dialog only if there a backup files!
             bool showRecoverDialog = false;
@@ -396,7 +409,9 @@ namespace SimpleJournal
                 {
                     try
                     {
-                        Journal j = Journal.LoadJournal(journalFile.FullName, true);
+                        Journal j = await Journal.LoadJournalAsync(journalFile.FullName, true);
+                        if (j == null)
+                            continue;
                         showRecoverDialog |= j.IsBackup && !ProcessHelper.IsProcessActiveByTaskId(j.ProcessID);
 
                         j.Pages.Clear();
@@ -439,12 +454,12 @@ namespace SimpleJournal
             autoSaveBackupTimer.Start();
         }
 
-        private void AutoSaveBackupTimer_Tick(object sender, EventArgs e)
+        private async void AutoSaveBackupTimer_Tick(object sender, EventArgs e)
         {
-            CreateBackup();
+            await CreateBackup();
         }
 
-        private void CreateBackup()
+        private async Task CreateBackup()
         {
             if (!Settings.Instance.UseAutoSave)
             {
@@ -473,7 +488,7 @@ namespace SimpleJournal
             backupName += $"{DateTime.Now.ToString(Properties.Resources.strAutoSaveDateTimeFileFormat)}.journal";
 
             string path = System.IO.Path.Combine(Consts.AutoSaveDirectory, backupName);
-            bool result = SaveJournal(path, true);
+            bool result = await SaveJournal(path, true);
             if (!result)
             {
                 try
@@ -548,7 +563,7 @@ namespace SimpleJournal
             //MessageBox.Show($"{Properties.Resources.strUnexceptedFailure}{Environment.NewLine}{Environment.NewLine}{e.Exception.Message}", Properties.Resources.strUnexceptedFailureTitle, MessageBoxButton.OK, MessageBoxImage.Error);
         }
 
-        private void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
+        private async void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
             string message = string.Empty;
 
@@ -563,7 +578,7 @@ namespace SimpleJournal
 
 
             // Try at least to create a backup - if SJ crashes - the user can restore the backup and everything is fine
-            CreateBackup();
+            await CreateBackup();
         }
         #endregion
 
@@ -2080,9 +2095,9 @@ namespace SimpleJournal
             //TouchHelper.SetTouchState(false);
         }
 
-        private void SaveCommand_Executed(object sender, ExecutedRoutedEventArgs e)
+        private async void SaveCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            SaveProject();
+            await SaveProject();
         }
 
         private void SaveCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
@@ -2236,20 +2251,23 @@ namespace SimpleJournal
             }
         }
 
-        private void SaveProject()
+        private async Task<bool> SaveProject()
         {
+            bool resultSaving = false;
             if (string.IsNullOrEmpty(currentJournalPath))
             {
                 SaveFileDialog dialog = new SaveFileDialog() { Filter = $"{Properties.Resources.strJournalFile}|*.journal", Title = Properties.Resources.strSave };
                 var result = dialog.ShowDialog();
                 if (result.HasValue && result.Value)
                 {
-                    SaveJournal(dialog.FileName);
+                    resultSaving =  await SaveJournal(dialog.FileName);
                     this.UpdateTitle(System.IO.Path.GetFileNameWithoutExtension(dialog.FileName));
                 }
             }
             else
-                SaveJournal(currentJournalPath);
+                resultSaving = await SaveJournal(currentJournalPath);
+
+            return resultSaving;
         }
 
         private async void MenuButtonBackstageExportPdf_Click(object sender, RoutedEventArgs e)
@@ -2390,18 +2408,18 @@ namespace SimpleJournal
                 MessageBox.Show(this, Properties.Resources.strNoShapeRecognized, Properties.Resources.strNoShapeRecognizedTitle, MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
-        private void btnSaveProject_Click(object sender, RoutedEventArgs e)
+        private async void btnSaveProject_Click(object sender, RoutedEventArgs e)
         {
-            SaveProject();
+            await SaveProject();
         }
 
-        private void btnSaveAs_Click(object sender, RoutedEventArgs e)
+        private async void btnSaveAs_Click(object sender, RoutedEventArgs e)
         {
             SaveFileDialog dialog = new SaveFileDialog() { Filter = $"{Properties.Resources.strJournalFile}|*.journal", Title = Properties.Resources.strSaveAs };
             var result = dialog.ShowDialog();
             if (result.HasValue && result.Value)
             {
-                SaveJournal(dialog.FileName);
+                await SaveJournal(dialog.FileName);
                 this.UpdateTitle(System.IO.Path.GetFileNameWithoutExtension(dialog.FileName));
             }
         }
@@ -2651,7 +2669,7 @@ namespace SimpleJournal
             }
         }
 
-        protected override void OnClosing(CancelEventArgs e)
+        protected override async void OnClosing(CancelEventArgs e)
         {
             base.OnClosing(e);
 
@@ -2661,7 +2679,7 @@ namespace SimpleJournal
             if (!closedButtonWasPressed && DrawingCanvas.Change)
             {
                 // Create a backup before closing - in case of windows will kill the app if the user will not awnser the dialog
-                CreateBackup();
+                await CreateBackup();
 
                 // Ask 
                 var result = MessageBox.Show(this, Properties.Resources.strSaveChanges, Properties.Resources.strSaveChangesTitle, MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
@@ -2862,7 +2880,7 @@ namespace SimpleJournal
         #endregion
 
         #region Internal Save and Load
-        private bool SaveJournal(string path, bool saveAsBackup = false)
+        private async Task<bool> SaveJournal(string path, bool saveAsBackup = false)
         {
             try
             {
@@ -2912,7 +2930,7 @@ namespace SimpleJournal
                     }
                 }
 
-                journal.Save(path);
+                await journal.SaveAsync(path);
 
                 if (!saveAsBackup)
                 {
@@ -2941,7 +2959,7 @@ namespace SimpleJournal
                 var dialog = new WaitingDialog(System.IO.Path.GetFileNameWithoutExtension(fileName), 1) { Owner = this };
                 try
                 {
-                    Journal currentJournal = Journal.LoadJournal(fileName);
+                    Journal currentJournal = await Journal.LoadJournalAsync(fileName);
 
                     if (currentJournal == null)
                     {
@@ -2982,9 +3000,9 @@ namespace SimpleJournal
                         // If a path is set remove the process id
                         try
                         {
-                            var journal = Journal.LoadJournal(currentJournalPath);
+                            var journal = await Journal.LoadJournalAsync(currentJournalPath);
                             journal.ProcessID = -1;
-                            journal.Save(currentJournalPath);
+                            await journal.UpdateJournalInfoAsync(currentJournalPath);
                             currentJournalPath = string.Empty;
                         }
                         catch
@@ -2997,13 +3015,10 @@ namespace SimpleJournal
 
                     IsEnabled = false;
                     isInitalized = false;
-                    
+
                     ClearJournal();
                     RecentlyOpenedDocuments.AddDocument(fileName);
                     dialog.Show();
-
-                    // Wait for the dialog being loaded
-                    while (!dialog.IsLoaded) { }
 
                     int pageCount = 0;
                     double progress = 0;
@@ -3075,9 +3090,7 @@ namespace SimpleJournal
                     // Set process id to document and save it to make sure other instances cannot load this journal
                     currentJournal.ProcessID = ProcessHelper.CurrentProcID;
 
-                    // ToDo: *** Handle pdf file (fileName is empty then)
-                    if (!string.IsNullOrEmpty(fileName))
-                        currentJournal.Save(fileName);
+                    await currentJournal.UpdateJournalInfoAsync(fileName);
                 }
                 catch (Exception ex)
                 {

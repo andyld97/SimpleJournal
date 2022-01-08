@@ -190,7 +190,7 @@ namespace SimpleJournal.Data
         {
             try
             {
-                var result = Serialization.Serialization.Read<Settings>(path, Serialization.Serialization.Mode.Normal);
+                var result = Serialization.Serialization.Read<Settings>(path, Serialization.Serialization.Mode.XML);
                 if (result != null)
                     return result;
             }
@@ -206,7 +206,7 @@ namespace SimpleJournal.Data
         {
             try
             {
-                Serialization.Serialization.Save<Settings>(path, this, Serialization.Serialization.Mode.Normal);
+                Serialization.Serialization.Save<Settings>(path, this, Serialization.Serialization.Mode.XML);
             }
             catch (Exception e)
             {

@@ -130,7 +130,7 @@ namespace SimpleJournal.Dialogs
             {
                 if (System.IO.File.Exists(Consts.PenSettingsFilePath))
                 {
-                    var result = Serialization.Serialization.Read<Data.Pen[]>(Consts.PenSettingsFilePath, Serialization.Serialization.Mode.Normal);
+                    var result = Serialization.Serialization.Read<Data.Pen[]>(Consts.PenSettingsFilePath, Serialization.Serialization.Mode.XML);
                     if (result != null)
                         pens = result;
                 }
@@ -277,7 +277,7 @@ namespace SimpleJournal.Dialogs
         {
             try
             {
-                Serialization.Serialization.Save<Data.Pen[]>(Consts.PenSettingsFilePath, pens, Serialization.Serialization.Mode.Normal);
+                Serialization.Serialization.Save<Data.Pen[]>(Consts.PenSettingsFilePath, pens, Serialization.Serialization.Mode.XML);
             }
             catch
             { }

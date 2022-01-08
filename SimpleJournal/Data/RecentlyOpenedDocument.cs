@@ -33,7 +33,7 @@ namespace SimpleJournal.Data
             List<Document> result = null;
             try
             {
-                result = Serialization.Serialization.Read<List<Document>>(path, Serialization.Serialization.Mode.Normal);
+                result = Serialization.Serialization.Read<List<Document>>(path, Serialization.Serialization.Mode.XML);
             }
             catch
             {
@@ -59,7 +59,7 @@ namespace SimpleJournal.Data
         {
             try
             {
-                Serialization.Serialization.Save<List<Document>>(path, docuemnts, Serialization.Serialization.Mode.Normal);
+                Serialization.Serialization.Save<List<Document>>(path, docuemnts, Serialization.Serialization.Mode.XML);
             }
             catch
             {

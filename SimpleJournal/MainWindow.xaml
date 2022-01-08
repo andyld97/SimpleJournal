@@ -38,7 +38,7 @@
         </DataTemplate>
     </Window.Resources>
     <Window.CommandBindings>
-        <CommandBinding x:Name="NewCommand" Command="ApplicationCommands.New" Executed="NewCommand_Executed" CanExecute="NewCommand_CanExecute" />        
+        <CommandBinding x:Name="NewCommand" Command="ApplicationCommands.New" Executed="NewCommand_Executed" CanExecute="NewCommand_CanExecute" />
         <CommandBinding x:Name="SaveCommand" Command="ApplicationCommands.Save" Executed="SaveCommand_Executed" CanExecute="SaveCommand_CanExecute" />
         <CommandBinding x:Name="UndoCommand" Command="ApplicationCommands.Undo" Executed="UndoCommand_Executed" CanExecute="UndoCommand_CanExecute" />
         <CommandBinding x:Name="RedoCommand" Command="ApplicationCommands.Redo" Executed="RedoCommand_Executed" CanExecute="RedoCommand_CanExecute" />
@@ -50,6 +50,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Fluent:Ribbon x:Name="ribbon" AutomaticStateManagement="True">
             <Fluent:Ribbon.Menu>
@@ -95,7 +96,7 @@
                                         </TextBlock>
                                     </GroupBox.Header>
                                     <ListBox x:Name="RecentlyOpenedDocumentsBackstage" ItemTemplate="{StaticResource RecentlyOpenedDocumentsTemplate}" ItemContainerStyle="{DynamicResource _ListBoxItemStyle}" Background="Transparent" BorderThickness="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" SelectionChanged="RecentlyOpenedDocumentsBackstage_SelectionChanged" />
-                                </GroupBox>                            
+                                </GroupBox>
                             </Fluent:BackstageTabItem>
                             <Fluent:Button Icon="/resources/open.png" Header="{x:Static res:Resources.strOpenDocument}" Click="btnOpen_Click" />
                             <Fluent:Button Icon="/resources/save.png" Header="{x:Static res:Resources.strSaveDocument}" Click="btnSaveProject_Click"/>
@@ -206,7 +207,7 @@
                     <Fluent:Button x:Name="btnCopy" Click="BtnCopy_Click_1" SizeDefinition="Middle,Small" Header="{x:Static res:Resources.strCopy}" ToolTip="{x:Static res:Resources.strCopyDescription}" Icon="pack://application:,,,/SimpleJournal;component/resources/copy.png"/>
                     <Fluent:Button x:Name="btnPaste" Click="BtnPaste_Click_1" SizeDefinition="Middle,Small" Header="{x:Static res:Resources.strPaste}" ToolTip="{x:Static res:Resources.strPasteDescription}" Icon="pack://application:,,,/SimpleJournal;component/resources/paste.png"/>
                 </Fluent:RibbonGroupBox>
-                
+
                 <Fluent:RibbonGroupBox x:Name="GroupForms" Header="{x:Static res:Resources.strShapesHeader}">
                     <controls:DropDownToggleButton x:Name="btnInsertSimpleForm" Click="btnInsertSimpleForm_Click_1" Header="{x:Static res:Resources.strToolFormFixed}" ToolTip="{x:Static res:Resources.strInsertSimpleFormToolTip}" Width="52">
                         <controls:DropDownToggleButton.LargeIcon>
@@ -238,7 +239,7 @@
                         </controls:DropDownToggleButton.LargeIcon>
                     </controls:DropDownToggleButton>
                 </Fluent:RibbonGroupBox>
-                
+
                 <Fluent:RibbonGroupBox x:Name="GroupPages" Header="{x:Static res:Resources.strPages}" KeyTip="S">
                     <controls:DropDownToggleButton x:Name="btnInsertNewPage" Click="BtnInsertNewPage_Click" Header="{x:Static res:Resources.strAddPage}" ToolTip="{x:Static res:Resources.strAddPageTooltip}" IsToggleable="False" Width="65">
                         <controls:DropDownToggleButton.LargeIcon>
@@ -370,6 +371,17 @@
             <controls:AnimatedScrollViewer CanContentScroll="False" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"  x:Name="mainScrollView" ScrollChanged="mainScrollView_ScrollChanged" SnapsToDevicePixels="True" UseLayoutRounding="True">
                 <StackPanel x:Name="pages" Orientation="Vertical" Background="Transparent" PreviewMouseDown="Pages_MouseDown"  PreviewMouseUp="Pages_PreviewMouseUp" MouseLeave="Pages_MouseLeave" SnapsToDevicePixels="True" UseLayoutRounding="True" />
             </controls:AnimatedScrollViewer>
+        </Grid>
+        <Grid Grid.Row="2">
+            <!-- ToDo: *** Localize -->
+            <Fluent:StatusBar x:Name="MainStatusBar" Visibility="Collapsed">
+                <Fluent:StatusBarItem Title="Speichern" HorizontalAlignment="Left">
+                    <StackPanel Orientation="Horizontal" Margin="5">
+                        <TextBlock Text="Speichern ..." />
+                        <ProgressBar Width="200" Margin="3" IsIndeterminate="True" />
+                    </StackPanel>
+                </Fluent:StatusBarItem>
+            </Fluent:StatusBar>
         </Grid>
     </Grid>
 </Fluent:RibbonWindow>

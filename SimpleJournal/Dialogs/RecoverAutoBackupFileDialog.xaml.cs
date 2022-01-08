@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Input;
@@ -38,7 +39,7 @@ namespace SimpleJournal.Dialogs
                 // Add all files to listBox
                 foreach (var file in sortedBackupFiles)
                 {
-                    Journal journal = Journal.LoadJournal(file.FullName, true);
+                    Journal journal = Journal.LoadJournalAsync(file.FullName, true).Result;
                     var bdi = new BackupDataItem()
                     {
                         FileInfo = file,
@@ -104,7 +105,7 @@ namespace SimpleJournal.Dialogs
             {
                 try
                 {
-                    var journal = Journal.LoadJournal(file.FullName, true);
+                    var journal = Journal.LoadJournalAsync(file.FullName, true).Result;
                     if (journal.IsBackup)
                     {
                         int pID = journal.ProcessID;
@@ -181,7 +182,7 @@ namespace SimpleJournal.Dialogs
             return false;
         }
 
-        private string RecoverFile(BackupDataItem backupDataItem, bool openAfterRecover, bool silent, string folderPath = "")
+        private async Task<string> RecoverFile(BackupDataItem backupDataItem, bool openAfterRecover, bool silent, string folderPath = "")
         {
             string pathToRecover = string.Empty;
             if (!string.IsNullOrEmpty(backupDataItem.Path))
@@ -202,11 +203,11 @@ namespace SimpleJournal.Dialogs
             try
             {
                 // Load journal
-                var journal = Journal.LoadJournal(backupDataItem.FileInfo.FullName, true);
+                var journal = await Journal.LoadJournalAsync(backupDataItem.FileInfo.FullName, true);
                 journal.IsBackup = false;
 
                 // Save it to another path
-                journal.Save(pathToRecover, true);
+                await journal.SaveAsync(pathToRecover, true);
 
                 journal.Pages.Clear();
                 journal = null;
@@ -298,7 +299,7 @@ namespace SimpleJournal.Dialogs
                 
         }
 
-        private void ButtonRecoverAll_Click(object sender, RoutedEventArgs e)
+        private async void ButtonRecoverAll_Click(object sender, RoutedEventArgs e)
         {
             // Determine if there are backups with no origin - we need to show an FolderBrowserDialog,
             // but not in RecoverFile each time, but rather once (yet)
@@ -320,8 +321,8 @@ namespace SimpleJournal.Dialogs
             foreach (var item in temp)
             {
                 // Pass path to make sure opening the FolderBrowserDialog only once!
-                string pathToRecover = RecoverFile(item, false, true, path);
-                filesToOpen.Add(pathToRecover);                
+                string pathToRecover = await RecoverFile(item, false, true, path);
+                filesToOpen.Add(pathToRecover);
             }
 
             // Open all files AFTER restoring not WHILE restoring
