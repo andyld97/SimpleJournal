@@ -122,4 +122,17 @@
         SelectedPageRange,
         SinglePage
     }
+
+    public enum ProgressState
+    {
+        Start,
+        Completed
+    }
+
+    public enum StateAction
+    {
+        Saving,
+        ExportPDF,
+        Export,
+    }
 }

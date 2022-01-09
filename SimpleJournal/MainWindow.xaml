@@ -373,11 +373,10 @@
             </controls:AnimatedScrollViewer>
         </Grid>
         <Grid Grid.Row="2">
-            <!-- ToDo: *** Localize -->
             <Fluent:StatusBar x:Name="MainStatusBar" Visibility="Collapsed">
                 <Fluent:StatusBarItem Title="Speichern" HorizontalAlignment="Left">
                     <StackPanel Orientation="Horizontal" Margin="5">
-                        <TextBlock Text="Speichern ..." />
+                        <TextBlock x:Name="TextStatusBar" />
                         <ProgressBar Width="200" Margin="3" IsIndeterminate="True" />
                     </StackPanel>
                 </Fluent:StatusBarItem>

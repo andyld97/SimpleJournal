@@ -6,14 +6,27 @@
         xmlns:local="clr-namespace:SimpleJournal.Dialogs"
         xmlns:res="clr-namespace:SimpleJournal.Properties"
         mc:Ignorable="d"
-        Title="{x:Static res:Resources.strPleaseWaitTitle}" Height="110" Width="600" 
+        Title="{x:Static res:Resources.strPleaseWaitTitle}" 
+        SizeToContent="Height" Width="500" 
         ResizeMode="NoResize"
         WindowStartupLocation="CenterOwner" 
         Background="{DynamicResource WhiteBrush}">
     <Grid Background="Transparent">
         <StackPanel Margin="2" Background="Transparent">
-            <TextBlock x:Name="txtInfo" Margin="5" FontSize="16" TextAlignment="Left" Text="{x:Static res:Resources.strWatingText}" Foreground="{DynamicResource BlackBrush}"/>
-            <ProgressBar x:Name="prgProgress" IsIndeterminate="True" Height="20" Margin="5" />
+            <StackPanel.Resources>
+                <Style TargetType="{x:Type TextBlock}">
+                    <Setter Property="Foreground"  Value="{DynamicResource BlackBrush}" />
+                </Style>
+            </StackPanel.Resources>
+            <TextBlock x:Name="txtInfo" Margin="5" FontSize="15" TextAlignment="Left" Text="{x:Static res:Resources.strWatingText}"/>
+            
+            <!-- ToDo: Localize -->
+            
+            <TextBlock Text="Aktueller Fortschritt:" Margin="5,5,5,0" />
+            <ProgressBar x:Name="prgProgress2" IsIndeterminate="True" Height="15" Margin="5" />
+
+            <TextBlock Text="Gesamtfortschritt:" Margin="5,5,5,0" />
+            <ProgressBar x:Name="prgProgress" IsIndeterminate="True" Height="15" Margin="5" />
         </StackPanel>
     </Grid>
 </Window>

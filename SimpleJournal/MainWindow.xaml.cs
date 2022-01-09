@@ -243,16 +243,11 @@ namespace SimpleJournal
                     TextExportStatus.Text = e;
             };
 
-            Journal.OnSaving += delegate (object sender, EventArgs e)
+            State.OnStateChanged += delegate (string message, ProgressState state)
             {
-                MainStatusBar.Visibility = Visibility.Visible;
+                MainStatusBar.Visibility = (state == ProgressState.Start ? Visibility.Visible : Visibility.Collapsed);
+                TextStatusBar.Text = message;
             };
-
-            Journal.OnSavingFinished += delegate (object sender, EventArgs e)
-            {
-                MainStatusBar.Visibility = Visibility.Collapsed;
-            };
-
 
             // Boot with fullscreen
             left = Left;
@@ -2959,16 +2954,19 @@ namespace SimpleJournal
                 var dialog = new WaitingDialog(System.IO.Path.GetFileNameWithoutExtension(fileName), 1) { Owner = this };
                 try
                 {
+                    dialog.Show();
                     Journal currentJournal = await Journal.LoadJournalAsync(fileName);
 
                     if (currentJournal == null)
                     {
+                        dialog.Close();
                         MessageBox.Show(Properties.Resources.strFailedToLoadJournalFromNetwork, Properties.Resources.strFailedToLoadJournalTitle, MessageBoxButton.OK, MessageBoxImage.Error);
                         return;
                     }
 
                     if (currentJournal.IsBackup)
                     {
+                        dialog.Close();
                         MessageBox.Show(Properties.Resources.strBackupFileCannotBeOpened, Properties.Resources.strBackupFileCannotBeOpenedTitle, MessageBoxButton.OK, MessageBoxImage.Error);
                         return;
                     }
@@ -2984,10 +2982,12 @@ namespace SimpleJournal
 
                                 // Try to focus the instance where it is
                                 ProcessHelper.BringProcessToFront(currentJournal.ProcessID);
+                                dialog.Close();
                                 return;
                             }
                             else
                             {
+                                dialog.Close();
                                 MessageBox.Show(Properties.Resources.strJournalIsAlreadyOpenedInTheSameWindow, Properties.Resources.strJournalIsAlreadyOpenedTitle, MessageBoxButton.OK, MessageBoxImage.Error);
                                 return;
                             }
@@ -3018,7 +3018,6 @@ namespace SimpleJournal
 
                     ClearJournal();
                     RecentlyOpenedDocuments.AddDocument(fileName);
-                    dialog.Show();
 
                     int pageCount = 0;
                     double progress = 0;

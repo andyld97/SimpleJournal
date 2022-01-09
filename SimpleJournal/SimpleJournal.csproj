@@ -332,7 +332,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Fluent.Ribbon" Version="9.0.1" />
-    <PackageReference Include="Magick.NET-Q16-AnyCPU" Version="8.4.0" />
+    <PackageReference Include="Magick.NET-Q16-AnyCPU" Version="8.5.0" />
     <PackageReference Include="Magick.NET.Core" Version="8.5.0" />
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.1054.31" />

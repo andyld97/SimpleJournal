@@ -27,9 +27,9 @@ namespace SimpleJournal.Helper
 
         public static async Task ExportJournalAsPDF(string outputPath, List<IPaper> pages)
         {
-            // ToDo: *** Show a progress dialog
+            State.SetAction(StateAction.ExportPDF, ProgressState.Start);
             // ToDo: *** Error Handling
-            // ToDo: *** Localize strings
+            // This method shouldn't freeze the whole gui (it's better already)
 
             using (MagickImageCollection imagesToPdf = new MagickImageCollection())
             {
@@ -44,7 +44,11 @@ namespace SimpleJournal.Helper
                     {
                         encoder.Save(ms);
                         ms.Seek(0, System.IO.SeekOrigin.Begin);
-                        imagesToPdf.Add(new MagickImage(ms));
+
+                        await Task.Run(() => {
+
+                            imagesToPdf.Add(new MagickImage(ms));
+                        });                        
                     }
 
                     rtb.Clear();
@@ -52,11 +56,12 @@ namespace SimpleJournal.Helper
                     encoder.Frames.Clear();
                     encoder = null;
                 }
+
                 await imagesToPdf.WriteAsync(outputPath);
                 imagesToPdf.Dispose();
             }
 
-            System.Windows.MessageBox.Show("Fertig");
+            State.SetAction(StateAction.ExportPDF, ProgressState.Completed);
         }
     }
 }

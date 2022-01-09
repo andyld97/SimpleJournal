@@ -141,9 +141,6 @@ namespace SimpleJournal.Data
             return new Journal();
         }
 
-        public static EventHandler OnSaving;
-        public static EventHandler OnSavingFinished;
-
         public async Task<bool> UpdateJournalInfoAsync(string filePath)
         {
             if (!wasSavedAlready)
@@ -195,7 +192,7 @@ namespace SimpleJournal.Data
             try
             {
                 if (!quiet)
-                    OnSaving?.Invoke(this, EventArgs.Empty);
+                    State.SetAction(StateAction.Saving, ProgressState.Start);
 
                 if (wasSavedAlready)
                 {
@@ -267,7 +264,7 @@ namespace SimpleJournal.Data
                     wasSavedAlready = true;
 
                 if (!quiet)
-                    OnSavingFinished?.Invoke(this, EventArgs.Empty);
+                    State.SetAction(StateAction.Saving, ProgressState.Completed);
 
                 retVal = true;
 
@@ -283,7 +280,7 @@ namespace SimpleJournal.Data
             }
 
             if (!quiet)
-                OnSavingFinished?.Invoke(this, EventArgs.Empty);
+                State.SetAction(StateAction.Saving, ProgressState.Completed);
 
             lock (sync)
                 isSaving = false;
