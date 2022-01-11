@@ -237,6 +237,7 @@ Many thanks ...
   </data>
   <data name="strBackwards" xml:space="preserve">
     <value>Undo</value>
+    <comment>MainWindow.xaml</comment>
   </data>
   <data name="strBackwardsDescription" xml:space="preserve">
     <value>Undos the last action</value>
@@ -1728,7 +1729,7 @@ Here I would like to give you some important hints, which will help you to handl
     <comment>*</comment>
   </data>
   <data name="strWatingText" xml:space="preserve">
-    <value>Please wait while "{0}" is loading (page {1}/{2}) ...</value>
+    <value>Please wait while document "{0}" is loading ...</value>
     <comment>WaitingDialog.xaml</comment>
   </data>
   <data name="strWindow" xml:space="preserve">
@@ -1895,5 +1896,50 @@ Alternatively, you can use the normal version of SimpleJournal!</value>
   <data name="strInsertImageOrText" xml:space="preserve">
     <value>Image/Text</value>
     <comment>*</comment>
+  </data>
+  <data name="strExportAsPDF" xml:space="preserve">
+    <value>Export as PDF</value>
+  </data>
+  <data name="strFailedToExportJournalAsPDF" xml:space="preserve">
+    <value>Error while exporting the journal as a PDF file</value>
+  </data>
+  <data name="strStateSaving" xml:space="preserve">
+    <value>Saving ...</value>
+  </data>
+  <data name="strStateExportAsPDF" xml:space="preserve">
+    <value>Export PDF ...</value>
+  </data>
+  <data name="strStateExportAsJournal" xml:space="preserve">
+    <value>Export Journal ...</value>
+  </data>
+  <data name="strStatePrinting" xml:space="preserve">
+    <value>Print Journal ...</value>
+  </data>
+  <data name="strPDFFilter" xml:space="preserve">
+    <value>PDF-Document|*.pdf</value>
+    <comment>*</comment>
+  </data>
+  <data name="strPDFDialogTitle" xml:space="preserve">
+    <value>Save as PDF ...</value>
+    <comment>*</comment>
+  </data>
+  <data name="strPrintingError" xml:space="preserve">
+    <value>A critical error has occurred while printing</value>
+  </data>
+  <data name="strWaitingDialogTotalProgress" xml:space="preserve">
+    <value>Total Progress:</value>
+    <comment>WaitingDialog.xaml</comment>
+  </data>
+  <data name="strWaitingDialogCurrentProgress" xml:space="preserve">
+    <value>Current Progress:</value>
+    <comment>WaitingDialog.xaml</comment>
+  </data>
+  <data name="strWaitingDialogReadingDocument" xml:space="preserve">
+    <value>Reading Document ...</value>
+    <comment>WaitingDialog.xaml</comment>
+  </data>
+  <data name="strWaitingDialogReadingPage" xml:space="preserve">
+    <value>Reading page {0} of {1} ...</value>
+    <comment>WaitingDialog.xaml</comment>
   </data>
 </root>

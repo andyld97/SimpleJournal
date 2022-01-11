@@ -8,24 +8,23 @@ namespace SimpleJournal.Dialogs
     public partial class WaitingDialog : Window
     {
         private readonly string text = Properties.Resources.strWatingText;
-        private readonly string documentName = string.Empty;
 
-        public WaitingDialog(string documentName, int pages)
+        public WaitingDialog(string documentName)
         {
             InitializeComponent();
-            this.documentName = documentName;
-            txtInfo.Text = text.Replace("{0}", documentName).Replace("{1}", "1").Replace("{2}", pages.ToString());
+
+            Title = string.Format(text, documentName);
         }
 
-        public void SetProgress(double d, int pageFrom, int pageTo)
+        public void SetProgress(double value, int pageFrom, int pageTo)
         {
             Dispatcher.Invoke(() => {
 
-                prgProgress.IsIndeterminate = false;
-                prgProgress.Maximum = 1;
-                prgProgress.Value = d;
+                ProgressTotal.IsIndeterminate = false;
+                ProgressTotal.Maximum = 1;
+                ProgressTotal.Value = value;
 
-                txtInfo.Text = text.Replace("{0}", documentName).Replace("{1}", pageFrom.ToString()).Replace("{2}", pageTo.ToString());
+                TextCurrentStatus.Text = string.Format(Properties.Resources.strWaitingDialogReadingPage, pageFrom, pageTo);
             });            
         }
     }

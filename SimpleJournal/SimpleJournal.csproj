@@ -102,6 +102,7 @@
     <None Remove="resources\dotted.png" />
     <None Remove="resources\managment\adddottedpagedown.png" />
     <None Remove="resources\managment\adddottedpageup.png" />
+    <None Remove="resources\pdf.png" />
   </ItemGroup>
   <ItemGroup>
     <None Update="app.normal.manifest">
@@ -138,6 +139,7 @@
     <Resource Include="resources\caslogo.ico" />
     <Resource Include="resources\managment\adddottedpagedown.png" />
     <Resource Include="resources\managment\adddottedpageup.png" />
+    <Resource Include="resources\pdf.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="resources\selectarea.png" />

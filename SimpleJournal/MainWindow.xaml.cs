@@ -571,7 +571,6 @@ namespace SimpleJournal
             }
             MessageBox.Show($"{Properties.Resources.strUnexceptedFailure}{Environment.NewLine}{Environment.NewLine}{message}{Environment.NewLine}{Environment.NewLine}{Properties.Resources.strUnexceptedFailureLine1}", Properties.Resources.strUnexceptedFailureTitle, MessageBoxButton.OK, MessageBoxImage.Error);
 
-
             // Try at least to create a backup - if SJ crashes - the user can restore the backup and everything is fine
             await CreateBackup();
         }
@@ -2267,8 +2266,7 @@ namespace SimpleJournal
 
         private async void MenuButtonBackstageExportPdf_Click(object sender, RoutedEventArgs e)
         {
-            // ToDo: *** Localize strings
-            SaveFileDialog dialog = new SaveFileDialog() { Filter = $"PDF-Datei|*.pdf", Title = "Als PDF speichern ..." };
+            SaveFileDialog dialog = new SaveFileDialog() { Filter = Properties.Resources.strPDFFilter, Title = Properties.Resources.strPDFDialogTitle };
             var dialogResult = dialog.ShowDialog();
 
             if (dialogResult.HasValue && dialogResult.Value)
@@ -2310,8 +2308,7 @@ namespace SimpleJournal
                 if (printToFilePDF)
                 {
                     // Prevent printing through printQueue instead create a pdf file directly
-                    // ToDo: *** Localize strings
-                    SaveFileDialog dialog = new SaveFileDialog() { Filter = $"PDF-Datei|*.pdf", Title = "Als PDF speichern ..." };
+                    SaveFileDialog dialog = new SaveFileDialog() { Filter = Properties.Resources.strPDFFilter, Title = Properties.Resources.strPDFDialogTitle };
                     var dialogResult = dialog.ShowDialog();
 
                     if (dialogResult.HasValue && dialogResult.Value)
@@ -2327,63 +2324,74 @@ namespace SimpleJournal
                 {
                     // https://stackoverflow.com/a/10139076/6237448
                     // https://stackoverflow.com/questions/8230090/printdialog-with-landscape-and-portrait-pages
-                    // ToDo: *** Find out a way to notify the user when printing is done
-                    // ToDo: *** Try-Catch
+                    // For later: Find out a way to notify the user when printing is done
+                    State.SetAction(StateAction.Printing, ProgressState.Start);
 
-                    List<IPaper> pages = new List<IPaper>();
-         
-                    for (int i = from; i <= to; i++)
-                        pages.Add(CurrentJournalPages[i]);          
-   
-                    var document = new FixedDocument();
-                    Blanco bl = new Blanco();
-
-                    foreach (var item in pages)
+                    try
                     {
-                        var ui = item.Canvas;            
+                        List<IPaper> pages = new List<IPaper>();
 
-                        var pageSize = new Size(bl.Width, bl.Height);
-                        if (item is Custom c && c.Orientation == Orientation.Landscape)
-                            pageSize = new Size(bl.Height, bl.Width);
+                        for (int i = from; i <= to; i++)
+                            pages.Add(CurrentJournalPages[i]);
 
-                        // Create FixedPage
-                        var fixedPage = new FixedPage
+                        var document = new FixedDocument();
+                        Blanco bl = new Blanco();
+
+                        foreach (var item in pages)
                         {
-                            Width = pageSize.Width,
-                            Height = pageSize.Height
+                            var ui = item.Canvas;
+
+                            var pageSize = new Size(bl.Width, bl.Height);
+                            if (item is Custom c && c.Orientation == Orientation.Landscape)
+                                pageSize = new Size(bl.Height, bl.Width);
+
+                            // Create FixedPage
+                            var fixedPage = new FixedPage
+                            {
+                                Width = pageSize.Width,
+                                Height = pageSize.Height
+                            };
+
+                            // Add visual, measure/arrange page.
+                            fixedPage.Children.Add((UIElement)item.ClonePage(true));
+                            fixedPage.Measure(pageSize);
+                            fixedPage.Arrange(new Rect(new Point(), pageSize));
+                            fixedPage.UpdateLayout();
+
+                            // Add page to document
+                            var pageContent = new PageContent();
+                            ((IAddChild)pageContent).AddChild(fixedPage);
+                            document.Pages.Add(pageContent);
+                        }
+
+                        XpsDocumentWriter xpsWriter = PrintQueue.CreateXpsDocumentWriter(pd.PrintQueue);
+                        xpsWriter.WritingPrintTicketRequired += (s, e) =>
+                        {
+                            Orientation orientation = Orientation.Portrait;
+                            var page = pages[e.Sequence - 1];
+
+                            if (page is Custom c)
+                                orientation = c.Orientation;
+
+                            e.CurrentPrintTicket = new PrintTicket();
+                            if (orientation == Orientation.Landscape)
+                                e.CurrentPrintTicket.PageOrientation = PageOrientation.Landscape;
+                            else
+                                e.CurrentPrintTicket.PageOrientation = PageOrientation.Portrait;
                         };
 
-                        // Add visual, measure/arrange page.
-                        fixedPage.Children.Add((UIElement)item.ClonePage(true));
-                        fixedPage.Measure(pageSize);
-                        fixedPage.Arrange(new Rect(new Point(), pageSize));
-                        fixedPage.UpdateLayout();
-
-                        // Add page to document
-                        var pageContent = new PageContent();
-                        ((IAddChild)pageContent).AddChild(fixedPage);
-                        document.Pages.Add(pageContent);
+                        // Use xpsWriter directly instead of pd.PrintDocument - this way, we can print multiple orientations in one printing ticket!!!
+                        // pd.PrintDocument(document.DocumentPaginator, "My Document");
+                        xpsWriter.Write(document.DocumentPaginator);
                     }
-
-                    XpsDocumentWriter xpsWriter = PrintQueue.CreateXpsDocumentWriter(pd.PrintQueue);
-                    xpsWriter.WritingPrintTicketRequired += (s, e) =>
+                    catch (Exception ex)
                     {
-                        Orientation orientation = Orientation.Portrait;
-                        var page = pages[e.Sequence - 1];
-
-                        if (page is Custom c)
-                            orientation = c.Orientation;
-
-                        e.CurrentPrintTicket = new PrintTicket();
-                        if (orientation == Orientation.Landscape)
-                            e.CurrentPrintTicket.PageOrientation = PageOrientation.Landscape;
-                        else
-                            e.CurrentPrintTicket.PageOrientation = PageOrientation.Portrait;
-                    };
-
-                    // Use xpsWriter directly instead of pd.PrintDocument - this way, we can print multiple orientations in one printing ticket!!!
-                    // pd.PrintDocument(document.DocumentPaginator, "My Document");
-                    xpsWriter.Write(document.DocumentPaginator);
+                        MessageBox.Show($"{Properties.Resources.strPrintingError}: {ex.Message}", Properties.Resources.strError, MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                    finally 
+                    {
+                        State.SetAction(StateAction.Printing, ProgressState.Completed);
+                    }
                 }
             }
         }
@@ -2951,7 +2959,7 @@ namespace SimpleJournal
         {
             if (fileName.EndsWith(".journal"))
             {
-                var dialog = new WaitingDialog(System.IO.Path.GetFileNameWithoutExtension(fileName), 1) { Owner = this };
+                var dialog = new WaitingDialog(System.IO.Path.GetFileNameWithoutExtension(fileName)) { Owner = this };
                 try
                 {
                     dialog.Show();
@@ -3168,7 +3176,7 @@ namespace SimpleJournal
             ClearJournal();
 
             double currentScrollOffset = this.mainScrollView.VerticalOffset;
-            var dialog = new WaitingDialog(System.IO.Path.GetFileNameWithoutExtension(currentJournalTitle), 1) { Owner = this };
+            var dialog = new WaitingDialog(System.IO.Path.GetFileNameWithoutExtension(currentJournalTitle)) { Owner = this };
             dialog.Show();
 
             IsEnabled = false;

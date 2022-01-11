@@ -134,5 +134,6 @@
         Saving,
         ExportPDF,
         Export,
+        Printing
     }
 }

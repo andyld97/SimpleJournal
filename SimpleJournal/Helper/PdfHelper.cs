@@ -1,6 +1,8 @@
 ﻿using ImageMagick;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
@@ -27,38 +29,45 @@ namespace SimpleJournal.Helper
 
         public static async Task ExportJournalAsPDF(string outputPath, List<IPaper> pages)
         {
-            State.SetAction(StateAction.ExportPDF, ProgressState.Start);
-            // ToDo: *** Error Handling
             // This method shouldn't freeze the whole gui (it's better already)
+            State.SetAction(StateAction.ExportPDF, ProgressState.Start);
 
-            using (MagickImageCollection imagesToPdf = new MagickImageCollection())
+            try
             {
-                foreach (var page in pages)
+  
+                using (MagickImageCollection imagesToPdf = new MagickImageCollection())
                 {
-                    BmpBitmapEncoder encoder = new BmpBitmapEncoder();
-
-                    RenderTargetBitmap rtb = GeneralHelper.RenderToBitmap(page.Canvas, 1.0, new SolidColorBrush(Colors.White));
-                    encoder.Frames.Add(BitmapFrame.Create(rtb));
-
-                    using (System.IO.MemoryStream ms = new System.IO.MemoryStream())
+                    foreach (var page in pages)
                     {
-                        encoder.Save(ms);
-                        ms.Seek(0, System.IO.SeekOrigin.Begin);
+                        BmpBitmapEncoder encoder = new BmpBitmapEncoder();
 
-                        await Task.Run(() => {
+                        RenderTargetBitmap rtb = GeneralHelper.RenderToBitmap(page.Canvas, 1.0, new SolidColorBrush(Colors.White));
+                        encoder.Frames.Add(BitmapFrame.Create(rtb));
 
-                            imagesToPdf.Add(new MagickImage(ms));
-                        });                        
+                        using (System.IO.MemoryStream ms = new System.IO.MemoryStream())
+                        {
+                            encoder.Save(ms);
+                            ms.Seek(0, System.IO.SeekOrigin.Begin);
+
+                            await Task.Run(() =>
+                            {
+                                imagesToPdf.Add(new MagickImage(ms));
+                            });
+                        }
+
+                        rtb.Clear();
+                        rtb = null;
+                        encoder.Frames.Clear();
+                        encoder = null;
                     }
 
-                    rtb.Clear();
-                    rtb = null;
-                    encoder.Frames.Clear();
-                    encoder = null;
+                    await imagesToPdf.WriteAsync(outputPath);
+                    imagesToPdf.Dispose();
                 }
-
-                await imagesToPdf.WriteAsync(outputPath);
-                imagesToPdf.Dispose();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"{Properties.Resources.strFailedToExportJournalAsPDF}\n\n{Properties.Resources.strPDFConversationDialog_GhostscriptMessage}: {ex.Message}", Properties.Resources.strError, MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
             State.SetAction(StateAction.ExportPDF, ProgressState.Completed);

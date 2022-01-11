@@ -13,7 +13,7 @@ namespace SimpleJournal.Data
     public class Journal
     {
         private static bool isSaving = false;
-        private static object sync = new object();
+        private static readonly object sync = new object();
 
         [XmlIgnore]
         private bool wasSavedAlready = false;
@@ -122,9 +122,7 @@ namespace SimpleJournal.Data
                             }
 
                             if (oldCount != count)
-                            {
-                                // ToDO: *** something is wrong!!
-                            }
+                                throw new Exception("Invalid or corrupt file, cannot load data");
 
 
                             return journal;
@@ -187,7 +185,7 @@ namespace SimpleJournal.Data
                     isSaving = true;
             }
 
-            bool retVal = false;
+            bool retVal;
 
             try
             {
@@ -196,7 +194,7 @@ namespace SimpleJournal.Data
 
                 if (wasSavedAlready)
                 {
-                    // ToDo: *** Only update the archive and (eventually delete pages/images, add pages)
+                    // ToDo: ***Only update the archive and (eventually delete pages/images, add pages)
                     // If the file exists already and is valid zip file we do not need to re-create the entire file, but open
                     // it as as ZipArchiveMode.Update and only update the bin files
                     // But remember to ensure that if a PdfJournalPage gets deleted, we need to delete the file from the zip archive also!
@@ -244,7 +242,7 @@ namespace SimpleJournal.Data
                             pgCount++;
                         }
 
-                        // Write amount of pages to load
+                        // Write journal infos
                         var info = zipArchive.CreateEntry("info.bin");
                         using (System.IO.Stream stream = info.Open())
                         {

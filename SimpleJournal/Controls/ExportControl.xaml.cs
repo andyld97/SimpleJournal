@@ -27,7 +27,7 @@ namespace SimpleJournal.Controls
         private Window owner;
 
         public event PropertyChangedEventHandler PropertyChanged;
-        private List<Expander> expanders = new List<Expander>();
+        private readonly List<Expander> expanders = new List<Expander>();
 
         public ExportMode SelectedExportMode
         {
@@ -283,6 +283,7 @@ namespace SimpleJournal.Controls
                 Title = $"{Properties.Resources.strExport} ({Properties.Resources.strPage} {to + 1}/{to + 1})";
 
                 await journal.SaveAsync(ofd.FileName);
+
                 MainGrid.IsEnabled = true;
                 Title = Properties.Resources.strExportPages;
                 MessageBox.Show(owner, Properties.Resources.strExportFinished, Properties.Resources.strSuccess, MessageBoxButton.OK, MessageBoxImage.Information);

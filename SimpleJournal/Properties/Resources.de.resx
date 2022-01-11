@@ -1726,7 +1726,7 @@ Hier möchte ich Ihnen noch ein paar wichtige Hinweise geben, die Ihnen helfen w
     <comment>*</comment>
   </data>
   <data name="strWatingText" xml:space="preserve">
-    <value>Bitte warten Sie während "{0}" geladen wird (Seite {1}/{2}) ...</value>
+    <value>Bitte warten Sie während das Dokument "{0}" geladen wird ...</value>
     <comment>WaitingDialog.xaml</comment>
   </data>
   <data name="strWindow" xml:space="preserve">
@@ -1889,5 +1889,44 @@ Alternativ können Sie die normale Version von SimpleJournal verwenden!</value>
   </data>
   <data name="strInsertNewObjects" xml:space="preserve">
     <value>Neue Objekte</value>
+  </data>
+  <data name="strExportAsPDF" xml:space="preserve">
+    <value>Als PDF exportieren</value>
+  </data>
+  <data name="strFailedToExportJournalAsPDF" xml:space="preserve">
+    <value>Fehler beim Exportieren des Journals als PDF-Datei</value>
+  </data>
+  <data name="strStateExportAsJournal" xml:space="preserve">
+    <value>Journal exportieren ...</value>
+  </data>
+  <data name="strStateExportAsPDF" xml:space="preserve">
+    <value>PDF exportieren ...</value>
+  </data>
+  <data name="strStatePrinting" xml:space="preserve">
+    <value>Journal drucken ...</value>
+  </data>
+  <data name="strStateSaving" xml:space="preserve">
+    <value>Speichern ...</value>
+  </data>
+  <data name="strPDFFilter" xml:space="preserve">
+    <value>PDF-Datei|*.pdf</value>
+  </data>
+  <data name="strPDFDialogTitle" xml:space="preserve">
+    <value>Als PDF speichern ...</value>
+  </data>
+  <data name="strPrintingError" xml:space="preserve">
+    <value>Es ist ein kritischer Fehler beim Drucken aufgetretem</value>
+  </data>
+  <data name="strWaitingDialogCurrentProgress" xml:space="preserve">
+    <value>Aktueller Fortschritt:</value>
+  </data>
+  <data name="strWaitingDialogTotalProgress" xml:space="preserve">
+    <value>Gesamtfortschritt:</value>
+  </data>
+  <data name="strWaitingDialogReadingPage" xml:space="preserve">
+    <value>Lese Seite {0} von {1} ...</value>
+  </data>
+  <data name="strWaitingDialogReadingDocument" xml:space="preserve">
+    <value>Lese Dokument ...</value>
   </data>
 </root>

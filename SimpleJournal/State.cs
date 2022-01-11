@@ -13,15 +13,15 @@ namespace SimpleJournal
 
         public static void SetAction(StateAction action, ProgressState state)
         {
-            // ToDo: *** Translate message
             // Generate message
             string message = string.Empty;
 
             switch (action)
             {
-                case StateAction.Saving: message = "Speichern ..."; break;
-                case StateAction.ExportPDF: message = "PDF exportieren ..."; break;
-                case StateAction.Export: message = "Journal exportieren ..."; break;
+                case StateAction.Saving: message = Properties.Resources.strStateSaving; break;
+                case StateAction.ExportPDF: message = Properties.Resources.strStateExportAsPDF; break;
+                case StateAction.Export: message =Properties.Resources.strStateExportAsJournal; break;
+                case StateAction.Printing: message = Properties.Resources.strStatePrinting; break;
             }
 
             OnStateChanged?.Invoke(message, state);

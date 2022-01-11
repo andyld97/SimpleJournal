@@ -3,11 +3,10 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:SimpleJournal.Dialogs"
         xmlns:res="clr-namespace:SimpleJournal.Properties"
         mc:Ignorable="d"
         Title="{x:Static res:Resources.strPleaseWaitTitle}" 
-        SizeToContent="Height" Width="500" 
+        SizeToContent="Height" Width="600" 
         ResizeMode="NoResize"
         WindowStartupLocation="CenterOwner" 
         Background="{DynamicResource WhiteBrush}">
@@ -18,15 +17,17 @@
                     <Setter Property="Foreground"  Value="{DynamicResource BlackBrush}" />
                 </Style>
             </StackPanel.Resources>
-            <TextBlock x:Name="txtInfo" Margin="5" FontSize="15" TextAlignment="Left" Text="{x:Static res:Resources.strWatingText}"/>
-            
-            <!-- ToDo: Localize -->
-            
-            <TextBlock Text="Aktueller Fortschritt:" Margin="5,5,5,0" />
-            <ProgressBar x:Name="prgProgress2" IsIndeterminate="True" Height="15" Margin="5" />
 
-            <TextBlock Text="Gesamtfortschritt:" Margin="5,5,5,0" />
-            <ProgressBar x:Name="prgProgress" IsIndeterminate="True" Height="15" Margin="5" />
+            <TextBlock x:Name="TextTitle" Visibility="Collapsed" Margin="5" FontSize="14" TextAlignment="Left" Text="{x:Static res:Resources.strWatingText}"/>
+
+            <TextBlock Margin="5,5,5,0">
+                <Run Text="{x:Static res:Resources.strWaitingDialogCurrentProgress}" FontWeight="Bold" />
+                <Run x:Name="TextCurrentStatus" Text="{x:Static res:Resources.strWaitingDialogReadingDocument}" />
+            </TextBlock>
+            <ProgressBar x:Name="ProgressCurrent" IsIndeterminate="True" Height="15" Margin="5" />
+
+            <TextBlock Text="{x:Static res:Resources.strWaitingDialogTotalProgress}" Margin="5,5,5,0" FontWeight="Bold" />
+            <ProgressBar x:Name="ProgressTotal" IsIndeterminate="False" Height="15" Margin="5" />
         </StackPanel>
     </Grid>
 </Window>

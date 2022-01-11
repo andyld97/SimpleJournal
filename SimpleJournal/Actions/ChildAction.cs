@@ -17,7 +17,7 @@ namespace SimpleJournal.Actions
         public override void Apply(DrawingCanvas canvas)
         {
             // Remove added child
-            // TODO: Sidebar must be refreshed
+            // ToDo: *** Sidebar must be refreshed
             canvas.Children.Remove(child);
         }
 
@@ -39,7 +39,7 @@ namespace SimpleJournal.Actions
         public override void Apply(DrawingCanvas canvas)
         {
             // Add removed child
-            // TODO: Sidebar must be refresh
+            // ToDo: *** Sidebar must be refreshed
             canvas.Children.Add(child);
         }
 

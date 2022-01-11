@@ -993,6 +993,15 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Export as PDF.
+        /// </summary>
+        public static string strExportAsPDF {
+            get {
+                return ResourceManager.GetString("strExportAsPDF", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Current Page.
         /// </summary>
         public static string strExportCurrentPage {
@@ -1115,6 +1124,15 @@ namespace SimpleJournal.Properties {
         public static string strFailedToDeleteSomeBackupsTitle {
             get {
                 return ResourceManager.GetString("strFailedToDeleteSomeBackupsTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error while exporting the journal as a PDF file.
+        /// </summary>
+        public static string strFailedToExportJournalAsPDF {
+            get {
+                return ResourceManager.GetString("strFailedToExportJournalAsPDF", resourceCulture);
             }
         }
         
@@ -2374,6 +2392,24 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Save as PDF ....
+        /// </summary>
+        public static string strPDFDialogTitle {
+            get {
+                return ResourceManager.GetString("strPDFDialogTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to PDF-Document|*.pdf.
+        /// </summary>
+        public static string strPDFFilter {
+            get {
+                return ResourceManager.GetString("strPDFFilter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Pen 1.
         /// </summary>
         public static string strPen1 {
@@ -2622,6 +2658,15 @@ namespace SimpleJournal.Properties {
         public static string strPrinting {
             get {
                 return ResourceManager.GetString("strPrinting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A critical error has occurred while printing.
+        /// </summary>
+        public static string strPrintingError {
+            get {
+                return ResourceManager.GetString("strPrintingError", resourceCulture);
             }
         }
         
@@ -3524,6 +3569,42 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Export Journal ....
+        /// </summary>
+        public static string strStateExportAsJournal {
+            get {
+                return ResourceManager.GetString("strStateExportAsJournal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Export PDF ....
+        /// </summary>
+        public static string strStateExportAsPDF {
+            get {
+                return ResourceManager.GetString("strStateExportAsPDF", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Print Journal ....
+        /// </summary>
+        public static string strStatePrinting {
+            get {
+                return ResourceManager.GetString("strStatePrinting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Saving ....
+        /// </summary>
+        public static string strStateSaving {
+            get {
+                return ResourceManager.GetString("strStateSaving", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to S.
         /// </summary>
         public static string strStrikethrough {
@@ -3992,6 +4073,42 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Current Progress:.
+        /// </summary>
+        public static string strWaitingDialogCurrentProgress {
+            get {
+                return ResourceManager.GetString("strWaitingDialogCurrentProgress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reading Document ....
+        /// </summary>
+        public static string strWaitingDialogReadingDocument {
+            get {
+                return ResourceManager.GetString("strWaitingDialogReadingDocument", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reading page {0} of {1} ....
+        /// </summary>
+        public static string strWaitingDialogReadingPage {
+            get {
+                return ResourceManager.GetString("strWaitingDialogReadingPage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total Progress:.
+        /// </summary>
+        public static string strWaitingDialogTotalProgress {
+            get {
+                return ResourceManager.GetString("strWaitingDialogTotalProgress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Do you really want to clear this page?.
         /// </summary>
         public static string strWantToClearPage {
@@ -4055,7 +4172,7 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please wait while &quot;{0}&quot; is loading (page {1}/{2}) ....
+        ///   Looks up a localized string similar to Please wait while document &quot;{0}&quot; is loading ....
         /// </summary>
         public static string strWatingText {
             get {
