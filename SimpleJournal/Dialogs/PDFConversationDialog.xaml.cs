@@ -51,6 +51,16 @@ namespace SimpleJournal.Dialogs
                 return;
             }
 
+            bool useAllPages = RadioAllPages.IsChecked.Value;
+            int pageFrom = NumPageFrom.Value;
+            int pageTo = NumPageTo.Value;
+
+            if (!useAllPages && pageFrom > pageTo)
+            {
+                MessageBox.Show(this, Properties.Resources.strPDFConversationDialog_InvalidInputMessage, Properties.Resources.strError, MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
             PanelInput.Visibility = Visibility.Hidden;
             PanelProgress.Visibility = Visibility.Visible;
             PanelInput.IsEnabled = false;
@@ -76,22 +86,42 @@ namespace SimpleJournal.Dialogs
             // Create a journal
             Journal journal = new Journal();
 
+            // ToDo: *** Limit pages to 100 (if more split the document into multiple documents ..100, ..200)
+
             if (images != null)
             {
                 Progress.IsIndeterminate = false;
                 int count = images.Count;
 
-                for (int i = 0; i < count; i++)
+                if (pageTo > count)
+                {
+                    int nPageTo = Math.Min(100, count);
+                    string message = string.Format(Properties.Resources.strPDFCOnversationDialog_TooFewPagesMessage, nPageTo, pageFrom, nPageTo);
+                    if (MessageBox.Show(this, message, Properties.Resources.strSure, MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.No)
+                    {
+                        PanelInput.Visibility = Visibility.Visible;
+                        PanelProgress.Visibility = Visibility.Collapsed;
+                        PanelInput.IsEnabled = true;
+                        return;
+                    }
+                    else
+                        pageTo = nPageTo;
+                }
+
+                int start = (useAllPages ? 0 : pageFrom - 1); 
+                int end = (useAllPages ? count : pageTo);
+
+                for (int i = start; i < end; i++)
                 {
                     var image = images[i];
                     int pg = i + 1;
              
-                    double percentage = Math.Round((pg / (double)count) * 100.0);
+                    double percentage = Math.Round((pg / (double)end) * 100.0);
 
                     // Update gui status message
                     Dispatcher.Invoke(new Action(() => 
                     {
-                        TextState.Text = string.Format(Properties.Resources.strPDFConversationDialog_ConversationStatusMessage, pg, count);
+                        TextState.Text = string.Format(Properties.Resources.strPDFConversationDialog_ConversationStatusMessage, pg, end );
                         Progress.Value = percentage;
                     }));
 

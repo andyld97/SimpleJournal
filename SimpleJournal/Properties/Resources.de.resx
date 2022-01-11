@@ -1929,4 +1929,22 @@ Alternativ können Sie die normale Version von SimpleJournal verwenden!</value>
   <data name="strWaitingDialogReadingDocument" xml:space="preserve">
     <value>Lese Dokument ...</value>
   </data>
+  <data name="strSure" xml:space="preserve">
+    <value>Sicher?</value>
+  </data>
+  <data name="strPDFCOnversationDialog_TooFewPagesMessage" xml:space="preserve">
+    <value>Das ausgewählte Dokument hat nur {0} Seiten! Möchten Sie stattdessen nur die Seiten {1} bis {2} konvertieren?</value>
+  </data>
+  <data name="strPDFConversationDialog_AllPages" xml:space="preserve">
+    <value>Alle Seiten konvertieren (max. 100 pro Journal)</value>
+  </data>
+  <data name="strPDFConversationDialog_ConvertOnlySelectedPages" xml:space="preserve">
+    <value>Nur bestimmte Seiten konvertieren</value>
+  </data>
+  <data name="strPDFConversationDialog_From" xml:space="preserve">
+    <value>Von:</value>
+  </data>
+  <data name="strPDFConversationDialog_To" xml:space="preserve">
+    <value>Bis:</value>
+  </data>
 </root>

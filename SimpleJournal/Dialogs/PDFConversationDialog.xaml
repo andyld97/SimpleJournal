@@ -3,12 +3,16 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:res="clr-namespace:SimpleJournal.Properties"
+        xmlns:res="clr-namespace:SimpleJournal.Properties" xmlns:controls="clr-namespace:SimpleJournal.Controls"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Background="{DynamicResource WhiteBrush}"
-        Title="{x:Static res:Resources.strPDFConversationDialog_Title}" Height="280"  Width="500">
+        Title="{x:Static res:Resources.strPDFConversationDialog_Title}" SizeToContent="Height" Width="500">
 
     <Window.Resources>
+        <Style TargetType="{x:Type RadioButton}">
+            <Setter Property="Foreground" Value="{DynamicResource BlackBrush}" />
+            <Setter Property="Margin" Value="3" />
+        </Style>
         <Style TargetType="{x:Type TextBlock}">
             <Setter Property="Foreground" Value="{DynamicResource BlackBrush}" />
             <Setter Property="Margin" Value="3" />
@@ -26,7 +30,7 @@
 
     <Grid>
         <StackPanel x:Name="PanelProgress" Margin="2" Visibility="Collapsed" VerticalAlignment="Center">
-            <TextBlock Margin="5">
+            <TextBlock Margin="5" TextWrapping="Wrap">
                 <Run Text="Status:" FontWeight="Bold" />
                 <Run x:Name="TextState" />
             </TextBlock>
@@ -45,6 +49,16 @@
                     <Run Foreground="Orange" FontWeight="Bold" Text="{x:Static res:Resources.strPDFConversationDialog_Hint}" />
                 </TextBlock>
             </Border>
+
+            <RadioButton x:Name="RadioAllPages" Margin="0,5,0,0" Content="{x:Static res:Resources.strPDFConversationDialog_AllPages}" IsChecked="True" />
+            <RadioButton x:Name="RadioChoosePageRange" Margin="0,5,0,0" Content="{x:Static res:Resources.strPDFConversationDialog_ConvertOnlySelectedPages}" />
+
+            <StackPanel Visibility="{Binding ElementName=RadioChoosePageRange, Path=IsChecked, Converter={StaticResource boolToVisibilityConverter}}" Orientation="Horizontal" HorizontalAlignment="Left">
+                <TextBlock Text="{x:Static res:Resources.strPDFConversationDialog_From}" Margin="25,0,0,0" VerticalAlignment="Center" FontWeight="Bold" />
+                <controls:NumericUpDown x:Name="NumPageFrom" Height="25" Value="1" Maximum="100" Minimum="1" Margin="3" />
+                <TextBlock Text="{x:Static res:Resources.strPDFConversationDialog_To}" Margin="10,0,3,0" VerticalAlignment="Center" FontWeight="Bold" />
+                <controls:NumericUpDown x:Name="NumPageTo" Height="25" Value="100" Maximum="100" Minimum="1" Margin="3" />
+            </StackPanel>
 
             <TextBlock Text="{x:Static res:Resources.strPDFConversationDialog_SourcePath}" />
             <TextBox x:Name="TextSource" IsReadOnly="True" />

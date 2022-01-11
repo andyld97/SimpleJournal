@@ -2266,6 +2266,15 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Convert all pages (max. 100 per journal).
+        /// </summary>
+        public static string strPDFConversationDialog_AllPages {
+            get {
+                return ResourceManager.GetString("strPDFConversationDialog_AllPages", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Select a path where the journal should be saved!.
         /// </summary>
         public static string strPDFConversationDialog_ButtonSearchToolTip {
@@ -2289,6 +2298,15 @@ namespace SimpleJournal.Properties {
         public static string strPDFConversationDialog_Convert {
             get {
                 return ResourceManager.GetString("strPDFConversationDialog_Convert", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Convert only specified pages.
+        /// </summary>
+        public static string strPDFConversationDialog_ConvertOnlySelectedPages {
+            get {
+                return ResourceManager.GetString("strPDFConversationDialog_ConvertOnlySelectedPages", resourceCulture);
             }
         }
         
@@ -2325,6 +2343,15 @@ namespace SimpleJournal.Properties {
         public static string strPDFConversationDialog_Explanation_Line3 {
             get {
                 return ResourceManager.GetString("strPDFConversationDialog_Explanation_Line3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to From:.
+        /// </summary>
+        public static string strPDFConversationDialog_From {
+            get {
+                return ResourceManager.GetString("strPDFConversationDialog_From", resourceCulture);
             }
         }
         
@@ -2388,6 +2415,24 @@ namespace SimpleJournal.Properties {
         public static string strPDFConversationDialog_Title {
             get {
                 return ResourceManager.GetString("strPDFConversationDialog_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to To:.
+        /// </summary>
+        public static string strPDFConversationDialog_To {
+            get {
+                return ResourceManager.GetString("strPDFConversationDialog_To", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The selected document has only {0} pages! Do you want to convert only pages {1} to {2} instead?.
+        /// </summary>
+        public static string strPDFCOnversationDialog_TooFewPagesMessage {
+            get {
+                return ResourceManager.GetString("strPDFCOnversationDialog_TooFewPagesMessage", resourceCulture);
             }
         }
         
@@ -3637,6 +3682,15 @@ namespace SimpleJournal.Properties {
         public static string strSuccess {
             get {
                 return ResourceManager.GetString("strSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sure?.
+        /// </summary>
+        public static string strSure {
+            get {
+                return ResourceManager.GetString("strSure", resourceCulture);
             }
         }
         
