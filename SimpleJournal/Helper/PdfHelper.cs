@@ -1,4 +1,5 @@
 ﻿using ImageMagick;
+using SimpleJournal.Data;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -25,6 +26,24 @@ namespace SimpleJournal.Helper
             var images = new MagickImageCollection();
             await images.ReadAsync(path, settings);
             return images;
+        }
+
+        public static async Task<PdfJournalPage> CreatePdfJournalPage(IMagickImage<ushort> image)
+        {
+            Orientation orientation = image.Width >= image.Height ? Orientation.Landscape : Orientation.Portrait;
+
+            PdfJournalPage pdfJournalPage = null;
+            await Task.Run(() =>
+            {
+                pdfJournalPage = new PdfJournalPage
+                {
+                    PageBackground = image.ToByteArray(MagickFormat.Png),
+                    PaperPattern = PaperType.Custom,
+                    Orientation = orientation
+                };
+            });
+
+            return pdfJournalPage;
         }
 
         public static async Task ExportJournalAsPDF(string outputPath, List<IPaper> pages)

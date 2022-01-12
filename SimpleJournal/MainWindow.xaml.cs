@@ -2495,7 +2495,6 @@ namespace SimpleJournal
                         return;
                     }
 
-
                     await LoadJournal(ofd.FileName);
                 }
             }

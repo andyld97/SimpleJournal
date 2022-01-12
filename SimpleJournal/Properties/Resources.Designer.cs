@@ -2401,6 +2401,15 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Saving Journal &quot;{0}&quot; ....
+        /// </summary>
+        public static string strPDFConversationDialog_Saving {
+            get {
+                return ResourceManager.GetString("strPDFConversationDialog_Saving", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Source path:.
         /// </summary>
         public static string strPDFConversationDialog_SourcePath {
@@ -2433,6 +2442,15 @@ namespace SimpleJournal.Properties {
         public static string strPDFCOnversationDialog_TooFewPagesMessage {
             get {
                 return ResourceManager.GetString("strPDFCOnversationDialog_TooFewPagesMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Write page {0} of {1} in journal &quot;{2}&quot; ....
+        /// </summary>
+        public static string strPDFConversationDialog_WritingPageStatus {
+            get {
+                return ResourceManager.GetString("strPDFConversationDialog_WritingPageStatus", resourceCulture);
             }
         }
         

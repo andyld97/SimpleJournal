@@ -1947,4 +1947,10 @@ Alternativ können Sie die normale Version von SimpleJournal verwenden!</value>
   <data name="strPDFConversationDialog_To" xml:space="preserve">
     <value>Bis:</value>
   </data>
+  <data name="strPDFConversationDialog_WritingPageStatus" xml:space="preserve">
+    <value>Schreibe Seite {0} von {1} in Journal "{2}" ...</value>
+  </data>
+  <data name="strPDFConversationDialog_Saving" xml:space="preserve">
+    <value>Speichere Journal "{0}" ...</value>
+  </data>
 </root>

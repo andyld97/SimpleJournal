@@ -175,7 +175,7 @@ namespace SimpleJournal.Data
             return false;
         }
 
-        public async Task<bool> SaveAsync(string filePath, bool quiet = false)
+        public async Task<bool> SaveAsync(string filePath, bool quiet = false, bool hideStatus = false)
         {
             lock (sync)
             {
@@ -189,7 +189,7 @@ namespace SimpleJournal.Data
 
             try
             {
-                if (!quiet)
+                if (!quiet && !hideStatus)
                     State.SetAction(StateAction.Saving, ProgressState.Start);
 
                 if (wasSavedAlready)
@@ -261,7 +261,7 @@ namespace SimpleJournal.Data
                 if (!wasSavedAlready)
                     wasSavedAlready = true;
 
-                if (!quiet)
+                if (!quiet && !hideStatus)
                     State.SetAction(StateAction.Saving, ProgressState.Completed);
 
                 retVal = true;

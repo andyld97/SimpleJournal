@@ -1885,6 +1885,7 @@ Alternatively, you can use the normal version of SimpleJournal!</value>
   </data>
   <data name="strPDFConversationDialog_ButtonSearchToolTip" xml:space="preserve">
     <value>Select a path where the journal should be saved!</value>
+    <comment>PDFConversationDialog.xaml</comment>
   </data>
   <data name="strAboutTextMagickNET" xml:space="preserve">
     <value>... to</value>
@@ -1964,6 +1965,14 @@ Alternatively, you can use the normal version of SimpleJournal!</value>
   </data>
   <data name="strPDFConversationDialog_To" xml:space="preserve">
     <value>To:</value>
+    <comment>PDFConversationDialog.xaml</comment>
+  </data>
+  <data name="strPDFConversationDialog_Saving" xml:space="preserve">
+    <value>Saving Journal "{0}" ...</value>
+    <comment>PDFConversationDialog.xaml</comment>
+  </data>
+  <data name="strPDFConversationDialog_WritingPageStatus" xml:space="preserve">
+    <value>Write page {0} of {1} in journal "{2}" ...</value>
     <comment>PDFConversationDialog.xaml</comment>
   </data>
 </root>
