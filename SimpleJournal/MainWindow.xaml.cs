@@ -2692,9 +2692,10 @@ namespace SimpleJournal
         {
             base.OnClosing(e);
 
-#pragma warning disable CS0219 // Variable ist zugewiesen, der Wert wird jedoch niemals verwendet
+#if !UWP
             bool close = false;
-#pragma warning restore CS0219 // Variable ist zugewiesen, der Wert wird jedoch niemals verwendet
+#endif
+
             if (!closedButtonWasPressed && DrawingCanvas.Change)
             {
                 // Create a backup before closing - in case of windows will kill the app if the user will not awnser the dialog
@@ -2709,20 +2710,27 @@ namespace SimpleJournal
                 {
                     DeleteAutoSaveBackup(true);
                     e.Cancel = false;
+#if !UWP
                     close = true;
+#endif
                 }
                 else if (result == MessageBoxResult.Yes)
                 {
                     this.btnSaveProject_Click(null, null);
                     DeleteAutoSaveBackup(true);
                     e.Cancel = false;
+
+#if !UWP
                     close = true;
+#endif
                 }
             }
             else
             {
                 DeleteAutoSaveBackup(true);
+#if !UWP
                 close = true;
+#endif
             }
 
 #if !UWP
@@ -2741,11 +2749,11 @@ namespace SimpleJournal
             AboutDialog aboutDialog = new AboutDialog();
             aboutDialog.ShowDialog();
         }
-        #endregion
+#endregion
 
-        #endregion
+#endregion
 
-        #endregion
+#endregion
 
         #region Zoom
 
@@ -2776,7 +2784,7 @@ namespace SimpleJournal
                 btnZoom200.IsChecked = true;
 
             pages.LayoutTransform = lt;
-            // This is for prevent jumping while switching zoom (see User Story #4)
+            // This is for prevent jumping while switching zoom
             mainScrollView.ScrollToVerticalOffset((mainScrollView.VerticalOffset / currentScaleFactor) * scale);
             currentScaleFactor = scale;
 
@@ -2809,7 +2817,7 @@ namespace SimpleJournal
         {
             ZoomByScale(1.8);
         }
-        #endregion
+#endregion
 
         #region Scroll Handling
         private Point p1 = new Point();
@@ -2896,7 +2904,7 @@ namespace SimpleJournal
             mainScrollView.BeginStoryboard(sbScrollViewerAnimation);
         }
 
-        #endregion
+#endregion
 
         #region Internal Save and Load
         private async Task<bool> SaveJournal(string path, bool saveAsBackup = false)
@@ -3178,7 +3186,7 @@ namespace SimpleJournal
         }
 
 
-        #endregion
+#endregion
 
         #region Pagemanagment Dialog
 
@@ -3288,7 +3296,7 @@ namespace SimpleJournal
             PageManagementControl.Initalize(CurrentJournalPages.ToList(), this);
         }
     
-        #endregion
+#endregion
 
         #region Export
 
@@ -3306,7 +3314,7 @@ namespace SimpleJournal
             ExportControl.Initalize(CurrentJournalPages, CurrentJournalPages[cmbPages.SelectedIndex], this);
         }
 
-        #endregion
+#endregion
 
         #region Copy / Paste
         private Data.Clipboard clipboard = new Data.Clipboard();
@@ -3404,7 +3412,7 @@ namespace SimpleJournal
             clipboard.Renew();
         }
 
-        #endregion
+#endregion
 
         #region Insert
 
@@ -3547,7 +3555,7 @@ namespace SimpleJournal
             InsertText(toInsert);
         }
 
-        #endregion
+#endregion
 
         #region Background
 
@@ -3595,7 +3603,7 @@ namespace SimpleJournal
                 mainScrollView.Background = Consts.DefaultBackground;
             }
         }
-        #endregion
+#endregion
 
         #region General Events / Touch
 
@@ -3640,7 +3648,7 @@ namespace SimpleJournal
 #endif
         }
 
-        #endregion
+#endregion
     }
 
     #region Converters
@@ -3692,5 +3700,5 @@ namespace SimpleJournal
             throw new NotImplementedException();
         }
     }
-    #endregion
+#endregion
 }
