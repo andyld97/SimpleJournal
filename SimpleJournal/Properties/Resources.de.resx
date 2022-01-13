@@ -1305,7 +1305,7 @@ Klicken Sie auf Nein, um diesen Hinweis weiterhin zu erhalten!</value>
     <comment>*</comment>
   </data>
   <data name="strSettingsFeatureBar" xml:space="preserve">
-    <value>Weitere Funktionen:</value>
+    <value>Weitere Funktionen</value>
     <comment>*</comment>
   </data>
   <data name="strSettingsOpenSetupAssistantTooltip" xml:space="preserve">
@@ -1952,5 +1952,20 @@ Alternativ können Sie die normale Version von SimpleJournal verwenden!</value>
   </data>
   <data name="strPDFConversationDialog_Saving" xml:space="preserve">
     <value>Speichere Journal "{0}" ...</value>
+  </data>
+  <data name="strSettings_OpenAutoSaveDirectory" xml:space="preserve">
+    <value>AutoSave-Verzeichnis öffnen</value>
+  </data>
+  <data name="strSettings_OpenAutoSaveDirectory_ToolTip" xml:space="preserve">
+    <value>Öffnet das Verzeichnis, in dem die automatisch erstellten Backups enthalten sind.</value>
+  </data>
+  <data name="strSettings_OpenBackupDirectory_ToDo" xml:space="preserve">
+    <value>Öffnet das Verzeichnis, in dem die erstellten Backups (von alten Dokumenten) enthalten sind.</value>
+  </data>
+  <data name="strSettings_OpenBackupDirectory" xml:space="preserve">
+    <value>Backup-Verzeichnis öffnen</value>
+  </data>
+  <data name="strSettingsImportantDirectories" xml:space="preserve">
+    <value>Wichtige Verzeichnisse</value>
   </data>
 </root>

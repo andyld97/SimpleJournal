@@ -22,6 +22,7 @@ namespace SimpleJournal.Dialogs
         private bool ignoreOnClosingEvent = false;
 
         private List<System.IO.FileInfo> BackupFiles { get; set; } = new List<System.IO.FileInfo>();
+
         private List<BackupDataItem> BackupItems { get; set; } = new List<BackupDataItem>();
 
         public bool IsEmptyDialog => GetAllBackupFiles().Count == 0;
@@ -66,7 +67,7 @@ namespace SimpleJournal.Dialogs
             }
         }
 
-        private void Bi_OnRecievedAction(bool discard, BackupDataItem item)
+        private async void Bi_OnRecievedAction(bool discard, BackupDataItem item)
         {
             if (discard)
             {
@@ -81,7 +82,7 @@ namespace SimpleJournal.Dialogs
             }
             else
             {
-                RecoverFile(item, CheckBoxOpenBackupsAfterRestore.IsChecked.Value, false);
+                await RecoverFile(item, CheckBoxOpenBackupsAfterRestore.IsChecked.Value, false);
 
                 // If there are no more files, close the dialog
                 if (ListBackupFiles.Items.Count == 0)

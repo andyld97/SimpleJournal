@@ -126,7 +126,7 @@
     public enum ProgressState
     {
         Start,
-        Completed
+        Completed,
     }
 
     public enum StateAction
@@ -134,6 +134,6 @@
         Saving,
         ExportPDF,
         Export,
-        Printing
+        Printing,
     }
 }

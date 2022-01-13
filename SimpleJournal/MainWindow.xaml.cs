@@ -518,7 +518,7 @@ namespace SimpleJournal
         public void DeleteAutoSaveBackup(bool onClosing = false)
         {
             // Delete the backup with this ProcessID
-            // Get the backup with this task id - it's obiously the last one - this instace -  has created!
+            // Get the backup with this task id - it's obviously the last one, this instace has created!
             if (!string.IsNullOrEmpty(lastBackupFileName) && System.IO.File.Exists(lastBackupFileName))
             {
                 try
@@ -540,7 +540,7 @@ namespace SimpleJournal
                 try
                 {
                     // Only delete empty directory (0 files and false (no recursive))
-                    if (new System.IO.DirectoryInfo(Consts.AutoSaveDirectory).GetFiles().Count() == 0)
+                    if (new System.IO.DirectoryInfo(Consts.AutoSaveDirectory).GetFiles().Length == 0)
                         System.IO.Directory.Delete(Consts.AutoSaveDirectory, false);
                 }
                 catch
@@ -2192,6 +2192,23 @@ namespace SimpleJournal
 
         #endregion
 
+        private void Backstage_IsOpenChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if (MenuBackstage.IsOpen)
+                MenuBackstageTabControl.SelectedIndex = 0;
+        }
+
+        private void BackstageTabItem_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            ApplicationCommands.New.Execute(null, null);
+            MenuBackstage.IsOpen = false;
+        }
+
+        private void ImageCloseStatusBar_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            MainStatusBar.Visibility = Visibility.Collapsed;
+        }
+
         private async void ListRecentlyOpenedDocuments_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (ListRecentlyOpenedDocuments.SelectedItem is Document d)
@@ -3005,16 +3022,12 @@ namespace SimpleJournal
                     if (!string.IsNullOrEmpty(currentJournalPath))
                     {
                         // If a path is set remove the process id
-                        try
+                        var journal = await Journal.LoadJournalMetaAsync(currentJournalPath);
+                        if (journal != null)
                         {
-                            var journal = await Journal.LoadJournalAsync(currentJournalPath);
                             journal.ProcessID = -1;
-                            await journal.UpdateJournalInfoAsync(currentJournalPath);
+                            await journal.UpdateJournalMetaAsync(currentJournalPath, true);
                             currentJournalPath = string.Empty;
-                        }
-                        catch
-                        {
-                            // ignroe
                         }
                     }
 
@@ -3096,7 +3109,7 @@ namespace SimpleJournal
                     // Set process id to document and save it to make sure other instances cannot load this journal
                     currentJournal.ProcessID = ProcessHelper.CurrentProcID;
 
-                    await currentJournal.UpdateJournalInfoAsync(fileName);
+                    await currentJournal.UpdateJournalMetaAsync(fileName, true);
                 }
                 catch (Exception ex)
                 {
@@ -3582,19 +3595,6 @@ namespace SimpleJournal
                 mainScrollView.Background = Consts.DefaultBackground;
             }
         }
-
-        private void Backstage_IsOpenChanged(object sender, DependencyPropertyChangedEventArgs e)
-        {
-            if (MenuBackstage.IsOpen)
-                MenuBackstageTabControl.SelectedIndex = 0;
-        }
-
-        private void BackstageTabItem_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            ApplicationCommands.New.Execute(null, null);
-            MenuBackstage.IsOpen = false;
-        }
-
         #endregion
 
         #region General Events / Touch

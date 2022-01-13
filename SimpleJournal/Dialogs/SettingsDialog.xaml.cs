@@ -319,5 +319,15 @@ namespace SimpleJournal
             // This is just for debugging purposes
             new UpdateDialog(Consts.StoreVersion).ShowDialog();
         }
+
+        private void ButtonShowAutoSaveFolder_Click(object sender, RoutedEventArgs e)
+        {
+            GeneralHelper.OpenUri(new Uri(Consts.AutoSaveDirectory));
+        }
+
+        private void ButtonShowBackupFolder_Click(object sender, RoutedEventArgs e)
+        {
+            GeneralHelper.OpenUri(new Uri(Consts.BackupDirectory));
+        }
     }
 }

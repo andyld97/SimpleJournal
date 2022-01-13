@@ -1278,6 +1278,7 @@ Click on No to continue to receive this message!</value>
   </data>
   <data name="strSettingsActivateGlowingEffectDescription" xml:space="preserve">
     <value>(may cause performance problems when resizing)</value>
+    <comment>SettingsDialog.xaml</comment>
   </data>
   <data name="strSettingsActivateTouchButtons" xml:space="preserve">
     <value>Show touch buttons in the quick selection bar</value>
@@ -1285,21 +1286,27 @@ Click on No to continue to receive this message!</value>
   </data>
   <data name="strSettingsBackgroundCustom" xml:space="preserve">
     <value>Set custom background image</value>
+    <comment>SettingsDialog.xaml</comment>
   </data>
   <data name="strSettingsBackgroundDefault" xml:space="preserve">
     <value>No background (standard, gray)</value>
+    <comment>SettingsDialog.xaml</comment>
   </data>
   <data name="strSettingsBackgroundHeader" xml:space="preserve">
     <value>Background</value>
+    <comment>SettingsDialog.xaml</comment>
   </data>
   <data name="strSettingsCheckBoxDisableTouchscreen" xml:space="preserve">
     <value>Disable Windows touchscreen at startup</value>
+    <comment>SettingsDialog.xaml</comment>
   </data>
   <data name="strSettingsClearLastOpenedDocumentsToolTip" xml:space="preserve">
     <value>Clears the list of recently opened documents in the menu</value>
+    <comment>SettingsDialog.xaml</comment>
   </data>
   <data name="strSettingsDisableTouchExplanation" xml:space="preserve">
     <value>Deactivates the touch screen on startup and reactivates it on exit. This option can be useful if you write with a pen, then you can put your hand on the display without your hand being recognized as input.</value>
+    <comment>SettingsDialog.xaml</comment>
   </data>
   <data name="strSettingsDisableTouchscreenTitle" xml:space="preserve">
     <value>Disable Touchscreen (For advanced users)Disable Touchscreen (For advanced users)</value>
@@ -1307,45 +1314,59 @@ Click on No to continue to receive this message!</value>
   </data>
   <data name="strSettingsDisableTouchUWP1" xml:space="preserve">
     <value>SimpleJournal cannot differentiate between pen and finger input or there is no way to disable finger input completely.</value>
+    <comment>SettingsDialog.xaml</comment>
   </data>
   <data name="strSettingsDisableTouchUWP2" xml:space="preserve">
     <value>However, there is the possibility to execute a Powershell script before starting and after closing SimpleJournal, which can be generated here!</value>
+    <comment>SettingsDialog.xaml</comment>
   </data>
   <data name="strSettingsDisableTouchUWP3" xml:space="preserve">
     <value>To execute these scripts, 2 conditions must be met: </value>
+    <comment>SettingsDialog.xaml</comment>
   </data>
   <data name="strSettingsDisableTouchUWP4" xml:space="preserve">
     <value>1) Run the script as administrator!</value>
+    <comment>SettingsDialog.xaml</comment>
   </data>
   <data name="strSettingsDisableTouchUWP5" xml:space="preserve">
     <value>2) You must allow Powershell to execute the script once (please enter and confirm the following command at Powershell)</value>
+    <comment>SettingsDialog.xaml</comment>
   </data>
   <data name="strSettingsFeatureBar" xml:space="preserve">
-    <value>Additional features:</value>
+    <value>Additional Features</value>
+    <comment>SettingsDialog.xaml</comment>
   </data>
   <data name="strSettingsOpenSetupAssistantTooltip" xml:space="preserve">
     <value>Offers you the possibility to setup SimpleJournal again</value>
+    <comment>SettingsDialog.xaml</comment>
   </data>
   <data name="strSettingsResetPensTooltip" xml:space="preserve">
     <value>Resets the pens to their original settings</value>
+    <comment>SettingsDialog.xaml</comment>
   </data>
   <data name="strSettingsSetFileAssoc" xml:space="preserve">
     <value>Restore file type association</value>
+    <comment>SettingsDialog.xaml</comment>
   </data>
   <data name="strSettingsSetFileAssocToolTip" xml:space="preserve">
     <value>Sets this program as default for .Journal files</value>
+    <comment>SettingsDialog.xaml</comment>
   </data>
   <data name="strSettingsTouchScreenExplanationNormal1" xml:space="preserve">
     <value>SimpleJournal cannot distinguish between pen and finger input respectively there is no possibility to disable finger input completely. Therefore, there is now an option to run a powershell script on starting/exiting SimpleJournal that disables/enables touch input system-wide.</value>
+    <comment>SettingsDialog.xaml</comment>
   </data>
   <data name="strSettingsTouchScreenExplanationNormal2" xml:space="preserve">
     <value>In order for the Powershell script to execute you need to ensure the following steps:</value>
+    <comment>SettingsDialog.xaml</comment>
   </data>
   <data name="strSettingsTouchScreenExplanationNormal3" xml:space="preserve">
     <value>1) Run SimpleJournal as administrator (it defaults)</value>
+    <comment>SettingsDialog.xaml</comment>
   </data>
   <data name="strSettingsTouchScreenExplanationNormal4" xml:space="preserve">
     <value>2) The Powershell script needs to be authorized (run the following command in Powershell and confirm it):</value>
+    <comment>SettingsDialog.xaml</comment>
   </data>
   <data name="strSetupCompleted" xml:space="preserve">
     <value>You have successfully completed the setup of SimpleJournal! 
@@ -1803,11 +1824,13 @@ Here I would like to give you some important hints, which will help you to handl
   </data>
   <data name="strSettingsDownloadTouchDeviceManager" xml:space="preserve">
     <value>Download Touchscreen Device Manager</value>
+    <comment>SettingsDialog.xaml</comment>
   </data>
   <data name="strSettingsDialogTouchDeviceManagerDescription" xml:space="preserve">
     <value>Due to missing permissions, it is unfortunately not possible to automatically deactivate the touchscreen in this version. Therefore, the Touchscreen Device Manager is available for download here. With it you can deactivate the touch screen before working and activate it again afterwards (if this is necessary). The programme works in the same way as the device manager and requires administrator rights!
 
 Alternatively, you can use the normal version of SimpleJournal!</value>
+    <comment>SettingsDialog.xaml</comment>
   </data>
   <data name="strJournalIsAlreadyOpenedInTheSameWindow" xml:space="preserve">
     <value>This document is already open!</value>
@@ -1815,6 +1838,7 @@ Alternatively, you can use the normal version of SimpleJournal!</value>
   </data>
   <data name="strSettingsUseBackstageMenu" xml:space="preserve">
     <value>Use modern menu</value>
+    <comment>SettingsDialog.xaml</comment>
   </data>
   <data name="strRecentlyOpenedDocuments_No" xml:space="preserve">
     <value>None</value>
@@ -1974,5 +1998,25 @@ Alternatively, you can use the normal version of SimpleJournal!</value>
   <data name="strPDFConversationDialog_WritingPageStatus" xml:space="preserve">
     <value>Write page {0} of {1} in journal "{2}" ...</value>
     <comment>PDFConversationDialog.xaml</comment>
+  </data>
+  <data name="strSettingsImportantDirectories" xml:space="preserve">
+    <value>Important Directories</value>
+    <comment>SettingsDialog.xaml</comment>
+  </data>
+  <data name="strSettings_OpenAutoSaveDirectory" xml:space="preserve">
+    <value>Open AutoSave directory</value>
+    <comment>SettingsDialog.xaml</comment>
+  </data>
+  <data name="strSettings_OpenBackupDirectory" xml:space="preserve">
+    <value>Open backup directory</value>
+    <comment>SettingsDialog.xaml</comment>
+  </data>
+  <data name="strSettings_OpenAutoSaveDirectory_ToolTip" xml:space="preserve">
+    <value>Opens the directory containing the automatically created backups.</value>
+    <comment>SettingsDialog.xaml</comment>
+  </data>
+  <data name="strSettings_OpenBackupDirectory_ToDo" xml:space="preserve">
+    <value>Opens the directory containing the created backups (of old documents).</value>
+    <comment>SettingsDialog.xaml</comment>
   </data>
 </root>

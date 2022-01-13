@@ -377,6 +377,7 @@
                     <StackPanel Orientation="Horizontal" Margin="5">
                         <TextBlock x:Name="TextStatusBar" />
                         <ProgressBar Width="200" Margin="8,3,3,3" IsIndeterminate="True" />
+                        <Image x:Name="ImageCloseStatusBar" MouseDown="ImageCloseStatusBar_MouseDown" Source="/resources/close.png" Height="16" Cursor="Hand" />
                     </StackPanel>
                 </Fluent:StatusBarItem>
             </Fluent:StatusBar>

@@ -3049,6 +3049,42 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Open AutoSave directory.
+        /// </summary>
+        public static string strSettings_OpenAutoSaveDirectory {
+            get {
+                return ResourceManager.GetString("strSettings_OpenAutoSaveDirectory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Opens the directory containing the automatically created backups..
+        /// </summary>
+        public static string strSettings_OpenAutoSaveDirectory_ToolTip {
+            get {
+                return ResourceManager.GetString("strSettings_OpenAutoSaveDirectory_ToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Open backup directory.
+        /// </summary>
+        public static string strSettings_OpenBackupDirectory {
+            get {
+                return ResourceManager.GetString("strSettings_OpenBackupDirectory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Opens the directory containing the created backups (of old documents)..
+        /// </summary>
+        public static string strSettings_OpenBackupDirectory_ToDo {
+            get {
+                return ResourceManager.GetString("strSettings_OpenBackupDirectory_ToDo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Active window glowing effect.
         /// </summary>
         public static string strSettingsActivateGlowingEffect {
@@ -3204,11 +3240,20 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Additional features:.
+        ///   Looks up a localized string similar to Additional Features.
         /// </summary>
         public static string strSettingsFeatureBar {
             get {
                 return ResourceManager.GetString("strSettingsFeatureBar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Important Directories.
+        /// </summary>
+        public static string strSettingsImportantDirectories {
+            get {
+                return ResourceManager.GetString("strSettingsImportantDirectories", resourceCulture);
             }
         }
         

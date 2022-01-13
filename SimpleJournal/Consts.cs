@@ -54,7 +54,12 @@ namespace SimpleJournal
 
 #if !UWP
         public static readonly string PenSettingsFilePath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Pen.xml");
-        public static readonly string AutoSaveDirectory = System.IO.Path.Combine(System.IO.Path.GetTempPath(), "SimpleJournal", "AutoSave");
+
+        /// <summary>
+        /// Used for old xml journals
+        /// </summary>
+        public static readonly string BackupDirectory = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "SimpleJournal", "Backup");
+        public static readonly string AutoSaveDirectory = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "SimpleJournal", "AutoSave");
         public static readonly string TouchExecutable = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Touch.exe");
         public static readonly string Executable = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "SimpleJournal.exe");
 
@@ -63,6 +68,10 @@ namespace SimpleJournal
 #else
         public static readonly string PenSettingsFilePath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "SimpleJournal", "Pen.xml");
         public static readonly string AutoSaveDirectory = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "SimpleJournal", "AutoSave");
+        /// <summary>
+        /// Used for old xml journals
+        /// </summary>
+        public static readonly string BackupDirectory = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "SimpleJournal", "Backup");
 #endif
 
 

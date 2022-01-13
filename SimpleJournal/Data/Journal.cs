@@ -40,13 +40,73 @@ namespace SimpleJournal.Data
         [XmlElement, DefaultValue("")]
         public string OriginalPath { get; set; } = "";
 
+        #region Load, Save, Update Methods
+
+        /// <summary>
+        /// Loads the journal, but only with the meta information
+        /// </summary>
+        /// <param name="path">The path where the journal is located</param>
+        /// <returns></returns>
+        public static async Task<Journal> LoadJournalMetaAsync(string path)
+        {
+            if (!ZipFileHelper.IsZipFile(path))
+                return null;
+
+            try
+            {
+                using (System.IO.FileStream fs = new System.IO.FileStream(path, System.IO.FileMode.Open))
+                {
+                    using (System.IO.Compression.ZipArchive zipArchive = new System.IO.Compression.ZipArchive(fs, System.IO.Compression.ZipArchiveMode.Read, false))
+                    {
+                        var entry = zipArchive.GetEntry("info.bin");
+                        var data = await entry.ReadZipEntryAsync();
+
+                        return Serialization.Serialization.ReadBytes<Journal>(data, Serialization.Serialization.Mode.Binary);
+                    }
+                }
+            }
+            catch
+            {
+
+            }
+
+            return null;
+        }
+
+        /// <summary>
+        /// Loads the full journal (zip file)
+        /// </summary>
+        /// <param name="path">The path where the journal is located</param>
+        /// <param name="quiet">If true, no error message is shown</param>
+        /// <returns></returns>
         public static async Task<Journal> LoadJournalAsync(string path, bool quiet = false)
         {
             try
             {
-                // If we have the old file format (load it using serialization)
+                // If we have the old file format (create a backup and load it using serialization)
                 if (!ZipFileHelper.IsZipFile(path))
                 {
+                    try
+                    {
+                        // Ensure that the backup directory exists
+                        if (!System.IO.Directory.Exists(Consts.BackupDirectory))
+                            System.IO.Directory.CreateDirectory(Consts.BackupDirectory);
+                    }
+                    catch
+                    {
+
+                    }
+
+                    try
+                    {
+                        // Create a backup (for older versions of sj)
+                        System.IO.File.Copy(path, System.IO.Path.Combine(Consts.BackupDirectory, System.IO.Path.GetFileName(path)));
+                    }
+                    catch
+                    {
+
+                    }
+
                     var result = Serialization.Serialization.Read<Journal>(path, Serialization.Serialization.Mode.XML);
                     if (result != null)
                         return result;
@@ -139,9 +199,9 @@ namespace SimpleJournal.Data
             return new Journal();
         }
 
-        public async Task<bool> UpdateJournalInfoAsync(string filePath)
+        public async Task<bool> UpdateJournalMetaAsync(string filePath, bool forceUpdate)
         {
-            if (!wasSavedAlready)
+            if (!wasSavedAlready && !forceUpdate)
                 return await SaveAsync(filePath, true);
             else
             {
@@ -150,7 +210,7 @@ namespace SimpleJournal.Data
                     // Update Journal
                     using (System.IO.FileStream fs = new System.IO.FileStream(filePath, System.IO.FileMode.Open))
                     {
-                        using (System.IO.Compression.ZipArchive zipArchive = new System.IO.Compression.ZipArchive(fs, System.IO.Compression.ZipArchiveMode.Read, false))
+                        using (System.IO.Compression.ZipArchive zipArchive = new System.IO.Compression.ZipArchive(fs, System.IO.Compression.ZipArchiveMode.Update, false))
                         {
                             var entry = zipArchive.GetEntry("info.bin");
 
@@ -285,5 +345,7 @@ namespace SimpleJournal.Data
 
             return retVal;
         }
+
+        #endregion
     }
 }
