@@ -1,5 +1,6 @@
 ﻿using Microsoft.Win32;
 using SimpleJournal.Data;
+using SimpleJournal.Templates;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -250,12 +251,22 @@ namespace SimpleJournal.Controls
 
                     try
                     {
-                        // ToDo: *** Handle PDF pages and test if the result is working
-
                         using (System.IO.MemoryStream ms = new System.IO.MemoryStream())
                         {
                             currentCanvas.Strokes.Save(ms);
                             JournalPage journalPage = new JournalPage();
+                            journalPage.PaperPattern = pages[i].Type;
+
+                            // Handle PDF pages and test if the result is working
+                            if (pages[i] is Custom c)
+                            {
+                                journalPage = new PdfJournalPage()
+                                {
+                                    Orientation = c.Orientation,
+                                    PageBackground = c.PageBackground,
+                                };
+                            }                       
+
                             journalPage.Data = ms.ToArray();
 
                             // Check for additional ressources
@@ -268,6 +279,7 @@ namespace SimpleJournal.Controls
                                         journalPage.JournalResources.Add(result);
                                 }
                             }
+
                             journal.Pages.Add(journalPage);
                         }
                     }
