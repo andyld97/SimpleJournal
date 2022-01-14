@@ -322,11 +322,27 @@ namespace SimpleJournal
 
         private void ButtonShowAutoSaveFolder_Click(object sender, RoutedEventArgs e)
         {
+            try
+            {
+                if (!System.IO.Directory.Exists(Consts.AutoSaveDirectory))
+                    System.IO.Directory.CreateDirectory(Consts.AutoSaveDirectory);
+            }
+            catch
+            { }
+
             GeneralHelper.OpenUri(new Uri(Consts.AutoSaveDirectory));
         }
 
         private void ButtonShowBackupFolder_Click(object sender, RoutedEventArgs e)
         {
+            try
+            {
+                if (!System.IO.Directory.Exists(Consts.BackupDirectory))
+                    System.IO.Directory.CreateDirectory(Consts.BackupDirectory);
+            }
+            catch
+            { }
+
             GeneralHelper.OpenUri(new Uri(Consts.BackupDirectory));
         }
     }
