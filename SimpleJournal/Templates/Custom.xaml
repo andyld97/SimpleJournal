@@ -6,8 +6,8 @@
       xmlns:sj="clr-namespace:SimpleJournal"
       mc:Ignorable="d" 
       Height="29.7cm" Width="21cm" Background="White">
-    <Grid>
-        <Image x:Name="ImageBackground" />
+    <Grid Background="White">
+        <Image x:Name="ImageBackground" RenderOptions.BitmapScalingMode="Fant" />
         <sj:DrawingCanvas x:Name="canvas" />
     </Grid>
 </UserControl>

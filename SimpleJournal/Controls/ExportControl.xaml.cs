@@ -208,7 +208,7 @@ namespace SimpleJournal.Controls
                 path = path.Replace(oldExt, string.Empty);
                 path += $".{from + 1}{oldExt}";
 
-                if (!ExportPageAsImage(pages[from].Canvas, path, from + 1))
+                if (!ExportPageAsImage(pages[from] as UserControl, path, from + 1))
                     return false;
 
                 Title = $"{Properties.Resources.strExport} ...";
@@ -222,7 +222,7 @@ namespace SimpleJournal.Controls
 
                     nPath += $".{displayNumber}{oldExt}";
 
-                    if (!ExportPageAsImage(pages[i].Canvas, nPath, displayNumber))
+                    if (!ExportPageAsImage(pages[i] as UserControl, nPath, displayNumber))
                         return false;
 
                     Title = $"{Properties.Resources.strExport} ... {Properties.Resources.strPage} {displayNumber}/{to + 1}";
@@ -305,12 +305,12 @@ namespace SimpleJournal.Controls
                 return false;
         }
 
-        private bool ExportPageAsImage(DrawingCanvas canvas, string path, int page)
+        private bool ExportPageAsImage(UserControl paper, string path, int page)
         {
             try
             {
                 BmpBitmapEncoder encoder = new BmpBitmapEncoder();
-                RenderTargetBitmap rtb = GeneralHelper.RenderToBitmap(canvas, 1.0, new SolidColorBrush(Colors.White));
+                RenderTargetBitmap rtb = GeneralHelper.RenderToBitmap(paper, 1.0, new SolidColorBrush(Colors.White));
 
                 encoder.Frames.Add(BitmapFrame.Create(rtb));
                 using (System.IO.FileStream fs = System.IO.File.Open(path, System.IO.FileMode.Create))

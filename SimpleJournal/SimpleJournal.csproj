@@ -337,7 +337,7 @@
     <PackageReference Include="Magick.NET-Q16-AnyCPU" Version="8.5.0" />
     <PackageReference Include="Magick.NET.Core" Version="8.5.0" />
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
-    <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.1054.31" />
+    <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.1072.54" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="Microsoft.Windows.Compatibility" Version="6.0.0" />
   </ItemGroup>

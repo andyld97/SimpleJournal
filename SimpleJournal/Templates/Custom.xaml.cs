@@ -23,10 +23,10 @@ namespace SimpleJournal.Templates
             if (background != null)
             {
                 PageBackground = background;
-                canvas.Background = new ImageBrush() { ImageSource = GeneralHelper.LoadImage(background), Stretch = Stretch.Uniform };
+              //  canvas.Background = new ImageBrush() { ImageSource = GeneralHelper.LoadImage(background), Stretch = Stretch.Uniform };
 
-                //ImageBackground.Source = GeneralHelper.LoadImage(background);
-             //   canvas.Background = new SolidColorBrush(Colors.Transparent);
+                ImageBackground.Source = GeneralHelper.LoadImage(background);
+               canvas.Background = new SolidColorBrush(Colors.Transparent);
             }
 
             if (orientation == Orientation.Landscape)

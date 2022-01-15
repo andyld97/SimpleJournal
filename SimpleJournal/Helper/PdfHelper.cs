@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
@@ -49,28 +50,28 @@ namespace SimpleJournal.Helper
         public static async Task ExportJournalAsPDF(string outputPath, List<IPaper> pages)
         {
             // This method shouldn't freeze the whole gui (it's better already)
-            State.SetAction(StateAction.ExportPDF, ProgressState.Start);
+            State.SetAction(StateAction.ExportPDF, ProgressState.Start);      
 
             try
             {
-  
                 using (MagickImageCollection imagesToPdf = new MagickImageCollection())
                 {
                     foreach (var page in pages)
                     {
-                        BmpBitmapEncoder encoder = new BmpBitmapEncoder();
+                        // BmpBitmapEncoder encoder = new BmpBitmapEncoder();
+                        PngBitmapEncoder encoder = new PngBitmapEncoder();
 
-                        RenderTargetBitmap rtb = GeneralHelper.RenderToBitmap(page.Canvas, 1.0, new SolidColorBrush(Colors.White));
+                        RenderTargetBitmap rtb = GeneralHelper.RenderToBitmap(page as UserControl, 1.0, new SolidColorBrush(Colors.White));
                         encoder.Frames.Add(BitmapFrame.Create(rtb));
 
                         using (System.IO.MemoryStream ms = new System.IO.MemoryStream())
                         {
                             encoder.Save(ms);
-                            ms.Seek(0, System.IO.SeekOrigin.Begin);
+                            // ms.Seek(0, System.IO.SeekOrigin.Begin);
 
                             await Task.Run(() =>
                             {
-                                imagesToPdf.Add(new MagickImage(ms));
+                                imagesToPdf.Add(new MagickImage(ms.ToArray(), MagickFormat.Png));
                             });
                         }
 
@@ -80,7 +81,7 @@ namespace SimpleJournal.Helper
                         encoder = null;
                     }
 
-                    await imagesToPdf.WriteAsync(outputPath);
+                    await imagesToPdf.WriteAsync(outputPath, MagickFormat.Pdf);
                     imagesToPdf.Dispose();
                 }
             }

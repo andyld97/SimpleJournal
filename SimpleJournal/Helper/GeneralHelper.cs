@@ -130,7 +130,7 @@ namespace SimpleJournal
         }
 
         public static double Distance(this Point p1, Point p2)
-        {
+        {   
             return Math.Sqrt(Math.Pow(p2.X - p1.X, 2) + Math.Pow(p2.Y - p1.Y, 2));
         }
 
@@ -157,7 +157,7 @@ namespace SimpleJournal
             var renderWidth = (int)(element.RenderSize.Width * scale);
             var renderHeight = (int)(element.RenderSize.Height * scale);
 
-            var renderTarget = new RenderTargetBitmap(renderWidth, renderHeight, 96, 96, PixelFormats.Default);
+            var renderTarget = new RenderTargetBitmap(renderWidth, renderHeight, 96, 96, PixelFormats.Pbgra32);
             var sourceBrush = new VisualBrush(element);
 
             var drawingVisual = new DrawingVisual();
@@ -167,7 +167,8 @@ namespace SimpleJournal
 
             using (drawingContext)
             {
-                drawingContext.PushTransform(new ScaleTransform(scale, scale));
+                if (scale != 1.0)
+                    drawingContext.PushTransform(new ScaleTransform(scale, scale));
                 drawingContext.DrawRectangle(background, null, rect);
                 drawingContext.DrawRectangle(sourceBrush, null, rect);
             }

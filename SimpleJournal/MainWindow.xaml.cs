@@ -2240,12 +2240,12 @@ namespace SimpleJournal
                 {
                     MenuBackstage.IsOpen = false;
                     await Task.Delay(500).ContinueWith(delegate (Task t)
-                     {
-                         Dispatcher.Invoke(new System.Action(async () =>
+                    {
+                        Dispatcher.Invoke(new System.Action(async () =>
                         {
                             await LoadJournal(d.Path);
                         }));
-                     });
+                    });
                 }
 
                 RecentlyOpenedDocumentsBackstage.SelectedItem = null;
