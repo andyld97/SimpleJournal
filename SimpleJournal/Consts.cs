@@ -13,6 +13,11 @@ namespace SimpleJournal
         public const double MarkerPathStrokeThickness = 0.4;
         public const double DefaultTextSize = 15.0;
 
+        public const int A4WidthP = 794;
+        public const int A4HeightP = 1123;
+        public const int A4WidthL = 1123;
+        public const int A4HeightL = 794;
+
         public static readonly DoubleCollection LineStrokeDottetDashArray = new DoubleCollection() { 0.03, 2 };
         public static readonly DoubleCollection LineStrokeDashedDashArray = new DoubleCollection() { 4, 3 };
         public const int DefaultLineStrokeDashOffset = 1;

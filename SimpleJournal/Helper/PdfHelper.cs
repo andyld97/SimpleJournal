@@ -36,6 +36,9 @@ namespace SimpleJournal.Helper
             PdfJournalPage pdfJournalPage = null;
             await Task.Run(() =>
             {
+                // Resize image to A4 pixels (96 dpi)
+                image.Resize(new MagickGeometry(orientation == Orientation.Portrait ? Consts.A4WidthP : Consts.A4WidthL, orientation == Orientation.Portrait ? Consts.A4HeightP : Consts.A4HeightL) { IgnoreAspectRatio = false });
+
                 pdfJournalPage = new PdfJournalPage
                 {
                     PageBackground = image.ToByteArray(MagickFormat.Png),
