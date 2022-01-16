@@ -2086,12 +2086,12 @@ namespace SimpleJournal
 
         private void DisableTouchScreenCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            //TouchHelper.SetTouchState(false);
+            // TouchHelper.SetTouchState(false);
         }
 
         private async void SaveCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            await SaveProject();
+            await SaveProject(true);
         }
 
         private void SaveCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
@@ -2262,10 +2262,10 @@ namespace SimpleJournal
             }
         }
 
-        private async Task<bool> SaveProject()
+        private async Task<bool> SaveProject(bool forceNewPath)
         {
             bool resultSaving = false;
-            if (string.IsNullOrEmpty(currentJournalPath))
+            if (string.IsNullOrEmpty(currentJournalPath) || forceNewPath)
             {
                 SaveFileDialog dialog = new SaveFileDialog() { Filter = $"{Properties.Resources.strJournalFile}|*.journal", Title = Properties.Resources.strSave };
                 var result = dialog.ShowDialog();
@@ -2430,7 +2430,7 @@ namespace SimpleJournal
 
         private async void btnSaveProject_Click(object sender, RoutedEventArgs e)
         {
-            await SaveProject();
+            await SaveProject(false);
         }
 
         private async void btnSaveAs_Click(object sender, RoutedEventArgs e)
@@ -2501,7 +2501,7 @@ namespace SimpleJournal
                 {
                     pnlSidebar.Visibility = Visibility.Hidden;
 
-                    if (System.IO.Path.GetExtension(ofd.FileName).Contains("pdf"))
+                    if (System.IO.Path.GetExtension(ofd.FileName).ToLower().Contains("pdf"))
                     {
                         PDFConversationDialog pdfConversationDialog = new PDFConversationDialog(ofd.FileName);
                         bool? res = pdfConversationDialog.ShowDialog();
@@ -2513,6 +2513,26 @@ namespace SimpleJournal
                     }
 
                     await LoadJournal(ofd.FileName);
+                }
+            }
+        }
+
+        private async void MenuButtonImportPDF_Click(object sender, RoutedEventArgs e)
+        {
+            if (AskForOpeningAfterModifying())
+            {
+                OpenFileDialog ofd = new OpenFileDialog() { Filter = $"{Properties.Resources.strPDFFile}|*.pdf" };
+                var result = ofd.ShowDialog();
+
+                if (result.HasValue && result.Value)
+                {
+                    pnlSidebar.Visibility = Visibility.Hidden;
+
+                    PDFConversationDialog pdfConversationDialog = new PDFConversationDialog(ofd.FileName);
+                    bool? res = pdfConversationDialog.ShowDialog();
+
+                    if (res.HasValue && res.Value)
+                        await LoadJournal(pdfConversationDialog.DestinationFileName);
                 }
             }
         }
@@ -3603,7 +3623,8 @@ namespace SimpleJournal
                 mainScrollView.Background = Consts.DefaultBackground;
             }
         }
-#endregion
+
+        #endregion
 
         #region General Events / Touch
 

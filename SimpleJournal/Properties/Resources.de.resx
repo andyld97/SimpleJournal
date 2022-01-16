@@ -1145,7 +1145,7 @@ Klicken Sie auf Nein, um diesen Hinweis weiterhin zu erhalten!</value>
     <comment>MainWindow.xaml</comment>
   </data>
   <data name="strReleaseDate" xml:space="preserve">
-    <value>14.01.2022 15:02 Uhr</value>
+    <value>15.01.2022 12:15 Uhr</value>
     <comment>*</comment>
   </data>
   <data name="strRemove" xml:space="preserve">
@@ -1967,5 +1967,11 @@ Alternativ können Sie die normale Version von SimpleJournal verwenden!</value>
   </data>
   <data name="strSettingsImportantDirectories" xml:space="preserve">
     <value>Wichtige Verzeichnisse</value>
+  </data>
+  <data name="strImportPDFFile" xml:space="preserve">
+    <value>PDF-Datei importieren</value>
+  </data>
+  <data name="strPDFFile" xml:space="preserve">
+    <value>PDF-Datei</value>
   </data>
 </root>

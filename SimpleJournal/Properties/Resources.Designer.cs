@@ -1591,6 +1591,15 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Import PDF FIle.
+        /// </summary>
+        public static string strImportPDFFile {
+            get {
+                return ResourceManager.GetString("strImportPDFFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Date.
         /// </summary>
         public static string strInsertDate {
@@ -2464,6 +2473,15 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to PDF File.
+        /// </summary>
+        public static string strPDFFile {
+            get {
+                return ResourceManager.GetString("strPDFFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to PDF-Document|*.pdf.
         /// </summary>
         public static string strPDFFilter {
@@ -2806,7 +2824,7 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 01/14/2022 3:02 PM.
+        ///   Looks up a localized string similar to 01/15/2022 12:15 AM.
         /// </summary>
         public static string strReleaseDate {
             get {

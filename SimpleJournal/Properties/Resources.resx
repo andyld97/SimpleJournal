@@ -1173,7 +1173,7 @@ Click on No to continue to receive this message!</value>
     <comment>MainWindow.xaml</comment>
   </data>
   <data name="strReleaseDate" xml:space="preserve">
-    <value>01/14/2022 3:02 PM</value>
+    <value>01/15/2022 12:15 AM</value>
     <comment>About.xaml</comment>
   </data>
   <data name="strRemove" xml:space="preserve">
@@ -2018,5 +2018,13 @@ Alternatively, you can use the normal version of SimpleJournal!</value>
   <data name="strSettings_OpenBackupDirectory_ToDo" xml:space="preserve">
     <value>Opens the directory containing the created backups (of old documents).</value>
     <comment>SettingsDialog.xaml</comment>
+  </data>
+  <data name="strImportPDFFile" xml:space="preserve">
+    <value>Import PDF FIle</value>
+    <comment>MainWindow.xaml</comment>
+  </data>
+  <data name="strPDFFile" xml:space="preserve">
+    <value>PDF File</value>
+    <comment>*</comment>
   </data>
 </root>
