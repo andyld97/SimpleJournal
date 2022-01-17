@@ -10,7 +10,6 @@ namespace SimpleJournal.Data
     /// <summary>
     /// Represents a journal resource to save and load journals
     /// </summary>
-    [Serializable]
     [XmlInclude(typeof(JournalImage))]
     [XmlInclude(typeof(JournalText))]
     [XmlInclude(typeof(JournalShape))]

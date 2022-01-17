@@ -106,7 +106,7 @@ namespace SimpleJournal.Dialogs
                 for (int p = 0; p < images.Count; p++)
                 {
                     var image = images[p];
-                    var page = await PdfHelper.CreatePdfJournalPage(image);
+                    var page = await PdfHelper.CreatePdfJournalPageAsync(image);
 
                     if (currentJournal.Pages.Count < Consts.MaxPDFPagesPerJournal)
                         currentJournal.Pages.Add(page);
@@ -195,7 +195,7 @@ namespace SimpleJournal.Dialogs
                             Progress.Value = percentage;
                         }));
 
-                        journal.Pages.Add(await PdfHelper.CreatePdfJournalPage(image));
+                        journal.Pages.Add(await PdfHelper.CreatePdfJournalPageAsync(image));
                     }
 
                     TextState.Text = Properties.Resources.strPDFConversationDialog_Ready;

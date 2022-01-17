@@ -8,7 +8,6 @@ using System.Xml.Serialization;
 
 namespace SimpleJournal.Data
 {
-    [Serializable]
     public class Journal
     {
         private static bool isSaving = false;
@@ -57,10 +56,10 @@ namespace SimpleJournal.Data
                 {
                     using (System.IO.Compression.ZipArchive zipArchive = new System.IO.Compression.ZipArchive(fs, System.IO.Compression.ZipArchiveMode.Read, false))
                     {
-                        var entry = zipArchive.GetEntry("info.bin");
+                        var entry = zipArchive.GetEntry("info.xml");
                         var data = await entry.ReadZipEntryAsync();
 
-                        return Serialization.Serialization.ReadBytes<Journal>(data, Serialization.Serialization.Mode.Binary);
+                        return Serialization.Serialization.ReadBytes<Journal>(data, Serialization.Serialization.Mode.XML);
                     }
                 }
             }
@@ -126,10 +125,10 @@ namespace SimpleJournal.Data
                             foreach (var currentEntry in zipArchive.Entries)
                             {
                                 byte[] data = await currentEntry.ReadZipEntryAsync();
-                                string pageNumber = currentEntry.Name.Replace("page", string.Empty).Replace(".png", string.Empty).Replace(".binp", string.Empty).Replace(".bin", string.Empty);
+                                string pageNumber = currentEntry.Name.Replace("page", string.Empty).Replace(".png", string.Empty).Replace(".pdf", string.Empty).Replace(".xml", string.Empty);
 
-                                if (currentEntry.Name == "info.bin")
-                                    journal = Serialization.Serialization.ReadBytes<Journal>(data, Serialization.Serialization.Mode.Binary);
+                                if (currentEntry.Name == "info.xml")
+                                    journal = Serialization.Serialization.ReadBytes<Journal>(data, Serialization.Serialization.Mode.XML);
                                 else if (int.TryParse(pageNumber, out int page))
                                 {
                                     if (currentEntry.Name.EndsWith(".png"))
@@ -137,15 +136,15 @@ namespace SimpleJournal.Data
                                         // image for pdf page
                                         images.Add(page, data);
                                     }
-                                    else if (currentEntry.Name.EndsWith(".binp"))
+                                    else if (currentEntry.Name.EndsWith(".pdf"))
                                     {
                                         // pdf page
-                                        pdfJournalPages.Add(page, Serialization.Serialization.ReadBytes<PdfJournalPage>(data, Serialization.Serialization.Mode.Binary));
+                                        pdfJournalPages.Add(page, Serialization.Serialization.ReadBytes<PdfJournalPage>(data, Serialization.Serialization.Mode.XML));
                                     }
-                                    else if (currentEntry.Name.EndsWith(".bin"))
+                                    else if (currentEntry.Name.EndsWith(".xml"))
                                     {
                                         // normal page
-                                        journalPages.Add(page, Serialization.Serialization.ReadBytes<JournalPage>(data, Serialization.Serialization.Mode.Binary));
+                                        journalPages.Add(page, Serialization.Serialization.ReadBytes<JournalPage>(data, Serialization.Serialization.Mode.XML));
                                     }
                                 }
                                 else
@@ -211,7 +210,7 @@ namespace SimpleJournal.Data
                     {
                         using (System.IO.Compression.ZipArchive zipArchive = new System.IO.Compression.ZipArchive(fs, System.IO.Compression.ZipArchiveMode.Update, false))
                         {
-                            var entry = zipArchive.GetEntry("info.bin");
+                            var entry = zipArchive.GetEntry("info.xml");
 
                             using (var stream = entry.Open())
                             {
@@ -220,7 +219,7 @@ namespace SimpleJournal.Data
                                 foreach (var page in Pages)
                                     jrn.Pages.Add(new JournalPage());
 
-                                var data = Serialization.Serialization.SaveToBytes(jrn, Serialization.Serialization.Mode.Binary);
+                                var data = Serialization.Serialization.SaveToBytes(jrn, Serialization.Serialization.Mode.XML);
                                 await stream.WriteAsync(data, 0, data.Length);
                             }
                         }
@@ -269,7 +268,7 @@ namespace SimpleJournal.Data
                         {
                             if (page is PdfJournalPage pdf)
                             {
-                                var pageEntry = zipArchive.CreateEntry($"pages/page{pgCount}.binp", System.IO.Compression.CompressionLevel.Optimal);
+                                var pageEntry = zipArchive.CreateEntry($"pages/page{pgCount}.pdf", System.IO.Compression.CompressionLevel.Optimal);
 
                                 // Backgorund will be saved seperatly 
                                 PdfJournalPage pdfJournalPage = new PdfJournalPage() { Data = pdf.Data, JournalResources = pdf.JournalResources, Orientation = pdf.Orientation, PageFormat = pdf.PageFormat, PaperPattern = pdf.PaperPattern };
@@ -277,7 +276,7 @@ namespace SimpleJournal.Data
 
                                 using (System.IO.Stream stream = pageEntry.Open())
                                 {
-                                    var data = Serialization.Serialization.SaveToBytes(pdfJournalPage, Serialization.Serialization.Mode.Binary);
+                                    var data = Serialization.Serialization.SaveToBytes(pdfJournalPage, Serialization.Serialization.Mode.XML);
                                     await stream.WriteAsync(data, 0, data.Length);
                                 }
 
@@ -290,10 +289,10 @@ namespace SimpleJournal.Data
                             }
                             else
                             {
-                                var pageEntry = zipArchive.CreateEntry($"pages/page{pgCount}.bin", System.IO.Compression.CompressionLevel.Optimal);
+                                var pageEntry = zipArchive.CreateEntry($"pages/page{pgCount}.xml", System.IO.Compression.CompressionLevel.Optimal);
                                 using (System.IO.Stream stream = pageEntry.Open())
                                 {
-                                    var data = Serialization.Serialization.SaveToBytes(page, Serialization.Serialization.Mode.Binary);
+                                    var data = Serialization.Serialization.SaveToBytes(page, Serialization.Serialization.Mode.XML);
                                     await stream.WriteAsync(data, 0, data.Length);
                                 }
                             }
@@ -302,7 +301,7 @@ namespace SimpleJournal.Data
                         }
 
                         // Write journal infos
-                        var info = zipArchive.CreateEntry("info.bin");
+                        var info = zipArchive.CreateEntry("info.xml");
                         using (System.IO.Stream stream = info.Open())
                         {
                             var jrn = new Journal() { ProcessID = this.ProcessID, IsBackup = this.IsBackup, OriginalPath = this.OriginalPath };
@@ -311,7 +310,7 @@ namespace SimpleJournal.Data
                             foreach (var page in Pages)
                                 jrn.Pages.Add(new JournalPage());
 
-                            var data = Serialization.Serialization.SaveToBytes(jrn, Serialization.Serialization.Mode.Binary);
+                            var data = Serialization.Serialization.SaveToBytes(jrn, Serialization.Serialization.Mode.XML);
                             await stream.WriteAsync(data, 0, data.Length);
                         }
                     }

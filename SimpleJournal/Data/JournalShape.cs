@@ -6,7 +6,6 @@ using System.Windows.Shapes;
 
 namespace SimpleJournal.Data
 {
-    [Serializable]
     public class JournalShape : JournalResource
     {
         public override Type JournalResourceType => Type.Shape;

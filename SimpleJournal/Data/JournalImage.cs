@@ -8,7 +8,6 @@ namespace SimpleJournal.Data
     /// <summary>
     /// A journal image resouce
     /// </summary>
-    [Serializable]
     public class JournalImage : JournalResource
     {
         public override Type JournalResourceType => Type.Image;

@@ -4,7 +4,6 @@ using System.Xml.Serialization;
 
 namespace SimpleJournal.Data
 {
-    [Serializable]
     [XmlInclude(typeof(PdfJournalPage))]
     public class JournalPage
     {

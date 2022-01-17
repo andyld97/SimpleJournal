@@ -6,7 +6,6 @@ using System.Windows.Media;
 
 namespace SimpleJournal.Data
 {
-    [Serializable]
     public class JournalText : JournalResource
     {
         public override Type JournalResourceType => Type.Text;

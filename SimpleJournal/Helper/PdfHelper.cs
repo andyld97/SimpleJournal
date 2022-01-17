@@ -29,7 +29,7 @@ namespace SimpleJournal.Helper
             return images;
         }
 
-        public static async Task<PdfJournalPage> CreatePdfJournalPage(IMagickImage<ushort> image)
+        public static async Task<PdfJournalPage> CreatePdfJournalPageAsync(IMagickImage<ushort> image)
         {
             Orientation orientation = image.Width >= image.Height ? Orientation.Landscape : Orientation.Portrait;
 
