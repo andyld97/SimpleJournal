@@ -213,7 +213,9 @@ namespace SimpleJournal.Data
                             var entry = zipArchive.GetEntry("journal.xml");
 
                             // Delete entry first to prevent that no old contet will stay there!
-                            entry.Delete();
+                            if (entry != null)
+                                entry.Delete();
+
                             entry = zipArchive.CreateEntry("journal.xml");
 
                             using (var stream = entry.Open())
