@@ -56,7 +56,7 @@ namespace SimpleJournal.Data
                 {
                     using (System.IO.Compression.ZipArchive zipArchive = new System.IO.Compression.ZipArchive(fs, System.IO.Compression.ZipArchiveMode.Read, false))
                     {
-                        var entry = zipArchive.GetEntry("info.xml");
+                        var entry = zipArchive.GetEntry("journal.xml");
                         var data = await entry.ReadZipEntryAsync();
 
                         return Serialization.Serialization.ReadBytes<Journal>(data, Serialization.Serialization.Mode.XML);
@@ -127,7 +127,7 @@ namespace SimpleJournal.Data
                                 byte[] data = await currentEntry.ReadZipEntryAsync();
                                 string pageNumber = currentEntry.Name.Replace("page", string.Empty).Replace(".png", string.Empty).Replace(".pdf", string.Empty).Replace(".xml", string.Empty);
 
-                                if (currentEntry.Name == "info.xml")
+                                if (currentEntry.Name == "journal.xml")
                                     journal = Serialization.Serialization.ReadBytes<Journal>(data, Serialization.Serialization.Mode.XML);
                                 else if (int.TryParse(pageNumber, out int page))
                                 {
@@ -210,7 +210,11 @@ namespace SimpleJournal.Data
                     {
                         using (System.IO.Compression.ZipArchive zipArchive = new System.IO.Compression.ZipArchive(fs, System.IO.Compression.ZipArchiveMode.Update, false))
                         {
-                            var entry = zipArchive.GetEntry("info.xml");
+                            var entry = zipArchive.GetEntry("journal.xml");
+
+                            // Delete entry first to prevent that no old contet will stay there!
+                            entry.Delete();
+                            entry = zipArchive.CreateEntry("journal.xml");
 
                             using (var stream = entry.Open())
                             {
@@ -301,7 +305,7 @@ namespace SimpleJournal.Data
                         }
 
                         // Write journal infos
-                        var info = zipArchive.CreateEntry("info.xml");
+                        var info = zipArchive.CreateEntry("journal.xml");
                         using (System.IO.Stream stream = info.Open())
                         {
                             var jrn = new Journal() { ProcessID = this.ProcessID, IsBackup = this.IsBackup, OriginalPath = this.OriginalPath };

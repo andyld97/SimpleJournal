@@ -34,7 +34,6 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 using System.Windows.Xps;
-using System.Windows.Xps.Packaging;
 using Pen = SimpleJournal.Data.Pen;
 
 namespace SimpleJournal
@@ -212,11 +211,6 @@ namespace SimpleJournal
                 {
                     // Open
                     btnOpen_Click(null, null);
-                }
-                else if (e.Key == Key.S && (Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control)
-                {
-                    // Save
-                    btnSaveProject_Click(null, null);
                 }
             };
 
@@ -2091,7 +2085,7 @@ namespace SimpleJournal
 
         private async void SaveCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            await SaveProject(true);
+            await SaveProject(false);
         }
 
         private void SaveCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
@@ -2265,6 +2259,7 @@ namespace SimpleJournal
         private async Task<bool> SaveProject(bool forceNewPath)
         {
             bool resultSaving = false;
+
             if (string.IsNullOrEmpty(currentJournalPath) || forceNewPath)
             {
                 SaveFileDialog dialog = new SaveFileDialog() { Filter = $"{Properties.Resources.strJournalFile}|*.journal", Title = Properties.Resources.strSave };
@@ -2279,6 +2274,11 @@ namespace SimpleJournal
                 resultSaving = await SaveJournal(currentJournalPath);
 
             return resultSaving;
+        }
+
+        private async void btnSave_Click(object sender, RoutedEventArgs e)
+        {
+            await SaveProject(true);
         }
 
         private async void MenuButtonBackstageExportPdf_Click(object sender, RoutedEventArgs e)
@@ -2426,22 +2426,6 @@ namespace SimpleJournal
         {
             if (DrawingCanvas.LastModifiedCanvas.GetSelectedStrokes() != null && DrawingCanvas.LastModifiedCanvas.GetSelectedStrokes().Count > 0 && !DrawingCanvas.LastModifiedCanvas.ConvertSelectedStrokesToShape())
                 MessageBox.Show(this, Properties.Resources.strNoShapeRecognized, Properties.Resources.strNoShapeRecognizedTitle, MessageBoxButton.OK, MessageBoxImage.Information);
-        }
-
-        private async void btnSaveProject_Click(object sender, RoutedEventArgs e)
-        {
-            await SaveProject(false);
-        }
-
-        private async void btnSaveAs_Click(object sender, RoutedEventArgs e)
-        {
-            SaveFileDialog dialog = new SaveFileDialog() { Filter = $"{Properties.Resources.strJournalFile}|*.journal", Title = Properties.Resources.strSaveAs };
-            var result = dialog.ShowDialog();
-            if (result.HasValue && result.Value)
-            {
-                await SaveJournal(dialog.FileName);
-                this.UpdateTitle(System.IO.Path.GetFileNameWithoutExtension(dialog.FileName));
-            }
         }
 
         private void btnClearPage_Click(object sender, RoutedEventArgs e)
@@ -2681,7 +2665,7 @@ namespace SimpleJournal
         #region Exit
         private bool closedButtonWasPressed = false;
 
-        private void btnExit_Click(object sender, RoutedEventArgs e)
+        private async void btnExit_Click(object sender, RoutedEventArgs e)
         {
             if (DrawingCanvas.Change)
             {
@@ -2696,7 +2680,7 @@ namespace SimpleJournal
                 }
                 else if (result == MessageBoxResult.Yes)
                 {
-                    this.btnSaveProject_Click(sender, e);
+                    await SaveProject(false);
                     closedButtonWasPressed = true;
                     Close();
                 }
@@ -2736,7 +2720,7 @@ namespace SimpleJournal
                 }
                 else if (result == MessageBoxResult.Yes)
                 {
-                    this.btnSaveProject_Click(null, null);
+                    await SaveProject(false);
                     DeleteAutoSaveBackup(true);
                     e.Cancel = false;
 
@@ -3623,7 +3607,6 @@ namespace SimpleJournal
                 mainScrollView.Background = Consts.DefaultBackground;
             }
         }
-
         #endregion
 
         #region General Events / Touch
