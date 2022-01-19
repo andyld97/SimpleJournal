@@ -1974,4 +1974,7 @@ Alternativ können Sie die normale Version von SimpleJournal verwenden!</value>
   <data name="strPDFFile" xml:space="preserve">
     <value>PDF-Datei</value>
   </data>
+  <data name="strPDFConversationDialog_UseOnlineConversation" xml:space="preserve">
+    <value>Use Online Conversation (if your system is low on memory)</value>
+  </data>
 </root>

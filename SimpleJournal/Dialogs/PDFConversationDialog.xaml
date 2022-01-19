@@ -52,6 +52,7 @@
 
             <RadioButton x:Name="RadioAllPages" Margin="0,5,0,0" Content="{x:Static res:Resources.strPDFConversationDialog_AllPages}" IsChecked="True" />
             <RadioButton x:Name="RadioChoosePageRange" Margin="0,5,0,0" Content="{x:Static res:Resources.strPDFConversationDialog_ConvertOnlySelectedPages}" />
+            <CheckBox x:Name="CheckUseOnlineConverter" Foreground="{DynamicResource BlackBrush}" Content="{x:Static res:Resources.strPDFConversationDialog_UseOnlineConversation}" Margin="0,5,0,0" />
 
             <StackPanel Visibility="{Binding ElementName=RadioChoosePageRange, Path=IsChecked, Converter={StaticResource boolToVisibilityConverter}}" Orientation="Horizontal" HorizontalAlignment="Left">
                 <TextBlock Text="{x:Static res:Resources.strPDFConversationDialog_From}" Margin="25,0,0,0" VerticalAlignment="Center" FontWeight="Bold" />

@@ -33,11 +33,12 @@ namespace SimpleJournal
         public static readonly string HomePageUrl = "https://simplejournal.ca-soft.net";
         public static readonly string HelpUrl = "https://simplejournal.ca-soft.net/faq";
         public static readonly string GhostScriptDownloadUrl = "https://ghostscript.com/releases/gsdnld.html";
+        public static readonly string ConverterAPIUrl = "http://cas-server2.ddns.net:8080";
 
         public static readonly string UpdaterExe = "7244a3f048e82af354eb3cfa3089a3035ff8768f";
         public static readonly string UpdateSystemDotNetDotControllerDotdll = "bbc7224ccc544651d9d844f309721091860f0f92";
 
-        public static readonly Version StoreVersion = new Version("1.500.0.0");
+        public static readonly Version StoreVersion = new Version("1.501.0.0");
         public static readonly Version NormalVersion = typeof(Consts).Assembly.GetName().Version;
 
         #region Pens

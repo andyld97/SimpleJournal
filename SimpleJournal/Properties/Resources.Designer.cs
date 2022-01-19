@@ -2455,6 +2455,15 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Online-Konversation verwenden (wenn Ihr System wenig Speicherplatz hat).
+        /// </summary>
+        public static string strPDFConversationDialog_UseOnlineConversation {
+            get {
+                return ResourceManager.GetString("strPDFConversationDialog_UseOnlineConversation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Write page {0} of {1} in journal &quot;{2}&quot; ....
         /// </summary>
         public static string strPDFConversationDialog_WritingPageStatus {

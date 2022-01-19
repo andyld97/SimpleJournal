@@ -136,4 +136,14 @@
         Export,
         Printing,
     }
+
+    public enum TicketStatus
+    {
+        OnHold,
+        Prepearing,
+        InProgress,
+        Failed,
+        Saving,
+        Completed,
+    }
 }

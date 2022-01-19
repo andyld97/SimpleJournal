@@ -4,6 +4,8 @@ using SimpleJournal.Helper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Forms;
@@ -19,6 +21,9 @@ namespace SimpleJournal.Dialogs
         private readonly string sourceFileName = string.Empty;
         private string destinationFileName = string.Empty;
 
+        private Timer timer = new Timer() { Interval = 1000 };
+        private PrintTicket currentTicket = null;
+
         public string DestinationFileName => destinationFileName;
 
         public PDFConversationDialog(string sourceFileName)
@@ -26,6 +31,94 @@ namespace SimpleJournal.Dialogs
             InitializeComponent();
             this.sourceFileName = sourceFileName;
             TextSource.Text = sourceFileName;
+
+            timer.Tick += Timer_Tick;
+        }
+
+        private async void Timer_Tick(object sender, EventArgs e)
+        {
+            // ToDo: *** Translate
+            // ToDo: *** Merge API into this project and make those classes shared!
+            // ToDo: *** Extend API so that it supports all options from this dialog!
+
+            if (currentTicket == null)
+            {
+                timer.Stop();
+                return;
+            }
+
+            // Refresh ticket information
+            using (HttpClient client = new HttpClient())
+            {
+                string url = $"{Consts.ConverterAPIUrl}/api/ticket/{currentTicket.ID}";
+
+                var result = await client.GetAsync(url);
+                var temp = await System.Text.Json.JsonSerializer.DeserializeAsync<PrintTicket>(await result.Content.ReadAsStreamAsync());
+                if (temp != null)
+                    currentTicket = temp;
+
+                Dispatcher.Invoke(() =>
+                {
+                    if (currentTicket.Percentage > 0)
+                    {
+                        Progress.IsIndeterminate = false;
+                        Progress.Value = currentTicket.Percentage;
+                    }
+
+                    if (currentTicket.Status == TicketStatus.Prepearing)
+                        TextState.Text = $"Preparing ticket {currentTicket.Name} ...";
+                    else if (currentTicket.Status == TicketStatus.InProgress)
+                        TextState.Text = $"Working on ticket {currentTicket.Name} ...";
+                    else if (currentTicket.Status == TicketStatus.Saving)
+                        TextState.Text = $"Saving ticket {currentTicket.Name} ...";
+                    else
+                    {
+                        TextState.Text = currentTicket.Status.ToString();
+
+                        if (currentTicket.Status == TicketStatus.Failed)
+                        {
+                            timer.Stop();
+                            Progress.Value = 0;
+                            Progress.IsIndeterminate = false;
+                            MessageBox.Show(currentTicket.ErorrMessage, "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
+                    }
+                });
+
+                if (currentTicket.IsCompleted && currentTicket.Status == TicketStatus.Completed)
+                {
+                    timer.Stop();
+                    Progress.Value = 100;
+
+                    // Download file
+                    try
+                    {
+
+                        var response = await client.GetAsync($"{Consts.ConverterAPIUrl}/api/ticket/{currentTicket.ID}/download/{currentTicket.Documents.FirstOrDefault()}");
+                        if (response.IsSuccessStatusCode)
+                        {
+                            var str = await response.Content.ReadAsStreamAsync();
+
+                            using (System.IO.FileStream fs = new System.IO.FileStream(destinationFileName, System.IO.FileMode.Create))
+                            {
+                                await str.CopyToAsync(fs);
+                            }                
+                        }
+                        else
+                            throw new Exception("Http Status Code: " + response.StatusCode);
+
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.ToString());
+
+                        SetInputPanelState(false);
+                        return;
+                    }
+
+                    DialogResult = true;
+                }
+            }
         }
 
         private void ButtonSearch_Click(object sender, RoutedEventArgs e)
@@ -39,6 +132,7 @@ namespace SimpleJournal.Dialogs
                 }
             }
         }
+
         private void Hyperlink_RequestNavigate(object sender, System.Windows.Navigation.RequestNavigateEventArgs e)
         {
             GeneralHelper.OpenUri(new Uri(Consts.GhostScriptDownloadUrl));
@@ -54,6 +148,7 @@ namespace SimpleJournal.Dialogs
         private async void ButtonConvert_Click(object sender, RoutedEventArgs e)
         {
             bool useAllPages = RadioAllPages.IsChecked.Value;
+            bool useOnlineConverstation = CheckUseOnlineConverter.IsChecked.Value; 
             int pageFrom = NumPageFrom.Value;
             int pageTo = NumPageTo.Value;
 
@@ -68,6 +163,28 @@ namespace SimpleJournal.Dialogs
             if (!useAllPages && pageFrom > pageTo)
             {
                 MessageBox.Show(this, Properties.Resources.strPDFConversationDialog_InvalidInputMessage, Properties.Resources.strError, MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            if (useOnlineConverstation)
+            {
+                // Upload file
+                var printTicket = await UploadFileAsync(sourceFileName, $"{Consts.ConverterAPIUrl}/api/pdf/upload");
+
+                if (printTicket == null)
+                {
+                    MessageBox.Show("error");
+                    return;
+                }
+                else
+                {
+                    currentTicket = printTicket;
+                    SetInputPanelState(false);
+                    Progress.IsIndeterminate = true;
+                    TextState.Text = $"Ticket {printTicket.Name} is in the queue!";
+                    timer.Start();
+                }
+
                 return;
             }
 
@@ -210,6 +327,68 @@ namespace SimpleJournal.Dialogs
                 else
                     SetInputPanelState(true);
             }
+        }
+
+        /// <summary>
+        /// https://stackoverflow.com/a/53284839/6237448
+        /// </summary>
+        public static async Task<PrintTicket> UploadFileAsync(string path, string url)
+        {
+            // we need to send a request with multipart/form-data
+            var multiForm = new MultipartFormDataContent();
+
+            // add file and directly upload it
+            System.IO.FileStream fs = System.IO.File.OpenRead(path);
+            multiForm.Add(new StreamContent(fs), "file", System.IO.Path.GetFileName(path));
+
+            // send request to API 
+            var client = new HttpClient();
+            var response = await client.PostAsync(url, multiForm);
+
+            if (response.IsSuccessStatusCode)
+            {
+                return await System.Text.Json.JsonSerializer.DeserializeAsync<PrintTicket>(await response.Content.ReadAsStreamAsync());
+            }
+
+            return null;
+        }
+    }
+
+    public class PrintTicket
+    {
+        [JsonPropertyName("id")]
+        public string ID { get; set; } = Guid.NewGuid().ToString();
+
+        [JsonPropertyName("documents")]
+        public List<string> Documents { get; set; } = new List<string>();
+
+        [JsonPropertyName("status")]
+        public TicketStatus Status { get; set; }
+
+        [JsonPropertyName("name")]
+        public string Name { get; set; }
+
+        /// <summary>
+        /// Value from 1-100
+        /// </summary>
+        [JsonPropertyName("percentage")]
+        public int Percentage { get; set; }
+
+        [JsonPropertyName("error_message")]
+        public string ErorrMessage { get; set; }
+
+        [JsonPropertyName("is_completed")]
+        public bool IsCompleted { get; set; }
+
+        [JsonPropertyName("date_time_added")]
+        public DateTime DateTimeAdded { get; set; }
+
+        [JsonIgnore]
+        public string TempPath => System.IO.Path.Combine(System.IO.Path.GetTempPath(), ID);
+
+        public override string ToString()
+        {
+            return Name;
         }
     }
 }

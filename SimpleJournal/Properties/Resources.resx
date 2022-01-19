@@ -2027,4 +2027,8 @@ Alternatively, you can use the normal version of SimpleJournal!</value>
     <value>PDF File</value>
     <comment>*</comment>
   </data>
+  <data name="strPDFConversationDialog_UseOnlineConversation" xml:space="preserve">
+    <value>Online-Konversation verwenden (wenn Ihr System wenig Speicherplatz hat)</value>
+    <comment>PDFConversationDialog.xaml</comment>
+  </data>
 </root>

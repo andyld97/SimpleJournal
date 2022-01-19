@@ -2390,7 +2390,7 @@ namespace SimpleJournal
                             if (page is Custom c)
                                 orientation = c.Orientation;
 
-                            e.CurrentPrintTicket = new PrintTicket();
+                            e.CurrentPrintTicket = new System.Printing.PrintTicket();
                             if (orientation == Orientation.Landscape)
                                 e.CurrentPrintTicket.PageOrientation = PageOrientation.Landscape;
                             else

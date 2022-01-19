@@ -330,8 +330,8 @@ namespace SimpleJournal.Data
 
                 retVal = true;
 
-                // Old method - XML Serialization then Binary Serialization, Now ZIP!
-                //Serialization.Serialization.Save(filePath, this, Serialization.Serialization.Mode.Binary);
+                // Old method - only XML Serialization
+                //Serialization.Serialization.Save(filePath, this, Serialization.Serialization.Mode.XML);
             }
             catch (Exception e)
             {
