@@ -1,5 +1,6 @@
 ﻿using Microsoft.Win32;
 using SimpleJournal.Data;
+using SimpleJournal.Common;
 using SimpleJournal.Templates;
 using System;
 using System.Collections.Generic;

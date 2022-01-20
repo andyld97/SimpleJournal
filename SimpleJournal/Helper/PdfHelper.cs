@@ -1,5 +1,6 @@
 ﻿using ImageMagick;
 using SimpleJournal.Data;
+using SimpleJournal.Common;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -7,6 +8,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using Orientation = SimpleJournal.Common.Orientation;
 
 namespace SimpleJournal.Helper
 {

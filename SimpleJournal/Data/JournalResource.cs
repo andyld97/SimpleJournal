@@ -1,4 +1,5 @@
 ﻿using SimpleJournal.Controls;
+using SimpleJournal.Common.Controls;
 using System;
 using System.Windows;
 using System.Windows.Controls;

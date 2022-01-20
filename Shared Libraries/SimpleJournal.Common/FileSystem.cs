@@ -1,7 +1,7 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
 
-namespace SimpleJournal.Shared
+namespace SimpleJournal.Common
 {
     public static class FileSystem
     {

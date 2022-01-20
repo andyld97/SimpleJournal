@@ -3,7 +3,8 @@ using Newtonsoft.Json;
 using SimpleJournal.Controls;
 using SimpleJournal.Data;
 using SimpleJournal.Dialogs;
-using SimpleJournal.Shared;
+using SimpleJournal.Common;
+using SimpleJournal.Common.Controls;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -686,11 +687,11 @@ namespace SimpleJournal
             {
                 {  System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "journal", "SjFileAssoc.exe"),   Properties.Resources.SJFileAssoc },
                 {  System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "journal", "SJFileAssoc.exe.config"),  System.Text.Encoding.Default.GetBytes(Properties.Resources.SJFileAssoc_exe) },
-                {  System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "journal", "SimpleJournal.Shared.dll"),   Properties.Resources.SimpleJournal_Shared },
+                {  System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "journal", "SimpleJournal.Common.dll"),   Properties.Resources.SimpleJournal_Common },
             };
 
             // If the file exists and if it's up to date no need to install
-            if (System.IO.File.Exists(resourcesToDeploy.Keys.FirstOrDefault()) && FileVersionInfo.GetVersionInfo(resourcesToDeploy.Keys.First()).FileVersion == "1.0.1.0")
+            if (System.IO.File.Exists(resourcesToDeploy.Keys.FirstOrDefault()) && FileVersionInfo.GetVersionInfo(resourcesToDeploy.Keys.First()).FileVersion == "1.0.2.0")
                 return false;
             else if (System.IO.File.Exists(resourcesToDeploy.Keys.FirstOrDefault()))
                 FileSystem.TryDeleteFile(resourcesToDeploy.Keys.FirstOrDefault());

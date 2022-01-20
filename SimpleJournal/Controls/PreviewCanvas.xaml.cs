@@ -1,4 +1,5 @@
-﻿using SimpleJournal.Templates;
+﻿using SimpleJournal.Common;
+using SimpleJournal.Templates;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Ink;

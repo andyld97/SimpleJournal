@@ -2,6 +2,8 @@
 using SimpleJournal.Controls;
 using SimpleJournal.Controls.Templates;
 using SimpleJournal.Data;
+using SimpleJournal.Common;
+using SimpleJournal.Common.Controls;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;

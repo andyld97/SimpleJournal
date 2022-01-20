@@ -1,7 +1,7 @@
 ﻿using ControlzEx.Theming;
 using SimpleJournal.Data;
 using SimpleJournal.Dialogs;
-using SJFileAssoc;
+using SimpleJournal.Common;
 using System;
 using System.ComponentModel;
 using System.Linq;
@@ -68,12 +68,12 @@ namespace SimpleJournal
             // Apply background settings
             switch (Settings.Instance.PageBackground)
             {
-                case SimpleJournal.Background.Default: RbDefault.IsChecked = true; break;
-                case SimpleJournal.Background.Blue: RbBlue.IsChecked = true; break;
-                case SimpleJournal.Background.Sand: RbSand.IsChecked = true; break;
-                case SimpleJournal.Background.Wooden1: RbWooden1.IsChecked = true; break;
-                case SimpleJournal.Background.Wooden2: RbWooden2.IsChecked = true; break;
-                case SimpleJournal.Background.Custom: RbCustom.IsChecked = true; break;
+                case SimpleJournal.Common.Background.Default: RbDefault.IsChecked = true; break;
+                case SimpleJournal.Common.Background.Blue: RbBlue.IsChecked = true; break;
+                case SimpleJournal.Common.Background.Sand: RbSand.IsChecked = true; break;
+                case SimpleJournal.Common.Background.Wooden1: RbWooden1.IsChecked = true; break;
+                case SimpleJournal.Common.Background.Wooden2: RbWooden2.IsChecked = true; break;
+                case SimpleJournal.Common.Background.Custom: RbCustom.IsChecked = true; break;
             }
 
             TextCustomImagePath.Text = Settings.Instance.CustomBackgroundImagePath;
@@ -260,18 +260,18 @@ namespace SimpleJournal
             if (sender is RadioButton rb)
             {
                 if (rb.Name == RbDefault.Name)
-                    Settings.Instance.PageBackground = SimpleJournal.Background.Default;
+                    Settings.Instance.PageBackground = SimpleJournal.Common.Background.Default;
                 else if (rb.Name == RbSand.Name)
-                    Settings.Instance.PageBackground = SimpleJournal.Background.Sand;
+                    Settings.Instance.PageBackground = SimpleJournal.Common.Background.Sand;
                 else if (rb.Name == RbBlue.Name)
-                    Settings.Instance.PageBackground = SimpleJournal.Background.Blue;
+                    Settings.Instance.PageBackground = SimpleJournal.Common.Background.Blue;
                 else if (rb.Name == RbWooden1.Name)
-                    Settings.Instance.PageBackground = SimpleJournal.Background.Wooden1;
+                    Settings.Instance.PageBackground = SimpleJournal.Common.Background.Wooden1;
                 else if (rb.Name == RbWooden2.Name)
-                    Settings.Instance.PageBackground = SimpleJournal.Background.Wooden2;
+                    Settings.Instance.PageBackground = SimpleJournal.Common.Background.Wooden2;
 
                 if (rb.Name == RbCustom.Name)
-                    Settings.Instance.PageBackground = SimpleJournal.Background.Custom;
+                    Settings.Instance.PageBackground = SimpleJournal.Common.Background.Custom;
 
                 MainWindow.W_INSTANCE.ApplyBackground();
                 Settings.Instance.Save();

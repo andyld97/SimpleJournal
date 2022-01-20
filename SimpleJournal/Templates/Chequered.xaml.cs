@@ -1,5 +1,6 @@
 ﻿using SimpleJournal.Controls;
 using SimpleJournal.Data;
+using SimpleJournal.Common;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;

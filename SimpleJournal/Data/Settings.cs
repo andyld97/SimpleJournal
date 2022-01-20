@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SimpleJournal.Common;
+using System;
 using System.Windows;
 using System.Windows.Media;
 

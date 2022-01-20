@@ -6,7 +6,8 @@ using SimpleJournal.Controls.Templates;
 using SimpleJournal.Data;
 using SimpleJournal.Dialogs;
 using SimpleJournal.Helper;
-using SimpleJournal.Shared;
+using SimpleJournal.Common;
+using SimpleJournal.Common.Controls;
 using SimpleJournal.Templates;
 #if !UWP
 using SJFileAssoc;
@@ -34,6 +35,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 using System.Windows.Xps;
+using Orientation = SimpleJournal.Common.Orientation;
 using Pen = SimpleJournal.Data.Pen;
 
 namespace SimpleJournal
@@ -3590,7 +3592,7 @@ namespace SimpleJournal
 
         public void ApplyBackground()
         {
-            if (Settings.Instance.PageBackground == SimpleJournal.Background.Default)
+            if (Settings.Instance.PageBackground == SimpleJournal.Common.Background.Default)
             {
                 mainScrollView.Background = Consts.DefaultBackground;
                 return;
@@ -3602,14 +3604,14 @@ namespace SimpleJournal
 
                 switch (Settings.Instance.PageBackground)
                 {
-                    case SimpleJournal.Background.Default: mainScrollView.Background = Consts.DefaultBackground; break;
-                    case SimpleJournal.Background.Blue: imageFileName = "blue"; break;
-                    case SimpleJournal.Background.Sand: imageFileName = "sand"; break;
-                    case SimpleJournal.Background.Wooden1: imageFileName = "wooden-1"; break;
-                    case SimpleJournal.Background.Wooden2: imageFileName = "wooden-2"; break;
+                    case SimpleJournal.Common.Background.Default: mainScrollView.Background = Consts.DefaultBackground; break;
+                    case SimpleJournal.Common.Background.Blue: imageFileName = "blue"; break;
+                    case SimpleJournal.Common.Background.Sand: imageFileName = "sand"; break;
+                    case SimpleJournal.Common.Background.Wooden1: imageFileName = "wooden-1"; break;
+                    case SimpleJournal.Common.Background.Wooden2: imageFileName = "wooden-2"; break;
                 }
 
-                if (Settings.Instance.PageBackground != SimpleJournal.Background.Custom)
+                if (Settings.Instance.PageBackground != SimpleJournal.Common.Background.Custom)
                 {
                     string uri = $"pack://application:,,,/SimpleJournal;component/resources/backgrounds/{imageFileName}.jpg";
                     ImageBrush imageBrush = new ImageBrush(new BitmapImage(new Uri(uri))) { Stretch = Stretch.UniformToFill };

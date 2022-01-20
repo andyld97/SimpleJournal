@@ -1,4 +1,4 @@
-﻿namespace SimpleJournal
+﻿namespace SimpleJournal.Common
 {
     public enum Tools
     {

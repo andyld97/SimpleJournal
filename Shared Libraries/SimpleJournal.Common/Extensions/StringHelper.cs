@@ -1,4 +1,4 @@
-﻿namespace SimpleJournal.Shared.Extensions
+﻿namespace SimpleJournal.Common.Extensions
 {
     public static class StringExtensions
     {

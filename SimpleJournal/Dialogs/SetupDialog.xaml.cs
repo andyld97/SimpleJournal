@@ -1,6 +1,7 @@
 ﻿using SimpleJournal.Controls;
 using SimpleJournal.Controls.Templates;
 using SimpleJournal.Data;
+using SimpleJournal.Common;
 using System;
 using System.ComponentModel;
 using System.Windows;

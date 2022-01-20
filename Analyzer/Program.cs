@@ -1,5 +1,5 @@
-﻿using SimpleJournal.Shared;
-using SimpleJournal.Shared.Extensions;
+﻿using SimpleJournal.Common;
+using SimpleJournal.Common.Extensions;
 using System;
 using System.Collections.Generic;
 using System.IO;

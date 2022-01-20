@@ -1,4 +1,6 @@
-﻿namespace SimpleJournal.Actions
+﻿using SimpleJournal.Common;
+
+namespace SimpleJournal.Actions
 {
     /// <summary>
     /// Describes a user action on the canvas: Add/Remove Child/Stroke

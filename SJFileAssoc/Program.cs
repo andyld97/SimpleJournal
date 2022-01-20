@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SimpleJournal.Common.FileAssociations;
+using System;
 
 namespace SJFileAssoc
 {

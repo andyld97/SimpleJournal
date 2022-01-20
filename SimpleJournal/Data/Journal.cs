@@ -1,4 +1,5 @@
 ﻿using SimpleJournal.Helper;
+using SimpleJournal.Common;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

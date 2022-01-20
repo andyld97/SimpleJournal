@@ -1,6 +1,7 @@
 ﻿using ImageMagick;
 using SimpleJournal.Data;
 using SimpleJournal.Helper;
+using SimpleJournal.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,7 +39,7 @@ namespace SimpleJournal.Dialogs
         private async void Timer_Tick(object sender, EventArgs e)
         {
             // ToDo: *** Translate
-            // ToDo: *** Merge API into this project and make those classes shared!
+            // ToDo: *** Merge API into this project and make those classes Common!
             // ToDo: *** Extend API so that it supports all options from this dialog!
 
             if (currentTicket == null)

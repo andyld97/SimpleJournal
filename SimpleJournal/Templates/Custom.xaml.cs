@@ -1,5 +1,6 @@
 ﻿using ImageMagick;
 using SimpleJournal.Controls;
+using SimpleJournal.Common;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -13,9 +14,9 @@ namespace SimpleJournal.Templates
     {
         public byte[] PageBackground { get; private set; }
 
-        public Orientation Orientation { get; private set; }
+        public Common.Orientation Orientation { get; private set; }
 
-        public Custom(byte[] background, Orientation orientation)
+        public Custom(byte[] background, Common.Orientation orientation)
         {
             InitializeComponent();
             this.Orientation = orientation;
@@ -29,7 +30,7 @@ namespace SimpleJournal.Templates
                canvas.Background = new SolidColorBrush(Colors.Transparent);
             }
 
-            if (orientation == Orientation.Landscape)
+            if (orientation == Common.Orientation.Landscape)
             {
                 // Swap width and height
                 double temp = Width;

@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Windows;
 
-namespace SimpleJournal.Shared
+namespace SimpleJournal.Common
 {
     public class ConvexHull
     {

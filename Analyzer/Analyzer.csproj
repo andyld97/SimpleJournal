@@ -169,13 +169,6 @@
     <Content Include="journalicon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Shared Libraries\SimpleJournal.Shared\SimpleJournal.Shared.csproj">
-      <Project>{079AFA71-58C5-4377-B2D6-B0218A66C0D9}</Project>
-      <Name>SimpleJournal.Shared</Name>
-      <EmbedInteropTypes>False</EmbedInteropTypes>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.8">
       <Visible>False</Visible>
       <ProductName>Microsoft .NET Framework 4.8 %28x86 and x64%29</ProductName>
@@ -186,6 +179,12 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Shared Libraries\SimpleJournal.Common\SimpleJournal.Common.csproj">
+      <Project>{079afa71-58c5-4377-b2d6-b0218a66c0d9}</Project>
+      <Name>SimpleJournal.Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

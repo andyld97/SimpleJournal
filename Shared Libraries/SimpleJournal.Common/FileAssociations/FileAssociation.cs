@@ -1,4 +1,4 @@
-﻿namespace SJFileAssoc
+﻿namespace SimpleJournal.Common.FileAssociations
 {
     public class FileAssociation
     {

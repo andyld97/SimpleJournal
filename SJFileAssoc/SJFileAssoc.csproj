@@ -103,9 +103,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Shared Libraries\SimpleJournal.Shared\SimpleJournal.Shared.csproj">
+    <ProjectReference Include="..\Shared Libraries\SimpleJournal.Common\SimpleJournal.Common.csproj">
       <Project>{079afa71-58c5-4377-b2d6-b0218a66c0d9}</Project>
-      <Name>SimpleJournal.Shared</Name>
+      <Name>SimpleJournal.Common</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -2,7 +2,7 @@
 using System;
 using System.Windows.Forms;
 
-namespace SJFileAssoc
+namespace SimpleJournal.Common.FileAssociations
 {
     public class FileAssociations
     {

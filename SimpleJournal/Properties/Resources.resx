@@ -121,15 +121,6 @@
   <data name="journalicon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\journalicon.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="SimpleJournal_Shared" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\SimpleJournal.Shared.dll;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="SJFileAssoc" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\SJFileAssoc.exe;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="SJFileAssoc_exe" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\SJFileAssoc.exe.config;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
-  </data>
   <data name="strA4" xml:space="preserve">
     <value>A4</value>
     <comment>*</comment>
@@ -2030,5 +2021,14 @@ Alternatively, you can use the normal version of SimpleJournal!</value>
   <data name="strPDFConversationDialog_UseOnlineConversation" xml:space="preserve">
     <value>Online-Konversation verwenden (wenn Ihr System wenig Speicherplatz hat)</value>
     <comment>PDFConversationDialog.xaml</comment>
+  </data>
+  <data name="SimpleJournal_Common" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\SimpleJournal.Common.dll;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="SJFileAssoc" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\SJFileAssoc.exe;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="SJFileAssoc_exe" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\SJFileAssoc.exe.config;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
 </root>

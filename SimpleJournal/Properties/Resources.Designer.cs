@@ -73,9 +73,9 @@ namespace SimpleJournal.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        public static byte[] SimpleJournal_Shared {
+        public static byte[] SimpleJournal_Common {
             get {
-                object obj = ResourceManager.GetObject("SimpleJournal_Shared", resourceCulture);
+                object obj = ResourceManager.GetObject("SimpleJournal_Common", resourceCulture);
                 return ((byte[])(obj));
             }
         }
