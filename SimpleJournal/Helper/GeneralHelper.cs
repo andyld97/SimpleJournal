@@ -312,12 +312,7 @@ namespace SimpleJournal
             };
 
             var foregroundBrush = (text.Foreground as SolidColorBrush);
-
-            jt.A = foregroundBrush.Color.A;
-            jt.R = foregroundBrush.Color.R;
-            jt.G = foregroundBrush.Color.G;
-            jt.B = foregroundBrush.Color.B;
-
+            jt.TextColor = new Data.Color(foregroundBrush.Color);
             jt.IsBold = (text.FontWeight == FontWeights.Bold);
             jt.IsItalic = (text.FontStyle == FontStyles.Italic);
             bool containsAll = true;
@@ -390,10 +385,7 @@ namespace SimpleJournal
                 PlotDirection = plot.DrawingDirection,
                 PlotMode = plot.DrawingMode,
                 StrokeThickness = plot.StrokeThickness,
-                ForegroundA = plot.Foreground.A,
-                ForegroundB = plot.Foreground.B,
-                ForegroundG = plot.Foreground.G,
-                ForegroundR = plot.Foreground.R,
+                StrokeColor = new Data.Color(plot.Foreground),
                 Width = plot.Width,
                 Height = plot.Height,
                 ZIndex = Canvas.GetZIndex(plot)

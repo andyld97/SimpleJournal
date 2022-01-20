@@ -66,6 +66,11 @@ namespace SimpleJournal.Data
         public double Height { get; set; }
 
         /// <summary>
+        /// Represents the z order of this resource
+        /// </summary>
+        public int ZIndex { get; set; } = 0;
+
+        /// <summary>
         /// Journal-Data in Base64-String representation (only used for converting old documents)
         /// </summary>
         public string DataBase64

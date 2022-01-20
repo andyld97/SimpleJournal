@@ -12,11 +12,9 @@ namespace SimpleJournal.Data
     {
         public override Type JournalResourceType => Type.Image;
 
-        public int RotationAngle = 0;
+        public int RotationAngle { get; set; } = 0;
 
         public bool IsUniform { get; set; } = true;
-
-        public int ZIndex { get; set; }
 
         public override UIElement ConvertToUiElement()
         {

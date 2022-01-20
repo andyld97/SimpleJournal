@@ -182,7 +182,6 @@ namespace SimpleJournal.Data
                             if (oldCount != count)
                                 throw new Exception("Invalid or corrupt file, cannot load data");
 
-
                             return journal;
                         }
                     }

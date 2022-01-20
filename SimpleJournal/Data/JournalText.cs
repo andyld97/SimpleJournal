@@ -14,7 +14,7 @@ namespace SimpleJournal.Data
 
         public string FontFamily = "Times New Roman";
 
-        public byte A, R, G, B;
+        public Color TextColor { get; set; } = new Color();
 
         public int RotationAngle = 0;
 
@@ -26,8 +26,6 @@ namespace SimpleJournal.Data
 
         public bool IsStrikeout = false;
 
-        public int ZIndex { get; set; } = 0;
-
         public override UIElement ConvertToUiElement()
         {
             TextBlock text = new TextBlock() { Text = Encoding.Default.GetString(Data) };
@@ -38,7 +36,7 @@ namespace SimpleJournal.Data
             text.Height = this.Height;
             text.FontSize = FontSize;
             text.FontFamily = new System.Windows.Media.FontFamily(FontFamily);
-            text.Foreground = new SolidColorBrush(System.Windows.Media.Color.FromArgb(A, R, G, B));
+            text.Foreground = new SolidColorBrush(TextColor.ToColor());
 
             if (IsBold)
                 text.FontWeight = FontWeights.Bold;

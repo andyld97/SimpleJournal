@@ -14,13 +14,11 @@ namespace SimpleJournal.Data
 
         public PlotMode PlotMode { get; set; } = PlotMode.Positive;
 
-        public int ZIndex { get; set; }
-
         public double RotationAngle { get; set; } = 0;
 
         public double StrokeThickness { get; set; } = 1;
 
-        public byte ForegroundA = 255, ForegroundR = 0, ForegroundB = 0, ForegroundG = 0;
+        public Color StrokeColor { get; set; } = new Color();
 
         public override UIElement ConvertToUiElement()
         {
@@ -30,12 +28,12 @@ namespace SimpleJournal.Data
                 DrawingMode = PlotMode,
             };
 
-            plt.SetValue(DrawingCanvas.LeftProperty, Left);
-            plt.SetValue(DrawingCanvas.TopProperty, Top);
+            plt.SetValue(InkCanvas.LeftProperty, Left);
+            plt.SetValue(InkCanvas.TopProperty, Top);
             plt.Width = Width;
             plt.Height = Height;
             plt.StrokeThickness = this.StrokeThickness;
-            plt.Foreground = System.Windows.Media.Color.FromArgb(ForegroundA, ForegroundR, ForegroundG, ForegroundB);
+            plt.Foreground = StrokeColor.ToColor();
             Canvas.SetZIndex(plt, ZIndex);
 
             plt.RenderTransform = new RotateTransform(RotationAngle);
