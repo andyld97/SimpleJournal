@@ -117,7 +117,7 @@ namespace SimpleJournal
         #endregion
 
         #region Events
-        public delegate void onChanged(StrokeCollection strokes, UIElement child, Action.Type value);
+        public delegate void onChanged(StrokeCollection strokes, UIElement child, ActionType value);
         public event onChanged OnChanged;
 
         public delegate void childElementsSelected(UIElement[] elements);
@@ -195,7 +195,7 @@ namespace SimpleJournal
                     MainWindow.W_INSTANCE.preventSelection = false;
 
                 if (notifiyActionManagerOnCollectionChanged)
-                    OnChanged.Invoke(GetSelectedStrokes(), (UIElement)e.NewItems[0], Actions.Action.Type.AddedChild);
+                    OnChanged.Invoke(GetSelectedStrokes(), (UIElement)e.NewItems[0], ActionType.AddedChild);
             }
             else if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Remove)
             {
@@ -211,7 +211,7 @@ namespace SimpleJournal
                     MainWindow.W_INSTANCE.pnlSidebar.Visibility = Visibility.Collapsed;
 
                 if (notifiyActionManagerOnCollectionChanged)
-                    OnChanged.Invoke(GetSelectedStrokes(), (UIElement)e.OldItems[0], Actions.Action.Type.RemovedChild);
+                    OnChanged.Invoke(GetSelectedStrokes(), (UIElement)e.OldItems[0], ActionType.RemovedChild);
             }
         }
 
@@ -630,11 +630,11 @@ namespace SimpleJournal
             {
                 if (e.Added.Count > 0)
                 {
-                    OnChanged?.Invoke(e.Added, null, Actions.Action.Type.AddedStrokes);
+                    OnChanged?.Invoke(e.Added, null, ActionType.AddedStrokes);
                 }
                 if (e.Removed.Count > 0)
                 {
-                    OnChanged?.Invoke(e.Removed, null, Actions.Action.Type.RemovedStrokes);
+                    OnChanged?.Invoke(e.Removed, null, ActionType.RemovedStrokes);
                 }
             }
         }
@@ -808,13 +808,13 @@ namespace SimpleJournal
 
                         // Make sure Action-Manager is notfiyed about this change, because he can't be notifyed when the user is moving the mouse,
                         // because then everytime when a stroke is added and removed it will be notified.
-                        OnChanged?.Invoke(new StrokeCollection() { stroke }, null, Actions.Action.Type.AddedStrokes);
+                        OnChanged?.Invoke(new StrokeCollection() { stroke }, null, ActionType.AddedStrokes);
 
                         // Make sure save dialog will also ask only if a stroke was drown in ruler mode
                         DrawingCanvas.Change = true;
                     }
                     else
-                        OnChanged?.Invoke(null, line, Actions.Action.Type.AddedChild);
+                        OnChanged?.Invoke(null, line, ActionType.AddedChild);
 
                     // Reset ruler
                     pointCounter = 0;
@@ -828,7 +828,7 @@ namespace SimpleJournal
                 {
                     // Remove MouseLeftButton event after adding the control finally (to ensure the ruler works properly again on the border of this control - after adding the control, the events are properly working again)
                     Children.Last().MouseLeftButtonDown -= Control_MouseLeftButtonDown;
-                    OnChanged?.Invoke(null, Children.Last(), Actions.Action.Type.AddedChild);
+                    OnChanged?.Invoke(null, Children.Last(), ActionType.AddedChild);
 
                     // Add rectangle
                     pointCounter = 0;
@@ -842,7 +842,7 @@ namespace SimpleJournal
                 {
                     // Remove MouseLeftButton event after adding the control finally (to ensure the ruler works properly again on the border of this control - after adding the control, the events are properly working again)
                     Children.Last().MouseLeftButtonDown -= Control_MouseLeftButtonDown;
-                    OnChanged?.Invoke(null, Children.Last(), Actions.Action.Type.AddedChild);
+                    OnChanged?.Invoke(null, Children.Last(), ActionType.AddedChild);
 
                     // Add rectangle
                     pointCounter = 0;

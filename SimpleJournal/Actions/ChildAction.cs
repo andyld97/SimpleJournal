@@ -9,7 +9,7 @@ namespace SimpleJournal.Actions
     {
         private readonly UIElement child = null;
 
-        public ChildAddedAction(UIElement child) : base(Action.Type.AddedChild)
+        public ChildAddedAction(UIElement child) : base(ActionType.AddedChild)
         {
             this.child = child;
         }
@@ -31,7 +31,7 @@ namespace SimpleJournal.Actions
     {
         private readonly UIElement child = null;
 
-        public ChildRemovedAction(UIElement child) : base(Action.Type.RemovedChild)
+        public ChildRemovedAction(UIElement child) : base(ActionType.RemovedChild)
         {
             this.child = child;
         }
@@ -57,7 +57,7 @@ namespace SimpleJournal.Actions
         private readonly double thicknessOld;
         private readonly double thicknessNew;
 
-        public ShapeChangedAction(UIElement handle, Color cOld, Color cNew, double thicknessOld, double thicknessNew) : base(Type.ShapeChanged)
+        public ShapeChangedAction(UIElement handle, Color cOld, Color cNew, double thicknessOld, double thicknessNew) : base(ActionType.ShapeChanged)
         {
             this.handle = handle;
             this.cOld = cOld;

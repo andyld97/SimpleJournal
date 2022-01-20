@@ -9,7 +9,7 @@ namespace SimpleJournal.Actions
         private readonly object newValue = null;
         private readonly Action<object> applyValueToProperty = null;
 
-        public PropertyChangedAction(object newValue, object oldValue, Action<object> applyValueToProperty) : base(Type.PropertyChanged)
+        public PropertyChangedAction(object newValue, object oldValue, Action<object> applyValueToProperty) : base(ActionType.PropertyChanged)
         {
             this.newValue = newValue;
             this.oldValue = oldValue;
@@ -31,7 +31,7 @@ namespace SimpleJournal.Actions
     {
         private readonly List<T> actions = null;
 
-        public MultipleChangedActions(List<T> actions) : base(Type.PropertyChanged)
+        public MultipleChangedActions(List<T> actions) : base(ActionType.PropertyChanged)
         {
             this.actions = actions;
         }

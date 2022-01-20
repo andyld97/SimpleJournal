@@ -7,7 +7,7 @@ namespace SimpleJournal.Actions
     {
         private readonly StrokeCollection strokes = null;
 
-        public StrokeAddedAction(StrokeCollection strokes) : base(Action.Type.AddedStrokes)
+        public StrokeAddedAction(StrokeCollection strokes) : base(ActionType.AddedStrokes)
         {
             this.strokes = strokes ?? throw new ArgumentNullException("strokes");
         }
@@ -39,7 +39,7 @@ namespace SimpleJournal.Actions
     {
         private readonly StrokeCollection strokes = null;
 
-        public StrokeRemovedAction(StrokeCollection strokes) : base(Action.Type.RemovedStrokes)
+        public StrokeRemovedAction(StrokeCollection strokes) : base(ActionType.RemovedStrokes)
         {
             this.strokes = strokes ?? throw new ArgumentNullException("strokes");
         }
@@ -73,7 +73,7 @@ namespace SimpleJournal.Actions
         private readonly DrawingAttributes oldAttributes;
         private readonly DrawingAttributes newAttributes;
 
-        public StrokesChangedAction(Stroke st, DrawingAttributes oldAttr, DrawingAttributes newAttr) : base(Type.AddedChild)
+        public StrokesChangedAction(Stroke st, DrawingAttributes oldAttr, DrawingAttributes newAttr) : base(ActionType.AddedChild)
         {
             this.st = st;
             this.oldAttributes = oldAttr;

@@ -137,6 +137,18 @@
         Printing,
     }
 
+    public enum ActionType
+    {
+        AddedChild,
+        RemovedChild,
+        AddedStrokes,
+        RemovedStrokes,
+        PropertyChanged,
+        StrokeChanged,
+        ShapeChanged,
+        Default
+    }
+
     public enum TicketStatus
     {
         OnHold,
