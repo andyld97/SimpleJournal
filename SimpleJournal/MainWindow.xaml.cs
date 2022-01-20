@@ -2322,9 +2322,18 @@ namespace SimpleJournal
                 // Determine if we need to print a pdf or not
                 bool printToFilePDF = (pd.PrintQueue.Name.ToLower().Contains("pdf"));
 
-                if (printToFilePDF)
+                if (printToFilePDF && pd.PrintQueue.Name.Contains("Microsoft"))
                 {
-                    // Prevent printing through printQueue instead create a pdf file directly
+                    // ToDo: *** Translate
+                    if (MessageBox.Show("Microsoft Print To PDF doesn't work properly! It is not recommended to use the printer, do you want to use it anyway?", "Error", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No)
+                        return;
+                }
+
+                // ToDo: *** Decide which method should be used
+                if (false)
+                {
+                    /*
+                    // Prevent printing through printQueue instead create a pdf file directly                    
                     SaveFileDialog dialog = new SaveFileDialog() { Filter = Properties.Resources.strPDFFilter, Title = Properties.Resources.strPDFDialogTitle };
                     var dialogResult = dialog.ShowDialog();
 
@@ -2336,6 +2345,20 @@ namespace SimpleJournal
 
                         await PdfHelper.ExportJournalAsPDF(dialog.FileName, pages);
                     }
+                    */
+
+                    // Old print method but with orientation
+                    /*for (int i = from; i <= to; i++)
+                    {
+                        var page = CurrentJournalPages[i].ClonePage(true);
+                        if (page is Custom c && c.Orientation == Orientation.Landscape)
+                            pd.PrintTicket.PageOrientation = PageOrientation.Landscape;
+                        else
+                            pd.PrintTicket.PageOrientation = PageOrientation.Portrait;
+
+                        pd.PrintVisual((UserControl)page, $"Printing page {i}/{to}");
+                    }
+                    */
                 }
                 else
                 {
@@ -2381,6 +2404,8 @@ namespace SimpleJournal
                             document.Pages.Add(pageContent);
                         }
 
+                        // Set the job description
+                        pd.PrintQueue.CurrentJobSettings.Description = currentJournalName;
                         XpsDocumentWriter xpsWriter = PrintQueue.CreateXpsDocumentWriter(pd.PrintQueue);
                         xpsWriter.WritingPrintTicketRequired += (s, e) =>
                         {
