@@ -2315,7 +2315,29 @@ namespace SimpleJournal
 
             if (dialogResult.HasValue && dialogResult.Value)
             {
-                var result = await PdfHelper.ExportJournalAsPDF(dialog.FileName, CurrentJournalPages.Select(p => p as UserControl).ToList());
+                List<byte[]> data = new List<byte[]>();
+
+                foreach (var page in CurrentJournalPages)
+                {
+                    // BmpBitmapEncoder encoder = new BmpBitmapEncoder();
+                    PngBitmapEncoder encoder = new PngBitmapEncoder();
+
+                    RenderTargetBitmap rtb = GeneralHelper.RenderToBitmap(page as UserControl, 1.0, new SolidColorBrush(Colors.White));
+                    encoder.Frames.Add(BitmapFrame.Create(rtb));
+
+                    using (System.IO.MemoryStream ms = new System.IO.MemoryStream())
+                    {
+                        encoder.Save(ms);
+                        data.Add(ms.ToArray());
+                    }
+
+                    rtb.Clear();
+                    rtb = null;
+                    encoder.Frames.Clear();
+                    encoder = null;
+                }
+
+                var result = await PdfHelper.ExportJournalAsPDF(dialog.FileName, data);
 
                 if (!result.Item1)
                     MessageBox.Show($"{Properties.Resources.strFailedToExportJournalAsPDF}\n\n{Properties.Resources.strPDFConversationDialog_GhostscriptMessage}: {result.Item2}", Properties.Resources.strError, MessageBoxButton.OK, MessageBoxImage.Error);

@@ -1,8 +1,5 @@
 ﻿using ImageMagick;
 using SimpleJournal.Common;
-using System.Windows.Controls;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using Orientation = SimpleJournal.Common.Orientation;
 using SimpleJournal.Documents;
 
@@ -48,10 +45,10 @@ namespace SimpleJournal.Helper.PDF
             return pdfJournalPage;
         }
 
-        public static async Task<(bool, string)> ExportJournalAsPDF(string outputPath, List<UserControl> pages)
+        public static async Task<(bool, string)> ExportJournalAsPDF(string outputPath, List<byte[]> pages)
         {
             // This method shouldn't freeze the whole gui (it's better already)
-            State.SetAction(StateType.ExportPDF, ProgressState.Start);      
+            State.SetAction(StateType.ExportPDF, ProgressState.Start);
 
             try
             {
@@ -59,27 +56,10 @@ namespace SimpleJournal.Helper.PDF
                 {
                     foreach (var page in pages)
                     {
-                        // BmpBitmapEncoder encoder = new BmpBitmapEncoder();
-                        PngBitmapEncoder encoder = new PngBitmapEncoder();
-
-                        RenderTargetBitmap rtb = new RenderTargetBitmap(2,2,2,2, PixelFormats.Prgba64); // GeneralHelper.RenderToBitmap(page, 1.0, new SolidColorBrush(Colors.White));
-                        encoder.Frames.Add(BitmapFrame.Create(rtb));
-
-                        using (System.IO.MemoryStream ms = new System.IO.MemoryStream())
+                        await Task.Run(() =>
                         {
-                            encoder.Save(ms);
-                            // ms.Seek(0, System.IO.SeekOrigin.Begin);
-
-                            await Task.Run(() =>
-                            {
-                                imagesToPdf.Add(new MagickImage(ms.ToArray(), MagickFormat.Png));
-                            });
-                        }
-
-                        rtb.Clear();
-                        rtb = null;
-                        encoder.Frames.Clear();
-                        encoder = null;
+                            imagesToPdf.Add(new MagickImage(page, MagickFormat.Png));
+                        });
                     }
 
                     await imagesToPdf.WriteAsync(outputPath, MagickFormat.Pdf);
