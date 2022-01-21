@@ -2313,7 +2313,12 @@ namespace SimpleJournal
             var dialogResult = dialog.ShowDialog();
 
             if (dialogResult.HasValue && dialogResult.Value)
-                await PdfHelper.ExportJournalAsPDF(dialog.FileName, CurrentJournalPages.ToList());
+            {
+                var result = await PdfHelper.ExportJournalAsPDF(dialog.FileName, CurrentJournalPages.Select(p => p as UserControl).ToList());
+
+                if (!result.Item1)
+                    MessageBox.Show($"{Properties.Resources.strFailedToExportJournalAsPDF}\n\n{Properties.Resources.strPDFConversationDialog_GhostscriptMessage}: {result.Item2}", Properties.Resources.strError, MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private async Task Print()

@@ -2,7 +2,7 @@
 using SimpleJournal.Common;
 using System;
 
-namespace SimpleJournal
+namespace SimpleJournal.Templates
 {
     public interface IPaper : IDisposable
     {

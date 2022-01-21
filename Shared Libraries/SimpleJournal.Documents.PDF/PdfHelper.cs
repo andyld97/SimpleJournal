@@ -1,9 +1,5 @@
 ﻿using ImageMagick;
-using SimpleJournal.Data;
 using SimpleJournal.Common;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -40,7 +36,7 @@ namespace SimpleJournal.Helper
             await Task.Run(() =>
             {
                 // Resize image to A4 pixels (96 dpi)
-                image.Resize(new MagickGeometry(orientation == Orientation.Portrait ? Consts.A4WidthP : Consts.A4WidthL, orientation == Orientation.Portrait ? Consts.A4HeightP : Consts.A4HeightL) { IgnoreAspectRatio = false });
+                image.Resize(new MagickGeometry(orientation == Orientation.Portrait ? (int)Consts.A4WidthP : (int)Consts.A4WidthL, orientation == Orientation.Portrait ? Consts.A4HeightP : Consts.A4HeightL) { IgnoreAspectRatio = false });
 
                 pdfJournalPage = new PdfJournalPage
                 {
@@ -53,7 +49,7 @@ namespace SimpleJournal.Helper
             return pdfJournalPage;
         }
 
-        public static async Task ExportJournalAsPDF(string outputPath, List<IPaper> pages)
+        public static async Task<(bool, string)> ExportJournalAsPDF(string outputPath, List<UserControl> pages)
         {
             // This method shouldn't freeze the whole gui (it's better already)
             State.SetAction(StateType.ExportPDF, ProgressState.Start);      
@@ -67,7 +63,7 @@ namespace SimpleJournal.Helper
                         // BmpBitmapEncoder encoder = new BmpBitmapEncoder();
                         PngBitmapEncoder encoder = new PngBitmapEncoder();
 
-                        RenderTargetBitmap rtb = GeneralHelper.RenderToBitmap(page as UserControl, 1.0, new SolidColorBrush(Colors.White));
+                        RenderTargetBitmap rtb = new RenderTargetBitmap(2,2,2,2, PixelFormats.Prgba64); // GeneralHelper.RenderToBitmap(page, 1.0, new SolidColorBrush(Colors.White));
                         encoder.Frames.Add(BitmapFrame.Create(rtb));
 
                         using (System.IO.MemoryStream ms = new System.IO.MemoryStream())
@@ -89,11 +85,13 @@ namespace SimpleJournal.Helper
 
                     await imagesToPdf.WriteAsync(outputPath, MagickFormat.Pdf);
                     imagesToPdf.Dispose();
+
+                    return (true, string.Empty);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"{Properties.Resources.strFailedToExportJournalAsPDF}\n\n{Properties.Resources.strPDFConversationDialog_GhostscriptMessage}: {ex.Message}", Properties.Resources.strError, MessageBoxButton.OK, MessageBoxImage.Error);
+                return (false, ex.Message);
             }
 
             State.SetAction(StateType.ExportPDF, ProgressState.Completed);
