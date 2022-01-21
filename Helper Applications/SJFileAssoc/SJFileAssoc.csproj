@@ -103,7 +103,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Shared Libraries\SimpleJournal.Common\SimpleJournal.Common.csproj">
+    <ProjectReference Include="..\..\Shared Libraries\SimpleJournal.Common\SimpleJournal.Common.csproj">
       <Project>{079afa71-58c5-4377-b2d6-b0218a66c0d9}</Project>
       <Name>SimpleJournal.Common</Name>
     </ProjectReference>
