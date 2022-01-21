@@ -80,7 +80,7 @@ namespace SimpleJournal.Data
         /// <summary>
         /// The color of the text marker 
         /// </summary>
-        public Color TextMarkerColor { get; set; } = new Color(Colors.Yellow.R, Colors.Yellow.G, Colors.Yellow.B);
+        public Common.Data.Color TextMarkerColor { get; set; } = new Common.Data.Color(Colors.Yellow.R, Colors.Yellow.G, Colors.Yellow.B);
 
         /// <summary>
         /// If true then all forms which would be converted will have a rotation of 0 degrees.
@@ -191,7 +191,7 @@ namespace SimpleJournal.Data
         {
             try
             {
-                var result = Serialization.Serialization.Read<Settings>(path, Serialization.Serialization.Mode.XML);
+                var result = Serialization.Read<Settings>(path, Serialization.Mode.XML);
                 if (result != null)
                     return result;
             }
@@ -207,7 +207,7 @@ namespace SimpleJournal.Data
         {
             try
             {
-                Serialization.Serialization.Save<Settings>(path, this, Serialization.Serialization.Mode.XML);
+                Serialization.Save<Settings>(path, this, Serialization.Mode.XML);
             }
             catch (Exception e)
             {

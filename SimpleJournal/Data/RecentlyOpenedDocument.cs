@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SimpleJournal.Common;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -33,7 +34,7 @@ namespace SimpleJournal.Data
             List<Document> result = null;
             try
             {
-                result = Serialization.Serialization.Read<List<Document>>(path, Serialization.Serialization.Mode.XML);
+                result = Serialization.Read<List<Document>>(path, Serialization.Mode.XML);
             }
             catch
             {
@@ -59,7 +60,7 @@ namespace SimpleJournal.Data
         {
             try
             {
-                Serialization.Serialization.Save<List<Document>>(path, docuemnts, Serialization.Serialization.Mode.XML);
+                Serialization.Save<List<Document>>(path, docuemnts, Serialization.Mode.XML);
             }
             catch
             {

@@ -4,6 +4,7 @@ using SimpleJournal.Common;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using SimpleJournal.Documents.UI.Helper;
 
 namespace SimpleJournal.Templates
 {
@@ -24,10 +25,10 @@ namespace SimpleJournal.Templates
             if (background != null)
             {
                 PageBackground = background;
-              //  canvas.Background = new ImageBrush() { ImageSource = GeneralHelper.LoadImage(background), Stretch = Stretch.Uniform };
+                // canvas.Background = new ImageBrush() { ImageSource = GeneralHelper.LoadImage(background), Stretch = Stretch.Uniform };
 
-                ImageBackground.Source = GeneralHelper.LoadImage(background);
-               canvas.Background = new SolidColorBrush(Colors.Transparent);
+                ImageBackground.Source = ImageHelper.LoadImage(background);
+                canvas.Background = new SolidColorBrush(Colors.Transparent);
             }
 
             if (orientation == Common.Orientation.Landscape)

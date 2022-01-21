@@ -52,10 +52,9 @@
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="PresentationCore" />
-    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.IO.Compression" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="Microsoft.CSharp" />
@@ -65,14 +64,16 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controls\Plot.cs" />
+    <Compile Include="Data\Color.cs" />
     <Compile Include="ConvexHull.cs" />
     <Compile Include="Enums.cs" />
     <Compile Include="Extensions\StringHelper.cs" />
     <Compile Include="FileAssociations\FileAssociation.cs" />
     <Compile Include="FileAssociations\FileAssociations.cs" />
-    <Compile Include="FileSystem.cs" />
+    <Compile Include="Helper\FileSystemHelper.cs" />
+    <Compile Include="Helper\ZipFileHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Serialization.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

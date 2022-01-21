@@ -1,4 +1,4 @@
-﻿namespace SimpleJournal.Data
+﻿namespace SimpleJournal.Common.Data
 {
     public class Color
     {
@@ -23,9 +23,6 @@
 
         // Black
         public Color() : this(255, 0, 0, 0)
-        { }
-
-        public Color(System.Windows.Media.Color color) : this(color.A, color.R, color.G, color.B)
         { }
     }
 }

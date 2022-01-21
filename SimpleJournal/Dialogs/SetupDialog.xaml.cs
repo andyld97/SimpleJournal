@@ -8,6 +8,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using Pen = SimpleJournal.Data.Pen;
+using SimpleJournal.Documents.UI.Extensions;
 
 namespace SimpleJournal.Dialogs
 {
@@ -67,7 +68,7 @@ namespace SimpleJournal.Dialogs
             {
                 markerPath.Fill = new SolidColorBrush(c.Value);
                 previewCanvasTextMarker.DrawingAttributes.Color = c.Value;
-                Settings.Instance.TextMarkerColor = new Data.Color(c.Value);
+                Settings.Instance.TextMarkerColor = c.Value.ToColor();
             }
 
             if (sizeIndex >= 0)
@@ -131,7 +132,7 @@ namespace SimpleJournal.Dialogs
             {
                 if (System.IO.File.Exists(Consts.PenSettingsFilePath))
                 {
-                    var result = Serialization.Serialization.Read<Data.Pen[]>(Consts.PenSettingsFilePath, Serialization.Serialization.Mode.XML);
+                    var result = Serialization.Read<Data.Pen[]>(Consts.PenSettingsFilePath, Serialization.Mode.XML);
                     if (result != null)
                         pens = result;
                 }
@@ -220,9 +221,9 @@ namespace SimpleJournal.Dialogs
                 currentDrawingAttributes.Color = c.Value;
 
                 if (SelectedPen != -1)
-                    pens[SelectedPen].FontColor = new Data.Color(c.Value.A, c.Value.R, c.Value.G, c.Value.B);
+                    pens[SelectedPen].FontColor = c.Value.ToColor();
                 else
-                    pens[index].FontColor = new Data.Color(c.Value.A, c.Value.R, c.Value.G, c.Value.B);
+                    pens[index].FontColor = c.Value.ToColor();
 
 
                 previewPensCanvas.DrawingAttributes = currentDrawingAttributes;
@@ -278,7 +279,7 @@ namespace SimpleJournal.Dialogs
         {
             try
             {
-                Serialization.Serialization.Save<Data.Pen[]>(Consts.PenSettingsFilePath, pens, Serialization.Serialization.Mode.XML);
+                Serialization.Save<Data.Pen[]>(Consts.PenSettingsFilePath, pens, Serialization.Mode.XML);
             }
             catch
             { }

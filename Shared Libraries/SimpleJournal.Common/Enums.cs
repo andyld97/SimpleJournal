@@ -17,6 +17,32 @@
         CooardinateSystem = 13
     }
 
+    /// <summary>
+    /// Type of this resource
+    /// </summary>
+    public enum JournalResourceType
+    {
+        /// <summary>
+        /// Image type
+        /// </summary>
+        Image = 0,
+
+        /// <summary>
+        /// Text type
+        /// </summary>
+        Text = 1,
+
+        /// <summary>
+        /// A rectangle, circle, ellipse, poligon  or something else which derrivered from shape
+        /// </summary>
+        Shape = 2,
+
+        /// <summary>
+        /// Simple plot
+        /// </summary>
+        Plot = 3
+    }
+
     public enum Format
     {
         A4

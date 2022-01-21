@@ -3,7 +3,7 @@ using System.IO;
 using System.IO.Compression;
 using System.Threading.Tasks;
 
-namespace SimpleJournal.Helper
+namespace SimpleJournal.Common.Helper
 {
     /// <summary>
     /// Taken from https://stackoverflow.com/a/55103482/6237448 (but modified)

@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using SimpleJournal.Documents.UI.Extensions;
+using System.Windows;
 using System.Windows.Media;
 
 namespace SimpleJournal.Controls.Templates

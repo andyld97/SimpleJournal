@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Forms;
 using MessageBox = System.Windows.MessageBox;
+using SimpleJournal.Documents;
 
 namespace SimpleJournal.Dialogs
 {

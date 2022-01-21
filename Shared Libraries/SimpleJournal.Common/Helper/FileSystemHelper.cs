@@ -1,9 +1,9 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
 
-namespace SimpleJournal.Common
+namespace SimpleJournal.Common.Helper
 {
-    public static class FileSystem
+    public static class FileSystemHelper
     {
         public static bool TryDeleteFile(string fileName)
         {

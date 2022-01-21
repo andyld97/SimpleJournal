@@ -343,6 +343,8 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Shared Libraries\SimpleJournal.Common\SimpleJournal.Common.csproj" />
+    <ProjectReference Include="..\Shared Libraries\SimpleJournal.Documents.UI\SimpleJournal.Documents.UI.csproj" />
+    <ProjectReference Include="..\Shared Libraries\SimpleJournal.Documents\SimpleJournal.Documents.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Serialization">

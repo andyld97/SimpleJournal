@@ -9,6 +9,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using Orientation = SimpleJournal.Common.Orientation;
+using SimpleJournal.Documents;
 
 namespace SimpleJournal.Helper
 {

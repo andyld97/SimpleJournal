@@ -1,5 +1,6 @@
 ﻿using SimpleJournal.Controls;
 using SimpleJournal.Data;
+using SimpleJournal.Documents;
 using SimpleJournal.Helper;
 using System;
 using System.Collections.Generic;
@@ -40,7 +41,7 @@ namespace SimpleJournal.Dialogs
                 // Add all files to listBox
                 foreach (var file in sortedBackupFiles)
                 {
-                    Journal journal = Journal.LoadJournalAsync(file.FullName, true).Result;
+                    Journal journal = Journal.LoadJournalAsync(file.FullName, Consts.BackupDirectory, true).Result;
                     var bdi = new BackupDataItem()
                     {
                         FileInfo = file,
@@ -106,7 +107,7 @@ namespace SimpleJournal.Dialogs
             {
                 try
                 {
-                    var journal = Journal.LoadJournalAsync(file.FullName, true).Result;
+                    var journal = Journal.LoadJournalAsync(file.FullName, Consts.BackupDirectory, true).Result;
                     if (journal.IsBackup)
                     {
                         int pID = journal.ProcessID;
@@ -204,7 +205,7 @@ namespace SimpleJournal.Dialogs
             try
             {
                 // Load journal
-                var journal = await Journal.LoadJournalAsync(backupDataItem.FileInfo.FullName, true);
+                var journal = await Journal.LoadJournalAsync(backupDataItem.FileInfo.FullName, Consts.BackupDirectory, true);
                 journal.IsBackup = false;
 
                 // Save it to another path

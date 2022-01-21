@@ -553,7 +553,7 @@ namespace SimpleJournal
                 return;
             }
 
-            Rect location = Serialization.Serialization.ReadString<Rect>(data[1].Trim(), System.Text.Encoding.Default);
+            Rect location = Serialization.ReadString<Rect>(data[1].Trim(), System.Text.Encoding.Default);
             StringReader stringReader = new StringReader(data[0]);
             XmlReader xmlReader = XmlTextReader.Create(stringReader, new XmlReaderSettings());
             var elem = (UIElement)XamlReader.Load(xmlReader);

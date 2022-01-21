@@ -1,9 +1,7 @@
 ﻿using SimpleJournal.Common;
-using System;
-using System.Collections.Generic;
 using System.Xml.Serialization;
 
-namespace SimpleJournal.Data
+namespace SimpleJournal.Documents
 {
     [XmlInclude(typeof(PdfJournalPage))]
     public class JournalPage

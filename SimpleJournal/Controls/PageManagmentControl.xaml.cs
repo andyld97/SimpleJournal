@@ -10,6 +10,8 @@ using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Media;
+using SimpleJournal.Documents;
+using SimpleJournal.Documents.UI.Extensions;
 
 namespace SimpleJournal.Controls
 {
@@ -366,7 +368,7 @@ namespace SimpleJournal.Controls
                     {
                         foreach (UIElement element in page.Canvas.Children)
                         {
-                            var result = JournalResource.ConvertFromUIElement(element);
+                            var result = element.ConvertFromUIElement();
                             if (result != null)
                                 jp.JournalResources.Add(result);
                         }

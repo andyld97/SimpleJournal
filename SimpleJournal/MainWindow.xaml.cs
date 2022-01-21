@@ -37,6 +37,9 @@ using System.Windows.Threading;
 using System.Windows.Xps;
 using Orientation = SimpleJournal.Common.Orientation;
 using Pen = SimpleJournal.Data.Pen;
+using SimpleJournal.Documents;
+using SimpleJournal.Documents.UI.Extensions;
+using SimpleJournal.Documents.UI.Helper;
 
 namespace SimpleJournal
 {
@@ -239,11 +242,25 @@ namespace SimpleJournal
                     TextExportStatus.Text = e;
             };
 
+            State.Initalize();
             State.OnStateChanged += delegate (string message, ProgressState state)
             {
                 MainStatusBar.Visibility = (state == ProgressState.Start ? Visibility.Visible : Visibility.Collapsed);
                 TextStatusBar.Text = message;
             };
+
+            Journal.OnErrorOccured += delegate (string message)
+            {
+                // ToDo: ***
+                throw new NotImplementedException();
+            };
+
+            ImageHelper.OnErrorOccured += delegate (string message)
+            {
+                // ToDo: ***
+                throw new NotImplementedException();
+            };
+
 
             // Boot with fullscreen
             left = Left;
@@ -400,7 +417,7 @@ namespace SimpleJournal
                 {
                     try
                     {
-                        Journal j = await Journal.LoadJournalAsync(journalFile.FullName, true);
+                        Journal j = await Journal.LoadJournalAsync(journalFile.FullName, Consts.BackupDirectory, true);
                         if (j == null)
                             continue;
                         showRecoverDialog |= j.IsBackup && !ProcessHelper.IsProcessActiveByTaskId(j.ProcessID);
@@ -714,7 +731,7 @@ namespace SimpleJournal
                 {
                     var img = new Image
                     {
-                        Source = GeneralHelper.LoadImage(new Uri($"pack://application:,,,/SimpleJournal;component/resources/text.png")),
+                        Source = ImageHelper.LoadImage(new Uri($"pack://application:,,,/SimpleJournal;component/resources/text.png")),
                         Width = Consts.SidebarListBoxItemViewboxSize,
                         Height = Consts.SidebarListBoxItemViewboxSize
                     };
@@ -1020,13 +1037,14 @@ namespace SimpleJournal
             if (reset)
             {
                 // Default values
-                currentTextMarkerAttributes.Width = new Settings().TextMarkerSize.Height; // Consts.TEXT_MARKER_WIDTH;
-                currentTextMarkerAttributes.Height = new Settings().TextMarkerSize.Width; // Consts.TEXT_MARKER_HEIGHT;
+                var defaultSettings = new Settings();
+                currentTextMarkerAttributes.Width = defaultSettings.TextMarkerSize.Height; // Consts.TEXT_MARKER_WIDTH;
+                currentTextMarkerAttributes.Height = defaultSettings.TextMarkerSize.Width; // Consts.TEXT_MARKER_HEIGHT;
                 currentTextMarkerAttributes.StylusTip = StylusTip.Rectangle;
-                currentTextMarkerAttributes.Color = new Settings().TextMarkerColor.ToColor(); //Consts.TEXT_MARKER_COLOR;
+                currentTextMarkerAttributes.Color = defaultSettings.TextMarkerColor.ToColor(); //Consts.TEXT_MARKER_COLOR;
 
                 Settings.Instance.TextMarkerSize = Consts.TextMarkerSizes[0];
-                Settings.Instance.TextMarkerColor = new Data.Color(Consts.TextMarkerColor.A, Consts.TextMarkerColor.R, Consts.TextMarkerColor.G, Consts.TextMarkerColor.B);
+                Settings.Instance.TextMarkerColor = new Common.Data.Color(Consts.TextMarkerColor.A, Consts.TextMarkerColor.R, Consts.TextMarkerColor.G, Consts.TextMarkerColor.B);
                 Settings.Instance.Save();
             }
             else
@@ -1040,7 +1058,7 @@ namespace SimpleJournal
             markerPath.Fill = new SolidColorBrush(currentTextMarkerAttributes.Color);
             markerPath.Stroke = Brushes.Black;
             markerPath.StrokeThickness = Consts.MarkerPathStrokeThickness;
-            textMarkerTemplate.LoadPen(new Pen(new Data.Color(currentTextMarkerAttributes.Color), Settings.Instance.TextMarkerSize.Width, Settings.Instance.TextMarkerSize.Height));
+            textMarkerTemplate.LoadPen(new Pen(currentTextMarkerAttributes.Color.ToColor(), Settings.Instance.TextMarkerSize.Width, Settings.Instance.TextMarkerSize.Height));
 
             if (currentTool == Tools.TextMarker)
             {
@@ -1126,7 +1144,7 @@ namespace SimpleJournal
             try
             {
 
-                ButtonInsertNewPageIcon.Source = GeneralHelper.LoadImage(new Uri($"pack://application:,,,/SimpleJournal;component/resources/{resourceImageName}"));
+                ButtonInsertNewPageIcon.Source = ImageHelper.LoadImage(new Uri($"pack://application:,,,/SimpleJournal;component/resources/{resourceImageName}"));
             }
             catch
             {
@@ -1863,9 +1881,9 @@ namespace SimpleJournal
                 CurrentDrawingAttributes.Color = c.Value;
 
                 if (SelectedPen != -1)
-                    currentPens[SelectedPen].FontColor = new Data.Color(c.Value.A, c.Value.R, c.Value.G, c.Value.B);
+                    currentPens[SelectedPen].FontColor = new Common.Data.Color(c.Value.A, c.Value.R, c.Value.G, c.Value.B);
                 else
-                    currentPens[index].FontColor = new Data.Color(c.Value.A, c.Value.R, c.Value.G, c.Value.B);
+                    currentPens[index].FontColor = new Common.Data.Color(c.Value.A, c.Value.R, c.Value.G, c.Value.B);
 
                 rulerDropDownTemplate.SetColor(c.Value);
             }
@@ -2004,7 +2022,7 @@ namespace SimpleJournal
 
             if (c != null)
             {
-                Settings.Instance.TextMarkerColor = new Data.Color(c.Value);
+                Settings.Instance.TextMarkerColor = c.Value.ToColor();
                 Settings.Instance.Save();
                 currentTextMarkerAttributes.Color = c.Value;
             }
@@ -2979,7 +2997,7 @@ namespace SimpleJournal
                         {
                             foreach (UIElement element in currentCanvas.Children)
                             {
-                                var result = JournalResource.ConvertFromUIElement(element);
+                                var result = element.ConvertFromUIElement();
                                 if (result != null)
                                     jp.JournalResources.Add(result);
                             }
@@ -3018,7 +3036,7 @@ namespace SimpleJournal
                 try
                 {
                     dialog.Show();
-                    Journal currentJournal = await Journal.LoadJournalAsync(fileName);
+                    Journal currentJournal = await Journal.LoadJournalAsync(fileName, Consts.BackupDirectory);
 
                     if (currentJournal == null)
                     {
@@ -3130,7 +3148,7 @@ namespace SimpleJournal
                                 if (jp.HasAdditionalResources)
                                 {
                                     foreach (JournalResource jr in jp.JournalResources)
-                                        JournalResource.AddJournalResourceToCanvas(jr, canvas);
+                                        GeneralHelper.AddJournalResourceToCanvas(jr, canvas);
                                 }
                             }));
                         }));
@@ -3278,7 +3296,7 @@ namespace SimpleJournal
                             if (page.HasAdditionalResources)
                             {
                                 foreach (JournalResource jr in page.JournalResources)
-                                    JournalResource.AddJournalResourceToCanvas(jr, canvas);
+                                    GeneralHelper.AddJournalResourceToCanvas(jr, canvas);
                             }
                         }));
                     }));

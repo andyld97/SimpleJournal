@@ -1,18 +1,21 @@
-﻿using SimpleJournal.Helper;
-using SimpleJournal.Common;
+﻿using SimpleJournal.Common;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Xml.Serialization;
+using SimpleJournal.Common.Helper;
 
-namespace SimpleJournal.Data
+namespace SimpleJournal.Documents
 {
     public class Journal
     {
         private static bool isSaving = false;
         private static readonly object sync = new object();
+
+        public delegate void onErrorOccured(string message);
+        public static event onErrorOccured OnErrorOccured;
 
         [XmlIgnore]
         private bool wasSavedAlready = false;
@@ -60,7 +63,7 @@ namespace SimpleJournal.Data
                         var entry = zipArchive.GetEntry("journal.xml");
                         var data = await entry.ReadZipEntryAsync();
 
-                        return Serialization.Serialization.ReadBytes<Journal>(data, Serialization.Serialization.Mode.XML);
+                        return Serialization.ReadBytes<Journal>(data, Serialization.Mode.XML);
                     }
                 }
             }
@@ -76,9 +79,10 @@ namespace SimpleJournal.Data
         /// Loads the full journal (zip file)
         /// </summary>
         /// <param name="path">The path where the journal is located</param>
+        /// <param name="backupDirectory">The directory where old documents will be stored</param>
         /// <param name="quiet">If true, no error message is shown</param>
         /// <returns></returns>
-        public static async Task<Journal> LoadJournalAsync(string path, bool quiet = false)
+        public static async Task<Journal> LoadJournalAsync(string path, string backupDirectory, bool quiet = false)
         {
             try
             {
@@ -88,8 +92,8 @@ namespace SimpleJournal.Data
                     try
                     {
                         // Ensure that the backup directory exists
-                        if (!System.IO.Directory.Exists(Consts.BackupDirectory))
-                            System.IO.Directory.CreateDirectory(Consts.BackupDirectory);
+                        if (!System.IO.Directory.Exists(backupDirectory))
+                            System.IO.Directory.CreateDirectory(backupDirectory);
                     }
                     catch
                     {
@@ -99,14 +103,15 @@ namespace SimpleJournal.Data
                     try
                     {
                         // Create a backup (for older versions of sj)
-                        System.IO.File.Copy(path, System.IO.Path.Combine(Consts.BackupDirectory, System.IO.Path.GetFileName(path)));
+                        if (!string.IsNullOrEmpty(backupDirectory))
+                            System.IO.File.Copy(path, System.IO.Path.Combine(backupDirectory, System.IO.Path.GetFileName(path)));
                     }
                     catch
                     {
 
                     }
 
-                    var result = Serialization.Serialization.Read<Journal>(path, Serialization.Serialization.Mode.XML);
+                    var result = Serialization.Read<Journal>(path, Serialization.Mode.XML);
                     if (result != null)
                         return result;
                 }
@@ -129,7 +134,7 @@ namespace SimpleJournal.Data
                                 string pageNumber = currentEntry.Name.Replace("page", string.Empty).Replace(".png", string.Empty).Replace(".pdf", string.Empty).Replace(".xml", string.Empty);
 
                                 if (currentEntry.Name == "journal.xml")
-                                    journal = Serialization.Serialization.ReadBytes<Journal>(data, Serialization.Serialization.Mode.XML);
+                                    journal = Serialization.ReadBytes<Journal>(data, Serialization.Mode.XML);
                                 else if (int.TryParse(pageNumber, out int page))
                                 {
                                     if (currentEntry.Name.EndsWith(".png"))
@@ -140,12 +145,12 @@ namespace SimpleJournal.Data
                                     else if (currentEntry.Name.EndsWith(".pdf"))
                                     {
                                         // pdf page
-                                        pdfJournalPages.Add(page, Serialization.Serialization.ReadBytes<PdfJournalPage>(data, Serialization.Serialization.Mode.XML));
+                                        pdfJournalPages.Add(page, Serialization.ReadBytes<PdfJournalPage>(data, Serialization.Mode.XML));
                                     }
                                     else if (currentEntry.Name.EndsWith(".xml"))
                                     {
                                         // normal page
-                                        journalPages.Add(page, Serialization.Serialization.ReadBytes<JournalPage>(data, Serialization.Serialization.Mode.XML));
+                                        journalPages.Add(page, Serialization.ReadBytes<JournalPage>(data, Serialization.Mode.XML));
                                     }
                                 }
                                 else
@@ -190,8 +195,9 @@ namespace SimpleJournal.Data
             }
             catch (Exception e)
             {
+                // ToDo: ***    MessageBox.Show($"{Properties.Resources.strFailedToLoadJournal}: {e.Message}", Properties.Resources.strFailedToLoadJournalTitle, MessageBoxButton.OK, MessageBoxImage.Error);
                 if (!quiet)
-                    MessageBox.Show($"{Properties.Resources.strFailedToLoadJournal}: {e.Message}", Properties.Resources.strFailedToLoadJournalTitle, MessageBoxButton.OK, MessageBoxImage.Error);
+                    OnErrorOccured?.Invoke(e.Message);
             }
 
             return new Journal();
@@ -225,7 +231,7 @@ namespace SimpleJournal.Data
                                 foreach (var page in Pages)
                                     jrn.Pages.Add(new JournalPage());
 
-                                var data = Serialization.Serialization.SaveToBytes(jrn, Serialization.Serialization.Mode.XML);
+                                var data = Serialization.SaveToBytes(jrn, Serialization.Mode.XML);
                                 await stream.WriteAsync(data, 0, data.Length);
                             }
                         }
@@ -282,7 +288,7 @@ namespace SimpleJournal.Data
 
                                 using (System.IO.Stream stream = pageEntry.Open())
                                 {
-                                    var data = Serialization.Serialization.SaveToBytes(pdfJournalPage, Serialization.Serialization.Mode.XML);
+                                    var data = Serialization.SaveToBytes(pdfJournalPage, Serialization.Mode.XML);
                                     await stream.WriteAsync(data, 0, data.Length);
                                 }
 
@@ -298,7 +304,7 @@ namespace SimpleJournal.Data
                                 var pageEntry = zipArchive.CreateEntry($"pages/page{pgCount}.xml", System.IO.Compression.CompressionLevel.Optimal);
                                 using (System.IO.Stream stream = pageEntry.Open())
                                 {
-                                    var data = Serialization.Serialization.SaveToBytes(page, Serialization.Serialization.Mode.XML);
+                                    var data = Serialization.SaveToBytes(page, Serialization.Mode.XML);
                                     await stream.WriteAsync(data, 0, data.Length);
                                 }
                             }
@@ -316,7 +322,7 @@ namespace SimpleJournal.Data
                             foreach (var page in Pages)
                                 jrn.Pages.Add(new JournalPage());
 
-                            var data = Serialization.Serialization.SaveToBytes(jrn, Serialization.Serialization.Mode.XML);
+                            var data = Serialization.SaveToBytes(jrn, Serialization.Mode.XML);
                             await stream.WriteAsync(data, 0, data.Length);
                         }
                     }
@@ -337,8 +343,9 @@ namespace SimpleJournal.Data
             {
                 retVal = false;
 
+                // ToDo: ***     MessageBox.Show($"{Properties.Resources.strFailedToSaveJournal} {e.Message}", Properties.Resources.strFailedToSaveJournalTitle, MessageBoxButton.OK, MessageBoxImage.Error);
                 if (!quiet)
-                    MessageBox.Show($"{Properties.Resources.strFailedToSaveJournal} {e.Message}", Properties.Resources.strFailedToSaveJournalTitle, MessageBoxButton.OK, MessageBoxImage.Error);
+                    OnErrorOccured?.Invoke(e.Message);
             }
 
             if (!quiet)

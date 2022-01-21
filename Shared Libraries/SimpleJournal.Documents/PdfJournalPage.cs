@@ -1,7 +1,6 @@
 ﻿using SimpleJournal.Common;
-using System;
 
-namespace SimpleJournal.Data
+namespace SimpleJournal.Documents
 {
     public class PdfJournalPage : JournalPage
     {

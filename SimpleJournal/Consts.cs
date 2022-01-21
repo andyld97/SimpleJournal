@@ -44,13 +44,13 @@ namespace SimpleJournal
         #region Pens
         public const int AMOUNT_PENS = 4;
 
-        public static Data.Color[] PEN_COLORS = new Data.Color[] 
+        public static Common.Data.Color[] PEN_COLORS = new Common.Data.Color[] 
         {
-            new Data.Color(0, 0, 0), // black
-            new Data.Color(180, 30, 40), // red
-            new Data.Color(30, 190, 20), // green
-            new Data.Color(30, 40, 210), // blue
-            new Data.Color(127, 127, 127)
+            new Common.Data.Color(0, 0, 0), // black
+            new Common.Data.Color(180, 30, 40), // red
+            new Common.Data.Color(30, 190, 20), // green
+            new Common.Data.Color(30, 40, 210), // blue
+            new Common.Data.Color(127, 127, 127)
         };
 
         #endregion
