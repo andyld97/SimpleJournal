@@ -56,7 +56,7 @@ namespace SimpleJournal.Helper
         public static async Task ExportJournalAsPDF(string outputPath, List<IPaper> pages)
         {
             // This method shouldn't freeze the whole gui (it's better already)
-            State.SetAction(StateAction.ExportPDF, ProgressState.Start);      
+            State.SetAction(StateType.ExportPDF, ProgressState.Start);      
 
             try
             {
@@ -96,7 +96,7 @@ namespace SimpleJournal.Helper
                 MessageBox.Show($"{Properties.Resources.strFailedToExportJournalAsPDF}\n\n{Properties.Resources.strPDFConversationDialog_GhostscriptMessage}: {ex.Message}", Properties.Resources.strError, MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
-            State.SetAction(StateAction.ExportPDF, ProgressState.Completed);
+            State.SetAction(StateType.ExportPDF, ProgressState.Completed);
         }
     }
 }

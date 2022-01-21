@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using SimpleJournal.Common.FileAssociations;
 
 namespace SimpleJournal
 {

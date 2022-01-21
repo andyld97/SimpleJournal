@@ -5,7 +5,7 @@ namespace SimpleJournal.Documents.UI.Helper
 {
     public static class ImageHelper
     {
-        public delegate void onErrorOccured(string message);
+        public delegate void onErrorOccured(string message, string scope);
         public static event onErrorOccured OnErrorOccured;
 
         public static byte[] ExportImage(BitmapSource bi)
@@ -22,8 +22,7 @@ namespace SimpleJournal.Documents.UI.Helper
             }
             catch (Exception e)
             {
-                // ToDo: *** MessageBox.Show($"{Properties.Resources.strFailedToSaveImage} {e.Message}", Properties.Resources.strFailure, MessageBoxButton.OK, MessageBoxImage.Error);
-                OnErrorOccured?.Invoke(e.Message);
+                OnErrorOccured?.Invoke(e.Message, "export");
                 return Array.Empty<byte>();
             }
         }
@@ -55,8 +54,7 @@ namespace SimpleJournal.Documents.UI.Helper
             }
             catch (Exception e)
             {
-                // ToDo: *** MessageBox.Show($"{Properties.Resources.strFailedToLoadImage} {e.Message}", Properties.Resources.strFailure, MessageBoxButton.OK, MessageBoxImage.Error);
-                OnErrorOccured?.Invoke(e.Message);
+                OnErrorOccured?.Invoke(e.Message, "load");
                 return null;
             }
         }
@@ -79,8 +77,7 @@ namespace SimpleJournal.Documents.UI.Helper
             }
             catch (Exception e)
             {
-                // ToDo: *** MessageBox.Show($"{Properties.Resources.strFailedToLoadImage} {e.Message}", Properties.Resources.strFailure, MessageBoxButton.OK, MessageBoxImage.Error);
-                OnErrorOccured?.Invoke(e.Message);
+                OnErrorOccured?.Invoke(e.Message, "load");
                 return null;
             }
         }

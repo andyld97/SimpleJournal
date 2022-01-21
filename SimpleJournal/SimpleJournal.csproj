@@ -347,11 +347,6 @@
     <ProjectReference Include="..\Shared Libraries\SimpleJournal.Documents\SimpleJournal.Documents.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Serialization">
-      <HintPath>..\External Libraries\Serialization.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Update="Properties\Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -368,7 +363,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <Target Name="PostPublish" AfterTargets="Publish">
-	  <Exec Command="copy /Y &quot;$(SolutionDir)Analyzer\bin\$(ConfigurationName)\Analyzer.exe&quot; &quot;$(SolutionDir)$(ProjectName)\$(PublishDir)\Analyzer.exe&quot;&#xD;&#xA;copy /Y &quot;$(SolutionDir)Analyzer\bin\$(ConfigurationName)\Analyzer.exe.config&quot; &quot;$(SolutionDir)$(ProjectName)\$(PublishDir)\Analyzer.exe.config&quot;&#xD;&#xA;copy /Y &quot;$(SolutionDir)Analyzer\bin\$(ConfigurationName)\IACore.dll&quot; &quot;$(SolutionDir)$(ProjectName)\$(PublishDir)\IACore.dll&quot;&#xD;&#xA;copy /Y &quot;$(SolutionDir)Analyzer\bin\$(ConfigurationName)\IALoader.dll&quot; &quot;$(SolutionDir)$(ProjectName)\$(PublishDir)\IALoader.dll&quot;&#xD;&#xA;copy /Y &quot;$(SolutionDir)Analyzer\bin\$(ConfigurationName)\IAWinFX.dll&quot; &quot;$(SolutionDir)$(ProjectName)\$(PublishDir)\IAWinFX.dll&quot;&#xD;&#xA;copy /Y &quot;$(SolutionDir)Analyzer\bin\$(ConfigurationName)\Serialization.dll&quot; &quot;$(SolutionDir)$(ProjectName)\$(PublishDir)\Serialization.dll&quot;&#xD;&#xA;copy /Y &quot;$(SolutionDir)Analyzer\bin\$(ConfigurationName)\SimpleJournal.Common.dll&quot; &quot;$(SolutionDir)$(ProjectName)\$(PublishDir)\SimpleJournal.Common.dll&quot;" />
+	  <Exec Command="copy /Y &quot;$(SolutionDir)Analyzer\bin\$(ConfigurationName)\Analyzer.exe&quot; &quot;$(SolutionDir)$(ProjectName)\$(PublishDir)\Analyzer.exe&quot;&#xD;&#xA;copy /Y &quot;$(SolutionDir)Analyzer\bin\$(ConfigurationName)\Analyzer.exe.config&quot; &quot;$(SolutionDir)$(ProjectName)\$(PublishDir)\Analyzer.exe.config&quot;&#xD;&#xA;copy /Y &quot;$(SolutionDir)Analyzer\bin\$(ConfigurationName)\IACore.dll&quot; &quot;$(SolutionDir)$(ProjectName)\$(PublishDir)\IACore.dll&quot;&#xD;&#xA;copy /Y &quot;$(SolutionDir)Analyzer\bin\$(ConfigurationName)\IALoader.dll&quot; &quot;$(SolutionDir)$(ProjectName)\$(PublishDir)\IALoader.dll&quot;&#xD;&#xA;copy /Y &quot;$(SolutionDir)Analyzer\bin\$(ConfigurationName)\IAWinFX.dll&quot; &quot;$(SolutionDir)$(ProjectName)\$(PublishDir)\IAWinFX.dll&quot;&#xD;&#xA;copy /Y &quot;$(SolutionDir)Analyzer\bin\$(ConfigurationName)\SimpleJournal.Common.dll&quot; &quot;$(SolutionDir)$(ProjectName)\$(PublishDir)\SimpleJournal.Common.dll&quot;&#xD;&#xA;copy /Y &quot;$(SolutionDir)Shared Libraries\SimpleJournal.Documents.UI\bin\$(ConfigurationName)\net6.0-windows\SimpleJournal.Documents.dll&quot; &quot;$(SolutionDir)$(ProjectName)\$(PublishDir)\SimpleJournal.Documents.dll&quot;&#xD;&#xA;copy /Y &quot;$(SolutionDir)Shared Libraries\SimpleJournal.Documents.UI\bin\$(ConfigurationName)\net6.0-windows\SimpleJournal.Documents.UI.dll&quot; &quot;$(SolutionDir)$(ProjectName)\$(PublishDir)\SimpleJournal.Documents.UI.dll&quot;" />
 	  <Exec Condition="'$(Configuration)' == 'Normal'" Command="copy /Y &quot;$(SolutionDir)Touch\bin\Debug\Device.dll&quot; &quot;$(SolutionDir)$(ProjectName)\$(PublishDir)\Device.dll&quot;&#xD;&#xA;copy /Y &quot;$(SolutionDir)Touch\bin\Debug\Touch.exe&quot; &quot;$(SolutionDir)$(ProjectName)\$(PublishDir)\Touch.exe&quot;&#xD;&#xA;copy /Y &quot;$(SolutionDir)Touch\bin\Debug\Touch.exe.config&quot; &quot;$(SolutionDir)$(ProjectName)\$(PublishDir)\Touch.exe.config" />
   </Target>
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">

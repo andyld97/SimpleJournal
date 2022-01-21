@@ -155,7 +155,7 @@
         Completed,
     }
 
-    public enum StateAction
+    public enum StateType
     {
         Saving,
         ExportPDF,

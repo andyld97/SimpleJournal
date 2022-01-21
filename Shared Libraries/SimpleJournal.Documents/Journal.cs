@@ -1,9 +1,5 @@
 ﻿using SimpleJournal.Common;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Xml.Serialization;
 using SimpleJournal.Common.Helper;
 
@@ -14,7 +10,7 @@ namespace SimpleJournal.Documents
         private static bool isSaving = false;
         private static readonly object sync = new object();
 
-        public delegate void onErrorOccured(string message);
+        public delegate void onErrorOccured(string message, string scope);
         public static event onErrorOccured OnErrorOccured;
 
         [XmlIgnore]
@@ -195,9 +191,8 @@ namespace SimpleJournal.Documents
             }
             catch (Exception e)
             {
-                // ToDo: ***    MessageBox.Show($"{Properties.Resources.strFailedToLoadJournal}: {e.Message}", Properties.Resources.strFailedToLoadJournalTitle, MessageBoxButton.OK, MessageBoxImage.Error);
                 if (!quiet)
-                    OnErrorOccured?.Invoke(e.Message);
+                    OnErrorOccured?.Invoke(e.Message, "load");
             }
 
             return new Journal();
@@ -260,7 +255,7 @@ namespace SimpleJournal.Documents
             try
             {
                 if (!quiet && !hideStatus)
-                    State.SetAction(StateAction.Saving, ProgressState.Start);
+                    State.SetAction(StateType.Saving, ProgressState.Start);
 
                 if (wasSavedAlready)
                 {
@@ -332,7 +327,7 @@ namespace SimpleJournal.Documents
                     wasSavedAlready = true;
 
                 if (!quiet && !hideStatus)
-                    State.SetAction(StateAction.Saving, ProgressState.Completed);
+                    State.SetAction(StateType.Saving, ProgressState.Completed);
 
                 retVal = true;
 
@@ -343,13 +338,12 @@ namespace SimpleJournal.Documents
             {
                 retVal = false;
 
-                // ToDo: ***     MessageBox.Show($"{Properties.Resources.strFailedToSaveJournal} {e.Message}", Properties.Resources.strFailedToSaveJournalTitle, MessageBoxButton.OK, MessageBoxImage.Error);
                 if (!quiet)
-                    OnErrorOccured?.Invoke(e.Message);
+                    OnErrorOccured?.Invoke(e.Message, "save");
             }
 
             if (!quiet)
-                State.SetAction(StateAction.Saving, ProgressState.Completed);
+                State.SetAction(StateType.Saving, ProgressState.Completed);
 
             lock (sync)
                 isSaving = false;

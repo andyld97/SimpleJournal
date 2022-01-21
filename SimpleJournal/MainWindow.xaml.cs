@@ -9,9 +9,6 @@ using SimpleJournal.Helper;
 using SimpleJournal.Common;
 using SimpleJournal.Common.Controls;
 using SimpleJournal.Templates;
-#if !UWP
-using SJFileAssoc;
-#endif
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -40,6 +37,7 @@ using Pen = SimpleJournal.Data.Pen;
 using SimpleJournal.Documents;
 using SimpleJournal.Documents.UI.Extensions;
 using SimpleJournal.Documents.UI.Helper;
+using SimpleJournal.Common.FileAssociations;
 
 namespace SimpleJournal
 {
@@ -204,7 +202,6 @@ namespace SimpleJournal
                 btnInsertPlot
             };
 
-
             // Handle keydown
             PreviewKeyDown += (s, e) =>
             {
@@ -237,30 +234,39 @@ namespace SimpleJournal
             ExportControl.TitleChanged += delegate (object sender, string e)
             {
                 if (e == Properties.Resources.strExportPages)
-                    TextExportStatus.Text = String.Empty;
+                    TextExportStatus.Text = string.Empty;
                 else
                     TextExportStatus.Text = e;
             };
 
-            State.Initalize();
+            State.Initalize(new[] {
+                Properties.Resources.strStateSaving,
+                Properties.Resources.strStateExportAsPDF,
+                Properties.Resources.strStateExportAsJournal,
+                Properties.Resources.strStatePrinting,
+            });
+
             State.OnStateChanged += delegate (string message, ProgressState state)
             {
                 MainStatusBar.Visibility = (state == ProgressState.Start ? Visibility.Visible : Visibility.Collapsed);
                 TextStatusBar.Text = message;
             };
 
-            Journal.OnErrorOccured += delegate (string message)
+            Journal.OnErrorOccured += delegate (string message, string scope)
             {
-                // ToDo: ***
-                throw new NotImplementedException();
+                if (scope == "load")
+                    MessageBox.Show($"{Properties.Resources.strFailedToLoadJournal} {message}", Properties.Resources.strFailedToLoadJournalTitle, MessageBoxButton.OK, MessageBoxImage.Error);
+                else if (scope == "save")
+                    MessageBox.Show($"{Properties.Resources.strFailedToSaveJournal} {message}", Properties.Resources.strFailedToSaveJournalTitle, MessageBoxButton.OK, MessageBoxImage.Error);
             };
 
-            ImageHelper.OnErrorOccured += delegate (string message)
+            ImageHelper.OnErrorOccured += delegate (string message, string scope)
             {
-                // ToDo: ***
-                throw new NotImplementedException();
+                if (scope == "export")
+                    MessageBox.Show($"{Properties.Resources.strFailedToSaveImage} {message}", Properties.Resources.strFailure, MessageBoxButton.OK, MessageBoxImage.Error);
+                else if (scope == "load")
+                    MessageBox.Show($"{Properties.Resources.strFailedToLoadImage} {message}", Properties.Resources.strFailure, MessageBoxButton.OK, MessageBoxImage.Error);
             };
-
 
             // Boot with fullscreen
             left = Left;
@@ -2385,7 +2391,7 @@ namespace SimpleJournal
                     // https://stackoverflow.com/a/10139076/6237448
                     // https://stackoverflow.com/questions/8230090/printdialog-with-landscape-and-portrait-pages
                     // For later: Find out a way to notify the user when printing is done
-                    State.SetAction(StateAction.Printing, ProgressState.Start);
+                    State.SetAction(StateType.Printing, ProgressState.Start);
 
                     try
                     {
@@ -2452,7 +2458,7 @@ namespace SimpleJournal
                     }
                     finally 
                     {
-                        State.SetAction(StateAction.Printing, ProgressState.Completed);
+                        State.SetAction(StateType.Printing, ProgressState.Completed);
                     }
                 }
             }
