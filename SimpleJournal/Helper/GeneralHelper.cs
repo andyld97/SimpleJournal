@@ -25,6 +25,9 @@ using System.Xml;
 using SimpleJournal.Documents;
 using SimpleJournal.Common.Helper;
 using SimpleJournal.Documents.UI.Extensions;
+using SimpleJournal.Documents.PDF;
+using System.Threading.Tasks;
+using System.Net.Http;
 
 namespace SimpleJournal
 {
@@ -219,6 +222,32 @@ namespace SimpleJournal
                 // ignore 
                 return false;
             }
+        }
+
+        /// <summary>
+        /// https://stackoverflow.com/a/53284839/6237448
+        /// </summary>
+        public static async Task<PrintTicket> UploadFileAsync(string path, string url)
+        {
+            // we need to send a request with multipart/form-data
+            var multiForm = new MultipartFormDataContent();
+
+            // add file and directly upload it
+            System.IO.FileStream fs = System.IO.File.OpenRead(path);
+            multiForm.Add(new StreamContent(fs), "file", System.IO.Path.GetFileName(path));
+
+            // send request to API 
+            using (HttpClient client = new HttpClient())
+            {
+                var response = await client.PostAsync(url, multiForm);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    return await System.Text.Json.JsonSerializer.DeserializeAsync<PrintTicket>(await response.Content.ReadAsStreamAsync());
+                }
+            }
+
+            return null;
         }
 
         /// <summary>

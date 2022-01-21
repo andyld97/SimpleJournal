@@ -38,6 +38,7 @@ using SimpleJournal.Documents;
 using SimpleJournal.Documents.UI.Extensions;
 using SimpleJournal.Documents.UI.Helper;
 using SimpleJournal.Common.FileAssociations;
+using SimpleJournal.Helper.PDF;
 
 namespace SimpleJournal
 {

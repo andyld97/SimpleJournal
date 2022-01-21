@@ -1,13 +1,12 @@
 ﻿using ImageMagick;
 using SimpleJournal.Common;
-using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using Orientation = SimpleJournal.Common.Orientation;
 using SimpleJournal.Documents;
 
-namespace SimpleJournal.Helper
+namespace SimpleJournal.Helper.PDF
 {
     /// <summary>
     /// Ghostscript needs to be installed: https://ghostscript.com/releases/gsdnld.html

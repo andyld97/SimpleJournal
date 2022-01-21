@@ -12,6 +12,8 @@ using System.Windows;
 using System.Windows.Forms;
 using MessageBox = System.Windows.MessageBox;
 using SimpleJournal.Documents;
+using SimpleJournal.Helper.PDF;
+using SimpleJournal.Documents.PDF;
 
 namespace SimpleJournal.Dialogs
 {
@@ -171,7 +173,7 @@ namespace SimpleJournal.Dialogs
             if (useOnlineConverstation)
             {
                 // Upload file
-                var printTicket = await UploadFileAsync(sourceFileName, $"{Consts.ConverterAPIUrl}/api/pdf/upload");
+                var printTicket = await GeneralHelper.UploadFileAsync(sourceFileName, $"{Consts.ConverterAPIUrl}/api/pdf/upload");
 
                 if (printTicket == null)
                 {
@@ -329,68 +331,6 @@ namespace SimpleJournal.Dialogs
                 else
                     SetInputPanelState(true);
             }
-        }
-
-        /// <summary>
-        /// https://stackoverflow.com/a/53284839/6237448
-        /// </summary>
-        public static async Task<PrintTicket> UploadFileAsync(string path, string url)
-        {
-            // we need to send a request with multipart/form-data
-            var multiForm = new MultipartFormDataContent();
-
-            // add file and directly upload it
-            System.IO.FileStream fs = System.IO.File.OpenRead(path);
-            multiForm.Add(new StreamContent(fs), "file", System.IO.Path.GetFileName(path));
-
-            // send request to API 
-            var client = new HttpClient();
-            var response = await client.PostAsync(url, multiForm);
-
-            if (response.IsSuccessStatusCode)
-            {
-                return await System.Text.Json.JsonSerializer.DeserializeAsync<PrintTicket>(await response.Content.ReadAsStreamAsync());
-            }
-
-            return null;
-        }
-    }
-
-    public class PrintTicket
-    {
-        [JsonPropertyName("id")]
-        public string ID { get; set; } = Guid.NewGuid().ToString();
-
-        [JsonPropertyName("documents")]
-        public List<string> Documents { get; set; } = new List<string>();
-
-        [JsonPropertyName("status")]
-        public TicketStatus Status { get; set; }
-
-        [JsonPropertyName("name")]
-        public string Name { get; set; }
-
-        /// <summary>
-        /// Value from 1-100
-        /// </summary>
-        [JsonPropertyName("percentage")]
-        public int Percentage { get; set; }
-
-        [JsonPropertyName("error_message")]
-        public string ErorrMessage { get; set; }
-
-        [JsonPropertyName("is_completed")]
-        public bool IsCompleted { get; set; }
-
-        [JsonPropertyName("date_time_added")]
-        public DateTime DateTimeAdded { get; set; }
-
-        [JsonIgnore]
-        public string TempPath => System.IO.Path.Combine(System.IO.Path.GetTempPath(), ID);
-
-        public override string ToString()
-        {
-            return Name;
         }
     }
 }
