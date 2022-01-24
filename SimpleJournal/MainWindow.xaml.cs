@@ -2346,6 +2346,32 @@ namespace SimpleJournal
 
         private async Task Print()
         {
+            /*
+             // Prevent printing through printQueue instead create a pdf file directly                    
+            SaveFileDialog dialog = new SaveFileDialog() { Filter = Properties.Resources.strPDFFilter, Title = Properties.Resources.strPDFDialogTitle };
+            var dialogResult = dialog.ShowDialog();
+
+            if (dialogResult.HasValue && dialogResult.Value)
+            {
+                List<IPaper> pages = new List<IPaper>();
+                for (int i = from; i <= to; i++)
+                   pages.Add(CurrentJournalPages[i]);
+                await PdfHelper.ExportJournalAsPDF(dialog.FileName, pages);
+            }
+
+            // Old print method but with orientation
+            /*for (int i = from; i <= to; i++)
+            {
+                var page = CurrentJournalPages[i].ClonePage(true);
+                if (page is Custom c && c.Orientation == Orientation.Landscape)
+                    pd.PrintTicket.PageOrientation = PageOrientation.Landscape;
+                else
+                    pd.PrintTicket.PageOrientation = PageOrientation.Portrait;
+
+                pd.PrintVisual((UserControl)page, $"Printing page {i}/{to}");
+            }
+            */
+
             PrintDialog pd = new PrintDialog() { MinPage = 1, MaxPage = (uint)CurrentJournalPages.Count, UserPageRangeEnabled = true, SelectedPagesEnabled = false, CurrentPageEnabled = true };
             int from = 0; int to = CurrentJournalPages.Count - 1;
             var result = pd.ShowDialog();
@@ -2378,116 +2404,87 @@ namespace SimpleJournal
 
                 if (printToFilePDF && pd.PrintQueue.Name.Contains("Microsoft"))
                 {
-                    // ToDo: *** Translate
-                    if (MessageBox.Show("Microsoft Print To PDF doesn't work properly! It is not recommended to use the printer, do you want to use it anyway?", "Error", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No)
+                    if (MessageBox.Show(Properties.Resources.strMicrosoftPrintToPDFWarning, Properties.Resources.strSure, MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No)
                         return;
                 }
 
-                // ToDo: *** Decide which method should be used
-                if (false)
+                // https://stackoverflow.com/a/10139076/6237448
+                // https://stackoverflow.com/questions/8230090/printdialog-with-landscape-and-portrait-pages
+                // For later: Find out a way to notify the user when printing is done
+                State.SetAction(StateType.Printing, ProgressState.Start);
+                await Task.Delay(1);
+
+                try
                 {
-                    /*
-                    // Prevent printing through printQueue instead create a pdf file directly                    
-                    SaveFileDialog dialog = new SaveFileDialog() { Filter = Properties.Resources.strPDFFilter, Title = Properties.Resources.strPDFDialogTitle };
-                    var dialogResult = dialog.ShowDialog();
+                    Blanco bl = new Blanco();
+                    var pageSize = new Size(bl.Width, bl.Height);
 
-                    if (dialogResult.HasValue && dialogResult.Value)
-                    {
-                        List<IPaper> pages = new List<IPaper>();
-                        for (int i = from; i <= to; i++)
-                            pages.Add(CurrentJournalPages[i]);
+                    List<IPaper> pages = new List<IPaper>();
 
-                        await PdfHelper.ExportJournalAsPDF(dialog.FileName, pages);
-                    }
-                    */
+                    for (int i = from; i <= to; i++)
+                        pages.Add(CurrentJournalPages[i]);
 
-                    // Old print method but with orientation
-                    /*for (int i = from; i <= to; i++)
-                    {
-                        var page = CurrentJournalPages[i].ClonePage(true);
-                        if (page is Custom c && c.Orientation == Orientation.Landscape)
-                            pd.PrintTicket.PageOrientation = PageOrientation.Landscape;
-                        else
-                            pd.PrintTicket.PageOrientation = PageOrientation.Portrait;
-
-                        pd.PrintVisual((UserControl)page, $"Printing page {i}/{to}");
-                    }
-                    */
-                }
-                else
-                {
-                    // https://stackoverflow.com/a/10139076/6237448
-                    // https://stackoverflow.com/questions/8230090/printdialog-with-landscape-and-portrait-pages
-                    // For later: Find out a way to notify the user when printing is done
-                    State.SetAction(StateType.Printing, ProgressState.Start);
-
-                    try
-                    {
-                        List<IPaper> pages = new List<IPaper>();
-
-                        for (int i = from; i <= to; i++)
-                            pages.Add(CurrentJournalPages[i]);
-
-                        var document = new FixedDocument();
-                        Blanco bl = new Blanco();
-
-                        foreach (var item in pages)
-                        {
-                            var ui = item.Canvas;
-
-                            var pageSize = new Size(bl.Width, bl.Height);
-                            if (item is Custom c && c.Orientation == Orientation.Landscape)
-                                pageSize = new Size(bl.Height, bl.Width);
-
-                            // Create FixedPage
-                            var fixedPage = new FixedPage
-                            {
-                                Width = pageSize.Width,
-                                Height = pageSize.Height
-                            };
-
-                            // Add visual, measure/arrange page.
-                            fixedPage.Children.Add((UIElement)item.ClonePage(true));
-                            fixedPage.Measure(pageSize);
-                            fixedPage.Arrange(new Rect(new Point(), pageSize));
-                            fixedPage.UpdateLayout();
-
-                            // Add page to document
-                            var pageContent = new PageContent();
-                            ((IAddChild)pageContent).AddChild(fixedPage);
-                            document.Pages.Add(pageContent);
-                        }
-
-                        // Set the job description
-                        pd.PrintQueue.CurrentJobSettings.Description = currentJournalName;
-                        XpsDocumentWriter xpsWriter = PrintQueue.CreateXpsDocumentWriter(pd.PrintQueue);
-                        xpsWriter.WritingPrintTicketRequired += (s, e) =>
-                        {
-                            Orientation orientation = Orientation.Portrait;
-                            var page = pages[e.Sequence - 1];
-
-                            if (page is Custom c)
-                                orientation = c.Orientation;
-
-                            e.CurrentPrintTicket = new System.Printing.PrintTicket();
-                            if (orientation == Orientation.Landscape)
-                                e.CurrentPrintTicket.PageOrientation = PageOrientation.Landscape;
-                            else
-                                e.CurrentPrintTicket.PageOrientation = PageOrientation.Portrait;
-                        };
-
-                        // Use xpsWriter directly instead of pd.PrintDocument - this way, we can print multiple orientations in one printing ticket!!!
-                        // pd.PrintDocument(document.DocumentPaginator, "My Document");
-                        xpsWriter.Write(document.DocumentPaginator);
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show($"{Properties.Resources.strPrintingError}: {ex.Message}", Properties.Resources.strError, MessageBoxButton.OK, MessageBoxImage.Error);
-                    }
-                    finally 
+                    var document = new FixedDocument();
+                    XpsDocumentWriter xpsWriter = PrintQueue.CreateXpsDocumentWriter(pd.PrintQueue);
+                    xpsWriter.WritingCompleted += delegate (object sender, System.Windows.Documents.Serialization.WritingCompletedEventArgs e)
                     {
                         State.SetAction(StateType.Printing, ProgressState.Completed);
+                    };
+
+                    foreach (var item in pages)
+                    {
+                        var ui = item.Canvas;
+
+                        if (item is Custom c && c.Orientation == Orientation.Landscape)
+                            pageSize = new Size(bl.Height, bl.Width);
+
+                        // Create FixedPage
+                        var fixedPage = new FixedPage
+                        {
+                            Width = pageSize.Width,
+                            Height = pageSize.Height
+                        };
+
+                        // Add visual, measure/arrange page.
+                        fixedPage.Children.Add((UIElement)item.ClonePage(true));
+                        fixedPage.Measure(pageSize);
+                        fixedPage.Arrange(new Rect(new Point(), pageSize));
+                        fixedPage.UpdateLayout();
+
+                        // Add page to document
+                        var pageContent = new PageContent();
+                        ((IAddChild)pageContent).AddChild(fixedPage);
+                        document.Pages.Add(pageContent);
+
+                        await Task.Delay(1);
                     }
+
+                    // Set the job description
+                    pd.PrintQueue.CurrentJobSettings.Description = currentJournalName;
+
+                    xpsWriter.WritingPrintTicketRequired += (s, e) =>
+                    {
+                        Orientation orientation = Orientation.Portrait;
+                        var page = pages[e.Sequence - 1];
+
+                        if (page is Custom c)
+                            orientation = c.Orientation;
+
+                        e.CurrentPrintTicket = new System.Printing.PrintTicket();
+                        if (orientation == Orientation.Landscape)
+                            e.CurrentPrintTicket.PageOrientation = PageOrientation.Landscape;
+                        else
+                            e.CurrentPrintTicket.PageOrientation = PageOrientation.Portrait;
+                    };
+
+                    // Use xpsWriter directly instead of pd.PrintDocument - this way, we can print multiple orientations in one printing ticket!!!
+                    // pd.PrintDocument(document.DocumentPaginator, "My Document");               
+                    xpsWriter.WriteAsync(document);
+                }
+                catch (Exception ex)
+                {
+                    State.SetAction(StateType.Printing, ProgressState.Completed);
+                    MessageBox.Show($"{Properties.Resources.strPrintingError}: {ex.Message}", Properties.Resources.strError, MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
         }
@@ -3021,7 +3018,7 @@ namespace SimpleJournal
 
                         JournalPage jp = new JournalPage();
                         if (paper is Custom custom)
-                            jp = new PdfJournalPage() { PageBackground = custom.PageBackground };
+                            jp = new PdfJournalPage() { PageBackground = custom.PageBackground, Orientation = custom.Orientation };
 
                         jp.PaperPattern = paper.Type;
                         jp.Data = ms.ToArray();

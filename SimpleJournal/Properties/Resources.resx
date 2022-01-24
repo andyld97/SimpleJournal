@@ -2019,7 +2019,7 @@ Alternatively, you can use the normal version of SimpleJournal!</value>
     <comment>*</comment>
   </data>
   <data name="strPDFConversationDialog_UseOnlineConversation" xml:space="preserve">
-    <value>Online-Konversation verwenden (wenn Ihr System wenig Speicherplatz hat)</value>
+    <value>Use Online Conversation (if your system is low on memory)</value>
     <comment>PDFConversationDialog.xaml</comment>
   </data>
   <data name="SimpleJournal_Common" type="System.Resources.ResXFileRef, System.Windows.Forms">
@@ -2030,5 +2030,9 @@ Alternatively, you can use the normal version of SimpleJournal!</value>
   </data>
   <data name="SJFileAssoc_exe" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\SJFileAssoc.exe.config;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="strMicrosoftPrintToPDFWarning" xml:space="preserve">
+    <value>Microsoft Print To PDF doesn't work properly! It is not recommended to use the printer, do you want to use it anyway?</value>
+    <comment>MainWindow.xaml.cs</comment>
   </data>
 </root>

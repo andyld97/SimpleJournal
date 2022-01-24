@@ -1825,6 +1825,15 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Microsoft Print To PDF doesn&apos;t work properly! It is not recommended to use the printer, do you want to use it anyway?.
+        /// </summary>
+        public static string strMicrosoftPrintToPDFWarning {
+            get {
+                return ResourceManager.GetString("strMicrosoftPrintToPDFWarning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Name:.
         /// </summary>
         public static string strName {
@@ -2455,7 +2464,7 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Online-Konversation verwenden (wenn Ihr System wenig Speicherplatz hat).
+        ///   Looks up a localized string similar to Use Online Conversation (if your system is low on memory).
         /// </summary>
         public static string strPDFConversationDialog_UseOnlineConversation {
             get {
