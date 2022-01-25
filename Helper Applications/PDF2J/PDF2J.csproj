@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
+    <Configurations>Debug;Release;Normal</Configurations>
   </PropertyGroup>
 
   <ItemGroup>

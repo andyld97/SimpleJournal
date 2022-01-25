@@ -86,16 +86,32 @@ namespace SimpleJournal.Documents.UI.Extensions
         {
             try
             {
-                Shape shape = (Shape)XamlReader.Parse(Encoding.Default.GetString(Convert.FromBase64String(Encoding.Default.GetString(journalShape.Data))));
-                Canvas.SetZIndex(shape, journalShape.ZIndex);
+                Shape shape = null;
 
-                return shape;
+                if (journalShape.Data != null)
+                {
+                    // Old base64 logic
+                    shape = (Shape)XamlReader.Parse(Encoding.Default.GetString(Convert.FromBase64String(Encoding.Default.GetString(journalShape.Data))));
+                }
+                else
+                {
+                    // New shape CDATA logic
+                    shape = (Shape)XamlReader.Parse(journalShape.ShapeXML);
+                }
+
+                if (shape != null)
+                {
+                    Canvas.SetZIndex(shape, journalShape.ZIndex);
+                    return shape;
+                }
             }
             catch (Exception)
             {
                 // Silence is golden
                 return new UIElement();
             }
+
+            return new UIElement();
         }
 
         public static JournalResource ConvertShape(this Shape shape)
@@ -103,7 +119,10 @@ namespace SimpleJournal.Documents.UI.Extensions
             JournalShape js = new JournalShape();
 
             string shapeData = XamlWriter.Save(shape);
-            js.Data = Encoding.Default.GetBytes(Convert.ToBase64String(Encoding.Default.GetBytes(shapeData)));
+            // js.Data = Encoding.Default.GetBytes(Convert.ToBase64String(Encoding.Default.GetBytes(shapeData)));
+            js.Data = Array.Empty<byte>();
+            js.ShapeXML = shapeData;
+
 
             return js;
         }
@@ -162,6 +181,7 @@ namespace SimpleJournal.Documents.UI.Extensions
             jt.TextColor = foregroundBrush.Color.ToColor();
             jt.IsBold = (text.FontWeight == FontWeights.Bold);
             jt.IsItalic = (text.FontStyle == FontStyles.Italic);
+
             bool containsAll = true;
             foreach (var deco in TextDecorations.Underline)
             {
