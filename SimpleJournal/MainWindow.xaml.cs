@@ -3041,7 +3041,7 @@ namespace SimpleJournal
                     }
                 }
 
-                await journal.SaveAsync(path);
+                await journal.SaveAsync(path, quiet: saveAsBackup, hideStatus: saveAsBackup);
 
                 if (!saveAsBackup)
                 {

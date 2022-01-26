@@ -88,7 +88,7 @@ namespace SimpleJournal.Documents.UI.Extensions
             {
                 Shape shape = null;
 
-                if (journalShape.Data != null)
+                if (journalShape.Data != null && journalShape.Data.Length > 0)
                 {
                     // Old base64 logic
                     shape = (Shape)XamlReader.Parse(Encoding.Default.GetString(Convert.FromBase64String(Encoding.Default.GetString(journalShape.Data))));
@@ -122,6 +122,7 @@ namespace SimpleJournal.Documents.UI.Extensions
             // js.Data = Encoding.Default.GetBytes(Convert.ToBase64String(Encoding.Default.GetBytes(shapeData)));
             js.Data = Array.Empty<byte>();
             js.ShapeXML = shapeData;
+            js.ZIndex = Canvas.GetZIndex(shape);
 
 
             return js;
