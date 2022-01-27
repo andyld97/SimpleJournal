@@ -17,8 +17,6 @@ namespace SimpleJournal
         public static readonly DoubleCollection LineStrokeDashedDashArray = new DoubleCollection() { 4, 3 };
         public const int DefaultLineStrokeDashOffset = 1;
 
-        public const int MaxPDFPagesPerJournal = 100;
-
         public static readonly SolidColorBrush DefaultBackground = new SolidColorBrush((System.Windows.Media.Color)(ColorConverter.ConvertFromString("#E1E1E1")));
 
         public static readonly string ChangelogUrl = "https://simplejournal.ca-soft.net/chg.php?lang={0}&dark={1}";

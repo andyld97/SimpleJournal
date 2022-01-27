@@ -48,7 +48,7 @@ namespace SimpleJournal.Documents
         public static async Task<Journal> LoadJournalMetaAsync(string path)
         {
             if (!ZipFileHelper.IsZipFile(path))
-                return null;
+                return Serialization.Read<Journal>(path, Serialization.Mode.XML);
 
             try
             {
@@ -182,7 +182,7 @@ namespace SimpleJournal.Documents
                             }
 
                             if (oldCount != count)
-                                throw new Exception("Invalid or corrupt file, cannot load data");
+                                throw new Exception("Invalid or corrupt file, cannot load data!");
 
                             return journal;
                         }
@@ -195,7 +195,7 @@ namespace SimpleJournal.Documents
                     OnErrorOccured?.Invoke(e.Message, "load");
             }
 
-            return new Journal();
+            return null;
         }
 
         public async Task<bool> UpdateJournalMetaAsync(string filePath, bool forceUpdate)

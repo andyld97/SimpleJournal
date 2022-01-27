@@ -25,8 +25,11 @@ namespace PDF2J.Controllers
             if (file == null)
                 return BadRequest("invalid file");
 
+            string optionsJson = Request.Headers["options"].ToString();
+
             // Create a new printing ticket
             PrintTicket ticket = new PrintTicket() { Name = file.FileName, Status = TicketStatus.OnHold, DateTimeAdded = DateTime.Now };
+            ticket.ConversationOptions = System.Text.Json.JsonSerializer.Deserialize<PdfConversationOptions>(optionsJson);
      
             // Create the the working directory for this printing ticket
             try

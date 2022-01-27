@@ -417,16 +417,29 @@ namespace SimpleJournal
                 // Reset this value, because if it's true it will never be false again
                 showRecoverDialog = false;
 
-                System.IO.FileInfo[] autoSaveFiles = new System.IO.DirectoryInfo(Consts.AutoSaveDirectory).GetFiles();
+                IEnumerable<System.IO.FileInfo> autoSaveFiles = new System.IO.DirectoryInfo(Consts.AutoSaveDirectory).EnumerateFiles();
                 var backupFiles = autoSaveFiles.Where(f => f.Name.EndsWith(".journal"));
 
                 foreach (var journalFile in backupFiles)
                 {
                     try
                     {
-                        Journal j = await Journal.LoadJournalAsync(journalFile.FullName, Consts.BackupDirectory, true);
+                        Journal j = await Journal.LoadJournalMetaAsync(journalFile.FullName);
                         if (j == null)
+                        {
+                            // delete invalid files
+                            try
+                            {
+                                System.IO.File.Delete(journalFile.FullName);
+                            }
+                            catch
+                            {
+
+                            }
+
                             continue;
+                        }
+
                         showRecoverDialog |= j.IsBackup && !ProcessHelper.IsProcessActiveByTaskId(j.ProcessID);
 
                         j.Pages.Clear();
@@ -438,7 +451,7 @@ namespace SimpleJournal
                     }
                     catch
                     {
-                        // ignore
+
                     }
                 }
             }
@@ -3070,6 +3083,9 @@ namespace SimpleJournal
                 var dialog = new WaitingDialog(System.IO.Path.GetFileNameWithoutExtension(fileName)) { Owner = this };
                 try
                 {
+                    if (!System.IO.File.Exists(fileName))
+                        throw new Exception(string.Format(Properties.Resources.strFileNotFound, fileName));
+
                     dialog.Show();
                     Journal currentJournal = await Journal.LoadJournalAsync(fileName, Consts.BackupDirectory);
 

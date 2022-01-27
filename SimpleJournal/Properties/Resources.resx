@@ -2035,4 +2035,36 @@ Alternatively, you can use the normal version of SimpleJournal!</value>
     <value>Microsoft Print To PDF doesn't work properly! It is not recommended to use the printer, do you want to use it anyway?</value>
     <comment>MainWindow.xaml.cs</comment>
   </data>
+  <data name="strRecoverAutoBackupFileDialog_Loading" xml:space="preserve">
+    <value>(Loading ...)</value>
+    <comment>RecoverAutoBackupFileDialog</comment>
+  </data>
+  <data name="strPDFConversationDialog_ConversationGeneralError" xml:space="preserve">
+    <value>Error occurred while converting ...</value>
+    <comment>PDFCOnversationDialog.xaml.cs</comment>
+  </data>
+  <data name="strPDFConversationDialog_Ticket_OnHold" xml:space="preserve">
+    <value>Please wait until your ticket "{0}" is processed!</value>
+    <comment>PDFConversationDialog.xaml.cs</comment>
+  </data>
+  <data name="strPDFConversationDialog_Ticket_InQueue" xml:space="preserve">
+    <value>Ticket "{0}" was added to the queue!</value>
+    <comment>PDFConversationDialog.xaml.cs</comment>
+  </data>
+  <data name="strPDFConversationDialog_Ticket_Preparing" xml:space="preserve">
+    <value>Preparing ticket "{0}" ...</value>
+    <comment>PDFConversationDialog.xaml.cs</comment>
+  </data>
+  <data name="strPDFConversationDialog_Ticket_InProgress" xml:space="preserve">
+    <value>Working on ticket "{0}" ...</value>
+    <comment>PDFConversationDialog.xaml.cs</comment>
+  </data>
+  <data name="strPDFConversationDialog_Ticket_Saving" xml:space="preserve">
+    <value>Saving ticket "{0}" ...</value>
+    <comment>PDFConversationDialog.xaml.cs</comment>
+  </data>
+  <data name="strFileNotFound" xml:space="preserve">
+    <value> File "{0}" not found!</value>
+    <comment>*</comment>
+  </data>
 </root>

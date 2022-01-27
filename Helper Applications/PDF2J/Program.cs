@@ -15,11 +15,13 @@ namespace PDF2J
 {
     public class Program
     {
+        // ToDo: *** Print (finished, or failed) tickets should be automatically deleted by a timer (maybe 1 hour)
         public static List<PrintTicket> PrintTickets = new List<PrintTicket>();
         private static System.Timers.Timer workingTimer = new System.Timers.Timer();
         
         private static bool isRunning = false;
         private static object sync = new object();
+        private static PrintTicket currentTicket = null;
 
         private  static ILogger logger;
 
@@ -50,76 +52,72 @@ namespace PDF2J
 
             if (ticket != null)
             {
-                // Let the work begin
-                try
-                {
-                    logger.LogInformation($"[{ticket.Name}] Prepearing ...");
-                    ticket.Status = TicketStatus.Prepearing;
-                    string docPath = System.IO.Path.Combine(ticket.TempPath, "doc.pdf");
+                currentTicket = ticket;
+                string docPath = System.IO.Path.Combine(ticket.TempPath, "doc.pdf");
+                string newFileName = $"{System.IO.Path.GetFileNameWithoutExtension(ticket.Name)}.journal";
 
-                    var settings = new MagickReadSettings
-                    {
-                        // Settings the density to 300 dpi will create an image with a better quality
-                        Density = new Density(300, 300)
-                    };
+                PdfConverter pdfConverter = new PdfConverter(docPath, System.IO.Path.Combine(ticket.TempPath, newFileName), ticket.ConversationOptions);
+                pdfConverter.ProgressChanged += PdfConverter_ProgressChanged;
+                pdfConverter.JournalHasFewerPagesThenRequired += PdfConverter_JournalHasFewerPagesThenRequired;
+                pdfConverter.Completed += PdfConverter_Completed;
 
-                    Journal journal = new Journal();
-                    using (ImageMagick.MagickImageCollection magickImages = new ImageMagick.MagickImageCollection())
-                    {
-                        await magickImages.ReadAsync(docPath, settings);
-                        ticket.Status = TicketStatus.InProgress;
-                        for (int p = 0; p < magickImages.Count; p++)
-                        {
-                            logger.LogInformation($"[{ticket.Name}] Converting page {p + 1} from {magickImages.Count} ...");
-                            var page = await CreatePdfJournalPageAsync(magickImages[p]);
-                            journal.Pages.Add(page);
+                var result = await pdfConverter.ConvertAsync();
 
-                            // Update ticket
-                            ticket.Percentage = (int)(((p + 1) / (double)magickImages.Count) * 100.0);
-                        }
-                    }
-
-                    ticket.Status = TicketStatus.Saving;
-                    logger.LogInformation($"[{ticket.Name}] Saving {ticket}.journal ...");
-                    await journal.SaveAsync(System.IO.Path.Combine(ticket.TempPath, $"{ticket.Name}.journal"));
-
-                    ticket.Documents.Add($"{ticket.Name}.journal");
-                    ticket.Status = TicketStatus.Completed;
-                    logger.LogInformation($"[{ticket.Name}] Completed!");
-                    ticket.IsCompleted = true;
-                }
-                catch (Exception ex)
-                {
-                    logger.LogError($"[{ticket.Name}] Failed: {ex.Message}");
-
-                    ticket.Status = TicketStatus.Failed;
-                    ticket.ErorrMessage = ex.ToString();
-                }
+                // Unassign events
+                pdfConverter.ProgressChanged -= PdfConverter_ProgressChanged;
+                pdfConverter.JournalHasFewerPagesThenRequired -= PdfConverter_JournalHasFewerPagesThenRequired;
+                pdfConverter.Completed -= PdfConverter_Completed;
             }
 
             lock (sync)
+            {
+                currentTicket = null;
                 isRunning = false;
+            }
         }
 
-        public static async Task<PdfJournalPage> CreatePdfJournalPageAsync(IMagickImage<ushort> image)
+        private static void PdfConverter_Completed(bool success, Exception ex, string destinationFileName)
         {
-            Orientation orientation = image.Width >= image.Height ? Orientation.Landscape : Orientation.Portrait;
-
-            PdfJournalPage pdfJournalPage = null;
-            await Task.Run(() =>
+            if (success)
             {
-                // Resize image to A4 pixels (96 dpi)
-                image.Resize(new MagickGeometry(orientation == Orientation.Portrait ? Consts.A4WidthP : Consts.A4WidthL, orientation == Orientation.Portrait ? Consts.A4HeightP : Consts.A4HeightL) { IgnoreAspectRatio = false });
+                currentTicket.IsCompleted = true;
+                currentTicket.Status = TicketStatus.Completed;
+                logger.LogInformation($"[{currentTicket.Name}] Completed!");
+            }
+            else
+            {
+                logger.LogError($"[{currentTicket.Name}] Failed: {ex.Message}");
 
-                pdfJournalPage = new PdfJournalPage
-                {
-                    PageBackground = image.ToByteArray(MagickFormat.Png),
-                    PaperPattern = PaperType.Custom,
-                    Orientation = orientation
-                };
-            });
+                currentTicket.Status = TicketStatus.Failed;
+                currentTicket.ErorrMessage = ex.ToString();
+            }
+        }
 
-            return pdfJournalPage;
+        private static bool PdfConverter_JournalHasFewerPagesThenRequired(int firstPage, int maxPages)
+        {
+            // No user interaction possible; always return true
+            return true;
+        }
+
+        private static void PdfConverter_ProgressChanged(PdfAction status, int progress, int currentPage, int maxPages, string journal)
+        {
+            if (status == PdfAction.Reading) 
+            {
+                logger.LogInformation($"[{currentTicket.Name}] Prepearing ...");
+                currentTicket.Status = TicketStatus.Prepearing;
+            }
+            else if (status == PdfAction.PagesALL_WritingPage || status == PdfAction.PageRange_WritingPage)
+            {
+                currentTicket.Status = TicketStatus.InProgress;
+                currentTicket.Percentage = progress;
+                logger.LogInformation($"[{currentTicket.Name}] Converting page {currentPage} from {maxPages} ...");
+            }
+            else if (status == PdfAction.Saving)
+            {
+                currentTicket.Documents.Add(journal);
+                currentTicket.Status = TicketStatus.Saving;
+                logger.LogInformation($"[{currentTicket.Name}] Saving {journal} ...");
+            }
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>

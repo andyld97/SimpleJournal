@@ -26,13 +26,16 @@ namespace SimpleJournal.Dialogs
 
         private List<BackupDataItem> BackupItems { get; set; } = new List<BackupDataItem>();
 
-        public bool IsEmptyDialog => GetAllBackupFiles().Count == 0;
-
         public RecoverAutoBackupFileDialog()
         {
             InitializeComponent();
 
-            BackupFiles = GetAllBackupFiles();
+            Loaded += RecoverAutoBackupFileDialog_Loaded;
+        }
+
+        private async void RecoverAutoBackupFileDialog_Loaded(object sender, RoutedEventArgs e)
+        {
+            BackupFiles = await GetAllBackupFiles();
 
             if (BackupFiles.Count > 0)
             {
@@ -41,7 +44,7 @@ namespace SimpleJournal.Dialogs
                 // Add all files to listBox
                 foreach (var file in sortedBackupFiles)
                 {
-                    Journal journal = Journal.LoadJournalAsync(file.FullName, Consts.BackupDirectory, true).Result;
+                    Journal journal = await Journal.LoadJournalMetaAsync(file.FullName);
                     var bdi = new BackupDataItem()
                     {
                         FileInfo = file,
@@ -55,7 +58,7 @@ namespace SimpleJournal.Dialogs
                     journal.Pages.Clear();
                     journal = null;
                 }
-                
+
                 FocusManager.SetFocusedElement(FocusManager.GetFocusScope(ButtonRecoverAll), ButtonRecoverAll);
             }
             else
@@ -66,6 +69,8 @@ namespace SimpleJournal.Dialogs
                 FocusManager.SetFocusedElement(FocusManager.GetFocusScope(ButtonDiscardAll), ButtonDiscardAll);
                 ButtonRecoverAll.Visibility = Visibility.Hidden;
             }
+
+            RunLoading.Text = string.Empty;
         }
 
         private async void Bi_OnRecievedAction(bool discard, BackupDataItem item)
@@ -94,20 +99,20 @@ namespace SimpleJournal.Dialogs
             }
         }
 
-        private List<System.IO.FileInfo> GetAllBackupFiles()
+        private async Task<List<System.IO.FileInfo>> GetAllBackupFiles()
         {
             List<System.IO.FileInfo> backupFiles = new List<System.IO.FileInfo>();
 
             if (!System.IO.Directory.Exists(Consts.AutoSaveDirectory))
                 return backupFiles;
 
-            var files = new System.IO.DirectoryInfo(Consts.AutoSaveDirectory).GetFiles().Where(f => f.Name.EndsWith(".journal"));
+            var files = new System.IO.DirectoryInfo(Consts.AutoSaveDirectory).EnumerateFiles().Where(f => f.Name.EndsWith(".journal"));
 
             foreach (var file in files)
             {
                 try
                 {
-                    var journal = Journal.LoadJournalAsync(file.FullName, Consts.BackupDirectory, true).Result;
+                    var journal = await Journal.LoadJournalMetaAsync(file.FullName);
                     if (journal.IsBackup)
                     {
                         int pID = journal.ProcessID;
@@ -206,6 +211,9 @@ namespace SimpleJournal.Dialogs
             {
                 // Load journal
                 var journal = await Journal.LoadJournalAsync(backupDataItem.FileInfo.FullName, Consts.BackupDirectory, true);
+                if (journal == null)
+                    return string.Empty;
+
                 journal.IsBackup = false;
 
                 // Save it to another path

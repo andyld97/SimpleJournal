@@ -1,10 +1,4 @@
 ﻿[*.cs]
 
-# IDE0090: Use 'new(...)'
-dotnet_diagnostic.IDE0090.severity = silent
-
-# IDE0063: Use simple 'using' statement
-dotnet_diagnostic.IDE0063.severity = silent
-
-# CA1416: Validate platform compatibility
-dotnet_diagnostic.CA1416.severity = none
+# Default severity for analyzer diagnostics with category 'Style'
+dotnet_analyzer_diagnostic.category-Style.severity = none

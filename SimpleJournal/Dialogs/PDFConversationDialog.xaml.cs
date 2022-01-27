@@ -1,19 +1,12 @@
-﻿using ImageMagick;
-using SimpleJournal.Data;
-using SimpleJournal.Helper;
-using SimpleJournal.Common;
+﻿using SimpleJournal.Common;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
-using System.Text.Json.Serialization;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Forms;
 using MessageBox = System.Windows.MessageBox;
-using SimpleJournal.Documents;
-using SimpleJournal.Helper.PDF;
 using SimpleJournal.Documents.PDF;
+using SimpleJournal.Data;
 
 namespace SimpleJournal.Dialogs
 {
@@ -22,108 +15,34 @@ namespace SimpleJournal.Dialogs
     /// </summary>
     public partial class PDFConversationDialog : Window
     {
+        #region Pivate Members
         private readonly string sourceFileName = string.Empty;
         private string destinationFileName = string.Empty;
 
-        private Timer timer = new Timer() { Interval = 1000 };
+        private bool isInitialized = false;
+
+        private readonly Timer timer = new Timer() { Interval = 1000 };
         private PrintTicket currentTicket = null;
+
+        #endregion
 
         public string DestinationFileName => destinationFileName;
 
+        #region Ctor
         public PDFConversationDialog(string sourceFileName)
         {
             InitializeComponent();
             this.sourceFileName = sourceFileName;
             TextSource.Text = sourceFileName;
 
+            CheckUseOnlineConverter.IsChecked = Settings.Instance.UseOnlineConversation;
+
             timer.Tick += Timer_Tick;
+            isInitialized = true;
         }
+        #endregion
 
-        private async void Timer_Tick(object sender, EventArgs e)
-        {
-            // ToDo: *** Translate
-            // ToDo: *** Merge API into this project and make those classes Common!
-            // ToDo: *** Extend API so that it supports all options from this dialog!
-
-            if (currentTicket == null)
-            {
-                timer.Stop();
-                return;
-            }
-
-            // Refresh ticket information
-            using (HttpClient client = new HttpClient())
-            {
-                string url = $"{Consts.ConverterAPIUrl}/api/ticket/{currentTicket.ID}";
-
-                var result = await client.GetAsync(url);
-                var temp = await System.Text.Json.JsonSerializer.DeserializeAsync<PrintTicket>(await result.Content.ReadAsStreamAsync());
-                if (temp != null)
-                    currentTicket = temp;
-
-                Dispatcher.Invoke(() =>
-                {
-                    if (currentTicket.Percentage > 0)
-                    {
-                        Progress.IsIndeterminate = false;
-                        Progress.Value = currentTicket.Percentage;
-                    }
-
-                    if (currentTicket.Status == TicketStatus.Prepearing)
-                        TextState.Text = $"Preparing ticket {currentTicket.Name} ...";
-                    else if (currentTicket.Status == TicketStatus.InProgress)
-                        TextState.Text = $"Working on ticket {currentTicket.Name} ...";
-                    else if (currentTicket.Status == TicketStatus.Saving)
-                        TextState.Text = $"Saving ticket {currentTicket.Name} ...";
-                    else
-                    {
-                        TextState.Text = currentTicket.Status.ToString();
-
-                        if (currentTicket.Status == TicketStatus.Failed)
-                        {
-                            timer.Stop();
-                            Progress.Value = 0;
-                            Progress.IsIndeterminate = false;
-                            MessageBox.Show(currentTicket.ErorrMessage, "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
-                        }
-                    }
-                });
-
-                if (currentTicket.IsCompleted && currentTicket.Status == TicketStatus.Completed)
-                {
-                    timer.Stop();
-                    Progress.Value = 100;
-
-                    // Download file
-                    try
-                    {
-
-                        var response = await client.GetAsync($"{Consts.ConverterAPIUrl}/api/ticket/{currentTicket.ID}/download/{currentTicket.Documents.FirstOrDefault()}");
-                        if (response.IsSuccessStatusCode)
-                        {
-                            var str = await response.Content.ReadAsStreamAsync();
-
-                            using (System.IO.FileStream fs = new System.IO.FileStream(destinationFileName, System.IO.FileMode.Create))
-                            {
-                                await str.CopyToAsync(fs);
-                            }                
-                        }
-                        else
-                            throw new Exception("Http Status Code: " + response.StatusCode);
-
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.ToString());
-
-                        SetInputPanelState(false);
-                        return;
-                    }
-
-                    DialogResult = true;
-                }
-            }
-        }
+        #region Dialog Buttons/Events
 
         private void ButtonSearch_Click(object sender, RoutedEventArgs e)
         {
@@ -156,6 +75,13 @@ namespace SimpleJournal.Dialogs
             int pageFrom = NumPageFrom.Value;
             int pageTo = NumPageTo.Value;
 
+            var options = new PdfConversationOptions()
+            {
+                UsePageRange = !useAllPages,
+                StartPage = pageFrom,
+                LastPage = pageTo,
+            };
+
             // Validate input params
             if (string.IsNullOrEmpty(destinationFileName) || string.IsNullOrEmpty(sourceFileName) || !System.IO.File.Exists(sourceFileName))
             {
@@ -172,12 +98,14 @@ namespace SimpleJournal.Dialogs
 
             if (useOnlineConverstation)
             {
+                SetInputPanelState(false);
+
                 // Upload file
-                var printTicket = await GeneralHelper.UploadFileAsync(sourceFileName, $"{Consts.ConverterAPIUrl}/api/pdf/upload");
+                var printTicket = await GeneralHelper.UploadFileAsync(sourceFileName, $"{Consts.ConverterAPIUrl}/api/pdf/upload", System.Text.Json.JsonSerializer.Serialize(options));
 
                 if (printTicket == null)
                 {
-                    MessageBox.Show("error");
+                    MessageBox.Show(Properties.Resources.strPDFConversationDialog_ConversationGeneralError, Properties.Resources.strError, MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
                 else
@@ -185,152 +113,209 @@ namespace SimpleJournal.Dialogs
                     currentTicket = printTicket;
                     SetInputPanelState(false);
                     Progress.IsIndeterminate = true;
-                    TextState.Text = $"Ticket {printTicket.Name} is in the queue!";
+                    TextState.Text = string.Format(Properties.Resources.strPDFConversationDialog_Ticket_InQueue, printTicket.Name);
                     timer.Start();
                 }
-
-                return;
-            }
-
-            SetInputPanelState(false);
-            Progress.IsIndeterminate = true;
-            TextState.Text = string.Format(Properties.Resources.strPDFConversationDialog_ReadingPDFDocument, System.IO.Path.GetFileName(sourceFileName));
-
-            // Read PDF Document
-            MagickImageCollection images = null;
-            try
-            {
-                images = await PdfHelper.ReadPDFFileAsync(sourceFileName);
-            }
-            catch (Exception ex)
-            { 
-                MessageBox.Show(this, $"{Properties.Resources.strPDFConversationDialog_GhostscriptMessage}\n\n{ex.Message}", Properties.Resources.strError, MessageBoxButton.OK, MessageBoxImage.Error);
-                SetInputPanelState(true);
-                return;
-            }
-
-            // Limit pages to Consts.MaxPDFPagesPerJournal (if more split the document into multiple documents ..100, ..200)
-            Journal currentJournal = new Journal();
-
-            if (images.Count > Consts.MaxPDFPagesPerJournal)
-            {
-                Progress.IsIndeterminate = false;
-
-                // Calculate the amount of journals required
-                int n = (int)Math.Ceiling(images.Count / (double)Consts.MaxPDFPagesPerJournal);
-                string firstFileName = string.Empty;
-
-                List<Journal> journals = new List<Journal>() { new Journal() };
-                currentJournal = journals.FirstOrDefault();
-
-                int journalCounter = 1;
-                for (int p = 0; p < images.Count; p++)
-                {
-                    var image = images[p];
-                    var page = await PdfHelper.CreatePdfJournalPageAsync(image);
-
-                    if (currentJournal.Pages.Count < Consts.MaxPDFPagesPerJournal)
-                        currentJournal.Pages.Add(page);
-                    else
-                    {
-                        currentJournal = new Journal();
-                        currentJournal.Pages.Add(page);
-                        journals.Add(currentJournal);
-                        journalCounter++;
-                    }
-
-                    double percentage = Math.Round(((p + 1) / (double)images.Count) * 100.0);
-
-                    // Update gui status message
-                    Dispatcher.Invoke(new Action(() =>
-                    {
-                        int maxPages = (journals.Count == n ? images.Count % Consts.MaxPDFPagesPerJournal : Consts.MaxPDFPagesPerJournal);
-                        TextState.Text = string.Format(Properties.Resources.strPDFConversationDialog_WritingPageStatus, (p % Consts.MaxPDFPagesPerJournal) + 1, maxPages, System.IO.Path.GetFileNameWithoutExtension(destinationFileName) + $".{journalCounter}.journal");
-                        Progress.Value = percentage;
-                    }));
-                }
-
-                int counter = 1;
-                foreach (var journal in journals)
-                {
-                    // Generate fileName
-                    string newFileName = System.IO.Path.Combine(System.IO.Path.GetDirectoryName(destinationFileName), System.IO.Path.GetFileNameWithoutExtension(destinationFileName) + $".{counter}.journal");
-
-                    if (string.IsNullOrEmpty(firstFileName))
-                        firstFileName = newFileName;
-
-                    // Update gui status message
-                    Dispatcher.Invoke(new Action(() =>
-                    {
-                        TextState.Text = string.Format(Properties.Resources.strPDFConversationDialog_Saving, System.IO.Path.GetFileNameWithoutExtension(destinationFileName) + $".{counter}.journal");
-                    }));
-
-                    await journal.SaveAsync(newFileName, hideStatus: true);
-                    counter++;
-                }
-
-                // Set destination filename to the first document
-                destinationFileName = firstFileName;
-
-                DialogResult = true;
             }
             else
             {
-                // Create a new journal
-                Journal journal = new Journal();
+                PdfConverter pdfConverter = new PdfConverter(sourceFileName, destinationFileName, options);
 
-                if (images != null)
+                pdfConverter.JournalHasFewerPagesThenRequired += PdfConverter_JournalHasFewerPagesThenRequired;
+                pdfConverter.Completed += PdfConverter_Completed;
+                pdfConverter.ProgressChanged += PdfConverter_ProgressChanged;
+
+                SetInputPanelState(false);
+
+                await pdfConverter.ConvertAsync();
+
+                // Unassign events after completion
+                pdfConverter.ProgressChanged -= PdfConverter_ProgressChanged;
+                pdfConverter.JournalHasFewerPagesThenRequired -= PdfConverter_JournalHasFewerPagesThenRequired;
+                pdfConverter.Completed -= PdfConverter_Completed;
+            }
+        }
+        #endregion
+
+        #region Converter Events
+
+        private void PdfConverter_ProgressChanged(PdfAction status, int progress, int currentPage, int maxPages, string journal)
+        {
+            Dispatcher.Invoke(new Action(() =>
+            {
+                if (status != PdfAction.Reading)
                 {
-                    Progress.IsIndeterminate = false;
-                    int count = images.Count;
+                    if (Progress.IsIndeterminate)
+                        Progress.IsIndeterminate = false;
 
-                    if (!useAllPages && pageTo > count)
-                    {
-                        int nPageTo = Math.Min(Consts.MaxPDFPagesPerJournal, count);
-                        string message = string.Format(Properties.Resources.strPDFCOnversationDialog_TooFewPagesMessage, nPageTo, pageFrom, nPageTo);
-                        if (MessageBox.Show(this, message, Properties.Resources.strSure, MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.No)
-                        {
-                            PanelInput.Visibility = Visibility.Visible;
-                            PanelProgress.Visibility = Visibility.Collapsed;
-                            PanelInput.IsEnabled = true;
-                            return;
-                        }
-                        else
-                            pageTo = nPageTo;
-                    }
-
-                    int start = (useAllPages ? 0 : pageFrom - 1);
-                    int end = (useAllPages ? count : pageTo);
-
-                    for (int i = start; i < end; i++)
-                    {
-                        var image = images[i];
-                        int pg = i + 1;
-
-                        double percentage = Math.Round((pg / (double)end) * 100.0);
-
-                        // Update gui status message
-                        Dispatcher.Invoke(new Action(() =>
-                        {
-                            TextState.Text = string.Format(Properties.Resources.strPDFConversationDialog_ConversationStatusMessage, pg, end);
-                            Progress.Value = percentage;
-                        }));
-
-                        journal.Pages.Add(await PdfHelper.CreatePdfJournalPageAsync(image));
-                    }
-
-                    TextState.Text = Properties.Resources.strPDFConversationDialog_Ready;
+                    Progress.Value = progress;
+                }
+                else
+                {
+                    Progress.IsIndeterminate = true;
+                    TextState.Text = string.Format(Properties.Resources.strPDFConversationDialog_ReadingPDFDocument, journal);
                 }
 
-                // Free resources
-                images.Dispose();
+                if (status == PdfAction.PagesALL_WritingPage)
+                    TextState.Text = string.Format(Properties.Resources.strPDFConversationDialog_WritingPageStatus, currentPage, maxPages, journal);
+                else if (status == PdfAction.PageRange_WritingPage)
+                    TextState.Text = string.Format(Properties.Resources.strPDFConversationDialog_ConversationStatusMessage, currentPage, maxPages);
+                else if (status == PdfAction.Saving)
+                    TextState.Text = string.Format(Properties.Resources.strPDFConversationDialog_Saving, journal);
+            }));
+        }
 
-                // Save the journal and quit (only on success)
-                if (await journal.SaveAsync(destinationFileName, hideStatus: true))
-                    DialogResult = true;
-                else
-                    SetInputPanelState(true);
+        private void PdfConverter_Completed(bool success, Exception ex, string destinationFileName)
+        {
+            if (success)
+            {
+                DialogResult = true;
+                this.destinationFileName = destinationFileName;
+                return;
             }
+
+            // Show error messages
+            if (ex != null)
+                MessageBox.Show(this, $"{Properties.Resources.strPDFConversationDialog_GhostscriptMessage}\n\n{ex.Message}", Properties.Resources.strError, MessageBoxButton.OK, MessageBoxImage.Error);
+            else
+                MessageBox.Show(Properties.Resources.strPDFConversationDialog_ConversationGeneralError, Properties.Resources.strError, MessageBoxButton.OK, MessageBoxImage.Error);
+
+            SetInputPanelState(true);
+        }
+
+        private bool PdfConverter_JournalHasFewerPagesThenRequired(int firstPage, int maxPages)
+        {
+            string message = string.Format(Properties.Resources.strPDFCOnversationDialog_TooFewPagesMessage, maxPages, firstPage, maxPages);
+
+            if (MessageBox.Show(this, message, Properties.Resources.strSure, MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.No)
+            {
+                PanelInput.Visibility = Visibility.Visible;
+                PanelProgress.Visibility = Visibility.Collapsed;
+                PanelInput.IsEnabled = true;
+                return false;
+            }
+
+            return true;
+        }
+
+        #endregion
+
+        #region Online Converstaion
+
+        private async void Timer_Tick(object sender, EventArgs e)
+        {
+            if (currentTicket == null)
+            {
+                timer.Stop();
+                return;
+            }
+
+            // Refresh ticket information
+            using (HttpClient client = new HttpClient())
+            {
+                string url = $"{Consts.ConverterAPIUrl}/api/ticket/{currentTicket.ID}";
+
+                var result = await client.GetAsync(url);
+                var temp = await System.Text.Json.JsonSerializer.DeserializeAsync<PrintTicket>(await result.Content.ReadAsStreamAsync());
+                if (temp != null)
+                    currentTicket = temp;
+
+                Dispatcher.Invoke(() =>
+                {
+                    if (currentTicket.Percentage > 0)
+                    {
+                        Progress.IsIndeterminate = false;
+                        Progress.Value = currentTicket.Percentage;
+                    }
+
+                    if (currentTicket.Status == TicketStatus.Prepearing)
+                        TextState.Text = string.Format(Properties.Resources.strPDFConversationDialog_Ticket_Preparing, currentTicket.Name);
+                    else if (currentTicket.Status == TicketStatus.InProgress)
+                        TextState.Text = string.Format(Properties.Resources.strPDFConversationDialog_Ticket_InProgress, currentTicket.Name);
+                    else if (currentTicket.Status == TicketStatus.Saving)
+                        TextState.Text = string.Format(Properties.Resources.strPDFConversationDialog_Ticket_Saving, currentTicket.Name);
+                    else if (currentTicket.Status == TicketStatus.OnHold)
+                        TextState.Text = string.Format(Properties.Resources.strPDFConversationDialog_Ticket_OnHold, currentTicket.Name);
+                    else
+                    {
+                        TextState.Text = currentTicket.Status.ToString();
+
+                        if (currentTicket.Status == TicketStatus.Failed)
+                        {
+                            timer.Stop();
+                            Progress.Value = 0;
+                            Progress.IsIndeterminate = false;
+                            MessageBox.Show(currentTicket.ErorrMessage, Properties.Resources.strError, MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
+                    }
+                });
+
+                if (currentTicket.IsCompleted && currentTicket.Status == TicketStatus.Completed)
+                {
+                    timer.Stop();
+                    Progress.Value = 100;
+
+                    try
+                    {
+                        // Download file(s)
+                        int counter = 1;
+                        string parentDirectory = System.IO.Path.GetDirectoryName(destinationFileName);
+                        string journalFileName = System.IO.Path.GetFileNameWithoutExtension(destinationFileName);
+                        foreach (var journal in currentTicket.Documents)
+                        {
+                            string newFileName = System.IO.Path.Combine(parentDirectory, $"{journalFileName}.{counter}.journal");
+
+                            // Assign the first document to open
+                            if (counter == 1 && currentTicket.Documents.Count > 1)
+                                destinationFileName = newFileName;
+
+                            var response = await client.GetAsync($"{Consts.ConverterAPIUrl}/api/ticket/{currentTicket.ID}/download/{journal}");
+                            if (response.IsSuccessStatusCode)
+                            {
+                                var str = await response.Content.ReadAsStreamAsync();
+
+                                using (System.IO.FileStream fs = new System.IO.FileStream(currentTicket.Documents.Count == 1 ? destinationFileName : newFileName, System.IO.FileMode.Create))
+                                {
+                                    await str.CopyToAsync(fs);
+                                }
+                            }
+                            else
+                                throw new Exception("Http Status Code: " + response.StatusCode);
+
+                            counter++;
+                        }
+
+                        try
+                        {
+                            // Send a message to the api that the ticket can be deleted
+                            await client.GetAsync($"{Consts.ConverterAPIUrl}/api/ticket/{currentTicket.ID}/delete");
+                        }
+                        catch
+                        {
+                            // ignore
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        SetInputPanelState(false);
+                        MessageBox.Show($"{Properties.Resources.strPDFConversationDialog_ConversationGeneralError}{Environment.NewLine}{Environment.NewLine}{ex.Message}" , Properties.Resources.strError, MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
+
+                    DialogResult = true;
+                }
+            }
+        }
+
+        #endregion
+
+        private void CheckUseOnlineConverter_Checked(object sender, RoutedEventArgs e)
+        {
+            if (!isInitialized)
+                return;
+
+            Settings.Instance.UseOnlineConversation = CheckUseOnlineConverter.IsChecked.Value;
+            Settings.Instance.Save();
         }
     }
 }

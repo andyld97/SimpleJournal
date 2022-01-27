@@ -184,4 +184,12 @@
         Saving,
         Completed,
     }
+
+    public enum PdfAction
+    {
+        Reading,
+        PageRange_WritingPage,
+        PagesALL_WritingPage,
+        Saving
+    }
 }

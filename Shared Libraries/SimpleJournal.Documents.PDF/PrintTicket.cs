@@ -32,6 +32,9 @@ namespace SimpleJournal.Documents.PDF
         [JsonPropertyName("date_time_added")]
         public DateTime DateTimeAdded { get; set; }
 
+        [JsonPropertyName("conversation_options")]
+        public PdfConversationOptions ConversationOptions { get; set; } = new PdfConversationOptions();
+
         [JsonIgnore]
         public string TempPath => System.IO.Path.Combine(System.IO.Path.GetTempPath(), ID);
 

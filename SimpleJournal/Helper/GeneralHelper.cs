@@ -227,10 +227,13 @@ namespace SimpleJournal
         /// <summary>
         /// https://stackoverflow.com/a/53284839/6237448
         /// </summary>
-        public static async Task<PrintTicket> UploadFileAsync(string path, string url)
+        public static async Task<PrintTicket> UploadFileAsync(string path, string url, string json)
         {
             // we need to send a request with multipart/form-data
             var multiForm = new MultipartFormDataContent();
+
+            //multiForm.Add(new StringContent(json), "options");
+            multiForm.Headers.Add("options", json);
 
             // add file and directly upload it
             System.IO.FileStream fs = System.IO.File.OpenRead(path);

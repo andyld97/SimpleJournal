@@ -182,6 +182,11 @@ namespace SimpleJournal.Data
         /// </summary>
         public bool DisableTouchScreenIfInForeground { get; set; } = false;
 
+        /// <summary>
+        /// This is just to remember the checkbox in PDFConversationDialog
+        /// </summary>
+        public bool UseOnlineConversation { get; set; } = false;    
+
         public Settings()
         {
 

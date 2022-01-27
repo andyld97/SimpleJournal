@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System.Linq;
 
 namespace PDF2J.Controllers
@@ -7,6 +8,13 @@ namespace PDF2J.Controllers
     [Route("api/[controller]")]
     public class TicketController : ControllerBase
     {
+        private readonly ILogger<TicketController> _logger;
+
+        public TicketController(ILogger<TicketController> logger)
+        {
+            _logger = logger;
+        }
+
         [HttpGet("{id}")]
         public IActionResult GetTicket(string id)
         {
@@ -30,6 +38,36 @@ namespace PDF2J.Controllers
                 return BadRequest("Invalid document specified!");
 
             return Ok(new System.IO.FileStream(System.IO.Path.Combine(result.TempPath, document), System.IO.FileMode.Open));
+        }
+
+        [HttpGet("all")]
+        public IActionResult GetAllTickets()
+        {
+            return Ok(Program.PrintTickets.Select(p => p.ID).ToList());
+        }
+
+        [HttpGet("{id}/delete")]
+        public IActionResult DeleteTicket(string id)
+        {
+            var result = Program.PrintTickets.FirstOrDefault(t => t.ID == id);
+
+            if (result == null)
+                return BadRequest($"Ticket {id} not found!");
+
+            try
+            {
+                if (System.IO.Directory.Exists(result.TempPath))
+                    System.IO.Directory.Delete(result.TempPath);
+            }
+            catch
+            {
+                // ignore
+            }
+
+            Program.PrintTickets.Remove(result);
+            _logger.LogInformation($"[{result.Name}] Ticket \"{result.ID}\" got deleted!");
+
+            return Ok();
         }
     }
 }

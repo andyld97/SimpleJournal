@@ -1355,6 +1355,15 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to  File &quot;{0}&quot; not found!.
+        /// </summary>
+        public static string strFileNotFound {
+            get {
+                return ResourceManager.GetString("strFileNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Finish.
         /// </summary>
         public static string strFinish {
@@ -2302,6 +2311,15 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error occurred while converting ....
+        /// </summary>
+        public static string strPDFConversationDialog_ConversationGeneralError {
+            get {
+                return ResourceManager.GetString("strPDFConversationDialog_ConversationGeneralError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Converting page {0} from {1} ....
         /// </summary>
         public static string strPDFConversationDialog_ConversationStatusMessage {
@@ -2433,6 +2451,51 @@ namespace SimpleJournal.Properties {
         public static string strPDFConversationDialog_SourcePath {
             get {
                 return ResourceManager.GetString("strPDFConversationDialog_SourcePath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Working on ticket &quot;{0}&quot; ....
+        /// </summary>
+        public static string strPDFConversationDialog_Ticket_InProgress {
+            get {
+                return ResourceManager.GetString("strPDFConversationDialog_Ticket_InProgress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ticket &quot;{0}&quot; was added to the queue!.
+        /// </summary>
+        public static string strPDFConversationDialog_Ticket_InQueue {
+            get {
+                return ResourceManager.GetString("strPDFConversationDialog_Ticket_InQueue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please wait until your ticket &quot;{0}&quot; is processed!.
+        /// </summary>
+        public static string strPDFConversationDialog_Ticket_OnHold {
+            get {
+                return ResourceManager.GetString("strPDFConversationDialog_Ticket_OnHold", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Preparing ticket &quot;{0}&quot; ....
+        /// </summary>
+        public static string strPDFConversationDialog_Ticket_Preparing {
+            get {
+                return ResourceManager.GetString("strPDFConversationDialog_Ticket_Preparing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Saving ticket &quot;{0}&quot; ....
+        /// </summary>
+        public static string strPDFConversationDialog_Ticket_Saving {
+            get {
+                return ResourceManager.GetString("strPDFConversationDialog_Ticket_Saving", resourceCulture);
             }
         }
         
@@ -2811,6 +2874,15 @@ namespace SimpleJournal.Properties {
         public static string strRecognizationDescription {
             get {
                 return ResourceManager.GetString("strRecognizationDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to (Loading ...).
+        /// </summary>
+        public static string strRecoverAutoBackupFileDialog_Loading {
+            get {
+                return ResourceManager.GetString("strRecoverAutoBackupFileDialog_Loading", resourceCulture);
             }
         }
         

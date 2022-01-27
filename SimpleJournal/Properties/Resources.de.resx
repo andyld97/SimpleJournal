@@ -1980,4 +1980,28 @@ Alternativ können Sie die normale Version von SimpleJournal verwenden!</value>
   <data name="strMicrosoftPrintToPDFWarning" xml:space="preserve">
     <value>Microsoft Print To PDF funktioniert nicht richtig! Es wird nicht empfohlen, den Drucker zu benutzen, wollen Sie ihn trotzdem verwenden?</value>
   </data>
+  <data name="strRecoverAutoBackupFileDialog_Loading" xml:space="preserve">
+    <value>(Laden ...)</value>
+  </data>
+  <data name="strPDFConversationDialog_ConversationGeneralError" xml:space="preserve">
+    <value>Fehler beim Konvertieren aufgetreten ...</value>
+  </data>
+  <data name="strPDFConversationDialog_Ticket_InProgress" xml:space="preserve">
+    <value>Bearbeite Ticket "{0}" ...</value>
+  </data>
+  <data name="strPDFConversationDialog_Ticket_Saving" xml:space="preserve">
+    <value>Speichere Ticket "{0}" ...</value>
+  </data>
+  <data name="strPDFConversationDialog_Ticket_Preparing" xml:space="preserve">
+    <value>Bereite Ticket "{0}" vor ...</value>
+  </data>
+  <data name="strPDFConversationDialog_Ticket_InQueue" xml:space="preserve">
+    <value>Ticket "{0}" wurde zur Warteschlange hinzugefügt!</value>
+  </data>
+  <data name="strPDFConversationDialog_Ticket_OnHold" xml:space="preserve">
+    <value>Bitte warten Sie bis Ihr Ticket "{0}" bearbeitet wird!</value>
+  </data>
+  <data name="strFileNotFound" xml:space="preserve">
+    <value> Die Datei "{0}" wurde nicht gefunden!</value>
+  </data>
 </root>
