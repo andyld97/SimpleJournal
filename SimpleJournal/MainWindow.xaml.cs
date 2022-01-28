@@ -586,29 +586,38 @@ namespace SimpleJournal
         #endregion
 
         #region Error Handling
+
+        // ToDO: *** https://github.com/Tyrrrz/DotnetRuntimeBootstrapper/issues/23
+        // Currently only Dispatcher_UnhandledException gets called due to DotnetRuntimeBootstrapper
         private void Dispatcher_UnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
         {
-            // ToDO: *** https://github.com/Tyrrrz/DotnetRuntimeBootstrapper/issues/23
             // MessageBox.Show(e.Exception.ToString());
             // MessageBox.Show($"{Properties.Resources.strUnexceptedFailure}{Environment.NewLine}{Environment.NewLine}{e.Exception.Message}", Properties.Resources.strUnexceptedFailureTitle, MessageBoxButton.OK, MessageBoxImage.Error);
         }
 
         private async void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
-        {
-            // ToDO: *** https://github.com/Tyrrrz/DotnetRuntimeBootstrapper/issues/23
+        {            
             string message = string.Empty;
 
             if (e.ExceptionObject != null && e.ExceptionObject is Exception ex)
             {
+                // Shorten the output length of the MessageBox in production code!
+#if DEBUG
                 message = ex.ToString();
 
                 if (ex.InnerException != null)
                     message += Environment.NewLine + Environment.NewLine + ex.InnerException.ToString();
+#else
+                message = ex.Message;
+
+                if (ex.InnerException != null)
+                    message += Environment.NewLine + Environment.NewLine + ex.InnerException.Message;
+#endif
             }
 
             MessageBox.Show($"{Properties.Resources.strUnexceptedFailure}{Environment.NewLine}{Environment.NewLine}{message}{Environment.NewLine}{Environment.NewLine}{Properties.Resources.strUnexceptedFailureLine1}", Properties.Resources.strUnexceptedFailureTitle, MessageBoxButton.OK, MessageBoxImage.Error);
 
-            // Try at least to create a backup - if SJ crashes - the user can restore the backup and everything is fine
+            // Try at least to create a backup - if SJ crashes - the user can restore the backup and everything should be fine though.
             await CreateBackup();
         }
         #endregion
@@ -2850,7 +2859,7 @@ namespace SimpleJournal
 
 #endregion
 
-#endregion
+        #endregion
 
         #region Zoom
 

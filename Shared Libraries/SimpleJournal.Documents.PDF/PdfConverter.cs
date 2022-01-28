@@ -9,6 +9,7 @@ namespace SimpleJournal.Documents.PDF
         #region Private Members
         private readonly string sourceFilePath;
         private readonly string destinationFileName;
+        private bool isCanceld = false;
         private readonly PdfConversationOptions options;
 
         #endregion
@@ -45,6 +46,11 @@ namespace SimpleJournal.Documents.PDF
         }
         #endregion
 
+        public void Cancel()
+        {
+            isCanceld = true;
+        }
+
         public async Task<List<Journal>> ConvertAsync()
         {
             int pageFrom = options.StartPage;
@@ -63,6 +69,9 @@ namespace SimpleJournal.Documents.PDF
                 return null;
             }
 
+            if (isCanceld)
+                return null;
+
             // Limit pages to Consts.MaxPDFPagesPerJournal (if more split the document into multiple documents ..100, ..200)
             Journal currentJournal = new Journal();
 
@@ -78,6 +87,9 @@ namespace SimpleJournal.Documents.PDF
                 int journalCounter = 1;
                 for (int p = 0; p < images.Count; p++)
                 {
+                    if (isCanceld)
+                        return null;
+
                     var image = images[p];
                     var page = await PdfHelper.CreatePdfJournalPageAsync(image);
 
@@ -99,6 +111,9 @@ namespace SimpleJournal.Documents.PDF
                 int counter = 1;
                 foreach (var journal in journals)
                 {
+                    if (isCanceld)
+                        break;
+
                     // Generate fileName
                     string newFileName = System.IO.Path.Combine(System.IO.Path.GetDirectoryName(destinationFileName), System.IO.Path.GetFileNameWithoutExtension(destinationFileName) + $".{counter}.journal");
 
@@ -111,11 +126,17 @@ namespace SimpleJournal.Documents.PDF
                     counter++;
                 }
 
+                if (isCanceld)
+                    return null;
+
                 Completed?.Invoke(true, null, firstFileName);
                 return journals;
             }
             else
             {
+                if (isCanceld)
+                    return null;
+
                 // Create a new journal
                 Journal journal = new Journal();
 
@@ -135,11 +156,17 @@ namespace SimpleJournal.Documents.PDF
                             pageTo = nPageTo;                                                
                     }
 
+                    if (isCanceld)
+                        return null;
+
                     int start = (!options.UsePageRange ? 0 : pageFrom - 1);
                     int end = (!options.UsePageRange ? count : pageTo);
 
                     for (int i = start; i < end; i++)
                     {
+                        if (isCanceld)
+                            break;
+
                         var image = images[i];
                         int currentPage = i + 1;
 
@@ -150,19 +177,36 @@ namespace SimpleJournal.Documents.PDF
                     }
                 }
 
+                if (isCanceld)
+                    return null;
+
                 // Free resources
                 images.Dispose();
 
+                if (isCanceld)
+                    return null;
+
                 ProgressChanged?.Invoke(PdfAction.Saving, 100, 0, 0, System.IO.Path.GetFileNameWithoutExtension(destinationFileName) + ".journal");
+
+                if (isCanceld)
+                    return null;
 
                 // Save the journal and quit (only on success)
                 if (await journal.SaveAsync(destinationFileName, hideStatus: true))
                 {
+                    if (isCanceld)
+                        return null;
+
                     Completed?.Invoke(true, null, System.IO.Path.GetFileName(destinationFileName));
                     return new List<Journal>() { journal }; 
                 }
-                else
+                else 
+                {
+                    if (isCanceld)
+                        return null;
+
                     Completed?.Invoke(false, null, string.Empty);
+                }
             }
 
             return null;

@@ -176,7 +176,7 @@ namespace SimpleJournal.Common
                     }
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return default(T);
             }

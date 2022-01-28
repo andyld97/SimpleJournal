@@ -26,6 +26,21 @@ namespace PDF2J.Controllers
             return Ok(result);
         }
 
+        [HttpGet("{id}/cancel")]
+        public IActionResult CancelTicket(string id)
+        {
+            var result = Program.PrintTickets.FirstOrDefault(t => t.ID == id);
+
+            if (result == null)
+                return BadRequest($"Ticket {id} not found!");
+
+            result.Status = SimpleJournal.Common.TicketStatus.Canceld;
+            _logger.LogInformation($"Ticket {result.Name} was canceld by the user!");
+
+            Program.CancelTicket(id);
+            return DeleteTicket(id);
+        }
+
         [HttpGet("{id}/download/{document}")]
         public IActionResult DownloadDocument(string id, string document)
         {

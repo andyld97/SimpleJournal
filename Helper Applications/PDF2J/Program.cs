@@ -15,15 +15,15 @@ namespace PDF2J
 {
     public class Program
     {
-        // ToDo: *** Print (finished, or failed) tickets should be automatically deleted by a timer (maybe 1 hour)
         public static List<PrintTicket> PrintTickets = new List<PrintTicket>();
         private static System.Timers.Timer workingTimer = new System.Timers.Timer();
+        private static System.Timers.Timer cleanUPTimer = new System.Timers.Timer();
         
         private static bool isRunning = false;
         private static object sync = new object();
         private static PrintTicket currentTicket = null;
-
-        private  static ILogger logger;
+        private static PdfConverter currentPdfConverter;
+        private static ILogger logger;
 
         public static void Main(string[] args)
         {
@@ -34,7 +34,41 @@ namespace PDF2J
             workingTimer.Elapsed += WorkingTimer_Elapsed;
             workingTimer.Start();
 
+            cleanUPTimer = new System.Timers.Timer() { Interval = TimeSpan.FromHours(1).TotalMilliseconds };
+            cleanUPTimer.Elapsed += CleanUPTimer_Elapsed;
+            cleanUPTimer.Start();
+
             host.Run();
+        }
+
+        private static void CleanUPTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            logger.LogInformation("[CleanUP] Starting cleaning service ...");
+
+            var now = DateTime.Now;
+            var ticketsToRemove = PrintTickets.Where(t => (t.Status == TicketStatus.Failed || t.Status == TicketStatus.Completed) && t.DateTimeAdded.AddHours(1) >= now).ToList();
+            foreach (var ticket in ticketsToRemove)
+            {
+                try
+                {
+                    PrintTickets.Remove(ticket);
+                    logger.LogInformation($"[CleanUP] Ticket {ticket.Name} was removed! (Added: {ticket.DateTimeAdded.ToLongDateString()} @ {ticket.DateTimeAdded.ToLongTimeString()})");
+                }
+                catch { }
+            }
+
+            if (ticketsToRemove.Count == 0)
+                logger.LogInformation("[CleanUP] Nothing to do, finished!");
+            else
+                logger.LogInformation($"[CleanUP] Removed {ticketsToRemove.Count} tickets!");
+
+            ticketsToRemove.Clear();
+        }
+
+        public static void CancelTicket(string id)
+        {
+            if (currentTicket.ID == id)
+                currentPdfConverter.Cancel();
         }
 
         private static async void WorkingTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
@@ -56,17 +90,18 @@ namespace PDF2J
                 string docPath = System.IO.Path.Combine(ticket.TempPath, "doc.pdf");
                 string newFileName = $"{System.IO.Path.GetFileNameWithoutExtension(ticket.Name)}.journal";
 
-                PdfConverter pdfConverter = new PdfConverter(docPath, System.IO.Path.Combine(ticket.TempPath, newFileName), ticket.ConversationOptions);
-                pdfConverter.ProgressChanged += PdfConverter_ProgressChanged;
-                pdfConverter.JournalHasFewerPagesThenRequired += PdfConverter_JournalHasFewerPagesThenRequired;
-                pdfConverter.Completed += PdfConverter_Completed;
+                currentPdfConverter = new PdfConverter(docPath, System.IO.Path.Combine(ticket.TempPath, newFileName), ticket.ConversationOptions);
+                currentPdfConverter.ProgressChanged += PdfConverter_ProgressChanged;
+                currentPdfConverter.JournalHasFewerPagesThenRequired += PdfConverter_JournalHasFewerPagesThenRequired;
+                currentPdfConverter.Completed += PdfConverter_Completed;
 
-                var result = await pdfConverter.ConvertAsync();
+                var result = await currentPdfConverter.ConvertAsync();
 
                 // Unassign events
-                pdfConverter.ProgressChanged -= PdfConverter_ProgressChanged;
-                pdfConverter.JournalHasFewerPagesThenRequired -= PdfConverter_JournalHasFewerPagesThenRequired;
-                pdfConverter.Completed -= PdfConverter_Completed;
+                currentPdfConverter.ProgressChanged -= PdfConverter_ProgressChanged;
+                currentPdfConverter.JournalHasFewerPagesThenRequired -= PdfConverter_JournalHasFewerPagesThenRequired;
+                currentPdfConverter.Completed -= PdfConverter_Completed;
+                currentPdfConverter = null;
             }
 
             lock (sync)

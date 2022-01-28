@@ -183,6 +183,7 @@
         Failed,
         Saving,
         Completed,
+        Canceld
     }
 
     public enum PdfAction

@@ -70,10 +70,13 @@ namespace SimpleJournal.Helper.PDF
             }
             catch (Exception ex)
             {
+                State.SetAction(StateType.ExportPDF, ProgressState.Completed);
                 return (false, ex.Message);
             }
-
-            State.SetAction(StateType.ExportPDF, ProgressState.Completed);
+            finally
+            {
+                State.SetAction(StateType.ExportPDF, ProgressState.Completed);
+            }
         }
     }
 }

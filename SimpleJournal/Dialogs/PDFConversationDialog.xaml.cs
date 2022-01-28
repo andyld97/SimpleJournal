@@ -7,6 +7,7 @@ using System.Windows.Forms;
 using MessageBox = System.Windows.MessageBox;
 using SimpleJournal.Documents.PDF;
 using SimpleJournal.Data;
+using System.ComponentModel;
 
 namespace SimpleJournal.Dialogs
 {
@@ -18,6 +19,8 @@ namespace SimpleJournal.Dialogs
         #region Pivate Members
         private readonly string sourceFileName = string.Empty;
         private string destinationFileName = string.Empty;
+
+        private PdfConverter currentConverter = null;
 
         private bool isInitialized = false;
 
@@ -70,6 +73,7 @@ namespace SimpleJournal.Dialogs
 
         private async void ButtonConvert_Click(object sender, RoutedEventArgs e)
         {
+            currentConverter = null;
             bool useAllPages = RadioAllPages.IsChecked.Value;
             bool useOnlineConverstation = CheckUseOnlineConverter.IsChecked.Value; 
             int pageFrom = NumPageFrom.Value;
@@ -101,6 +105,7 @@ namespace SimpleJournal.Dialogs
                 SetInputPanelState(false);
 
                 // Upload file
+                // ToDo: ** Try-Catch
                 var printTicket = await GeneralHelper.UploadFileAsync(sourceFileName, $"{Consts.ConverterAPIUrl}/api/pdf/upload", System.Text.Json.JsonSerializer.Serialize(options));
 
                 if (printTicket == null)
@@ -120,6 +125,7 @@ namespace SimpleJournal.Dialogs
             else
             {
                 PdfConverter pdfConverter = new PdfConverter(sourceFileName, destinationFileName, options);
+                currentConverter = pdfConverter;
 
                 pdfConverter.JournalHasFewerPagesThenRequired += PdfConverter_JournalHasFewerPagesThenRequired;
                 pdfConverter.Completed += PdfConverter_Completed;
@@ -174,7 +180,7 @@ namespace SimpleJournal.Dialogs
                 return;
             }
 
-            // Show error messages
+            // Show error messages (if any)
             if (ex != null)
                 MessageBox.Show(this, $"{Properties.Resources.strPDFConversationDialog_GhostscriptMessage}\n\n{ex.Message}", Properties.Resources.strError, MessageBoxButton.OK, MessageBoxImage.Error);
             else
@@ -196,6 +202,38 @@ namespace SimpleJournal.Dialogs
             }
 
             return true;
+        }
+
+        protected override async void OnClosing(CancelEventArgs e)
+        {
+            base.OnClosing(e);
+            if (timer.Enabled)
+            {
+                timer.Stop();
+                try
+                {
+                    using (HttpClient client = new HttpClient())
+                    {
+                        // Send a message to the api that the ticket should be canceld!
+                        await client.GetAsync($"{Consts.ConverterAPIUrl}/api/ticket/{currentTicket?.ID}/cancel");
+                    }
+                }
+                catch
+                {
+                    // ignore
+                }
+            }
+
+            currentConverter?.Cancel();
+        }
+
+        private void CheckUseOnlineConverter_Checked(object sender, RoutedEventArgs e)
+        {
+            if (!isInitialized)
+                return;
+
+            Settings.Instance.UseOnlineConversation = CheckUseOnlineConverter.IsChecked.Value;
+            Settings.Instance.Save();
         }
 
         #endregion
@@ -308,14 +346,5 @@ namespace SimpleJournal.Dialogs
         }
 
         #endregion
-
-        private void CheckUseOnlineConverter_Checked(object sender, RoutedEventArgs e)
-        {
-            if (!isInitialized)
-                return;
-
-            Settings.Instance.UseOnlineConversation = CheckUseOnlineConverter.IsChecked.Value;
-            Settings.Instance.Save();
-        }
     }
 }
