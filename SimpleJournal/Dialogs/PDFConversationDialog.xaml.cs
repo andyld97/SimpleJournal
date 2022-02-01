@@ -104,13 +104,23 @@ namespace SimpleJournal.Dialogs
             {
                 SetInputPanelState(false);
 
-                // Upload file
-                // ToDo: ** Try-Catch
-                var printTicket = await GeneralHelper.UploadFileAsync(sourceFileName, $"{Consts.ConverterAPIUrl}/api/pdf/upload", System.Text.Json.JsonSerializer.Serialize(options));
+                // Upload file to API
+                PrintTicket printTicket = null;
+                string errorMessage = string.Empty;
+
+                try
+                {
+                    printTicket = await GeneralHelper.UploadFileAsync(sourceFileName, $"{Consts.ConverterAPIUrl}/api/pdf/upload", System.Text.Json.JsonSerializer.Serialize(options));
+                }
+                catch (Exception ex)
+                {
+                    errorMessage = ex.Message;
+                }
 
                 if (printTicket == null)
                 {
-                    MessageBox.Show(Properties.Resources.strPDFConversationDialog_ConversationGeneralError, Properties.Resources.strError, MessageBoxButton.OK, MessageBoxImage.Error);
+                    SetInputPanelState(true);
+                    MessageBox.Show($"{Properties.Resources.strPDFConversationDialog_ConversationGeneralError}{Environment.NewLine}{Environment.NewLine}{errorMessage}", Properties.Resources.strError, MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
                 else
@@ -249,102 +259,112 @@ namespace SimpleJournal.Dialogs
             }
 
             // Refresh ticket information
-            using (HttpClient client = new HttpClient())
+            try
             {
-                string url = $"{Consts.ConverterAPIUrl}/api/ticket/{currentTicket.ID}";
-
-                var result = await client.GetAsync(url);
-                var temp = await System.Text.Json.JsonSerializer.DeserializeAsync<PrintTicket>(await result.Content.ReadAsStreamAsync());
-                if (temp != null)
-                    currentTicket = temp;
-
-                Dispatcher.Invoke(() =>
+                using (HttpClient client = new HttpClient())
                 {
-                    if (currentTicket.Percentage > 0)
-                    {
-                        Progress.IsIndeterminate = false;
-                        Progress.Value = currentTicket.Percentage;
-                    }
+                    string url = $"{Consts.ConverterAPIUrl}/api/ticket/{currentTicket.ID}";
 
-                    if (currentTicket.Status == TicketStatus.Prepearing)
-                        TextState.Text = string.Format(Properties.Resources.strPDFConversationDialog_Ticket_Preparing, currentTicket.Name);
-                    else if (currentTicket.Status == TicketStatus.InProgress)
-                        TextState.Text = string.Format(Properties.Resources.strPDFConversationDialog_Ticket_InProgress, currentTicket.Name);
-                    else if (currentTicket.Status == TicketStatus.Saving)
-                        TextState.Text = string.Format(Properties.Resources.strPDFConversationDialog_Ticket_Saving, currentTicket.Name);
-                    else if (currentTicket.Status == TicketStatus.OnHold)
-                        TextState.Text = string.Format(Properties.Resources.strPDFConversationDialog_Ticket_OnHold, currentTicket.Name);
-                    else
-                    {
-                        TextState.Text = currentTicket.Status.ToString();
+                    var result = await client.GetAsync(url);
+                    var temp = await System.Text.Json.JsonSerializer.DeserializeAsync<PrintTicket>(await result.Content.ReadAsStreamAsync());
+                    if (temp != null)
+                        currentTicket = temp;
 
-                        if (currentTicket.Status == TicketStatus.Failed)
+                    Dispatcher.Invoke(() =>
+                    {
+                        if (currentTicket.Percentage > 0)
                         {
-                            timer.Stop();
-                            Progress.Value = 0;
                             Progress.IsIndeterminate = false;
-                            MessageBox.Show(currentTicket.ErorrMessage, Properties.Resources.strError, MessageBoxButton.OK, MessageBoxImage.Error);
+                            Progress.Value = currentTicket.Percentage;
                         }
-                    }
-                });
 
-                if (currentTicket.IsCompleted && currentTicket.Status == TicketStatus.Completed)
-                {
-                    timer.Stop();
-                    Progress.Value = 100;
-
-                    try
-                    {
-                        // Download file(s)
-                        int counter = 1;
-                        string parentDirectory = System.IO.Path.GetDirectoryName(destinationFileName);
-                        string journalFileName = System.IO.Path.GetFileNameWithoutExtension(destinationFileName);
-                        foreach (var journal in currentTicket.Documents)
+                        if (currentTicket.Status == TicketStatus.Prepearing)
+                            TextState.Text = string.Format(Properties.Resources.strPDFConversationDialog_Ticket_Preparing, currentTicket.Name);
+                        else if (currentTicket.Status == TicketStatus.InProgress)
+                            TextState.Text = string.Format(Properties.Resources.strPDFConversationDialog_Ticket_InProgress, currentTicket.Name);
+                        else if (currentTicket.Status == TicketStatus.Saving)
+                            TextState.Text = string.Format(Properties.Resources.strPDFConversationDialog_Ticket_Saving, currentTicket.Name);
+                        else if (currentTicket.Status == TicketStatus.OnHold)
+                            TextState.Text = string.Format(Properties.Resources.strPDFConversationDialog_Ticket_OnHold, currentTicket.Name);
+                        else
                         {
-                            string newFileName = System.IO.Path.Combine(parentDirectory, $"{journalFileName}.{counter}.journal");
+                            TextState.Text = currentTicket.Status.ToString();
 
-                            // Assign the first document to open
-                            if (counter == 1 && currentTicket.Documents.Count > 1)
-                                destinationFileName = newFileName;
-
-                            var response = await client.GetAsync($"{Consts.ConverterAPIUrl}/api/ticket/{currentTicket.ID}/download/{journal}");
-                            if (response.IsSuccessStatusCode)
+                            if (currentTicket.Status == TicketStatus.Failed)
                             {
-                                var str = await response.Content.ReadAsStreamAsync();
-
-                                using (System.IO.FileStream fs = new System.IO.FileStream(currentTicket.Documents.Count == 1 ? destinationFileName : newFileName, System.IO.FileMode.Create))
-                                {
-                                    await str.CopyToAsync(fs);
-                                }
+                                timer.Stop();
+                                Progress.Value = 0;
+                                Progress.IsIndeterminate = false;
+                                SetInputPanelState(true);
+                                MessageBox.Show(currentTicket.ErorrMessage, Properties.Resources.strError, MessageBoxButton.OK, MessageBoxImage.Error);
                             }
-                            else
-                                throw new Exception("Http Status Code: " + response.StatusCode);
-
-                            counter++;
                         }
+                    });
+
+                    if (currentTicket.IsCompleted && currentTicket.Status == TicketStatus.Completed)
+                    {
+                        timer.Stop();
+                        Progress.Value = 100;
 
                         try
                         {
-                            // Send a message to the api that the ticket can be deleted
-                            await client.GetAsync($"{Consts.ConverterAPIUrl}/api/ticket/{currentTicket.ID}/delete");
-                        }
-                        catch
-                        {
-                            // ignore
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        SetInputPanelState(false);
-                        MessageBox.Show($"{Properties.Resources.strPDFConversationDialog_ConversationGeneralError}{Environment.NewLine}{Environment.NewLine}{ex.Message}" , Properties.Resources.strError, MessageBoxButton.OK, MessageBoxImage.Error);
-                        return;
-                    }
+                            // Download file(s)
+                            int counter = 1;
+                            string parentDirectory = System.IO.Path.GetDirectoryName(destinationFileName);
+                            string journalFileName = System.IO.Path.GetFileNameWithoutExtension(destinationFileName);
+                            foreach (var journal in currentTicket.Documents)
+                            {
+                                string newFileName = System.IO.Path.Combine(parentDirectory, $"{journalFileName}.{counter}.journal");
 
-                    DialogResult = true;
+                                // Assign the first document to open
+                                if (counter == 1 && currentTicket.Documents.Count > 1)
+                                    destinationFileName = newFileName;
+
+                                var response = await client.GetAsync($"{Consts.ConverterAPIUrl}/api/ticket/{currentTicket.ID}/download/{journal}");
+                                if (response.IsSuccessStatusCode)
+                                {
+                                    var str = await response.Content.ReadAsStreamAsync();
+
+                                    using (System.IO.FileStream fs = new System.IO.FileStream(currentTicket.Documents.Count == 1 ? destinationFileName : newFileName, System.IO.FileMode.Create))
+                                    {
+                                        await str.CopyToAsync(fs);
+                                    }
+                                }
+                                else
+                                    throw new Exception("Http Status Code: " + response.StatusCode);
+
+                                counter++;
+                            }
+
+                            try
+                            {
+                                // Send a message to the api that the ticket can be deleted
+                                await client.GetAsync($"{Consts.ConverterAPIUrl}/api/ticket/{currentTicket.ID}/delete");
+                            }
+                            catch
+                            {
+                                // ignore
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            timer.Stop();
+                            SetInputPanelState(true);
+                            MessageBox.Show($"{Properties.Resources.strPDFConversationDialog_ConversationGeneralError}{Environment.NewLine}{Environment.NewLine}{ex.Message}", Properties.Resources.strError, MessageBoxButton.OK, MessageBoxImage.Error);
+                            return;
+                        }
+
+                        DialogResult = true;
+                    }
                 }
             }
+            catch (Exception ex)
+            {
+                timer.Stop();
+                SetInputPanelState(true);
+                MessageBox.Show($"{Properties.Resources.strPDFConversationDialog_ConversationGeneralError}{Environment.NewLine}{Environment.NewLine}{ex.Message}", Properties.Resources.strError, MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
-
         #endregion
     }
 }

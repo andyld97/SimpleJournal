@@ -229,25 +229,22 @@ namespace SimpleJournal
         /// </summary>
         public static async Task<PrintTicket> UploadFileAsync(string path, string url, string json)
         {
-            // we need to send a request with multipart/form-data
             var multiForm = new MultipartFormDataContent();
-
-            //multiForm.Add(new StringContent(json), "options");
             multiForm.Headers.Add("options", json);
 
-            // add file and directly upload it
+            // Add file and directly upload it
             System.IO.FileStream fs = System.IO.File.OpenRead(path);
             multiForm.Add(new StreamContent(fs), "file", System.IO.Path.GetFileName(path));
 
-            // send request to API 
+            // Send request to API 
             using (HttpClient client = new HttpClient())
             {
                 var response = await client.PostAsync(url, multiForm);
 
                 if (response.IsSuccessStatusCode)
-                {
                     return await System.Text.Json.JsonSerializer.DeserializeAsync<PrintTicket>(await response.Content.ReadAsStreamAsync());
-                }
+                else
+                    throw new Exception("Http Status Code: " + response.StatusCode);
             }
 
             return null;
