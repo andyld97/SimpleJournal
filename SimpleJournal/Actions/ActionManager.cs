@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SimpleJournal.Common;
+using System;
 using System.Collections.Generic;
 
 namespace SimpleJournal.Actions
@@ -22,7 +23,7 @@ namespace SimpleJournal.Actions
             owner.OnChanged += Owner_OnChanged;
         }
 
-        private void Owner_OnChanged(System.Windows.Ink.StrokeCollection strokes, System.Windows.UIElement child, Action.Type value)
+        private void Owner_OnChanged(System.Windows.Ink.StrokeCollection strokes, System.Windows.UIElement child, ActionType value)
         {
             if ((strokes == null && child == null) || IgnoreEvents)
                 return;
@@ -31,10 +32,10 @@ namespace SimpleJournal.Actions
 
             switch (value)
             {
-                case Action.Type.AddedChild: action = new ChildAddedAction(child); break;
-                case Action.Type.AddedStrokes: action = new StrokeAddedAction(strokes); break;
-                case Action.Type.RemovedChild: action = new ChildRemovedAction(child); break;
-                case Action.Type.RemovedStrokes: action = new StrokeRemovedAction(strokes); break;
+                case ActionType.AddedChild: action = new ChildAddedAction(child); break;
+                case ActionType.AddedStrokes: action = new StrokeAddedAction(strokes); break;
+                case ActionType.RemovedChild: action = new ChildRemovedAction(child); break;
+                case ActionType.RemovedStrokes: action = new StrokeRemovedAction(strokes); break;
             }
 
             undo.Push(action);

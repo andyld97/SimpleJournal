@@ -73,9 +73,9 @@ namespace SimpleJournal.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        public static byte[] SimpleJournal_Shared {
+        public static byte[] SimpleJournal_Common {
             get {
-                object obj = ResourceManager.GetObject("SimpleJournal_Shared", resourceCulture);
+                object obj = ResourceManager.GetObject("SimpleJournal_Common", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -170,6 +170,15 @@ namespace SimpleJournal.Properties {
         public static string strAboutTextIcons8_2 {
             get {
                 return ResourceManager.GetString("strAboutTextIcons8_2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ... to.
+        /// </summary>
+        public static string strAboutTextMagickNET {
+            get {
+                return ResourceManager.GetString("strAboutTextMagickNET", resourceCulture);
             }
         }
         
@@ -984,6 +993,15 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Export as PDF.
+        /// </summary>
+        public static string strExportAsPDF {
+            get {
+                return ResourceManager.GetString("strExportAsPDF", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Current Page.
         /// </summary>
         public static string strExportCurrentPage {
@@ -1106,6 +1124,15 @@ namespace SimpleJournal.Properties {
         public static string strFailedToDeleteSomeBackupsTitle {
             get {
                 return ResourceManager.GetString("strFailedToDeleteSomeBackupsTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error while exporting the journal as a PDF file.
+        /// </summary>
+        public static string strFailedToExportJournalAsPDF {
+            get {
+                return ResourceManager.GetString("strFailedToExportJournalAsPDF", resourceCulture);
             }
         }
         
@@ -1324,6 +1351,15 @@ namespace SimpleJournal.Properties {
         public static string strFile {
             get {
                 return ResourceManager.GetString("strFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to  File &quot;{0}&quot; not found!.
+        /// </summary>
+        public static string strFileNotFound {
+            get {
+                return ResourceManager.GetString("strFileNotFound", resourceCulture);
             }
         }
         
@@ -1564,6 +1600,15 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Import PDF FIle.
+        /// </summary>
+        public static string strImportPDFFile {
+            get {
+                return ResourceManager.GetString("strImportPDFFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Date.
         /// </summary>
         public static string strInsertDate {
@@ -1785,6 +1830,15 @@ namespace SimpleJournal.Properties {
         public static string strMessageFailedToExportPsScripts {
             get {
                 return ResourceManager.GetString("strMessageFailedToExportPsScripts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Microsoft Print To PDF doesn&apos;t work properly! It is not recommended to use the printer, do you want to use it anyway?.
+        /// </summary>
+        public static string strMicrosoftPrintToPDFWarning {
+            get {
+                return ResourceManager.GetString("strMicrosoftPrintToPDFWarning", resourceCulture);
             }
         }
         
@@ -2239,6 +2293,285 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Convert all pages (max. 100 per journal).
+        /// </summary>
+        public static string strPDFConversationDialog_AllPages {
+            get {
+                return ResourceManager.GetString("strPDFConversationDialog_AllPages", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select a path where the journal should be saved!.
+        /// </summary>
+        public static string strPDFConversationDialog_ButtonSearchToolTip {
+            get {
+                return ResourceManager.GetString("strPDFConversationDialog_ButtonSearchToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error occurred while converting ....
+        /// </summary>
+        public static string strPDFConversationDialog_ConversationGeneralError {
+            get {
+                return ResourceManager.GetString("strPDFConversationDialog_ConversationGeneralError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Converting page {0} from {1} ....
+        /// </summary>
+        public static string strPDFConversationDialog_ConversationStatusMessage {
+            get {
+                return ResourceManager.GetString("strPDFConversationDialog_ConversationStatusMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Convert.
+        /// </summary>
+        public static string strPDFConversationDialog_Convert {
+            get {
+                return ResourceManager.GetString("strPDFConversationDialog_Convert", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Convert only specified pages.
+        /// </summary>
+        public static string strPDFConversationDialog_ConvertOnlySelectedPages {
+            get {
+                return ResourceManager.GetString("strPDFConversationDialog_ConvertOnlySelectedPages", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Target path:.
+        /// </summary>
+        public static string strPDFConversationDialog_DestinationPath {
+            get {
+                return ResourceManager.GetString("strPDFConversationDialog_DestinationPath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to To use a PDF docuemnt in SimpleJournal, it must first be converted to a journal document. This is done using Magick.NET in combination with.
+        /// </summary>
+        public static string strPDFConversationDialog_Explanation_Line1 {
+            get {
+                return ResourceManager.GetString("strPDFConversationDialog_Explanation_Line1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please make sure that.
+        /// </summary>
+        public static string strPDFConversationDialog_Explanation_Line2 {
+            get {
+                return ResourceManager.GetString("strPDFConversationDialog_Explanation_Line2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to is installed, otherwise the conversion will not work!.
+        /// </summary>
+        public static string strPDFConversationDialog_Explanation_Line3 {
+            get {
+                return ResourceManager.GetString("strPDFConversationDialog_Explanation_Line3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to From:.
+        /// </summary>
+        public static string strPDFConversationDialog_From {
+            get {
+                return ResourceManager.GetString("strPDFConversationDialog_From", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An error occurred during conversion. Make sure that Ghostscript is installed!.
+        /// </summary>
+        public static string strPDFConversationDialog_GhostscriptMessage {
+            get {
+                return ResourceManager.GetString("strPDFConversationDialog_GhostscriptMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Attention: The original PDF document remains unchanged!.
+        /// </summary>
+        public static string strPDFConversationDialog_Hint {
+            get {
+                return ResourceManager.GetString("strPDFConversationDialog_Hint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please specify valid paths!.
+        /// </summary>
+        public static string strPDFConversationDialog_InvalidInputMessage {
+            get {
+                return ResourceManager.GetString("strPDFConversationDialog_InvalidInputMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reading PDF Document &quot;{0}&quot; ....
+        /// </summary>
+        public static string strPDFConversationDialog_ReadingPDFDocument {
+            get {
+                return ResourceManager.GetString("strPDFConversationDialog_ReadingPDFDocument", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ready.
+        /// </summary>
+        public static string strPDFConversationDialog_Ready {
+            get {
+                return ResourceManager.GetString("strPDFConversationDialog_Ready", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Saving Journal &quot;{0}&quot; ....
+        /// </summary>
+        public static string strPDFConversationDialog_Saving {
+            get {
+                return ResourceManager.GetString("strPDFConversationDialog_Saving", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Source path:.
+        /// </summary>
+        public static string strPDFConversationDialog_SourcePath {
+            get {
+                return ResourceManager.GetString("strPDFConversationDialog_SourcePath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Working on ticket &quot;{0}&quot; ....
+        /// </summary>
+        public static string strPDFConversationDialog_Ticket_InProgress {
+            get {
+                return ResourceManager.GetString("strPDFConversationDialog_Ticket_InProgress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ticket &quot;{0}&quot; was added to the queue!.
+        /// </summary>
+        public static string strPDFConversationDialog_Ticket_InQueue {
+            get {
+                return ResourceManager.GetString("strPDFConversationDialog_Ticket_InQueue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please wait until your ticket &quot;{0}&quot; is processed!.
+        /// </summary>
+        public static string strPDFConversationDialog_Ticket_OnHold {
+            get {
+                return ResourceManager.GetString("strPDFConversationDialog_Ticket_OnHold", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Preparing ticket &quot;{0}&quot; ....
+        /// </summary>
+        public static string strPDFConversationDialog_Ticket_Preparing {
+            get {
+                return ResourceManager.GetString("strPDFConversationDialog_Ticket_Preparing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Saving ticket &quot;{0}&quot; ....
+        /// </summary>
+        public static string strPDFConversationDialog_Ticket_Saving {
+            get {
+                return ResourceManager.GetString("strPDFConversationDialog_Ticket_Saving", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Convert PDF document as journal.
+        /// </summary>
+        public static string strPDFConversationDialog_Title {
+            get {
+                return ResourceManager.GetString("strPDFConversationDialog_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to To:.
+        /// </summary>
+        public static string strPDFConversationDialog_To {
+            get {
+                return ResourceManager.GetString("strPDFConversationDialog_To", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The selected document has only {0} pages! Do you want to convert only pages {1} to {2} instead?.
+        /// </summary>
+        public static string strPDFCOnversationDialog_TooFewPagesMessage {
+            get {
+                return ResourceManager.GetString("strPDFCOnversationDialog_TooFewPagesMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Use Online Conversation (if your system is low on memory).
+        /// </summary>
+        public static string strPDFConversationDialog_UseOnlineConversation {
+            get {
+                return ResourceManager.GetString("strPDFConversationDialog_UseOnlineConversation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Write page {0} of {1} in journal &quot;{2}&quot; ....
+        /// </summary>
+        public static string strPDFConversationDialog_WritingPageStatus {
+            get {
+                return ResourceManager.GetString("strPDFConversationDialog_WritingPageStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save as PDF ....
+        /// </summary>
+        public static string strPDFDialogTitle {
+            get {
+                return ResourceManager.GetString("strPDFDialogTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to PDF File.
+        /// </summary>
+        public static string strPDFFile {
+            get {
+                return ResourceManager.GetString("strPDFFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to PDF-Document|*.pdf.
+        /// </summary>
+        public static string strPDFFilter {
+            get {
+                return ResourceManager.GetString("strPDFFilter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Pen 1.
         /// </summary>
         public static string strPen1 {
@@ -2491,6 +2824,15 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to A critical error has occurred while printing.
+        /// </summary>
+        public static string strPrintingError {
+            get {
+                return ResourceManager.GetString("strPrintingError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Quad (Polygon).
         /// </summary>
         public static string strQuad {
@@ -2536,6 +2878,15 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to (Loading ...).
+        /// </summary>
+        public static string strRecoverAutoBackupFileDialog_Loading {
+            get {
+                return ResourceManager.GetString("strRecoverAutoBackupFileDialog_Loading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Restore Backups ....
         /// </summary>
         public static string strRecoverAutoBackupFileDialogTitle {
@@ -2563,7 +2914,7 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 12/31/2021 3:36 PM.
+        ///   Looks up a localized string similar to 01/28/2022 13:13 AM.
         /// </summary>
         public static string strReleaseDate {
             get {
@@ -2806,6 +3157,42 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Open AutoSave directory.
+        /// </summary>
+        public static string strSettings_OpenAutoSaveDirectory {
+            get {
+                return ResourceManager.GetString("strSettings_OpenAutoSaveDirectory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Opens the directory containing the automatically created backups..
+        /// </summary>
+        public static string strSettings_OpenAutoSaveDirectory_ToolTip {
+            get {
+                return ResourceManager.GetString("strSettings_OpenAutoSaveDirectory_ToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Open backup directory.
+        /// </summary>
+        public static string strSettings_OpenBackupDirectory {
+            get {
+                return ResourceManager.GetString("strSettings_OpenBackupDirectory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Opens the directory containing the created backups (of old documents)..
+        /// </summary>
+        public static string strSettings_OpenBackupDirectory_ToDo {
+            get {
+                return ResourceManager.GetString("strSettings_OpenBackupDirectory_ToDo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Active window glowing effect.
         /// </summary>
         public static string strSettingsActivateGlowingEffect {
@@ -2961,11 +3348,20 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Additional features:.
+        ///   Looks up a localized string similar to Additional Features.
         /// </summary>
         public static string strSettingsFeatureBar {
             get {
                 return ResourceManager.GetString("strSettingsFeatureBar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Important Directories.
+        /// </summary>
+        public static string strSettingsImportantDirectories {
+            get {
+                return ResourceManager.GetString("strSettingsImportantDirectories", resourceCulture);
             }
         }
         
@@ -3389,6 +3785,42 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Export Journal ....
+        /// </summary>
+        public static string strStateExportAsJournal {
+            get {
+                return ResourceManager.GetString("strStateExportAsJournal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Export PDF ....
+        /// </summary>
+        public static string strStateExportAsPDF {
+            get {
+                return ResourceManager.GetString("strStateExportAsPDF", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Print Journal ....
+        /// </summary>
+        public static string strStatePrinting {
+            get {
+                return ResourceManager.GetString("strStatePrinting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Saving ....
+        /// </summary>
+        public static string strStateSaving {
+            get {
+                return ResourceManager.GetString("strStateSaving", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to S.
         /// </summary>
         public static string strStrikethrough {
@@ -3421,6 +3853,15 @@ namespace SimpleJournal.Properties {
         public static string strSuccess {
             get {
                 return ResourceManager.GetString("strSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sure?.
+        /// </summary>
+        public static string strSure {
+            get {
+                return ResourceManager.GetString("strSure", resourceCulture);
             }
         }
         
@@ -3857,6 +4298,42 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Current Progress:.
+        /// </summary>
+        public static string strWaitingDialogCurrentProgress {
+            get {
+                return ResourceManager.GetString("strWaitingDialogCurrentProgress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reading Document ....
+        /// </summary>
+        public static string strWaitingDialogReadingDocument {
+            get {
+                return ResourceManager.GetString("strWaitingDialogReadingDocument", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reading page {0} of {1} ....
+        /// </summary>
+        public static string strWaitingDialogReadingPage {
+            get {
+                return ResourceManager.GetString("strWaitingDialogReadingPage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total Progress:.
+        /// </summary>
+        public static string strWaitingDialogTotalProgress {
+            get {
+                return ResourceManager.GetString("strWaitingDialogTotalProgress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Do you really want to clear this page?.
         /// </summary>
         public static string strWantToClearPage {
@@ -3920,7 +4397,7 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please wait while {0} is loading (page {1}/{2}) ....
+        ///   Looks up a localized string similar to Please wait while document &quot;{0}&quot; is loading ....
         /// </summary>
         public static string strWatingText {
             get {

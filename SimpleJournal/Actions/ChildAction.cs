@@ -1,4 +1,5 @@
 ﻿using SimpleJournal.Controls;
+using SimpleJournal.Common.Controls;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Shapes;
@@ -9,7 +10,7 @@ namespace SimpleJournal.Actions
     {
         private readonly UIElement child = null;
 
-        public ChildAddedAction(UIElement child) : base(Action.Type.AddedChild)
+        public ChildAddedAction(UIElement child) : base(Common.ActionType.AddedChild)
         {
             this.child = child;
         }
@@ -17,7 +18,7 @@ namespace SimpleJournal.Actions
         public override void Apply(DrawingCanvas canvas)
         {
             // Remove added child
-            // TODO: Sidebar must be refreshed
+            // ToDo: *** Sidebar must be refreshed
             canvas.Children.Remove(child);
         }
 
@@ -31,7 +32,7 @@ namespace SimpleJournal.Actions
     {
         private readonly UIElement child = null;
 
-        public ChildRemovedAction(UIElement child) : base(Action.Type.RemovedChild)
+        public ChildRemovedAction(UIElement child) : base(Common.ActionType.RemovedChild)
         {
             this.child = child;
         }
@@ -39,7 +40,7 @@ namespace SimpleJournal.Actions
         public override void Apply(DrawingCanvas canvas)
         {
             // Add removed child
-            // TODO: Sidebar must be refresh
+            // ToDo: *** Sidebar must be refreshed
             canvas.Children.Add(child);
         }
 
@@ -57,7 +58,7 @@ namespace SimpleJournal.Actions
         private readonly double thicknessOld;
         private readonly double thicknessNew;
 
-        public ShapeChangedAction(UIElement handle, Color cOld, Color cNew, double thicknessOld, double thicknessNew) : base(Type.ShapeChanged)
+        public ShapeChangedAction(UIElement handle, Color cOld, Color cNew, double thicknessOld, double thicknessNew) : base(Common.ActionType.ShapeChanged)
         {
             this.handle = handle;
             this.cOld = cOld;

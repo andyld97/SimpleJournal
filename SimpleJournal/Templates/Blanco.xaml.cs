@@ -1,4 +1,5 @@
 ﻿using SimpleJournal.Controls;
+using SimpleJournal.Common;
 using System.Windows.Controls;
 
 namespace SimpleJournal.Templates
@@ -21,9 +22,30 @@ namespace SimpleJournal.Templates
 
         public PageSplitter Border { get; set; }
 
+        public IPaper ClonePage(bool isReadonly)
+        {
+            Blanco blanco = new Blanco();
+
+            if (isReadonly)
+                blanco.Canvas.EditingMode = InkCanvasEditingMode.None;
+            blanco.Canvas.Strokes = Canvas.Strokes.Clone();
+            foreach (var child in Canvas.Children)
+                blanco.Canvas.Children.Add(GeneralHelper.CloneElement(child));
+
+            return blanco;
+        }
+
         public void SetDebug(bool state = true)
         {
             Canvas.SetDebug(state);
+        }
+
+        public void Dispose()
+        {
+            Content = null;
+            Border = null;
+            Canvas.Strokes.Clear();
+            Canvas.Children.Clear();
         }
     }
 }

@@ -1,11 +1,13 @@
 ﻿using SimpleJournal.Controls;
 using SimpleJournal.Data;
+using SimpleJournal.Documents;
 using SimpleJournal.Helper;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Input;
@@ -21,15 +23,19 @@ namespace SimpleJournal.Dialogs
         private bool ignoreOnClosingEvent = false;
 
         private List<System.IO.FileInfo> BackupFiles { get; set; } = new List<System.IO.FileInfo>();
-        private List<BackupDataItem> BackupItems { get; set; } = new List<BackupDataItem>();
 
-        public bool IsEmptyDialog => GetAllBackupFiles().Count == 0;
+        private List<BackupDataItem> BackupItems { get; set; } = new List<BackupDataItem>();
 
         public RecoverAutoBackupFileDialog()
         {
             InitializeComponent();
 
-            BackupFiles = GetAllBackupFiles();
+            Loaded += RecoverAutoBackupFileDialog_Loaded;
+        }
+
+        private async void RecoverAutoBackupFileDialog_Loaded(object sender, RoutedEventArgs e)
+        {
+            BackupFiles = await GetAllBackupFiles();
 
             if (BackupFiles.Count > 0)
             {
@@ -38,7 +44,7 @@ namespace SimpleJournal.Dialogs
                 // Add all files to listBox
                 foreach (var file in sortedBackupFiles)
                 {
-                    Journal journal = Journal.LoadJournal(file.FullName, true);
+                    Journal journal = await Journal.LoadJournalMetaAsync(file.FullName);
                     var bdi = new BackupDataItem()
                     {
                         FileInfo = file,
@@ -52,7 +58,7 @@ namespace SimpleJournal.Dialogs
                     journal.Pages.Clear();
                     journal = null;
                 }
-                
+
                 FocusManager.SetFocusedElement(FocusManager.GetFocusScope(ButtonRecoverAll), ButtonRecoverAll);
             }
             else
@@ -63,9 +69,11 @@ namespace SimpleJournal.Dialogs
                 FocusManager.SetFocusedElement(FocusManager.GetFocusScope(ButtonDiscardAll), ButtonDiscardAll);
                 ButtonRecoverAll.Visibility = Visibility.Hidden;
             }
+
+            RunLoading.Text = string.Empty;
         }
 
-        private void Bi_OnRecievedAction(bool discard, BackupDataItem item)
+        private async void Bi_OnRecievedAction(bool discard, BackupDataItem item)
         {
             if (discard)
             {
@@ -80,7 +88,7 @@ namespace SimpleJournal.Dialogs
             }
             else
             {
-                RecoverFile(item, CheckBoxOpenBackupsAfterRestore.IsChecked.Value, false);
+                await RecoverFile(item, CheckBoxOpenBackupsAfterRestore.IsChecked.Value, false);
 
                 // If there are no more files, close the dialog
                 if (ListBackupFiles.Items.Count == 0)
@@ -91,20 +99,20 @@ namespace SimpleJournal.Dialogs
             }
         }
 
-        private List<System.IO.FileInfo> GetAllBackupFiles()
+        private async Task<List<System.IO.FileInfo>> GetAllBackupFiles()
         {
             List<System.IO.FileInfo> backupFiles = new List<System.IO.FileInfo>();
 
             if (!System.IO.Directory.Exists(Consts.AutoSaveDirectory))
                 return backupFiles;
 
-            var files = new System.IO.DirectoryInfo(Consts.AutoSaveDirectory).GetFiles().Where(f => f.Name.EndsWith(".journal"));
+            var files = new System.IO.DirectoryInfo(Consts.AutoSaveDirectory).EnumerateFiles().Where(f => f.Name.EndsWith(".journal"));
 
             foreach (var file in files)
             {
                 try
                 {
-                    var journal = Journal.LoadJournal(file.FullName, true);
+                    var journal = await Journal.LoadJournalMetaAsync(file.FullName);
                     if (journal.IsBackup)
                     {
                         int pID = journal.ProcessID;
@@ -181,7 +189,7 @@ namespace SimpleJournal.Dialogs
             return false;
         }
 
-        private string RecoverFile(BackupDataItem backupDataItem, bool openAfterRecover, bool silent, string folderPath = "")
+        private async Task<string> RecoverFile(BackupDataItem backupDataItem, bool openAfterRecover, bool silent, string folderPath = "")
         {
             string pathToRecover = string.Empty;
             if (!string.IsNullOrEmpty(backupDataItem.Path))
@@ -202,11 +210,14 @@ namespace SimpleJournal.Dialogs
             try
             {
                 // Load journal
-                var journal = Journal.LoadJournal(backupDataItem.FileInfo.FullName, true);
+                var journal = await Journal.LoadJournalAsync(backupDataItem.FileInfo.FullName, Consts.BackupDirectory, true);
+                if (journal == null)
+                    return string.Empty;
+
                 journal.IsBackup = false;
 
                 // Save it to another path
-                journal.Save(pathToRecover, true);
+                await journal.SaveAsync(pathToRecover, true);
 
                 journal.Pages.Clear();
                 journal = null;
@@ -298,7 +309,7 @@ namespace SimpleJournal.Dialogs
                 
         }
 
-        private void ButtonRecoverAll_Click(object sender, RoutedEventArgs e)
+        private async void ButtonRecoverAll_Click(object sender, RoutedEventArgs e)
         {
             // Determine if there are backups with no origin - we need to show an FolderBrowserDialog,
             // but not in RecoverFile each time, but rather once (yet)
@@ -320,8 +331,8 @@ namespace SimpleJournal.Dialogs
             foreach (var item in temp)
             {
                 // Pass path to make sure opening the FolderBrowserDialog only once!
-                string pathToRecover = RecoverFile(item, false, true, path);
-                filesToOpen.Add(pathToRecover);                
+                string pathToRecover = await RecoverFile(item, false, true, path);
+                filesToOpen.Add(pathToRecover);
             }
 
             // Open all files AFTER restoring not WHILE restoring

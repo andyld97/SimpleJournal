@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+	<UseWPF>true</UseWPF>
+	<AssemblyVersion>0.5.0.2</AssemblyVersion>
+	<FileVersion>0.5.0.2</FileVersion>
+	<Configurations>Debug;Release;Normal;UWPNew</Configurations>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SimpleJournal.Common\SimpleJournal.Common.csproj" />
+    <ProjectReference Include="..\SimpleJournal.Documents\SimpleJournal.Documents.csproj" />
+  </ItemGroup>
+
+</Project>

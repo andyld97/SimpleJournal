@@ -1,25 +1,15 @@
-﻿namespace SimpleJournal.Actions
+﻿using SimpleJournal.Common;
+
+namespace SimpleJournal.Actions
 {
     /// <summary>
     /// Describes a user action on the canvas: Add/Remove Child/Stroke
     /// </summary>
     public abstract class Action
     {
-        public Type ActionType { get; } = Type.Default;
+        public ActionType ActionType { get; } = ActionType.Default;
 
-        public enum Type
-        {
-            AddedChild,
-            RemovedChild,
-            AddedStrokes,
-            RemovedStrokes,
-            PropertyChanged,
-            StrokeChanged,
-            ShapeChanged,
-            Default
-        }
-
-        public Action(Type type)
+        public Action(ActionType type)
         {
             this.ActionType = type;
         }

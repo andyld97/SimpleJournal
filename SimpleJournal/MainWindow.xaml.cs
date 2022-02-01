@@ -6,11 +6,9 @@ using SimpleJournal.Controls.Templates;
 using SimpleJournal.Data;
 using SimpleJournal.Dialogs;
 using SimpleJournal.Helper;
-using SimpleJournal.Shared;
+using SimpleJournal.Common;
+using SimpleJournal.Common.Controls;
 using SimpleJournal.Templates;
-#if !UWP
-using SJFileAssoc;
-#endif
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -18,19 +16,29 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
+using System.Printing;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Data;
+using System.Windows.Documents;
 using System.Windows.Ink;
 using System.Windows.Input;
+using System.Windows.Markup;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Windows.Threading;
+using System.Windows.Xps;
+using Orientation = SimpleJournal.Common.Orientation;
 using Pen = SimpleJournal.Data.Pen;
+using SimpleJournal.Documents;
+using SimpleJournal.Documents.UI.Extensions;
+using SimpleJournal.Documents.UI.Helper;
+using SimpleJournal.Common.FileAssociations;
+using SimpleJournal.Helper.PDF;
 
 namespace SimpleJournal
 {
@@ -195,7 +203,6 @@ namespace SimpleJournal
                 btnInsertPlot
             };
 
-
             // Handle keydown
             PreviewKeyDown += (s, e) =>
             {
@@ -208,13 +215,10 @@ namespace SimpleJournal
                     // Open
                     btnOpen_Click(null, null);
                 }
-                else if (e.Key == Key.S && (Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control)
-                {
-                    // Save
-                    btnSaveProject_Click(null, null);
-                }
             };
 
+
+            // Handle events
             PageManagementControl.DialogClosed += async delegate (object semder, bool e)
             {
                 if (e)
@@ -231,9 +235,38 @@ namespace SimpleJournal
             ExportControl.TitleChanged += delegate (object sender, string e)
             {
                 if (e == Properties.Resources.strExportPages)
-                    TextExportStatus.Text = String.Empty;
-                else 
+                    TextExportStatus.Text = string.Empty;
+                else
                     TextExportStatus.Text = e;
+            };
+
+            State.Initalize(new[] {
+                Properties.Resources.strStateSaving,
+                Properties.Resources.strStateExportAsPDF,
+                Properties.Resources.strStateExportAsJournal,
+                Properties.Resources.strStatePrinting,
+            });
+
+            State.OnStateChanged += delegate (string message, ProgressState state)
+            {
+                MainStatusBar.Visibility = (state == ProgressState.Start ? Visibility.Visible : Visibility.Collapsed);
+                TextStatusBar.Text = message;
+            };
+
+            Journal.OnErrorOccured += delegate (string message, string scope)
+            {
+                if (scope == "load")
+                    MessageBox.Show($"{Properties.Resources.strFailedToLoadJournal} {message}", Properties.Resources.strFailedToLoadJournalTitle, MessageBoxButton.OK, MessageBoxImage.Error);
+                else if (scope == "save")
+                    MessageBox.Show($"{Properties.Resources.strFailedToSaveJournal} {message}", Properties.Resources.strFailedToSaveJournalTitle, MessageBoxButton.OK, MessageBoxImage.Error);
+            };
+
+            ImageHelper.OnErrorOccured += delegate (string message, string scope)
+            {
+                if (scope == "export")
+                    MessageBox.Show($"{Properties.Resources.strFailedToSaveImage} {message}", Properties.Resources.strFailure, MessageBoxButton.OK, MessageBoxImage.Error);
+                else if (scope == "load")
+                    MessageBox.Show($"{Properties.Resources.strFailedToLoadImage} {message}", Properties.Resources.strFailure, MessageBoxButton.OK, MessageBoxImage.Error);
             };
 
             // Boot with fullscreen
@@ -345,7 +378,7 @@ namespace SimpleJournal
                 await LoadJournal(App.Path);
 
             if (Settings.Instance.UseAutoSave)
-                ShowRecoverAutoBackupFileDialog();
+                await ShowRecoverAutoBackupFileDialog();
 
 #if !UWP
 
@@ -368,7 +401,7 @@ namespace SimpleJournal
 
         private string lastBackupFileName = string.Empty;
 
-        private void ShowRecoverAutoBackupFileDialog()
+        private async Task ShowRecoverAutoBackupFileDialog()
         {
             // Show this dialog only if there a backup files!
             bool showRecoverDialog = false;
@@ -384,14 +417,29 @@ namespace SimpleJournal
                 // Reset this value, because if it's true it will never be false again
                 showRecoverDialog = false;
 
-                System.IO.FileInfo[] autoSaveFiles = new System.IO.DirectoryInfo(Consts.AutoSaveDirectory).GetFiles();
+                IEnumerable<System.IO.FileInfo> autoSaveFiles = new System.IO.DirectoryInfo(Consts.AutoSaveDirectory).EnumerateFiles();
                 var backupFiles = autoSaveFiles.Where(f => f.Name.EndsWith(".journal"));
 
                 foreach (var journalFile in backupFiles)
                 {
                     try
                     {
-                        Journal j = Journal.LoadJournal(journalFile.FullName, true);
+                        Journal j = await Journal.LoadJournalMetaAsync(journalFile.FullName);
+                        if (j == null)
+                        {
+                            // delete invalid files
+                            try
+                            {
+                                System.IO.File.Delete(journalFile.FullName);
+                            }
+                            catch
+                            {
+
+                            }
+
+                            continue;
+                        }
+
                         showRecoverDialog |= j.IsBackup && !ProcessHelper.IsProcessActiveByTaskId(j.ProcessID);
 
                         j.Pages.Clear();
@@ -403,7 +451,7 @@ namespace SimpleJournal
                     }
                     catch
                     {
-                        // ignore
+
                     }
                 }
             }
@@ -434,12 +482,12 @@ namespace SimpleJournal
             autoSaveBackupTimer.Start();
         }
 
-        private void AutoSaveBackupTimer_Tick(object sender, EventArgs e)
+        private async void AutoSaveBackupTimer_Tick(object sender, EventArgs e)
         {
-            CreateBackup();
+            await CreateBackup();
         }
 
-        private void CreateBackup()
+        private async Task CreateBackup()
         {
             if (!Settings.Instance.UseAutoSave)
             {
@@ -468,7 +516,7 @@ namespace SimpleJournal
             backupName += $"{DateTime.Now.ToString(Properties.Resources.strAutoSaveDateTimeFileFormat)}.journal";
 
             string path = System.IO.Path.Combine(Consts.AutoSaveDirectory, backupName);
-            bool result = SaveJournal(path, true);
+            bool result = await SaveJournal(path, true);
             if (!result)
             {
                 try
@@ -503,7 +551,7 @@ namespace SimpleJournal
         public void DeleteAutoSaveBackup(bool onClosing = false)
         {
             // Delete the backup with this ProcessID
-            // Get the backup with this task id - it's obiously the last one - this instace -  has created!
+            // Get the backup with this task id - it's obviously the last one, this instace has created!
             if (!string.IsNullOrEmpty(lastBackupFileName) && System.IO.File.Exists(lastBackupFileName))
             {
                 try
@@ -525,7 +573,7 @@ namespace SimpleJournal
                 try
                 {
                     // Only delete empty directory (0 files and false (no recursive))
-                    if (new System.IO.DirectoryInfo(Consts.AutoSaveDirectory).GetFiles().Count() == 0)
+                    if (new System.IO.DirectoryInfo(Consts.AutoSaveDirectory).GetFiles().Length == 0)
                         System.IO.Directory.Delete(Consts.AutoSaveDirectory, false);
                 }
                 catch
@@ -538,27 +586,39 @@ namespace SimpleJournal
         #endregion
 
         #region Error Handling
+
+        // ToDO: *** https://github.com/Tyrrrz/DotnetRuntimeBootstrapper/issues/23
+        // Currently only Dispatcher_UnhandledException gets called due to DotnetRuntimeBootstrapper
         private void Dispatcher_UnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
         {
-            //MessageBox.Show($"{Properties.Resources.strUnexceptedFailure}{Environment.NewLine}{Environment.NewLine}{e.Exception.Message}", Properties.Resources.strUnexceptedFailureTitle, MessageBoxButton.OK, MessageBoxImage.Error);
+            // MessageBox.Show(e.Exception.ToString());
+            // MessageBox.Show($"{Properties.Resources.strUnexceptedFailure}{Environment.NewLine}{Environment.NewLine}{e.Exception.Message}", Properties.Resources.strUnexceptedFailureTitle, MessageBoxButton.OK, MessageBoxImage.Error);
         }
 
-        private void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
-        {
+        private async void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
+        {            
             string message = string.Empty;
 
             if (e.ExceptionObject != null && e.ExceptionObject is Exception ex)
             {
+                // Shorten the output length of the MessageBox in production code!
+#if DEBUG
                 message = ex.ToString();
 
                 if (ex.InnerException != null)
                     message += Environment.NewLine + Environment.NewLine + ex.InnerException.ToString();
+#else
+                message = ex.Message;
+
+                if (ex.InnerException != null)
+                    message += Environment.NewLine + Environment.NewLine + ex.InnerException.Message;
+#endif
             }
+
             MessageBox.Show($"{Properties.Resources.strUnexceptedFailure}{Environment.NewLine}{Environment.NewLine}{message}{Environment.NewLine}{Environment.NewLine}{Properties.Resources.strUnexceptedFailureLine1}", Properties.Resources.strUnexceptedFailureTitle, MessageBoxButton.OK, MessageBoxImage.Error);
 
-
-            // Try at least to create a backup - if SJ crashes - the user can restore the backup and everything is fine
-            CreateBackup();
+            // Try at least to create a backup - if SJ crashes - the user can restore the backup and everything should be fine though.
+            await CreateBackup();
         }
         #endregion
 
@@ -695,7 +755,7 @@ namespace SimpleJournal
                 Viewbox previewViewBox = new Viewbox
                 {
                     Stretch = Stretch.Uniform,
-                    StretchDirection = StretchDirection.Both                 
+                    StretchDirection = StretchDirection.Both
                 };
 
                 if (!isTextBlock)
@@ -704,7 +764,7 @@ namespace SimpleJournal
                 {
                     var img = new Image
                     {
-                        Source = GeneralHelper.LoadImage(new Uri($"pack://application:,,,/SimpleJournal;component/resources/text.png")),
+                        Source = ImageHelper.LoadImage(new Uri($"pack://application:,,,/SimpleJournal;component/resources/text.png")),
                         Width = Consts.SidebarListBoxItemViewboxSize,
                         Height = Consts.SidebarListBoxItemViewboxSize
                     };
@@ -721,7 +781,7 @@ namespace SimpleJournal
                 previewViewBox.Width = Consts.SidebarListBoxItemViewboxSize;
                 previewViewBox.Height = Consts.SidebarListBoxItemViewboxSize;
 
-                StackPanel panel = new StackPanel { Orientation = Orientation.Horizontal };
+                StackPanel panel = new StackPanel { Orientation = System.Windows.Controls.Orientation.Horizontal };
                 panel.Background = new SolidColorBrush(Colors.Transparent);
                 panel.Children.Add(previewViewBox);
 
@@ -1010,13 +1070,14 @@ namespace SimpleJournal
             if (reset)
             {
                 // Default values
-                currentTextMarkerAttributes.Width = new Settings().TextMarkerSize.Height; // Consts.TEXT_MARKER_WIDTH;
-                currentTextMarkerAttributes.Height = new Settings().TextMarkerSize.Width; // Consts.TEXT_MARKER_HEIGHT;
+                var defaultSettings = new Settings();
+                currentTextMarkerAttributes.Width = defaultSettings.TextMarkerSize.Height; // Consts.TEXT_MARKER_WIDTH;
+                currentTextMarkerAttributes.Height = defaultSettings.TextMarkerSize.Width; // Consts.TEXT_MARKER_HEIGHT;
                 currentTextMarkerAttributes.StylusTip = StylusTip.Rectangle;
-                currentTextMarkerAttributes.Color = new Settings().TextMarkerColor.ToColor(); //Consts.TEXT_MARKER_COLOR;
+                currentTextMarkerAttributes.Color = defaultSettings.TextMarkerColor.ToColor(); //Consts.TEXT_MARKER_COLOR;
 
                 Settings.Instance.TextMarkerSize = Consts.TextMarkerSizes[0];
-                Settings.Instance.TextMarkerColor = new Data.Color(Consts.TextMarkerColor.A, Consts.TextMarkerColor.R, Consts.TextMarkerColor.G, Consts.TextMarkerColor.B);
+                Settings.Instance.TextMarkerColor = new Common.Data.Color(Consts.TextMarkerColor.A, Consts.TextMarkerColor.R, Consts.TextMarkerColor.G, Consts.TextMarkerColor.B);
                 Settings.Instance.Save();
             }
             else
@@ -1030,7 +1091,7 @@ namespace SimpleJournal
             markerPath.Fill = new SolidColorBrush(currentTextMarkerAttributes.Color);
             markerPath.Stroke = Brushes.Black;
             markerPath.StrokeThickness = Consts.MarkerPathStrokeThickness;
-            textMarkerTemplate.LoadPen(new Pen(new Data.Color(currentTextMarkerAttributes.Color), Settings.Instance.TextMarkerSize.Width, Settings.Instance.TextMarkerSize.Height));
+            textMarkerTemplate.LoadPen(new Pen(currentTextMarkerAttributes.Color.ToColor(), Settings.Instance.TextMarkerSize.Width, Settings.Instance.TextMarkerSize.Height));
 
             if (currentTool == Tools.TextMarker)
             {
@@ -1116,7 +1177,7 @@ namespace SimpleJournal
             try
             {
 
-                ButtonInsertNewPageIcon.Source = GeneralHelper.LoadImage(new Uri($"pack://application:,,,/SimpleJournal;component/resources/{resourceImageName}"));
+                ButtonInsertNewPageIcon.Source = ImageHelper.LoadImage(new Uri($"pack://application:,,,/SimpleJournal;component/resources/{resourceImageName}"));
             }
             catch
             {
@@ -1234,7 +1295,7 @@ namespace SimpleJournal
 
         private int CalculateCurrentPageIndexOnScrollPosition()
         {
-            // Do not divide with zero!
+            // Do not divide by zero!
             if (mainScrollView.ScrollableHeight == 0)
                 return 0;
 
@@ -1245,6 +1306,25 @@ namespace SimpleJournal
             return (int)result;
         }
 
+        private void ScrollToPage(int pTarget)
+        {
+            double cumulatedHeight = 0;
+
+            // Cumulate size height foreach page (because each page can have a different height due to landscape/portrait)
+            for (int i = 0; i < pTarget; i++)
+                cumulatedHeight += CurrentJournalPages[i].Canvas.ActualHeight * currentScaleFactor;
+
+            // Add space
+            cumulatedHeight += ((pTarget - 1) * Consts.SpaceBetweenPages * currentScaleFactor);
+
+            double resultOffset = (pTarget == 0 ? 0 : cumulatedHeight);
+
+            if (pTarget != 0)
+                mainScrollView.ScrollToVerticalOffset(resultOffset + (Consts.SpaceBetweenPages * currentScaleFactor));
+            else
+                mainScrollView.ScrollToVerticalOffset(0.0);
+        }
+
         private void RefreshVerticalScrollbarSize()
         {
             ScrollViewer scrollViewer = mainScrollView;
@@ -1253,7 +1333,7 @@ namespace SimpleJournal
             scrollBar.Width = (Settings.Instance.EnlargeScrollbar ? Consts.ScrollBarExtendedWidth : Consts.ScrollBarDefaultWidth);
         }
 
-        private UserControl GeneratePage(PaperType? paperType = null)
+        private UserControl GeneratePage(PaperType? paperType = null, byte[] background = null, Orientation orientation = Orientation.Portrait)
         {
             UserControl pageContent = null;
             PaperType paperPattern = Settings.Instance.PaperType;
@@ -1267,6 +1347,7 @@ namespace SimpleJournal
                 case PaperType.Chequeued: pageContent = new Chequered(); break;
                 case PaperType.Ruled: pageContent = new Ruled(); break;
                 case PaperType.Dotted: pageContent = new Dotted(); break;
+                case PaperType.Custom: pageContent = new Custom(background, orientation); break;
             }
 
             IPaper page = pageContent as IPaper;
@@ -1833,9 +1914,9 @@ namespace SimpleJournal
                 CurrentDrawingAttributes.Color = c.Value;
 
                 if (SelectedPen != -1)
-                    currentPens[SelectedPen].FontColor = new Data.Color(c.Value.A, c.Value.R, c.Value.G, c.Value.B);
+                    currentPens[SelectedPen].FontColor = new Common.Data.Color(c.Value.A, c.Value.R, c.Value.G, c.Value.B);
                 else
-                    currentPens[index].FontColor = new Data.Color(c.Value.A, c.Value.R, c.Value.G, c.Value.B);
+                    currentPens[index].FontColor = new Common.Data.Color(c.Value.A, c.Value.R, c.Value.G, c.Value.B);
 
                 rulerDropDownTemplate.SetColor(c.Value);
             }
@@ -1974,7 +2055,7 @@ namespace SimpleJournal
 
             if (c != null)
             {
-                Settings.Instance.TextMarkerColor = new Data.Color(c.Value);
+                Settings.Instance.TextMarkerColor = c.Value.ToColor();
                 Settings.Instance.Save();
                 currentTextMarkerAttributes.Color = c.Value;
             }
@@ -2052,12 +2133,12 @@ namespace SimpleJournal
 
         private void DisableTouchScreenCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            //TouchHelper.SetTouchState(false);
+            // TouchHelper.SetTouchState(false);
         }
 
-        private void SaveCommand_Executed(object sender, ExecutedRoutedEventArgs e)
+        private async void SaveCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            SaveProject();
+            await SaveProject(false);
         }
 
         private void SaveCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
@@ -2091,9 +2172,9 @@ namespace SimpleJournal
                 e.CanExecute = DrawingCanvas.LastModifiedCanvas.CanRedo();
         }
 
-        private void PrintCommand_Executed(object sender, ExecutedRoutedEventArgs e)
+        private async void PrintCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            Print();
+            await Print();
         }
 
         private void PrintCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
@@ -2158,6 +2239,23 @@ namespace SimpleJournal
 
         #endregion
 
+        private void Backstage_IsOpenChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if (MenuBackstage.IsOpen)
+                MenuBackstageTabControl.SelectedIndex = 0;
+        }
+
+        private void BackstageTabItem_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            ApplicationCommands.New.Execute(null, null);
+            MenuBackstage.IsOpen = false;
+        }
+
+        private void ImageCloseStatusBar_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            MainStatusBar.Visibility = Visibility.Collapsed;
+        }
+
         private async void ListRecentlyOpenedDocuments_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (ListRecentlyOpenedDocuments.SelectedItem is Document d)
@@ -2189,12 +2287,12 @@ namespace SimpleJournal
                 {
                     MenuBackstage.IsOpen = false;
                     await Task.Delay(500).ContinueWith(delegate (Task t)
-                     {
-                         Dispatcher.Invoke(new System.Action(async () =>
+                    {
+                        Dispatcher.Invoke(new System.Action(async () =>
                         {
                             await LoadJournal(d.Path);
                         }));
-                     });
+                    });
                 }
 
                 RecentlyOpenedDocumentsBackstage.SelectedItem = null;
@@ -2211,33 +2309,95 @@ namespace SimpleJournal
             }
         }
 
-        private void ScrollToPage(int pTarget)
+        private async Task<bool> SaveProject(bool forceNewPath)
         {
-            double resultOffset = (pTarget == 0 ? 0 : pTarget * (new Chequered().Height * currentScaleFactor) + ((pTarget - 1) * Consts.SpaceBetweenPages * currentScaleFactor));
-            if (pTarget != 0)
-                mainScrollView.ScrollToVerticalOffset(resultOffset + (Consts.SpaceBetweenPages * currentScaleFactor));
-            else
-                mainScrollView.ScrollToVerticalOffset(0.0);
-        }
+            bool resultSaving = false;
 
-        private void SaveProject()
-        {
-            if (string.IsNullOrEmpty(currentJournalPath))
+            if (string.IsNullOrEmpty(currentJournalPath) || forceNewPath)
             {
                 SaveFileDialog dialog = new SaveFileDialog() { Filter = $"{Properties.Resources.strJournalFile}|*.journal", Title = Properties.Resources.strSave };
                 var result = dialog.ShowDialog();
                 if (result.HasValue && result.Value)
                 {
-                    SaveJournal(dialog.FileName);
+                    resultSaving =  await SaveJournal(dialog.FileName);
                     this.UpdateTitle(System.IO.Path.GetFileNameWithoutExtension(dialog.FileName));
                 }
             }
             else
-                SaveJournal(currentJournalPath);
+                resultSaving = await SaveJournal(currentJournalPath);
+
+            return resultSaving;
         }
 
-        private void Print()
+        private async void btnSave_Click(object sender, RoutedEventArgs e)
         {
+            await SaveProject(true);
+        }
+
+        private async void MenuButtonBackstageExportPdf_Click(object sender, RoutedEventArgs e)
+        {
+            SaveFileDialog dialog = new SaveFileDialog() { Filter = Properties.Resources.strPDFFilter, Title = Properties.Resources.strPDFDialogTitle };
+            var dialogResult = dialog.ShowDialog();
+
+            if (dialogResult.HasValue && dialogResult.Value)
+            {
+                List<byte[]> data = new List<byte[]>();
+
+                foreach (var page in CurrentJournalPages)
+                {
+                    // BmpBitmapEncoder encoder = new BmpBitmapEncoder();
+                    PngBitmapEncoder encoder = new PngBitmapEncoder();
+
+                    RenderTargetBitmap rtb = GeneralHelper.RenderToBitmap(page as UserControl, 1.0, new SolidColorBrush(Colors.White));
+                    encoder.Frames.Add(BitmapFrame.Create(rtb));
+
+                    using (System.IO.MemoryStream ms = new System.IO.MemoryStream())
+                    {
+                        encoder.Save(ms);
+                        data.Add(ms.ToArray());
+                    }
+
+                    rtb.Clear();
+                    rtb = null;
+                    encoder.Frames.Clear();
+                    encoder = null;
+                }
+
+                var result = await PdfHelper.ExportJournalAsPDF(dialog.FileName, data);
+
+                if (!result.Item1)
+                    MessageBox.Show($"{Properties.Resources.strFailedToExportJournalAsPDF}\n\n{Properties.Resources.strPDFConversationDialog_GhostscriptMessage}: {result.Item2}", Properties.Resources.strError, MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private async Task Print()
+        {
+            /*
+             // Prevent printing through printQueue instead create a pdf file directly                    
+            SaveFileDialog dialog = new SaveFileDialog() { Filter = Properties.Resources.strPDFFilter, Title = Properties.Resources.strPDFDialogTitle };
+            var dialogResult = dialog.ShowDialog();
+
+            if (dialogResult.HasValue && dialogResult.Value)
+            {
+                List<IPaper> pages = new List<IPaper>();
+                for (int i = from; i <= to; i++)
+                   pages.Add(CurrentJournalPages[i]);
+                await PdfHelper.ExportJournalAsPDF(dialog.FileName, pages);
+            }
+
+            // Old print method but with orientation
+            /*for (int i = from; i <= to; i++)
+            {
+                var page = CurrentJournalPages[i].ClonePage(true);
+                if (page is Custom c && c.Orientation == Orientation.Landscape)
+                    pd.PrintTicket.PageOrientation = PageOrientation.Landscape;
+                else
+                    pd.PrintTicket.PageOrientation = PageOrientation.Portrait;
+
+                pd.PrintVisual((UserControl)page, $"Printing page {i}/{to}");
+            }
+            */
+
             PrintDialog pd = new PrintDialog() { MinPage = 1, MaxPage = (uint)CurrentJournalPages.Count, UserPageRangeEnabled = true, SelectedPagesEnabled = false, CurrentPageEnabled = true };
             int from = 0; int to = CurrentJournalPages.Count - 1;
             var result = pd.ShowDialog();
@@ -2265,9 +2425,93 @@ namespace SimpleJournal
 
             if (result.HasValue && result.Value)
             {
-                int pageCount = 1;
-                for (int i = from; i <= to; i++)
-                    pd.PrintVisual(CurrentJournalPages[i].Canvas, $"{Properties.Resources.strPrinting} {pageCount++}");
+                // Determine if we need to print a pdf or not
+                bool printToFilePDF = (pd.PrintQueue.Name.ToLower().Contains("pdf"));
+
+                if (printToFilePDF && pd.PrintQueue.Name.Contains("Microsoft"))
+                {
+                    if (MessageBox.Show(Properties.Resources.strMicrosoftPrintToPDFWarning, Properties.Resources.strSure, MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No)
+                        return;
+                }
+
+                // https://stackoverflow.com/a/10139076/6237448
+                // https://stackoverflow.com/questions/8230090/printdialog-with-landscape-and-portrait-pages
+                // For later: Find out a way to notify the user when printing is done
+                State.SetAction(StateType.Printing, ProgressState.Start);
+                await Task.Delay(1);
+
+                try
+                {
+                    Blanco bl = new Blanco();
+                    var pageSize = new Size(bl.Width, bl.Height);
+
+                    List<IPaper> pages = new List<IPaper>();
+
+                    for (int i = from; i <= to; i++)
+                        pages.Add(CurrentJournalPages[i]);
+
+                    var document = new FixedDocument();
+                    XpsDocumentWriter xpsWriter = PrintQueue.CreateXpsDocumentWriter(pd.PrintQueue);
+                    xpsWriter.WritingCompleted += delegate (object sender, System.Windows.Documents.Serialization.WritingCompletedEventArgs e)
+                    {
+                        State.SetAction(StateType.Printing, ProgressState.Completed);
+                    };
+
+                    foreach (var item in pages)
+                    {
+                        var ui = item.Canvas;
+
+                        if (item is Custom c && c.Orientation == Orientation.Landscape)
+                            pageSize = new Size(bl.Height, bl.Width);
+
+                        // Create FixedPage
+                        var fixedPage = new FixedPage
+                        {
+                            Width = pageSize.Width,
+                            Height = pageSize.Height
+                        };
+
+                        // Add visual, measure/arrange page.
+                        fixedPage.Children.Add((UIElement)item.ClonePage(true));
+                        fixedPage.Measure(pageSize);
+                        fixedPage.Arrange(new Rect(new Point(), pageSize));
+                        fixedPage.UpdateLayout();
+
+                        // Add page to document
+                        var pageContent = new PageContent();
+                        ((IAddChild)pageContent).AddChild(fixedPage);
+                        document.Pages.Add(pageContent);
+
+                        await Task.Delay(1);
+                    }
+
+                    // Set the job description
+                    pd.PrintQueue.CurrentJobSettings.Description = currentJournalName;
+
+                    xpsWriter.WritingPrintTicketRequired += (s, e) =>
+                    {
+                        Orientation orientation = Orientation.Portrait;
+                        var page = pages[e.Sequence - 1];
+
+                        if (page is Custom c)
+                            orientation = c.Orientation;
+
+                        e.CurrentPrintTicket = new System.Printing.PrintTicket();
+                        if (orientation == Orientation.Landscape)
+                            e.CurrentPrintTicket.PageOrientation = PageOrientation.Landscape;
+                        else
+                            e.CurrentPrintTicket.PageOrientation = PageOrientation.Portrait;
+                    };
+
+                    // Use xpsWriter directly instead of pd.PrintDocument - this way, we can print multiple orientations in one printing ticket!!!
+                    // pd.PrintDocument(document.DocumentPaginator, "My Document");               
+                    xpsWriter.WriteAsync(document);
+                }
+                catch (Exception ex)
+                {
+                    State.SetAction(StateType.Printing, ProgressState.Completed);
+                    MessageBox.Show($"{Properties.Resources.strPrintingError}: {ex.Message}", Properties.Resources.strError, MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
         }
 
@@ -2284,22 +2528,6 @@ namespace SimpleJournal
         {
             if (DrawingCanvas.LastModifiedCanvas.GetSelectedStrokes() != null && DrawingCanvas.LastModifiedCanvas.GetSelectedStrokes().Count > 0 && !DrawingCanvas.LastModifiedCanvas.ConvertSelectedStrokesToShape())
                 MessageBox.Show(this, Properties.Resources.strNoShapeRecognized, Properties.Resources.strNoShapeRecognizedTitle, MessageBoxButton.OK, MessageBoxImage.Information);
-        }
-
-        private void btnSaveProject_Click(object sender, RoutedEventArgs e)
-        {
-            SaveProject();
-        }
-
-        private void btnSaveAs_Click(object sender, RoutedEventArgs e)
-        {
-            SaveFileDialog dialog = new SaveFileDialog() { Filter = $"{Properties.Resources.strJournalFile}|*.journal", Title = Properties.Resources.strSaveAs };
-            var result = dialog.ShowDialog();
-            if (result.HasValue && result.Value)
-            {
-                SaveJournal(dialog.FileName);
-                this.UpdateTitle(System.IO.Path.GetFileNameWithoutExtension(dialog.FileName));
-            }
         }
 
         private void btnClearPage_Click(object sender, RoutedEventArgs e)
@@ -2352,13 +2580,45 @@ namespace SimpleJournal
         {
             if (AskForOpeningAfterModifying())
             {
-                OpenFileDialog ofd = new OpenFileDialog() { Filter = $"{Properties.Resources.strJournalFile}|*.journal|{Properties.Resources.strImages}|*.png;*.tif;*.bmp;*.jpg;*.jpeg" }; // .journal or images
+                OpenFileDialog ofd = new OpenFileDialog() { Filter = $"{Properties.Resources.strJournalFile}|*.journal;*.pdf" }; // .journal or pdf
                 var result = ofd.ShowDialog();
 
                 if (result.HasValue && result.Value)
                 {
                     pnlSidebar.Visibility = Visibility.Hidden;
+
+                    if (System.IO.Path.GetExtension(ofd.FileName).ToLower().Contains("pdf"))
+                    {
+                        PDFConversationDialog pdfConversationDialog = new PDFConversationDialog(ofd.FileName);
+                        bool? res = pdfConversationDialog.ShowDialog();
+
+                        if (res.HasValue && res.Value)
+                            await LoadJournal(pdfConversationDialog.DestinationFileName);
+
+                        return;
+                    }
+
                     await LoadJournal(ofd.FileName);
+                }
+            }
+        }
+
+        private async void MenuButtonImportPDF_Click(object sender, RoutedEventArgs e)
+        {
+            if (AskForOpeningAfterModifying())
+            {
+                OpenFileDialog ofd = new OpenFileDialog() { Filter = $"{Properties.Resources.strPDFFile}|*.pdf" };
+                var result = ofd.ShowDialog();
+
+                if (result.HasValue && result.Value)
+                {
+                    pnlSidebar.Visibility = Visibility.Hidden;
+
+                    PDFConversationDialog pdfConversationDialog = new PDFConversationDialog(ofd.FileName);
+                    bool? res = pdfConversationDialog.ShowDialog();
+
+                    if (res.HasValue && res.Value)
+                        await LoadJournal(pdfConversationDialog.DestinationFileName);
                 }
             }
         }
@@ -2507,7 +2767,7 @@ namespace SimpleJournal
         #region Exit
         private bool closedButtonWasPressed = false;
 
-        private void btnExit_Click(object sender, RoutedEventArgs e)
+        private async void btnExit_Click(object sender, RoutedEventArgs e)
         {
             if (DrawingCanvas.Change)
             {
@@ -2522,7 +2782,7 @@ namespace SimpleJournal
                 }
                 else if (result == MessageBoxResult.Yes)
                 {
-                    this.btnSaveProject_Click(sender, e);
+                    await SaveProject(false);
                     closedButtonWasPressed = true;
                     Close();
                 }
@@ -2534,17 +2794,18 @@ namespace SimpleJournal
             }
         }
 
-        protected override void OnClosing(CancelEventArgs e)
+        protected override async void OnClosing(CancelEventArgs e)
         {
             base.OnClosing(e);
 
-#pragma warning disable CS0219 // Variable ist zugewiesen, der Wert wird jedoch niemals verwendet
+#if !UWP
             bool close = false;
-#pragma warning restore CS0219 // Variable ist zugewiesen, der Wert wird jedoch niemals verwendet
+#endif
+
             if (!closedButtonWasPressed && DrawingCanvas.Change)
             {
                 // Create a backup before closing - in case of windows will kill the app if the user will not awnser the dialog
-                CreateBackup();
+                await CreateBackup();
 
                 // Ask 
                 var result = MessageBox.Show(this, Properties.Resources.strSaveChanges, Properties.Resources.strSaveChangesTitle, MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
@@ -2555,20 +2816,27 @@ namespace SimpleJournal
                 {
                     DeleteAutoSaveBackup(true);
                     e.Cancel = false;
+#if !UWP
                     close = true;
+#endif
                 }
                 else if (result == MessageBoxResult.Yes)
                 {
-                    this.btnSaveProject_Click(null, null);
+                    await SaveProject(false);
                     DeleteAutoSaveBackup(true);
                     e.Cancel = false;
+
+#if !UWP
                     close = true;
+#endif
                 }
             }
             else
             {
                 DeleteAutoSaveBackup(true);
+#if !UWP
                 close = true;
+#endif
             }
 
 #if !UWP
@@ -2587,9 +2855,9 @@ namespace SimpleJournal
             AboutDialog aboutDialog = new AboutDialog();
             aboutDialog.ShowDialog();
         }
-        #endregion
+#endregion
 
-        #endregion
+#endregion
 
         #endregion
 
@@ -2622,7 +2890,7 @@ namespace SimpleJournal
                 btnZoom200.IsChecked = true;
 
             pages.LayoutTransform = lt;
-            // This is for prevent jumping while switching zoom (see User Story #4)
+            // This is for prevent jumping while switching zoom
             mainScrollView.ScrollToVerticalOffset((mainScrollView.VerticalOffset / currentScaleFactor) * scale);
             currentScaleFactor = scale;
 
@@ -2655,7 +2923,7 @@ namespace SimpleJournal
         {
             ZoomByScale(1.8);
         }
-        #endregion
+#endregion
 
         #region Scroll Handling
         private Point p1 = new Point();
@@ -2742,10 +3010,10 @@ namespace SimpleJournal
             mainScrollView.BeginStoryboard(sbScrollViewerAnimation);
         }
 
-        #endregion
+#endregion
 
         #region Internal Save and Load
-        private bool SaveJournal(string path, bool saveAsBackup = false)
+        private async Task<bool> SaveJournal(string path, bool saveAsBackup = false)
         {
             try
             {
@@ -2753,7 +3021,7 @@ namespace SimpleJournal
 
                 if (saveAsBackup)
                 {
-                    // Claim this journal as a backup - the document needs also a process ID to determine if this is an active backup (see 112 in Azure for details)
+                    // Claim this journal as a backup - the document needs also a process ID to determine if this is an active backup
                     journal.IsBackup = true;
                     journal.ProcessID = ProcessHelper.CurrentProcID;
 
@@ -2773,15 +3041,20 @@ namespace SimpleJournal
                     using (System.IO.MemoryStream ms = new System.IO.MemoryStream())
                     {
                         currentCanvas.Strokes.Save(ms);
-                        JournalPage jp = new JournalPage { PaperPattern = paper.Type };
-                        jp.SetData(ms.ToArray());
+
+                        JournalPage jp = new JournalPage();
+                        if (paper is Custom custom)
+                            jp = new PdfJournalPage() { PageBackground = custom.PageBackground, Orientation = custom.Orientation };
+
+                        jp.PaperPattern = paper.Type;
+                        jp.Data = ms.ToArray();
 
                         // Check for additional ressources
                         if (currentCanvas.Children.Count > 0)
                         {
                             foreach (UIElement element in currentCanvas.Children)
                             {
-                                var result = JournalResource.ConvertFromUIElement(element);
+                                var result = element.ConvertFromUIElement();
                                 if (result != null)
                                     jp.JournalResources.Add(result);
                             }
@@ -2790,7 +3063,7 @@ namespace SimpleJournal
                     }
                 }
 
-                journal.Save(path);
+                await journal.SaveAsync(path, quiet: saveAsBackup, hideStatus: saveAsBackup);
 
                 if (!saveAsBackup)
                 {
@@ -2812,40 +3085,29 @@ namespace SimpleJournal
             }
         }
 
-        private void ClearJournal()
-        {
-            List<IPaper> toClear = new List<IPaper>();
-            foreach (IPaper page in CurrentJournalPages)
-            {
-                page.Canvas.Strokes = new StrokeCollection();
-                page.Canvas.Children.ClearAll(page.Canvas);
-                toClear.Add(page);
-            }
-            foreach (IPaper page in toClear)
-                CurrentJournalPages.Remove(page);
-            pages.Children.Clear();
-            CurrentJournalPages.Clear();
-            GC.Collect();
-            GC.WaitForPendingFinalizers();
-        }
-
         private async Task LoadJournal(string fileName)
         {
             if (fileName.EndsWith(".journal"))
             {
-                var dialog = new WaitingDialog(System.IO.Path.GetFileNameWithoutExtension(fileName), 1) { Owner = this };
+                var dialog = new WaitingDialog(System.IO.Path.GetFileNameWithoutExtension(fileName)) { Owner = this };
                 try
                 {
-                    var currentJournal = Journal.LoadJournal(fileName);
+                    if (!System.IO.File.Exists(fileName))
+                        throw new Exception(string.Format(Properties.Resources.strFileNotFound, fileName));
+
+                    dialog.Show();
+                    Journal currentJournal = await Journal.LoadJournalAsync(fileName, Consts.BackupDirectory);
 
                     if (currentJournal == null)
                     {
+                        dialog.Close();
                         MessageBox.Show(Properties.Resources.strFailedToLoadJournalFromNetwork, Properties.Resources.strFailedToLoadJournalTitle, MessageBoxButton.OK, MessageBoxImage.Error);
                         return;
                     }
 
                     if (currentJournal.IsBackup)
                     {
+                        dialog.Close();
                         MessageBox.Show(Properties.Resources.strBackupFileCannotBeOpened, Properties.Resources.strBackupFileCannotBeOpenedTitle, MessageBoxButton.OK, MessageBoxImage.Error);
                         return;
                     }
@@ -2861,10 +3123,12 @@ namespace SimpleJournal
 
                                 // Try to focus the instance where it is
                                 ProcessHelper.BringProcessToFront(currentJournal.ProcessID);
+                                dialog.Close();
                                 return;
                             }
                             else
                             {
+                                dialog.Close();
                                 MessageBox.Show(Properties.Resources.strJournalIsAlreadyOpenedInTheSameWindow, Properties.Resources.strJournalIsAlreadyOpenedTitle, MessageBoxButton.OK, MessageBoxImage.Error);
                                 return;
                             }
@@ -2875,16 +3139,12 @@ namespace SimpleJournal
                     if (!string.IsNullOrEmpty(currentJournalPath))
                     {
                         // If a path is set remove the process id
-                        try
+                        var journal = await Journal.LoadJournalMetaAsync(currentJournalPath);
+                        if (journal != null)
                         {
-                            var journal = Journal.LoadJournal(currentJournalPath);
                             journal.ProcessID = -1;
-                            journal.Save(currentJournalPath);
+                            await journal.UpdateJournalMetaAsync(currentJournalPath, true);
                             currentJournalPath = string.Empty;
-                        }
-                        catch
-                        {
-                            // ignroe
                         }
                     }
 
@@ -2892,36 +3152,52 @@ namespace SimpleJournal
 
                     IsEnabled = false;
                     isInitalized = false;
-                    dialog.Show();
 
                     ClearJournal();
                     RecentlyOpenedDocuments.AddDocument(fileName);
 
-                    int countPages = 0;
+                    int pageCount = 0;
                     double progress = 0;
 
                     foreach (JournalPage jp in currentJournal.Pages)
                     {
                         DrawingCanvas canvas = null;
-                        canvas = AddPage(GeneratePage(jp.PaperPattern));
+                        byte[] background = null;
+                        Orientation orientation = Orientation.Portrait;
 
-                        if (countPages == 0)
+                        if (jp is PdfJournalPage pdf)
+                        {
+                            background = pdf.PageBackground;
+                            orientation = pdf.Orientation;
+                        }
+
+                        canvas = AddPage(GeneratePage(jp.PaperPattern, background, orientation));
+
+                        if (pageCount == 0)
                         {
                             // Set last modified canvas to this, because the old is non existing any more
                             DrawingCanvas.LastModifiedCanvas = canvas;
                         }
 
-                        progress = (countPages++ + 1) / (double)currentJournal.Pages.Count;
-                        dialog.SetProgress(progress, countPages, currentJournal.Pages.Count());
+                        progress = (pageCount++ + 1) / (double)currentJournal.Pages.Count;
+                        dialog.SetProgress(progress, pageCount, currentJournal.Pages.Count);
+
+                        // Delay 1ms to ensure the dialog will be displayed correctly
+                        await Task.Delay(1);
 
                         StrokeCollection strokes = null;
                         await Task.Run(() =>
                         {
                             using (System.IO.MemoryStream ms = new System.IO.MemoryStream())
                             {
-                                ms.Write(jp.Data, 0, jp.Data.Length);
-                                ms.Position = 0;
-                                strokes = new StrokeCollection(ms);
+                                if (jp.Data != null)
+                                {
+                                    ms.Write(jp.Data, 0, jp.Data.Length);
+                                    ms.Position = 0;
+                                    strokes = new StrokeCollection(ms);
+                                }
+                                else
+                                    strokes = new StrokeCollection();
                             }
                         }).ContinueWith(new Action<Task>((Task t) =>
                         {
@@ -2932,7 +3208,7 @@ namespace SimpleJournal
                                 if (jp.HasAdditionalResources)
                                 {
                                     foreach (JournalResource jr in jp.JournalResources)
-                                        JournalResource.AddJournalResourceToCanvas(jr, canvas);
+                                        GeneralHelper.AddJournalResourceToCanvas(jr, canvas);
                                 }
                             }));
                         }));
@@ -2949,7 +3225,8 @@ namespace SimpleJournal
 
                     // Set process id to document and save it to make sure other instances cannot load this journal
                     currentJournal.ProcessID = ProcessHelper.CurrentProcID;
-                    currentJournal.Save(fileName);
+
+                    await currentJournal.UpdateJournalMetaAsync(fileName, true);
                 }
                 catch (Exception ex)
                 {
@@ -2968,7 +3245,57 @@ namespace SimpleJournal
             }
             DrawingCanvas.Change = false;
         }
-        #endregion
+
+        private void ClearJournalOld()
+        {
+            List<IPaper> toClear = new List<IPaper>();
+            foreach (IPaper page in CurrentJournalPages)
+            {
+                page.Canvas.Strokes = new StrokeCollection();
+                page.Canvas.Children.ClearAll(page.Canvas);
+                toClear.Add(page);
+            }
+            foreach (IPaper page in toClear)
+                CurrentJournalPages.Remove(page);
+            pages.Children.Clear();
+            CurrentJournalPages.Clear();
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
+        }
+
+        private void ClearJournal()
+        {
+            List<UIElement> toRemove = new List<UIElement>();
+
+            foreach (var item in pages.Children)
+            {
+                if (item is IPaper page)
+                {
+                    page.Dispose();
+                    toRemove.Add(item as UIElement);
+                }
+                else if (item is PageSplitter ps)
+                    toRemove.Add(ps);
+            }
+
+            foreach (var item in toRemove)
+                pages.Children.Remove(item);
+
+            pages.Children.Clear();
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
+            GC.Collect();
+
+            CurrentJournalPages.Clear();
+            UpdateLayout();
+
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
+            GC.Collect();
+        }
+
+
+#endregion
 
         #region Pagemanagment Dialog
 
@@ -2978,7 +3305,7 @@ namespace SimpleJournal
             ClearJournal();
 
             double currentScrollOffset = this.mainScrollView.VerticalOffset;
-            var dialog = new WaitingDialog(System.IO.Path.GetFileNameWithoutExtension(currentJournalTitle), 1) { Owner = this };
+            var dialog = new WaitingDialog(System.IO.Path.GetFileNameWithoutExtension(currentJournalTitle)) { Owner = this };
             dialog.Show();
 
             IsEnabled = false;
@@ -2993,7 +3320,11 @@ namespace SimpleJournal
                 foreach (var page in result)
                 {
                     DrawingCanvas canvas = null;
-                    canvas = AddPage(GeneratePage(page.PaperPattern));
+                    byte[] background = null;
+                    if (page is PdfJournalPage pdf)
+                        background = pdf.PageBackground;
+
+                    canvas = AddPage(GeneratePage(page.PaperPattern, background));
 
                     if (countPages == 0)
                     {
@@ -3003,6 +3334,9 @@ namespace SimpleJournal
 
                     progress = (countPages++ + 1) / (double)result.Count;
                     dialog.SetProgress(progress, countPages, result.Count);
+
+                    // Delay 1ms to ensure the dialog will be displayed correctly
+                    await Task.Delay(1);
 
                     StrokeCollection strokes = null;
                     await Task.Run(() =>
@@ -3022,7 +3356,7 @@ namespace SimpleJournal
                             if (page.HasAdditionalResources)
                             {
                                 foreach (JournalResource jr in page.JournalResources)
-                                    JournalResource.AddJournalResourceToCanvas(jr, canvas);
+                                    GeneralHelper.AddJournalResourceToCanvas(jr, canvas);
                             }
                         }));
                     }));
@@ -3071,7 +3405,7 @@ namespace SimpleJournal
             PageManagementControl.Initalize(CurrentJournalPages.ToList(), this);
         }
     
-        #endregion
+#endregion
 
         #region Export
 
@@ -3089,7 +3423,7 @@ namespace SimpleJournal
             ExportControl.Initalize(CurrentJournalPages, CurrentJournalPages[cmbPages.SelectedIndex], this);
         }
 
-        #endregion
+#endregion
 
         #region Copy / Paste
         private Data.Clipboard clipboard = new Data.Clipboard();
@@ -3187,7 +3521,7 @@ namespace SimpleJournal
             clipboard.Renew();
         }
 
-        #endregion
+#endregion
 
         #region Insert
 
@@ -3330,13 +3664,13 @@ namespace SimpleJournal
             InsertText(toInsert);
         }
 
-        #endregion
+#endregion
 
         #region Background
 
         public void ApplyBackground()
         {
-            if (Settings.Instance.PageBackground == SimpleJournal.Background.Default)
+            if (Settings.Instance.PageBackground == SimpleJournal.Common.Background.Default)
             {
                 mainScrollView.Background = Consts.DefaultBackground;
                 return;
@@ -3348,14 +3682,14 @@ namespace SimpleJournal
 
                 switch (Settings.Instance.PageBackground)
                 {
-                    case SimpleJournal.Background.Default: mainScrollView.Background = Consts.DefaultBackground; break;
-                    case SimpleJournal.Background.Blue: imageFileName = "blue"; break;
-                    case SimpleJournal.Background.Sand: imageFileName = "sand"; break;
-                    case SimpleJournal.Background.Wooden1: imageFileName = "wooden-1"; break;
-                    case SimpleJournal.Background.Wooden2: imageFileName = "wooden-2"; break;
+                    case SimpleJournal.Common.Background.Default: mainScrollView.Background = Consts.DefaultBackground; break;
+                    case SimpleJournal.Common.Background.Blue: imageFileName = "blue"; break;
+                    case SimpleJournal.Common.Background.Sand: imageFileName = "sand"; break;
+                    case SimpleJournal.Common.Background.Wooden1: imageFileName = "wooden-1"; break;
+                    case SimpleJournal.Common.Background.Wooden2: imageFileName = "wooden-2"; break;
                 }
 
-                if (Settings.Instance.PageBackground != SimpleJournal.Background.Custom)
+                if (Settings.Instance.PageBackground != SimpleJournal.Common.Background.Custom)
                 {
                     string uri = $"pack://application:,,,/SimpleJournal;component/resources/backgrounds/{imageFileName}.jpg";
                     ImageBrush imageBrush = new ImageBrush(new BitmapImage(new Uri(uri))) { Stretch = Stretch.UniformToFill };
@@ -3378,19 +3712,6 @@ namespace SimpleJournal
                 mainScrollView.Background = Consts.DefaultBackground;
             }
         }
-
-        private void Backstage_IsOpenChanged(object sender, DependencyPropertyChangedEventArgs e)
-        {
-            if (MenuBackstage.IsOpen)
-                MenuBackstageTabControl.SelectedIndex = 0;
-        }
-
-        private void BackstageTabItem_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            ApplicationCommands.New.Execute(null, null);
-            MenuBackstage.IsOpen = false;
-        }
-
         #endregion
 
         #region General Events / Touch
@@ -3436,7 +3757,7 @@ namespace SimpleJournal
 #endif
         }
 
-        #endregion
+#endregion
     }
 
     #region Converters
@@ -3488,5 +3809,5 @@ namespace SimpleJournal
             throw new NotImplementedException();
         }
     }
-    #endregion
+#endregion
 }
