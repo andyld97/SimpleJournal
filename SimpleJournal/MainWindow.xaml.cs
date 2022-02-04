@@ -2795,8 +2795,6 @@ namespace SimpleJournal
             }
         }
 
-        private bool second1 = false;
-
         protected override async void OnClosing(CancelEventArgs e)
         {
             base.OnClosing(e);
