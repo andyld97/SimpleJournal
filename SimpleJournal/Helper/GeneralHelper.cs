@@ -3,7 +3,8 @@ using Newtonsoft.Json;
 using SimpleJournal.Controls;
 using SimpleJournal.Data;
 using SimpleJournal.Dialogs;
-using SimpleJournal.Shared;
+using SimpleJournal.Common;
+using SimpleJournal.Common.Controls;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -21,6 +22,12 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Xml;
+using SimpleJournal.Documents;
+using SimpleJournal.Common.Helper;
+using SimpleJournal.Documents.UI.Extensions;
+using SimpleJournal.Documents.PDF;
+using System.Threading.Tasks;
+using System.Net.Http;
 
 namespace SimpleJournal
 {
@@ -110,10 +117,6 @@ namespace SimpleJournal
             ThemeManager.Current.ChangeTheme(Application.Current, GetCurrentTheme());
         }
 
-        public static System.Windows.Media.Color ToColor(this Data.Color color)
-        {
-            return System.Windows.Media.Color.FromArgb(color.A, color.R, color.G, color.B);
-        }
 
         public static void ClearAll(this ObservableCollection<UIElement> collection, DrawingCanvas canvas)
         {
@@ -130,7 +133,7 @@ namespace SimpleJournal
         }
 
         public static double Distance(this Point p1, Point p2)
-        {
+        {   
             return Math.Sqrt(Math.Pow(p2.X - p1.X, 2) + Math.Pow(p2.Y - p1.Y, 2));
         }
 
@@ -142,77 +145,64 @@ namespace SimpleJournal
             //  return (p2, p1);
         }
 
-        public static byte[] ExportImage(BitmapSource bi)
+        #region RTB
+
+
+        /// <summary>
+        /// See https://stackoverflow.com/a/19534008/6237448
+        /// </summary>
+        /// <param name="element"></param>
+        /// <param name="scale"></param>
+        /// <param name="background"></param>
+        /// <returns></returns>
+        public static RenderTargetBitmap RenderToBitmap(UIElement element, double scale, Brush background)
         {
-            try
+            var renderWidth = (int)(element.RenderSize.Width * scale);
+            var renderHeight = (int)(element.RenderSize.Height * scale);
+
+            var renderTarget = new RenderTargetBitmap(renderWidth, renderHeight, 96, 96, PixelFormats.Pbgra32);
+            var sourceBrush = new VisualBrush(element);
+
+            var drawingVisual = new DrawingVisual();
+            var drawingContext = drawingVisual.RenderOpen();
+
+            var rect = new Rect(0, 0, element.RenderSize.Width, element.RenderSize.Height);
+
+            using (drawingContext)
             {
-                MemoryStream memStream = new MemoryStream();
-                PngBitmapEncoder encoder = new PngBitmapEncoder();
-                encoder.Frames.Add(BitmapFrame.Create(bi));
-                encoder.Save(memStream);
-                return memStream.ToArray();
+                if (scale != 1.0)
+                    drawingContext.PushTransform(new ScaleTransform(scale, scale));
+                drawingContext.DrawRectangle(background, null, rect);
+                drawingContext.DrawRectangle(sourceBrush, null, rect);
             }
-            catch (Exception e)
-            {
-                MessageBox.Show($"{Properties.Resources.strFailedToSaveImage} {e.Message}", Properties.Resources.strFailure, MessageBoxButton.OK, MessageBoxImage.Error);
-                return new byte[] { };
-            }
+
+            renderTarget.Render(drawingVisual);
+
+            return renderTarget;
         }
 
-        public static BitmapImage LoadImageFromBase64(string data)
+        /// <summary>
+        /// Create a screenshof of UI element
+        /// </summary>
+        /// <param name="element">The element to copy.</param>
+        public static RenderTargetBitmap CreateScreenshotOfElement(FrameworkElement element)
         {
-            return LoadImage(Convert.FromBase64String(data));
+            double width = double.IsNaN(element.Width) ? element.ActualWidth : element.Width;
+            double height = double.IsNaN(element.Height) ? element.ActualHeight : element.Height;
+
+            RenderTargetBitmap bmpCopied = new RenderTargetBitmap((int)Math.Round(width), (int)Math.Round(height), 96, 96, PixelFormats.Default);
+            DrawingVisual dv = new DrawingVisual();
+            using (DrawingContext dc = dv.RenderOpen())
+            {
+                VisualBrush vb = new VisualBrush(element);
+                dc.DrawRectangle(vb, null, new Rect(new Point(), new Size(width, height)));
+            }
+            bmpCopied.Render(dv);
+            return bmpCopied;
         }
 
-        public static BitmapImage LoadImage(byte[] imageData)
-        {
-            if (imageData == null || imageData.Length == 0) return null;
-
-            try
-            {
-                var image = new BitmapImage();
-                using (var mem = new MemoryStream(imageData))
-                {
-                    mem.Position = 0;
-                    image.BeginInit();
-                    image.CreateOptions = BitmapCreateOptions.PreservePixelFormat;
-                    image.CacheOption = BitmapCacheOption.OnLoad;
-                    image.UriSource = null;
-                    image.StreamSource = mem;
-                    image.EndInit();
-                }
-                image.Freeze();
-                return image;
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show($"{Properties.Resources.strFailedToLoadImage} {e.Message}", Properties.Resources.strFailure, MessageBoxButton.OK, MessageBoxImage.Error);
-                return null;
-            }
-        }
-
-        public static BitmapImage LoadImage(Uri url)
-        {
-            if (url == null) return null;
-
-            try
-            {
-                var image = new BitmapImage();
-                image.BeginInit();
-                image.CreateOptions = BitmapCreateOptions.PreservePixelFormat;
-                image.CacheOption = BitmapCacheOption.OnLoad;
-                image.UriSource = url;
-                image.StreamSource = null;
-                image.EndInit();
-                image.Freeze();
-                return image;
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show($"{Properties.Resources.strFailedToLoadImage} {e.Message}", Properties.Resources.strFailure, MessageBoxButton.OK, MessageBoxImage.Error);
-                return null;
-            }
-        }
+   
+        #endregion
 
         /// <summary>
         /// Opens the default system browser with the requested uri
@@ -234,131 +224,30 @@ namespace SimpleJournal
             }
         }
 
-        #region Convert
-        public static JournalResource ConvertText(this TextBlock text)
-        {
-            JournalText jt = new JournalText();
-            jt.SetData(Encoding.Default.GetBytes(text.Text));
-            jt.Left = (double)text.GetValue(InkCanvas.LeftProperty);
-            jt.Top = (double)text.GetValue(InkCanvas.TopProperty);
-            jt.ZIndex = Canvas.GetZIndex(text);
-            jt.Width = text.Width;
-            jt.Height = text.Height;
-
-            // Set speical button
-            jt.FontSize = text.FontSize;
-            jt.FontFamily = text.FontFamily.ToString();
-            var foregroundBrush = (text.Foreground as SolidColorBrush);
-
-            jt.A = foregroundBrush.Color.A;
-            jt.R = foregroundBrush.Color.R;
-            jt.G = foregroundBrush.Color.G;
-            jt.B = foregroundBrush.Color.B;
-
-            jt.IsBold = (text.FontWeight == FontWeights.Bold);
-            jt.IsItalic = (text.FontStyle == FontStyles.Italic);
-            bool containsAll = true;
-            foreach (var deco in TextDecorations.Underline)
-            {
-                if (!text.TextDecorations.Contains(deco))
-                {
-                    containsAll = false;
-                    break;
-                }
-            }
-
-            if (containsAll && text.TextDecorations.Count != 0)
-                jt.IsUnderlined = true;
-
-            containsAll = true;
-            foreach (var deco in TextDecorations.Strikethrough)
-            {
-                if (!text.TextDecorations.Contains(deco))
-                {
-                    containsAll = false;
-                    break;
-                }
-            }
-
-            if (containsAll && text.TextDecorations.Count() != 0)
-                jt.IsStrikeout = true;
-
-            if (text.RenderTransform != null && text.RenderTransform is RotateTransform rt)
-                jt.RotationAngle = (int)rt.Angle;
-
-            return jt;
-        }
-
-        public static JournalResource ConvertImage(this Image img)
-        {
-            JournalImage ji = new JournalImage();
-            ji.SetData(GeneralHelper.ExportImage((BitmapSource)img.Source));
-            ji.Left = (double)img.GetValue(InkCanvas.LeftProperty);
-            ji.Top = (double)img.GetValue(InkCanvas.TopProperty);
-            ji.ZIndex = Canvas.GetZIndex(img);
-            ji.Width = img.Width;
-            ji.Height = img.Height;
-            ji.IsUniform = (img.Stretch == Stretch.Uniform);
-
-            if (img.RenderTransform != null && img.RenderTransform is RotateTransform rt)
-                ji.RotationAngle = (int)rt.Angle;
-
-            return ji;
-        }
-
-        public static JournalResource ConvertShape(this Shape shape)
-        {
-            JournalShape js = new JournalShape();
-
-            string shapeData = XamlWriter.Save(shape);
-            js.SetData(Encoding.Default.GetBytes(Convert.ToBase64String(Encoding.Default.GetBytes(shapeData))));
-
-            return js;
-        }
-
-        public static JournalResource ConvertPlot(this Plot plot)
-        {
-            JournalPlot js = new JournalPlot
-            {
-                Left = (double)plot.GetValue(DrawingCanvas.LeftProperty),
-                Top = (double)plot.GetValue(DrawingCanvas.TopProperty),
-                PlotDirection = plot.DrawingDirection,
-                PlotMode = plot.DrawingMode,
-                StrokeThickness = plot.StrokeThickness,
-                ForegroundA = plot.Foreground.A,
-                ForegroundB = plot.Foreground.B,
-                ForegroundG = plot.Foreground.G,
-                ForegroundR = plot.Foreground.R,
-                Width = plot.Width,
-                Height = plot.Height,
-                ZIndex = Canvas.GetZIndex(plot)
-            };
-
-            if (plot.RenderTransform != null && plot.RenderTransform is RotateTransform rt)
-                js.RotationAngle = (int)rt.Angle;
-
-            return js;
-        }
-        #endregion
-
         /// <summary>
-        /// Create a screenshof of UI element
+        /// https://stackoverflow.com/a/53284839/6237448
         /// </summary>
-        /// <param name="element">The element to copy.</param>
-        public static RenderTargetBitmap CreateScreenshotOfElement(FrameworkElement element)
+        public static async Task<PrintTicket> UploadFileAsync(string path, string url, string json)
         {
-            double width = double.IsNaN(element.Width) ? element.ActualWidth : element.Width;
-            double height = double.IsNaN(element.Height) ? element.ActualHeight : element.Height;
+            var multiForm = new MultipartFormDataContent();
+            multiForm.Headers.Add("options", json);
 
-            RenderTargetBitmap bmpCopied = new RenderTargetBitmap((int)Math.Round(width), (int)Math.Round(height), 96, 96, PixelFormats.Default);
-            DrawingVisual dv = new DrawingVisual();
-            using (DrawingContext dc = dv.RenderOpen())
+            // Add file and directly upload it
+            System.IO.FileStream fs = System.IO.File.OpenRead(path);
+            multiForm.Add(new StreamContent(fs), "file", System.IO.Path.GetFileName(path));
+
+            // Send request to API 
+            using (HttpClient client = new HttpClient())
             {
-                VisualBrush vb = new VisualBrush(element);
-                dc.DrawRectangle(vb, null, new Rect(new Point(), new Size(width, height)));
+                var response = await client.PostAsync(url, multiForm);
+
+                if (response.IsSuccessStatusCode)
+                    return await System.Text.Json.JsonSerializer.DeserializeAsync<PrintTicket>(await response.Content.ReadAsStreamAsync());
+                else
+                    throw new Exception("Http Status Code: " + response.StatusCode);
             }
-            bmpCopied.Render(dv);
-            return bmpCopied;
+
+            return null;
         }
 
         /// <summary>
@@ -457,6 +346,11 @@ namespace SimpleJournal
                 Canvas.SetZIndex(element, newZ);
         }
 
+        public static void AddJournalResourceToCanvas(JournalResource resource, DrawingCanvas ink)
+        {
+            ink.LoadChildren(resource.ConvertToUIElement());
+        }
+
         /// <summary>
         /// Removes orignal renderTransform and replace it that there is just a RenderTransform and normal properties
         /// </summary>
@@ -534,11 +428,11 @@ namespace SimpleJournal
             string pathUpdaterExe = System.IO.Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, "Updater.exe");
             string pathUpdateSystemDotNetDotControllerDotdll = System.IO.Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, "updateSystemDotNet.Controller.dll");
 
-            if (System.IO.File.Exists(pathUpdaterExe) && FileSystem.BuildSHA1FromFile(pathUpdaterExe) == Consts.UpdaterExe)
-                FileSystem.TryDeleteFile(pathUpdaterExe);
+            if (System.IO.File.Exists(pathUpdaterExe) && FileSystemHelper.BuildSHA1FromFile(pathUpdaterExe) == Consts.UpdaterExe)
+                FileSystemHelper.TryDeleteFile(pathUpdaterExe);
 
-            if (System.IO.File.Exists(pathUpdateSystemDotNetDotControllerDotdll) && FileSystem.BuildSHA1FromFile(pathUpdateSystemDotNetDotControllerDotdll) == Consts.UpdateSystemDotNetDotControllerDotdll)
-                FileSystem.TryDeleteFile(pathUpdateSystemDotNetDotControllerDotdll);
+            if (System.IO.File.Exists(pathUpdateSystemDotNetDotControllerDotdll) && FileSystemHelper.BuildSHA1FromFile(pathUpdateSystemDotNetDotControllerDotdll) == Consts.UpdateSystemDotNetDotControllerDotdll)
+                FileSystemHelper.TryDeleteFile(pathUpdateSystemDotNetDotControllerDotdll);
         }
 
         public static bool IsConnectedToInternet()
@@ -647,20 +541,20 @@ namespace SimpleJournal
             Dictionary<string, byte[]> resourcesToDeploy = new Dictionary<string, byte[]>()
 #pragma warning restore CS0162 // Unreachable code detected
             {
-                {  System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "journal", "SjFileAssoc.exe"),   Properties.Resources.SJFileAssoc },
-                {  System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "journal", "SJFileAssoc.exe.config"),  System.Text.Encoding.Default.GetBytes(Properties.Resources.SJFileAssoc_exe) },
-                {  System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "journal", "SimpleJournal.Shared.dll"),   Properties.Resources.SimpleJournal_Shared },
+                {  System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "journal", "SjFileAssoc.exe"), Properties.Resources.SJFileAssoc },
+                {  System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "journal", "SJFileAssoc.exe.config"), System.Text.Encoding.Default.GetBytes(Properties.Resources.SJFileAssoc_exe) },
+                {  System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "journal", "SimpleJournal.Common.dll"), Properties.Resources.SimpleJournal_Common },
             };
 
             // If the file exists and if it's up to date no need to install
-            if (System.IO.File.Exists(resourcesToDeploy.Keys.FirstOrDefault()) && FileVersionInfo.GetVersionInfo(resourcesToDeploy.Keys.First()).FileVersion == "1.0.1.0")
+            if (System.IO.File.Exists(resourcesToDeploy.Keys.FirstOrDefault()) && FileVersionInfo.GetVersionInfo(resourcesToDeploy.Keys.First()).FileVersion == "0.5.0.2")
                 return false;
             else if (System.IO.File.Exists(resourcesToDeploy.Keys.FirstOrDefault()))
-                FileSystem.TryDeleteFile(resourcesToDeploy.Keys.FirstOrDefault());
+                FileSystemHelper.TryDeleteFile(resourcesToDeploy.Keys.FirstOrDefault());
 
             bool result = true;
             foreach (var file in resourcesToDeploy)
-                result &= FileSystem.TryWriteAllBytes(file.Key, file.Value);
+                result &= FileSystemHelper.TryWriteAllBytes(file.Key, file.Value);
 
             return result;
         }

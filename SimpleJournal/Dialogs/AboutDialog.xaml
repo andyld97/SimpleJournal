@@ -3,8 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:SimpleJournal"
-        xmlns:res="clr-namespace:SimpleJournal.Properties" xmlns:controls="clr-namespace:SimpleJournal.Controls" xmlns:wpf="clr-namespace:Microsoft.Web.WebView2.Wpf;assembly=Microsoft.Web.WebView2.Wpf"
+        xmlns:res="clr-namespace:SimpleJournal.Properties" xmlns:wpf="clr-namespace:Microsoft.Web.WebView2.Wpf;assembly=Microsoft.Web.WebView2.Wpf"
         mc:Ignorable="d"
         Title="{x:Static res:Resources.strAbout}" Height="630" Width="420"
         ResizeMode="NoResize"
@@ -27,15 +26,19 @@
                     </StackPanel.Resources>
                     <Image Source="../resources/logo.png" Width="230" Margin="0,15,0,0"/>
                     <TextBlock Margin="5,10,0,0" HorizontalAlignment="Center" Foreground="{DynamicResource BlackBrush}">
-                        <Run Text="{x:Static res:Resources.strAboutText1}"/>
+                        <Run Text="{x:Static res:Resources.strAboutText1}" FontWeight="Bold"/>
                         <LineBreak />
                         <Run Text="{x:Static res:Resources.strAboutTextIcons8_1}"/>
                         <Hyperlink NavigateUri="https://icons8.com/" RequestNavigate="Hyperlink_RequestNavigate">Icons8</Hyperlink>
                         <Run Text="{x:Static res:Resources.strAboutTextIcons8_2}" />
                         <LineBreak />
                         <Run Text="{x:Static res:Resources.strAboutTextFluentRibbon_1}"/>
-                        <Hyperlink NavigateUri="https://github.com/fluentribbon/Fluent.Ribbon" RequestNavigate="Hyperlink_RequestNavigate">Fluent.Ribbon (GitHub)</Hyperlink>
+                        <Hyperlink NavigateUri="https://github.com/fluentribbon/Fluent.Ribbon" RequestNavigate="Hyperlink_RequestNavigate">Fluent.Ribbon</Hyperlink>
                         <Run Text="{x:Static res:Resources.strAboutTextFluentRibbon_2}"/>
+                        <LineBreak />
+                        <Run Text="{x:Static res:Resources.strAboutTextMagickNET}" />
+                        <Hyperlink NavigateUri="https://github.com/dlemstra/Magick.NET" RequestNavigate="Hyperlink_RequestNavigate">Magick.NET</Hyperlink>
+                        <Run Text="(PDF Support)!" />                                                                    
                         <LineBreak />
                         <Run Text="{x:Static res:Resources.strAboutTextFluentRibbon_1}"/>
                         <Hyperlink NavigateUri="https://github.com/Tyrrrz/DotnetRuntimeBootstrapper" RequestNavigate="Hyperlink_RequestNavigate">Tyrrrz/DotnetRuntimeBootstrapper (GitHub)</Hyperlink>
@@ -55,7 +58,7 @@
                         <LineBreak />
                         <Run x:Name="TextNewVersionAvailable" FontWeight="Bold" />
                         <LineBreak />
-                        <Run Text="Powered by .NET 6.0.0" FontWeight="Bold" />
+                        <Run Text="Powered by .NET 6.0.1" FontWeight="Bold" />
                     </TextBlock>
                 </StackPanel>
             </TabItem>

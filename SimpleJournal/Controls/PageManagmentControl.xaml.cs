@@ -1,4 +1,5 @@
 ﻿using SimpleJournal.Data;
+using SimpleJournal.Common;
 using SimpleJournal.Templates;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,8 @@ using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Media;
+using SimpleJournal.Documents;
+using SimpleJournal.Documents.UI.Extensions;
 
 namespace SimpleJournal.Controls
 {
@@ -249,9 +252,12 @@ namespace SimpleJournal.Controls
             if (ListViewPages.SelectedIndex != -1)
             {
                 var page = pages[ListViewPages.SelectedIndex];
-                var template = PageHelper.ClonePage(page, true);
+                var template = page.ClonePage(true);
                 displayFrame.Child = template as UserControl;
                 ignoreCheckedChanged = true;
+
+                if (template.Type == PaperType.Custom)
+                    return;
 
                 ToggleButton tb = null;
                 switch (template.Type)
@@ -272,7 +278,7 @@ namespace SimpleJournal.Controls
 
         private void ToggleButton_Checked(object sender, RoutedEventArgs e)
         {
-            if (!isInitalized || ignoreCheckedChanged)
+            if (!isInitalized || ignoreCheckedChanged || CurrentSelectedPaperType == PaperType.Custom)
                 return;
 
             var tbSender = (sender as ToggleButton);
@@ -346,19 +352,23 @@ namespace SimpleJournal.Controls
 
             foreach (var page in pages)
             {
-                JournalPage jp = new JournalPage { PaperPattern = page.Type };
+                JournalPage jp = null;
+                if (page is Custom pdf)
+                    jp = new PdfJournalPage { PaperPattern = PaperType.Custom, PageBackground = pdf.PageBackground };
+                else
+                    jp = new JournalPage { PaperPattern = page.Type };
 
                 using (MemoryStream ms = new MemoryStream())
                 {
                     page.Canvas.Strokes.Save(ms);
-                    jp.SetData(ms.ToArray());
+                    jp.Data = ms.ToArray();
 
                     // Check for additional ressources
                     if (page.Canvas.Children.Count > 0)
                     {
                         foreach (UIElement element in page.Canvas.Children)
                         {
-                            var result = JournalResource.ConvertFromUIElement(element);
+                            var result = element.ConvertFromUIElement();
                             if (result != null)
                                 jp.JournalResources.Add(result);
                         }

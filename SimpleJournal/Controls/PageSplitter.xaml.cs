@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using SimpleJournal.Common;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace SimpleJournal.Controls

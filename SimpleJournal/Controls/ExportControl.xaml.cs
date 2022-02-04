@@ -1,15 +1,20 @@
 ﻿using Microsoft.Win32;
 using SimpleJournal.Data;
+using SimpleJournal.Common;
+using SimpleJournal.Templates;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Globalization;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using SimpleJournal.Documents;
+using SimpleJournal.Documents.UI.Extensions;
 
 namespace SimpleJournal.Controls
 {
@@ -26,7 +31,7 @@ namespace SimpleJournal.Controls
         private Window owner;
 
         public event PropertyChangedEventHandler PropertyChanged;
-        private List<Expander> expanders = new List<Expander>();
+        private readonly List<Expander> expanders = new List<Expander>();
 
         public ExportMode SelectedExportMode
         {
@@ -107,7 +112,6 @@ namespace SimpleJournal.Controls
                 {
                     var page = pages[i];
                     int pageIndex = pages.IndexOf(page) + 1;
-                    var frame = new Frame() { Content = PageHelper.ClonePage(page, true) };
                     var expander = new Expander()
                     {
                         Header = $"{Properties.Resources.strPage} {pageIndex}",
@@ -116,7 +120,7 @@ namespace SimpleJournal.Controls
                         Width = page.Canvas.Width
                     };
                     expander.IsExpanded = false;
-                    expander.Content = frame;
+                    expander.Content = page.ClonePage(true);
 
                     expanders.Add(expander);
                     Pages.Children.Add(expander);
@@ -207,7 +211,7 @@ namespace SimpleJournal.Controls
                 path = path.Replace(oldExt, string.Empty);
                 path += $".{from + 1}{oldExt}";
 
-                if (!ExportPageAsImage(pages[from].Canvas, path, from + 1))
+                if (!ExportPageAsImage(pages[from] as UserControl, path, from + 1))
                     return false;
 
                 Title = $"{Properties.Resources.strExport} ...";
@@ -221,7 +225,7 @@ namespace SimpleJournal.Controls
 
                     nPath += $".{displayNumber}{oldExt}";
 
-                    if (!ExportPageAsImage(pages[i].Canvas, nPath, displayNumber))
+                    if (!ExportPageAsImage(pages[i] as UserControl, nPath, displayNumber))
                         return false;
 
                     Title = $"{Properties.Resources.strExport} ... {Properties.Resources.strPage} {displayNumber}/{to + 1}";
@@ -235,7 +239,7 @@ namespace SimpleJournal.Controls
             return true;
         }
 
-        private bool ExportJournal(int from, int to)
+        private async Task<bool> ExportJournal(int from, int to)
         {
             SaveFileDialog ofd = new SaveFileDialog() { Filter = $"{Properties.Resources.strJournalFile}|*.journal;" };
             var dialogResult = ofd.ShowDialog();
@@ -254,18 +258,31 @@ namespace SimpleJournal.Controls
                         {
                             currentCanvas.Strokes.Save(ms);
                             JournalPage journalPage = new JournalPage();
-                            journalPage.SetData(ms.ToArray());
+                            journalPage.PaperPattern = pages[i].Type;
+
+                            // Handle PDF pages and test if the result is working
+                            if (pages[i] is Custom c)
+                            {
+                                journalPage = new PdfJournalPage()
+                                {
+                                    Orientation = c.Orientation,
+                                    PageBackground = c.PageBackground,
+                                };
+                            }                       
+
+                            journalPage.Data = ms.ToArray();
 
                             // Check for additional ressources
                             if (currentCanvas.Children.Count > 0)
                             {
                                 foreach (UIElement element in currentCanvas.Children)
                                 {
-                                    var result = JournalResource.ConvertFromUIElement(element);
+                                    var result = element.ConvertFromUIElement();
                                     if (result != null)
                                         journalPage.JournalResources.Add(result);
                                 }
                             }
+
                             journal.Pages.Add(journalPage);
                         }
                     }
@@ -280,7 +297,8 @@ namespace SimpleJournal.Controls
                 }
                 Title = $"{Properties.Resources.strExport} ({Properties.Resources.strPage} {to + 1}/{to + 1})";
 
-                journal.Save(ofd.FileName);
+                await journal.SaveAsync(ofd.FileName);
+
                 MainGrid.IsEnabled = true;
                 Title = Properties.Resources.strExportPages;
                 MessageBox.Show(owner, Properties.Resources.strExportFinished, Properties.Resources.strSuccess, MessageBoxButton.OK, MessageBoxImage.Information);
@@ -290,44 +308,12 @@ namespace SimpleJournal.Controls
                 return false;
         }
 
-        /// <summary>
-        /// See https://stackoverflow.com/a/19534008/6237448
-        /// </summary>
-        /// <param name="element"></param>
-        /// <param name="scale"></param>
-        /// <param name="background"></param>
-        /// <returns></returns>
-        public static RenderTargetBitmap RenderToBitmap(UIElement element, double scale, Brush background)
-        {
-            var renderWidth = (int)(element.RenderSize.Width * scale);
-            var renderHeight = (int)(element.RenderSize.Height * scale);
-
-            var renderTarget = new RenderTargetBitmap(renderWidth, renderHeight, 96, 96, PixelFormats.Default);
-            var sourceBrush = new VisualBrush(element);
-
-            var drawingVisual = new DrawingVisual();
-            var drawingContext = drawingVisual.RenderOpen();
-
-            var rect = new Rect(0, 0, element.RenderSize.Width, element.RenderSize.Height);
-
-            using (drawingContext)
-            {
-                drawingContext.PushTransform(new ScaleTransform(scale, scale));
-                drawingContext.DrawRectangle(background, null, rect);
-                drawingContext.DrawRectangle(sourceBrush, null, rect);
-            }
-
-            renderTarget.Render(drawingVisual);
-
-            return renderTarget;
-        }
-
-        private bool ExportPageAsImage(DrawingCanvas canvas, string path, int page)
+        private bool ExportPageAsImage(UserControl paper, string path, int page)
         {
             try
             {
                 BmpBitmapEncoder encoder = new BmpBitmapEncoder();
-                RenderTargetBitmap rtb = RenderToBitmap(canvas, 1.0, new SolidColorBrush(Colors.White));
+                RenderTargetBitmap rtb = GeneralHelper.RenderToBitmap(paper, 1.0, new SolidColorBrush(Colors.White));
 
                 encoder.Frames.Add(BitmapFrame.Create(rtb));
                 using (System.IO.FileStream fs = System.IO.File.Open(path, System.IO.FileMode.Create))
@@ -355,7 +341,7 @@ namespace SimpleJournal.Controls
 
         #endregion
 
-        private void ButtonOK_Click(object sender, RoutedEventArgs e)
+        private async void ButtonOK_Click(object sender, RoutedEventArgs e)
         {
             var range = GetPageRange();
             if (!ValidatePageRange(range))
@@ -370,10 +356,10 @@ namespace SimpleJournal.Controls
 
             switch (SelectedExportMode)
             {
-                case ExportMode.AllPages: result = (exportAsJournal ? ExportJournal(0, pages.Count - 1) : Export(0, pages.Count - 1)); break;
-                case ExportMode.CurrentPage: result = (exportAsJournal ? ExportJournal(currentPageIdx, currentPageIdx) : Export(currentPageIdx, currentPageIdx)); break;
+                case ExportMode.AllPages: result = (exportAsJournal ? await ExportJournal(0, pages.Count - 1) : Export(0, pages.Count - 1)); break;
+                case ExportMode.CurrentPage: result = (exportAsJournal ? await ExportJournal(currentPageIdx, currentPageIdx) : Export(currentPageIdx, currentPageIdx)); break;
                 case ExportMode.SinglePage:
-                case ExportMode.SelectedPageRange: result = (exportAsJournal ? ExportJournal(range.Item1 - 1, range.Item2 - 1) : Export(range.Item1 - 1, range.Item2 - 1)); break;
+                case ExportMode.SelectedPageRange: result = (exportAsJournal ? await ExportJournal(range.Item1 - 1, range.Item2 - 1) : Export(range.Item1 - 1, range.Item2 - 1)); break;
             }
 
             // Update title (reset)

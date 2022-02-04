@@ -40,6 +40,7 @@
                 <TextBlock FontSize="22" HorizontalAlignment="Center" FontWeight="Bold" Text="{x:Static res:Resources.strSJTerminated}"/>
                 <TextBlock FontSize="16" TextAlignment="Left" Margin="10,10,30,0">
                     <Run x:Name="RunAutoSaveRecoverInfo" Text="{x:Static res:Resources.strLabelBackups}"/>
+                    <Run x:Name="RunLoading" Text="{x:Static res:Resources.strRecoverAutoBackupFileDialog_Loading}" />
                 </TextBlock>
 
                 <ListBox x:Name="ListBackupFiles" Background="Transparent" ItemContainerStyle="{DynamicResource _ListBoxItemStyle}" Margin="10,10,10,0" Height="200" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Grid.IsSharedSizeScope="False" HorizontalContentAlignment="Stretch" />

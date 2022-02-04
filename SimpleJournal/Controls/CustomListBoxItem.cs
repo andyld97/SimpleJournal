@@ -21,8 +21,11 @@ namespace SimpleJournal.Controls
         public void Refresh()
         {
             // TextBlock has it's own custom icons, so no refresh required
-            if (AssociativeRelation is TextBlock)
+            if (AssociativeRelation is TextBlock text)
+            {
+                ToolTip = text.Text;
                 return;
+            }
 
             var element = GeneralHelper.CloneElement(AssociativeRelation);
             element.RenderTransform = new RotateTransform();

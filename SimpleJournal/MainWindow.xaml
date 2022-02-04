@@ -38,7 +38,7 @@
         </DataTemplate>
     </Window.Resources>
     <Window.CommandBindings>
-        <CommandBinding x:Name="NewCommand" Command="ApplicationCommands.New" Executed="NewCommand_Executed" CanExecute="NewCommand_CanExecute" />        
+        <CommandBinding x:Name="NewCommand" Command="ApplicationCommands.New" Executed="NewCommand_Executed" CanExecute="NewCommand_CanExecute" />
         <CommandBinding x:Name="SaveCommand" Command="ApplicationCommands.Save" Executed="SaveCommand_Executed" CanExecute="SaveCommand_CanExecute" />
         <CommandBinding x:Name="UndoCommand" Command="ApplicationCommands.Undo" Executed="UndoCommand_Executed" CanExecute="UndoCommand_CanExecute" />
         <CommandBinding x:Name="RedoCommand" Command="ApplicationCommands.Redo" Executed="RedoCommand_Executed" CanExecute="RedoCommand_CanExecute" />
@@ -50,11 +50,12 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Fluent:Ribbon x:Name="ribbon" AutomaticStateManagement="True">
             <Fluent:Ribbon.Menu>
                 <Grid>
-                    <Fluent:ApplicationMenu x:Name="MenuApplication" Visibility="Collapsed" Header="{x:Static res:Resources.strFile}" MaxDropDownHeight="500" BorderBrush="Blue">
+                    <Fluent:ApplicationMenu x:Name="MenuApplication" Visibility="Collapsed" Header="{x:Static res:Resources.strFile}" MaxDropDownHeight="550" BorderBrush="Blue">
                         <Fluent:ApplicationMenu.RightPaneContent>
                             <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Orientation="Vertical" CanVerticallyScroll="True">
                                 <Border HorizontalAlignment="Stretch" BorderBrush="#64647F" BorderThickness="0,0,0,0">
@@ -72,9 +73,11 @@
                         </Fluent:ApplicationMenu.RightPaneContent>
                         <Fluent:MenuItem x:Name="btnNew" Command="ApplicationCommands.New" Header="{x:Static res:Resources.strNewDocument}" KeyTip="N" Icon="pack://application:,,,/SimpleJournal;component/resources/add.png"  />
                         <Fluent:MenuItem x:Name="btnOpen" Click="btnOpen_Click" Header="{x:Static res:Resources.strOpenDocument}" KeyTip="O" Icon="pack://application:,,,/SimpleJournal;component/resources/open.png"  />
-                        <Fluent:MenuItem x:Name="btnSaveProject" Click="btnSaveProject_Click" Header="{x:Static res:Resources.strSaveDocument}" KeyTip="S" Icon="pack://application:,,,/SimpleJournal;component/resources/save.png"  />
-                        <Fluent:MenuItem x:Name="btnSave" Command="ApplicationCommands.Save" Header="{x:Static res:Resources.strSaveAsDocument}" KeyTip="S" Icon="pack://application:,,,/SimpleJournal;component/resources/save.png"  />
+                        <Fluent:MenuItem x:Name="btnImportPDF" Header="{x:Static res:Resources.strImportPDFFile}" Icon="/resources/pdf.png" Click="MenuButtonImportPDF_Click"  />
+                        <Fluent:MenuItem x:Name="btnSaveProject"  Command="ApplicationCommands.Save" Header="{x:Static res:Resources.strSaveDocument}" KeyTip="S" Icon="pack://application:,,,/SimpleJournal;component/resources/save.png"  />
+                        <Fluent:MenuItem x:Name="btnSave" Click="btnSave_Click" Header="{x:Static res:Resources.strSaveAsDocument}" KeyTip="S" Icon="pack://application:,,,/SimpleJournal;component/resources/save.png"  />
                         <Fluent:MenuItem x:Name="btnPrint" Command="ApplicationCommands.Print" Header="{x:Static res:Resources.strPrintDocument}" KeyTip="D" Icon="pack://application:,,,/SimpleJournal;component/resources/print.png"  />
+                        <Fluent:MenuItem Header="{x:Static res:Resources.strExportAsPDF}" Click="MenuButtonBackstageExportPdf_Click" Icon="/resources/pdf.png" Visibility="Collapsed" />
                         <Fluent:MenuItem x:Name="btnExport" Click="btnExport_Click" Header="{x:Static res:Resources.strExportDocument}" KeyTip="E" Icon="pack://application:,,,/SimpleJournal;component/resources/export.png"  />
                         <Fluent:MenuItem x:Name="btnPageManagment" Click="btnPageManagment_Click" Header="{x:Static res:Resources.strManagePage}" Icon="pack://application:,,,/SimpleJournal;component/resources/editpage.png" />
                         <Fluent:MenuItem x:Name="btnSettings" Click="btnSettings_Click" Header="{x:Static res:Resources.strSettings}" KeyTip="S" Icon="pack://application:,,,/SimpleJournal;component/resources/settings.png"  />
@@ -93,13 +96,15 @@
                                         </TextBlock>
                                     </GroupBox.Header>
                                     <ListBox x:Name="RecentlyOpenedDocumentsBackstage" ItemTemplate="{StaticResource RecentlyOpenedDocumentsTemplate}" ItemContainerStyle="{DynamicResource _ListBoxItemStyle}" Background="Transparent" BorderThickness="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" SelectionChanged="RecentlyOpenedDocumentsBackstage_SelectionChanged" />
-                                </GroupBox>                            
+                                </GroupBox>
                             </Fluent:BackstageTabItem>
                             <Fluent:Button Icon="/resources/open.png" Header="{x:Static res:Resources.strOpenDocument}" Click="btnOpen_Click" />
-                            <Fluent:Button Icon="/resources/save.png" Header="{x:Static res:Resources.strSaveDocument}" Click="btnSaveProject_Click"/>
-                            <Fluent:Button Icon="/resources/save.png" Header="{x:Static res:Resources.strSaveAsDocument}" Command="ApplicationCommands.Save"  />
+                            <Fluent:Button x:Name="MenuButtonImportPDF" Icon="/resources/pdf.png" Header="{x:Static res:Resources.strImportPDFFile}" Click="MenuButtonImportPDF_Click" />
+                            <Fluent:Button Icon="/resources/save.png" Header="{x:Static res:Resources.strSaveDocument}" Command="ApplicationCommands.Save" />
+                            <Fluent:Button Icon="/resources/save.png" Header="{x:Static res:Resources.strSaveAsDocument}" Click="btnSave_Click" />
                             <Fluent:SeparatorTabItem />
                             <Fluent:Button Icon="/resources/print.png" Header="{x:Static res:Resources.strPrintDocument}" Command="ApplicationCommands.Print" />
+                            <Fluent:Button x:Name="MenuButtonBackstageExportPdf" Icon="/resources/pdf.png" Header="{x:Static res:Resources.strExportAsPDF}" Click="MenuButtonBackstageExportPdf_Click" Visibility="Collapsed" />
                             <Fluent:BackstageTabItem x:Name="MenuBackstageExport" Icon="/resources/export.png" Header="{x:Static res:Resources.strExportDocument}" MouseDown="MenuBackstageExport_MouseDown">
                                 <DockPanel LastChildFill="True">
                                     <StatusBar DockPanel.Dock="Top" Visibility="{Binding ElementName=TextExportStatus, Path=Text, Converter={StaticResource stringToVisilbity}}" Background="{DynamicResource WhiteBrush20}">
@@ -203,7 +208,7 @@
                     <Fluent:Button x:Name="btnCopy" Click="BtnCopy_Click_1" SizeDefinition="Middle,Small" Header="{x:Static res:Resources.strCopy}" ToolTip="{x:Static res:Resources.strCopyDescription}" Icon="pack://application:,,,/SimpleJournal;component/resources/copy.png"/>
                     <Fluent:Button x:Name="btnPaste" Click="BtnPaste_Click_1" SizeDefinition="Middle,Small" Header="{x:Static res:Resources.strPaste}" ToolTip="{x:Static res:Resources.strPasteDescription}" Icon="pack://application:,,,/SimpleJournal;component/resources/paste.png"/>
                 </Fluent:RibbonGroupBox>
-                
+
                 <Fluent:RibbonGroupBox x:Name="GroupForms" Header="{x:Static res:Resources.strShapesHeader}">
                     <controls:DropDownToggleButton x:Name="btnInsertSimpleForm" Click="btnInsertSimpleForm_Click_1" Header="{x:Static res:Resources.strToolFormFixed}" ToolTip="{x:Static res:Resources.strInsertSimpleFormToolTip}" Width="52">
                         <controls:DropDownToggleButton.LargeIcon>
@@ -235,7 +240,7 @@
                         </controls:DropDownToggleButton.LargeIcon>
                     </controls:DropDownToggleButton>
                 </Fluent:RibbonGroupBox>
-                
+
                 <Fluent:RibbonGroupBox x:Name="GroupPages" Header="{x:Static res:Resources.strPages}" KeyTip="S">
                     <controls:DropDownToggleButton x:Name="btnInsertNewPage" Click="BtnInsertNewPage_Click" Header="{x:Static res:Resources.strAddPage}" ToolTip="{x:Static res:Resources.strAddPageTooltip}" IsToggleable="False" Width="65">
                         <controls:DropDownToggleButton.LargeIcon>
@@ -367,6 +372,17 @@
             <controls:AnimatedScrollViewer CanContentScroll="False" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"  x:Name="mainScrollView" ScrollChanged="mainScrollView_ScrollChanged" SnapsToDevicePixels="True" UseLayoutRounding="True">
                 <StackPanel x:Name="pages" Orientation="Vertical" Background="Transparent" PreviewMouseDown="Pages_MouseDown"  PreviewMouseUp="Pages_PreviewMouseUp" MouseLeave="Pages_MouseLeave" SnapsToDevicePixels="True" UseLayoutRounding="True" />
             </controls:AnimatedScrollViewer>
+        </Grid>
+        <Grid Grid.Row="2">
+            <Fluent:StatusBar x:Name="MainStatusBar" Visibility="Collapsed">
+                <Fluent:StatusBarItem Title="Speichern" HorizontalAlignment="Left">
+                    <StackPanel Orientation="Horizontal" Margin="5">
+                        <TextBlock x:Name="TextStatusBar" />
+                        <ProgressBar Width="200" Margin="8,3,3,3" IsIndeterminate="True" />
+                        <Image x:Name="ImageCloseStatusBar" MouseDown="ImageCloseStatusBar_MouseDown" Source="/resources/close.png" Height="16" Cursor="Hand" />
+                    </StackPanel>
+                </Fluent:StatusBarItem>
+            </Fluent:StatusBar>
         </Grid>
     </Grid>
 </Fluent:RibbonWindow>

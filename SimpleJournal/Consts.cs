@@ -25,23 +25,25 @@ namespace SimpleJournal
         public static readonly string FeedbackUrl = "https://simplejournal.ca-soft.net/feedback.php?name={0}&mail={1}&content={2}";
         public static readonly string HomePageUrl = "https://simplejournal.ca-soft.net";
         public static readonly string HelpUrl = "https://simplejournal.ca-soft.net/faq";
+        public static readonly string GhostScriptDownloadUrl = "https://ghostscript.com/releases/gsdnld.html";
+        public static readonly string ConverterAPIUrl = "http://cas-server2.ddns.net:8080";
 
         public static readonly string UpdaterExe = "7244a3f048e82af354eb3cfa3089a3035ff8768f";
         public static readonly string UpdateSystemDotNetDotControllerDotdll = "bbc7224ccc544651d9d844f309721091860f0f92";
 
-        public static readonly Version StoreVersion = new Version("1.491.0.0");
+        public static readonly Version StoreVersion = new Version("1.502.0.0");
         public static readonly Version NormalVersion = typeof(Consts).Assembly.GetName().Version;
 
         #region Pens
         public const int AMOUNT_PENS = 4;
 
-        public static Data.Color[] PEN_COLORS = new Data.Color[] 
+        public static Common.Data.Color[] PEN_COLORS = new Common.Data.Color[] 
         {
-            new Data.Color(0, 0, 0), // black
-            new Data.Color(180, 30, 40), // red
-            new Data.Color(30, 190, 20), // green
-            new Data.Color(30, 40, 210), // blue
-            new Data.Color(127, 127, 127)
+            new Common.Data.Color(0, 0, 0), // black
+            new Common.Data.Color(180, 30, 40), // red
+            new Common.Data.Color(30, 190, 20), // green
+            new Common.Data.Color(30, 40, 210), // blue
+            new Common.Data.Color(127, 127, 127)
         };
 
         #endregion
@@ -51,7 +53,12 @@ namespace SimpleJournal
 
 #if !UWP
         public static readonly string PenSettingsFilePath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Pen.xml");
-        public static readonly string AutoSaveDirectory = System.IO.Path.Combine(System.IO.Path.GetTempPath(), "SimpleJournal", "AutoSave");
+
+        /// <summary>
+        /// Used for old xml journals
+        /// </summary>
+        public static readonly string BackupDirectory = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "SimpleJournal", "Backup");
+        public static readonly string AutoSaveDirectory = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "SimpleJournal", "AutoSave");
         public static readonly string TouchExecutable = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Touch.exe");
         public static readonly string Executable = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "SimpleJournal.exe");
 
@@ -60,6 +67,10 @@ namespace SimpleJournal
 #else
         public static readonly string PenSettingsFilePath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "SimpleJournal", "Pen.xml");
         public static readonly string AutoSaveDirectory = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "SimpleJournal", "AutoSave");
+        /// <summary>
+        /// Used for old xml journals
+        /// </summary>
+        public static readonly string BackupDirectory = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "SimpleJournal", "Backup");
 #endif
 
 

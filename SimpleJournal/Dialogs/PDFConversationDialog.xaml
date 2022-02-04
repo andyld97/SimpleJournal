@@ -1,0 +1,86 @@
+﻿<Window x:Class="SimpleJournal.Dialogs.PDFConversationDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:res="clr-namespace:SimpleJournal.Properties" xmlns:controls="clr-namespace:SimpleJournal.Controls"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Background="{DynamicResource WhiteBrush}"
+        Title="{x:Static res:Resources.strPDFConversationDialog_Title}" SizeToContent="Height" Width="500">
+
+    <Window.Resources>
+        <Style TargetType="{x:Type RadioButton}">
+            <Setter Property="Foreground" Value="{DynamicResource BlackBrush}" />
+            <Setter Property="Margin" Value="3" />
+        </Style>
+        <Style TargetType="{x:Type TextBlock}">
+            <Setter Property="Foreground" Value="{DynamicResource BlackBrush}" />
+            <Setter Property="Margin" Value="3" />
+        </Style>
+        <Style TargetType="{x:Type TextBox}">
+            <Setter Property="Background" Value="{DynamicResource WhiteBrush}" />
+            <Setter Property="Foreground" Value="{DynamicResource BlackBrush}" />
+            <Setter Property="Margin" Value="3" />
+            <Setter Property="Padding" Value="3" />
+        </Style>
+        <Style TargetType="{x:Type Hyperlink}">
+            <Setter Property="Foreground" Value="{DynamicResource BlackBrush}" />
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <StackPanel x:Name="PanelProgress" Margin="2" Visibility="Collapsed" VerticalAlignment="Center">
+            <TextBlock Margin="5" TextWrapping="Wrap">
+                <Run Text="Status:" FontWeight="Bold" />
+                <Run x:Name="TextState" />
+            </TextBlock>
+            <ProgressBar x:Name="Progress" Height="20" Margin="5" />
+        </StackPanel>
+
+        <StackPanel x:Name="PanelInput" Margin="2" Visibility="Visible">
+            <Border BorderThickness="1" BorderBrush="{DynamicResource BlackBrush}" CornerRadius="5">
+                <TextBlock TextWrapping="Wrap" FontSize="12">
+                    <Run Text="{x:Static res:Resources.strPDFConversationDialog_Explanation_Line1}" />
+                    <Hyperlink NavigateUri="https://google.de" RequestNavigate="Hyperlink_RequestNavigate">Ghostscript</Hyperlink>
+                    <Run Text="{x:Static res:Resources.strPDFConversationDialog_Explanation_Line2}"/>
+                    <Hyperlink NavigateUri="https://google.de" RequestNavigate="Hyperlink_RequestNavigate">Ghostscript</Hyperlink>
+                    <Run Text="{x:Static res:Resources.strPDFConversationDialog_Explanation_Line3}" />
+                    <LineBreak />
+                    <Run Foreground="Orange" FontWeight="Bold" Text="{x:Static res:Resources.strPDFConversationDialog_Hint}" />
+                </TextBlock>
+            </Border>
+
+            <RadioButton x:Name="RadioAllPages" Margin="0,5,0,0" Content="{x:Static res:Resources.strPDFConversationDialog_AllPages}" IsChecked="True" />
+            <RadioButton x:Name="RadioChoosePageRange" Margin="0,5,0,0" Content="{x:Static res:Resources.strPDFConversationDialog_ConvertOnlySelectedPages}" />
+            <CheckBox x:Name="CheckUseOnlineConverter" Checked="CheckUseOnlineConverter_Checked" Unchecked="CheckUseOnlineConverter_Checked" Foreground="{DynamicResource BlackBrush}" Content="{x:Static res:Resources.strPDFConversationDialog_UseOnlineConversation}" Margin="0,5,0,0" />
+
+            <StackPanel Visibility="{Binding ElementName=RadioChoosePageRange, Path=IsChecked, Converter={StaticResource boolToVisibilityConverter}}" Orientation="Horizontal" HorizontalAlignment="Left">
+                <TextBlock Text="{x:Static res:Resources.strPDFConversationDialog_From}" Margin="25,0,0,0" VerticalAlignment="Center" FontWeight="Bold" />
+                <controls:NumericUpDown x:Name="NumPageFrom" Height="25" Value="1" Maximum="100" Minimum="1" Margin="3" />
+                <TextBlock Text="{x:Static res:Resources.strPDFConversationDialog_To}" Margin="10,0,3,0" VerticalAlignment="Center" FontWeight="Bold" />
+                <controls:NumericUpDown x:Name="NumPageTo" Height="25" Value="100" Maximum="100" Minimum="1" Margin="3" />
+            </StackPanel>
+
+            <TextBlock Text="{x:Static res:Resources.strPDFConversationDialog_SourcePath}" />
+            <TextBox x:Name="TextSource" IsReadOnly="True" />
+
+            <TextBlock Text="{x:Static res:Resources.strPDFConversationDialog_DestinationPath}" FontWeight="Bold" />
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <TextBox x:Name="TextDestination" IsReadOnly="True" />
+                <Button x:Name="ButtonSearch" Click="ButtonSearch_Click" Content="..." Grid.Column="1" FontWeight="Bold" Margin="3" Width="50" ToolTip="{x:Static res:Resources.strPDFConversationDialog_ButtonSearchToolTip}" />
+            </Grid>
+
+            <Button x:Name="ButtonConvert" Click="ButtonConvert_Click" Width="150" HorizontalAlignment="Right" Margin="3">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="../resources/redo.png" Height="32" />
+                    <TextBlock Text="{x:Static res:Resources.strPDFConversationDialog_Convert}" Foreground="Black" FontWeight="Bold" VerticalAlignment="Center" />
+                </StackPanel>
+            </Button>
+        </StackPanel>
+    </Grid>
+</Window>

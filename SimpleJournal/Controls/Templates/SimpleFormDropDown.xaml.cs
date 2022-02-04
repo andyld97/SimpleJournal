@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls.Primitives;
+﻿using SimpleJournal.Common;
+using System.Windows.Controls.Primitives;
 
 namespace SimpleJournal.Controls.Templates
 {

@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="strA4" xml:space="preserve">
     <value>A4</value>
@@ -1145,7 +1145,7 @@ Klicken Sie auf Nein, um diesen Hinweis weiterhin zu erhalten!</value>
     <comment>MainWindow.xaml</comment>
   </data>
   <data name="strReleaseDate" xml:space="preserve">
-    <value>31.12.2021 15:37 Uhr</value>
+    <value>01.02.2022 15:01 Uhr</value>
     <comment>*</comment>
   </data>
   <data name="strRemove" xml:space="preserve">
@@ -1305,7 +1305,7 @@ Klicken Sie auf Nein, um diesen Hinweis weiterhin zu erhalten!</value>
     <comment>*</comment>
   </data>
   <data name="strSettingsFeatureBar" xml:space="preserve">
-    <value>Weitere Funktionen:</value>
+    <value>Weitere Funktionen</value>
     <comment>*</comment>
   </data>
   <data name="strSettingsOpenSetupAssistantTooltip" xml:space="preserve">
@@ -1726,7 +1726,7 @@ Hier möchte ich Ihnen noch ein paar wichtige Hinweise geben, die Ihnen helfen w
     <comment>*</comment>
   </data>
   <data name="strWatingText" xml:space="preserve">
-    <value>Bitte warten Sie während {0} geladen wird (Seite {1}/{2}) ...</value>
+    <value>Bitte warten Sie während das Dokument "{0}" geladen wird ...</value>
     <comment>WaitingDialog.xaml</comment>
   </data>
   <data name="strWindow" xml:space="preserve">
@@ -1826,10 +1826,182 @@ Alternativ können Sie die normale Version von SimpleJournal verwenden!</value>
   <data name="strDropDownTemplateMode" xml:space="preserve">
     <value>Modus:</value>
   </data>
+  <data name="strPDFConversationDialog_Convert" xml:space="preserve">
+    <value>Umwandeln</value>
+    <comment>PDFConversationDialog.xaml.cs</comment>
+  </data>
+  <data name="strPDFConversationDialog_DestinationPath" xml:space="preserve">
+    <value>Zielpfad:</value>
+    <comment>PDFConversationDialog.xaml.cs</comment>
+  </data>
+  <data name="strPDFConversationDialog_SourcePath" xml:space="preserve">
+    <value>Quellpfad:</value>
+    <comment>PDFConversationDialog.xaml.cs</comment>
+  </data>
+  <data name="strPDFConversationDialog_Title" xml:space="preserve">
+    <value>PDF-Dokument als Journal umwandeln</value>
+    <comment>PDFConversationDialog.xaml.cs</comment>
+  </data>
+  <data name="strPDFConversationDialog_Explanation_Line2" xml:space="preserve">
+    <value>verwendet. Bitte stellen Sie sicher, dass</value>
+    <comment>PDFConversationDialog.xaml.cs</comment>
+  </data>
+  <data name="strPDFConversationDialog_Explanation_Line1" xml:space="preserve">
+    <value>Um ein PDF Dokuemnt in SimpleJournal verwenden zu können, muss es zunächst in ein Journal-Dokument konvertiert werden. Dazu wird Magick.NET in Kombination mit</value>
+    <comment>PDFConversationDialog.xaml.cs</comment>
+  </data>
+  <data name="strPDFConversationDialog_Explanation_Line3" xml:space="preserve">
+    <value>installiert ist, sonst funktioniert die Umwandlung nicht!</value>
+    <comment>PDFConversationDialog.xaml.cs</comment>
+  </data>
+  <data name="strPDFConversationDialog_Hint" xml:space="preserve">
+    <value>Achtung: Das originale PDF Dokument bleibt unverändert!</value>
+    <comment>PDFConversationDialog.xaml.cs</comment>
+  </data>
+  <data name="strPDFConversationDialog_ReadingPDFDocument" xml:space="preserve">
+    <value>Lese PDF Dokument "{0}" ...</value>
+    <comment>PDFConversationDialog.xaml.cs</comment>
+  </data>
+  <data name="strPDFConversationDialog_InvalidInputMessage" xml:space="preserve">
+    <value>Bitte geben Sie gültige Pfade an!</value>
+    <comment>PDFConversationDialog.xaml.cs</comment>
+  </data>
+  <data name="strPDFConversationDialog_GhostscriptMessage" xml:space="preserve">
+    <value>Es ist ein Fehler beim Konvertieren aufgetreten. Stellen Sie sicher, dass Ghostscript installiert ist!</value>
+    <comment>PDFConversationDialog.xaml.cs</comment>
+  </data>
+  <data name="strPDFConversationDialog_Ready" xml:space="preserve">
+    <value>Fertig</value>
+    <comment>PDFConversationDialog.xaml.cs</comment>
+  </data>
+  <data name="strPDFConversationDialog_ConversationStatusMessage" xml:space="preserve">
+    <value>Konvertiere Seite {0} von {1} ...</value>
+    <comment>PDFConversationDialog.xaml.cs</comment>
+  </data>
+  <data name="strPDFConversationDialog_ButtonSearchToolTip" xml:space="preserve">
+    <value>Wählen Sie einen Pfad aus, an dem das Journal gespeichert werden soll!</value>
+  </data>
+  <data name="strAboutTextMagickNET" xml:space="preserve">
+    <value>... an</value>
+  </data>
   <data name="strInsertImageOrText" xml:space="preserve">
     <value>Bild/Text</value>
   </data>
   <data name="strInsertNewObjects" xml:space="preserve">
     <value>Neue Objekte</value>
+  </data>
+  <data name="strExportAsPDF" xml:space="preserve">
+    <value>Als PDF exportieren</value>
+  </data>
+  <data name="strFailedToExportJournalAsPDF" xml:space="preserve">
+    <value>Fehler beim Exportieren des Journals als PDF-Datei</value>
+  </data>
+  <data name="strStateExportAsJournal" xml:space="preserve">
+    <value>Journal exportieren ...</value>
+  </data>
+  <data name="strStateExportAsPDF" xml:space="preserve">
+    <value>PDF exportieren ...</value>
+  </data>
+  <data name="strStatePrinting" xml:space="preserve">
+    <value>Journal drucken ...</value>
+  </data>
+  <data name="strStateSaving" xml:space="preserve">
+    <value>Speichern ...</value>
+  </data>
+  <data name="strPDFFilter" xml:space="preserve">
+    <value>PDF-Datei|*.pdf</value>
+  </data>
+  <data name="strPDFDialogTitle" xml:space="preserve">
+    <value>Als PDF speichern ...</value>
+  </data>
+  <data name="strPrintingError" xml:space="preserve">
+    <value>Es ist ein kritischer Fehler beim Drucken aufgetretem</value>
+  </data>
+  <data name="strWaitingDialogCurrentProgress" xml:space="preserve">
+    <value>Aktueller Fortschritt:</value>
+  </data>
+  <data name="strWaitingDialogTotalProgress" xml:space="preserve">
+    <value>Gesamtfortschritt:</value>
+  </data>
+  <data name="strWaitingDialogReadingPage" xml:space="preserve">
+    <value>Lese Seite {0} von {1} ...</value>
+  </data>
+  <data name="strWaitingDialogReadingDocument" xml:space="preserve">
+    <value>Lese Dokument ...</value>
+  </data>
+  <data name="strSure" xml:space="preserve">
+    <value>Sicher?</value>
+  </data>
+  <data name="strPDFCOnversationDialog_TooFewPagesMessage" xml:space="preserve">
+    <value>Das ausgewählte Dokument hat nur {0} Seiten! Möchten Sie stattdessen nur die Seiten {1} bis {2} konvertieren?</value>
+  </data>
+  <data name="strPDFConversationDialog_AllPages" xml:space="preserve">
+    <value>Alle Seiten konvertieren (max. 100 pro Journal)</value>
+  </data>
+  <data name="strPDFConversationDialog_ConvertOnlySelectedPages" xml:space="preserve">
+    <value>Nur bestimmte Seiten konvertieren</value>
+  </data>
+  <data name="strPDFConversationDialog_From" xml:space="preserve">
+    <value>Von:</value>
+  </data>
+  <data name="strPDFConversationDialog_To" xml:space="preserve">
+    <value>Bis:</value>
+  </data>
+  <data name="strPDFConversationDialog_WritingPageStatus" xml:space="preserve">
+    <value>Schreibe Seite {0} von {1} in Journal "{2}" ...</value>
+  </data>
+  <data name="strPDFConversationDialog_Saving" xml:space="preserve">
+    <value>Speichere Journal "{0}" ...</value>
+  </data>
+  <data name="strSettings_OpenAutoSaveDirectory" xml:space="preserve">
+    <value>AutoSave-Verzeichnis öffnen</value>
+  </data>
+  <data name="strSettings_OpenAutoSaveDirectory_ToolTip" xml:space="preserve">
+    <value>Öffnet das Verzeichnis, in dem die automatisch erstellten Backups enthalten sind.</value>
+  </data>
+  <data name="strSettings_OpenBackupDirectory_ToDo" xml:space="preserve">
+    <value>Öffnet das Verzeichnis, in dem die erstellten Backups (von alten Dokumenten) enthalten sind.</value>
+  </data>
+  <data name="strSettings_OpenBackupDirectory" xml:space="preserve">
+    <value>Backup-Verzeichnis öffnen</value>
+  </data>
+  <data name="strSettingsImportantDirectories" xml:space="preserve">
+    <value>Wichtige Verzeichnisse</value>
+  </data>
+  <data name="strImportPDFFile" xml:space="preserve">
+    <value>PDF-Datei importieren</value>
+  </data>
+  <data name="strPDFFile" xml:space="preserve">
+    <value>PDF-Datei</value>
+  </data>
+  <data name="strPDFConversationDialog_UseOnlineConversation" xml:space="preserve">
+    <value>Online-Konversation verwenden (wenn Ihr System wenig Speicherplatz hat)</value>
+  </data>
+  <data name="strMicrosoftPrintToPDFWarning" xml:space="preserve">
+    <value>Microsoft Print To PDF funktioniert nicht richtig! Es wird nicht empfohlen, den Drucker zu benutzen, wollen Sie ihn trotzdem verwenden?</value>
+  </data>
+  <data name="strRecoverAutoBackupFileDialog_Loading" xml:space="preserve">
+    <value>(Laden ...)</value>
+  </data>
+  <data name="strPDFConversationDialog_ConversationGeneralError" xml:space="preserve">
+    <value>Fehler beim Konvertieren aufgetreten ...</value>
+  </data>
+  <data name="strPDFConversationDialog_Ticket_InProgress" xml:space="preserve">
+    <value>Bearbeite Ticket "{0}" ...</value>
+  </data>
+  <data name="strPDFConversationDialog_Ticket_Saving" xml:space="preserve">
+    <value>Speichere Ticket "{0}" ...</value>
+  </data>
+  <data name="strPDFConversationDialog_Ticket_Preparing" xml:space="preserve">
+    <value>Bereite Ticket "{0}" vor ...</value>
+  </data>
+  <data name="strPDFConversationDialog_Ticket_InQueue" xml:space="preserve">
+    <value>Ticket "{0}" wurde zur Warteschlange hinzugefügt!</value>
+  </data>
+  <data name="strPDFConversationDialog_Ticket_OnHold" xml:space="preserve">
+    <value>Bitte warten Sie bis Ihr Ticket "{0}" bearbeitet wird!</value>
+  </data>
+  <data name="strFileNotFound" xml:space="preserve">
+    <value> Die Datei "{0}" wurde nicht gefunden!</value>
   </data>
 </root>

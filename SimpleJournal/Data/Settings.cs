@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SimpleJournal.Common;
+using System;
 using System.Windows;
 using System.Windows.Media;
 
@@ -79,7 +80,7 @@ namespace SimpleJournal.Data
         /// <summary>
         /// The color of the text marker 
         /// </summary>
-        public Color TextMarkerColor { get; set; } = new Color(Colors.Yellow.R, Colors.Yellow.G, Colors.Yellow.B);
+        public Common.Data.Color TextMarkerColor { get; set; } = new Common.Data.Color(Colors.Yellow.R, Colors.Yellow.G, Colors.Yellow.B);
 
         /// <summary>
         /// If true then all forms which would be converted will have a rotation of 0 degrees.
@@ -181,6 +182,11 @@ namespace SimpleJournal.Data
         /// </summary>
         public bool DisableTouchScreenIfInForeground { get; set; } = false;
 
+        /// <summary>
+        /// This is just to remember the checkbox in PDFConversationDialog
+        /// </summary>
+        public bool UseOnlineConversation { get; set; } = false;    
+
         public Settings()
         {
 
@@ -190,7 +196,7 @@ namespace SimpleJournal.Data
         {
             try
             {
-                var result = Serialization.Serialization.Read<Settings>(path, Serialization.Serialization.Mode.Normal);
+                var result = Serialization.Read<Settings>(path, Serialization.Mode.XML);
                 if (result != null)
                     return result;
             }
@@ -206,7 +212,7 @@ namespace SimpleJournal.Data
         {
             try
             {
-                Serialization.Serialization.Save<Settings>(path, this, Serialization.Serialization.Mode.Normal);
+                Serialization.Save<Settings>(path, this, Serialization.Mode.XML);
             }
             catch (Exception e)
             {
