@@ -197,7 +197,7 @@ namespace SimpleJournal.Documents.PDF
                     if (isCanceld)
                         return null;
 
-                    Completed?.Invoke(true, null, System.IO.Path.GetFileName(destinationFileName));
+                    Completed?.Invoke(true, null, destinationFileName);
                     return new List<Journal>() { journal }; 
                 }
                 else 
