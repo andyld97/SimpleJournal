@@ -16,6 +16,7 @@ namespace SimpleJournal
         public static readonly DoubleCollection LineStrokeDottetDashArray = new DoubleCollection() { 0.03, 2 };
         public static readonly DoubleCollection LineStrokeDashedDashArray = new DoubleCollection() { 4, 3 };
         public const int DefaultLineStrokeDashOffset = 1;
+        public const int RulerCompensationOffset = 10;
 
         public static readonly SolidColorBrush DefaultBackground = new SolidColorBrush((System.Windows.Media.Color)(ColorConverter.ConvertFromString("#E1E1E1")));
 

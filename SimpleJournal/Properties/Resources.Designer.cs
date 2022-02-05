@@ -2914,7 +2914,7 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 01/28/2022 13:13 AM.
+        ///   Looks up a localized string similar to 01/02/2022 3:01 PM.
         /// </summary>
         public static string strReleaseDate {
             get {
@@ -4276,6 +4276,24 @@ namespace SimpleJournal.Properties {
         public static string strUseRotationCompensation {
             get {
                 return ResourceManager.GetString("strUseRotationCompensation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Use ruler compensation.
+        /// </summary>
+        public static string strUseRulerCompensation {
+            get {
+                return ResourceManager.GetString("strUseRulerCompensation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The ruler compensation ensures that lines that are drawn minimally crooked are automatically straightened..
+        /// </summary>
+        public static string strUseRulerCompensation_Description {
+            get {
+                return ResourceManager.GetString("strUseRulerCompensation_Description", resourceCulture);
             }
         }
         

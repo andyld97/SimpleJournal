@@ -185,7 +185,12 @@ namespace SimpleJournal.Data
         /// <summary>
         /// This is just to remember the checkbox in PDFConversationDialog
         /// </summary>
-        public bool UseOnlineConversation { get; set; } = false;    
+        public bool UseOnlineConversation { get; set; } = false;
+
+        /// <summary>
+        /// If true the strokes drawn with a ruler getting straight horizontal or vertical (only if the offset is little enough)
+        /// </summary>
+        public bool UseRulerCompensation { get; set; } = true;
 
         public Settings()
         {

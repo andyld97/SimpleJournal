@@ -802,6 +802,34 @@ namespace SimpleJournal
                         pointCollection.RemoveAt(1);
                     pointCollection.Add(new StylusPoint(p2.X, p2.Y));
 
+                    if (Settings.Instance.UseRulerCompensation)
+                    {
+                        var firstPoint = pointCollection.FirstOrDefault();
+                        var secondPoint = pointCollection.LastOrDefault();
+
+                        double xDiff = Math.Abs(firstPoint.X - secondPoint.X);
+                        double yDiff = Math.Abs(firstPoint.Y - secondPoint.Y);
+
+                        if (xDiff > yDiff)
+                        {
+                            // horizontal
+                            if (yDiff <= Consts.RulerCompensationOffset)
+                            { 
+                                secondPoint.Y = firstPoint.Y;
+                                pointCollection[pointCollection.Count - 1] = secondPoint;
+                            }
+                        }
+                        else if (yDiff > xDiff)
+                        {
+                            // vertical
+                            if (xDiff <= Consts.RulerCompensationOffset)
+                            {
+                                secondPoint.X = firstPoint.X;
+                                pointCollection[pointCollection.Count - 1] = secondPoint;
+                            }
+                        }
+                    }
+
                     if (rulerMode == RulerMode.Normal)
                     {
                         Strokes.Remove(currentStroke);

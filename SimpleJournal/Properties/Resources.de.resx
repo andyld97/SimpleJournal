@@ -2004,4 +2004,10 @@ Alternativ können Sie die normale Version von SimpleJournal verwenden!</value>
   <data name="strFileNotFound" xml:space="preserve">
     <value> Die Datei "{0}" wurde nicht gefunden!</value>
   </data>
+  <data name="strUseRulerCompensation" xml:space="preserve">
+    <value>Linealausgleich verwenden</value>
+  </data>
+  <data name="strUseRulerCompensation_Description" xml:space="preserve">
+    <value>Der Linealausgleich sorgt dafür, dass Linien, die minimal schief gezeichnet werden, automatisch gerade ausgerichtet werden.</value>
+  </data>
 </root>

@@ -2067,4 +2067,11 @@ Alternatively, you can use the normal version of SimpleJournal!</value>
     <value> File "{0}" not found!</value>
     <comment>*</comment>
   </data>
+  <data name="strUseRulerCompensation" xml:space="preserve">
+    <value>Use ruler compensation</value>
+    <comment>SettingsDialog.xaml</comment>
+  </data>
+  <data name="strUseRulerCompensation_Description" xml:space="preserve">
+    <value>The ruler compensation ensures that lines that are drawn minimally crooked are automatically straightened.</value>
+  </data>
 </root>
