@@ -116,6 +116,8 @@ namespace SimpleJournal
         public bool PreviewCircleCorrection { get; set; } = false;
 
         public bool PreviewRotationCorrection { get; set; } = false;
+
+        public bool PreviewRulerCompensation { get; set; } = false;
         #endregion
 
         #region Events
@@ -167,7 +169,6 @@ namespace SimpleJournal
             Children.CollectionChanged -= Childrens_CollectionChanged;
             base.Strokes.StrokesChanged -= Strokes_StrokesChanged;
         }
-
 
         public void SetDebug(bool state = true)
         {
@@ -259,7 +260,6 @@ namespace SimpleJournal
         public void SetFormMode()
         {
             isInFormMode = true;
-
         }
 
         public void UnsetFormMode()
@@ -317,7 +317,7 @@ namespace SimpleJournal
             EditingMode = InkCanvasEditingMode.None;
         }
 
-        public void UnSetCopyMode()
+        public void UnsetCopyMode()
         {
             isInCopyMode = false;
         }
@@ -428,13 +428,6 @@ namespace SimpleJournal
         #endregion
 
         #region Shape and Text Recognization
-
-        public enum Operation
-        {
-            Shape,
-            Text,
-            TextSearch
-        }
 
         public static string[] StartAnalyzingProcess(StrokeCollection sc, Operation operation, string[] additionalArguments = null)
         {
@@ -758,6 +751,50 @@ namespace SimpleJournal
         }
         #endregion
 
+        private void CalculateRulerCompensation(double  x1, double x2, double y1, double y2,  out double tX, out double tY)
+        {
+            bool shouldUseCompensation = Settings.Instance.UseRulerCompensation;
+            if (isPreview)
+                shouldUseCompensation = PreviewRulerCompensation;
+
+            if (shouldUseCompensation)
+            {
+                double xDiff = Math.Abs(x1 - x2);
+                double yDiff = Math.Abs(y1 - y2);
+
+                if (xDiff > yDiff)
+                {
+                    // horizontal
+                    if (yDiff <= Consts.RulerCompensationOffset)
+                        tY = y1;
+                    else
+                        tY = y2;
+
+                    tX = x2;
+                }
+                else if (yDiff > xDiff)
+                {
+                    // vertical
+                    if (xDiff <= Consts.RulerCompensationOffset)
+                        tX = x1;
+                    else
+                        tX = x2;
+
+                    tY = y2;
+                }
+                else
+                {
+                    tX = x2;
+                    tY = y2;
+                }
+            }
+            else
+            {
+                tX = x2;
+                tY = y2;
+            }
+        }
+
         protected override void OnMouseLeftButtonDown(MouseButtonEventArgs e)
         {
             base.OnMouseLeftButtonDown(e);
@@ -802,6 +839,11 @@ namespace SimpleJournal
                         pointCollection.RemoveAt(1);
                     pointCollection.Add(new StylusPoint(p2.X, p2.Y));
 
+                     var firstPoint = pointCollection.FirstOrDefault();
+                     var secondPoint = pointCollection.LastOrDefault();
+                     CalculateRulerCompensation(firstPoint.X, secondPoint.X, firstPoint.Y, secondPoint.Y, out double tX, out double tY);
+                     pointCollection[pointCollection.Count - 1] = new StylusPoint(tX, tY);
+
                     if (rulerMode == RulerMode.Normal)
                     {
                         Strokes.Remove(currentStroke);
@@ -816,7 +858,13 @@ namespace SimpleJournal
                         DrawingCanvas.Change = true;
                     }
                     else
+                    {
+                        CalculateRulerCompensation(line.X1, line.X2, line.Y1, line.Y2, out double tX2, out double tY2);
+                        line.X2 = tX2;
+                        line.Y2 = tY2;
+
                         OnChanged?.Invoke(null, line, ActionType.AddedChild);
+                    }
 
                     // Reset ruler
                     pointCounter = 0;
@@ -918,11 +966,21 @@ namespace SimpleJournal
                     {
                         if (currentStroke == null)
                         {
+                            var firstPoint = pointCollection.FirstOrDefault();
+                            var secondPoint = pointCollection.LastOrDefault();
+                            CalculateRulerCompensation(firstPoint.X, secondPoint.X, firstPoint.Y, secondPoint.Y, out double tX, out double tY);
+                            pointCollection[pointCollection.Count - 1] = new StylusPoint(tX, tY);
+
                             currentStroke = new Stroke(pointCollection) { DrawingAttributes = DefaultDrawingAttributes.Clone() };
                             Strokes.Add(currentStroke);
                         }
                         else
                         {
+                            var firstPoint = pointCollection.FirstOrDefault();
+                            var secondPoint = pointCollection.LastOrDefault();
+                            CalculateRulerCompensation(firstPoint.X, secondPoint.X, firstPoint.Y, secondPoint.Y, out double tX, out double tY);
+                            pointCollection[pointCollection.Count - 1] = new StylusPoint(tX, tY);
+
                             Strokes.Remove(currentStroke);
                             Strokes.Add(currentStroke);
                         }
@@ -940,6 +998,10 @@ namespace SimpleJournal
                         line.Y1 = points.Item1.Y;
                         line.X2 = points.Item2.X;
                         line.Y2 = points.Item2.Y;
+
+                        CalculateRulerCompensation(line.X1, line.X2, line.Y1, line.Y2, out double tX2, out double tY2);
+                        line.X2 = tX2;
+                        line.Y2 = tY2;
 
                         // *** Workaround to make sure the line can be easily accessed via user (no big selection rectangle)
                         line.Stretch = Stretch.Fill;

@@ -1145,7 +1145,7 @@ Klicken Sie auf Nein, um diesen Hinweis weiterhin zu erhalten!</value>
     <comment>MainWindow.xaml</comment>
   </data>
   <data name="strReleaseDate" xml:space="preserve">
-    <value>01.02.2022 15:01 Uhr</value>
+    <value>06.02.2022 13:28 Uhr</value>
     <comment>*</comment>
   </data>
   <data name="strRemove" xml:space="preserve">
@@ -1342,11 +1342,11 @@ Klicken Sie auf Nein, um diesen Hinweis weiterhin zu erhalten!</value>
   </data>
   <data name="strSetupCompleted" xml:space="preserve">
     <value>Sie haben die Einrichtung von SimpleJournal erfolgreich abgeschlossen! 
-Hier möchte ich Ihnen noch ein paar wichtige Hinweise geben, die Ihnen helfen werden, leichter mit dem Programm umgehen zu können.
+Hier möchte ich Ihnen noch ein paar wichtige Hinweise geben, die Ihnen helfen werden, SimpleJournal besser verwenden zu können.
 
-1. Wenn Sie etwas kopieren und einfügen möchten: Das Kopieren funktioniert wie folgt: Wenn Sie etwas ausgewählt haben klicken Sie auf "Kopieren". Um etwas einzufügen klicken Sie einfach auf "Einfügen". Es wird allerdings noch nichts eingefügt, da Sie selbst bestimmen können, an welcher Position eingefügt werden soll, klicken Sie dazu einfach auf eine belibiger Position auf einer beliebigen Seite.
+1. Wenn Sie etwas kopieren und einfügen möchten: Das Kopieren funktioniert wie folgt: Wenn Sie etwas ausgewählt haben klicken Sie auf "Kopieren". Um etwas einzufügen klicken Sie einfach auf "Einfügen". Es wird allerdings noch nichts eingefügt, da Sie selbst bestimmen können, auf welcher Seite/Position das Objekt eingefügt werden soll. Klicken Sie dazu einfach auf eine beliebige Position auf einer beliebigen Seite.
 
-2. Wenn Sie ein Dokument als PDF exportieren möchten, klicken Sie im Menü auf "Drucken" und wählen als Drucker "Microsoft Print To PDF" aus. Dieser Drucker hat bislang nicht immer zuverlässig funktioniert, also falls damit Probleme auftreten sollten, können Sie sich einen alternativen PDF-Drucker herunterladen, der zuverlässig funktioniert. Sie können die Seiten aber auch als Bilder exportieren.</value>
+2. Wenn Sie ein Dokument als PDF exportieren möchten, klicken Sie im Menü auf "Drucken" und wählen als Drucker einen PDF Drucker. "Microsoft Print To PDF" funktioniert leider nicht wie gewünscht, daher ist es empfehlenswert einen alternativen PDF Drucker zu installieren! Allerdings kann ein Journal auch als Bilder-Serie exportiert werden!</value>
     <comment>SetupDialog.xaml</comment>
   </data>
   <data name="strSetupCompletedTitle" xml:space="preserve">
@@ -1425,27 +1425,27 @@ Hier möchte ich Ihnen noch ein paar wichtige Hinweise geben, die Ihnen helfen w
     <value>Der Anpressdruck bezieht sich auf dem Stift, mit dem Sie schreiben. Desto fester Sie aufdrücken, desto dicker zeichnen Sie. Dieses Feature ist oft praktisch, wenn man etwas deutlicher abheben möchte und aus diesem Grund ist dieses Feature standardmäßig aktiviert. Aber es kann auch sinnvoll sein, dieses Feature zu deaktivieren.</value>
     <comment>SetupDialog.xaml</comment>
   </data>
-  <data name="strSetupStep4" xml:space="preserve">
-    <value>Schritt 4: Formerkennung anpassen</value>
-    <comment>SetupDialog.xaml</comment>
-  </data>
-  <data name="strSetupStep4Description" xml:space="preserve">
-    <value>Die Formerkennung von SimpleJournal ermöglicht Ihnen leicht Kreise, Ellipsen und Formen von Polygonen bis zu Sechsecken zu zeichnen. Ihre Zeichnung wird automatisch zu einer Form umgewandelt, sofern eine Form erkannt wurde.</value>
-    <comment>SetupDialog.xaml</comment>
-  </data>
   <data name="strSetupStep5" xml:space="preserve">
-    <value>Schritt 5: Stifte anpassen</value>
+    <value>Schritt 5: Formerkennung anpassen</value>
     <comment>SetupDialog.xaml</comment>
   </data>
   <data name="strSetupStep5Description" xml:space="preserve">
-    <value>Sie können die Stifte anpassen. SimpleJournal bietet Ihnen 4 Stifte, damit man schnell zwischen verschiedenen Farben/Größen wechseln kann. Sie können die Stifte aber jederzeit oben im Menü ändern, d.h. wenn Sie noch nicht wissen, wie Sie Ihre Stifte einstellen möchten, können Sie einfach auf "Weiter" klicken.</value>
+    <value>Die Formerkennung von SimpleJournal ermöglicht Ihnen leicht Kreise, Ellipsen und Formen von Polygonen bis zu Sechsecken zu zeichnen. Ihre Zeichnung wird automatisch zu einer Form umgewandelt, sofern eine Form erkannt wurde.</value>
     <comment>SetupDialog.xaml</comment>
   </data>
   <data name="strSetupStep6" xml:space="preserve">
-    <value>Schritt 6: Textmarker anpassen</value>
+    <value>Schritt 6: Stifte anpassen</value>
     <comment>SetupDialog.xaml</comment>
   </data>
   <data name="strSetupStep6Description" xml:space="preserve">
+    <value>Sie können die Stifte anpassen. SimpleJournal bietet Ihnen 4 Stifte, damit man schnell zwischen verschiedenen Farben/Größen wechseln kann. Sie können die Stifte aber jederzeit oben im Menü ändern, d.h. wenn Sie noch nicht wissen, wie Sie Ihre Stifte einstellen möchten, können Sie einfach auf "Weiter" klicken.</value>
+    <comment>SetupDialog.xaml</comment>
+  </data>
+  <data name="strSetupStep7" xml:space="preserve">
+    <value>Schritt 7: Textmarker anpassen</value>
+    <comment>SetupDialog.xaml</comment>
+  </data>
+  <data name="strSetupStep7Description" xml:space="preserve">
     <value>Hier können Sie Ihren Textmarker optimal für Ihre Bedürfnisse anpassen. Auch hier gilt, dass Sie diese Einstellung jederzeit sehr einfach oben im Menü ändern können. Wenn Sie noch nicht wissen, wie der Textmarker eingestellt werden soll, klicken Sie einfach auf "Weiter".</value>
     <comment>SetupDialog.xaml</comment>
   </data>
@@ -2003,5 +2003,20 @@ Alternativ können Sie die normale Version von SimpleJournal verwenden!</value>
   </data>
   <data name="strFileNotFound" xml:space="preserve">
     <value> Die Datei "{0}" wurde nicht gefunden!</value>
+  </data>
+  <data name="strUseRulerCompensation" xml:space="preserve">
+    <value>Linealausgleich verwenden</value>
+  </data>
+  <data name="strUseRulerCompensation_Description" xml:space="preserve">
+    <value>Der Linealausgleich sorgt dafür, dass Linien, die minimal schief gezeichnet werden, automatisch gerade ausgerichtet werden.</value>
+  </data>
+  <data name="strDontUseRulerCompensation" xml:space="preserve">
+    <value>Linealausgleich nicht verwenden</value>
+  </data>
+  <data name="strRulerCompensationTitle" xml:space="preserve">
+    <value>Linealausgleich</value>
+  </data>
+  <data name="strSetupSetp4" xml:space="preserve">
+    <value>Schritt 4: Lineal einstellen</value>
   </data>
 </root>

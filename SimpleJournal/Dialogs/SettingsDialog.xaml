@@ -208,6 +208,7 @@
                         <controls:SettingsItemControl x:Name="SettingFitToCurve" SettingName="{x:Static res:Resources.strFitToCurveTitle}" Description="{x:Static res:Resources.strFitToCurveDescription}" SettingPropertyName="UseFitToCurve" OnSettingChanged="SettingFitToCurve_OnSettingChanged" />
                         <controls:SettingsItemControl SettingName="{x:Static res:Resources.strUseContactPressure}" Description="{x:Static res:Resources.strSetupStep3Description}" SettingPropertyName="UsePreasure" />
                         <controls:SettingsItemControl SettingName="{x:Static res:Resources.strUseRotationCompensation}" Description="{x:Static res:Resources.strSetupRotationComparisonDescription}" SettingPropertyName="UseRotateCorrection" />
+                        <controls:SettingsItemControl SettingName="{x:Static res:Resources.strUseRulerCompensation}" Description="{x:Static res:Resources.strUseRulerCompensation_Description}" SettingPropertyName="UseRulerCompensation"/>
                         <controls:SettingsItemControl SettingName="{x:Static res:Resources.strUseReplaceEllipsesWithCircles}" Description="{x:Static res:Resources.strSetupReplaceEllipsesWithCirclesDescription}" SettingPropertyName="UseCircleCorrection" />
                     </StackPanel>
                 </ScrollViewer>

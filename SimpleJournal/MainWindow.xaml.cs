@@ -546,6 +546,7 @@ namespace SimpleJournal
             }
 
             lastBackupFileName = path;
+            return;
         }
 
         public void DeleteAutoSaveBackup(bool onClosing = false)
@@ -1379,7 +1380,7 @@ namespace SimpleJournal
                 page.Canvas.SetInsertMode(); // Something to insert
 
             if (currentTool == Tools.Ruler)
-                page.Canvas.SetRulerMode(RulerMode.Normal);
+                page.Canvas.SetRulerMode(Settings.Instance.RulerStrokeMode);
             else if (currentTool == Tools.FreeHandPolygon)
                 page.Canvas.SetFreeHandPolygonMode(polygonDropDownTemplate);
             else if (currentTool == Tools.Form)
@@ -1727,6 +1728,9 @@ namespace SimpleJournal
 
             // Refresh recently openend documents
             RefreshRecentlyOpenedFiles();
+
+            // Refresh ruler mode
+            rulerDropDownTemplate.lstBoxChooseRulerMode.SelectedIndex = (int)(Settings.Instance.RulerStrokeMode);
 
             if (CurrentJournalPages.Count == 1 && CurrentJournalPages[0].Canvas.Strokes.Count == 0 && CurrentJournalPages[0].Canvas.Children.Count == 0)
             {
@@ -2804,8 +2808,17 @@ namespace SimpleJournal
 
             if (!closedButtonWasPressed && DrawingCanvas.Change)
             {
-                // Create a backup before closing - in case of windows will kill the app if the user will not awnser the dialog
-                await CreateBackup();
+                // Create a backup before closing - in case of windows will kill the app if the user will not answer the dialog
+                // PROBLEM: CreateBackup take too much time (compressing), so before the backup is finished the app gets closed!
+                // https://stackoverflow.com/questions/45310056/wpf-child-form-onclosing-event-and-await/45325710#45325710
+                // In general: For large documents the user shouldn't wait till the large backup has finished!
+
+                // So Fire and Forget is the solution here
+                // But it needs to be done on the gui/app thread, because gui elements are accessed!
+                // https://stackoverflow.com/questions/5613951/simplest-way-to-do-a-fire-and-forget-method-in-c-sharp-4-0/5616348#5616348
+#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+                Task.Factory.StartNew(() => Application.Current.Dispatcher.Invoke(() => CreateBackup()));
+#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
 
                 // Ask 
                 var result = MessageBox.Show(this, Properties.Resources.strSaveChanges, Properties.Resources.strSaveChangesTitle, MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
@@ -3482,7 +3495,7 @@ namespace SimpleJournal
 
             ApplyToAllCanvas(new Action<DrawingCanvas>((DrawingCanvas target) =>
             {
-                target.UnSetCopyMode();
+                target.UnsetCopyMode();
             }));
         }
 

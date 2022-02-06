@@ -1164,7 +1164,7 @@ Click on No to continue to receive this message!</value>
     <comment>MainWindow.xaml</comment>
   </data>
   <data name="strReleaseDate" xml:space="preserve">
-    <value>01/02/2022 3:01 PM</value>
+    <value>02/06/2022 1:28 AM</value>
     <comment>About.xaml</comment>
   </data>
   <data name="strRemove" xml:space="preserve">
@@ -1361,11 +1361,11 @@ Click on No to continue to receive this message!</value>
   </data>
   <data name="strSetupCompleted" xml:space="preserve">
     <value>You have successfully completed the setup of SimpleJournal! 
-Here I would like to give you some important hints, which will help you to handle the program more easily. 
+Here I would like to give you a few more important hints that will help you to use SimpleJournal more effectively.
 
-1. If you want to copy and paste something: Copy works as follows: When you have selected something, click on "Copy". To paste something simply click on "Paste". However, nothing will be pasted yet, because you can choose where you want to paste, just click on any position on any page.
+1. If you want to copy and paste something: Copying works as follows: When you have selected something click on "Copy". To paste something, just click on "Paste". However, nothing is pasted yet, as you can determine yourself on which page/position the object is to be pasted. Simply click on any position on any page. 
 
-2. If you would like to export a document as a PDF, click on "Print" in the menu and select "Microsoft Print To PDF" as the printer. This printer has not always worked reliably, so if you have problems with it, you can download an alternative PDF printer that works reliably. You can also export the pages as images.</value>
+2. If you want to export a document as a PDF, click on "Print" in the menu and select a PDF printer. Unfortunately, "Microsoft Print To PDF" does not work as desired, so it is recommended to install an alternative PDF printer! However, a journal can also be exported as a picture series!</value>
     <comment>SetupDialog.xaml</comment>
   </data>
   <data name="strSetupCompletedTitle" xml:space="preserve">
@@ -1444,27 +1444,27 @@ Here I would like to give you some important hints, which will help you to handl
     <value>The contact pressure refers to the pen you write with. The harder you press, the thicker you draw. This feature is often useful when you want to make a more significant stroke, and that's why this feature is enabled by default. But it can also be useful to disable this feature.</value>
     <comment>SetupDialog.xaml</comment>
   </data>
-  <data name="strSetupStep4" xml:space="preserve">
-    <value>Step 4: Adjust shape recognition</value>
-    <comment>SetupDialog.xaml</comment>
-  </data>
-  <data name="strSetupStep4Description" xml:space="preserve">
-    <value>SimpleJournal's shape recognition allows you to easily draw circles, ellipses and shapes from polygons to hexagons. Your drawing is automatically converted to a shape when a shape is recognized.</value>
-    <comment>SetupDialog.xaml</comment>
-  </data>
   <data name="strSetupStep5" xml:space="preserve">
-    <value>Step 5: Customize pens</value>
+    <value>Step 5: Adjust shape recognition</value>
     <comment>SetupDialog.xaml</comment>
   </data>
   <data name="strSetupStep5Description" xml:space="preserve">
-    <value>You can customize the pens. SimpleJournal offers you 4 pens so that you can quickly switch between different colors/sizes. However, you can change the pens at any time at the top of the menu, i.e. if you do not yet know how to adjust your pens, you can simply click on "Next".</value>
+    <value>SimpleJournal's shape recognition allows you to easily draw circles, ellipses and shapes from polygons to hexagons. Your drawing is automatically converted to a shape when a shape is recognized.</value>
     <comment>SetupDialog.xaml</comment>
   </data>
   <data name="strSetupStep6" xml:space="preserve">
-    <value>Step 6: Customize Highlighter</value>
+    <value>Step 6: Customize pens</value>
     <comment>SetupDialog.xaml</comment>
   </data>
   <data name="strSetupStep6Description" xml:space="preserve">
+    <value>You can customize the pens. SimpleJournal offers you 4 pens so that you can quickly switch between different colors/sizes. However, you can change the pens at any time at the top of the menu, i.e. if you do not yet know how to adjust your pens, you can simply click on "Next".</value>
+    <comment>SetupDialog.xaml</comment>
+  </data>
+  <data name="strSetupStep7" xml:space="preserve">
+    <value>Step 7: Customize Highlighter</value>
+    <comment>SetupDialog.xaml</comment>
+  </data>
+  <data name="strSetupStep7Description" xml:space="preserve">
     <value>Here you can adjust your highlighter optimally for your needs. Here, too, you can change this setting very easily at any time at the top of the menu. If you do not yet know how the highlighter should be set, simply click on "Next".</value>
     <comment>SetupDialog.xaml</comment>
   </data>
@@ -2066,5 +2066,24 @@ Alternatively, you can use the normal version of SimpleJournal!</value>
   <data name="strFileNotFound" xml:space="preserve">
     <value> File "{0}" not found!</value>
     <comment>*</comment>
+  </data>
+  <data name="strUseRulerCompensation" xml:space="preserve">
+    <value>Use ruler compensation</value>
+    <comment>SettingsDialog.xaml</comment>
+  </data>
+  <data name="strUseRulerCompensation_Description" xml:space="preserve">
+    <value>The ruler compensation ensures that lines that are drawn minimally crooked are automatically straightened.</value>
+  </data>
+  <data name="strDontUseRulerCompensation" xml:space="preserve">
+    <value>Don't use ruler compensation</value>
+    <comment>SetupDialog.xaml</comment>
+  </data>
+  <data name="strRulerCompensationTitle" xml:space="preserve">
+    <value>Ruler compensation</value>
+    <comment>SetupDialog.xaml</comment>
+  </data>
+  <data name="strSetupSetp4" xml:space="preserve">
+    <value>Step 4: Adjust the ruler</value>
+    <comment>SetupDialog.xaml</comment>
   </data>
 </root>

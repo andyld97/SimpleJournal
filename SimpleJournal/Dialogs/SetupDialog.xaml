@@ -3,8 +3,6 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:SimpleJournal.Dialogs"
-        xmlns:local1="clr-namespace:SimpleJournal"
         xmlns:controls="clr-namespace:SimpleJournal.Controls"
         xmlns:res="clr-namespace:SimpleJournal.Properties"
         xmlns:Fluent="urn:fluent-ribbon"
@@ -99,11 +97,44 @@
                 </StackPanel>
             </Grid>
             <Grid x:Name="page4" Visibility="Collapsed">
+                <StackPanel>                                                        
+                    <TextBlock Margin="5" FontSize="15" TextWrapping="Wrap">
+                        <Run FontWeight="Bold" Text="{x:Static res:Resources.strSetupSetp4}"/>
+                    </TextBlock>
+
+                    <TextBlock Margin="5" FontSize="15" FontWeight="Bold" Text="Linienart" />
+                    <ListBox x:Name="lstBoxChooseRulerMode" SelectionChanged="lstBoxChooseRulerMode_SelectionChanged" Background="Transparent" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden" ItemContainerStyle="{DynamicResource ListBoxSelectionHoldActiveContainerStyle}" Margin="5,0,5,0"  Padding="0,2,0,0">
+                        <ListBox.Items>
+                            <ListBoxItem HorizontalAlignment="Stretch">
+                                <Rectangle x:Name="rectFullStroke" Stroke="{DynamicResource BlackBrush}" StrokeThickness="15" Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBox}}, Path=ActualWidth}" Height="5" Margin="0,2" />
+                            </ListBoxItem>
+                            <ListBoxItem>
+                                <Rectangle x:Name="rectDashedStroke" Stroke="{DynamicResource BlackBrush}" StrokeThickness="15" Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBox}}, Path=ActualWidth}" StrokeDashArray="0.5,0.8" Height="5" Margin="0,2" />
+                            </ListBoxItem>
+                            <ListBoxItem>
+                                <Line x:Name="lineDottetStroke" X1="0" Y1="0" X2="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBox}}, Path=ActualWidth}" Y2="0" Stroke="{DynamicResource BlackBrush}" StrokeDashOffset="-1" StrokeThickness="5" Height="5" Margin="0,2" StrokeDashCap="Round" StrokeDashArray="0.03,2"></Line>
+                            </ListBoxItem>
+                        </ListBox.Items>
+                    </ListBox>
+
+                    <TextBlock Margin="5" FontSize="15" FontWeight="Bold" Text="{x:Static res:Resources.strRulerCompensationTitle}" />
+                    <TextBlock Margin="5" FontSize="15" TextWrapping="Wrap" Text="{x:Static res:Resources.strUseRulerCompensation_Description}"/>
+                    <Fluent:ComboBox x:Name="cmbUseRulerCompensation" SelectionChanged="cmbUseRulerCompensation_SelectionChanged" IsEditable="False" SelectedIndex="0" Margin="0,5,5,5">
+                        <TextBlock Text="{x:Static res:Resources.strUseRulerCompensation}"/>
+                        <TextBlock Text="{x:Static res:Resources.strDontUseRulerCompensation}"/>
+                    </Fluent:ComboBox>
+                    
+                    <Border BorderBrush="Black" BorderThickness="2" Margin="5" Height="150">
+                        <controls:PreviewCanvas x:Name="rulerPreviewCanvas" IsInRulerMode="True" Height="150"/>
+                    </Border>
+                </StackPanel>
+            </Grid>            
+            <Grid x:Name="page5" Visibility="Collapsed">
                 <StackPanel>
                     <TextBlock Margin="5" FontSize="15" TextWrapping="Wrap">
-                        <Run FontWeight="Bold" Text="{x:Static res:Resources.strSetupStep4}"/>
+                        <Run FontWeight="Bold" Text="{x:Static res:Resources.strSetupStep5}"/>
                     </TextBlock>
-                    <TextBlock Margin="5" FontSize="15" TextWrapping="Wrap" Text="{x:Static res:Resources.strSetupStep4Description}"/>
+                    <TextBlock Margin="5" FontSize="15" TextWrapping="Wrap" Text="{x:Static res:Resources.strSetupStep5Description}"/>
                     <Fluent:ComboBox IsEditable="False" x:Name="cmbRotationCorrection" SelectionChanged="CmbRotationCorrection_SelectionChanged" SelectedIndex="0" Margin="0,5,5,5">
                         <TextBlock Text="{x:Static res:Resources.strUseRotationCompensation}"/>
                         <TextBlock Text="{x:Static res:Resources.strDontUseRotationCompensation}"/>
@@ -119,12 +150,12 @@
                     </Border>
                 </StackPanel>
             </Grid>
-            <Grid x:Name="page5" Visibility="Collapsed">
+            <Grid x:Name="page6" Visibility="Collapsed">
                 <StackPanel>
                     <TextBlock Margin="5" FontSize="15" TextWrapping="Wrap">
-                        <Run FontWeight="Bold" Text="{x:Static res:Resources.strSetupStep5}"/>
+                        <Run FontWeight="Bold" Text="{x:Static res:Resources.strSetupStep6}"/>
                     </TextBlock>
-                    <TextBlock Margin="5" FontSize="15" TextWrapping="Wrap" Text="{x:Static res:Resources.strSetupStep5Description}"/>
+                    <TextBlock Margin="5" FontSize="15" TextWrapping="Wrap" Text="{x:Static res:Resources.strSetupStep6Description}"/>
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="90"/>
@@ -182,12 +213,12 @@
                     </Grid>
                 </StackPanel>
             </Grid>
-            <Grid x:Name="page6" Visibility="Collapsed">
+            <Grid x:Name="page7" Visibility="Collapsed">
                 <StackPanel>
                     <TextBlock Margin="5" FontSize="15" TextWrapping="Wrap">
-                        <Run FontWeight="Bold" Text="{x:Static res:Resources.strSetupStep6}"/>
+                        <Run FontWeight="Bold" Text="{x:Static res:Resources.strSetupStep7}"/>
                     </TextBlock>
-                    <TextBlock Margin="5" FontSize="15" TextWrapping="Wrap" Text="{x:Static res:Resources.strSetupStep6Description}"/>
+                    <TextBlock Margin="5" FontSize="15" TextWrapping="Wrap" Text="{x:Static res:Resources.strSetupStep7Description}"/>
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="70"/>
@@ -215,7 +246,7 @@
                     </Grid>
                 </StackPanel>
             </Grid>
-            <Grid x:Name="page7" Visibility="Collapsed">
+            <Grid x:Name="page8" Visibility="Collapsed">
                 <StackPanel>
                     <TextBlock Margin="5" FontSize="15" TextWrapping="Wrap">
                      <Run FontWeight="Bold" Text="{x:Static res:Resources.strSetupCompletedTitle}"/>
@@ -240,9 +271,9 @@
                     <ColumnDefinition />
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
-                <Button x:Name="btnSkip" Click="btnSkip_Click" Grid.Column="0" Content="{x:Static res:Resources.strSkip}" Margin="5" Padding="5"/>
-                <Button x:Name="btnBackwards" Click="btnBackwards_Click" Grid.Column="2" Content="{x:Static res:Resources.strBack}" Margin="5" Padding="5"/>
-                <Button x:Name="btnForwards" Click="btnForwards_Click" Grid.Column="3" Content="{x:Static res:Resources.strNext}" Margin="5" Padding="5"/>
+                <Button x:Name="btnSkip" Click="btnSkip_Click" Grid.Column="0" Content="{x:Static res:Resources.strSkip}" Margin="5" Padding="5" />
+                <Button x:Name="btnBackwards" Click="btnBackwards_Click" Grid.Column="2" Content="{x:Static res:Resources.strBack}" Margin="5" Padding="5" />
+                <Button x:Name="btnForwards" Click="btnForwards_Click" Grid.Column="3" Content="{x:Static res:Resources.strNext}" Margin="5" Padding="5" />
             </Grid>
         </Border>
     </Grid>

@@ -46,8 +46,16 @@ namespace SimpleJournal.Controls
                     (control as IPaper).SetDebug();
 
                     currentCanvas = (control as IPaper).Canvas;
+
+
+                    if (IsInRulerMode)
+                    {
+                        currentCanvas.EditingMode = InkCanvasEditingMode.None;
+                        currentCanvas.SetRulerMode(RulerMode.Normal);
+                    }
+
                     gridPaperContainer.Children.Clear();
-                    gridPaperContainer.Children.Add(new Frame() { Content = control });
+                    gridPaperContainer.Children.Add(control);
                 }
             }
         }
@@ -70,13 +78,17 @@ namespace SimpleJournal.Controls
             }
         }
 
+        public bool IsInRulerMode { get; set; }
+
         public DrawingAttributes DrawingAttributes
         {
             get => (writing ? old : currentCanvas.DefaultDrawingAttributes);
             set
             {
-                if (writing) old = value;
-                else currentCanvas.DefaultDrawingAttributes = value;
+                if (writing) 
+                    old = value;
+                else 
+                    currentCanvas.DefaultDrawingAttributes = value;
             }
         }
         
@@ -84,7 +96,6 @@ namespace SimpleJournal.Controls
         {
             InitializeComponent();
             PaperType = PaperType.Ruled;
-            PaperType = PaperType.Blanco;
         }
 
         public void AddChild(UIElement element)

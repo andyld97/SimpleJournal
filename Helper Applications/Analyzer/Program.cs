@@ -126,7 +126,7 @@ namespace Analyzer
                                     string result = XamlWriter.Save(s);
                                     Rect currentRectangle = rects[counter++];
 
-                                    var xmlRect = Serialization.Serialization.SaveToString(currentRectangle, System.Text.Encoding.Default);
+                                    var xmlRect = Serialization.SaveToString(currentRectangle, System.Text.Encoding.Default);
                                     Console.WriteLine($"{Convert.ToBase64String(System.Text.Encoding.Default.GetBytes(result + DELIMITTER + xmlRect))}{Environment.NewLine}");
                                 }
                             }

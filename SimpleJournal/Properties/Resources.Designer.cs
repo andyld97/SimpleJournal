@@ -804,6 +804,15 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Don&apos;t use ruler compensation.
+        /// </summary>
+        public static string strDontUseRulerCompensation {
+            get {
+                return ResourceManager.GetString("strDontUseRulerCompensation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Dotted.
         /// </summary>
         public static string strDottet {
@@ -2914,7 +2923,7 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 01/28/2022 13:13 AM.
+        ///   Looks up a localized string similar to 02/06/2022 1:28 AM.
         /// </summary>
         public static string strReleaseDate {
             get {
@@ -3000,6 +3009,15 @@ namespace SimpleJournal.Properties {
         public static string strRuler {
             get {
                 return ResourceManager.GetString("strRuler", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ruler compensation.
+        /// </summary>
+        public static string strRulerCompensationTitle {
+            get {
+                return ResourceManager.GetString("strRulerCompensationTitle", resourceCulture);
             }
         }
         
@@ -3448,11 +3466,11 @@ namespace SimpleJournal.Properties {
         
         /// <summary>
         ///   Looks up a localized string similar to You have successfully completed the setup of SimpleJournal! 
-        ///Here I would like to give you some important hints, which will help you to handle the program more easily. 
+        ///Here I would like to give you a few more important hints that will help you to use SimpleJournal more effectively.
         ///
-        ///1. If you want to copy and paste something: Copy works as follows: When you have selected something, click on &quot;Copy&quot;. To paste something simply click on &quot;Paste&quot;. However, nothing will be pasted yet, because you can choose where you want to paste, just click on any position on any page.
+        ///1. If you want to copy and paste something: Copying works as follows: When you have selected something click on &quot;Copy&quot;. To paste something, just click on &quot;Paste&quot;. However, nothing is pasted yet, as you can determine yourself on which page/position the object is to be pasted. Simply click on any position on any page. 
         ///
-        ///2. If you would like to export a document as a PD [rest of string was truncated]&quot;;.
+        ///2. If you  [rest of string was truncated]&quot;;.
         /// </summary>
         public static string strSetupCompleted {
             get {
@@ -3587,6 +3605,15 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Step 4: Adjust the ruler.
+        /// </summary>
+        public static string strSetupSetp4 {
+            get {
+                return ResourceManager.GetString("strSetupSetp4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Step 1: Does your screen have an HD resolution?.
         /// </summary>
         public static string strSetupStep1 {
@@ -3632,25 +3659,7 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Step 4: Adjust shape recognition.
-        /// </summary>
-        public static string strSetupStep4 {
-            get {
-                return ResourceManager.GetString("strSetupStep4", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to SimpleJournal&apos;s shape recognition allows you to easily draw circles, ellipses and shapes from polygons to hexagons. Your drawing is automatically converted to a shape when a shape is recognized..
-        /// </summary>
-        public static string strSetupStep4Description {
-            get {
-                return ResourceManager.GetString("strSetupStep4Description", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Step 5: Customize pens.
+        ///   Looks up a localized string similar to Step 5: Adjust shape recognition.
         /// </summary>
         public static string strSetupStep5 {
             get {
@@ -3659,7 +3668,7 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You can customize the pens. SimpleJournal offers you 4 pens so that you can quickly switch between different colors/sizes. However, you can change the pens at any time at the top of the menu, i.e. if you do not yet know how to adjust your pens, you can simply click on &quot;Next&quot;..
+        ///   Looks up a localized string similar to SimpleJournal&apos;s shape recognition allows you to easily draw circles, ellipses and shapes from polygons to hexagons. Your drawing is automatically converted to a shape when a shape is recognized..
         /// </summary>
         public static string strSetupStep5Description {
             get {
@@ -3668,7 +3677,7 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Step 6: Customize Highlighter.
+        ///   Looks up a localized string similar to Step 6: Customize pens.
         /// </summary>
         public static string strSetupStep6 {
             get {
@@ -3677,11 +3686,29 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Here you can adjust your highlighter optimally for your needs. Here, too, you can change this setting very easily at any time at the top of the menu. If you do not yet know how the highlighter should be set, simply click on &quot;Next&quot;..
+        ///   Looks up a localized string similar to You can customize the pens. SimpleJournal offers you 4 pens so that you can quickly switch between different colors/sizes. However, you can change the pens at any time at the top of the menu, i.e. if you do not yet know how to adjust your pens, you can simply click on &quot;Next&quot;..
         /// </summary>
         public static string strSetupStep6Description {
             get {
                 return ResourceManager.GetString("strSetupStep6Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Step 7: Customize Highlighter.
+        /// </summary>
+        public static string strSetupStep7 {
+            get {
+                return ResourceManager.GetString("strSetupStep7", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Here you can adjust your highlighter optimally for your needs. Here, too, you can change this setting very easily at any time at the top of the menu. If you do not yet know how the highlighter should be set, simply click on &quot;Next&quot;..
+        /// </summary>
+        public static string strSetupStep7Description {
+            get {
+                return ResourceManager.GetString("strSetupStep7Description", resourceCulture);
             }
         }
         
@@ -4276,6 +4303,24 @@ namespace SimpleJournal.Properties {
         public static string strUseRotationCompensation {
             get {
                 return ResourceManager.GetString("strUseRotationCompensation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Use ruler compensation.
+        /// </summary>
+        public static string strUseRulerCompensation {
+            get {
+                return ResourceManager.GetString("strUseRulerCompensation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The ruler compensation ensures that lines that are drawn minimally crooked are automatically straightened..
+        /// </summary>
+        public static string strUseRulerCompensation_Description {
+            get {
+                return ResourceManager.GetString("strUseRulerCompensation_Description", resourceCulture);
             }
         }
         

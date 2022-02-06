@@ -31,14 +31,15 @@ namespace SimpleJournal.Dialogs
         public SetupDialog()
         {
             InitializeComponent();
-            pagesArr = new Grid[] { page1, page2, page3, page4, page5, page6, page7 };
+            pagesArr = new Grid[] { page1, page2, page3, page4, page5, page6, page7, page8 };
             previewCanvas = new PreviewCanvas[]
             {
                 formatPreviewCanvas,
                 preasurePreviewCanvas,
                 previewPensCanvas,
                 previewCanvasTextMarker,
-                previewInputGesture
+                previewInputGesture,
+                rulerPreviewCanvas
             };
 
             foreach (var prev in previewCanvas)
@@ -57,6 +58,7 @@ namespace SimpleJournal.Dialogs
             LoadSettings();
             InitalizePreviewCanvasTextMarker();
             InitalizePreviewInputGesture();
+            InitalizePreviewRulerCanvas();
         }
 
         #region Text Marker
@@ -105,6 +107,12 @@ namespace SimpleJournal.Dialogs
             previewInputGesture.Canvas.SetFreeHandDrawingMode();
             previewInputGesture.Canvas.PreviewCircleCorrection = (cmbCircleCorrection.SelectedIndex == 0);
             previewInputGesture.Canvas.PreviewRotationCorrection = (cmbRotationCorrection.SelectedIndex == 0);
+        }
+
+        private void InitalizePreviewRulerCanvas()
+        {
+            rulerPreviewCanvas.Canvas.PreviewRulerCompensation = (cmbUseRulerCompensation.SelectedIndex == 0);
+            rulerPreviewCanvas.Canvas.SetRulerMode((RulerMode)lstBoxChooseRulerMode.SelectedIndex);
         }
 
         #region Pens
@@ -225,7 +233,6 @@ namespace SimpleJournal.Dialogs
                 else
                     pens[index].FontColor = c.Value.ToColor();
 
-
                 previewPensCanvas.DrawingAttributes = currentDrawingAttributes;
             }
 
@@ -273,6 +280,8 @@ namespace SimpleJournal.Dialogs
             cmbFitToFurve.SelectedIndex = (Settings.Instance.UseFitToCurve ? 0 : 1);
             cmbHDResolution.SelectedIndex = (Settings.Instance.UserHasSelectedHDScreen ? 0 : 1);
             cmbDarkMode.SelectedIndex = (Settings.Instance.UseDarkMode ? 0 : 1);
+            cmbUseRulerCompensation.SelectedIndex = (Settings.Instance.UseRulerCompensation ? 0 : 1);
+            lstBoxChooseRulerMode.SelectedIndex = (int)Settings.Instance.RulerStrokeMode;
         }
 
         private void SavePenSettings()
@@ -301,11 +310,6 @@ namespace SimpleJournal.Dialogs
                 Settings.Instance.DisplaySidebarAutomatically = false;
             }
 
-            // Apply text marker attributes
-            // ToDo: ***
-            //Settings.Instance.TextMarkerColor = new Data.Color(colPickerTextMarker.SelectedColor.R, colPickerTextMarker.SelectedColor.G, colPickerTextMarker.SelectedColor.B);
-            //Settings.Instance.TextMarkerSize = Consts.TextMarkerSizes[cmbStrokeSizeTextMarker.SelectedIndex];
-
             //Settings.Instance.PaperFormat = Format.A4;
             Settings.Instance.PaperType = (PaperType)cmbFormat.SelectedIndex;
             Settings.Instance.UsePreasure = (cmbPreasure.SelectedIndex == 0);
@@ -314,6 +318,8 @@ namespace SimpleJournal.Dialogs
             Settings.Instance.UseFitToCurve = (cmbFitToFurve.SelectedIndex == 0);
             Settings.Instance.UserHasSelectedHDScreen = (cmbHDResolution.SelectedIndex == 0);
             Settings.Instance.UseDarkMode = (cmbDarkMode.SelectedIndex == 0);
+            Settings.Instance.UseRulerCompensation = (cmbUseRulerCompensation.SelectedIndex == 0);
+            Settings.Instance.RulerStrokeMode = (RulerMode)lstBoxChooseRulerMode.SelectedIndex;
 
             Settings.Instance.Save();
             GeneralHelper.ApplyTheming();
@@ -372,9 +378,7 @@ namespace SimpleJournal.Dialogs
             else
             {
                 if (MessageBox.Show(this, Properties.Resources.strSetupExitDialog, Properties.Resources.strSetupExitDialogTitle, MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
-                {
                     e.Cancel = false;
-                }
                 else
                     e.Cancel = true;
             }
@@ -454,6 +458,18 @@ namespace SimpleJournal.Dialogs
 
         private void cmbDarkMode_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+        }
+
+        private void cmbUseRulerCompensation_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (isInitalized)
+                InitalizePreviewRulerCanvas();
+        }
+
+        private void lstBoxChooseRulerMode_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (isInitalized)
+                InitalizePreviewRulerCanvas();
         }
     }
 }

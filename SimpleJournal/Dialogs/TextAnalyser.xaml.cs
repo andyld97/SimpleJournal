@@ -1,4 +1,5 @@
-﻿using SimpleJournal.Templates;
+﻿using SimpleJournal.Common;
+using SimpleJournal.Templates;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -32,7 +33,7 @@ namespace SimpleJournal
                 {
                     if (strokes.Count != 0)
                     {
-                        string[] result = DrawingCanvas.StartAnalyzingProcess(strokes, DrawingCanvas.Operation.Text);
+                        string[] result = DrawingCanvas.StartAnalyzingProcess(strokes, Operation.Text);
                         Application.Current.Dispatcher.Invoke(new Action(() =>
                         {
                             txtText.Text += $"{Properties.Resources.strPage} {pageCounter}:\n\n";

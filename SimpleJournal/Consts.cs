@@ -16,6 +16,7 @@ namespace SimpleJournal
         public static readonly DoubleCollection LineStrokeDottetDashArray = new DoubleCollection() { 0.03, 2 };
         public static readonly DoubleCollection LineStrokeDashedDashArray = new DoubleCollection() { 4, 3 };
         public const int DefaultLineStrokeDashOffset = 1;
+        public const int RulerCompensationOffset = 10;
 
         public static readonly SolidColorBrush DefaultBackground = new SolidColorBrush((System.Windows.Media.Color)(ColorConverter.ConvertFromString("#E1E1E1")));
 
@@ -31,7 +32,7 @@ namespace SimpleJournal
         public static readonly string UpdaterExe = "7244a3f048e82af354eb3cfa3089a3035ff8768f";
         public static readonly string UpdateSystemDotNetDotControllerDotdll = "bbc7224ccc544651d9d844f309721091860f0f92";
 
-        public static readonly Version StoreVersion = new Version("1.502.0.0");
+        public static readonly Version StoreVersion = new Version("1.503.0.0");
         public static readonly Version NormalVersion = typeof(Consts).Assembly.GetName().Version;
 
         #region Pens
