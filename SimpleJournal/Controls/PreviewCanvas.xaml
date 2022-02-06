@@ -4,10 +4,11 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SimpleJournal.Controls"
-             xmlns:res="clr-namespace:SimpleJournal.Properties"
+             xmlns:res="clr-namespace:SimpleJournal.Properties" xmlns:simplejournal="clr-namespace:SimpleJournal"
              mc:Ignorable="d" 
+             Background="Transparent"
              d:DesignHeight="350" d:DesignWidth="500">
-    <Grid>
+    <Grid Background="Transparent">
         <Grid.RowDefinitions>
             <RowDefinition Height="35"/>
             <RowDefinition/>
@@ -24,6 +25,6 @@
             </StackPanel>
         </Grid>
 
-        <Grid Grid.Row="1" x:Name="gridPaperContainer"/>
+        <Grid Grid.Row="1" x:Name="gridPaperContainer" Background="Transparent" />
     </Grid>
 </UserControl>

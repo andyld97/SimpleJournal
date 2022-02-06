@@ -1380,7 +1380,7 @@ namespace SimpleJournal
                 page.Canvas.SetInsertMode(); // Something to insert
 
             if (currentTool == Tools.Ruler)
-                page.Canvas.SetRulerMode(RulerMode.Normal);
+                page.Canvas.SetRulerMode(Settings.Instance.RulerStrokeMode);
             else if (currentTool == Tools.FreeHandPolygon)
                 page.Canvas.SetFreeHandPolygonMode(polygonDropDownTemplate);
             else if (currentTool == Tools.Form)
@@ -1728,6 +1728,9 @@ namespace SimpleJournal
 
             // Refresh recently openend documents
             RefreshRecentlyOpenedFiles();
+
+            // Refresh ruler mode
+            rulerDropDownTemplate.lstBoxChooseRulerMode.SelectedIndex = (int)(Settings.Instance.RulerStrokeMode);
 
             if (CurrentJournalPages.Count == 1 && CurrentJournalPages[0].Canvas.Strokes.Count == 0 && CurrentJournalPages[0].Canvas.Children.Count == 0)
             {
@@ -3492,7 +3495,7 @@ namespace SimpleJournal
 
             ApplyToAllCanvas(new Action<DrawingCanvas>((DrawingCanvas target) =>
             {
-                target.UnSetCopyMode();
+                target.UnsetCopyMode();
             }));
         }
 

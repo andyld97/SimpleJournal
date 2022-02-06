@@ -94,6 +94,13 @@
         Trapeze
     }
 
+    public enum Operation
+    {
+        Shape,
+        Text,
+        TextSearch
+    }
+
     public enum PlotMode
     {
         Positive,
