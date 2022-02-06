@@ -134,17 +134,14 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="IACore, Version=1.7.6223.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\External Libraries\IACore.dll</HintPath>
+    <Reference Include="IACore">
+      <HintPath>..\..\External Libraries\IACore.dll</HintPath>
     </Reference>
-    <Reference Include="IALoader, Version=1.7.6223.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\External Libraries\IALoader.dll</HintPath>
+    <Reference Include="IALoader">
+      <HintPath>..\..\External Libraries\IALoader.dll</HintPath>
     </Reference>
-    <Reference Include="IAWinFX, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=x86">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\External Libraries\IAWinFX.dll</HintPath>
+    <Reference Include="IAWinFX">
+      <HintPath>..\..\External Libraries\IAWinFX.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
