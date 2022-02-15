@@ -35,9 +35,9 @@ namespace SimpleJournal.Controls.Templates
             int index;
 
             if (isTextMarker)
-                index = Consts.TextMarkerSizes.IndexOf(new Size(p.Width, p.Height));
+                index = Documents.UI.Consts.TextMarkerSizes.IndexOf(new Common.Data.Size(p.Width, p.Height));
             else
-                index = Consts.StrokeSizes.IndexOf(new Size(p.Width, p.Height));
+                index = Documents.UI.Consts.StrokeSizes.IndexOf(new Common.Data.Size(p.Width, p.Height));
 
             PenSize.SetColor(p.FontColor.ToColor());
             PenSize.SetIndex(index);

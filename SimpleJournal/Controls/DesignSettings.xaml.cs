@@ -1,5 +1,6 @@
 ﻿using ControlzEx.Theming;
 using SimpleJournal.Data;
+using SimpleJournal.Documents.UI;
 using System.Linq;
 using System.Windows.Controls;
 using System.Windows.Media;

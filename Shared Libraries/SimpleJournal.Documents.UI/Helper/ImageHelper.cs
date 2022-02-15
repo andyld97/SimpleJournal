@@ -81,6 +81,5 @@ namespace SimpleJournal.Documents.UI.Helper
                 return null;
             }
         }
-
     }
 }

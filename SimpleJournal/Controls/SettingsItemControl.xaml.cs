@@ -1,4 +1,5 @@
 ﻿using SimpleJournal.Data;
+using SimpleJournal.Documents.UI;
 using System;
 using System.Globalization;
 using System.Windows;

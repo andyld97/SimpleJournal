@@ -8,6 +8,8 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using SimpleJournal.Common.FileAssociations;
+using SimpleJournal.Documents.UI;
+using SimpleJournal.Documents.UI.Controls;
 
 namespace SimpleJournal
 {
@@ -138,7 +140,7 @@ namespace SimpleJournal
             }
             catch (Exception ex)
             {
-                MessageBox.Show(this, $"{Properties.Resources.strFailedToResetPens}{Environment.NewLine}{Environment.NewLine}{ex.Message}", Properties.Resources.strError, MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(this, $"{Properties.Resources.strFailedToResetPens}{Environment.NewLine}{Environment.NewLine}{ex.Message}", SharedResources.Resources.strError, MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
             // Notify main window to refresh pens

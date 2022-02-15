@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:SimpleJournal.Controls" xmlns:fluent="urn:fluent-ribbon"
              mc:Ignorable="d" 
              xmlns:controlzEx="urn:controlzex"
-             xmlns:res="clr-namespace:SimpleJournal.Properties" xmlns:simplejournal="clr-namespace:SimpleJournal" xmlns:templates="clr-namespace:SimpleJournal.Templates"
+             xmlns:res="clr-namespace:SimpleJournal.Properties" xmlns:paper="clr-namespace:SimpleJournal.Documents.UI.Controls.Paper;assembly=SimpleJournal.Documents.UI"
              d:DesignWidth="400" d:DesignHeight="500">
     <Border BorderBrush="{DynamicResource Fluent.Ribbon.Brushes.AccentBaseColorBrush}" BorderThickness="0">
         <Grid>
@@ -56,13 +56,9 @@
 
                     </fluent:RibbonTabItem>
                 </fluent:Ribbon>
-                
+
                 <ScrollViewer>
-                    <Frame>
-                        <Frame.Content>
-                            <templates:Chequered Background="White" Margin="50,0,50,0" />
-                        </Frame.Content>
-                    </Frame>
+                    <paper:Chequered Background="White" Margin="50,0,50,0" />
                 </ScrollViewer>
             </DockPanel>
         </Grid>

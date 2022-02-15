@@ -253,10 +253,6 @@ Vielen Dank ...
     <value>Changelog</value>
     <comment>About.xaml</comment>
   </data>
-  <data name="strChequered" xml:space="preserve">
-    <value>Kariert</value>
-    <comment>*</comment>
-  </data>
   <data name="strChoosePenColor" xml:space="preserve">
     <value>Stiftfarbe auswählen</value>
     <comment>MainWindow.xaml</comment>
@@ -467,14 +463,6 @@ Vielen Dank ...
     <value>Bitte geben Sie einen gültigen Text ein!</value>
     <comment>About.xaml.cs</comment>
   </data>
-  <data name="strError" xml:space="preserve">
-    <value>Fehler!</value>
-    <comment>*</comment>
-  </data>
-  <data name="strErrorMessageAnalyzingStrokes" xml:space="preserve">
-    <value>Beim Analyisieren ist ein Fehler aufgetreten: {0}. Stellen Sie sicher, dass SimpleJournal richtig installiert ist!</value>
-    <comment>DrawingCanvas.cs</comment>
-  </data>
   <data name="strExport" xml:space="preserve">
     <value>Exportieren</value>
     <comment>*</comment>
@@ -562,10 +550,6 @@ Vielen Dank ...
     <value>Kritischer Fehler!</value>
     <comment>*</comment>
   </data>
-  <data name="strFailedToLoadSettings" xml:space="preserve">
-    <value>Fehler beim Laden der Einstellungen:</value>
-    <comment>*</comment>
-  </data>
   <data name="strFailedToOpenAutoBackupDirectory" xml:space="preserve">
     <value>Fehler beim Öffnen des Verzeichnis im Explorer:</value>
     <comment>RecoverAutoBackupFileDialog.xaml.cs</comment>
@@ -606,17 +590,9 @@ Vielen Dank ...
     <value>Kritischer Fehler!</value>
     <comment>*</comment>
   </data>
-  <data name="strFailedToSaveSettings" xml:space="preserve">
-    <value>Fehler beim Speichern der Einstellungen:</value>
-    <comment>*</comment>
-  </data>
   <data name="strFailedToSendFeedback" xml:space="preserve">
     <value>Fehler beim Senden des Feedbacks, bitte prüfen Sie Ihre Interntverbindung!</value>
     <comment>About.xaml.cs</comment>
-  </data>
-  <data name="strFailedToTransformShape" xml:space="preserve">
-    <value>Es ist ein Fehler beim Transformieren der Form aufgetreten:</value>
-    <comment>*</comment>
   </data>
   <data name="strFailedToUpdate" xml:space="preserve">
     <value>Fehler beim Update:</value>
@@ -1060,10 +1036,6 @@ Klicken Sie auf Nein, um diesen Hinweis weiterhin zu erhalten!</value>
     <value>Klein</value>
     <comment>*</comment>
   </data>
-  <data name="strPlain" xml:space="preserve">
-    <value>Blanko</value>
-    <comment>*</comment>
-  </data>
   <data name="strPleaseEnterValidText" xml:space="preserve">
     <value>Bitte geben Sie gültigen Text ein!</value>
     <comment>*</comment>
@@ -1175,10 +1147,6 @@ Klicken Sie auf Nein, um diesen Hinweis weiterhin zu erhalten!</value>
   <data name="strRubber" xml:space="preserve">
     <value>Radieren</value>
     <comment>MainWindow.xaml</comment>
-  </data>
-  <data name="strRuled" xml:space="preserve">
-    <value>Liniert</value>
-    <comment>*</comment>
   </data>
   <data name="strRuler" xml:space="preserve">
     <value>Lineal</value>
@@ -1783,10 +1751,6 @@ Hier möchte ich Ihnen noch ein paar wichtige Hinweise geben, die Ihnen helfen w
   <data name="strBackground" xml:space="preserve">
     <value>Hintergrund:</value>
     <comment>SettingsDialog.xaml</comment>
-  </data>
-  <data name="strDottet" xml:space="preserve">
-    <value>Punkte (Dotted)</value>
-    <comment>*</comment>
   </data>
   <data name="strPageManagmentButtonInsertPageAfterIndexDotted" xml:space="preserve">
     <value>Fügt nach der aktuellen Seite eine gepunktete Seite ein</value>

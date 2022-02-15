@@ -9,6 +9,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using Pen = SimpleJournal.Data.Pen;
 using SimpleJournal.Documents.UI.Extensions;
+using SimpleJournal.Documents.UI;
 
 namespace SimpleJournal.Dialogs
 {
@@ -75,7 +76,7 @@ namespace SimpleJournal.Dialogs
 
             if (sizeIndex >= 0)
             {
-                var size = Consts.TextMarkerSizes[sizeIndex];
+                var size = Documents.UI.Consts.TextMarkerSizes[sizeIndex];
                 previewCanvasTextMarker.DrawingAttributes.Width = size.Height;
                 previewCanvasTextMarker.DrawingAttributes.Height = size.Width;
 
@@ -191,7 +192,7 @@ namespace SimpleJournal.Dialogs
             pensControls[index].IsChecked = true;
             ignorePenClickedEvent = false;
 
-            var size = Consts.StrokeSizes[Consts.StrokeSizes.IndexOf(new Size(pens[index].Width, pens[index].Height))];
+            var size = Documents.UI.Consts.StrokeSizes[Documents.UI.Consts.StrokeSizes.IndexOf(new Common.Data.Size(pens[index].Width, pens[index].Height))];
 
             var currentDrawingAttributes = previewPensCanvas.DrawingAttributes;
             currentDrawingAttributes.Color = pens[index].FontColor.ToColor();
@@ -238,8 +239,10 @@ namespace SimpleJournal.Dialogs
 
             if (sizeIndex >= 0)
             {
-                pens[index].Width = Consts.StrokeSizes[sizeIndex].Width;
-                pens[index].Height = Consts.StrokeSizes[sizeIndex].Height;
+                var selectedSize = Documents.UI.Consts.StrokeSizes[sizeIndex];
+                pens[index].Width = selectedSize.Width;
+                pens[index].Height = selectedSize.Height;
+
                 currentDrawingAttributes.Width = pens[index].Width;
                 currentDrawingAttributes.Height = pens[index].Height;
 

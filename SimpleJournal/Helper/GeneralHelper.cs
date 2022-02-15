@@ -4,7 +4,7 @@ using SimpleJournal.Controls;
 using SimpleJournal.Data;
 using SimpleJournal.Dialogs;
 using SimpleJournal.Common;
-using SimpleJournal.Common.Controls;
+using SimpleJournal.Documents.UI.Controls;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -28,6 +28,7 @@ using SimpleJournal.Documents.UI.Extensions;
 using SimpleJournal.Documents.PDF;
 using System.Threading.Tasks;
 using System.Net.Http;
+using SimpleJournal.Documents.UI;
 
 namespace SimpleJournal
 {
@@ -37,19 +38,7 @@ namespace SimpleJournal
         {
             return iterator.Where(p => p.GetType() != toOmit);
         }
-
-        public static StrokeCollection Reverse(this StrokeCollection sc)
-        {
-            if (sc == null)
-                return null;
-
-            StrokeCollection result = new StrokeCollection();
-            for (int i = sc.Count - 1; i >= 0; i--)
-                result.Add(sc[i]);
-
-            return result;
-        }
-
+      
         public static void Move<T>(this List<T> lst, int from, int to)
         {
             if (from >= 0 && from < lst.Count && to >= 0 && to < lst.Count)
@@ -61,33 +50,7 @@ namespace SimpleJournal
             }
             else
                 throw new ArgumentOutOfRangeException("from or to must be in the range of length!");
-        }
-
-        public static Point ToPoint(this StylusPoint point)
-        {
-            return new Point(point.X, point.Y);
-        }
-
-        public static double Angle(this Point pt, Point other)
-        {
-            double a = Math.Abs(pt.X - other.X);
-            double result = Math.Acos(a / Math.Sqrt(Math.Pow(a, 2) + Math.Pow(Math.Abs(pt.Y - other.Y), 2)));
-
-            if (other.X < pt.X)
-                return Angle(other, pt) - 180;
-
-            if (other.Y < pt.Y)
-                result = -result;
-
-            return result * (180 / Math.PI);
-        }
-
-        public static System.Windows.Media.Color ConstrastColor(this System.Windows.Media.Color color)
-        {
-            // Counting the perceptive luminance - human eye favors green color... 
-            var l = 0.2126 * color.ScR + 0.7152 * color.ScG + 0.0722 * color.ScB;
-            return l < 0.5 ? Colors.White : Colors.Black;
-        }
+        }      
 
         public static string GetCurrentTheme()
         {
@@ -116,34 +79,7 @@ namespace SimpleJournal
 
             ThemeManager.Current.ChangeTheme(Application.Current, GetCurrentTheme());
         }
-
-
-        public static void ClearAll(this ObservableCollection<UIElement> collection, DrawingCanvas canvas)
-        {
-            List<UIElement> childs = new List<UIElement>();
-            foreach (UIElement child in collection)
-                childs.Add(child);
-            foreach (UIElement child in childs)
-                canvas.Children.Remove(child);
-        }
-
-        public static double Distance(this Point p1)
-        {
-            return Distance(p1, new Point(0, 0));
-        }
-
-        public static double Distance(this Point p1, Point p2)
-        {   
-            return Math.Sqrt(Math.Pow(p2.X - p1.X, 2) + Math.Pow(p2.Y - p1.Y, 2));
-        }
-
-        public static (Point, Point) SortPoints(this Point p1, Point p2)
-        {
-            //  if (p1.Distance() < p2.Distance())
-            return (p1, p2);
-            //else
-            //  return (p2, p1);
-        }
+   
 
         #region RTB
 
@@ -246,181 +182,6 @@ namespace SimpleJournal
                 else
                     throw new Exception("Http Status Code: " + response.StatusCode);
             }
-
-            return null;
-        }
-
-        /// <summary>
-        /// Determines if an element is visible to the user in relation to it's container (e.g. ScrollViewer)
-        /// </summary>
-        /// <param name="element"></param>
-        /// <param name="container"></param>
-        /// <returns></returns>
-        public static bool IsUserVisible(FrameworkElement element, FrameworkElement container)
-        {
-            if (!element.IsVisible)
-                return false;
-
-            Rect bounds = element.TransformToAncestor(container).TransformBounds(new Rect(0.0, 0.0, element.ActualWidth, element.ActualHeight));
-            Rect rect = new Rect(0.0, 0.0, container.ActualWidth, container.ActualHeight);
-
-            return rect.Contains(bounds.TopLeft) || rect.Contains(bounds.BottomRight);
-        }
-
-        /// <summary>
-        /// Creates a clone of input element
-        /// </summary>
-        /// <param name="element"></param>
-        /// <returns></returns>
-        public static UIElement CloneElement(UIElement element)
-        {
-            if (element == null)
-                return null;
-
-            if (element is Image oldImage)
-            {
-                var img = new Image() { Source = (element as Image).Source.Clone() };
-                img.RenderTransform = new RotateTransform(0);
-                img.Width = oldImage.Width;
-                img.Height = oldImage.Height;
-                return img;
-            }
-
-            string s = XamlWriter.Save(element);
-            StringReader stringReader = new StringReader(s);
-            XmlReader xmlReader = XmlTextReader.Create(stringReader, new XmlReaderSettings());
-            var copy = (UIElement)XamlReader.Load(xmlReader);
-
-            if (copy is System.Windows.Controls.TextBox txt)
-            {
-                txt.HorizontalAlignment = HorizontalAlignment.Center;
-                txt.VerticalAlignment = VerticalAlignment.Center;
-            }
-
-            return copy;
-        }
-
-        public static Point DeterminePointFromUIElement(UIElement element, DrawingCanvas can)
-        {
-            try
-            {
-                Visual visualcanvas = (Visual)can;
-                Visual visualRec = (Visual)element;
-                GeneralTransform gf = visualRec.TransformToVisual(visualcanvas);
-
-                return gf.Transform(new Point(0, 0));
-            }
-            catch
-            {
-                return new Point();
-            }
-        }
-
-        public static void BringToFront(this UIElement element, DrawingCanvas canvas)
-        {
-            try
-            {
-                int currentIndex = Canvas.GetZIndex(element);
-                int maxZ = 0;
-
-                for (int i = 0; i < canvas.Children.Count; i++)
-                {
-                    if (canvas.Children[i] is UIElement && canvas.Children[i] != element)
-                        maxZ = Math.Max(maxZ, Canvas.GetZIndex(canvas.Children[i]));
-                }
-                Canvas.SetZIndex(element, Math.Min(++maxZ, int.MaxValue));
-            }
-            catch (Exception)
-            { }
-        }
-
-        public static void BringToFront(this IEnumerable<UIElement> elements, DrawingCanvas canvas)
-        {
-            // Determine max index
-            int zMax = 0;
-            for (int i = 0; i < canvas.Children.Count; i++)
-                zMax = Math.Max(zMax, Canvas.GetZIndex(canvas.Children[i]));
-
-            int newZ = Math.Min(zMax + 1, int.MaxValue);
-            foreach (var element in elements)
-                Canvas.SetZIndex(element, newZ);
-        }
-
-        public static void AddJournalResourceToCanvas(JournalResource resource, DrawingCanvas ink)
-        {
-            ink.LoadChildren(resource.ConvertToUIElement());
-        }
-
-        /// <summary>
-        /// Removes orignal renderTransform and replace it that there is just a RenderTransform and normal properties
-        /// </summary>
-        /// <param name="element"></param>
-        /// <param name="can"></param>
-        /// <returns></returns>
-        public static Point ConvertTransformToProperties(UIElement element, DrawingCanvas can)
-        {
-            try
-            {
-                FrameworkElement fe = (FrameworkElement)element;
-
-                if (fe.Parent == null)
-                    return new Point();
-
-                // Get rotation angle from rendertransform of the element
-                var v = new Vector(0, 1);
-                Vector rotated = Vector.Multiply(v, element.RenderTransform.Value);
-                double angleBetween = Vector.AngleBetween(v, rotated);
-
-                // Get current position of elem in the InkCanvas
-                Point point = DeterminePointFromUIElement(element, can);
-
-                // Reset old transform to replace it with roation angle with origin (0,0)!
-                if (!(element.RenderTransform is RotateTransform))
-                {
-                    element.RenderTransform = null;
-                    element.SetValue(InkCanvas.LeftProperty, point.X);
-                    element.SetValue(InkCanvas.TopProperty, point.Y);
-                    element.RenderTransform = new RotateTransform(angleBetween);
-                    // IMPORTANT: ORIGIN AT (0,0)
-                }
-
-                return point;
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show($"{Properties.Resources.strFailedToTransformShape} {Environment.NewLine}{Environment.NewLine}{e.Message}", Properties.Resources.strFailure, MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-
-            return new Point();
-        }
-
-        /// <summary>
-        /// Determines if an ellipse is a circle
-        /// </summary>
-        /// <param name="el"></param>
-        /// <returns></returns>
-        public static bool IsCricle(this Ellipse el)
-        {
-            return (el != null && Math.Round(el.Width) == Math.Round(el.Height));
-        }
-
-        /// <summary>
-        /// Get bounds from a child of a visual
-        /// </summary>
-        /// <param name="child"></param>
-        /// <param name="parent"></param>
-        /// <returns></returns>
-        public static Rect BoundsRelativeTo(this FrameworkElement child, Visual parent)
-        {
-            try
-            {
-                GeneralTransform gt = child.TransformToAncestor(parent);
-                return gt.TransformBounds(new Rect(0, 0, child.ActualWidth, child.ActualHeight));
-            }
-            catch
-            { }
-
-            return new Rect();
         }
 
         public static void RemoveUpdaterIfAny()
@@ -439,16 +200,19 @@ namespace SimpleJournal
         {
             try
             {
-                using (var client = new WebClient())
-                using (client.OpenRead("http://clients3.google.com/generate_204"))
+                using (var client = new HttpClient())
                 {
-                    return true;
+                    var result = Task.Run(() => client.GetAsync(Consts.Google204Url)).Result;
+                    if (result.IsSuccessStatusCode)
+                        return true;
                 }
             }
             catch
             {
                 return false;
             }
+
+            return false;
         }
 
         public static void SearchForUpdates()
@@ -465,9 +229,9 @@ namespace SimpleJournal
                 // 2) Download version
                 try
                 {
-                    using (WebClient wc = new WebClient())
+                    using (HttpClient client = new HttpClient())
                     {
-                        string versionJSON = wc.DownloadString(Consts.VersionUrl);
+                        string versionJSON = Task.Run(() => client.GetStringAsync(Consts.VersionUrl)).Result;
                         dynamic versions = JsonConvert.DeserializeObject(versionJSON);
 
                         Version onlineVersion = Version.Parse(versions.current.normal.Value);
@@ -547,7 +311,7 @@ namespace SimpleJournal
             };
 
             // If the file exists and if it's up to date no need to install
-            if (System.IO.File.Exists(resourcesToDeploy.Keys.FirstOrDefault()) && FileVersionInfo.GetVersionInfo(resourcesToDeploy.Keys.First()).FileVersion == "0.5.0.2")
+            if (System.IO.File.Exists(resourcesToDeploy.Keys.FirstOrDefault()) && FileVersionInfo.GetVersionInfo(resourcesToDeploy.Keys.First()).FileVersion == "0.5.0.4")
                 return false;
             else if (System.IO.File.Exists(resourcesToDeploy.Keys.FirstOrDefault()))
                 FileSystemHelper.TryDeleteFile(resourcesToDeploy.Keys.FirstOrDefault());

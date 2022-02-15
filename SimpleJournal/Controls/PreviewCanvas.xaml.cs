@@ -1,5 +1,7 @@
 ﻿using SimpleJournal.Common;
-using SimpleJournal.Templates;
+using SimpleJournal.Documents.UI.Controls;
+using SimpleJournal.Documents.UI.Controls.Paper;
+using SimpleJournal.Documents.UI.Helper;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Ink;

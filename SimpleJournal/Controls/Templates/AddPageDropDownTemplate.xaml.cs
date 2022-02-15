@@ -3,6 +3,7 @@ using SimpleJournal.Common;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using SimpleJournal.Documents.UI;
 
 namespace SimpleJournal.Controls.Templates
 {
@@ -31,6 +32,7 @@ namespace SimpleJournal.Controls.Templates
 
             ListBoxPageType.SelectedIndex = index;
         }
+
         private void ListBoxPageType_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.LeftButton == MouseButtonState.Pressed)

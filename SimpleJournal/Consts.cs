@@ -9,14 +9,10 @@ namespace SimpleJournal
     {
         public const int LastRecentlyOpenedDocuments = 10;
         public const double SpaceBetweenPages = 75D;
-        public const int TrapezeOffset = 30;
+ 
         public const double MarkerPathStrokeThickness = 0.4;
         public const double DefaultTextSize = 15.0;
-
-        public static readonly DoubleCollection LineStrokeDottetDashArray = new DoubleCollection() { 0.03, 2 };
-        public static readonly DoubleCollection LineStrokeDashedDashArray = new DoubleCollection() { 4, 3 };
-        public const int DefaultLineStrokeDashOffset = 1;
-        public const int RulerCompensationOffset = 10;
+     
 
         public static readonly SolidColorBrush DefaultBackground = new SolidColorBrush((System.Windows.Media.Color)(ColorConverter.ConvertFromString("#E1E1E1")));
 
@@ -28,11 +24,12 @@ namespace SimpleJournal
         public static readonly string HelpUrl = "https://simplejournal.ca-soft.net/faq";
         public static readonly string GhostScriptDownloadUrl = "https://ghostscript.com/releases/gsdnld.html";
         public static readonly string ConverterAPIUrl = "http://cas-server2.ddns.net:8080";
+        public static readonly string Google204Url = "http://clients3.google.com/generate_204";
 
         public static readonly string UpdaterExe = "7244a3f048e82af354eb3cfa3089a3035ff8768f";
         public static readonly string UpdateSystemDotNetDotControllerDotdll = "bbc7224ccc544651d9d844f309721091860f0f92";
 
-        public static readonly Version StoreVersion = new Version("1.503.0.0");
+        public static readonly Version StoreVersion = new Version("1.504.0.0");
         public static readonly Version NormalVersion = typeof(Consts).Assembly.GetName().Version;
 
         #region Pens
@@ -118,44 +115,6 @@ namespace SimpleJournal
         public const double SidebarListBoxItemViewboxSize = 40;
         #endregion
 
-        #region Pen and Stroke Sizes
-        /// <summary>
-        /// The sizes for the stylus
-        /// </summary>
-        public static readonly List<Size> StrokeSizes = new List<Size>()
-        {
-            // Default size of InkCanvas
-            new Size(1, 1),
-            new Size(2.0031496062992127, 2.0031496062992127),
-            new Size(3, 3),
-            new Size(6, 6),
-            new Size(9, 9),
-        };
-
-        /// <summary>
-        /// The sizes for the rubber
-        /// </summary>
-        public static readonly List<Size> RubberSizes = new List<Size>()
-        {
-            new Size(8, 8),
-            new Size(15, 15),
-            new Size(30, 30),
-            new Size(35, 35),
-            new Size(40, 40),
-        };
-
-        /// <summary>
-        /// The sizes for the textmarker
-        /// </summary>
-        public static readonly List<Size> TextMarkerSizes = new List<Size>()
-        {
-            new Size(15, 20),
-            new Size(20, 20),
-            new Size(30, 20),
-            new Size(40, 20),
-            new Size(50, 20),
-        };
-
-        #endregion
+    
     }
 }

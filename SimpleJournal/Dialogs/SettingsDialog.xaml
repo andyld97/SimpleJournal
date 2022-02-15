@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SimpleJournal"
         xmlns:res="clr-namespace:SimpleJournal.Properties"
+        xmlns:shared="clr-namespace:SimpleJournal.SharedResources;assembly=SimpleJournal.SharedResources"
         xmlns:controlzEx="urn:controlzex"
         xmlns:controls="clr-namespace:SimpleJournal.Controls"
         xmlns:Fluent="urn:fluent-ribbon"
@@ -97,10 +98,10 @@
                         <TextBlock Margin="0,3,0,0" Text="{x:Static res:Resources.strPaperFormat}"/>
                         <Fluent:ComboBox Header="{x:Null}" IsEditable="False" Margin="-8,3,3,0" Padding="4" SelectedIndex="1" x:Name="chkPaperType" SelectionChanged="chkPaperType_SelectionChanged">
                             <ComboBox.Items>
-                                <ComboBoxItem Content="{x:Static res:Resources.strPlain}"/>
-                                <ComboBoxItem Content="{x:Static res:Resources.strChequered}"/>
-                                <ComboBoxItem Content="{x:Static res:Resources.strRuled}"/>
-                                <ComboBoxItem Content="{x:Static res:Resources.strDottet}" />
+                                <ComboBoxItem Content="{x:Static shared:Resources.strPlain}"/>
+                                <ComboBoxItem Content="{x:Static shared:Resources.strChequered}"/>
+                                <ComboBoxItem Content="{x:Static shared:Resources.strRuled}"/>
+                                <ComboBoxItem Content="{x:Static shared:Resources.strDottet}" />
                             </ComboBox.Items>
                         </Fluent:ComboBox>
                         <TextBlock Margin="0,5,0,0" Text="{x:Static res:Resources.strPaperSize}"/>

@@ -66,6 +66,7 @@
   <ItemGroup>
     <Compile Include="Data\Color.cs" />
     <Compile Include="ConvexHull.cs" />
+    <Compile Include="Data\Size.cs" />
     <Compile Include="Enums.cs" />
     <Compile Include="Extensions\StringHelper.cs" />
     <Compile Include="FileAssociations\FileAssociation.cs" />

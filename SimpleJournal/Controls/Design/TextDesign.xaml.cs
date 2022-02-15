@@ -1,4 +1,5 @@
 ﻿using SimpleJournal.Data;
+using SimpleJournal.Documents.UI.Data;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;

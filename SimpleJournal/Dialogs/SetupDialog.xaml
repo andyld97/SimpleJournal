@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:controls="clr-namespace:SimpleJournal.Controls"
         xmlns:res="clr-namespace:SimpleJournal.Properties"
+        xmlns:shared="clr-namespace:SimpleJournal.SharedResources;assembly=SimpleJournal.SharedResources"
         xmlns:Fluent="urn:fluent-ribbon"
         mc:Ignorable="d"
         Title="{x:Static res:Resources.strSetupDialogTitle}" SizeToContent="Height" Width="500"
@@ -60,10 +61,10 @@
                     </TextBlock>
                     <TextBlock Margin="3" FontSize="15" Text="{x:Static res:Resources.strPaperFormat}"/>
                     <Fluent:ComboBox IsEditable="False" Margin="0,4,4,4" Padding="4" HorizontalAlignment="Stretch" SelectedIndex="1" x:Name="cmbFormat" SelectionChanged="CmbFormat_SelectionChanged">
-                        <TextBlock Text="{x:Static res:Resources.strPlain}"/>
-                        <TextBlock Text="{x:Static res:Resources.strChequered}"/>
-                        <TextBlock Text="{x:Static res:Resources.strRuled}"/>
-                        <TextBlock Text="{x:Static res:Resources.strDottet}"/>
+                        <TextBlock Text="{x:Static shared:Resources.strPlain}"/>
+                        <TextBlock Text="{x:Static shared:Resources.strChequered}"/>
+                        <TextBlock Text="{x:Static shared:Resources.strRuled}"/>
+                        <TextBlock Text="{x:Static shared:Resources.strDottet}"/>
                     </Fluent:ComboBox>
                     <TextBlock Margin="3" FontSize="15" Text="{x:Static res:Resources.strPaperSize}"/>
                     <Fluent:ComboBox IsEditable="False" Margin="0,4,4,4" Padding="4" HorizontalAlignment="Stretch" SelectedIndex="0">

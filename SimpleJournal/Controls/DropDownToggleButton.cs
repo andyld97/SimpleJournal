@@ -1,5 +1,6 @@
 ﻿using ControlzEx.Theming;
 using SimpleJournal.Controls.Templates;
+using SimpleJournal.Documents.UI.Helper;
 using System;
 using System.Windows;
 using System.Windows.Controls;
@@ -153,19 +154,16 @@ namespace SimpleJournal.Controls
 
             var pos = e.GetPosition(this);
 
-            if (presenter != null)
+            if (presenter != null && presenter.BoundsRelativeTo(this).Contains(pos))
             {
-                if (presenter.BoundsRelativeTo(this).Contains(pos))
-                {
-                    // Prevent drop down if user selects this pen
-                    e.Handled = true;
+                // Prevent drop down if user selects this pen
+                e.Handled = true;
 
-                    if (!IsToggleable)
-                    {
-                        Click?.Invoke(this, EventArgs.Empty);
-                        RefreshStyle();
-                    }
-                }                
+                if (!IsToggleable)
+                {
+                    Click?.Invoke(this, EventArgs.Empty);
+                    RefreshStyle();
+                }
             }
         }
 

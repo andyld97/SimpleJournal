@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using SimpleJournal.Documents.UI.Helper;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
@@ -27,7 +28,7 @@ namespace SimpleJournal.Controls
                 return;
             }
 
-            var element = GeneralHelper.CloneElement(AssociativeRelation);
+            var element = UIHelper.CloneElement(AssociativeRelation);
             element.RenderTransform = new RotateTransform();
             Viewport.Child = element;
         }

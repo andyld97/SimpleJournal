@@ -1,4 +1,4 @@
-﻿using SimpleJournal.Common.Controls;
+﻿using SimpleJournal.Documents.UI.Controls;
 using SimpleJournal.Documents.Resources;
 using SimpleJournal.Documents.UI.Helper;
 using System.Text;

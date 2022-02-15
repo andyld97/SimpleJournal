@@ -5,14 +5,41 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
 	<UseWPF>true</UseWPF>
-	<AssemblyVersion>0.5.0.3</AssemblyVersion>
-	<FileVersion>0.5.0.3</FileVersion>
+	<AssemblyVersion>0.5.0.4</AssemblyVersion>
+	<FileVersion>0.5.0.4</FileVersion>
 	<Configurations>Debug;Release;Normal;UWPNew</Configurations>
+	<MSBuildWarningsAsMessages>NU1702</MSBuildWarningsAsMessages>
   </PropertyGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\SimpleJournal.Common\SimpleJournal.Common.csproj" />
     <ProjectReference Include="..\SimpleJournal.Documents\SimpleJournal.Documents.csproj" />
+    <ProjectReference Include="..\SimpleJournal.SharedResources\SimpleJournal.SharedResources.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Controls\Paper\Dotted.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Controls\Paper\Blanco.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
+    <Page Update="Controls\Paper\Chequered.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
+    <Page Update="Controls\Paper\Custom.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
+    <Page Update="Controls\Paper\Dotted.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Controls\Paper\Ruled.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
   </ItemGroup>
 
 </Project>
