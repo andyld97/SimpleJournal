@@ -1215,6 +1215,7 @@ namespace SimpleJournal
         private void AddPageDropDownTemplate_AddPage(PaperType paperType)
         {
             AddNewPage(paperType);
+            DrawingCanvas.Change = true;
         }
 
         private void SimpleFormDropDown_OnSimpleFormDropDownChanged(ShapeType shapeType)
@@ -1461,6 +1462,7 @@ namespace SimpleJournal
                 CurrentJournalPages.Insert(CurrentJournalPages.IndexOf(paper) + 1, newPage as IPaper);
 
                 RefreshPages();
+                DrawingCanvas.Change = true;
             };
 
             if (index == -1)
