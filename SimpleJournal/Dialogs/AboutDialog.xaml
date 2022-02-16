@@ -58,7 +58,7 @@
                         <LineBreak />
                         <Run x:Name="TextNewVersionAvailable" FontWeight="Bold" />
                         <LineBreak />
-                        <Run Text="Powered by .NET 6.0.1" FontWeight="Bold" />
+                        <Run Text="Powered by .NET 6.0.2" FontWeight="Bold" />
                     </TextBlock>
                 </StackPanel>
             </TabItem>
@@ -80,14 +80,18 @@
                     </StackPanel.Resources>
                     
                     <TextBlock TextWrapping="Wrap" Margin="5" Text="{x:Static res:Resources.strFeedbackDescription}"/>
-                    <TextBlock Text="{x:Static res:Resources.strName}" Margin="5,5,0,0"/>
-                    <TextBox x:Name="txtName" Text="Anonym" Margin="5,0,5,0" Padding="2"/>
-                    <TextBlock x:Name="txtMail" Text="{x:Static res:Resources.strMail}" Margin="5,5,0,0"/>
-                    <TextBox Margin="5,0,5,0" Padding="2"/>
-                    <TextBlock Text="{x:Static res:Resources.strContent}" Margin="5,5,0,0"/>
+                    
+                    <TextBlock Text="{x:Static res:Resources.strName}" Margin="5,5,0,0" />                    
+                    <TextBox x:Name="txtName" Text="Anonym" Margin="5,0,5,0" Padding="2" />
+                    
+                    <TextBlock Text="{x:Static res:Resources.strMail}" Margin="5,5,0,0" />                    
+                    <TextBox x:Name="txtMail" Margin="5,0,5,0" Padding="2" />
+                    
+                    <TextBlock Text="{x:Static res:Resources.strContent}" Margin="5,5,0,0" />                    
                     <TextBox Margin="5,0,5,0" Padding="2" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" Height="200" x:Name="txtFeedback" AcceptsReturn="True"/>
+                    
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                        <Button x:Name="btnSendFeedback" Click="btnSendFeedback_Click" Content="{x:Static res:Resources.strSend}" Padding="5" Margin="5" Width="100"/>
+                        <Button x:Name="btnSendFeedback" Click="btnSendFeedback_Click" Content="{x:Static res:Resources.strSend}" Padding="5" Margin="5" Width="100" FontWeight="Bold" />
                     </StackPanel>
                 </StackPanel>
             </TabItem>
