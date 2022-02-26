@@ -1737,7 +1737,7 @@ Here I would like to give you a few more important hints that will help you to u
     <comment>SettingsDialog.xaml</comment>
   </data>
   <data name="strWrite" xml:space="preserve">
-    <value>Pen</value>
+    <value>Write</value>
     <comment>*</comment>
   </data>
   <data name="strWrongFileFormat" xml:space="preserve">

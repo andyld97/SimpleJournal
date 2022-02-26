@@ -121,9 +121,14 @@ namespace SimpleJournal.Documents.UI.Helper
             if (element is Image oldImage)
             {
                 var img = new Image() { Source = (element as Image).Source.Clone() };
-                img.RenderTransform = new RotateTransform(0);
                 img.Width = oldImage.Width;
                 img.Height = oldImage.Height;
+
+                // Remember to also apply coordinates for an image (and rendertransform also ...)
+                img.SetValue(InkCanvas.LeftProperty, element.GetValue(InkCanvas.LeftProperty));
+                img.SetValue(InkCanvas.TopProperty, element.GetValue(InkCanvas.TopProperty));
+                img.RenderTransform = oldImage.RenderTransform.Clone();
+
                 return img;
             }
 

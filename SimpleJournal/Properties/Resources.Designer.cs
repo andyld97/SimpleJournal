@@ -4424,7 +4424,7 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Pen.
+        ///   Looks up a localized string similar to Write.
         /// </summary>
         public static string strWrite {
             get {
