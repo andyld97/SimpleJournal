@@ -1,5 +1,6 @@
 ﻿using SimpleJournal.Common;
-using SimpleJournal.Templates;
+using SimpleJournal.Documents.UI.Controls;
+using SimpleJournal.Documents.UI.Controls.Paper;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;

@@ -1,5 +1,6 @@
 ﻿using Microsoft.Web.WebView2.Core;
 using Newtonsoft.Json;
+using SimpleJournal.Documents.UI;
 using System;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -84,7 +85,7 @@ namespace SimpleJournal
                 // Load changelog
                 var webView2Envoirnment = await CoreWebView2Environment.CreateAsync(null, Consts.WebView2CachePath);
                 await BrowserChangelog.EnsureCoreWebView2Async(webView2Envoirnment);
-                BrowserChangelog.Source = new Uri(string.Format(Consts.ChangelogUrl, Properties.Resources.strLang, Data.Settings.Instance.UseDarkMode ? 1 : 0));
+                BrowserChangelog.Source = new Uri(string.Format(Consts.ChangelogUrl, Properties.Resources.strLang, Settings.Instance.UseDarkMode ? 1 : 0));
             }
             catch (Exception)
             { }

@@ -1,7 +1,6 @@
 ﻿using Microsoft.Win32;
 using SimpleJournal.Data;
 using SimpleJournal.Common;
-using SimpleJournal.Templates;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -15,6 +14,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using SimpleJournal.Documents;
 using SimpleJournal.Documents.UI.Extensions;
+using SimpleJournal.Documents.UI;
+using SimpleJournal.Documents.UI.Controls.Paper;
 
 namespace SimpleJournal.Controls
 {

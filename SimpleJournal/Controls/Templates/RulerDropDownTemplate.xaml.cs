@@ -2,6 +2,8 @@
 using SimpleJournal.Common;
 using System.Windows.Controls;
 using System.Windows.Media;
+using SimpleJournal.Documents.UI;
+using SimpleJournal.Documents.UI.Helper;
 
 namespace SimpleJournal.Controls.Templates
 {
@@ -26,7 +28,7 @@ namespace SimpleJournal.Controls.Templates
         public void SetColor(System.Windows.Media.Color c)
         {
             rectDashedStroke.Stroke = lineDottetStroke.Stroke = rectFullStroke.Stroke = new SolidColorBrush(c);
-            lstBoxChooseRulerMode.Background = new SolidColorBrush(c.ConstrastColor());
+            lstBoxChooseRulerMode.Background = new SolidColorBrush(c.BuildConstrastColor());
         }
 
         private void LstBoxChooseRulerMode_SelectionChanged(object sender, SelectionChangedEventArgs e)

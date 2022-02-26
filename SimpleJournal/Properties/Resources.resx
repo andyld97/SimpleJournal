@@ -258,10 +258,6 @@ Many thanks ...
     <value>Changelog</value>
     <comment>About.xaml</comment>
   </data>
-  <data name="strChequered" xml:space="preserve">
-    <value>Chequered</value>
-    <comment>*</comment>
-  </data>
   <data name="strChoosePenColor" xml:space="preserve">
     <value>Choose color of pen</value>
     <comment>MainWindow.xaml</comment>
@@ -476,14 +472,6 @@ Many thanks ...
     <value>Please enter a valid text!</value>
     <comment>About.xaml.cs</comment>
   </data>
-  <data name="strError" xml:space="preserve">
-    <value>Error!</value>
-    <comment>*</comment>
-  </data>
-  <data name="strErrorMessageAnalyzingStrokes" xml:space="preserve">
-    <value>An error occurred while analysing: {0}. Make sure SimpleJournal is installed correctly!</value>
-    <comment>DrawingCanvas.cs</comment>
-  </data>
   <data name="strExport" xml:space="preserve">
     <value>Export</value>
     <comment>*</comment>
@@ -572,10 +560,6 @@ Many thanks ...
     <value>Critical error!</value>
     <comment>*</comment>
   </data>
-  <data name="strFailedToLoadSettings" xml:space="preserve">
-    <value>Error loading settings:</value>
-    <comment>*</comment>
-  </data>
   <data name="strFailedToOpenAutoBackupDirectory" xml:space="preserve">
     <value>Error opening the directory in explorer:</value>
     <comment>RecoverAutoBackupFileDialog.xaml.cs</comment>
@@ -616,17 +600,9 @@ Many thanks ...
     <value>Critical error!</value>
     <comment>*</comment>
   </data>
-  <data name="strFailedToSaveSettings" xml:space="preserve">
-    <value>Error when saving the settings:</value>
-    <comment>*</comment>
-  </data>
   <data name="strFailedToSendFeedback" xml:space="preserve">
     <value>Failed to send your feedback, please make sure you internet connection is working!</value>
     <comment>About.xaml.cs</comment>
-  </data>
-  <data name="strFailedToTransformShape" xml:space="preserve">
-    <value>An error occurred while transforming the shape:</value>
-    <comment>*</comment>
   </data>
   <data name="strFailedToUpdate" xml:space="preserve">
     <value>Failed to update:</value>
@@ -1080,10 +1056,6 @@ Click on No to continue to receive this message!</value>
     <value>Tiny</value>
     <comment>*</comment>
   </data>
-  <data name="strPlain" xml:space="preserve">
-    <value>Plain</value>
-    <comment>*</comment>
-  </data>
   <data name="strPleaseEnterValidText" xml:space="preserve">
     <value>Please enter valid text!</value>
     <comment>*</comment>
@@ -1164,7 +1136,7 @@ Click on No to continue to receive this message!</value>
     <comment>MainWindow.xaml</comment>
   </data>
   <data name="strReleaseDate" xml:space="preserve">
-    <value>02/06/2022 1:28 AM</value>
+    <value>02/26/2022 6:40 PM</value>
     <comment>About.xaml</comment>
   </data>
   <data name="strRemove" xml:space="preserve">
@@ -1194,10 +1166,6 @@ Click on No to continue to receive this message!</value>
   <data name="strRubber" xml:space="preserve">
     <value>Erase</value>
     <comment>MainWindow.xaml</comment>
-  </data>
-  <data name="strRuled" xml:space="preserve">
-    <value>Ruled</value>
-    <comment>*</comment>
   </data>
   <data name="strRuler" xml:space="preserve">
     <value>Ruler</value>
@@ -1438,7 +1406,7 @@ Here I would like to give you a few more important hints that will help you to u
   </data>
   <data name="strSetupStep3ContactPressureTitle" xml:space="preserve">
     <value>Anpressdruck</value>
-    <comment>SetpDialog.xaml</comment>
+    <comment>SetupDialog.xaml</comment>
   </data>
   <data name="strSetupStep3Description" xml:space="preserve">
     <value>The contact pressure refers to the pen you write with. The harder you press, the thicker you draw. This feature is often useful when you want to make a more significant stroke, and that's why this feature is enabled by default. But it can also be useful to disable this feature.</value>
@@ -1769,7 +1737,7 @@ Here I would like to give you a few more important hints that will help you to u
     <comment>SettingsDialog.xaml</comment>
   </data>
   <data name="strWrite" xml:space="preserve">
-    <value>Pen</value>
+    <value>Write</value>
     <comment>*</comment>
   </data>
   <data name="strWrongFileFormat" xml:space="preserve">
@@ -1799,10 +1767,6 @@ Here I would like to give you a few more important hints that will help you to u
   <data name="strBackground" xml:space="preserve">
     <value>Background:</value>
     <comment>SettingsDialog.xaml</comment>
-  </data>
-  <data name="strDottet" xml:space="preserve">
-    <value>Dotted</value>
-    <comment>*</comment>
   </data>
   <data name="strPageManagmentButtonInsertPageBeforeIndexDotted" xml:space="preserve">
     <value>Inserts a dotted page before the current page</value>

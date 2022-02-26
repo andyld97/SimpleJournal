@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using SimpleJournal.Documents.UI;
+using System.Windows;
 using System.Windows.Media;
 
 namespace SimpleJournal.Controls.Templates
@@ -6,7 +7,7 @@ namespace SimpleJournal.Controls.Templates
     /// <summary>
     /// Interaktionslogik für PolygonDropDownTemplate.xaml
     /// </summary>
-    public partial class PolygonDropDownTemplate : DropDownTemplate
+    public partial class PolygonDropDownTemplate : DropDownTemplate, IPolygonTemplateInfo
     {
         private Color borderColor = Colors.Black;
         private Color backgroundColor = Colors.Transparent;
@@ -14,20 +15,15 @@ namespace SimpleJournal.Controls.Templates
         public Color BorderColor
         {
             get => borderColor;
-            private set
-            {
-                borderColor = value;
-            }
+            set => borderColor = value;
         }
 
         public Color BackgroundColor
         {
             get => backgroundColor;
-            private set
-            {
-                backgroundColor = value;
-            }
+            set => backgroundColor = value;
         }
+
 
         public PolygonDropDownTemplate()
         {

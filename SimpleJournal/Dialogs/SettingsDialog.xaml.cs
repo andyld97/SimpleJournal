@@ -8,6 +8,8 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using SimpleJournal.Common.FileAssociations;
+using SimpleJournal.Documents.UI;
+using SimpleJournal.Documents.UI.Controls;
 
 namespace SimpleJournal
 {
@@ -131,14 +133,15 @@ namespace SimpleJournal
 
         private void BtnResetPens_Click(object sender, RoutedEventArgs e)
         {
-            // Delete Pen.xml
             try
             {
+                // Delete Pen.xml
                 System.IO.File.Delete(Consts.PenSettingsFilePath);
+                MessageBox.Show(Properties.Resources.strSuccess, Properties.Resources.strSuccess, MessageBoxButton.OK, MessageBoxImage.Information);
             }
             catch (Exception ex)
             {
-                MessageBox.Show(this, $"{Properties.Resources.strFailedToResetPens}{Environment.NewLine}{Environment.NewLine}{ex.Message}", Properties.Resources.strError, MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(this, $"{Properties.Resources.strFailedToResetPens}{Environment.NewLine}{Environment.NewLine}{ex.Message}", SharedResources.Resources.strError, MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
             // Notify main window to refresh pens
@@ -156,6 +159,8 @@ namespace SimpleJournal
         {
             RecentlyOpenedDocuments.Instance.Clear();
             RecentlyOpenedDocuments.Save();
+
+            MessageBox.Show(Properties.Resources.strSuccess, Properties.Resources.strSuccess, MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         private void NumericUpDownAutoSaveInteral_OnChanged(int oldValue, int newValue)

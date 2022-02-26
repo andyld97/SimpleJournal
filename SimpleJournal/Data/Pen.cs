@@ -2,6 +2,7 @@
 using SimpleJournal.Common.Data;
 using System.Linq;
 using System.Windows;
+using Size = SimpleJournal.Common.Data.Size;
 
 namespace SimpleJournal.Data
 {
@@ -25,7 +26,7 @@ namespace SimpleJournal.Data
             Height = height;
         }
 
-        public Pen() : this(new Color(), Consts.StrokeSizes.FirstOrDefault())
+        public Pen() : this(new Color(), Documents.UI.Consts.StrokeSizes.FirstOrDefault())
         { }
 
         public Pen(Color fontColor, Size size) : this(fontColor, size.Width, size.Height)
@@ -35,7 +36,7 @@ namespace SimpleJournal.Data
         {
             // Initalize pens
             Pen[] pens = new Pen[Consts.AMOUNT_PENS];
-            var firstSize = Consts.StrokeSizes.FirstOrDefault();
+            var firstSize = Documents.UI.Consts.StrokeSizes.FirstOrDefault();
             for (int i = 0; i < Consts.AMOUNT_PENS; i++)
                 pens[i] = new Pen(Consts.PEN_COLORS[i], firstSize);
 

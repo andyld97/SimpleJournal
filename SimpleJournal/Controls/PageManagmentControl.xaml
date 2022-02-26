@@ -45,44 +45,44 @@
                 <Grid Grid.Row="2">
                     <StackPanel HorizontalAlignment="Left">
                         <StackPanel Orientation="Horizontal">
-                            <Button x:Name="ButtonInsertPageBeforeIndexChequered" Click="ButtonInsertPageBeforeIndexChequered_Click"  Height="48" Width="48" Margin="5">
-                                <Image Source="pack://application:,,,/SimpleJournal;component/resources/managment/addchequeredpageup.png"/>
+                            <!--pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages-->
+                            <Button x:Name="ButtonInsertPageBeforeIndexChequered" Click="ButtonInsertPageBeforeIndexChequered_Click" Height="48" Width="48" Margin="5">
+                                <Image Source="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/addchequeredpageup.png"/>
                             </Button>
                             <Button x:Name="ButtonInsertPageBeforeIndexDotted" Click="ButtonInsertPageBeforeIndexDotted_Click" Height="48" Width="48" Margin="5">
-                                <Image Source="pack://application:,,,/SimpleJournal;component/resources/managment/adddottedpageup.png"/>
+                                <Image Source="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/adddottedpageup.png"/>
                             </Button>
-
                             <Button x:Name="ButtonInsertPageBeforeIndexRuled" Click="ButtonInsertPageBeforeIndexRuled_Click"  Height="48" Width="48" Margin="5">
-                                <Image Source="pack://application:,,,/SimpleJournal;component/resources/managment/addruledpageup.png"/>
+                                <Image Source="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/addruledpageup.png"/>
                             </Button>
                             <Button x:Name="ButtonInsertPageBeforeIndexBlanko" Click="ButtonInsertPageBeforeIndexBlanko_Click"  Height="48" Width="48" Margin="5">
-                                <Image Source="pack://application:,,,/SimpleJournal;component/resources/managment/addblankopageup.png"/>
+                                <Image Source="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/addblankopageup.png"/>
                             </Button>
                             <Button x:Name="ButtonMovePageUp" Click="ButtonMovePageUp_Click" Height="48" Width="48" Margin="5">
-                                <Image Source="pack://application:,,,/SimpleJournal;component/resources/managment/pageup.png"/>
+                                <Image Source="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/pageup.png"/>
                             </Button>
                             <Button x:Name="ButtonInsertTop" Click="ButtonInsertTop_Click"  Height="48" Width="48" Margin="5">
-                                <Image Source="pack://application:,,,/SimpleJournal;component/resources/managment/pagetop.png"/>
+                                <Image Source="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/pagetop.png"/>
                             </Button>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
                             <Button x:Name="ButtonInsertPageAfterIndexChequered" Click="ButtonInsertPageAfterIndexChequered_Click" Height="48" Width="48" Margin="5">
-                                <Image Source="pack://application:,,,/SimpleJournal;component/resources/managment/addchequeredpagedown.png"/>
+                                <Image Source="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/addchequeredpagedown.png"/>
                             </Button>
                             <Button x:Name="ButtonInsertPageAfterIndexDotted" Click="ButtonInsertPageAfterIndexDotted_Click"  Height="48" Width="48" Margin="5">
-                                <Image Source="pack://application:,,,/SimpleJournal;component/resources/managment/adddottedpagedown.png"/>
+                                <Image Source="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/adddottedpagedown.png"/>
                             </Button>
                             <Button x:Name="ButtonInsertPageAfterIndexRuled" Click="ButtonInsertPageAfterIndexRuled_Click"  Height="48" Width="48" Margin="5">
-                                <Image Source="pack://application:,,,/SimpleJournal;component/resources/managment/addruledpagedown.png"/>
+                                <Image Source="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/addruledpagedown.png"/>
                             </Button>
                             <Button x:Name="ButtonInsertPageAfterIndexBlanko" Click="ButtonInsertPageAfterIndexBlanko_Click"  Height="48" Width="48" Margin="5">
-                                <Image Source="pack://application:,,,/SimpleJournal;component/resources/managment/addblankopagedown.png"/>
+                                <Image Source="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/addblankopagedown.png"/>
                             </Button>
                             <Button x:Name="ButtonMovePageDown" Click="ButtonMovePageDown_Click" Height="48" Width="48" Margin="5">
-                                <Image Source="pack://application:,,,/SimpleJournal;component/resources/managment/pagedown.png"/>
+                                <Image Source="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/pagedown.png"/>
                             </Button>
                             <Button x:Name="ButtonInsertDown" Click="ButtonInsertDown_Click" Height="48" Width="48" Margin="5">
-                                <Image Source="pack://application:,,,/SimpleJournal;component/resources/managment/pagebottom.png"/>
+                                <Image Source="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/pagebottom.png"/>
                             </Button>
                         </StackPanel>
                     </StackPanel>
@@ -94,7 +94,7 @@
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
                             <Button x:Name="ButtonDeletePage" Click="ButtonDeletePage_Click" Height="48" Width="48" Margin="5">
-                                <Image Source="pack://application:,,,/SimpleJournal;component/resources/managment/pagedelete.png"/>
+                                <Image Source="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/pagedelete.png"/>
                             </Button>
                         </StackPanel>
                     </StackPanel>
@@ -128,13 +128,13 @@
                 <Grid HorizontalAlignment="Right">
                     <StackPanel Orientation="Horizontal">
                         <ToggleButton x:Name="ToggleButtonChequered" Checked="ToggleButton_Checked" Unchecked="ToggleButton_Checked" Width="48" Height="48" Margin="5">
-                            <Image Source="pack://application:,,,/SimpleJournal;component/resources/managment/chequred.png"/>
+                            <Image Source="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/chequred.png"/>
                         </ToggleButton>
                         <ToggleButton x:Name="ToggleButtonDotted" Checked="ToggleButton_Checked" Unchecked="ToggleButton_Checked"  Width="48" Height="48" Margin="5">
-                            <Image Source="pack://application:,,,/SimpleJournal;component/resources/dotted.png"/>
+                            <Image Source="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/dotted.png"/>
                         </ToggleButton>
                         <ToggleButton x:Name="ToggleButtonRuled" Checked="ToggleButton_Checked" Unchecked="ToggleButton_Checked" Width="48" Height="48" Margin="5">
-                            <Image Source="pack://application:,,,/SimpleJournal;component/resources/managment/ruled.png"/>
+                            <Image Source="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/ruled.png"/>
                         </ToggleButton>
                         <ToggleButton x:Name="ToggleButtonBlanko" Checked="ToggleButton_Checked" Unchecked="ToggleButton_Checked" Width="48" Height="48" Margin="5">
                             <Image Source="pack://application:,,,/SimpleJournal;component/resources/clear.png"/>

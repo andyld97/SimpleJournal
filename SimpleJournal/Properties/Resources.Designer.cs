@@ -426,15 +426,6 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Chequered.
-        /// </summary>
-        public static string strChequered {
-            get {
-                return ResourceManager.GetString("strChequered", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Choose color of pen.
         /// </summary>
         public static string strChoosePenColor {
@@ -813,15 +804,6 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Dotted.
-        /// </summary>
-        public static string strDottet {
-            get {
-                return ResourceManager.GetString("strDottet", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Draw.
         /// </summary>
         public static string strDraw {
@@ -944,24 +926,6 @@ namespace SimpleJournal.Properties {
         public static string strEnterValidText {
             get {
                 return ResourceManager.GetString("strEnterValidText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Error!.
-        /// </summary>
-        public static string strError {
-            get {
-                return ResourceManager.GetString("strError", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to An error occurred while analysing: {0}. Make sure SimpleJournal is installed correctly!.
-        /// </summary>
-        public static string strErrorMessageAnalyzingStrokes {
-            get {
-                return ResourceManager.GetString("strErrorMessageAnalyzingStrokes", resourceCulture);
             }
         }
         
@@ -1182,15 +1146,6 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Error loading settings:.
-        /// </summary>
-        public static string strFailedToLoadSettings {
-            get {
-                return ResourceManager.GetString("strFailedToLoadSettings", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Error opening the directory in explorer:.
         /// </summary>
         public static string strFailedToOpenAutoBackupDirectory {
@@ -1281,29 +1236,11 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Error when saving the settings:.
-        /// </summary>
-        public static string strFailedToSaveSettings {
-            get {
-                return ResourceManager.GetString("strFailedToSaveSettings", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Failed to send your feedback, please make sure you internet connection is working!.
         /// </summary>
         public static string strFailedToSendFeedback {
             get {
                 return ResourceManager.GetString("strFailedToSendFeedback", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to An error occurred while transforming the shape:.
-        /// </summary>
-        public static string strFailedToTransformShape {
-            get {
-                return ResourceManager.GetString("strFailedToTransformShape", resourceCulture);
             }
         }
         
@@ -2680,15 +2617,6 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Plain.
-        /// </summary>
-        public static string strPlain {
-            get {
-                return ResourceManager.GetString("strPlain", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Please enter valid text!.
         /// </summary>
         public static string strPleaseEnterValidText {
@@ -2923,7 +2851,7 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 02/06/2022 1:28 AM.
+        ///   Looks up a localized string similar to 02/26/2022 6:40 PM.
         /// </summary>
         public static string strReleaseDate {
             get {
@@ -2991,15 +2919,6 @@ namespace SimpleJournal.Properties {
         public static string strRubber {
             get {
                 return ResourceManager.GetString("strRubber", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Ruled.
-        /// </summary>
-        public static string strRuled {
-            get {
-                return ResourceManager.GetString("strRuled", resourceCulture);
             }
         }
         
@@ -4505,7 +4424,7 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Pen.
+        ///   Looks up a localized string similar to Write.
         /// </summary>
         public static string strWrite {
             get {

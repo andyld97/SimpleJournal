@@ -27,6 +27,7 @@
 		<PublishReadyToRun>true</PublishReadyToRun>
 		<ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
 		<Configurations>Debug;Release;UWPNew;Normal</Configurations>
+		<MSBuildWarningsAsMessages>NU1702</MSBuildWarningsAsMessages>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
 		<PlatformTarget>x64</PlatformTarget>
@@ -98,10 +99,6 @@
 		<AdditionalFiles Remove="C:\Users\andre\.nuget\packages\microsoft.dotnet.upgradeassistant.extensions.default.analyzers\0.2.231403\build\\WebTypeReplacements.typemap" />
 	</ItemGroup>
 	<ItemGroup>
-		<None Remove="resources\adddotted.png" />
-		<None Remove="resources\dotted.png" />
-		<None Remove="resources\managment\adddottedpagedown.png" />
-		<None Remove="resources\managment\adddottedpageup.png" />
 		<None Remove="resources\pdf.png" />
 	</ItemGroup>
 	<ItemGroup>
@@ -137,15 +134,10 @@
 	</ItemGroup>
 	<ItemGroup>
 		<Resource Include="resources\caslogo.ico" />
-		<Resource Include="resources\managment\adddottedpagedown.png" />
-		<Resource Include="resources\managment\adddottedpageup.png" />
 		<Resource Include="resources\pdf.png" />
 	</ItemGroup>
 	<ItemGroup>
 		<Resource Include="resources\selectarea.png" />
-	</ItemGroup>
-	<ItemGroup>
-		<Resource Include="resources\add.png" />
 	</ItemGroup>
 	<ItemGroup>
 		<Resource Include="resources\about.png" />
@@ -168,10 +160,6 @@
 	</ItemGroup>
 	<ItemGroup>
 		<Resource Include="resources\search.png" />
-	</ItemGroup>
-	<ItemGroup>
-		<Resource Include="resources\deletepage.png" />
-		<Resource Include="resources\editpage.png" />
 	</ItemGroup>
 	<ItemGroup>
 		<Resource Include="journalicon.ico" />
@@ -238,12 +226,6 @@
 		</BootstrapperPackage>
 	</ItemGroup>
 	<ItemGroup>
-		<Resource Include="resources\adddotted.png" />
-	</ItemGroup>
-	<ItemGroup>
-		<Resource Include="resources\dotted.png" />
-	</ItemGroup>
-	<ItemGroup>
 		<Resource Include="resources\polygon.png" />
 	</ItemGroup>
 	<ItemGroup>
@@ -252,47 +234,6 @@
 	</ItemGroup>
 	<ItemGroup>
 		<Resource Include="resources\zoom_out.png" />
-	</ItemGroup>
-	<ItemGroup>
-		<Resource Include="resources\managment\pageadd.png" />
-		<Resource Include="resources\managment\pagedelete.png" />
-	</ItemGroup>
-	<ItemGroup>
-		<Resource Include="resources\managment\pagedown.png" />
-		<Resource Include="resources\managment\pagetop.png" />
-	</ItemGroup>
-	<ItemGroup>
-		<Resource Include="resources\managment\pageup.png" />
-	</ItemGroup>
-	<ItemGroup>
-		<Resource Include="resources\managment\pagebottom.png" />
-	</ItemGroup>
-	<ItemGroup>
-		<Resource Include="resources\managment\ruled.png" />
-	</ItemGroup>
-	<ItemGroup>
-		<Resource Include="resources\managment\addblankopagedown.png" />
-	</ItemGroup>
-	<ItemGroup>
-		<Resource Include="resources\managment\addblankopageup.png" />
-	</ItemGroup>
-	<ItemGroup>
-		<Resource Include="resources\managment\chequred.png" />
-	</ItemGroup>
-	<ItemGroup>
-		<Resource Include="resources\managment\addchequeredpagedown.png" />
-		<Resource Include="resources\managment\addchequeredpageup.png" />
-	</ItemGroup>
-	<ItemGroup>
-		<Resource Include="resources\managment\addruledpagedown.png" />
-		<Resource Include="resources\managment\addruledpageup.png" />
-	</ItemGroup>
-	<ItemGroup>
-		<Resource Include="resources\addblankopage.png" />
-		<Resource Include="resources\addruledpage.png" />
-	</ItemGroup>
-	<ItemGroup>
-		<Resource Include="resources\addchequeredpage.png" />
 	</ItemGroup>
 	<ItemGroup>
 		<Resource Include="resources\warning.png" />
@@ -329,23 +270,24 @@
 		<Resource Include="resources\touch_on.png" />
 	</ItemGroup>
 	<ItemGroup>
-		<PackageReference Include="DotnetRuntimeBootstrapper" Version="2.0.3">
+		<PackageReference Include="DotnetRuntimeBootstrapper" Version="2.2.0">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
 		<PackageReference Include="Fluent.Ribbon" Version="9.0.3" />
-		<PackageReference Include="Magick.NET-Q16-AnyCPU" Version="9.0.0" />
-		<PackageReference Include="Magick.NET.Core" Version="9.0.0" />
+		<PackageReference Include="Magick.NET-Q16-AnyCPU" Version="10.0.0" />
+		<PackageReference Include="Magick.NET.Core" Version="10.0.0" />
 		<PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
-		<PackageReference Include="Microsoft.Web.WebView2" Version="1.0.1072.54" />
+		<PackageReference Include="Microsoft.Web.WebView2" Version="1.0.1158-prerelease" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-		<PackageReference Include="Microsoft.Windows.Compatibility" Version="6.0.0" />
+		<PackageReference Include="Microsoft.Windows.Compatibility" Version="7.0.0-preview.1.22076.8" />
 	</ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\Shared Libraries\SimpleJournal.Common\SimpleJournal.Common.csproj" />
 		<ProjectReference Include="..\Shared Libraries\SimpleJournal.Documents.PDF\SimpleJournal.Documents.PDF.csproj" />
 		<ProjectReference Include="..\Shared Libraries\SimpleJournal.Documents.UI\SimpleJournal.Documents.UI.csproj" />
 		<ProjectReference Include="..\Shared Libraries\SimpleJournal.Documents\SimpleJournal.Documents.csproj" />
+		<ProjectReference Include="..\Shared Libraries\SimpleJournal.SharedResources\SimpleJournal.SharedResources.csproj" />
 	</ItemGroup>
 	<ItemGroup>
 		<Compile Update="Properties\Resources.Designer.cs">
@@ -358,13 +300,16 @@
 		<EmbeddedResource Update="Properties\Resources.de.resx">
 			<Generator>PublicResXFileCodeGenerator</Generator>
 		</EmbeddedResource>
+		<EmbeddedResource Update="Properties\Resources.pl.resx">
+		  <Generator>PublicResXFileCodeGenerator</Generator>
+		</EmbeddedResource>
 		<EmbeddedResource Update="Properties\Resources.resx">
 			<Generator>PublicResXFileCodeGenerator</Generator>
 			<LastGenOutput>Resources.Designer.cs</LastGenOutput>
 		</EmbeddedResource>
 	</ItemGroup>
 	<Target Name="PostPublish" AfterTargets="Publish">
-		<Exec Command="copy /Y &quot;$(SolutionDir)Helper Applications\Analyzer\bin\$(ConfigurationName)\Analyzer.exe&quot; &quot;$(SolutionDir)$(ProjectName)\$(PublishDir)\Analyzer.exe&quot;&#xD;&#xA;copy /Y &quot;$(SolutionDir)Helper Applications\Analyzer\bin\$(ConfigurationName)\Analyzer.exe.config&quot; &quot;$(SolutionDir)$(ProjectName)\$(PublishDir)\Analyzer.exe.config&quot;&#xD;&#xA;copy /Y &quot;$(SolutionDir)Helper Applications\Analyzer\bin\$(ConfigurationName)\IACore.dll&quot; &quot;$(SolutionDir)$(ProjectName)\$(PublishDir)\IACore.dll&quot;&#xD;&#xA;copy /Y &quot;$(SolutionDir)Helper Applications\Analyzer\bin\$(ConfigurationName)\IALoader.dll&quot; &quot;$(SolutionDir)$(ProjectName)\$(PublishDir)\IALoader.dll&quot;&#xD;&#xA;copy /Y &quot;$(SolutionDir)Helper Applications\Analyzer\bin\$(ConfigurationName)\IAWinFX.dll&quot; &quot;$(SolutionDir)$(ProjectName)\$(PublishDir)\IAWinFX.dll&quot;&#xD;&#xA;copy /Y &quot;$(SolutionDir)Helper Applications\Analyzer\bin\$(ConfigurationName)\SimpleJournal.Common.dll&quot; &quot;$(SolutionDir)$(ProjectName)\$(PublishDir)\SimpleJournal.Common.dll&quot;&#xD;&#xA;copy /Y &quot;$(SolutionDir)Shared Libraries\SimpleJournal.Documents.UI\bin\$(ConfigurationName)\net6.0-windows\SimpleJournal.Documents.dll&quot; &quot;$(SolutionDir)$(ProjectName)\$(PublishDir)\SimpleJournal.Documents.dll&quot;&#xD;&#xA;copy /Y &quot;$(SolutionDir)Shared Libraries\SimpleJournal.Documents.UI\bin\$(ConfigurationName)\net6.0-windows\SimpleJournal.Documents.UI.dll&quot; &quot;$(SolutionDir)$(ProjectName)\$(PublishDir)\SimpleJournal.Documents.UI.dll&quot;" />
+		<Exec Command="copy /Y &quot;$(SolutionDir)Helper Applications\Analyzer\bin\$(ConfigurationName)\Analyzer.exe&quot; &quot;$(SolutionDir)$(ProjectName)\$(PublishDir)\Analyzer.exe&quot;&#xD;&#xA;copy /Y &quot;$(SolutionDir)Helper Applications\Analyzer\bin\$(ConfigurationName)\Analyzer.exe.config&quot; &quot;$(SolutionDir)$(ProjectName)\$(PublishDir)\Analyzer.exe.config&quot;&#xD;&#xA;copy /Y &quot;$(SolutionDir)Helper Applications\Analyzer\bin\$(ConfigurationName)\IACore.dll&quot; &quot;$(SolutionDir)$(ProjectName)\$(PublishDir)\IACore.dll&quot;&#xD;&#xA;copy /Y &quot;$(SolutionDir)Helper Applications\Analyzer\bin\$(ConfigurationName)\IALoader.dll&quot; &quot;$(SolutionDir)$(ProjectName)\$(PublishDir)\IALoader.dll&quot;&#xD;&#xA;copy /Y &quot;$(SolutionDir)Helper Applications\Analyzer\bin\$(ConfigurationName)\IAWinFX.dll&quot; &quot;$(SolutionDir)$(ProjectName)\$(PublishDir)\IAWinFX.dll&quot;&#xD;&#xA;copy /Y &quot;$(SolutionDir)Helper Applications\Analyzer\bin\$(ConfigurationName)\SimpleJournal.Common.dll&quot; &quot;$(SolutionDir)$(ProjectName)\$(PublishDir)\SimpleJournal.Common.dll&quot;&#xD;&#xA;copy /Y &quot;$(SolutionDir)Shared Libraries\SimpleJournal.Documents.UI\bin\$(ConfigurationName)\net6.0-windows\SimpleJournal.Documents.dll&quot; &quot;$(SolutionDir)$(ProjectName)\$(PublishDir)\SimpleJournal.Documents.dll&quot;&#xD;&#xA;copy /Y &quot;$(SolutionDir)Shared Libraries\SimpleJournal.Documents.UI\bin\$(ConfigurationName)\net6.0-windows\SimpleJournal.Documents.UI.dll&quot; &quot;$(SolutionDir)$(ProjectName)\$(PublishDir)\SimpleJournal.Documents.UI.dll&quot;&#xD;&#xA;copy /Y &quot;$(SolutionDir)Shared Libraries\SimpleJournal.SharedResources\bin\$(ConfigurationName)\net48\SimpleJournal.SharedResources.dll&quot; &quot;$(SolutionDir)$(ProjectName)\$(PublishDir)\SimpleJournal.SharedResources.dll&quot;" />
 		<Exec Condition="'$(Configuration)' == 'Normal'" Command="copy /Y &quot;$(SolutionDir)Helper Applications\Touch\bin\Debug\Device.dll&quot; &quot;$(SolutionDir)$(ProjectName)\$(PublishDir)\Device.dll&quot;&#xD;&#xA;copy /Y &quot;$(SolutionDir)Helper Applications\Touch\bin\Debug\Touch.exe&quot; &quot;$(SolutionDir)$(ProjectName)\$(PublishDir)\Touch.exe&quot;&#xD;&#xA;copy /Y &quot;$(SolutionDir)Helper Applications\Touch\bin\Debug\Touch.exe.config&quot; &quot;$(SolutionDir)$(ProjectName)\$(PublishDir)\Touch.exe.config" />
 	</Target>
 	<Target Name="PostBuild" AfterTargets="PostBuildEvent">

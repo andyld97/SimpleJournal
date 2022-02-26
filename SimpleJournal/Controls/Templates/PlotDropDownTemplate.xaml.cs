@@ -1,5 +1,6 @@
 ﻿using SimpleJournal.Data;
 using SimpleJournal.Common;
+using SimpleJournal.Documents.UI;
 
 namespace SimpleJournal.Controls.Templates
 {

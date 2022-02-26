@@ -1,0 +1,71 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net48</TargetFramework>
+    <AssemblyVersion>0.5.0.4</AssemblyVersion>
+    <FileVersion>0.5.0.4</FileVersion>
+    <Configurations>Debug;Release;Normal;UWPNew</Configurations>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="icons\pages\add.png" />
+    <None Remove="icons\pages\addblankopage.png" />
+    <None Remove="icons\pages\deletepage.png" />
+    <None Remove="icons\pages\dotted.png" />
+    <None Remove="icons\pages\editpage.png" />
+    <None Remove="icons\pages\pagedown.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="icons\pages\pagedown.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="icons\pages\add.png" />
+    <Resource Include="icons\pages\addblankopage.png" />
+    <Resource Include="icons\pages\addblankopagedown.png" />
+    <Resource Include="icons\pages\addblankopageup.png" />
+    <Resource Include="icons\pages\addchequeredpage.png" />
+    <Resource Include="icons\pages\addchequeredpagedown.png" />
+    <Resource Include="icons\pages\addchequeredpageup.png" />
+    <Resource Include="icons\pages\adddotted.png" />
+    <Resource Include="icons\pages\adddottedpagedown.png" />
+    <Resource Include="icons\pages\adddottedpageup.png" />
+    <Resource Include="icons\pages\addruledpage.png" />
+    <Resource Include="icons\pages\addruledpagedown.png" />
+    <Resource Include="icons\pages\addruledpageup.png" />
+    <Resource Include="icons\pages\chequred.png" />
+    <Resource Include="icons\pages\deletepage.png" />
+    <Resource Include="icons\pages\dotted.png" />
+    <Resource Include="icons\pages\editpage.png" />
+    <Resource Include="icons\pages\pageadd.png" />
+    <Resource Include="icons\pages\pagebottom.png" />
+    <Resource Include="icons\pages\pagedelete.png" />
+    <Resource Include="icons\pages\pagedown.png" />
+    <Resource Include="icons\pages\pagetop.png" />
+    <Resource Include="icons\pages\pageup.png" />
+    <Resource Include="icons\pages\ruled.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Resources.de.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources.pl.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+</Project>

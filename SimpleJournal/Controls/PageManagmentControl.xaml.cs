@@ -1,6 +1,5 @@
 ﻿using SimpleJournal.Data;
 using SimpleJournal.Common;
-using SimpleJournal.Templates;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -12,6 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using SimpleJournal.Documents;
 using SimpleJournal.Documents.UI.Extensions;
+using SimpleJournal.Documents.UI;
+using SimpleJournal.Documents.UI.Controls.Paper;
 
 namespace SimpleJournal.Controls
 {

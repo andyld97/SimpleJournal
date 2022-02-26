@@ -43,7 +43,7 @@ namespace PDF2J
 
         private static void CleanUPTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
-            logger.LogInformation("[CleanUP] Starting cleaning service ...");
+           // logger.LogInformation("[CleanUP] Starting cleaning service ...");
 
             var now = DateTime.Now;
             var ticketsToRemove = PrintTickets.Where(t => (t.Status == TicketStatus.Failed || t.Status == TicketStatus.Completed) && t.DateTimeAdded.AddHours(1) >= now).ToList();
@@ -57,10 +57,10 @@ namespace PDF2J
                 catch { }
             }
 
-            if (ticketsToRemove.Count == 0)
-                logger.LogInformation("[CleanUP] Nothing to do, finished!");
-            else
-                logger.LogInformation($"[CleanUP] Removed {ticketsToRemove.Count} tickets!");
+            // if (ticketsToRemove.Count == 0)
+            //     logger.LogInformation("[CleanUP] Nothing to do, finished!");
+            // else
+            //     logger.LogInformation($"[CleanUP] Removed {ticketsToRemove.Count} tickets!");
 
             ticketsToRemove.Clear();
         }

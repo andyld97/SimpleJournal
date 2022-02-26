@@ -1,14 +1,13 @@
 ﻿using Fluent;
 using Microsoft.Win32;
-using SimpleJournal.Actions;
+using SimpleJournal.Documents.UI.Actions;
 using SimpleJournal.Controls;
 using SimpleJournal.Controls.Templates;
 using SimpleJournal.Data;
 using SimpleJournal.Dialogs;
 using SimpleJournal.Helper;
 using SimpleJournal.Common;
-using SimpleJournal.Common.Controls;
-using SimpleJournal.Templates;
+using SimpleJournal.Documents.UI.Controls;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -39,6 +38,11 @@ using SimpleJournal.Documents.UI.Extensions;
 using SimpleJournal.Documents.UI.Helper;
 using SimpleJournal.Common.FileAssociations;
 using SimpleJournal.Helper.PDF;
+using Action = SimpleJournal.Documents.UI.Actions.Action;
+using SimpleJournal.Documents.UI;
+using SimpleJournal.Documents.UI.Data;
+using Clipboard = SimpleJournal.Documents.UI.Data.Clipboard;
+using SimpleJournal.Documents.UI.Controls.Paper;
 
 namespace SimpleJournal
 {
@@ -134,6 +138,26 @@ namespace SimpleJournal
         #endregion
 
         #region Constructor
+        static MainWindow()
+        {
+            DrawingCanvas.HideSidebar += DrawingCanvas_HideSidebar;
+            DrawingCanvas.PreventSelection += DrawingCanvas_PreventSelection;
+        }
+
+        private static void DrawingCanvas_PreventSelection(object sender, EventArgs e)
+        {
+            if (MainWindow.W_INSTANCE.IsSideBarVisible)
+                MainWindow.W_INSTANCE.preventSelection = false;
+        }
+
+        private static void DrawingCanvas_HideSidebar(object sender, int e)
+        {
+            if (e > 0 && MainWindow.W_INSTANCE.IsSideBarVisible)
+                MainWindow.W_INSTANCE.preventSelection = false;
+            else if (MainWindow.W_INSTANCE.IsSideBarVisible)
+                MainWindow.W_INSTANCE.pnlSidebar.Visibility = Visibility.Collapsed;
+        }
+
         public MainWindow()
         {
             W_INSTANCE = this;
@@ -290,8 +314,9 @@ namespace SimpleJournal
             DrawingCanvas.ChildElementsSelected += DrawingCanvas_ChildElementsSelected;
 
             // Apply default size to textmarker
-            currentTextMarkerAttributes.Height = Consts.TextMarkerSizes[0].Width;
-            currentTextMarkerAttributes.Width = Consts.TextMarkerSizes[0].Height;
+            var defaultSize = Documents.UI.Consts.TextMarkerSizes[0];
+            currentTextMarkerAttributes.Height = defaultSize.Width;
+            currentTextMarkerAttributes.Width = defaultSize.Height;
 
             // Apply default zoom factor
             ZoomByScale(Settings.Instance.Zoom / 100.0);
@@ -589,6 +614,8 @@ namespace SimpleJournal
         #region Error Handling
 
         // ToDO: *** https://github.com/Tyrrrz/DotnetRuntimeBootstrapper/issues/23
+        // Related:  https://github.com/Tyrrrz/DotnetRuntimeBootstrapper/issues/27
+        // Related:  https://github.com/dotnet/runtime/discussions/64942
         // Currently only Dispatcher_UnhandledException gets called due to DotnetRuntimeBootstrapper
         private void Dispatcher_UnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
         {
@@ -597,7 +624,7 @@ namespace SimpleJournal
         }
 
         private async void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
-        {            
+        {
             string message = string.Empty;
 
             if (e.ExceptionObject != null && e.ExceptionObject is Exception ex)
@@ -760,7 +787,7 @@ namespace SimpleJournal
                 };
 
                 if (!isTextBlock)
-                    previewViewBox.Child = GeneralHelper.CloneElement(element);
+                    previewViewBox.Child = UIHelper.CloneElement(element);
                 else
                 {
                     var img = new Image
@@ -904,7 +931,7 @@ namespace SimpleJournal
                     objImgSettings.Visibility = Visibility.Collapsed;
                     objTextSettings.Visibility = Visibility.Collapsed;
 
-                    GeneralHelper.ConvertTransformToProperties(sh, DrawingCanvas.LastModifiedCanvas);
+                    UIHelper.ConvertTransformToProperties(sh, DrawingCanvas.LastModifiedCanvas);
 
                     int angle = 0;
                     if (sh.RenderTransform is RotateTransform rt)
@@ -918,7 +945,7 @@ namespace SimpleJournal
                     objShapeSettings.Visibility = Visibility.Collapsed;
                     objTextSettings.Visibility = Visibility.Collapsed;
 
-                    GeneralHelper.ConvertTransformToProperties(im, DrawingCanvas.LastModifiedCanvas);
+                    UIHelper.ConvertTransformToProperties(im, DrawingCanvas.LastModifiedCanvas);
                 }
                 else if (item is TextBlock tb)
                 {
@@ -926,7 +953,7 @@ namespace SimpleJournal
                     objShapeSettings.Visibility = Visibility.Collapsed;
                     objImgSettings.Visibility = Visibility.Collapsed;
 
-                    GeneralHelper.ConvertTransformToProperties(tb, DrawingCanvas.LastModifiedCanvas);
+                    UIHelper.ConvertTransformToProperties(tb, DrawingCanvas.LastModifiedCanvas);
 
                     int angle = 0;
                     if (tb.RenderTransform != null && tb.RenderTransform is RotateTransform rt)
@@ -1077,7 +1104,7 @@ namespace SimpleJournal
                 currentTextMarkerAttributes.StylusTip = StylusTip.Rectangle;
                 currentTextMarkerAttributes.Color = defaultSettings.TextMarkerColor.ToColor(); //Consts.TEXT_MARKER_COLOR;
 
-                Settings.Instance.TextMarkerSize = Consts.TextMarkerSizes[0];
+                Settings.Instance.TextMarkerSize = Documents.UI.Consts.TextMarkerSizes[0];
                 Settings.Instance.TextMarkerColor = new Common.Data.Color(Consts.TextMarkerColor.A, Consts.TextMarkerColor.R, Consts.TextMarkerColor.G, Consts.TextMarkerColor.B);
                 Settings.Instance.Save();
             }
@@ -1177,8 +1204,7 @@ namespace SimpleJournal
 
             try
             {
-
-                ButtonInsertNewPageIcon.Source = ImageHelper.LoadImage(new Uri($"pack://application:,,,/SimpleJournal;component/resources/{resourceImageName}"));
+                ButtonInsertNewPageIcon.Source = ImageHelper.LoadImage(new Uri($"pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/{resourceImageName}"));
             }
             catch
             {
@@ -1189,6 +1215,7 @@ namespace SimpleJournal
         private void AddPageDropDownTemplate_AddPage(PaperType paperType)
         {
             AddNewPage(paperType);
+            DrawingCanvas.Change = true;
         }
 
         private void SimpleFormDropDown_OnSimpleFormDropDownChanged(ShapeType shapeType)
@@ -1211,7 +1238,7 @@ namespace SimpleJournal
         private void SelectDropDownTemplate_OnColorAndSizeChanged(System.Windows.Media.Color? c, int size)
         {
             // If strokes and child elements are selected change their colors
-            List<Actions.Action> changedActions = new List<Actions.Action>();
+            List<Action> changedActions = new List<Action>();
 
             foreach (Stroke st in DrawingCanvas.LastModifiedCanvas.GetSelectedStrokes())
             {
@@ -1221,11 +1248,12 @@ namespace SimpleJournal
 
                 if (size != -1)
                 {
-                    st.DrawingAttributes.Width = Consts.StrokeSizes[size].Width;
-                    st.DrawingAttributes.Height = Consts.StrokeSizes[size].Height;
+                    var selectedSize = Documents.UI.Consts.StrokeSizes[size];
+                    st.DrawingAttributes.Width = selectedSize.Width;
+                    st.DrawingAttributes.Height = selectedSize.Height;
                 }
-                DrawingAttributes newAttr = st.DrawingAttributes.Clone();
 
+                DrawingAttributes newAttr = st.DrawingAttributes.Clone();
                 changedActions.Add(new StrokesChangedAction(st, old, newAttr));
             }
 
@@ -1235,7 +1263,7 @@ namespace SimpleJournal
                 if (element is Shape sh)
                 {
                     double oldSize = sh.StrokeThickness;
-                    double newSize = (size >= 0 ? Consts.StrokeSizes[size].Width : oldSize);
+                    double newSize = (size >= 0 ? Documents.UI.Consts.StrokeSizes[size].Width : oldSize);
                     System.Windows.Media.Color oldColor = (sh.Stroke as SolidColorBrush).Color;
                     System.Windows.Media.Color newColor = (c != null && c.HasValue ? c.Value : oldColor);
 
@@ -1243,12 +1271,12 @@ namespace SimpleJournal
                     if (c != null && c.HasValue)
                         sh.Stroke = new SolidColorBrush(c.Value);
                     if (size >= 0)
-                        sh.StrokeThickness = Consts.StrokeSizes[size].Width;
+                        sh.StrokeThickness = Documents.UI.Consts.StrokeSizes[size].Width;
                 }
                 else if (element is Plot plot)
                 {
                     double oldSize = plot.StrokeThickness;
-                    double newSize = (size >= 0 ? Consts.StrokeSizes[size].Width : oldSize);
+                    double newSize = (size >= 0 ? Documents.UI.Consts.StrokeSizes[size].Width : oldSize);
                     System.Windows.Media.Color oldColor = plot.Foreground;
                     System.Windows.Media.Color newColor = (c != null && c.HasValue ? c.Value : oldColor);
 
@@ -1257,13 +1285,13 @@ namespace SimpleJournal
                     if (c != null && c.HasValue)
                         plot.Foreground = c.Value;
                     if (size >= 0)
-                        plot.StrokeThickness = Math.Round((Consts.StrokeSizes[size].Width + Consts.StrokeSizes[size].Height) / 2.0);
+                        plot.StrokeThickness = Math.Round((Documents.UI.Consts.StrokeSizes[size].Width + Documents.UI.Consts.StrokeSizes[size].Height) / 2.0);
 
                     plot.RenderPlot();
                 }
             }
 
-            DrawingCanvas.LastModifiedCanvas.Manager.AddSpecialAction<Actions.Action>(changedActions);
+            DrawingCanvas.LastModifiedCanvas.Manager.AddSpecialAction<Action>(changedActions);
             DrawingCanvas.Change = true;
             RefreshSideBar();
         }
@@ -1434,6 +1462,7 @@ namespace SimpleJournal
                 CurrentJournalPages.Insert(CurrentJournalPages.IndexOf(paper) + 1, newPage as IPaper);
 
                 RefreshPages();
+                DrawingCanvas.Change = true;
             };
 
             if (index == -1)
@@ -1482,8 +1511,9 @@ namespace SimpleJournal
             if (reset)
             {
                 // Initalize pens
+                var defaultSize = Documents.UI.Consts.StrokeSizes[0];
                 for (int i = 0; i < currentPens.Length; i++)
-                    currentPens[i] = new Pen(Consts.PEN_COLORS[i], Consts.StrokeSizes[0].Width, Consts.StrokeSizes[0].Height);
+                    currentPens[i] = new Pen(Consts.PEN_COLORS[i], defaultSize.Width, defaultSize.Height);
 
                 // Initalize text marker (reset)
                 UpdateTextMarkerAttributes(true);
@@ -1685,7 +1715,7 @@ namespace SimpleJournal
             int index = rubberSizeIndex;
             bool rectangle = rubberIsRectangle;
 
-            var result = Consts.RubberSizes[index];
+            var result = Documents.UI.Consts.RubberSizes[index];
             StylusShape shape;
             if (rectangle)
                 shape = new RectangleStylusShape(result.Width, result.Height);
@@ -1927,8 +1957,9 @@ namespace SimpleJournal
 
             if (sizeIndex >= 0)
             {
-                currentPens[index].Width = Consts.StrokeSizes[sizeIndex].Width;
-                currentPens[index].Height = Consts.StrokeSizes[sizeIndex].Height;
+                var selectedSize = Documents.UI.Consts.StrokeSizes[sizeIndex];
+                currentPens[index].Width = selectedSize.Width;
+                currentPens[index].Height = selectedSize.Height;
                 CurrentDrawingAttributes.Width = currentPens[index].Width;
                 CurrentDrawingAttributes.Height = currentPens[index].Height;
 
@@ -2050,7 +2081,7 @@ namespace SimpleJournal
         {
             if (sizeIndex != -1)
             {
-                var textMakerResult = Consts.TextMarkerSizes[sizeIndex];
+                var textMakerResult = Documents.UI.Consts.TextMarkerSizes[sizeIndex];
                 Settings.Instance.TextMarkerSize = textMakerResult;
                 Settings.Instance.Save();
                 currentTextMarkerAttributes.Width = textMakerResult.Height;
@@ -2370,14 +2401,14 @@ namespace SimpleJournal
                 var result = await PdfHelper.ExportJournalAsPDF(dialog.FileName, data);
 
                 if (!result.Item1)
-                    MessageBox.Show($"{Properties.Resources.strFailedToExportJournalAsPDF}\n\n{Properties.Resources.strPDFConversationDialog_GhostscriptMessage}: {result.Item2}", Properties.Resources.strError, MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show($"{Properties.Resources.strFailedToExportJournalAsPDF}\n\n{Properties.Resources.strPDFConversationDialog_GhostscriptMessage}: {result.Item2}", SharedResources.Resources.strError, MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
         private async Task Print()
         {
             /*
-             // Prevent printing through printQueue instead create a pdf file directly                    
+            Prevent printing through printQueue instead create a pdf file directly                    
             SaveFileDialog dialog = new SaveFileDialog() { Filter = Properties.Resources.strPDFFilter, Title = Properties.Resources.strPDFDialogTitle };
             var dialogResult = dialog.ShowDialog();
 
@@ -2514,7 +2545,7 @@ namespace SimpleJournal
                 catch (Exception ex)
                 {
                     State.SetAction(StateType.Printing, ProgressState.Completed);
-                    MessageBox.Show($"{Properties.Resources.strPrintingError}: {ex.Message}", Properties.Resources.strError, MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show($"{Properties.Resources.strPrintingError}: {ex.Message}", SharedResources.Resources.strError, MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
         }
@@ -2868,9 +2899,9 @@ namespace SimpleJournal
             AboutDialog aboutDialog = new AboutDialog();
             aboutDialog.ShowDialog();
         }
-#endregion
+        #endregion
 
-#endregion
+        #endregion
 
         #endregion
 
@@ -2936,7 +2967,7 @@ namespace SimpleJournal
         {
             ZoomByScale(1.8);
         }
-#endregion
+        #endregion
 
         #region Scroll Handling
         private Point p1 = new Point();
@@ -3023,7 +3054,7 @@ namespace SimpleJournal
             mainScrollView.BeginStoryboard(sbScrollViewerAnimation);
         }
 
-#endregion
+        #endregion
 
         #region Internal Save and Load
         private async Task<bool> SaveJournal(string path, bool saveAsBackup = false)
@@ -3221,7 +3252,7 @@ namespace SimpleJournal
                                 if (jp.HasAdditionalResources)
                                 {
                                     foreach (JournalResource jr in jp.JournalResources)
-                                        GeneralHelper.AddJournalResourceToCanvas(jr, canvas);
+                                        UIHelper.AddJournalResourceToCanvas(jr, canvas);
                                 }
                             }));
                         }));
@@ -3308,7 +3339,7 @@ namespace SimpleJournal
         }
 
 
-#endregion
+        #endregion
 
         #region Pagemanagment Dialog
 
@@ -3369,7 +3400,7 @@ namespace SimpleJournal
                             if (page.HasAdditionalResources)
                             {
                                 foreach (JournalResource jr in page.JournalResources)
-                                    GeneralHelper.AddJournalResourceToCanvas(jr, canvas);
+                                    UIHelper.AddJournalResourceToCanvas(jr, canvas);
                             }
                         }));
                     }));
@@ -3418,7 +3449,7 @@ namespace SimpleJournal
             PageManagementControl.Initalize(CurrentJournalPages.ToList(), this);
         }
     
-#endregion
+        #endregion
 
         #region Export
 
@@ -3436,10 +3467,10 @@ namespace SimpleJournal
             ExportControl.Initalize(CurrentJournalPages, CurrentJournalPages[cmbPages.SelectedIndex], this);
         }
 
-#endregion
+        #endregion
 
         #region Copy / Paste
-        private Data.Clipboard clipboard = new Data.Clipboard();
+        private Clipboard clipboard = new Clipboard();
         private bool waitingForClickToPaste = false;
         private Tools pasteBackupTool = Tools.Pencil1;
         private Rect selctionBounds = new Rect();
@@ -3449,13 +3480,13 @@ namespace SimpleJournal
             selctionBounds = DrawingCanvas.LastModifiedCanvas.GetSelectionBounds();
 
             // Fill clipboard
-            clipboard = new Data.Clipboard();
+            clipboard = new Clipboard();
 
             var elements = DrawingCanvas.LastModifiedCanvas.GetSelectedElements();
             foreach (UIElement elem in elements)
             {
-                var point = GeneralHelper.ConvertTransformToProperties(elem, DrawingCanvas.LastModifiedCanvas);
-                var result = GeneralHelper.CloneElement(elem);
+                var point = UIHelper.ConvertTransformToProperties(elem, DrawingCanvas.LastModifiedCanvas);
+                var result = UIHelper.CloneElement(elem);
 
                 clipboard.Children.Add(result);
                 clipboard.ChildPoints.Add(point);

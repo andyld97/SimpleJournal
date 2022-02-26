@@ -8,6 +8,7 @@ using MessageBox = System.Windows.MessageBox;
 using SimpleJournal.Documents.PDF;
 using SimpleJournal.Data;
 using System.ComponentModel;
+using SimpleJournal.Documents.UI;
 
 namespace SimpleJournal.Dialogs
 {
@@ -89,14 +90,14 @@ namespace SimpleJournal.Dialogs
             // Validate input params
             if (string.IsNullOrEmpty(destinationFileName) || string.IsNullOrEmpty(sourceFileName) || !System.IO.File.Exists(sourceFileName))
             {
-                MessageBox.Show(this, Properties.Resources.strPDFConversationDialog_InvalidInputMessage, Properties.Resources.strError, MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(this, Properties.Resources.strPDFConversationDialog_InvalidInputMessage, SharedResources.Resources.strError, MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
             // Further validation
             if (!useAllPages && pageFrom > pageTo)
             {
-                MessageBox.Show(this, Properties.Resources.strPDFConversationDialog_InvalidInputMessage, Properties.Resources.strError, MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(this, Properties.Resources.strPDFConversationDialog_InvalidInputMessage, SharedResources.Resources.strError, MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
@@ -120,7 +121,7 @@ namespace SimpleJournal.Dialogs
                 if (printTicket == null)
                 {
                     SetInputPanelState(true);
-                    MessageBox.Show($"{Properties.Resources.strPDFConversationDialog_ConversationGeneralError}{Environment.NewLine}{Environment.NewLine}{errorMessage}", Properties.Resources.strError, MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show($"{Properties.Resources.strPDFConversationDialog_ConversationGeneralError}{Environment.NewLine}{Environment.NewLine}{errorMessage}", SharedResources.Resources.strError, MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
                 else
@@ -192,9 +193,9 @@ namespace SimpleJournal.Dialogs
 
             // Show error messages (if any)
             if (ex != null)
-                MessageBox.Show(this, $"{Properties.Resources.strPDFConversationDialog_GhostscriptMessage}\n\n{ex.Message}", Properties.Resources.strError, MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(this, $"{Properties.Resources.strPDFConversationDialog_GhostscriptMessage}\n\n{ex.Message}", SharedResources.Resources.strError, MessageBoxButton.OK, MessageBoxImage.Error);
             else
-                MessageBox.Show(Properties.Resources.strPDFConversationDialog_ConversationGeneralError, Properties.Resources.strError, MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(Properties.Resources.strPDFConversationDialog_ConversationGeneralError, SharedResources.Resources.strError, MessageBoxButton.OK, MessageBoxImage.Error);
 
             SetInputPanelState(true);
         }
@@ -296,7 +297,7 @@ namespace SimpleJournal.Dialogs
                                 Progress.Value = 0;
                                 Progress.IsIndeterminate = false;
                                 SetInputPanelState(true);
-                                MessageBox.Show(currentTicket.ErorrMessage, Properties.Resources.strError, MessageBoxButton.OK, MessageBoxImage.Error);
+                                MessageBox.Show(currentTicket.ErorrMessage, SharedResources.Resources.strError, MessageBoxButton.OK, MessageBoxImage.Error);
                             }
                         }
                     });
@@ -350,7 +351,7 @@ namespace SimpleJournal.Dialogs
                         {
                             timer.Stop();
                             SetInputPanelState(true);
-                            MessageBox.Show($"{Properties.Resources.strPDFConversationDialog_ConversationGeneralError}{Environment.NewLine}{Environment.NewLine}{ex.Message}", Properties.Resources.strError, MessageBoxButton.OK, MessageBoxImage.Error);
+                            MessageBox.Show($"{Properties.Resources.strPDFConversationDialog_ConversationGeneralError}{Environment.NewLine}{Environment.NewLine}{ex.Message}", SharedResources.Resources.strError, MessageBoxButton.OK, MessageBoxImage.Error);
                             return;
                         }
 
@@ -362,7 +363,7 @@ namespace SimpleJournal.Dialogs
             {
                 timer.Stop();
                 SetInputPanelState(true);
-                MessageBox.Show($"{Properties.Resources.strPDFConversationDialog_ConversationGeneralError}{Environment.NewLine}{Environment.NewLine}{ex.Message}", Properties.Resources.strError, MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show($"{Properties.Resources.strPDFConversationDialog_ConversationGeneralError}{Environment.NewLine}{Environment.NewLine}{ex.Message}", SharedResources.Resources.strError, MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
         #endregion
