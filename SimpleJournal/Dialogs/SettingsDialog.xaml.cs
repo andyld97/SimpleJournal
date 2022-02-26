@@ -133,10 +133,11 @@ namespace SimpleJournal
 
         private void BtnResetPens_Click(object sender, RoutedEventArgs e)
         {
-            // Delete Pen.xml
             try
             {
+                // Delete Pen.xml
                 System.IO.File.Delete(Consts.PenSettingsFilePath);
+                MessageBox.Show(Properties.Resources.strSuccess, Properties.Resources.strSuccess, MessageBoxButton.OK, MessageBoxImage.Information);
             }
             catch (Exception ex)
             {
@@ -158,6 +159,8 @@ namespace SimpleJournal
         {
             RecentlyOpenedDocuments.Instance.Clear();
             RecentlyOpenedDocuments.Save();
+
+            MessageBox.Show(Properties.Resources.strSuccess, Properties.Resources.strSuccess, MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         private void NumericUpDownAutoSaveInteral_OnChanged(int oldValue, int newValue)
