@@ -2898,27 +2898,12 @@ namespace SimpleJournal
             }
 
 #if !UWP
-            if (close && Settings.Instance.UseTouchScreenDisabling)
-            {
-                if (ProcessHelper.SimpleJournalProcessCount > 1)
-                    return;
-
+            if (close && Settings.Instance.UseTouchScreenDisabling && ProcessHelper.SimpleJournalProcessCount == 1)
                 TouchHelper.SetTouchState(true);
-            }
-            
-            if (close && flag)
+                
+            if (close && cancelClosing)
                 Close();
 #endif
-        }
-
-        public static TResult RunSync<TResult>(Func<Task<TResult>> func)
-        {
-            CultureInfo cultureUi = CultureInfo.CurrentUICulture;
-            CultureInfo culture = CultureInfo.CurrentCulture;
-            return Task.Factory.StartNew<Task<TResult>>(delegate
-            {
-               return Application.Current.Dispatcher.Invoke(() => func());
-            }).Unwrap<TResult>().GetAwaiter().GetResult();
         }
 
         private void btnAbout_Click(object sender, RoutedEventArgs e)
