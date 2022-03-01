@@ -85,6 +85,7 @@ namespace SimpleJournal.Dialogs
                 UsePageRange = !useAllPages,
                 StartPage = pageFrom,
                 LastPage = pageTo,
+                CurrentSimpleJounalVersion = Consts.NormalVersion.ToString(4),
             };
 
             // Validate input params

@@ -7,14 +7,13 @@ namespace SimpleJournal
 {
     public static class Consts
     {
+        public static readonly SolidColorBrush DefaultBackground = new SolidColorBrush((System.Windows.Media.Color)(ColorConverter.ConvertFromString("#E1E1E1")));
+
         public const int LastRecentlyOpenedDocuments = 10;
         public const double SpaceBetweenPages = 75D;
  
         public const double MarkerPathStrokeThickness = 0.4;
-        public const double DefaultTextSize = 15.0;
-     
-
-        public static readonly SolidColorBrush DefaultBackground = new SolidColorBrush((System.Windows.Media.Color)(ColorConverter.ConvertFromString("#E1E1E1")));
+        public const double DefaultTextSize = 15.0;     
 
         public static readonly string ChangelogUrl = "https://simplejournal.ca-soft.net/chg.php?lang={0}&dark={1}";
         public static readonly string DonwloadUrl = "https://simplejournal.ca-soft.net/download.php";
