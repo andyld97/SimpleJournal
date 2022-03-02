@@ -261,8 +261,9 @@ namespace SimpleJournal.Dialogs
                 string sjPath = "SimpleJournal.exe";
 #endif
                 System.Diagnostics.Process.Start(sjPath, args);
-#else
-                System.Diagnostics.Process.Start(System.Reflection.Assembly.GetExecutingAssembly().Location, args);
+#else                
+                // Location is only the .NET 6 DLL but not the EXE File
+                System.Diagnostics.Process.Start(System.IO.Path.Combine(System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location), "SimpleJournal.exe"), args);
 #endif
 
                 return true;

@@ -18,6 +18,11 @@ namespace PDF2J
         public static List<PrintTicket> PrintTickets = new List<PrintTicket>();
         private static System.Timers.Timer workingTimer = new System.Timers.Timer();
         private static System.Timers.Timer cleanUPTimer = new System.Timers.Timer();
+
+        /// <summary>
+        /// This version must only be changed if there are changes due to the document format!
+        /// </summary>
+        public static readonly Version MinSJVersionRequired = new Version(0, 5, 0, 2);
         
         private static bool isRunning = false;
         private static object sync = new object();
@@ -43,8 +48,6 @@ namespace PDF2J
 
         private static void CleanUPTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
-           // logger.LogInformation("[CleanUP] Starting cleaning service ...");
-
             var now = DateTime.Now;
             var ticketsToRemove = PrintTickets.Where(t => (t.Status == TicketStatus.Failed || t.Status == TicketStatus.Completed) && t.DateTimeAdded.AddHours(1) >= now).ToList();
             foreach (var ticket in ticketsToRemove)
@@ -56,11 +59,6 @@ namespace PDF2J
                 }
                 catch { }
             }
-
-            // if (ticketsToRemove.Count == 0)
-            //     logger.LogInformation("[CleanUP] Nothing to do, finished!");
-            // else
-            //     logger.LogInformation($"[CleanUP] Removed {ticketsToRemove.Count} tickets!");
 
             ticketsToRemove.Clear();
         }

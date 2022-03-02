@@ -2829,9 +2829,16 @@ namespace SimpleJournal
             }
         }
 
+        private bool cancelClosing = false;
+
         protected override async void OnClosing(CancelEventArgs e)
         {
             base.OnClosing(e);
+            if (cancelClosing)
+            {
+                cancelClosing = false;
+                return;
+            }
 
 #if !UWP
             bool close = false;
@@ -2866,12 +2873,19 @@ namespace SimpleJournal
                 }
                 else if (result == MessageBoxResult.Yes)
                 {
+                    // Ensure that closing is canceld to successfully saving the document, if it's finished "Close()" is
+                    // called again, but this event is ignored then and the app gets closed - related to https://stackoverflow.com/a/49013345/6237448
+                    e.Cancel = true;
+                    cancelClosing = true;
+
                     await SaveProject(false);
                     DeleteAutoSaveBackup(true);
-                    e.Cancel = false;
 
+                    e.Cancel = false;
 #if !UWP
                     close = true;
+#else
+                    Close();
 #endif
                 }
             }
@@ -2884,13 +2898,11 @@ namespace SimpleJournal
             }
 
 #if !UWP
-            if (close && Settings.Instance.UseTouchScreenDisabling)
-            {
-                if (ProcessHelper.SimpleJournalProcessCount > 1)
-                    return;
-
+            if (close && Settings.Instance.UseTouchScreenDisabling && ProcessHelper.SimpleJournalProcessCount == 1)
                 TouchHelper.SetTouchState(true);
-            }
+                
+            if (close && cancelClosing)
+                Close();
 #endif
         }
 
@@ -3793,7 +3805,6 @@ namespace SimpleJournal
         private void RibbonWindow_StateChanged(object sender, EventArgs e)
         {
 #if !UWP
-
             if (WindowState == WindowState.Minimized && Settings.Instance.DisableTouchScreenIfInForeground)
                 TouchHelper.SetTouchState(true);
             else if ((WindowState == WindowState.Normal || WindowState == WindowState.Maximized) && Settings.Instance.DisableTouchScreenIfInForeground)

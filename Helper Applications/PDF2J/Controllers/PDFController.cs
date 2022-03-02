@@ -30,6 +30,17 @@ namespace PDF2J.Controllers
             // Create a new printing ticket
             PrintTicket ticket = new PrintTicket() { Name = file.FileName, Status = TicketStatus.OnHold, DateTimeAdded = DateTime.Now };
             ticket.ConversationOptions = System.Text.Json.JsonSerializer.Deserialize<PdfConversationOptions>(optionsJson);
+
+            // Check version
+            string tooOldMessage = "Your SimpleJournal version is too old, please update to the newest version to use this feature!";
+            if (Version.TryParse(ticket.ConversationOptions.CurrentSimpleJounalVersion, out var version))
+            {
+                if (version < Program.MinSJVersionRequired)
+                    return BadRequest(tooOldMessage);
+            }
+            else
+                return BadRequest(tooOldMessage);
+
      
             // Create the the working directory for this printing ticket
             try
