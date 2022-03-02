@@ -2851,7 +2851,7 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 02/26/2022 6:40 PM.
+        ///   Looks up a localized string similar to 02/03/2022 14:53 PM.
         /// </summary>
         public static string strReleaseDate {
             get {
