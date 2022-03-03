@@ -180,7 +180,17 @@ namespace SimpleJournal
                 if (response.IsSuccessStatusCode)
                     return await System.Text.Json.JsonSerializer.DeserializeAsync<PrintTicket>(await response.Content.ReadAsStreamAsync());
                 else
-                    throw new Exception("Http Status Code: " + response.StatusCode);
+                {
+                    try
+                    {
+                        string content = await response.Content.ReadAsStringAsync();
+                        throw new Exception($"Http Status Code: {response.StatusCode}{Environment.NewLine}{Environment.NewLine}{content}");
+                    }
+                    catch
+                    { 
+                        throw new Exception($"Http Status Code: {response.StatusCode}");
+                    }
+                }
             }
         }
 
