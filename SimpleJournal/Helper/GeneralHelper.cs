@@ -181,15 +181,18 @@ namespace SimpleJournal
                     return await System.Text.Json.JsonSerializer.DeserializeAsync<PrintTicket>(await response.Content.ReadAsStreamAsync());
                 else
                 {
+                    string content = string.Empty;
                     try
                     {
-                        string content = await response.Content.ReadAsStringAsync();
-                        throw new Exception($"Http Status Code: {response.StatusCode}{Environment.NewLine}{Environment.NewLine}{content}");
+                        content = await response.Content.ReadAsStringAsync();
                     }
                     catch
-                    { 
+                    { }
+
+                    if (!string.IsNullOrEmpty(content))
+                        throw new Exception($"Http Status Code: {response.StatusCode}{Environment.NewLine}{Environment.NewLine}{content}");
+                    else
                         throw new Exception($"Http Status Code: {response.StatusCode}");
-                    }
                 }
             }
         }
