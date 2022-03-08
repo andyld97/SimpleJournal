@@ -2885,7 +2885,7 @@ namespace SimpleJournal
 #if !UWP
                     close = true;
 #else
-                    Close();
+                    Application.Current.Shutdown();
 #endif
                 }
             }
@@ -2902,7 +2902,7 @@ namespace SimpleJournal
                 TouchHelper.SetTouchState(true);
                 
             if (close && cancelClosing)
-                Close();
+                Application.Current.Shutdown();
 #endif
         }
 
