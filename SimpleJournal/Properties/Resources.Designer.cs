@@ -73,6 +73,16 @@ namespace SimpleJournal.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
+        public static byte[] Microsoft_Win32_Registry {
+            get {
+                object obj = ResourceManager.GetObject("Microsoft_Win32_Registry", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
         public static byte[] SimpleJournal_Common {
             get {
                 object obj = ResourceManager.GetObject("SimpleJournal_Common", resourceCulture);

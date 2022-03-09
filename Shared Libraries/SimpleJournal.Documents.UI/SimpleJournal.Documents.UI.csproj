@@ -12,7 +12,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SimpleJournal.Common\SimpleJournal.Common.csproj" />
     <ProjectReference Include="..\SimpleJournal.Documents\SimpleJournal.Documents.csproj" />
     <ProjectReference Include="..\SimpleJournal.SharedResources\SimpleJournal.SharedResources.csproj" />
   </ItemGroup>

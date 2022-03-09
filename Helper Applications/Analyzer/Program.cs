@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Markup;
 using System.Windows.Media;
 using System.Windows.Shapes;
+using Point = SimpleJournal.Common.Data.Point;
 
 namespace Analyzer
 {
@@ -236,14 +237,14 @@ namespace Analyzer
                         var poly = shapeToAdd as Polygon;
 
                         // Generate strokes from generated shape with convex hull to get a clean polygon
-                        List<Point> convexHull = ConvexHull.GetConvexHull(poly.Points.ToList());
+                        List<Point> convexHull = ConvexHull.GetConvexHull(poly.Points.Select(p => new SimpleJournal.Common.Data.Point(p.X, p.Y)).ToList());
                         for (int i = 0; i < convexHull.Count; i++)
                         {
                             int from = i;
                             int to = (i + 1) % convexHull.Count;
 
                             List<Point> points = new List<Point>() { convexHull[from], convexHull[to] };
-                            sc.Add(new Stroke(new StylusPointCollection(points)));
+                            sc.Add(new Stroke(new StylusPointCollection(points.Select(p => new StylusPoint(p.X, p.Y)))));
                         }
 
                         Rect bounds = sc.GetBounds();
@@ -255,7 +256,7 @@ namespace Analyzer
 
                         sc.Transform(mat, false);
                         foreach (Stroke s in sc)
-                            foreach (Point p in s.StylusPoints)
+                            foreach (System.Windows.Point p in s.StylusPoints)
                                 pc.Add(p);
 
                         // Shift the polygon back to original location

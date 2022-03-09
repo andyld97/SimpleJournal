@@ -203,7 +203,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Shared Libraries\SimpleJournal.Common\SimpleJournal.Common.csproj">
-      <Project>{079afa71-58c5-4377-b2d6-b0218a66c0d9}</Project>
+      <Project>{a6f54f41-5b9f-4cdf-b684-c1c072399ce8}</Project>
       <Name>SimpleJournal.Common</Name>
     </ProjectReference>
   </ItemGroup>

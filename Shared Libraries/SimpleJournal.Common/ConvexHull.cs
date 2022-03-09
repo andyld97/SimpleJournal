@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Windows;
+using SimpleJournal.Common.Data;
 
 namespace SimpleJournal.Common
 {
