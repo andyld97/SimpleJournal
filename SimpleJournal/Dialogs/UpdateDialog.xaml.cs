@@ -63,8 +63,9 @@ namespace SimpleJournal.Dialogs
                 }
                 catch (Exception ex)
                 {
-                    // ToDo: ***
-                    MessageBox.Show("hi");
+                    MessageBox.Show($"{Properties.Resources.strUpdateDownloadDialog_FailedToOpenSetup}{Environment.NewLine}{Environment.NewLine}{ex.Message}", SharedResources.Resources.strError, MessageBoxButton.OK, MessageBoxImage.Error);
+                    DialogResult = false;
+                    return;
                 }
 
                 // Exit to make sure user can easily update without problems

@@ -1,4 +1,5 @@
-﻿using SimpleJournal.Common.Helper;
+﻿using SimpleJournal.Common.Data;
+using SimpleJournal.Common.Helper;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -28,9 +29,7 @@ namespace SimpleJournal.Dialogs
 	{
 		private int lastSecond;
 		private long bytesInLastSecond = 0;
-		private Version version;
-
-	
+		private Version version;	
 
 		public string LocalFilePath { get; set; }
 
@@ -55,18 +54,17 @@ namespace SimpleJournal.Dialogs
 					using (System.IO.FileStream fs = new FileStream(LocalFilePath, FileMode.OpenOrCreate))
 					{
 						lastSecond = DateTime.Now.Second;
-						await client.DownloadDataAsync(Consts.DonwloadUrl, fs, progress);
+						await client.DownloadDataAsync(Consts.DownloadUrl, fs, progress);
 						DialogResult = true;
 					}
 				}
 			}
 			catch (Exception ex)
 			{
-				// ToDo: ***
-				MessageBox.Show(ex.Message);
+				MessageBox.Show($"{Properties.Resources.strUpdateDownloadDialog_FailedToDownloadUpdate}{Environment.NewLine}{Environment.NewLine}{ex.Message}", SharedResources.Resources.strError, MessageBoxButton.OK, MessageBoxImage.Error);
 				DialogResult = false;
 			}
-		}	
+		}
 
 		private void Progress_OnProgressChanged(long bytesRead, long totalBytesRead, long length)
 		{
@@ -79,7 +77,8 @@ namespace SimpleJournal.Dialogs
 
 				if (lastSecond != now.Second)
 				{
-					RunSpeed.Text = string.Format("{0} KB/s", (bytesInLastSecond / 1024d).ToString("0.00"));
+					// x MB of 5,5 GB (11,3 MB/s)
+					RunSpeed.Text = string.Format(Properties.Resources.strUpdateDownloadSpeedMessage, ByteUnit.Calculate(totalBytesRead), ByteUnit.Calculate(length), ByteUnit.Calculate(bytesInLastSecond).ToString(true));
 					bytesInLastSecond = 0;
 					lastSecond = now.Second;
 				}

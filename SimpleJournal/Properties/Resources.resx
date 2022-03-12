@@ -2053,4 +2053,32 @@ Alternatively, you can use the normal version of SimpleJournal!</value>
   <data name="Microsoft_Win32_Registry" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\Microsoft.Win32.Registry.dll;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="strUpdateDownloadSpeedMessage" xml:space="preserve">
+    <value>{0} of {1} ({2})</value>
+    <comment>UpdateDownloadDialog.xaml.cs</comment>
+  </data>
+  <data name="strUpdateDownloadDialog_FailedToDownloadUpdate" xml:space="preserve">
+    <value>An error occurred while downloading the update! Please try again later!</value>
+    <comment>UpdateDownloadDialog.xaml.cs</comment>
+  </data>
+  <data name="strUpdateDownloadDialog_Title" xml:space="preserve">
+    <value>Downloading ...</value>
+    <comment>UpdateDownloadDialog.xaml</comment>
+  </data>
+  <data name="strUpdateDownloadDialog_DownloadText" xml:space="preserve">
+    <value>Downloading SimpleJournal v</value>
+    <comment>UpdateDownloadDialog.xaml</comment>
+  </data>
+  <data name="strUpdateDownloadDialog_DownloadText2" xml:space="preserve">
+    <value>...</value>
+    <comment>UpdateDownloadDialog.xaml</comment>
+  </data>
+  <data name="strUpdateDownloadDialog_PleaseWait" xml:space="preserve">
+    <value>Please wait:</value>
+    <comment>UpdateDownloadDialog.xaml</comment>
+  </data>
+  <data name="strUpdateDownloadDialog_FailedToOpenSetup" xml:space="preserve">
+    <value>Error while opening the setup!</value>
+    <comment>UpdateDialog.xaml.cs</comment>
+  </data>
 </root>

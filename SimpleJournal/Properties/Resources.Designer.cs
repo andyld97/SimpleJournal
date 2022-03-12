@@ -4137,6 +4137,69 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Downloading SimpleJournal v.
+        /// </summary>
+        public static string strUpdateDownloadDialog_DownloadText {
+            get {
+                return ResourceManager.GetString("strUpdateDownloadDialog_DownloadText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ....
+        /// </summary>
+        public static string strUpdateDownloadDialog_DownloadText2 {
+            get {
+                return ResourceManager.GetString("strUpdateDownloadDialog_DownloadText2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An error occurred while downloading the update! Please try again later!.
+        /// </summary>
+        public static string strUpdateDownloadDialog_FailedToDownloadUpdate {
+            get {
+                return ResourceManager.GetString("strUpdateDownloadDialog_FailedToDownloadUpdate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error while opening the setup!.
+        /// </summary>
+        public static string strUpdateDownloadDialog_FailedToOpenSetup {
+            get {
+                return ResourceManager.GetString("strUpdateDownloadDialog_FailedToOpenSetup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please wait:.
+        /// </summary>
+        public static string strUpdateDownloadDialog_PleaseWait {
+            get {
+                return ResourceManager.GetString("strUpdateDownloadDialog_PleaseWait", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Downloading ....
+        /// </summary>
+        public static string strUpdateDownloadDialog_Title {
+            get {
+                return ResourceManager.GetString("strUpdateDownloadDialog_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} of {1} ({2}).
+        /// </summary>
+        public static string strUpdateDownloadSpeedMessage {
+            get {
+                return ResourceManager.GetString("strUpdateDownloadSpeedMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Enable AutoSave.
         /// </summary>
         public static string strUseAutoSave {

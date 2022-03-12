@@ -200,4 +200,13 @@
         PagesALL_WritingPage,
         Saving
     }
+
+    public enum Unit
+    {
+        B = 1,
+        KB = 2,
+        MB = 3,
+        GB = 4,
+        TB = 5
+    }
 }

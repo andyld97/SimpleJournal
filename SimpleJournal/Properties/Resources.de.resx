@@ -1983,4 +1983,25 @@ Alternativ können Sie die normale Version von SimpleJournal verwenden!</value>
   <data name="strSetupSetp4" xml:space="preserve">
     <value>Schritt 4: Lineal einstellen</value>
   </data>
+  <data name="strUpdateDownloadSpeedMessage" xml:space="preserve">
+    <value>{0} von {1} ({2})</value>
+  </data>
+  <data name="strUpdateDownloadDialog_FailedToDownloadUpdate" xml:space="preserve">
+    <value>Fehler beim Herunterladen des Updates! Bitte versuchen Sie es später noch einmal!</value>
+  </data>
+  <data name="strUpdateDownloadDialog_Title" xml:space="preserve">
+    <value>Herunterladen ...</value>
+  </data>
+  <data name="strUpdateDownloadDialog_DownloadText" xml:space="preserve">
+    <value>Lade SimpleJournal v</value>
+  </data>
+  <data name="strUpdateDownloadDialog_DownloadText2" xml:space="preserve">
+    <value>herunter ...</value>
+  </data>
+  <data name="strUpdateDownloadDialog_PleaseWait" xml:space="preserve">
+    <value>Bitte warten:</value>
+  </data>
+  <data name="strUpdateDownloadDialog_FailedToOpenSetup" xml:space="preserve">
+    <value>Fehler beim Öffnen des Setups!</value>
+  </data>
 </root>

@@ -7,7 +7,8 @@
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize"
-        Title="Downloading ..." SizeToContent="Height" Width="500" Background="{DynamicResource WhiteBrush}">
+        xmlns:res="clr-namespace:SimpleJournal.Properties"
+        Title="{x:Static res:Resources.strUpdateDownloadDialog_Title}" SizeToContent="Height" Width="500" Background="{DynamicResource WhiteBrush}">
     <StackPanel Margin="2">
         <StackPanel.Resources>
             <Style TargetType="{x:Type TextBlock}">
@@ -17,13 +18,13 @@
             </Style>
         </StackPanel.Resources>
         <TextBlock FontWeight="Bold">
-            <Run Text="Downloading SimpleJournal v" /><Run x:Name="RunVersion" />
-            <Run Text="..." />
+            <Run Text="{x:Static res:Resources.strUpdateDownloadDialog_DownloadText}" /><Run x:Name="RunVersion" />
+            <Run Text="{x:Static res:Resources.strUpdateDownloadDialog_DownloadText2}" />
         </TextBlock>
         <ProgressBar x:Name="ProgressDownload" Margin="4,0,2,0" Height="15" />
         <TextBlock FontWeight="Bold">
-            <Run Text="Speed: " />
-            <Run x:Name="RunSpeed" />
+            <Run Text="{x:Static res:Resources.strUpdateDownloadDialog_PleaseWait}" />
+            <Run x:Name="RunSpeed" Text="-" />
         </TextBlock>
     </StackPanel>
 </Window>
