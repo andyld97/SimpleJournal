@@ -1609,7 +1609,7 @@ Here I would like to give you a few more important hints that will help you to u
     <comment>*</comment>
   </data>
   <data name="strUpdateDialogDownload" xml:space="preserve">
-    <value>Download</value>
+    <value>Download and Install</value>
     <comment>UpdateDialog.xaml.cs</comment>
   </data>
   <data name="strUpdateDialogFailedToOpenBrowserAutomatically" xml:space="preserve">

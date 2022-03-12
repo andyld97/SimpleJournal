@@ -1594,7 +1594,7 @@ Hier möchte ich Ihnen noch ein paar wichtige Hinweise geben, die Ihnen helfen w
     <comment>*</comment>
   </data>
   <data name="strUpdateDialogDownload" xml:space="preserve">
-    <value>Herunterladen</value>
+    <value>Herunterladen und Installieren</value>
     <comment>UpdateDialog.xaml.cs</comment>
   </data>
   <data name="strUpdateDialogFailedToOpenBrowserAutomatically" xml:space="preserve">

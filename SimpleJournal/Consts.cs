@@ -16,7 +16,7 @@ namespace SimpleJournal
         public const double DefaultTextSize = 15.0;     
 
         public static readonly string ChangelogUrl = "https://simplejournal.ca-soft.net/chg.php?lang={0}&dark={1}";
-        public static readonly string DonwloadUrl = "https://simplejournal.ca-soft.net/download.php";
+        public static readonly string DonwloadUrl = "https://simplejournal.ca-soft.net/download.php?auto=1";
         public static readonly string VersionUrl = "https://simplejournal.ca-soft.net/versions.json";
         public static readonly string FeedbackUrl = "https://simplejournal.ca-soft.net/feedback.php?name={0}&mail={1}&content={2}";
         public static readonly string HomePageUrl = "https://simplejournal.ca-soft.net";

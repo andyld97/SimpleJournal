@@ -4092,7 +4092,7 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Download.
+        ///   Looks up a localized string similar to Download and Install.
         /// </summary>
         public static string strUpdateDialogDownload {
             get {
