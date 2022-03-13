@@ -73,6 +73,16 @@ namespace SimpleJournal.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
+        public static byte[] Microsoft_Win32_Registry {
+            get {
+                object obj = ResourceManager.GetObject("Microsoft_Win32_Registry", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
         public static byte[] SimpleJournal_Common {
             get {
                 object obj = ResourceManager.GetObject("SimpleJournal_Common", resourceCulture);
@@ -2851,7 +2861,7 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 02/03/2022 14:53 PM.
+        ///   Looks up a localized string similar to 03/13/2022 1:19 AM.
         /// </summary>
         public static string strReleaseDate {
             get {
@@ -4082,7 +4092,7 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Download.
+        ///   Looks up a localized string similar to Download and Install.
         /// </summary>
         public static string strUpdateDialogDownload {
             get {
@@ -4123,6 +4133,69 @@ namespace SimpleJournal.Properties {
         public static string strUpdateDialogVersionText {
             get {
                 return ResourceManager.GetString("strUpdateDialogVersionText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Downloading SimpleJournal v.
+        /// </summary>
+        public static string strUpdateDownloadDialog_DownloadText {
+            get {
+                return ResourceManager.GetString("strUpdateDownloadDialog_DownloadText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ....
+        /// </summary>
+        public static string strUpdateDownloadDialog_DownloadText2 {
+            get {
+                return ResourceManager.GetString("strUpdateDownloadDialog_DownloadText2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An error occurred while downloading the update! Please try again later!.
+        /// </summary>
+        public static string strUpdateDownloadDialog_FailedToDownloadUpdate {
+            get {
+                return ResourceManager.GetString("strUpdateDownloadDialog_FailedToDownloadUpdate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error while opening the setup!.
+        /// </summary>
+        public static string strUpdateDownloadDialog_FailedToOpenSetup {
+            get {
+                return ResourceManager.GetString("strUpdateDownloadDialog_FailedToOpenSetup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please wait:.
+        /// </summary>
+        public static string strUpdateDownloadDialog_PleaseWait {
+            get {
+                return ResourceManager.GetString("strUpdateDownloadDialog_PleaseWait", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Downloading ....
+        /// </summary>
+        public static string strUpdateDownloadDialog_Title {
+            get {
+                return ResourceManager.GetString("strUpdateDownloadDialog_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} of {1} ({2}).
+        /// </summary>
+        public static string strUpdateDownloadSpeedMessage {
+            get {
+                return ResourceManager.GetString("strUpdateDownloadSpeedMessage", resourceCulture);
             }
         }
         

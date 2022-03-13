@@ -1,5 +1,6 @@
 ﻿using SimpleJournal.Common.FileAssociations;
 using System;
+using System.Windows.Forms;
 
 namespace SJFileAssoc
 {
@@ -11,7 +12,14 @@ namespace SJFileAssoc
         [STAThread]
         static void Main()
         {
-            FileAssociations.EnsureAssociationsSet("SimpleJournal UWP", "SimpleJournal UWP");
+            try
+            {
+                FileAssociations.EnsureAssociationsSet("SimpleJournal UWP", "SimpleJournal UWP");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Failed to set file association: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

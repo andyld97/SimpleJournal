@@ -247,9 +247,19 @@ namespace SimpleJournal
         private void btnSetFileAssoc_Click(object sender, RoutedEventArgs e)
         {
 #if UWP
-            GeneralHelper.InstallUWPFileAssoc();
+            bool result = GeneralHelper.InstallUWPFileAssoc();
+            if (result)
+                MessageBox.Show(Properties.Resources.strSuccess, Properties.Resources.strSuccess, MessageBoxButton.OK, MessageBoxImage.Information);
 #else
-            FileAssociations.EnsureAssociationsSet(Consts.Executable);
+            try
+            {
+                FileAssociations.EnsureAssociationsSet(Consts.Executable);
+                MessageBox.Show(Properties.Resources.strSuccess, Properties.Resources.strSuccess, MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Failed to set file association: {ex.Message}", SharedResources.Resources.strError, MessageBoxButton.OK, MessageBoxImage.Error);
+            }
 #endif
         }
 
@@ -323,7 +333,7 @@ namespace SimpleJournal
         private void DebugTestButton_Click(object sender, RoutedEventArgs e)
         {
             // This is just for debugging purposes
-            new UpdateDialog(Consts.StoreVersion).ShowDialog();
+            new UpdateDialog(Consts.NormalVersion).ShowDialog();
         }
 
         private void ButtonShowAutoSaveFolder_Click(object sender, RoutedEventArgs e)

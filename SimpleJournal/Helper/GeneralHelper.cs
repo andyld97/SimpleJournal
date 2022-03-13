@@ -180,7 +180,20 @@ namespace SimpleJournal
                 if (response.IsSuccessStatusCode)
                     return await System.Text.Json.JsonSerializer.DeserializeAsync<PrintTicket>(await response.Content.ReadAsStreamAsync());
                 else
-                    throw new Exception("Http Status Code: " + response.StatusCode);
+                {
+                    string content = string.Empty;
+                    try
+                    {
+                        content = await response.Content.ReadAsStringAsync();
+                    }
+                    catch
+                    { }
+
+                    if (!string.IsNullOrEmpty(content))
+                        throw new Exception($"Http Status Code: {response.StatusCode}{Environment.NewLine}{Environment.NewLine}{content}");
+                    else
+                        throw new Exception($"Http Status Code: {response.StatusCode}");
+                }
             }
         }
 
@@ -308,10 +321,11 @@ namespace SimpleJournal
                 {  System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "journal", "SjFileAssoc.exe"), Properties.Resources.SJFileAssoc },
                 {  System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "journal", "SJFileAssoc.exe.config"), System.Text.Encoding.Default.GetBytes(Properties.Resources.SJFileAssoc_exe) },
                 {  System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "journal", "SimpleJournal.Common.dll"), Properties.Resources.SimpleJournal_Common },
+                {  System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "journal", "Microsoft.Win32.Registry.dll"), Properties.Resources.Microsoft_Win32_Registry },
             };
 
             // If the file exists and if it's up to date no need to install
-            if (System.IO.File.Exists(resourcesToDeploy.Keys.FirstOrDefault()) && FileVersionInfo.GetVersionInfo(resourcesToDeploy.Keys.First()).FileVersion == "0.5.0.4")
+            if (System.IO.File.Exists(resourcesToDeploy.Keys.FirstOrDefault()) && FileVersionInfo.GetVersionInfo(resourcesToDeploy.Keys.First()).FileVersion == "0.5.0.5")
                 return false;
             else if (System.IO.File.Exists(resourcesToDeploy.Keys.FirstOrDefault()))
                 FileSystemHelper.TryDeleteFile(resourcesToDeploy.Keys.FirstOrDefault());
@@ -325,8 +339,7 @@ namespace SimpleJournal
 
         public static bool InstallUWPFileAssoc()
         {
-            GeneralHelper.InstallApplicationIconForFileAssociation();
-            if (GeneralHelper.InstallFileAssoc())
+            if (GeneralHelper.InstallApplicationIconForFileAssociation() && GeneralHelper.InstallFileAssoc())
             {
                 var tempFile = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "journal", "SjFileAssoc.exe");
                 if (System.IO.File.Exists(tempFile))
@@ -336,9 +349,9 @@ namespace SimpleJournal
                         System.Diagnostics.Process.Start(tempFile);
                         return true;
                     }
-                    catch (Exception)
+                    catch (Exception ex)
                     {
-
+                        MessageBox.Show($"Failed to set file association: {ex.Message}", SharedResources.Resources.strError, MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                 }
             }

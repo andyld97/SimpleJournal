@@ -16,7 +16,7 @@ namespace SimpleJournal
         public const double DefaultTextSize = 15.0;     
 
         public static readonly string ChangelogUrl = "https://simplejournal.ca-soft.net/chg.php?lang={0}&dark={1}";
-        public static readonly string DonwloadUrl = "https://simplejournal.ca-soft.net/download.php";
+        public static readonly string DownloadUrl = "https://simplejournal.ca-soft.net/download.php?auto=1";
         public static readonly string VersionUrl = "https://simplejournal.ca-soft.net/versions.json";
         public static readonly string FeedbackUrl = "https://simplejournal.ca-soft.net/feedback.php?name={0}&mail={1}&content={2}";
         public static readonly string HomePageUrl = "https://simplejournal.ca-soft.net";
@@ -28,7 +28,7 @@ namespace SimpleJournal
         public static readonly string UpdaterExe = "7244a3f048e82af354eb3cfa3089a3035ff8768f";
         public static readonly string UpdateSystemDotNetDotControllerDotdll = "bbc7224ccc544651d9d844f309721091860f0f92";
 
-        public static readonly Version StoreVersion = new Version("1.505.0.0");
+        public static readonly Version StoreVersion = new Version("1.506.0.0");
         public static readonly Version NormalVersion = typeof(Consts).Assembly.GetName().Version;
 
         #region Pens

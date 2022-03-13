@@ -1117,7 +1117,7 @@ Klicken Sie auf Nein, um diesen Hinweis weiterhin zu erhalten!</value>
     <comment>MainWindow.xaml</comment>
   </data>
   <data name="strReleaseDate" xml:space="preserve">
-    <value>02.03.2022 14:53 Uhr</value>
+    <value>13.03.2022 13:19 Uhr</value>
     <comment>*</comment>
   </data>
   <data name="strRemove" xml:space="preserve">
@@ -1594,7 +1594,7 @@ Hier möchte ich Ihnen noch ein paar wichtige Hinweise geben, die Ihnen helfen w
     <comment>*</comment>
   </data>
   <data name="strUpdateDialogDownload" xml:space="preserve">
-    <value>Herunterladen</value>
+    <value>Herunterladen und Installieren</value>
     <comment>UpdateDialog.xaml.cs</comment>
   </data>
   <data name="strUpdateDialogFailedToOpenBrowserAutomatically" xml:space="preserve">
@@ -1982,5 +1982,26 @@ Alternativ können Sie die normale Version von SimpleJournal verwenden!</value>
   </data>
   <data name="strSetupSetp4" xml:space="preserve">
     <value>Schritt 4: Lineal einstellen</value>
+  </data>
+  <data name="strUpdateDownloadSpeedMessage" xml:space="preserve">
+    <value>{0} von {1} ({2})</value>
+  </data>
+  <data name="strUpdateDownloadDialog_FailedToDownloadUpdate" xml:space="preserve">
+    <value>Fehler beim Herunterladen des Updates! Bitte versuchen Sie es später noch einmal!</value>
+  </data>
+  <data name="strUpdateDownloadDialog_Title" xml:space="preserve">
+    <value>Herunterladen ...</value>
+  </data>
+  <data name="strUpdateDownloadDialog_DownloadText" xml:space="preserve">
+    <value>Lade SimpleJournal v</value>
+  </data>
+  <data name="strUpdateDownloadDialog_DownloadText2" xml:space="preserve">
+    <value>herunter ...</value>
+  </data>
+  <data name="strUpdateDownloadDialog_PleaseWait" xml:space="preserve">
+    <value>Bitte warten:</value>
+  </data>
+  <data name="strUpdateDownloadDialog_FailedToOpenSetup" xml:space="preserve">
+    <value>Fehler beim Öffnen des Setups!</value>
   </data>
 </root>

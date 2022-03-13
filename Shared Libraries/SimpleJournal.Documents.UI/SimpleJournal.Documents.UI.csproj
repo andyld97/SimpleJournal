@@ -5,14 +5,13 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
 	<UseWPF>true</UseWPF>
-	<AssemblyVersion>0.5.0.5</AssemblyVersion>
-	<FileVersion>0.5.0.5</FileVersion>
+	<AssemblyVersion>0.5.0.6</AssemblyVersion>
+	<FileVersion>0.5.0.6</FileVersion>
 	<Configurations>Debug;Release;Normal;UWPNew</Configurations>
 	<MSBuildWarningsAsMessages>NU1702</MSBuildWarningsAsMessages>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SimpleJournal.Common\SimpleJournal.Common.csproj" />
     <ProjectReference Include="..\SimpleJournal.Documents\SimpleJournal.Documents.csproj" />
     <ProjectReference Include="..\SimpleJournal.SharedResources\SimpleJournal.SharedResources.csproj" />
   </ItemGroup>

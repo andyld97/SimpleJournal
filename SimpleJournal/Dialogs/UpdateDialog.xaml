@@ -27,7 +27,7 @@
         <Image Grid.Column="0" VerticalAlignment="Top" Source="/SimpleJournal;component/resources/journalicon.png"/>
         <StackPanel Grid.Column="1" Margin="5">
             <TextBlock Text="{x:Static res:Resources.strUpdateDialogNewVersionAvailable}" FontSize="25" FontWeight="Bold"/>
-            <TextBlock x:Name="txtVersion" Foreground="Red" Text="Version 0.4.8.0 is now available!"/>
+            <TextBlock x:Name="txtVersion" Foreground="Red" Text="Version 0.5.0.6 is now available!"/>
 
             <TextBlock Text="Changelog:" Margin="0,3,0,5"/>
             <Border BorderBrush="Black" BorderThickness="1">
@@ -37,8 +37,8 @@
 
         <Grid Height="50" Grid.Row="1" Grid.ColumnSpan="2">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                <Button x:Name="btnOK" Click="BtnOK_Click" Height="30" Width="100" Margin="5"  HorizontalAlignment="Right" FontWeight="Bold" Content="{x:Static res:Resources.strUpdateDialogDownload}"/>
-                <Button x:Name="btnCancel" Click="BtnCancel_Click" Height="30" Width="100" Margin="5"  HorizontalAlignment="Right" Content="{x:Static res:Resources.strCancel}"/>
+                <Button x:Name="btnOK" Click="BtnOK_Click" Height="30" Width="200" Margin="5" HorizontalAlignment="Right" FontWeight="Bold" Content="{x:Static res:Resources.strUpdateDialogDownload}" />
+                <Button x:Name="btnCancel" Click="BtnCancel_Click" Height="30" Width="100" Margin="5"  HorizontalAlignment="Right" Content="{x:Static res:Resources.strCancel}" />
             </StackPanel>
         </Grid>
     </Grid>

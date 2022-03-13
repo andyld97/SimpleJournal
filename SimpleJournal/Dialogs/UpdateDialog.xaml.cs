@@ -11,9 +11,13 @@ namespace SimpleJournal.Dialogs
     /// </summary>
     public partial class UpdateDialog : Window
     {
+        private Version version;
+
         public UpdateDialog(Version v)
         {
             InitializeComponent();
+            this.version = v;
+
             try
             {
                 txtVersion.Text = string.Format(Properties.Resources.strUpdateDialogVersionText, v.ToString(4));
@@ -46,19 +50,32 @@ namespace SimpleJournal.Dialogs
 
         private void BtnOK_Click(object sender, RoutedEventArgs e)
         {
-            try
+            UpdateDownloadDialog updateDownloadDialog = new UpdateDownloadDialog(version);
+            var result = updateDownloadDialog.ShowDialog();
+
+            if (result.HasValue && result.Value)
             {
-                GeneralHelper.OpenUri(new Uri(Consts.DonwloadUrl));
                 DialogResult = true;
+
+                try
+                {
+                    System.Diagnostics.Process.Start(updateDownloadDialog.LocalFilePath);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"{Properties.Resources.strUpdateDownloadDialog_FailedToOpenSetup}{Environment.NewLine}{Environment.NewLine}{ex.Message}", SharedResources.Resources.strError, MessageBoxButton.OK, MessageBoxImage.Error);
+                    DialogResult = false;
+                    return;
+                }
 
                 // Exit to make sure user can easily update without problems
                 Application.Current.Shutdown();
             }
-            catch (Exception ex)
+            else
             {
-                string message = string.Format(Properties.Resources.strUpdateDialogFailedToOpenBrowserAutomatically, ex.Message, Consts.DonwloadUrl, Consts.HomePageUrl);
-                MessageBox.Show(this, message, Properties.Resources.strFailure, MessageBoxButton.OK, MessageBoxImage.Error);
-            }             
+                DialogResult = false;
+                return;
+            }
         }
     }
 }

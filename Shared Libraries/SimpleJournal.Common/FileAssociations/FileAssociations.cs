@@ -1,6 +1,6 @@
 ﻿using Microsoft.Win32;
 using System;
-using System.Windows.Forms;
+//using System.Windows.Forms;
 
 namespace SimpleJournal.Common.FileAssociations
 {
@@ -17,26 +17,19 @@ namespace SimpleJournal.Common.FileAssociations
 
         public static void EnsureAssociationsSet(string executable, string progId = "SimpleJournal")
         {
-            try
-            {
+            // var filePath = Process.GetCurrentProcess().MainModule.FileName;
+            //var filePath = @"explorer shell:appsFolder\26590AndreasLeopold.SimpleJournal_77rg7g3vwn6wg!SimpleJournal";
+            //var filePath = "26590AndreasLeopold.SimpleJournal_77rg7g3vwn6wg";
+            var filePath = executable;
 
-                // var filePath = Process.GetCurrentProcess().MainModule.FileName;
-                //var filePath = @"explorer shell:appsFolder\26590AndreasLeopold.SimpleJournal_77rg7g3vwn6wg!SimpleJournal";
-                //var filePath = "26590AndreasLeopold.SimpleJournal_77rg7g3vwn6wg";
-                var filePath = executable;
-
-                EnsureAssociationsSet(new FileAssociation
-                {
-                    Extension = ".journal",
-                    ProgId = progId,
-                    FileTypeDescription = "Journal",
-                    ExecutableFilePath = filePath
-                });
-            }
-            catch (Exception e)
+            EnsureAssociationsSet(new FileAssociation
             {
-                MessageBox.Show(e.Message);
-            }
+                Extension = ".journal",
+                ProgId = progId,
+                FileTypeDescription = "Journal",
+                ExecutableFilePath = filePath
+            });
+
         }
 
         public static void EnsureAssociationsSet(params FileAssociation[] associations)

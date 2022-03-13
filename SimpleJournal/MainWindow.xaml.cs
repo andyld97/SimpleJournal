@@ -197,7 +197,14 @@ namespace SimpleJournal
                 // ToDo: *** Move this out of first start (so that this is checked on every start?)
 #if !UWP
                 string executable = Consts.Executable;
-                FileAssociations.EnsureAssociationsSet(executable);
+                try
+                {
+                    FileAssociations.EnsureAssociationsSet(executable);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Failed to set file association: {ex.Message}", SharedResources.Resources.strError, MessageBoxButton.OK, MessageBoxImage.Error);
+                }
 #else
                 GeneralHelper.InstallUWPFileAssoc();
 #endif
@@ -741,7 +748,7 @@ namespace SimpleJournal
 
                     if (element is Polygon pol)
                     {
-                        int edge = ConvexHull.GetConvexHull(pol.Points.ToList()).Count;
+                        int edge = ConvexHull.GetConvexHull(pol.Points.Select(p => new Common.Data.Point(p.X, p.Y)).ToList()).Count;
                         if (edge == 3)
                             text = Properties.Resources.strTriangle;
                         else if (edge == 4)
@@ -2885,7 +2892,7 @@ namespace SimpleJournal
 #if !UWP
                     close = true;
 #else
-                    Close();
+                    Application.Current.Shutdown();
 #endif
                 }
             }
@@ -2902,7 +2909,7 @@ namespace SimpleJournal
                 TouchHelper.SetTouchState(true);
                 
             if (close && cancelClosing)
-                Close();
+                Application.Current.Shutdown();
 #endif
         }
 
