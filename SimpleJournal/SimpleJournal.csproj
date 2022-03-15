@@ -274,7 +274,7 @@
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
-		<PackageReference Include="Fluent.Ribbon" Version="9.0.3" />
+		<PackageReference Include="Fluent.Ribbon" Version="9.0.4" />
 		<PackageReference Include="Magick.NET-Q16-AnyCPU" Version="10.1.0" />
 		<PackageReference Include="Magick.NET.Core" Version="10.1.0" />
 		<PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
