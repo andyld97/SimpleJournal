@@ -3,10 +3,11 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:res="clr-namespace:Touch_Device_Manager.Properties"
         mc:Ignorable="d"
         Title="Touch Device Manager" Height="300" Width="400"
-        ResizeMode="NoResize"
-        >
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
@@ -34,8 +35,8 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <Button x:Name="ButtonEnable" Click="ButtonEnable_Click" Content="Enable Device" Margin="5" Width="180" />
-            <Button x:Name="ButtonDisable" Click="ButtonDisable_Click" Content="Disable Device" Margin="5" Width="180"  Grid.Column="1"/>
+            <Button x:Name="ButtonEnable" Click="ButtonEnable_Click" Content="{x:Static res:Resources.strEnableDevice}" Margin="5" FontWeight="Bold" />
+            <Button x:Name="ButtonDisable" Click="ButtonDisable_Click" Content="{x:Static res:Resources.strDisableDevice}" Margin="5" Grid.Column="1" FontWeight="Bold"/>
         </Grid>
     </Grid>
 </Window>

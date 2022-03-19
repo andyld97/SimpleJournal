@@ -114,4 +114,25 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="strEnableDevice" xml:space="preserve">
+    <value>Enable Device</value>
+  </data>
+  <data name="strDisableDevice" xml:space="preserve">
+    <value>Disable Device</value>
+  </data>
+  <data name="strFailedToSetDeviceState" xml:space="preserve">
+    <value>Failed to set state {0} for device: "{1}": {2}</value>
+  </data>
+  <data name="strTitle" xml:space="preserve">
+    <value>Touch Device Manager - {0} Devices found!</value>
+  </data>
+  <data name="strNoDeviceSelected_Title" xml:space="preserve">
+    <value>No device selected!</value>
+  </data>
+  <data name="strNoDeviceSelected_Message" xml:space="preserve">
+    <value>Please select a device first!</value>
+  </data>
+  <data name="strErrorOccuredWhileQueryingWMIData" xml:space="preserve">
+    <value>An error occurred while querying for WMI data: {0}</value>
+  </data>
 </root>

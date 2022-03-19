@@ -24,14 +24,14 @@ namespace Touch_Device_Manager
             {
                 devices = DeviceWMI.GetPNPDevicesWithNames(new string[] { "touch screen", "touchscreen" });
                 ListDevices.ItemsSource = devices;
-                Title = $"Touch Device Manager - {devices.Count} Devices found!";
+                Title = string.Format(Properties.Resources.strTitle, devices.Count);
 
                 if (devices.Count > 0)
                     ListDevices.SelectedIndex = devices.Count - 1;
             }
             catch (Exception e)
             {
-                MessageBox.Show("An error occurred while querying for WMI data: " + e.Message);
+                MessageBox.Show(string.Format(Properties.Resources.strErrorOccuredWhileQueryingWMIData, e.Message), SimpleJournal.SharedResources.Resources.strError, MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -49,7 +49,7 @@ namespace Touch_Device_Manager
         {
             if (index < 0 || index > devices.Count - 1)
             {
-                MessageBox.Show($"Please select a device first!", "No device selected!", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(Properties.Resources.strNoDeviceSelected_Message, Properties.Resources.strNoDeviceSelected_Title, MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
@@ -59,7 +59,7 @@ namespace Touch_Device_Manager
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Failed to set state {state} for device: {devices[index]}: {ex}", "Fail!", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(string.Format(Properties.Resources.strFailedToSetDeviceState, state, devices[index], ex.Message), SimpleJournal.SharedResources.Resources.strError, MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
             RefreshList();
