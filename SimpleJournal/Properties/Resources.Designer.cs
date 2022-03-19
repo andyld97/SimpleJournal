@@ -1473,7 +1473,7 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to https://simplejournal.ca-soft.net/de/index.php?page=help.
+        ///   Looks up a localized string similar to https://simplejournal.ca-soft.net/en/faq/.
         /// </summary>
         public static string strHelpLnk {
             get {

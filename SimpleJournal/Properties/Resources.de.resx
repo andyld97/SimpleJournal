@@ -687,7 +687,7 @@ Ihre Daten werden nicht an Dritte weitergegeben, sondern auschließlich dazu ver
     <comment>MainWindow.xaml</comment>
   </data>
   <data name="strHelpLnk" xml:space="preserve">
-    <value>https://simplejournal.ca-soft.net/de/index.php?page=help</value>
+    <value>https://simplejournal.ca-soft.net/de/faq/</value>
     <comment>MainWindow.xaml</comment>
   </data>
   <data name="strHelpText" xml:space="preserve">

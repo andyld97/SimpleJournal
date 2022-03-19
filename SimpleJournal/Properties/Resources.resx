@@ -699,7 +699,7 @@ Your data will not be shared with third parties, but will only be used to give y
     <comment>MainWindow.xaml</comment>
   </data>
   <data name="strHelpLnk" xml:space="preserve">
-    <value>https://simplejournal.ca-soft.net/de/index.php?page=help</value>
+    <value>https://simplejournal.ca-soft.net/en/faq/</value>
     <comment>MainWindow.xaml</comment>
   </data>
   <data name="strHelpText" xml:space="preserve">

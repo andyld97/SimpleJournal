@@ -1580,13 +1580,9 @@ namespace SimpleJournal
 
         private void BtnHelp_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                System.Diagnostics.Process.Start(Properties.Resources.strHelpLnk);
-            }
-            catch
-            { }
+            GeneralHelper.OpenUri(new Uri(Properties.Resources.strHelpLnk));
         }
+
         private void RefreshSizeBar()
         {
             if (SelectedPen == -1)
