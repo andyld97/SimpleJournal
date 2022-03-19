@@ -10,7 +10,7 @@
     <Grid>
         <StackPanel Background="Transparent">
             <TextBlock Margin="3,0,0,0" Text="{x:Static res:Resources.strRotation}"/>
-            <local:NumericUpDown x:Name="numAngle" OnChanged="NumAngle_OnChanged" Step="5" Value="0" Minimum="0" Maximum="360" Margin="5" HorizontalAlignment="Stretch"/>
+            <local:NumericUpDown x:Name="numAngle" OnChanged="NumAngle_OnChanged" Step="5" Value="0" Minimum="0" Maximum="360" Margin="3,5" HorizontalAlignment="Stretch" />
         </StackPanel>
     </Grid>
 </UserControl>
