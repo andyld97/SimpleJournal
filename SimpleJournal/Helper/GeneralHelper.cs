@@ -64,7 +64,7 @@ namespace SimpleJournal
 
             if (Settings.Instance.UseDarkMode)
             {
-                sidebarColor = (System.Windows.Media.Color)ColorConverter.ConvertFromString("#FF252525");
+                sidebarColor = (System.Windows.Media.Color)ColorConverter.ConvertFromString("#AF252525");
                 linkColor = System.Windows.Media.Colors.White;
             }
             else
