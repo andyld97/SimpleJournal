@@ -3149,15 +3149,6 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to (may cause performance problems when resizing).
-        /// </summary>
-        public static string strSettingsActivateGlowingEffectDescription {
-            get {
-                return ResourceManager.GetString("strSettingsActivateGlowingEffectDescription", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Show touch buttons in the quick selection bar.
         /// </summary>
         public static string strSettingsActivateTouchButtons {
@@ -3349,6 +3340,24 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Display sidebar lightly transparent.
+        /// </summary>
+        public static string strSettingsSidebarTransparency {
+            get {
+                return ResourceManager.GetString("strSettingsSidebarTransparency", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Adds a slight transparency effect to the sidebar..
+        /// </summary>
+        public static string strSettingsSidebarTransparency_Description {
+            get {
+                return ResourceManager.GetString("strSettingsSidebarTransparency_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to SimpleJournal cannot distinguish between pen and finger input respectively there is no possibility to disable finger input completely. Therefore, there is now an option to run a powershell script on starting/exiting SimpleJournal that disables/enables touch input system-wide..
         /// </summary>
         public static string strSettingsTouchScreenExplanationNormal1 {
@@ -3390,6 +3399,15 @@ namespace SimpleJournal.Properties {
         public static string strSettingsUseBackstageMenu {
             get {
                 return ResourceManager.GetString("strSettingsUseBackstageMenu", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to When activated, the menu is replaced by a more modern backstage menu..
+        /// </summary>
+        public static string strSettingsUseBackstageMenu_Description {
+            get {
+                return ResourceManager.GetString("strSettingsUseBackstageMenu_Description", resourceCulture);
             }
         }
         

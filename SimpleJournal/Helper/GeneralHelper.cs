@@ -62,14 +62,16 @@ namespace SimpleJournal
             System.Windows.Media.Color sidebarColor;
             System.Windows.Media.Color linkColor;
 
+            string transparency = Settings.Instance.UseObjectBarTransparency ? "AF" : "FF";
+
             if (Settings.Instance.UseDarkMode)
             {
-                sidebarColor = (System.Windows.Media.Color)ColorConverter.ConvertFromString("#AF252525");
+                sidebarColor = (System.Windows.Media.Color)ColorConverter.ConvertFromString($"#{transparency}252525");
                 linkColor = System.Windows.Media.Colors.White;
             }
             else
             {
-                sidebarColor = (System.Windows.Media.Color)ColorConverter.ConvertFromString("#AFCECACA");
+                sidebarColor = (System.Windows.Media.Color)ColorConverter.ConvertFromString($"#{transparency}CECACA");
                 linkColor = System.Windows.Media.Colors.MediumBlue;
             }
 
@@ -78,8 +80,7 @@ namespace SimpleJournal
             App.Current.Resources["Link.Foreground"] = new SolidColorBrush(linkColor);
 
             ThemeManager.Current.ChangeTheme(Application.Current, GetCurrentTheme());
-        }
-   
+        }   
 
         #region RTB
 

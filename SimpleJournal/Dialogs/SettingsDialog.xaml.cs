@@ -58,7 +58,6 @@ namespace SimpleJournal
                 chkWindowMode.SelectedIndex = 0;
 
             CheckBoxActivateGlowingBrush.IsChecked = Settings.Instance.ActivateGlowingBrush;
-            CheckBoxUseNewMenu.IsChecked = Settings.Instance.UseNewMenu;
 
 #if UWP
             TabTouch.Visibility = Visibility.Collapsed;
@@ -321,15 +320,6 @@ namespace SimpleJournal
                 DrawingCanvas.LastModifiedCanvas.DefaultDrawingAttributes.FitToCurve = (bool)value;
         }
 
-        private void CheckBoxUseNewMenu_Checked(object sender, RoutedEventArgs e)
-        {
-            if (editMode)
-                return;
-
-            Settings.Instance.UseNewMenu = CheckBoxUseNewMenu.IsChecked.Value;
-            Settings.Instance.Save();
-        }
-
         private void DebugTestButton_Click(object sender, RoutedEventArgs e)
         {
             // This is just for debugging purposes
@@ -360,6 +350,11 @@ namespace SimpleJournal
             { }
 
             GeneralHelper.OpenUri(new Uri(Consts.BackupDirectory));
+        }
+
+        private void SettingObjectBarTransparency_OnSettingChanged(object value)
+        {
+            GeneralHelper.ApplyTheming();
         }
     }
 }

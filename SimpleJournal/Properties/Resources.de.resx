@@ -1216,10 +1216,6 @@ Klicken Sie auf Nein, um diesen Hinweis weiterhin zu erhalten!</value>
     <value>Fensterleuchteffekt aktivieren</value>
     <comment>*</comment>
   </data>
-  <data name="strSettingsActivateGlowingEffectDescription" xml:space="preserve">
-    <value>(kann beim Verkleinern/Vergrößern zu Performance-Problemen führen)</value>
-    <comment>*</comment>
-  </data>
   <data name="strSettingsActivateTouchButtons" xml:space="preserve">
     <value>Touch-Buttons in der Schnellwahlleiste anzeigen</value>
     <comment>SettingsDialog.xaml</comment>
@@ -2003,5 +1999,14 @@ Alternativ können Sie die normale Version von SimpleJournal verwenden!</value>
   </data>
   <data name="strUpdateDownloadDialog_FailedToOpenSetup" xml:space="preserve">
     <value>Fehler beim Öffnen des Setups!</value>
+  </data>
+  <data name="strSettingsSidebarTransparency_Description" xml:space="preserve">
+    <value>Verleiht der Seitenleiste einen leichten Transparenzeffekt.</value>
+  </data>
+  <data name="strSettingsSidebarTransparency" xml:space="preserve">
+    <value>Objektleiste leicht transparent darstellen</value>
+  </data>
+  <data name="strSettingsUseBackstageMenu_Description" xml:space="preserve">
+    <value>Wenn aktiviert, wird das Menü durch ein moderneres Backstage Menü ersetzt.</value>
   </data>
 </root>

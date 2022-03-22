@@ -1235,10 +1235,6 @@ Click on No to continue to receive this message!</value>
     <value>Active window glowing effect</value>
     <comment>SettingsDialog.xaml</comment>
   </data>
-  <data name="strSettingsActivateGlowingEffectDescription" xml:space="preserve">
-    <value>(may cause performance problems when resizing)</value>
-    <comment>SettingsDialog.xaml</comment>
-  </data>
   <data name="strSettingsActivateTouchButtons" xml:space="preserve">
     <value>Show touch buttons in the quick selection bar</value>
     <comment>SettingsDialog.xaml</comment>
@@ -1770,6 +1766,7 @@ Here I would like to give you a few more important hints that will help you to u
   </data>
   <data name="strPageManagmentButtonInsertPageBeforeIndexDotted" xml:space="preserve">
     <value>Inserts a dotted page before the current page</value>
+    <comment>*</comment>
   </data>
   <data name="strPageManagmentButtonInsertPageAfterIndexDotted" xml:space="preserve">
     <value>Inserts a dotted page after the current page</value>
@@ -1891,9 +1888,11 @@ Alternatively, you can use the normal version of SimpleJournal!</value>
   </data>
   <data name="strStateExportAsJournal" xml:space="preserve">
     <value>Export Journal ...</value>
+    <comment>*</comment>
   </data>
   <data name="strStatePrinting" xml:space="preserve">
     <value>Print Journal ...</value>
+    <comment>*</comment>
   </data>
   <data name="strPDFFilter" xml:space="preserve">
     <value>PDF-Document|*.pdf</value>
@@ -2037,6 +2036,7 @@ Alternatively, you can use the normal version of SimpleJournal!</value>
   </data>
   <data name="strUseRulerCompensation_Description" xml:space="preserve">
     <value>The ruler compensation ensures that lines that are drawn minimally crooked are automatically straightened.</value>
+    <comment>SettingsDialog.xaml</comment>
   </data>
   <data name="strDontUseRulerCompensation" xml:space="preserve">
     <value>Don't use ruler compensation</value>
@@ -2080,5 +2080,17 @@ Alternatively, you can use the normal version of SimpleJournal!</value>
   <data name="strUpdateDownloadDialog_FailedToOpenSetup" xml:space="preserve">
     <value>Error while opening the setup!</value>
     <comment>UpdateDialog.xaml.cs</comment>
+  </data>
+  <data name="strSettingsSidebarTransparency" xml:space="preserve">
+    <value>Display sidebar lightly transparent</value>
+    <comment>SettingsDialog.xaml</comment>
+  </data>
+  <data name="strSettingsSidebarTransparency_Description" xml:space="preserve">
+    <value>Adds a slight transparency effect to the sidebar.</value>
+    <comment>SettingsDialog.xaml</comment>
+  </data>
+  <data name="strSettingsUseBackstageMenu_Description" xml:space="preserve">
+    <value>When activated, the menu is replaced by a more modern backstage menu.</value>
+    <comment>SettingsDialog.xaml</comment>
   </data>
 </root>
