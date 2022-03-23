@@ -73,45 +73,10 @@ namespace SimpleJournal.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        public static byte[] Microsoft_Win32_Registry {
-            get {
-                object obj = ResourceManager.GetObject("Microsoft_Win32_Registry", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
-        /// </summary>
-        public static byte[] SimpleJournal_Common {
-            get {
-                object obj = ResourceManager.GetObject("SimpleJournal_Common", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
-        /// </summary>
         public static byte[] SJFileAssoc {
             get {
                 object obj = ResourceManager.GetObject("SJFileAssoc", resourceCulture);
                 return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
-        ///&lt;configuration&gt;
-        ///    &lt;startup&gt; 
-        ///        &lt;supportedRuntime version=&quot;v4.0&quot; sku=&quot;.NETFramework,Version=v4.8&quot;/&gt;
-        ///    &lt;/startup&gt;
-        ///&lt;/configuration&gt;
-        ///.
-        /// </summary>
-        public static string SJFileAssoc_exe {
-            get {
-                return ResourceManager.GetString("SJFileAssoc_exe", resourceCulture);
             }
         }
         
@@ -1116,6 +1081,15 @@ namespace SimpleJournal.Properties {
         public static string strFailedToExportJournalAsPDF {
             get {
                 return ResourceManager.GetString("strFailedToExportJournalAsPDF", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to extract SJFileAssoc for creating the file association: {0}.
+        /// </summary>
+        public static string strFailedToExtractSJFileAssoc {
+            get {
+                return ResourceManager.GetString("strFailedToExtractSJFileAssoc", resourceCulture);
             }
         }
         

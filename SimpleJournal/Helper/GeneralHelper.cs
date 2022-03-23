@@ -314,45 +314,46 @@ namespace SimpleJournal
 #if !UWP
             return false;
 #endif
-
-#pragma warning disable CS0162 // Unreachable code detected
-            Dictionary<string, byte[]> resourcesToDeploy = new Dictionary<string, byte[]>()
-#pragma warning restore CS0162 // Unreachable code detected
+            string directoryPath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "journal");
+            string execuatable = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "journal", "SjFileAssoc.exe");            
+           
+            if (System.IO.File.Exists(execuatable))
             {
-                {  System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "journal", "SjFileAssoc.exe"), Properties.Resources.SJFileAssoc },
-                {  System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "journal", "SJFileAssoc.exe.config"), System.Text.Encoding.Default.GetBytes(Properties.Resources.SJFileAssoc_exe) },
-                {  System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "journal", "SimpleJournal.Common.dll"), Properties.Resources.SimpleJournal_Common },
-                {  System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "journal", "Microsoft.Win32.Registry.dll"), Properties.Resources.Microsoft_Win32_Registry },
-            };
+                string fileVersion = FileVersionInfo.GetVersionInfo(execuatable).FileVersion;
 
-            // If the file exists and if it's up to date no need to install
-            if (System.IO.File.Exists(resourcesToDeploy.Keys.FirstOrDefault()) && FileVersionInfo.GetVersionInfo(resourcesToDeploy.Keys.First()).FileVersion == "0.5.0.5")
-                return false;
-            else if (System.IO.File.Exists(resourcesToDeploy.Keys.FirstOrDefault()))
-                FileSystemHelper.TryDeleteFile(resourcesToDeploy.Keys.FirstOrDefault());
+                if (fileVersion == "0.5.0.7")
+                    return false;
+            }
 
-            bool result = true;
-            foreach (var file in resourcesToDeploy)
-                result &= FileSystemHelper.TryWriteAllBytes(file.Key, file.Value);
+            try
+            {
+                FileSystemHelper.ExtractZipFile(Properties.Resources.SJFileAssoc, directoryPath);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(string.Format(Properties.Resources.strFailedToExtractSJFileAssoc, ex.Message), SharedResources.Resources.strError, MessageBoxButton.OK, MessageBoxImage.Error);
+            }
 
-            return result;
+            return true;
         }
 
         public static bool InstallUWPFileAssoc()
         {
-            if (GeneralHelper.InstallApplicationIconForFileAssociation() && GeneralHelper.InstallFileAssoc())
+            GeneralHelper.InstallApplicationIconForFileAssociation();
+
+            if (GeneralHelper.InstallFileAssoc())
             {
-                var tempFile = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "journal", "SjFileAssoc.exe");
-                if (System.IO.File.Exists(tempFile))
+                var executableSJFileAssocFile = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "journal", "SjFileAssoc.exe");
+                if (System.IO.File.Exists(executableSJFileAssocFile))
                 {
                     try
                     {
-                        System.Diagnostics.Process.Start(tempFile);
+                        System.Diagnostics.Process.Start(executableSJFileAssocFile);
                         return true;
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show($"Failed to set file association: {ex.Message}", SharedResources.Resources.strError, MessageBoxButton.OK, MessageBoxImage.Error);
+                        MessageBox.Show(string.Format(SharedResources.Resources.strFailedToSetFileAssoc_Message, ex.Message), SharedResources.Resources.strError, MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                 }
             }

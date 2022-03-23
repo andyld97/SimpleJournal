@@ -2021,4 +2021,7 @@ Alternativ können Sie die normale Version von SimpleJournal verwenden!</value>
   <data name="strSettingDefaultStretching" xml:space="preserve">
     <value>Standardmäßige Streckung für eingefügte Bilder:</value>
   </data>
+  <data name="strFailedToExtractSJFileAssoc" xml:space="preserve">
+    <value>SJFileAssoc konnte nicht extrahiert werden, um die Dateizuordnung zu erstellen: {0}</value>
+  </data>
 </root>

@@ -204,7 +204,7 @@ namespace SimpleJournal
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show($"Failed to set file association: {ex.Message}", SharedResources.Resources.strError, MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show(string.Format(SharedResources.Resources.strFailedToSetFileAssoc_Message, ex.Message), SharedResources.Resources.strError, MessageBoxButton.OK, MessageBoxImage.Error);
                 }
 #else
                 GeneralHelper.InstallUWPFileAssoc();
