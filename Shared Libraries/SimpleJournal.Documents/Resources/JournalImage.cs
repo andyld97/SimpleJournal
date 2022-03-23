@@ -13,6 +13,6 @@ namespace SimpleJournal.Documents.Resources
 
         public int RotationAngle { get; set; } = 0;
 
-        public bool IsUniform { get; set; } = true;             
+        public Common.Stretch Stretch { get; set; } = Stretch.Fill;
     }
 }

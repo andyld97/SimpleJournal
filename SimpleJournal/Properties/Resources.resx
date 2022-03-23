@@ -2093,4 +2093,17 @@ Alternatively, you can use the normal version of SimpleJournal!</value>
     <value>When activated, the menu is replaced by a more modern backstage menu.</value>
     <comment>SettingsDialog.xaml</comment>
   </data>
+  <data name="strStretching" xml:space="preserve">
+    <value>Stretching:</value>
+    <comment>ImageDesign.xaml</comment>
+  </data>
+  <data name="strStretch_Fill" xml:space="preserve">
+    <value>Fill</value>
+  </data>
+  <data name="strStretching_Uniform" xml:space="preserve">
+    <value>Uniform</value>
+  </data>
+  <data name="strSettingDefaultStretching" xml:space="preserve">
+    <value>Standard stretching for inserted images:</value>
+  </data>
 </root>

@@ -2009,4 +2009,16 @@ Alternativ können Sie die normale Version von SimpleJournal verwenden!</value>
   <data name="strSettingsUseBackstageMenu_Description" xml:space="preserve">
     <value>Wenn aktiviert, wird das Menü durch ein moderneres Backstage Menü ersetzt.</value>
   </data>
+  <data name="strStretching" xml:space="preserve">
+    <value>Streckung:</value>
+  </data>
+  <data name="strStretch_Fill" xml:space="preserve">
+    <value>Füllend</value>
+  </data>
+  <data name="strStretching_Uniform" xml:space="preserve">
+    <value>Proportional</value>
+  </data>
+  <data name="strSettingDefaultStretching" xml:space="preserve">
+    <value>Standardmäßige Streckung für eingefügte Bilder:</value>
+  </data>
 </root>

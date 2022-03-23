@@ -49,7 +49,7 @@ namespace SimpleJournal.Documents.UI.Extensions
         #region Image
         public static UIElement ConvertImageToUiElement(this JournalImage image)
         {
-            Image img = new Image() { Source = ImageHelper.LoadImageFromBase64(Convert.ToBase64String(image.Data)), Stretch = (image.IsUniform ? Stretch.Uniform : Stretch.Fill) };
+            Image img = new Image() { Source = ImageHelper.LoadImageFromBase64(Convert.ToBase64String(image.Data)), Stretch = image.Stretch.ConvertStretch() };
             img.SetValue(InkCanvas.LeftProperty, image.Left);
             img.SetValue(InkCanvas.TopProperty, image.Top);
             img.Width = image.Width;
@@ -71,7 +71,7 @@ namespace SimpleJournal.Documents.UI.Extensions
                 ZIndex = Canvas.GetZIndex(img),
                 Width = img.Width,
                 Height = img.Height,
-                IsUniform = (img.Stretch == Stretch.Uniform)
+                Stretch = img.Stretch.ConvertStretch()
             };
 
             if (img.RenderTransform != null && img.RenderTransform is RotateTransform rt)
@@ -237,7 +237,7 @@ namespace SimpleJournal.Documents.UI.Extensions
             plt.RenderTransformOrigin = new Point(0.5, 0.5);
 
             return plt;
-        }     
+        }
 
         public static JournalResource ConvertPlot(this Plot plot)
         {
@@ -260,6 +260,38 @@ namespace SimpleJournal.Documents.UI.Extensions
             return js;
         }
 
+        #endregion
+
+        #region Stretch
+
+        public static System.Windows.Media.Stretch ConvertStretch(this Common.Stretch stretch)
+        {
+            System.Windows.Media.Stretch result = Stretch.Fill;
+            switch (stretch)
+            {
+                case Common.Stretch.None: result = Stretch.None; break;
+                case Common.Stretch.Fill: result = Stretch.Fill; break;
+                case Common.Stretch.Uniform: result = Stretch.Uniform; break;
+                case Common.Stretch.UniformToFill: result = Stretch.UniformToFill; break;
+            }
+
+            return result;
+        }
+
+        public static Common.Stretch ConvertStretch(this System.Windows.Media.Stretch stretch)
+        {
+            Common.Stretch result = Common.Stretch.Fill;
+
+            switch (stretch)
+            {
+                case System.Windows.Media.Stretch.None: result = Common.Stretch.None; break;
+                case System.Windows.Media.Stretch.Fill: result = Common.Stretch.Fill; break;
+                case System.Windows.Media.Stretch.Uniform: result = Common.Stretch.Uniform; break;
+                case System.Windows.Media.Stretch.UniformToFill: result = Common.Stretch.UniformToFill; break;
+            }
+
+            return result;
+        }
         #endregion
     }
 }

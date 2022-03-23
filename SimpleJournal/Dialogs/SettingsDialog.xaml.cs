@@ -58,6 +58,7 @@ namespace SimpleJournal
                 chkWindowMode.SelectedIndex = 0;
 
             CheckBoxActivateGlowingBrush.IsChecked = Settings.Instance.ActivateGlowingBrush;
+            ComboBoxStretch.SelectedIndex = (Settings.Instance.InsertImageStretchFormat == Stretch.Fill ? 0 : 1);
 
 #if UWP
             TabTouch.Visibility = Visibility.Collapsed;
@@ -355,6 +356,15 @@ namespace SimpleJournal
         private void SettingObjectBarTransparency_OnSettingChanged(object value)
         {
             GeneralHelper.ApplyTheming();
+        }
+
+        private void ComboBoxStretch_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (editMode)
+                return;
+
+            Settings.Instance.InsertImageStretchFormat = (ComboBoxStretch.SelectedIndex == 0 ? Stretch.Fill : Stretch.Uniform);
+            Settings.Instance.Save();
         }
     }
 }

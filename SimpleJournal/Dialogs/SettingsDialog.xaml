@@ -95,6 +95,11 @@
                         </StackPanel>
                     </Border>
                     <StackPanel Margin="3,0,0,0" Background="Transparent">
+                        <StackPanel.Resources>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="FontWeight" Value="Bold" />
+                            </Style>
+                        </StackPanel.Resources>
                         <TextBlock Margin="0,3,0,0" Text="{x:Static res:Resources.strPaperFormat}"/>
                         <Fluent:ComboBox Header="{x:Null}" IsEditable="False" Margin="-8,3,3,0" Padding="4" SelectedIndex="1" x:Name="chkPaperType" SelectionChanged="chkPaperType_SelectionChanged">
                             <ComboBox.Items>
@@ -139,7 +144,6 @@
                             </Fluent:ComboBox.ItemTemplate>
                         </Fluent:ComboBox>
 
-
                         <CheckBox x:Name="CheckBoxThemeIsColorful" Content="{x:Static res:Resources.strIsColorfulTheme}" Checked="CheckBoxThemeIsColorful_Checked" Unchecked="CheckBoxThemeIsColorful_Unchecked" Margin="0,5,0,0" />
                         <CheckBox x:Name="CheckBoxActivateGlowingBrush" Checked="CheckBoxActivateGlowingBrush_Checked" Unchecked="CheckBoxActivateGlowingBrush_Checked" Content="{x:Static res:Resources.strSettingsActivateGlowingEffect}" Margin="0,5,0,0" />
                     </StackPanel>
@@ -150,7 +154,7 @@
                     <StackPanel Margin="3,5,0,0">
                         <Border BorderThickness="1" BorderBrush="LightGray" CornerRadius="3">
                             <StackPanel>
-                                <TextBlock Text="{x:Static res:Resources.strBackground}" Margin="5,3,0,5" />
+                                <TextBlock Text="{x:Static res:Resources.strBackground}" Margin="5,3,0,5" FontWeight="Bold" />
                                 <RadioButton x:Name="RbDefault" Margin="3,0,0,0" Checked="rb_Checked" GroupName="background" Content="{x:Static res:Resources.strSettingsBackgroundDefault}" />
 
                                 <StackPanel Orientation="Horizontal" Margin="0,3,0,0">
@@ -168,7 +172,7 @@
                                     </RadioButton>
                                 </StackPanel>
 
-                                <RadioButton x:Name="RbCustom" Margin="3,0,0,0" Checked="rb_Checked" GroupName="background" Content="{x:Static res:Resources.strSettingsBackgroundCustom}" />
+                                <RadioButton x:Name="RbCustom" Margin="3,0,0,3" Checked="rb_Checked" GroupName="background" Content="{x:Static res:Resources.strSettingsBackgroundCustom}" />
 
                                 <Grid Margin="0,3,0,3" Visibility="{Binding ElementName=RbCustom, Path=IsChecked, Converter={StaticResource BooleanToVisibility}}">
                                     <Grid.ColumnDefinitions>
@@ -187,6 +191,19 @@
                         <controls:SettingsItemControl SettingName="{x:Static res:Resources.strSettingsUseBackstageMenu}" Description="{x:Static res:Resources.strSettingsUseBackstageMenu_Description}" SettingPropertyName="UseNewMenu" />
                         <controls:SettingsItemControl SettingName="{x:Static res:Resources.strDisplaySidebarAutomatically}" Description="{x:Static res:Resources.strDisplaySidebarAutomaticallyDescription}" SettingPropertyName="DisplaySidebarAutomatically" />
                         <controls:SettingsItemControl x:Name="SettingObjectBarTransparency" SettingName="{x:Static res:Resources.strSettingsSidebarTransparency}" Description="{x:Static res:Resources.strSettingsSidebarTransparency_Description}" SettingPropertyName="UseObjectBarTransparency" OnSettingChanged="SettingObjectBarTransparency_OnSettingChanged" />
+
+                        <Border Margin="0,5,0,0" BorderThickness="1" BorderBrush="LightGray" CornerRadius="3">
+                            <StackPanel>
+                                <TextBlock Text="{x:Static res:Resources.strSettingDefaultStretching}" Margin="5,2,0,0" FontWeight="Bold" />
+                                <Fluent:ComboBox x:Name="ComboBoxStretch" SelectionChanged="ComboBoxStretch_SelectionChanged" IsEditable="False" Margin="-5.5,5,3,5">
+                                    <Fluent:ComboBox.Items>
+                                        <ComboBoxItem Content="{x:Static res:Resources.strStretch_Fill}" />
+                                        <ComboBoxItem Content="{x:Static res:Resources.strStretching_Uniform}" />
+                                    </Fluent:ComboBox.Items>
+                                </Fluent:ComboBox>
+                            </StackPanel>
+                        </Border>
+
                         <controls:SettingsItemControl SettingName="{x:Static res:Resources.strUseOldChequeredPatternLine1}" Description="{x:Static res:Resources.strUseOldChequeredPatternLine2}" SettingPropertyName="UseOldChequeredPattern" />
 
                         <Border BorderThickness="1" BorderBrush="LightGray" CornerRadius="3" Margin="0,3,0,0">
@@ -221,9 +238,14 @@
                 <StackPanel Margin="0,2,-3,0">
                     <Border BorderBrush="LightGray" BorderThickness="1" CornerRadius="3" Margin="3">
                         <StackPanel>
+                            <StackPanel.Resources>
+                                <Style TargetType="{x:Type Hyperlink}">
+                                    <Setter Property="Foreground" Value="{DynamicResource BlackBrush}" />
+                                </Style>
+                            </StackPanel.Resources>
                             <TextBlock Margin="5,2,2,5">
                                 <Hyperlink x:Name="DownloadTDM" RequestNavigate="DownloadTDM_RequestNavigate" NavigateUri="https://simplejournal.ca-soft.net/download.php?tdm=1">
-                                    <Run Text="{x:Static res:Resources.strSettingsDownloadTouchDeviceManager}" />
+                                    <Run Text="{x:Static res:Resources.strSettingsDownloadTouchDeviceManager}" FontWeight="Bold" />
                                 </Hyperlink>
                             </TextBlock>
 
@@ -232,12 +254,6 @@
                     </Border>
                 </StackPanel>
             </TabItem>
-            <!--ToDo: *** Next update -->
-            <!--
-            <TabItem x:Name="TabTest" Header="Design">
-                <controls:DesignSettings />
-            </TabItem>
-            -->
         </TabControl>
     </Grid>
 </Window>

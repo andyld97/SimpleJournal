@@ -4,13 +4,21 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SimpleJournal.Controls"
-             xmlns:res="clr-namespace:SimpleJournal.Properties"
+             xmlns:res="clr-namespace:SimpleJournal.Properties" xmlns:fluent="urn:fluent-ribbon"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="200">
     <Grid>
         <StackPanel Background="Transparent">
             <TextBlock Margin="3,0,0,0" Text="{x:Static res:Resources.strRotation}"/>
             <local:NumericUpDown x:Name="numAngle" OnChanged="NumAngle_OnChanged" Step="5" Value="0" Minimum="0" Maximum="360" Margin="3,5" HorizontalAlignment="Stretch" />
+            
+            <TextBlock Margin="3,0,0,0" Text="{x:Static res:Resources.strStretching}" />
+            <fluent:ComboBox x:Name="ComboBoxStretch" SelectionChanged="ComboBoxStretch_SelectionChanged" IsEditable="False" Margin="-5.5,5,3,0">
+                <fluent:ComboBox.Items>
+                    <ComboBoxItem Content="{x:Static res:Resources.strStretch_Fill}" />
+                    <ComboBoxItem Content="{x:Static res:Resources.strStretching_Uniform}" />
+                </fluent:ComboBox.Items>
+            </fluent:ComboBox>
         </StackPanel>
     </Grid>
 </UserControl>

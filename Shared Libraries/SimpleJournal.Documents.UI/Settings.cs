@@ -202,6 +202,11 @@ namespace SimpleJournal.Documents.UI
         /// </summary>
         public bool UseObjectBarTransparency { get; set; } = true;
 
+        /// <summary>
+        /// Determines which stretch format will be used while inserting an image
+        /// </summary>
+        public Common.Stretch InsertImageStretchFormat { get; set; } = Common.Stretch.Fill;
+
         public Settings()
         {
 

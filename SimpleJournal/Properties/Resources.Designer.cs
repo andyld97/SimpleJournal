@@ -3077,6 +3077,15 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Standard stretching for inserted images:.
+        /// </summary>
+        public static string strSettingDefaultStretching {
+            get {
+                return ResourceManager.GetString("strSettingDefaultStretching", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Settings.
         /// </summary>
         public static string strSettings {
@@ -3791,6 +3800,33 @@ namespace SimpleJournal.Properties {
         public static string strStateSaving {
             get {
                 return ResourceManager.GetString("strStateSaving", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fill.
+        /// </summary>
+        public static string strStretch_Fill {
+            get {
+                return ResourceManager.GetString("strStretch_Fill", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stretching:.
+        /// </summary>
+        public static string strStretching {
+            get {
+                return ResourceManager.GetString("strStretching", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Uniform.
+        /// </summary>
+        public static string strStretching_Uniform {
+            get {
+                return ResourceManager.GetString("strStretching_Uniform", resourceCulture);
             }
         }
         
