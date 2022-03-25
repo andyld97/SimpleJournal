@@ -9,34 +9,43 @@
     <Grid>
         <StackPanel>
             <TextBlock Margin="5,0,0,0" FontSize="14" Text="{x:Static res:Resources.strRotation}"/>
-            <local:NumericUpDown x:Name="numAngle" OnChanged="NumAngle_OnChanged" Margin="5,5,5,0" Step="5" Value="0" Minimum="0" Maximum="360"/>
-            <TextBlock Margin="5,0,0,0" FontSize="14" Text="{x:Static res:Resources.strTextDot}"/>
-            <TextBox Background="{DynamicResource WhiteBrush}" Foreground="{DynamicResource BlackBrush}" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Visible" x:Name="txtContent" TextChanged="TxtContent_TextChanged" FontSize="13" Height="50"  Margin="5"/>
+            <local:NumericUpDown x:Name="numAngle" OnChanged="NumAngle_OnChanged" Margin="5,2,5,0" Step="5" Value="0" Minimum="0" Maximum="360"/>
+            
+            <TextBlock Margin="5,3,0,0" FontSize="14" Text="{x:Static res:Resources.strTextDot}"/>
+            <TextBox Background="{DynamicResource WhiteBrush}" Foreground="{DynamicResource BlackBrush}" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Visible" x:Name="txtContent" TextChanged="TxtContent_TextChanged" FontSize="13" Height="50" Margin="5,2,5,5" />
+            
             <StackPanel Orientation="Horizontal">
-                <Grid Width="50">
+                <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
 
-                    <TextBlock Grid.Row="0" Margin="5,0,0,0" FontSize="14" Text="{x:Static res:Resources.strColor}"/>
-                    <local:ColorPicker Grid.Row="1" x:Name="textColorPicker" ColorChanged="TextColorPicker_ColorChanged" Width="48" Height="32" Margin="5,5,0,0" HorizontalAlignment="Left" />
-                </Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
 
-                <ToggleButton Checked="BtnBold_Checked" Unchecked="BtnBold_Checked" x:Name="btnBold" Margin="10,23,0,0" Content="{x:Static res:Resources.strBold}" FontFamily="20" FontWeight="Bold" Width="30" Height="32"/>
-                <ToggleButton Checked="BtnItalic_Checked" Unchecked="BtnItalic_Unchecked" x:Name="btnItalic" Margin="5,23,0,0" Content="{x:Static res:Resources.strItalic}" FontFamily="20" FontStyle="Italic" Width="30" Height="32"/>
-                <ToggleButton Checked="BtnUnderline_Checked" Unchecked="BtnUnderline_Checked" x:Name="btnUnderline" Margin="5,23,0,0" FontFamily="20" Width="30" Height="32">
-                    <TextBlock TextDecorations="Underline" Text="{x:Static res:Resources.strUnderline}"/>
-                </ToggleButton>
-                <ToggleButton Checked="BtnStrikeThrough_Checked" Unchecked="BtnStrikeThrough_Checked" x:Name="btnStrikeThrough" Margin="5,23,0,0" FontFamily="20"  Width="30" Height="32">
-                    <TextBlock TextDecorations="Strikethrough" Text="{x:Static res:Resources.strStrikethrough}"/>
-                </ToggleButton>
+                    <TextBlock Grid.Row="0" Margin="5,0,0,0" FontSize="14" Text="{x:Static res:Resources.strColor}"/>
+                    <local:ColorPicker Grid.Row="1" x:Name="textColorPicker" ColorChanged="TextColorPicker_ColorChanged" Width="48" Height="32" Margin="5,2,0,0" HorizontalAlignment="Left" />
+
+                    <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Horizontal" Margin="-3,2,0,0">
+                        <ToggleButton Checked="BtnBold_Checked" Unchecked="BtnBold_Checked" x:Name="btnBold" Margin="10,0,0,0" Content="{x:Static res:Resources.strBold}" FontFamily="20" FontWeight="Bold" Width="30" Height="32"/>
+                        <ToggleButton Checked="BtnItalic_Checked" Unchecked="BtnItalic_Unchecked" x:Name="btnItalic" Margin="5,0,0,0" Content="{x:Static res:Resources.strItalic}" FontFamily="20" FontStyle="Italic" Width="30" Height="32"/>
+                        <ToggleButton Checked="BtnUnderline_Checked" Unchecked="BtnUnderline_Checked" x:Name="btnUnderline" Margin="5,0,0,0" FontFamily="20" Width="30" Height="32">
+                            <TextBlock TextDecorations="Underline" Text="{x:Static res:Resources.strUnderline}"/>
+                        </ToggleButton>
+                        <ToggleButton Checked="BtnStrikeThrough_Checked" Unchecked="BtnStrikeThrough_Checked" x:Name="btnStrikeThrough" Margin="5,0,0,0" FontFamily="20"  Width="30" Height="32">
+                            <TextBlock TextDecorations="Strikethrough" Text="{x:Static res:Resources.strStrikethrough}"/>
+                        </ToggleButton>
+                    </StackPanel>
+                </Grid>
             </StackPanel>
 
             <TextBlock Margin="5,2,0,0" FontSize="14" Text="{x:Static res:Resources.strFontSize}"/>
             <local:NumericUpDown x:Name="numTextSize" OnChanged="NumTextSize_OnChanged" Margin="5,2,5,0" Step="1" Value="0" Minimum="1" Maximum="50"/>
-            <TextBlock Margin="5,0,0,0" FontSize="14" Text="{x:Static res:Resources.strFont}"/>
-            <local:FontChooseBox x:Name="cmbFontChooser" OnFontChanged="CmbFontChooser_OnFontChanged" Margin="5,0,5,0"/>
+            <TextBlock Margin="5,2,0,0" FontSize="14" Text="{x:Static res:Resources.strFont}"/>
+            <local:FontChooseBox x:Name="cmbFontChooser" OnFontChanged="CmbFontChooser_OnFontChanged" Margin="5,2,5,0"/>
         </StackPanel>
     </Grid>
 </UserControl>

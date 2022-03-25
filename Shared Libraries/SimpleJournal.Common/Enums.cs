@@ -209,4 +209,12 @@
         GB = 4,
         TB = 5
     }
+
+    public enum Stretch
+    {
+        None,
+        Fill,
+        Uniform,
+        UniformToFill
+    }
 }

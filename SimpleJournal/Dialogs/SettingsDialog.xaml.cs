@@ -58,7 +58,7 @@ namespace SimpleJournal
                 chkWindowMode.SelectedIndex = 0;
 
             CheckBoxActivateGlowingBrush.IsChecked = Settings.Instance.ActivateGlowingBrush;
-            CheckBoxUseNewMenu.IsChecked = Settings.Instance.UseNewMenu;
+            ComboBoxStretch.SelectedIndex = (Settings.Instance.InsertImageStretchFormat == Stretch.Fill ? 0 : 1);
 
 #if UWP
             TabTouch.Visibility = Visibility.Collapsed;
@@ -258,7 +258,7 @@ namespace SimpleJournal
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Failed to set file association: {ex.Message}", SharedResources.Resources.strError, MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(string.Format(SharedResources.Resources.strFailedToSetFileAssoc_Message, ex.Message), SharedResources.Resources.strError, MessageBoxButton.OK, MessageBoxImage.Error);
             }
 #endif
         }
@@ -321,15 +321,6 @@ namespace SimpleJournal
                 DrawingCanvas.LastModifiedCanvas.DefaultDrawingAttributes.FitToCurve = (bool)value;
         }
 
-        private void CheckBoxUseNewMenu_Checked(object sender, RoutedEventArgs e)
-        {
-            if (editMode)
-                return;
-
-            Settings.Instance.UseNewMenu = CheckBoxUseNewMenu.IsChecked.Value;
-            Settings.Instance.Save();
-        }
-
         private void DebugTestButton_Click(object sender, RoutedEventArgs e)
         {
             // This is just for debugging purposes
@@ -360,6 +351,20 @@ namespace SimpleJournal
             { }
 
             GeneralHelper.OpenUri(new Uri(Consts.BackupDirectory));
+        }
+
+        private void SettingObjectBarTransparency_OnSettingChanged(object value)
+        {
+            GeneralHelper.ApplyTheming();
+        }
+
+        private void ComboBoxStretch_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (editMode)
+                return;
+
+            Settings.Instance.InsertImageStretchFormat = (ComboBoxStretch.SelectedIndex == 0 ? Stretch.Fill : Stretch.Uniform);
+            Settings.Instance.Save();
         }
     }
 }

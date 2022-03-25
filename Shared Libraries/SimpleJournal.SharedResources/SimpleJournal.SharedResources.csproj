@@ -2,9 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>net48</TargetFramework>
-    <AssemblyVersion>0.5.0.6</AssemblyVersion>
-    <FileVersion>0.5.0.6</FileVersion>
     <Configurations>Debug;Release;Normal;UWPNew</Configurations>
+	<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
 
   <ItemGroup>
@@ -18,6 +17,10 @@
 
   <ItemGroup>
     <EmbeddedResource Include="icons\pages\pagedown.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SimpleJournal.Common\SimpleJournal.Common.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -57,9 +60,6 @@
 
   <ItemGroup>
     <EmbeddedResource Update="Resources.de.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Resources.pl.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Resources.resx">

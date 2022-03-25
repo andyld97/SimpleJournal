@@ -687,7 +687,7 @@ Ihre Daten werden nicht an Dritte weitergegeben, sondern auschließlich dazu ver
     <comment>MainWindow.xaml</comment>
   </data>
   <data name="strHelpLnk" xml:space="preserve">
-    <value>https://simplejournal.ca-soft.net/de/index.php?page=help</value>
+    <value>https://simplejournal.ca-soft.net/de/faq/</value>
     <comment>MainWindow.xaml</comment>
   </data>
   <data name="strHelpText" xml:space="preserve">
@@ -1117,7 +1117,7 @@ Klicken Sie auf Nein, um diesen Hinweis weiterhin zu erhalten!</value>
     <comment>MainWindow.xaml</comment>
   </data>
   <data name="strReleaseDate" xml:space="preserve">
-    <value>13.03.2022 13:19 Uhr</value>
+    <value>25.03.2022 10:29 Uhr</value>
     <comment>*</comment>
   </data>
   <data name="strRemove" xml:space="preserve">
@@ -1214,10 +1214,6 @@ Klicken Sie auf Nein, um diesen Hinweis weiterhin zu erhalten!</value>
   </data>
   <data name="strSettingsActivateGlowingEffect" xml:space="preserve">
     <value>Fensterleuchteffekt aktivieren</value>
-    <comment>*</comment>
-  </data>
-  <data name="strSettingsActivateGlowingEffectDescription" xml:space="preserve">
-    <value>(kann beim Verkleinern/Vergrößern zu Performance-Problemen führen)</value>
     <comment>*</comment>
   </data>
   <data name="strSettingsActivateTouchButtons" xml:space="preserve">
@@ -2003,5 +1999,29 @@ Alternativ können Sie die normale Version von SimpleJournal verwenden!</value>
   </data>
   <data name="strUpdateDownloadDialog_FailedToOpenSetup" xml:space="preserve">
     <value>Fehler beim Öffnen des Setups!</value>
+  </data>
+  <data name="strSettingsSidebarTransparency_Description" xml:space="preserve">
+    <value>Verleiht der Seitenleiste einen leichten Transparenzeffekt.</value>
+  </data>
+  <data name="strSettingsSidebarTransparency" xml:space="preserve">
+    <value>Objektleiste leicht transparent darstellen</value>
+  </data>
+  <data name="strSettingsUseBackstageMenu_Description" xml:space="preserve">
+    <value>Wenn aktiviert, wird das Menü durch ein moderneres Backstage Menü ersetzt.</value>
+  </data>
+  <data name="strStretching" xml:space="preserve">
+    <value>Streckung:</value>
+  </data>
+  <data name="strStretch_Fill" xml:space="preserve">
+    <value>Füllend</value>
+  </data>
+  <data name="strStretching_Uniform" xml:space="preserve">
+    <value>Proportional</value>
+  </data>
+  <data name="strSettingDefaultStretching" xml:space="preserve">
+    <value>Standardmäßige Streckung für eingefügte Bilder:</value>
+  </data>
+  <data name="strFailedToExtractSJFileAssoc" xml:space="preserve">
+    <value>SJFileAssoc konnte nicht extrahiert werden, um die Dateizuordnung zu erstellen: {0}</value>
   </data>
 </root>

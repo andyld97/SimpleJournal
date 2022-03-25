@@ -115,6 +115,15 @@ namespace SimpleJournal.SharedResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Failed to set file association: {0}.
+        /// </summary>
+        public static string strFailedToSetFileAssoc_Message {
+            get {
+                return ResourceManager.GetString("strFailedToSetFileAssoc_Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to An error occurred while transforming the shape:.
         /// </summary>
         public static string strFailedToTransformShape {

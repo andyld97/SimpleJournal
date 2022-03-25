@@ -133,4 +133,7 @@
     <value>Fehler beim Speichern der Einstellungen:</value>
     <comment>*</comment>
   </data>
+  <data name="strFailedToSetFileAssoc_Message" xml:space="preserve">
+    <value>Die Dateizuordnung konnte nicht festgelegt werden: {0}</value>
+  </data>
 </root>

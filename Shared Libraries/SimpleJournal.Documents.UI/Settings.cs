@@ -155,7 +155,7 @@ namespace SimpleJournal.Documents.UI
         /// <summary>
         /// Determines if the glowing brush of the mainwindow is disabled or not
         /// </summary>
-        public bool ActivateGlowingBrush { get; set; } = false;
+        public bool ActivateGlowingBrush { get; set; } = true;
 
         /// <summary>
         /// Determines if the touch screen will be disabled at startup and enabled at closing
@@ -196,6 +196,16 @@ namespace SimpleJournal.Documents.UI
         /// If true the strokes drawn with a ruler getting straight horizontal or vertical (only if the offset is little enough)
         /// </summary>
         public bool UseRulerCompensation { get; set; } = true;
+
+        /// <summary>
+        /// If true the object bar will be transparent
+        /// </summary>
+        public bool UseObjectBarTransparency { get; set; } = true;
+
+        /// <summary>
+        /// Determines which stretch format will be used while inserting an image
+        /// </summary>
+        public Common.Stretch InsertImageStretchFormat { get; set; } = Common.Stretch.Fill;
 
         public Settings()
         {

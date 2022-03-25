@@ -298,10 +298,8 @@ namespace SimpleJournal.Common
                     }
                 }
             }
-            catch (Exception e)
-            {
-
-            }
+            catch (Exception)
+            { }
             return serializedContent;
         }
 

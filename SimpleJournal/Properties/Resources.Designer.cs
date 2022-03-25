@@ -73,45 +73,10 @@ namespace SimpleJournal.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        public static byte[] Microsoft_Win32_Registry {
-            get {
-                object obj = ResourceManager.GetObject("Microsoft_Win32_Registry", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
-        /// </summary>
-        public static byte[] SimpleJournal_Common {
-            get {
-                object obj = ResourceManager.GetObject("SimpleJournal_Common", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
-        /// </summary>
         public static byte[] SJFileAssoc {
             get {
                 object obj = ResourceManager.GetObject("SJFileAssoc", resourceCulture);
                 return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
-        ///&lt;configuration&gt;
-        ///    &lt;startup&gt; 
-        ///        &lt;supportedRuntime version=&quot;v4.0&quot; sku=&quot;.NETFramework,Version=v4.8&quot;/&gt;
-        ///    &lt;/startup&gt;
-        ///&lt;/configuration&gt;
-        ///.
-        /// </summary>
-        public static string SJFileAssoc_exe {
-            get {
-                return ResourceManager.GetString("SJFileAssoc_exe", resourceCulture);
             }
         }
         
@@ -1120,6 +1085,15 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Failed to extract SJFileAssoc for creating the file association: {0}.
+        /// </summary>
+        public static string strFailedToExtractSJFileAssoc {
+            get {
+                return ResourceManager.GetString("strFailedToExtractSJFileAssoc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error loading the image:.
         /// </summary>
         public static string strFailedToLoadImage {
@@ -1473,7 +1447,7 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to https://simplejournal.ca-soft.net/de/index.php?page=help.
+        ///   Looks up a localized string similar to https://simplejournal.ca-soft.net/en/faq/.
         /// </summary>
         public static string strHelpLnk {
             get {
@@ -2861,7 +2835,7 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 03/13/2022 1:19 AM.
+        ///   Looks up a localized string similar to 03/25/2022 10:29 AM.
         /// </summary>
         public static string strReleaseDate {
             get {
@@ -3077,6 +3051,15 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Standard stretching for inserted images:.
+        /// </summary>
+        public static string strSettingDefaultStretching {
+            get {
+                return ResourceManager.GetString("strSettingDefaultStretching", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Settings.
         /// </summary>
         public static string strSettings {
@@ -3145,15 +3128,6 @@ namespace SimpleJournal.Properties {
         public static string strSettingsActivateGlowingEffect {
             get {
                 return ResourceManager.GetString("strSettingsActivateGlowingEffect", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to (may cause performance problems when resizing).
-        /// </summary>
-        public static string strSettingsActivateGlowingEffectDescription {
-            get {
-                return ResourceManager.GetString("strSettingsActivateGlowingEffectDescription", resourceCulture);
             }
         }
         
@@ -3349,6 +3323,24 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Display sidebar lightly transparent.
+        /// </summary>
+        public static string strSettingsSidebarTransparency {
+            get {
+                return ResourceManager.GetString("strSettingsSidebarTransparency", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Adds a slight transparency effect to the sidebar..
+        /// </summary>
+        public static string strSettingsSidebarTransparency_Description {
+            get {
+                return ResourceManager.GetString("strSettingsSidebarTransparency_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to SimpleJournal cannot distinguish between pen and finger input respectively there is no possibility to disable finger input completely. Therefore, there is now an option to run a powershell script on starting/exiting SimpleJournal that disables/enables touch input system-wide..
         /// </summary>
         public static string strSettingsTouchScreenExplanationNormal1 {
@@ -3390,6 +3382,15 @@ namespace SimpleJournal.Properties {
         public static string strSettingsUseBackstageMenu {
             get {
                 return ResourceManager.GetString("strSettingsUseBackstageMenu", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to When activated, the menu is replaced by a more modern backstage menu..
+        /// </summary>
+        public static string strSettingsUseBackstageMenu_Description {
+            get {
+                return ResourceManager.GetString("strSettingsUseBackstageMenu_Description", resourceCulture);
             }
         }
         
@@ -3773,6 +3774,33 @@ namespace SimpleJournal.Properties {
         public static string strStateSaving {
             get {
                 return ResourceManager.GetString("strStateSaving", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fill.
+        /// </summary>
+        public static string strStretch_Fill {
+            get {
+                return ResourceManager.GetString("strStretch_Fill", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stretching:.
+        /// </summary>
+        public static string strStretching {
+            get {
+                return ResourceManager.GetString("strStretching", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Uniform.
+        /// </summary>
+        public static string strStretching_Uniform {
+            get {
+                return ResourceManager.GetString("strStretching_Uniform", resourceCulture);
             }
         }
         

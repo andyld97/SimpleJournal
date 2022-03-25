@@ -133,4 +133,8 @@
     <value>Error when saving the settings:</value>
     <comment>*</comment>
   </data>
+  <data name="strFailedToSetFileAssoc_Message" xml:space="preserve">
+    <value>Failed to set file association: {0}</value>
+    <comment>*</comment>
+  </data>
 </root>

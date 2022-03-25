@@ -699,7 +699,7 @@ Your data will not be shared with third parties, but will only be used to give y
     <comment>MainWindow.xaml</comment>
   </data>
   <data name="strHelpLnk" xml:space="preserve">
-    <value>https://simplejournal.ca-soft.net/de/index.php?page=help</value>
+    <value>https://simplejournal.ca-soft.net/en/faq/</value>
     <comment>MainWindow.xaml</comment>
   </data>
   <data name="strHelpText" xml:space="preserve">
@@ -1136,7 +1136,7 @@ Click on No to continue to receive this message!</value>
     <comment>MainWindow.xaml</comment>
   </data>
   <data name="strReleaseDate" xml:space="preserve">
-    <value>03/13/2022 1:19 AM</value>
+    <value>03/25/2022 10:29 AM</value>
     <comment>About.xaml</comment>
   </data>
   <data name="strRemove" xml:space="preserve">
@@ -1233,10 +1233,6 @@ Click on No to continue to receive this message!</value>
   </data>
   <data name="strSettingsActivateGlowingEffect" xml:space="preserve">
     <value>Active window glowing effect</value>
-    <comment>SettingsDialog.xaml</comment>
-  </data>
-  <data name="strSettingsActivateGlowingEffectDescription" xml:space="preserve">
-    <value>(may cause performance problems when resizing)</value>
     <comment>SettingsDialog.xaml</comment>
   </data>
   <data name="strSettingsActivateTouchButtons" xml:space="preserve">
@@ -1770,6 +1766,7 @@ Here I would like to give you a few more important hints that will help you to u
   </data>
   <data name="strPageManagmentButtonInsertPageBeforeIndexDotted" xml:space="preserve">
     <value>Inserts a dotted page before the current page</value>
+    <comment>*</comment>
   </data>
   <data name="strPageManagmentButtonInsertPageAfterIndexDotted" xml:space="preserve">
     <value>Inserts a dotted page after the current page</value>
@@ -1891,9 +1888,11 @@ Alternatively, you can use the normal version of SimpleJournal!</value>
   </data>
   <data name="strStateExportAsJournal" xml:space="preserve">
     <value>Export Journal ...</value>
+    <comment>*</comment>
   </data>
   <data name="strStatePrinting" xml:space="preserve">
     <value>Print Journal ...</value>
+    <comment>*</comment>
   </data>
   <data name="strPDFFilter" xml:space="preserve">
     <value>PDF-Document|*.pdf</value>
@@ -1986,15 +1985,6 @@ Alternatively, you can use the normal version of SimpleJournal!</value>
     <value>Use Online Conversation (if your system is low on memory)</value>
     <comment>PDFConversationDialog.xaml</comment>
   </data>
-  <data name="SimpleJournal_Common" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\SimpleJournal.Common.dll;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="SJFileAssoc" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\SJFileAssoc.exe;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="SJFileAssoc_exe" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\SJFileAssoc.exe.config;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
-  </data>
   <data name="strMicrosoftPrintToPDFWarning" xml:space="preserve">
     <value>Microsoft Print To PDF doesn't work properly! It is not recommended to use the printer, do you want to use it anyway?</value>
     <comment>MainWindow.xaml.cs</comment>
@@ -2037,6 +2027,7 @@ Alternatively, you can use the normal version of SimpleJournal!</value>
   </data>
   <data name="strUseRulerCompensation_Description" xml:space="preserve">
     <value>The ruler compensation ensures that lines that are drawn minimally crooked are automatically straightened.</value>
+    <comment>SettingsDialog.xaml</comment>
   </data>
   <data name="strDontUseRulerCompensation" xml:space="preserve">
     <value>Don't use ruler compensation</value>
@@ -2049,9 +2040,6 @@ Alternatively, you can use the normal version of SimpleJournal!</value>
   <data name="strSetupSetp4" xml:space="preserve">
     <value>Step 4: Adjust the ruler</value>
     <comment>SetupDialog.xaml</comment>
-  </data>
-  <data name="Microsoft_Win32_Registry" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\Microsoft.Win32.Registry.dll;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="strUpdateDownloadSpeedMessage" xml:space="preserve">
     <value>{0} of {1} ({2})</value>
@@ -2080,5 +2068,37 @@ Alternatively, you can use the normal version of SimpleJournal!</value>
   <data name="strUpdateDownloadDialog_FailedToOpenSetup" xml:space="preserve">
     <value>Error while opening the setup!</value>
     <comment>UpdateDialog.xaml.cs</comment>
+  </data>
+  <data name="strSettingsSidebarTransparency" xml:space="preserve">
+    <value>Display sidebar lightly transparent</value>
+    <comment>SettingsDialog.xaml</comment>
+  </data>
+  <data name="strSettingsSidebarTransparency_Description" xml:space="preserve">
+    <value>Adds a slight transparency effect to the sidebar.</value>
+    <comment>SettingsDialog.xaml</comment>
+  </data>
+  <data name="strSettingsUseBackstageMenu_Description" xml:space="preserve">
+    <value>When activated, the menu is replaced by a more modern backstage menu.</value>
+    <comment>SettingsDialog.xaml</comment>
+  </data>
+  <data name="strStretching" xml:space="preserve">
+    <value>Stretching:</value>
+    <comment>ImageDesign.xaml</comment>
+  </data>
+  <data name="strStretch_Fill" xml:space="preserve">
+    <value>Fill</value>
+  </data>
+  <data name="strStretching_Uniform" xml:space="preserve">
+    <value>Uniform</value>
+  </data>
+  <data name="strSettingDefaultStretching" xml:space="preserve">
+    <value>Standard stretching for inserted images:</value>
+  </data>
+  <data name="SJFileAssoc" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\SJFileAssoc.zip;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="strFailedToExtractSJFileAssoc" xml:space="preserve">
+    <value>Failed to extract SJFileAssoc for creating the file association: {0}</value>
+    <comment>GeneralHelper.cs</comment>
   </data>
 </root>

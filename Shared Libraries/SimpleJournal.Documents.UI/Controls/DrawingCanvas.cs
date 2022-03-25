@@ -19,6 +19,7 @@ using SimpleJournal.Documents;
 using SimpleJournal.Documents.UI;
 using SimpleJournal.Documents.UI.Actions;
 using SimpleJournal.Documents.UI.Helper;
+using Stretch = System.Windows.Media.Stretch;
 
 namespace SimpleJournal.Documents.UI.Controls
 {

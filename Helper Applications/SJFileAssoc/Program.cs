@@ -18,7 +18,7 @@ namespace SJFileAssoc
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Failed to set file association: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(string.Format(SimpleJournal.SharedResources.Resources.strFailedToSetFileAssoc_Message, ex.Message), SimpleJournal.SharedResources.Resources.strError, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

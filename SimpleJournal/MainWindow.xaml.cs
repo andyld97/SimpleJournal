@@ -43,6 +43,7 @@ using SimpleJournal.Documents.UI;
 using SimpleJournal.Documents.UI.Data;
 using Clipboard = SimpleJournal.Documents.UI.Data.Clipboard;
 using SimpleJournal.Documents.UI.Controls.Paper;
+using Stretch = System.Windows.Media.Stretch;
 
 namespace SimpleJournal
 {
@@ -203,7 +204,7 @@ namespace SimpleJournal
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show($"Failed to set file association: {ex.Message}", SharedResources.Resources.strError, MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show(string.Format(SharedResources.Resources.strFailedToSetFileAssoc_Message, ex.Message), SharedResources.Resources.strError, MessageBoxButton.OK, MessageBoxImage.Error);
                 }
 #else
                 GeneralHelper.InstallUWPFileAssoc();
@@ -952,7 +953,12 @@ namespace SimpleJournal
                     objShapeSettings.Visibility = Visibility.Collapsed;
                     objTextSettings.Visibility = Visibility.Collapsed;
 
+                    int angle = 0;
+                    if (im.RenderTransform is RotateTransform rt)
+                        angle = (int)rt.Angle;
+
                     UIHelper.ConvertTransformToProperties(im, DrawingCanvas.LastModifiedCanvas);
+                    objImgSettings.Load(angle, im.Stretch);
                 }
                 else if (item is TextBlock tb)
                 {
@@ -1059,7 +1065,7 @@ namespace SimpleJournal
             }
         }
 
-        private void ObjImgSettings_Changed(int angle)
+        private void ObjImgSettings_Changed(int? angle, Common.Stretch? stretch)
         {
             // Rotate image with it's origin in the center
             var can = DrawingCanvas.LastModifiedCanvas;
@@ -1072,8 +1078,14 @@ namespace SimpleJournal
 
                 if (item is Image im)
                 {
-                    im.RenderTransform = new RotateTransform(angle);
-                    im.RenderTransformOrigin = center;
+                    if (angle != null)
+                    {
+                        im.RenderTransform = new RotateTransform(angle.Value);
+                        im.RenderTransformOrigin = center;
+                    }
+
+                    if (stretch != null)
+                        im.Stretch = stretch.Value.ConvertStretch();
                 }
 
                 (pnlItems.Items[pnlItems.SelectedIndex] as CustomListBoxItem).Refresh();
@@ -1580,13 +1592,9 @@ namespace SimpleJournal
 
         private void BtnHelp_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                System.Diagnostics.Process.Start(Properties.Resources.strHelpLnk);
-            }
-            catch
-            { }
+            GeneralHelper.OpenUri(new Uri(Properties.Resources.strHelpLnk));
         }
+
         private void RefreshSizeBar()
         {
             if (SelectedPen == -1)
@@ -3641,9 +3649,6 @@ namespace SimpleJournal
             if (elem == null)
                 return;
 
-            if (elem is Image i)
-                i.Stretch = Stretch.Fill;
-
             insertBackupTool = currentTool;
             ShowInsertHint();
 
@@ -3658,18 +3663,20 @@ namespace SimpleJournal
         {
             if (System.Windows.Clipboard.ContainsImage())
             {
-                var img = new Image { Source = System.Windows.Clipboard.GetImage() };
-                img.Width = Consts.InsertImageWidth;
-                img.Height = Consts.InsertImageHeight;
+                var img = new Image
+                {
+                    Source = System.Windows.Clipboard.GetImage(),
+                    Width = Consts.InsertImageWidth,
+                    Height = Consts.InsertImageHeight,
+                    Stretch = Settings.Instance.InsertImageStretchFormat.ConvertStretch()
+                };
 
                 InsertUIElement(img);
             }
             else if (System.Windows.Clipboard.ContainsText())
                 InsertText(System.Windows.Clipboard.GetText());
             else
-            {
                 MessageBox.Show(Properties.Resources.strUnsupportedFormat, Properties.Resources.strUnssportedFormatTitle, MessageBoxButton.OK, MessageBoxImage.Error);
-            }
         }
 
         private void InsertImageFromFile()
@@ -3683,7 +3690,8 @@ namespace SimpleJournal
                 {
                     Width = Consts.InsertImageWidth,
                     Height = Consts.InsertImageHeight,
-                    Source = new BitmapImage(new Uri(ofd.FileName, UriKind.Absolute))
+                    Source = new BitmapImage(new Uri(ofd.FileName, UriKind.Absolute)),
+                    Stretch = Settings.Instance.InsertImageStretchFormat.ConvertStretch()
                 };
 
                 InsertUIElement(image);

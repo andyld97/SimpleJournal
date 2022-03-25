@@ -7,7 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleJournal", "SimpleJour
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "External Libraries", "External Libraries", "{1922C65D-E924-4958-B877-B2DFBF734EB7}"
 	ProjectSection(SolutionItems) = preProject
-		External Libraries\Device.dll = External Libraries\Device.dll
 		External Libraries\IACore.dll = External Libraries\IACore.dll
 		External Libraries\IALoader.dll = External Libraries\IALoader.dll
 		External Libraries\IAWinFX.dll = External Libraries\IAWinFX.dll
@@ -39,6 +38,10 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleJournal.SharedResources", "Shared Libraries\SimpleJournal.SharedResources\SimpleJournal.SharedResources.csproj", "{4553E93B-6CB6-4C96-9030-D8C84F59C1CE}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleJournal.Common", "Shared Libraries\SimpleJournal.Common\SimpleJournal.Common.csproj", "{A6F54F41-5B9F-4CDF-B684-C1C072399CE8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Device", "Shared Libraries\Device\Device.csproj", "{0D481D77-EFAA-44BA-A5C4-621B93977661}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Touch Device Manager", "Helper Applications\TouchDeviceManager\Touch Device Manager.csproj", "{F02F9366-81E3-4918-886C-F29E75738BB0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -212,6 +215,38 @@ Global
 		{A6F54F41-5B9F-4CDF-B684-C1C072399CE8}.UWPNew|Any CPU.Build.0 = UWPNew|Any CPU
 		{A6F54F41-5B9F-4CDF-B684-C1C072399CE8}.UWPNew|x64.ActiveCfg = Debug|Any CPU
 		{A6F54F41-5B9F-4CDF-B684-C1C072399CE8}.UWPNew|x64.Build.0 = Debug|Any CPU
+		{0D481D77-EFAA-44BA-A5C4-621B93977661}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D481D77-EFAA-44BA-A5C4-621B93977661}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D481D77-EFAA-44BA-A5C4-621B93977661}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{0D481D77-EFAA-44BA-A5C4-621B93977661}.Debug|x64.Build.0 = Debug|Any CPU
+		{0D481D77-EFAA-44BA-A5C4-621B93977661}.Normal|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D481D77-EFAA-44BA-A5C4-621B93977661}.Normal|Any CPU.Build.0 = Debug|Any CPU
+		{0D481D77-EFAA-44BA-A5C4-621B93977661}.Normal|x64.ActiveCfg = Debug|Any CPU
+		{0D481D77-EFAA-44BA-A5C4-621B93977661}.Normal|x64.Build.0 = Debug|Any CPU
+		{0D481D77-EFAA-44BA-A5C4-621B93977661}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D481D77-EFAA-44BA-A5C4-621B93977661}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0D481D77-EFAA-44BA-A5C4-621B93977661}.Release|x64.ActiveCfg = Release|Any CPU
+		{0D481D77-EFAA-44BA-A5C4-621B93977661}.Release|x64.Build.0 = Release|Any CPU
+		{0D481D77-EFAA-44BA-A5C4-621B93977661}.UWPNew|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D481D77-EFAA-44BA-A5C4-621B93977661}.UWPNew|Any CPU.Build.0 = Debug|Any CPU
+		{0D481D77-EFAA-44BA-A5C4-621B93977661}.UWPNew|x64.ActiveCfg = Debug|Any CPU
+		{0D481D77-EFAA-44BA-A5C4-621B93977661}.UWPNew|x64.Build.0 = Debug|Any CPU
+		{F02F9366-81E3-4918-886C-F29E75738BB0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F02F9366-81E3-4918-886C-F29E75738BB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F02F9366-81E3-4918-886C-F29E75738BB0}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{F02F9366-81E3-4918-886C-F29E75738BB0}.Debug|x64.Build.0 = Debug|Any CPU
+		{F02F9366-81E3-4918-886C-F29E75738BB0}.Normal|Any CPU.ActiveCfg = Debug|Any CPU
+		{F02F9366-81E3-4918-886C-F29E75738BB0}.Normal|Any CPU.Build.0 = Debug|Any CPU
+		{F02F9366-81E3-4918-886C-F29E75738BB0}.Normal|x64.ActiveCfg = Debug|Any CPU
+		{F02F9366-81E3-4918-886C-F29E75738BB0}.Normal|x64.Build.0 = Debug|Any CPU
+		{F02F9366-81E3-4918-886C-F29E75738BB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F02F9366-81E3-4918-886C-F29E75738BB0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F02F9366-81E3-4918-886C-F29E75738BB0}.Release|x64.ActiveCfg = Release|Any CPU
+		{F02F9366-81E3-4918-886C-F29E75738BB0}.Release|x64.Build.0 = Release|Any CPU
+		{F02F9366-81E3-4918-886C-F29E75738BB0}.UWPNew|Any CPU.ActiveCfg = Debug|Any CPU
+		{F02F9366-81E3-4918-886C-F29E75738BB0}.UWPNew|Any CPU.Build.0 = Debug|Any CPU
+		{F02F9366-81E3-4918-886C-F29E75738BB0}.UWPNew|x64.ActiveCfg = Debug|Any CPU
+		{F02F9366-81E3-4918-886C-F29E75738BB0}.UWPNew|x64.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -226,6 +261,8 @@ Global
 		{ABA44FA0-A52F-4B2C-BCBF-782685D3AF41} = {C78A01ED-5C07-4876-9E30-6DB96D8F6F23}
 		{4553E93B-6CB6-4C96-9030-D8C84F59C1CE} = {48624BDF-2689-480B-8213-DDE28D919BEA}
 		{A6F54F41-5B9F-4CDF-B684-C1C072399CE8} = {48624BDF-2689-480B-8213-DDE28D919BEA}
+		{0D481D77-EFAA-44BA-A5C4-621B93977661} = {48624BDF-2689-480B-8213-DDE28D919BEA}
+		{F02F9366-81E3-4918-886C-F29E75738BB0} = {C78A01ED-5C07-4876-9E30-6DB96D8F6F23}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {58519301-A59B-4F8D-A7ED-59C7AED0CAC4}

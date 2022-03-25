@@ -29,8 +29,6 @@ namespace Touch
     public static class TouchHelper
     {
         private static readonly string[] TOUCH_SCREEN_NAMES = new string[] { "touchscreen", "touch screen" };
-        private static bool hasTouchscreenCachedResult = false;
-        private static bool isInitalized = false;
 
         public static void SetTouchState(bool state)
         {
