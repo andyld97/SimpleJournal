@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SimpleJournal.Common;
+using System;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Media;
@@ -28,7 +29,7 @@ namespace SimpleJournal
         public static readonly string UpdaterExe = "7244a3f048e82af354eb3cfa3089a3035ff8768f";
         public static readonly string UpdateSystemDotNetDotControllerDotdll = "bbc7224ccc544651d9d844f309721091860f0f92";
 
-        public static readonly Version StoreVersion = new Version("1.506.0.0");
+        public static readonly Version StoreVersion = new Version(Strings.StoreVersion);
         public static readonly Version NormalVersion = typeof(Consts).Assembly.GetName().Version;
 
         #region Pens
@@ -112,8 +113,6 @@ namespace SimpleJournal
         #region Sidebar
         public const double SidebarListBoxItemHeight = 50;
         public const double SidebarListBoxItemViewboxSize = 40;
-        #endregion
-
-    
+        #endregion    
     }
 }
