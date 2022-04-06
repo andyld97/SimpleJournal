@@ -40,5 +40,6 @@ The reason why this feature is only integrated in the non-store version is, that
 In order to work with form or text-recognition you need to compile `Analyzer` and then all files should be copied automatically while publishing!
 
 ## Thanks to
-- Daniel S. for the great ideas and testing
-- Stefan E. for the great ideas and testing
+- Daniel S. for the great ideas and testing!
+- Stefan E. for the great ideas and testing!
+- Elmo for the dutch translation!
