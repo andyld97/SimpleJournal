@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SimpleJournal.Documents.UI.Helper;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -8,6 +9,7 @@ using System.Windows;
 using System.Windows.Automation.Peers;
 using System.Windows.Controls;
 using System.Windows.Markup;
+using System.Windows.Media;
 
 namespace SimpleJournal.Controls
 {
@@ -159,10 +161,83 @@ namespace SimpleJournal.Controls
             if (this.textRun is null || this.textRun2 is null)
                 return;
 
-            var text = this.Text?.Trim();
+            var parent = UIHelper.FindParent<DropDownToggleButton>(this);
+            if (parent != null && !parent.HasModifiedTwoLineLabel)
+            {
+                UpdateTextRunOrg();
+                return;
+            }
 
+            var text = this.Text?.Trim();
             this.textRun.Text = text;
             this.textRun2.Text = string.Empty;
+        }
+
+        private void UpdateTextRunOrg()
+        {
+            if (this.textRun is null || this.textRun2 is null)
+                return;
+
+            var text = this.Text?.Trim();
+
+            if (this.HasTwoLines == false || string.IsNullOrEmpty(text))
+            {
+                this.textRun.Text = text;
+                this.textRun2.Text = string.Empty;
+                return;
+            }
+
+            // Find soft hyphen, break at its position and display a normal hyphen.
+#pragma warning disable CA1307 // Specify StringComparison for clarity
+            var hyphenIndex = text!.IndexOf((char)173);
+#pragma warning restore CA1307 // Specify StringComparison for clarity
+
+            if (hyphenIndex >= 0)
+            {
+                this.textRun.Text = text.Substring(0, hyphenIndex) + "-";
+                this.textRun2.Text = text.Substring(hyphenIndex) + " ";
+            }
+            else
+            {
+                var centerIndex = text.Length / 2;
+
+                // Find spaces nearest to center from left and right
+                var leftSpaceIndex = text.LastIndexOf(" ", centerIndex, centerIndex, StringComparison.CurrentCulture);
+                var rightSpaceIndex = text.IndexOf(" ", centerIndex, StringComparison.CurrentCulture);
+
+                if (leftSpaceIndex == -1
+                    && rightSpaceIndex == -1)
+                {
+                    this.textRun.Text = text;
+                    this.textRun2.Text = string.Empty;
+                }
+                else if (leftSpaceIndex == -1)
+                {
+                    // Finds only space from right. New line adds on it
+                    this.textRun.Text = text.Substring(0, rightSpaceIndex);
+                    this.textRun2.Text = text.Substring(rightSpaceIndex) + " ";
+                }
+                else if (rightSpaceIndex == -1)
+                {
+                    // Finds only space from left. New line adds on it
+                    this.textRun.Text = text.Substring(0, leftSpaceIndex);
+                    this.textRun2.Text = text.Substring(leftSpaceIndex) + " ";
+                }
+                else
+                {
+                    // Find nearest to center space and add new line on it
+                    if (Math.Abs(centerIndex - leftSpaceIndex) < Math.Abs(centerIndex - rightSpaceIndex))
+                    {
+                        this.textRun.Text = text.Substring(0, leftSpaceIndex);
+                        this.textRun2.Text = text.Substring(leftSpaceIndex) + " ";
+                    }
+                    else
+                    {
+                        this.textRun.Text = text.Substring(0, rightSpaceIndex);
+                        this.textRun2.Text = text.Substring(rightSpaceIndex) + " ";
+                    }
+                }
+            }
         }
 
         #endregion

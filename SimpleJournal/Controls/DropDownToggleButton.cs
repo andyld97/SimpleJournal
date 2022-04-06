@@ -36,6 +36,10 @@ namespace SimpleJournal.Controls
             }
         }
 
+        // ToDo: *** Currently this is only required for dutch (TextTrimming), but later if there are other languages
+        // this must be specified further
+        public bool HasModifiedTwoLineLabel { get; set; } = Properties.Resources.strLang != "de";
+
         public bool IsChecked
         {
             get => isChecked;
