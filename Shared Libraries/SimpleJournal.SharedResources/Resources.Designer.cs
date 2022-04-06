@@ -133,7 +133,7 @@ namespace SimpleJournal.SharedResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Plain.
+        ///   Looks up a localized string similar to Blanco.
         /// </summary>
         public static string strPlain {
             get {

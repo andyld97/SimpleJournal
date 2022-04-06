@@ -131,7 +131,8 @@ Programmiert von Andreas L.
 
 Vielen Dank ...
 
-... an Daniel S. und Stefan E. für die Ideen/Programmtests!</value>
+... an Daniel S. und Stefan E. für die Ideen/Programmtests!
+... an Elmo für die niederländische Übersetzung!</value>
     <comment>About.xaml</comment>
   </data>
   <data name="strAboutTextFluentRibbon_1" xml:space="preserve">
@@ -1117,7 +1118,7 @@ Klicken Sie auf Nein, um diesen Hinweis weiterhin zu erhalten!</value>
     <comment>MainWindow.xaml</comment>
   </data>
   <data name="strReleaseDate" xml:space="preserve">
-    <value>25.03.2022 10:29 Uhr</value>
+    <value>06.04.2022 15:26 Uhr</value>
     <comment>*</comment>
   </data>
   <data name="strRemove" xml:space="preserve">
@@ -1843,6 +1844,7 @@ Alternativ können Sie die normale Version von SimpleJournal verwenden!</value>
   </data>
   <data name="strAboutTextMagickNET" xml:space="preserve">
     <value>... an</value>
+    <comment>About.xaml</comment>
   </data>
   <data name="strInsertImageOrText" xml:space="preserve">
     <value>Bild/Text</value>
@@ -1929,10 +1931,10 @@ Alternativ können Sie die normale Version von SimpleJournal verwenden!</value>
     <value>Wichtige Verzeichnisse</value>
   </data>
   <data name="strImportPDFFile" xml:space="preserve">
-    <value>PDF-Datei importieren</value>
+    <value>PDF-Dokumentimportieren</value>
   </data>
   <data name="strPDFFile" xml:space="preserve">
-    <value>PDF-Datei</value>
+    <value>PDF Dokument</value>
   </data>
   <data name="strPDFConversationDialog_UseOnlineConversation" xml:space="preserve">
     <value>Online-Konversation verwenden (wenn Ihr System wenig Speicherplatz hat)</value>
@@ -1962,7 +1964,7 @@ Alternativ können Sie die normale Version von SimpleJournal verwenden!</value>
     <value>Bitte warten Sie bis Ihr Ticket "{0}" bearbeitet wird!</value>
   </data>
   <data name="strFileNotFound" xml:space="preserve">
-    <value> Die Datei "{0}" wurde nicht gefunden!</value>
+    <value>Die Datei "{0}" wurde nicht gefunden!</value>
   </data>
   <data name="strUseRulerCompensation" xml:space="preserve">
     <value>Linealausgleich verwenden</value>
@@ -1989,10 +1991,7 @@ Alternativ können Sie die normale Version von SimpleJournal verwenden!</value>
     <value>Herunterladen ...</value>
   </data>
   <data name="strUpdateDownloadDialog_DownloadText" xml:space="preserve">
-    <value>Lade SimpleJournal v</value>
-  </data>
-  <data name="strUpdateDownloadDialog_DownloadText2" xml:space="preserve">
-    <value>herunter ...</value>
+    <value>Lade SimpleJournal v{0} herunter ...</value>
   </data>
   <data name="strUpdateDownloadDialog_PleaseWait" xml:space="preserve">
     <value>Bitte warten:</value>
@@ -2023,5 +2022,14 @@ Alternativ können Sie die normale Version von SimpleJournal verwenden!</value>
   </data>
   <data name="strFailedToExtractSJFileAssoc" xml:space="preserve">
     <value>SJFileAssoc konnte nicht extrahiert werden, um die Dateizuordnung zu erstellen: {0}</value>
+  </data>
+  <data name="strSetupSetp1_Description" xml:space="preserve">
+    <value>Hat Ihr Bildschirm eine HD-Auflösung?</value>
+  </data>
+  <data name="strSetupSetp1_Title" xml:space="preserve">
+    <value>Schritt 1: Allgemeine Einstellungen</value>
+  </data>
+  <data name="strRecentDocumentLastChange" xml:space="preserve">
+    <value>Zuletzt geändert:</value>
   </data>
 </root>

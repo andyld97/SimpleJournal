@@ -36,10 +36,10 @@
                         <LineBreak/><LineBreak/>
                         <Run Text="{x:Static res:Resources.strSetupInitalText}" />
                         <LineBreak/><LineBreak/>
-                        <Run FontWeight="Bold" Text="Schritt 1: Allgemeine Einstellungen"/>
+                        <Run FontWeight="Bold" Text="{x:Static res:Resources.strSetupSetp1_Title}" />
                         <LineBreak />
                         <LineBreak />
-                        <Run FontWeight="Bold" Text="Hat Ihr Bildschirm eine HD-Auflösung?" />
+                        <Run FontWeight="Bold" Text="{x:Static res:Resources.strSetupSetp1_Description}" />
                     </TextBlock>
                     <Fluent:ComboBox IsEditable="False" x:Name="cmbHDResolution" Margin="0,5,5,5" Padding="5" HorizontalAlignment="Stretch" SelectedIndex="0">
                         <TextBlock Text="{x:Static res:Resources.strSetupHighResolution}"/>

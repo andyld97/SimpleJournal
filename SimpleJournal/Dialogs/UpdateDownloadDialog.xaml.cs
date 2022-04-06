@@ -38,7 +38,7 @@ namespace SimpleJournal.Dialogs
 			InitializeComponent();
 			this.version = version;
 			Loaded += UpdateDownloadDialog_Loaded;
-			RunVersion.Text = version.ToString(4);
+			TextDescription.Text = string.Format(Properties.Resources.strUpdateDownloadDialog_DownloadText, version.ToString(4));
 		}
 
 		private async void UpdateDownloadDialog_Loaded(object sender, RoutedEventArgs e)

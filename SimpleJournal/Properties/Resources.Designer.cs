@@ -104,7 +104,8 @@ namespace SimpleJournal.Properties {
         ///
         ///Many thanks ...
         ///
-        ///... to Daniel S. and Stefan E. for the ideas/programm tests!.
+        ///... to Daniel S. and Stefan E. for the ideas/programm tests!
+        ///... to Elmo who made the dutch translation!.
         /// </summary>
         public static string strAboutText1 {
             get {
@@ -1285,7 +1286,7 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to  File &quot;{0}&quot; not found!.
+        ///   Looks up a localized string similar to File &quot;{0}&quot; not found!.
         /// </summary>
         public static string strFileNotFound {
             get {
@@ -1530,7 +1531,7 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Import PDF FIle.
+        ///   Looks up a localized string similar to Import PDF Document.
         /// </summary>
         public static string strImportPDFFile {
             get {
@@ -1674,7 +1675,7 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Dokument bereits geöffnet!.
+        ///   Looks up a localized string similar to Document already open!.
         /// </summary>
         public static string strJournalIsAlreadyOpenedTitle {
             get {
@@ -2484,7 +2485,7 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to PDF File.
+        ///   Looks up a localized string similar to PDF Document.
         /// </summary>
         public static string strPDFFile {
             get {
@@ -2763,6 +2764,15 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Last change:.
+        /// </summary>
+        public static string strRecentDocumentLastChange {
+            get {
+                return ResourceManager.GetString("strRecentDocumentLastChange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Recent documents.
         /// </summary>
         public static string strRecentFiles {
@@ -2835,7 +2845,7 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 03/25/2022 10:29 AM.
+        ///   Looks up a localized string similar to 04/06/2022 3:26 PM.
         /// </summary>
         public static string strReleaseDate {
             get {
@@ -3535,6 +3545,24 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Does your screen have HD resolution?.
+        /// </summary>
+        public static string strSetupSetp1_Description {
+            get {
+                return ResourceManager.GetString("strSetupSetp1_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Step 1: General settings.
+        /// </summary>
+        public static string strSetupSetp1_Title {
+            get {
+                return ResourceManager.GetString("strSetupSetp1_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Step 4: Adjust the ruler.
         /// </summary>
         public static string strSetupSetp4 {
@@ -4165,20 +4193,11 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Downloading SimpleJournal v.
+        ///   Looks up a localized string similar to Downloading SimpleJournal v{0} ....
         /// </summary>
         public static string strUpdateDownloadDialog_DownloadText {
             get {
                 return ResourceManager.GetString("strUpdateDownloadDialog_DownloadText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to ....
-        /// </summary>
-        public static string strUpdateDownloadDialog_DownloadText2 {
-            get {
-                return ResourceManager.GetString("strUpdateDownloadDialog_DownloadText2", resourceCulture);
             }
         }
         

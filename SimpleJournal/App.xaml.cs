@@ -1,4 +1,5 @@
 ﻿using System.Globalization;
+using System.Threading;
 using System.Windows;
 using System.Windows.Markup;
 
@@ -17,7 +18,7 @@ namespace SimpleJournal
         {
             if (e.Args.Length >= 1)
             {
-                // Path is the cli parameter for the Document
+                // Path is the cli parameter for the document
                 Path = e.Args[0];
 
                 // Check if /ignorebackups is set, this is only required for internal usage (BackupDialog)
@@ -27,6 +28,11 @@ namespace SimpleJournal
                         IgnoreBackups = true;
                 }
             }
+
+            // Test
+            /*var cultureInfoTest = new CultureInfo("nl");
+            Thread.CurrentThread.CurrentCulture =
+            Thread.CurrentThread.CurrentUICulture = cultureInfoTest;*/
 
             GeneralHelper.ApplyTheming();
         }

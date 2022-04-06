@@ -1,4 +1,12 @@
 # SimpleJournal
+![GitHub](https://img.shields.io/github/license/andyld97/SimpleJournal)
+![GitHub issues](https://img.shields.io/github/issues/andyld97/SimpleJournal)
+![GitHub all releases](https://img.shields.io/github/downloads/andyld97/SimpleJournal/total)
+![GitHub last commit (branch)](https://img.shields.io/github/last-commit/andyld97/SimpleJournal/dev)
+![GitHub commit activity](https://img.shields.io/github/commit-activity/m/andyld97/SimpleJournal)
+![GitHub Release Date](https://img.shields.io/github/release-date/andyld97/SimpleJournal)
+![GitHub release (release name instead of tag name)](https://img.shields.io/github/v/release/andyld97/SimpleJournal?include_prereleases)
+![Website](https://img.shields.io/website?down_color=lightgrey&down_message=offline&up_color=blue&up_message=online&url=https%3A%2F%2Fsimplejournal.ca-soft.net)
 
 ## Welcome
 
@@ -32,5 +40,6 @@ The reason why this feature is only integrated in the non-store version is, that
 In order to work with form or text-recognition you need to compile `Analyzer` and then all files should be copied automatically while publishing!
 
 ## Thanks to
-- Daniel S. for the great ideas and testing
-- Stefan E. for the great ideas and testing
+- Daniel S. for the great ideas and testing!
+- Stefan E. for the great ideas and testing!
+- Elmo for the dutch translation!
