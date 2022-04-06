@@ -17,10 +17,7 @@
                 <Setter Property="Foreground" Value="{DynamicResource BlackBrush}" />
             </Style>
         </StackPanel.Resources>
-        <TextBlock FontWeight="Bold">
-            <Run Text="{x:Static res:Resources.strUpdateDownloadDialog_DownloadText}" /><Run x:Name="RunVersion" />
-            <Run Text="{x:Static res:Resources.strUpdateDownloadDialog_DownloadText2}" />
-        </TextBlock>
+        <TextBlock x:Name="TextDescription" FontWeight="Bold" />
         <ProgressBar x:Name="ProgressDownload" Margin="4,0,2,0" Height="15" />
         <TextBlock FontWeight="Bold">
             <Run Text="{x:Static res:Resources.strUpdateDownloadDialog_PleaseWait}" />

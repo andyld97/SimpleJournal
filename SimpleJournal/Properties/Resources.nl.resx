@@ -1,0 +1,1611 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+		Microsoft ResX Schema
+
+		Version 1.3
+
+		The primary goals of this format is to allow a simple XML format 
+		that is mostly human readable. The generation and parsing of the 
+		various data types are done through the TypeConverter classes 
+		associated with the data types.
+
+		Example:
+
+		... ado.net/XML headers & schema ...
+		<resheader name="resmimetype">text/microsoft-resx</resheader>
+		<resheader name="version">1.3</resheader>
+		<resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+		<resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+		<data name="Name1">this is my long string</data>
+		<data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+		<data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+			[base64 mime encoded serialized .NET Framework object]
+		</data>
+		<data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+			[base64 mime encoded string representing a byte array form of the .NET Framework object]
+		</data>
+
+		There are any number of "resheader" rows that contain simple 
+		name/value pairs.
+
+		Each data row contains a name, and value. The row also contains a 
+		type or mimetype. Type corresponds to a .NET class that support 
+		text/value conversion through the TypeConverter architecture. 
+		Classes that don't support this are serialized and stored with the 
+		mimetype set.
+
+		The mimetype is used for serialized objects, and tells the 
+		ResXResourceReader how to depersist the object. This is currently not 
+		extensible. For a given mimetype the value must be set accordingly:
+
+		Note - application/x-microsoft.net.object.binary.base64 is the format 
+		that the ResXResourceWriter will generate, however the reader can 
+		read any of the formats listed below.
+
+		mimetype: application/x-microsoft.net.object.binary.base64
+		value   : The object must be serialized with 
+			: System.Serialization.Formatters.Binary.BinaryFormatter
+			: and then encoded with base64 encoding.
+
+		mimetype: application/x-microsoft.net.object.soap.base64
+		value   : The object must be serialized with 
+			: System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+			: and then encoded with base64 encoding.
+
+		mimetype: application/x-microsoft.net.object.bytearray.base64
+		value   : The object must be serialized into a byte array 
+			: using a System.ComponentModel.TypeConverter
+			: and then encoded with base64 encoding.
+	-->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>1.3</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="strA4" xml:space="preserve">
+    <value>A4</value>
+  </data>
+  <data name="strAbout" xml:space="preserve">
+    <value>Over</value>
+  </data>
+  <data name="strAboutText1" xml:space="preserve">
+    <value>Idee van Daniel S.
+Geprogrammeerd door Andreas L.
+
+Erg bedankt ...
+
+... aan Daniel S. en Stefan E. voor de ideeën!
+... aan Elmo die de Nederlandse vertaling maakte!</value>
+  </data>
+  <data name="strAboutTextFluentRibbon_1" xml:space="preserve">
+    <value>... naar</value>
+  </data>
+  <data name="strAboutTextFluentRibbon_2" xml:space="preserve">
+    <value>voor de menu!</value>
+  </data>
+  <data name="strAboutTextIcons8_1" xml:space="preserve">
+    <value>... naar</value>
+  </data>
+  <data name="strAboutTextIcons8_2" xml:space="preserve">
+    <value>voor de gratis iconen!</value>
+  </data>
+  <data name="strAboutTextMagickNET" xml:space="preserve">
+    <value>... naar</value>
+  </data>
+  <data name="strAddPage" xml:space="preserve">
+    <value>Pagina toevoegen</value>
+  </data>
+  <data name="strAddPageHere" xml:space="preserve">
+    <value>Voeg hier pagina in</value>
+  </data>
+  <data name="strAddPageTooltip" xml:space="preserve">
+    <value>Nieuwe pagina toevoegen</value>
+  </data>
+  <data name="strAutoBackupDirectoryDoesNotExists" xml:space="preserve">
+    <value>Deze map bestaat op dit moment nog niet! Maar zodra er een nieuwe back-up is gemaakt, wordt de map opnieuw gemaakt!</value>
+  </data>
+  <data name="strAutoBackupDirectoryDoesNotExistsTitle" xml:space="preserve">
+    <value>Map bestaat niet!</value>
+  </data>
+  <data name="strAutoSaveCouldRecoverThisFile" xml:space="preserve">
+    <value>AutoSave kan de volgende bestand herstellen:</value>
+  </data>
+  <data name="strAutoSaveDateTimeFileFormat" xml:space="preserve">
+    <value>dd.MM.yyyy-HH.mm.ss.fff</value>
+  </data>
+  <data name="strAutoSaveDescription" xml:space="preserve">
+    <value>AutoSave is een functie die altijd een back-up maakt met een vooraf gedefinieerd interval (bijvoorbeeld elke 5 minuten). Met andere woorden, als SimpleJournal onverwachts wordt beëindigd, kunt u het document vanuit AutoSave opslaan en opnieuw laden.</value>
+  </data>
+  <data name="strAutoSaveDialogButtonDiscard" xml:space="preserve">
+    <value>Alles weggooien</value>
+  </data>
+  <data name="strAutoSaveDialogButtonRecover" xml:space="preserve">
+    <value>Alles herstellen</value>
+  </data>
+  <data name="strAutoSaveInterval" xml:space="preserve">
+    <value>AutoSave Interval (minuten):</value>
+  </data>
+  <data name="strAutoSaveNoBackupFileFound" xml:space="preserve">
+    <value>Geen back-up bestand gevonden!</value>
+  </data>
+  <data name="strAutoSaveNoBackupFileFoundHint" xml:space="preserve">
+    <value>(Zorg ervoor dat de AutoSave interval niet te hoog is!)</value>
+  </data>
+  <data name="strBack" xml:space="preserve">
+    <value>Terug</value>
+  </data>
+  <data name="strBackground" xml:space="preserve">
+    <value>Achtergrond:</value>
+  </data>
+  <data name="strBackgroundColor" xml:space="preserve">
+    <value>Achtergrond kleur:</value>
+  </data>
+  <data name="strBackupFileCannotBeOpened" xml:space="preserve">
+    <value>Dit journaal kan niet worden geopend omdat het een back-up is!</value>
+  </data>
+  <data name="strBackupFileCannotBeOpenedTitle" xml:space="preserve">
+    <value>Back-up kan niet geopend worden!</value>
+  </data>
+  <data name="strBackupOriginExplanation" xml:space="preserve">
+    <value>Back-ups die een oorsprong hebben worden teruggezet naar de locatie van hun oorsprong, voor alle andere back-ups moet u kiezen naar welke map de bestanden moeten worden teruggezet!</value>
+  </data>
+  <data name="strBackwards" xml:space="preserve">
+    <value>Terug</value>
+  </data>
+  <data name="strBackwardsDescription" xml:space="preserve">
+    <value>De laatste actie ongedaan maken</value>
+  </data>
+  <data name="strBehaviour" xml:space="preserve">
+    <value>Gedrag</value>
+  </data>
+  <data name="strBold" xml:space="preserve">
+    <value>V</value>
+  </data>
+  <data name="strBringToFront" xml:space="preserve">
+    <value>Naar voren brengen</value>
+  </data>
+  <data name="strButtonDisplayAutoSaveDirectory" xml:space="preserve">
+    <value>In Explorer laten zien</value>
+  </data>
+  <data name="strCancel" xml:space="preserve">
+    <value>Annuleren</value>
+  </data>
+  <data name="strChangelog" xml:space="preserve">
+    <value>Changelog</value>
+  </data>
+  <data name="strChoosePenColor" xml:space="preserve">
+    <value>Kies de kleur van de pen</value>
+  </data>
+  <data name="strChooseRubberForm" xml:space="preserve">
+    <value>Je kan de vorm van de rubber kiezen</value>
+  </data>
+  <data name="strChooseRubberSize" xml:space="preserve">
+    <value>Je kan de maat van de rubber kiezen</value>
+  </data>
+  <data name="strCircle" xml:space="preserve">
+    <value>Cirkel</value>
+  </data>
+  <data name="strClear" xml:space="preserve">
+    <value>Wissen</value>
+  </data>
+  <data name="strClearLastOpenedDocuments" xml:space="preserve">
+    <value>Laatst geopende document resetten</value>
+  </data>
+  <data name="strClearPage" xml:space="preserve">
+    <value>Pagina wissen</value>
+  </data>
+  <data name="strClearPageTooltip" xml:space="preserve">
+    <value>Huidige pagina wissen</value>
+  </data>
+  <data name="strClipboard" xml:space="preserve">
+    <value>Klembord</value>
+  </data>
+  <data name="strClose" xml:space="preserve">
+    <value>Sluiten</value>
+  </data>
+  <data name="strCloseSidebar" xml:space="preserve">
+    <value>Zijbalk sluiten</value>
+  </data>
+  <data name="strColor" xml:space="preserve">
+    <value>Kleur:</value>
+  </data>
+  <data name="strColors" xml:space="preserve">
+    <value>Kleuren:</value>
+  </data>
+  <data name="strContent" xml:space="preserve">
+    <value>Inhoud:</value>
+  </data>
+  <data name="strConvertToForm" xml:space="preserve">
+    <value>Transformeren naar vorm</value>
+  </data>
+  <data name="strCopy" xml:space="preserve">
+    <value>Kopiëren</value>
+  </data>
+  <data name="strCopyDescription" xml:space="preserve">
+    <value>Kopieert alle geselecteerde objecten/streken</value>
+  </data>
+  <data name="strCreateScripts" xml:space="preserve">
+    <value>Scripts maken...</value>
+  </data>
+  <data name="strDark" xml:space="preserve">
+    <value>Donker</value>
+  </data>
+  <data name="strDarkModeSettingsTitle" xml:space="preserve">
+    <value>Kleur mode:</value>
+  </data>
+  <data name="strDate" xml:space="preserve">
+    <value>Datum:</value>
+  </data>
+  <data name="strDateFormat" xml:space="preserve">
+    <value>dd.MM.yyyy</value>
+  </data>
+  <data name="strDefaultColors" xml:space="preserve">
+    <value>Standaard kleuren:</value>
+  </data>
+  <data name="strDeletePage" xml:space="preserve">
+    <value>Pagina verwijderen</value>
+  </data>
+  <data name="strDeletePageTooltip" xml:space="preserve">
+    <value>Verwijderd de huidige pagina</value>
+  </data>
+  <data name="strDescription" xml:space="preserve">
+    <value>Beschrijving:</value>
+  </data>
+  <data name="strDisableTouchscreen" xml:space="preserve">
+    <value>Touchscreen deactiveren</value>
+  </data>
+  <data name="strDiscardBackupToolTip" xml:space="preserve">
+    <value>Back-up verwijderen</value>
+  </data>
+  <data name="strDiscardQuestion" xml:space="preserve">
+    <value>Weet u zeker dat u dit bestand wilt verwijderen?</value>
+  </data>
+  <data name="strDiscardQuestionAll" xml:space="preserve">
+    <value>Weet u zeker dat u alle bestanden wilt verwijderen?</value>
+  </data>
+  <data name="strDiscardTitle" xml:space="preserve">
+    <value>Zeker?</value>
+  </data>
+  <data name="strDisplayRecoverDialogDescription" xml:space="preserve">
+    <value>Als AutoSave is geactiveerd en SimpleJournal onverwacht afsluit, kan het gebeuren dat er geen bestanden zijn om te herstellen (bijvoorbeeld een leeg document of als er geen wijzigingen zijn aangebracht na het opslaan). Het bericht kan nog steeds nuttig zijn, omdat u weet dat SimpleJournal onverwacht is beëindigd.</value>
+  </data>
+  <data name="strDisplayObjects" xml:space="preserve">
+    <value>Objecten weergeven</value>
+  </data>
+  <data name="strDisplayRecoverDialogTitle" xml:space="preserve">
+    <value>Crashbericht weergeven zelfs als er geen bestanden zijn om te herstellen</value>
+  </data>
+  <data name="strDisplaySidebarAutomatically" xml:space="preserve">
+    <value>Zijbalk automatisch weergeven</value>
+  </data>
+  <data name="strDisplaySidebarAutomaticallyDescription" xml:space="preserve">
+    <value>De objectbalk verschijnt altijd automatisch wanneer u een vorm of afbeelding selecteert. Dit gedrag kan echter vervelend zijn op kleinere schermen, waar de objectbalk het papier gedeeltelijk verbergt.</value>
+  </data>
+  <data name="strDocument" xml:space="preserve">
+    <value>Document</value>
+  </data>
+  <data name="strDontReplaceEllipsesWithCircles" xml:space="preserve">
+    <value>Vervang ellipsen niet door cirkels</value>
+  </data>
+  <data name="strDontUseContatPressure" xml:space="preserve">
+    <value>Geen contactdruk gebruiken</value>
+  </data>
+  <data name="strDontUseFitToCurve" xml:space="preserve">
+    <value>Gebruik geen afvlakking van Bézier</value>
+  </data>
+  <data name="strDontUseRotationCompensation" xml:space="preserve">
+    <value>Gebruik geen rotatiecompensatie</value>
+  </data>
+  <data name="strDontUseRulerCompensation" xml:space="preserve">
+    <value>Gebruik geen liniaalcompensatie</value>
+  </data>
+  <data name="strDraw" xml:space="preserve">
+    <value>Tekenen</value>
+  </data>
+  <data name="strDropDownTemplateMode" xml:space="preserve">
+    <value>Mode:</value>
+  </data>
+  <data name="strEdit" xml:space="preserve">
+    <value>Bewerken</value>
+  </data>
+  <data name="strEditMarkerSize" xml:space="preserve">
+    <value>Bewerk markeer maat</value>
+  </data>
+  <data name="strEditObjectDescription" xml:space="preserve">
+    <value>Bewerk een object</value>
+  </data>
+  <data name="strEditObjects" xml:space="preserve">
+    <value>Bewerk objecten:</value>
+  </data>
+  <data name="strEditPenSize" xml:space="preserve">
+    <value>Bewerk pen maat</value>
+  </data>
+  <data name="strEllipse" xml:space="preserve">
+    <value>Ellipse</value>
+  </data>
+  <data name="strEmptyClipboard" xml:space="preserve">
+    <value>Het klembord is leeg. Er zijn geen voorwerpen om in te voegen!</value>
+  </data>
+  <data name="strEmptyClipboardTitle" xml:space="preserve">
+    <value>Leeg klembord!</value>
+  </data>
+  <data name="strEmptySelection" xml:space="preserve">
+    <value>Lege selectie!</value>
+  </data>
+  <data name="strEmptyText" xml:space="preserve">
+    <value>Lege text</value>
+  </data>
+  <data name="strEnableTouchScreen" xml:space="preserve">
+    <value>Activeer touchscreen</value>
+  </data>
+  <data name="strEnterValidText" xml:space="preserve">
+    <value>Voer een geldige tekst in!</value>
+  </data>
+  <data name="strExport" xml:space="preserve">
+    <value>Exporteren</value>
+  </data>
+  <data name="strExportAllPages" xml:space="preserve">
+    <value>Alle pagina's</value>
+  </data>
+  <data name="strExportAsJournal" xml:space="preserve">
+    <value>Exporteer als Journaal</value>
+  </data>
+  <data name="strExportAsJournalExplanation" xml:space="preserve">
+    <value>Als deze optie niet is geselecteerd, worden de pagina's geëxporteerd als afbeeldingen!</value>
+  </data>
+  <data name="strExportAsPDF" xml:space="preserve">
+    <value>Exporteren als PDF</value>
+  </data>
+  <data name="strExportCurrentPage" xml:space="preserve">
+    <value>Huidige pagina</value>
+  </data>
+  <data name="strExportDialogExpanderExplanation" xml:space="preserve">
+    <value>Vouw alle pagina's uit of verberg alle pagina's!</value>
+  </data>
+  <data name="strExportDocument" xml:space="preserve">
+    <value>Exporteren</value>
+  </data>
+  <data name="strExportDialogInvalidSettings" xml:space="preserve">
+    <value>Ongeldige instellingen!</value>
+  </data>
+  <data name="strExportFailed" xml:space="preserve">
+    <value>Kan pagina niet exporteren</value>
+  </data>
+  <data name="strExportFinished" xml:space="preserve">
+    <value>Export voltooid!</value>
+  </data>
+  <data name="strExportPageArea" xml:space="preserve">
+    <value>Paginagebied (bv. 3-5)</value>
+  </data>
+  <data name="strExportPages" xml:space="preserve">
+    <value>Pagina's exporteren</value>
+  </data>
+  <data name="strFailedToCopyFile" xml:space="preserve">
+    <value>Fout bij het kopiëren van het bestand! Kies een andere locatie!</value>
+  </data>
+  <data name="strFailedToCopyFileTitle" xml:space="preserve">
+    <value>Fout bij het kopiëren van het bestand!</value>
+  </data>
+  <data name="strFailedToDeleteFile" xml:space="preserve">
+    <value>Fout bij het verwijderen van het bestand!</value>
+  </data>
+  <data name="strFailedToDeleteFileTitle" xml:space="preserve">
+    <value>Fout!</value>
+  </data>
+  <data name="strFailedToDeleteSomeBackups" xml:space="preserve">
+    <value>Fout bij het verwijderen van enkele back-ups!</value>
+  </data>
+  <data name="strFailedToDeleteSomeBackupsTitle" xml:space="preserve">
+    <value>Fout!</value>
+  </data>
+  <data name="strFailedToExportJournalAsPDF" xml:space="preserve">
+    <value>Fout bij het exporteren van het journaal als PDF-bestand</value>
+  </data>
+  <data name="strFailedToExtractSJFileAssoc" xml:space="preserve">
+    <value>Kan SJFileAssoc niet uitpakken voor het maken van de bestandskoppeling: {0}</value>
+  </data>
+  <data name="strFailedToLoadImage" xml:space="preserve">
+    <value>Fout bij het laden van de afbeelding:</value>
+  </data>
+  <data name="strFailedToLoadJournal" xml:space="preserve">
+    <value>Fout bij het laden van het journaal:</value>
+  </data>
+  <data name="strFailedToLoadJournalFromNetwork" xml:space="preserve">
+    <value>Fout bij het laden van het journaal, zorg ervoor dat het journaal lokaal op je computer staat. Er kan geen journaal van het netwerk worden geladen!</value>
+  </data>
+  <data name="strFailedToLoadJournalTitle" xml:space="preserve">
+    <value>Kritische fout!</value>
+  </data>
+  <data name="strFailedToOpenAutoBackupDirectory" xml:space="preserve">
+    <value>Fout bij het openen van de map in verkenner:</value>
+  </data>
+  <data name="strFailedToOpenAutoBackupDirectoryTitle" xml:space="preserve">
+    <value>Fout!</value>
+  </data>
+  <data name="strFailedToOpenNewSJInstance" xml:space="preserve">
+    <value>Fout bij het openen van een ander exemplaar van SimpleJournal:</value>
+  </data>
+  <data name="strFailedToOpenNewSJInstanceTitle" xml:space="preserve">
+    <value>Fout!</value>
+  </data>
+  <data name="strFailedToRecoverJournal" xml:space="preserve">
+    <value>Fout bij het herstellen van het journaal:</value>
+  </data>
+  <data name="strFailedToRecoverJournalTitle" xml:space="preserve">
+    <value>Fout!</value>
+  </data>
+  <data name="strFailedToResetPens" xml:space="preserve">
+    <value>Fout bij het resetten van de pennen:</value>
+  </data>
+  <data name="strFailedToSaveImage" xml:space="preserve">
+    <value>Fout bij het opslaan van de afbeelding:</value>
+  </data>
+  <data name="strFailedToSaveJournal" xml:space="preserve">
+    <value>Fout bij het opslaan van het journaal:</value>
+  </data>
+  <data name="strFailedToSaveJournalTitle" xml:space="preserve">
+    <value>Kritische fout!</value>
+  </data>
+  <data name="strFailedToSendFeedback" xml:space="preserve">
+    <value>Het verzenden van u feedback is mislukt. Controleer of u internetverbinding werkt!</value>
+  </data>
+  <data name="strFailedToUpdate" xml:space="preserve">
+    <value>Kan niet updaten:</value>
+  </data>
+  <data name="strFailure" xml:space="preserve">
+    <value>Fout!</value>
+  </data>
+  <data name="strFeedback" xml:space="preserve">
+    <value>Feedback</value>
+  </data>
+  <data name="strFeedbackDescription" xml:space="preserve">
+    <value>Heb je een probleem gevonden? Wat zou je verbeteren?
+Ik zou je feedback heel erg warderen!
+Uw gegevens worden niet met anderen gedeeld, maar alleen gebruikt om u feedback te geven.</value>
+  </data>
+  <data name="strFeedbackSent" xml:space="preserve">
+    <value>Uw feedback is succesvol verzonden. Heel erg bedankt!</value>
+  </data>
+  <data name="strFile" xml:space="preserve">
+    <value>Bestand</value>
+  </data>
+  <data name="strFileNotFound" xml:space="preserve">
+    <value>Bestand "{0}" niet gevonden!</value>
+  </data>
+  <data name="strFinish" xml:space="preserve">
+    <value>Finish</value>
+  </data>
+  <data name="strFitToCurveDescription" xml:space="preserve">
+    <value>Geeft aan of Bézier-effening moet worden gebruikt voor het renderen. Nadat een curve is getekend, wordt deze afgevlakt en ziet deze er niet langer hoekig uit (vaak worden curven erg scherp, vooral als u met de muis tekent, is deze instelling handig).</value>
+  </data>
+  <data name="strFitToCurveTitle" xml:space="preserve">
+    <value>Gebruik Bézier-effening</value>
+  </data>
+  <data name="strFont" xml:space="preserve">
+    <value>Lettertype:</value>
+  </data>
+  <data name="strFontSize" xml:space="preserve">
+    <value>Tekstgrootte:</value>
+  </data>
+  <data name="strFormat" xml:space="preserve">
+    <value>Formaat</value>
+  </data>
+  <data name="strForwardDescription" xml:space="preserve">
+    <value>Doe de laatste actie opnieuw</value>
+  </data>
+  <data name="strFrameColor" xml:space="preserve">
+    <value>Rand kleur:</value>
+  </data>
+  <data name="strFrameWidth" xml:space="preserve">
+    <value>Rand breedte:</value>
+  </data>
+  <data name="strFree" xml:space="preserve">
+    <value>Vrij</value>
+  </data>
+  <data name="strFreeDescription" xml:space="preserve">
+    <value>U kunt pixel-precies wissen</value>
+  </data>
+  <data name="strFrom" xml:space="preserve">
+    <value>Van</value>
+  </data>
+  <data name="strFullscreen" xml:space="preserve">
+    <value>Volledig scherm</value>
+  </data>
+  <data name="strGeneral" xml:space="preserve">
+    <value>Algemeen</value>
+  </data>
+  <data name="strGUI" xml:space="preserve">
+    <value>Gebruikersomgeving</value>
+  </data>
+  <data name="strHelp" xml:space="preserve">
+    <value>Help</value>
+  </data>
+  <data name="strHelpLnk" xml:space="preserve">
+    <value>https://simplejournal.ca-soft.net/en/faq/</value>
+  </data>
+  <data name="strHelpText" xml:space="preserve">
+    <value>Voor meer informatie, zie</value>
+  </data>
+  <data name="strHexagon" xml:space="preserve">
+    <value>Zeshoek (veelhoek)</value>
+  </data>
+  <data name="strHighlight" xml:space="preserve">
+    <value>Markeren</value>
+  </data>
+  <data name="strHint" xml:space="preserve">
+    <value>Hint</value>
+  </data>
+  <data name="strHintInsert" xml:space="preserve">
+    <value>Opmerking: klik ergens op een pagina om het object daar in te voegen.
+Klik op Ja om deze hint te negeren!
+Klik op Nee om dit bericht te blijven ontvangen!</value>
+  </data>
+  <data name="strHintTitle" xml:space="preserve">
+    <value>Hint</value>
+  </data>
+  <data name="strImage" xml:space="preserve">
+    <value>Afbeelding</value>
+  </data>
+  <data name="strImages" xml:space="preserve">
+    <value>Afbeeldingen</value>
+  </data>
+  <data name="strImportPDFFile" xml:space="preserve">
+    <value>PDF-document importeren</value>
+  </data>
+  <data name="strInsertDate" xml:space="preserve">
+    <value>Datum</value>
+  </data>
+  <data name="strInsertFromClipboard" xml:space="preserve">
+    <value>Plak de afbeelding van het klembord...</value>
+  </data>
+  <data name="strInsertImage" xml:space="preserve">
+    <value>Afbeelding</value>
+  </data>
+  <data name="strInsertImageOrText" xml:space="preserve">
+    <value>Afbeelding/tekst</value>
+  </data>
+  <data name="strInsertNewObjects" xml:space="preserve">
+    <value>Nieuwen Objecten</value>
+  </data>
+  <data name="strInsertPlotToolTip" xml:space="preserve">
+    <value>Sleep het coördinatensysteem open door op een punt te klikken en beweeg vervolgens de muis/pen naar de gewenste locatie en laat los</value>
+  </data>
+  <data name="strInsertSimpleFormToolTip" xml:space="preserve">
+    <value>Sleep een vorm door één keer op een punt te klikken en dan kunt u de vorm slepen met de muis/pen</value>
+  </data>
+  <data name="strInsertText" xml:space="preserve">
+    <value>Text</value>
+  </data>
+  <data name="strInvalidInput" xml:space="preserve">
+    <value>U heeft ongeldige waarden ingevoerd!</value>
+  </data>
+  <data name="strInvalidInputTitle" xml:space="preserve">
+    <value>Ongeldige invoer!</value>
+  </data>
+  <data name="strIsColorfulTheme" xml:space="preserve">
+    <value>Toon accentkleur in titelbalk</value>
+  </data>
+  <data name="strItalic" xml:space="preserve">
+    <value>C</value>
+  </data>
+  <data name="strJournalFile" xml:space="preserve">
+    <value>Journaal-Bestand</value>
+  </data>
+  <data name="strJournalIsAlreadyOpened" xml:space="preserve">
+    <value>Dit journaal is al geopend in een ander exemplaar van SimpleJournal en kan daarom niet worden geopend!</value>
+  </data>
+  <data name="strJournalIsAlreadyOpenedInTheSameWindow" xml:space="preserve">
+    <value>Dit document is al geopend!</value>
+  </data>
+  <data name="strJournalIsAlreadyOpenedTitle" xml:space="preserve">
+    <value>Document is al geopend!</value>
+  </data>
+  <data name="strJournalNeedsOnePageMinimum" xml:space="preserve">
+    <value>Er moet minstens één pagina in het journaal zijn!</value>
+  </data>
+  <data name="strJournalNeedsOnePageMinimumTitle" xml:space="preserve">
+    <value>Deze pagina kan niet worden verwijderd!</value>
+  </data>
+  <data name="strLabelBackups" xml:space="preserve">
+    <value>Backups</value>
+  </data>
+  <data name="strLang" xml:space="preserve">
+    <value>nl</value>
+  </data>
+  <data name="strLight" xml:space="preserve">
+    <value>Licht</value>
+  </data>
+  <data name="strMail" xml:space="preserve">
+    <value>E-Mail:</value>
+  </data>
+  <data name="strManagePage" xml:space="preserve">
+    <value>Pagina's beheren</value>
+  </data>
+  <data name="strOK" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="strNext" xml:space="preserve">
+    <value>Volgende</value>
+  </data>
+  <data name="strObject" xml:space="preserve">
+    <value>Object</value>
+  </data>
+  <data name="strObjects" xml:space="preserve">
+    <value>Objecten:</value>
+  </data>
+  <data name="strPage" xml:space="preserve">
+    <value>Pagina</value>
+  </data>
+  <data name="strPaste" xml:space="preserve">
+    <value>Plakken</value>
+  </data>
+  <data name="strPaperFormat" xml:space="preserve">
+    <value>Papier formaat:</value>
+  </data>
+  <data name="strPaperSize" xml:space="preserve">
+    <value>Papier grootte:</value>
+  </data>
+  <data name="strPages" xml:space="preserve">
+    <value>Pagina's</value>
+  </data>
+  <data name="strOpenDocument" xml:space="preserve">
+    <value>Document openen</value>
+  </data>
+  <data name="strOpenSetupAssistant" xml:space="preserve">
+    <value>Configuratie-assistent openen</value>
+  </data>
+  <data name="strOpenBackupsAfterRecovery" xml:space="preserve">
+    <value>Open back-up(s) na herstel</value>
+  </data>
+  <data name="strOCRTitle" xml:space="preserve">
+    <value>Tekstherkenning (OCR)</value>
+  </data>
+  <data name="strOCRLoading" xml:space="preserve">
+    <value>Tekstherkenning (OCR) - Bezig met laden ...</value>
+  </data>
+  <data name="strName" xml:space="preserve">
+    <value>Naam:</value>
+  </data>
+  <data name="strNewJournal" xml:space="preserve">
+    <value>Nieuw journaal</value>
+  </data>
+  <data name="strNewDocument" xml:space="preserve">
+    <value>Nieuw Document</value>
+  </data>
+  <data name="strOCRCopyToClipboard" xml:space="preserve">
+    <value>Kopieer naar klembord</value>
+  </data>
+  <data name="strNoShapeRecognizedTitle" xml:space="preserve">
+    <value>Geen vorm herkend!</value>
+  </data>
+  <data name="strNoShapeRecognized" xml:space="preserve">
+    <value>Het geselecteerde gebied kan niet worden herkend als een vorm!</value>
+  </data>
+  <data name="strNoObjectsToDelete" xml:space="preserve">
+    <value>Er zijn geen objecten geselecteerd om te verwijderen!</value>
+  </data>
+  <data name="strNewerVersionAvailable" xml:space="preserve">
+    <value>Er is een nieuwere versie beschikbaar:</value>
+  </data>
+  <data name="strMicrosoftPrintToPDFWarning" xml:space="preserve">
+    <value>Microsoft Afdrukken naar PDF werkt niet goed! Het wordt afgeraden om de printer te gebruiken, wil je hem toch gebruiken?</value>
+  </data>
+  <data name="strManagePageTooltip" xml:space="preserve">
+    <value>Hiermee kunt u de pagina's beheren (bijvoorbeeld de volgorde wijzigen)</value>
+  </data>
+  <data name="strMessageFailedToExportPsScripts" xml:space="preserve">
+    <value>Fout bij het exporteren van de bestanden: {0}</value>
+  </data>
+  <data name="strPageManagmentButtonClearPage" xml:space="preserve">
+    <value>Wist de momenteel geselecteerde pagina</value>
+  </data>
+  <data name="strPageManagmentButtonDecreaseZoom" xml:space="preserve">
+    <value>Verlaagt de zoomfactor van het voorbeeld</value>
+  </data>
+  <data name="strPageManagmentButtonDeletePage" xml:space="preserve">
+    <value>Verwijdert de momenteel geselecteerde pagina</value>
+  </data>
+  <data name="strPageManagmentButtonIncreaseZoom" xml:space="preserve">
+    <value>Verhoogt de zoomfactor van het voorbeeld</value>
+  </data>
+  <data name="strPageManagmentButtonInsertBottom" xml:space="preserve">
+    <value>Verplaatst de momenteel geselecteerde pagina naar beneden</value>
+  </data>
+  <data name="strPageManagmentButtonInsertPageAfterIndexBlanko" xml:space="preserve">
+    <value>Voegt een blanco pagina in na de huidige pagina</value>
+  </data>
+  <data name="strPageManagmentButtonInsertPageAfterIndexChequered" xml:space="preserve">
+    <value>Voegt een geruite pagina in na de huidige pagina</value>
+  </data>
+  <data name="strPageManagmentButtonInsertPageAfterIndexDotted" xml:space="preserve">
+    <value>Voegt een gestippelde pagina in na de huidige pagina</value>
+  </data>
+  <data name="strPageManagmentButtonInsertPageAfterIndexRuled" xml:space="preserve">
+    <value>Voegt een gelinieerde pagina in na de huidige pagina</value>
+  </data>
+  <data name="strPageManagmentButtonInsertPageBeforeIndexBlanko" xml:space="preserve">
+    <value>Voegt een blanco pagina in voor de huidige pagina</value>
+  </data>
+  <data name="strPageManagmentButtonInsertPageBeforeIndexChequered" xml:space="preserve">
+    <value>Voegt een geruite pagina in voor de huidige pagina</value>
+  </data>
+  <data name="strPageManagmentButtonInsertPageBeforeIndexDotted" xml:space="preserve">
+    <value>Voegt een gestippelde pagina in vóór de huidige pagina</value>
+  </data>
+  <data name="strPageManagmentButtonInsertPageBeforeIndexRuled" xml:space="preserve">
+    <value>Voegt een gelinieerde pagina in voor de huidige pagina</value>
+  </data>
+  <data name="strPageManagmentButtonInsertTop" xml:space="preserve">
+    <value>Verplaatst de momenteel geselecteerde pagina naar boven</value>
+  </data>
+  <data name="strPageManagmentButtonMovePageDown" xml:space="preserve">
+    <value>Verplaatst de momenteel geselecteerde pagina één stap omlaag</value>
+  </data>
+  <data name="strPageManagmentButtonMovePageUp" xml:space="preserve">
+    <value>Verplaatst de momenteel geselecteerde pagina één stap omhoog</value>
+  </data>
+  <data name="strPageManagmentTitle" xml:space="preserve">
+    <value>Pagina's beheren</value>
+  </data>
+  <data name="strPageManagmentToggleButtonBlanko" xml:space="preserve">
+    <value>Wijzigt de huidige pagina in het papiertype: Blanco</value>
+  </data>
+  <data name="strPageManagmentToggleButtonChequered" xml:space="preserve">
+    <value>Wijzigt de huidige pagina in het papierformaat: Ruitjes</value>
+  </data>
+  <data name="strPageManagmentToggleButtonDotted" xml:space="preserve">
+    <value>Wijzigt de huidige pagina in het papierformaat: Gestippeld</value>
+  </data>
+  <data name="strPageManagmentToggleButtonRuled" xml:space="preserve">
+    <value>Wijzigt de huidige pagina in het papierformaat: Ruled</value>
+  </data>
+  <data name="strPageManagmentZoomLabel" xml:space="preserve">
+    <value>Voorbeeld (zoom: {0}%)</value>
+  </data>
+  <data name="strPasteDescription" xml:space="preserve">
+    <value>Klik gewoon op plakken en kies een plek en klik erop, dan worden alle gekopieerde objecten ingevoegd</value>
+  </data>
+  <data name="strPatchDownload" xml:space="preserve">
+    <value>Patch Downloaden</value>
+  </data>
+  <data name="strPatchFailedToOpenUrl" xml:space="preserve">
+    <value>Fout bij het openen van de patch-URL:</value>
+  </data>
+  <data name="strPatchText" xml:space="preserve">
+    <value>Deze versie van SimpleJournal zal vanwege een herstructurering geen updates ontvangen, dus je moet deze patch installeren om updates te blijven ontvangen:</value>
+  </data>
+  <data name="strPathHasNoOrigin" xml:space="preserve">
+    <value>Geen herkomst</value>
+  </data>
+  <data name="strPathHasOrigin" xml:space="preserve">
+    <value>Oorsprong: </value>
+  </data>
+  <data name="strPDFConversationDialog_AllPages" xml:space="preserve">
+    <value>Converteer alle pagina's (max. 100 per tijdschrift)</value>
+  </data>
+  <data name="strPDFConversationDialog_ButtonSearchToolTip" xml:space="preserve">
+    <value>Selecteer een pad waar het journaal moet worden opgeslagen!</value>
+  </data>
+  <data name="strPDFConversationDialog_ConversationGeneralError" xml:space="preserve">
+    <value>Er is een fout opgetreden tijdens het converteren ...</value>
+  </data>
+  <data name="strPDFConversationDialog_ConversationStatusMessage" xml:space="preserve">
+    <value>Pagina {0} converteren van {1} ...</value>
+  </data>
+  <data name="strPDFConversationDialog_Convert" xml:space="preserve">
+    <value>Overzetten</value>
+  </data>
+  <data name="strPDFConversationDialog_ConvertOnlySelectedPages" xml:space="preserve">
+    <value>Alleen gespecificeerde pagina's converteren</value>
+  </data>
+  <data name="strPDFConversationDialog_DestinationPath" xml:space="preserve">
+    <value>Doel pad:</value>
+  </data>
+  <data name="strPDFConversationDialog_Explanation_Line1" xml:space="preserve">
+    <value>Om een ​​PDF-document in SimpleJournal te gebruiken, moet het eerst worden geconverteerd naar een journaaldocument. Dit wordt gedaan met behulp van Magick.NET in combinatie met</value>
+  </data>
+  <data name="strPDFConversationDialog_Explanation_Line2" xml:space="preserve">
+    <value>Zorg er alsjeblieft voor dat</value>
+  </data>
+  <data name="strPDFConversationDialog_Explanation_Line3" xml:space="preserve">
+    <value>is geïnstalleerd, anders werkt de conversie niet!</value>
+  </data>
+  <data name="strPDFConversationDialog_From" xml:space="preserve">
+    <value>Van:</value>
+  </data>
+  <data name="strPDFConversationDialog_GhostscriptMessage" xml:space="preserve">
+    <value>Er is een fout opgetreden tijdens de conversie. Zorg ervoor dat Ghostscript is geïnstalleerd!</value>
+  </data>
+  <data name="strPDFConversationDialog_Hint" xml:space="preserve">
+    <value>Let op: het originele PDF-document blijft ongewijzigd!</value>
+  </data>
+  <data name="strPDFConversationDialog_InvalidInputMessage" xml:space="preserve">
+    <value>Geef geldige paden op!</value>
+  </data>
+  <data name="strPDFConversationDialog_ReadingPDFDocument" xml:space="preserve">
+    <value>PDF-document "{0}" lezen ...</value>
+  </data>
+  <data name="strPDFConversationDialog_Ready" xml:space="preserve">
+    <value>Klaar</value>
+  </data>
+  <data name="strPDFConversationDialog_Saving" xml:space="preserve">
+    <value>Journaal "{0}" opslaan ...</value>
+  </data>
+  <data name="strPDFConversationDialog_SourcePath" xml:space="preserve">
+    <value>Bron pad:</value>
+  </data>
+  <data name="strPDFConversationDialog_Ticket_InProgress" xml:space="preserve">
+    <value>Werken aan ticket "{0}" ...</value>
+  </data>
+  <data name="strPDFConversationDialog_Ticket_InQueue" xml:space="preserve">
+    <value>Ticket "{0}" is toegevoegd aan de wachtrij!</value>
+  </data>
+  <data name="strPDFConversationDialog_Ticket_OnHold" xml:space="preserve">
+    <value>Wacht tot uw ticket "{0}" is verwerkt!</value>
+  </data>
+  <data name="strPDFConversationDialog_Ticket_Preparing" xml:space="preserve">
+    <value>Ticket voorbereiden "{0}" ...</value>
+  </data>
+  <data name="strPDFConversationDialog_Ticket_Saving" xml:space="preserve">
+    <value>Ticket "{0}" opslaan ...</value>
+  </data>
+  <data name="strPDFConversationDialog_Title" xml:space="preserve">
+    <value>Converteer PDF-document als journaal</value>
+  </data>
+  <data name="strPDFConversationDialog_To" xml:space="preserve">
+    <value>Naar:</value>
+  </data>
+  <data name="strPDFCOnversationDialog_TooFewPagesMessage" xml:space="preserve">
+    <value>Het geselecteerde document heeft slechts {0} pagina's! Wilt u in plaats daarvan alleen pagina's {1} naar {2} converteren?</value>
+  </data>
+  <data name="strPDFConversationDialog_UseOnlineConversation" xml:space="preserve">
+    <value>Gebruik online conversatie (als uw systeem weinig geheugen heeft)</value>
+  </data>
+  <data name="strPDFConversationDialog_WritingPageStatus" xml:space="preserve">
+    <value>Schrijf pagina {0} van {1} in journaal "{2}" ...</value>
+  </data>
+  <data name="strPDFDialogTitle" xml:space="preserve">
+    <value>Opslaan als pdf...</value>
+  </data>
+  <data name="strPDFFilter" xml:space="preserve">
+    <value>PDF-document|*.pdf</value>
+  </data>
+  <data name="strPen1" xml:space="preserve">
+    <value>Pen 1</value>
+  </data>
+  <data name="strPen2" xml:space="preserve">
+    <value>Pen 2</value>
+  </data>
+  <data name="strPen3" xml:space="preserve">
+    <value>Pen 3</value>
+  </data>
+  <data name="strPen4" xml:space="preserve">
+    <value>Pen 4</value>
+  </data>
+  <data name="strPenDefault" xml:space="preserve">
+    <value>Standaard</value>
+  </data>
+  <data name="strPenLarge" xml:space="preserve">
+    <value>Groot</value>
+  </data>
+  <data name="strPenMidsize" xml:space="preserve">
+    <value>Middelmatig</value>
+  </data>
+  <data name="strPens" xml:space="preserve">
+    <value>Pennen</value>
+  </data>
+  <data name="strPenFine" xml:space="preserve">
+    <value>Fijn</value>
+  </data>
+  <data name="strPentagon" xml:space="preserve">
+    <value>Vijfhoek (veelhoek)</value>
+  </data>
+  <data name="strPenTiny" xml:space="preserve">
+    <value>Klein</value>
+  </data>
+  <data name="strPleaseEnterValidText" xml:space="preserve">
+    <value>Voer een geldige tekst in!</value>
+  </data>
+  <data name="strPleaseInputText" xml:space="preserve">
+    <value>Voer een tekst in:</value>
+  </data>
+  <data name="strPleaseInputTextTitle" xml:space="preserve">
+    <value>Tekst invoegen</value>
+  </data>
+  <data name="strPleaseWait" xml:space="preserve">
+    <value>Even geduld tijdens het laden van pagina {0} (Pagina {1}/{2}) ...</value>
+  </data>
+  <data name="strPleaseWaitTitle" xml:space="preserve">
+    <value>Wacht alsjeblieft ...</value>
+  </data>
+  <data name="strPlot" xml:space="preserve">
+    <value>coördinatie systeem</value>
+  </data>
+  <data name="strPlotDrawNegativeAxis" xml:space="preserve">
+    <value>Negatieve assen tekenen</value>
+  </data>
+  <data name="strPlotDropDownTemplateAllAxes" xml:space="preserve">
+    <value>Alle assen</value>
+  </data>
+  <data name="strPlotDropDownTemplateAllAxesButWithoutNegativeYAxis" xml:space="preserve">
+    <value>Alle assen (zonder negatieve Y-as)</value>
+  </data>
+  <data name="strPlotDropDownTemplateOnlyPositiveAxes" xml:space="preserve">
+    <value>Alleen positieve assen</value>
+  </data>
+  <data name="strPolygon" xml:space="preserve">
+    <value>Veelhoek</value>
+  </data>
+  <data name="strPolygonButton" xml:space="preserve">
+    <value>Veelhoek</value>
+  </data>
+  <data name="strPolygonToolTip" xml:space="preserve">
+    <value>Teken een veelhoek door één keer een startpunt te definiëren (klik). Daar krijg je een cirkel, nu kun je meer randen toevoegen, aan het einde moet een rand weer op het beginpunt eindigen om een ​​vorm te krijgen</value>
+  </data>
+  <data name="strPreview" xml:space="preserve">
+    <value>Voorbeeld:</value>
+  </data>
+  <data name="strPrintDocument" xml:space="preserve">
+    <value>Afdrukken</value>
+  </data>
+  <data name="strPrinting" xml:space="preserve">
+    <value>Afbeelding afdrukken</value>
+  </data>
+  <data name="strPrintingError" xml:space="preserve">
+    <value>Er is een kritieke fout opgetreden tijdens het afdrukken</value>
+  </data>
+  <data name="strQuad" xml:space="preserve">
+    <value>Vierling (veelhoek)</value>
+  </data>
+  <data name="strRecentFiles" xml:space="preserve">
+    <value>Recente documenten</value>
+  </data>
+  <data name="strRecentlyOpenedDocuments_No" xml:space="preserve">
+    <value>Geen</value>
+  </data>
+  <data name="strRecognization" xml:space="preserve">
+    <value>Vormen</value>
+  </data>
+  <data name="strRecognizationDescription" xml:space="preserve">
+    <value>Teken gewoon een polygoon/vorm die je wilt en het wordt automatisch geconverteerd naar een polygoon (alleen als je tekening netjes is)</value>
+  </data>
+  <data name="strRecoverAutoBackupFileDialog_Loading" xml:space="preserve">
+    <value>(Laden ...)</value>
+  </data>
+  <data name="strRecoverAutoBackupFileDialogTitle" xml:space="preserve">
+    <value>Back-ups terugzetten...</value>
+  </data>
+  <data name="strRectangle" xml:space="preserve">
+    <value>Rechthoek</value>
+  </data>
+  <data name="strRedo" xml:space="preserve">
+    <value>Opnieuw</value>
+  </data>
+  <data name="strReleaseDate" xml:space="preserve">
+    <value>06/04/2022 15:00</value>
+  </data>
+  <data name="strRemove" xml:space="preserve">
+    <value>Verwijderen</value>
+  </data>
+  <data name="strRemoveDescription" xml:space="preserve">
+    <value>Verwijdert alle geselecteerde objecten/streken</value>
+  </data>
+  <data name="strRemoveObjectsDescription" xml:space="preserve">
+    <value>Geselecteerde objecten verwijderen</value>
+  </data>
+  <data name="strResetPens" xml:space="preserve">
+    <value>Pennen resetten</value>
+  </data>
+  <data name="strRestoreBackupToolTip" xml:space="preserve">
+    <value>Back-up terugzetten</value>
+  </data>
+  <data name="strRotation" xml:space="preserve">
+    <value>Rotatie:</value>
+  </data>
+  <data name="strRubber" xml:space="preserve">
+    <value>Wissen</value>
+  </data>
+  <data name="strRuler" xml:space="preserve">
+    <value>Liniaal</value>
+  </data>
+  <data name="strRulerCompensationTitle" xml:space="preserve">
+    <value>Liniaal compensatie</value>
+  </data>
+  <data name="strRulerDescription" xml:space="preserve">
+    <value>Klik gewoon op een punt en beweeg de muis en klik op de gewenste positie en er verschijnt een lijn</value>
+  </data>
+  <data name="strSave" xml:space="preserve">
+    <value>Opslaan</value>
+  </data>
+  <data name="strSaveAs" xml:space="preserve">
+    <value>Opslaan Als ...</value>
+  </data>
+  <data name="strSaveAsDocument" xml:space="preserve">
+    <value>Opslaan Als ...</value>
+  </data>
+  <data name="strSaveChanges" xml:space="preserve">
+    <value>Wilt u wijzigingen opslaan voordat u het programma afsluit?</value>
+  </data>
+  <data name="strSaveChangesTitle" xml:space="preserve">
+    <value>Opslaan?</value>
+  </data>
+  <data name="strSaveDocument" xml:space="preserve">
+    <value>Opslaan</value>
+  </data>
+  <data name="strSearch" xml:space="preserve">
+    <value>Zoeken ...</value>
+  </data>
+  <data name="strSelect" xml:space="preserve">
+    <value>Selecteren</value>
+  </data>
+  <data name="strSelectDescription" xml:space="preserve">
+    <value>U kunt een gebied selecteren dat u kunt bewerken</value>
+  </data>
+  <data name="strSelectedDocumentNotExisting" xml:space="preserve">
+    <value>Het geselecteerde document bestaat niet meer. Moet het van de lijst worden verwijderd?</value>
+  </data>
+  <data name="strSelectedDocumentNotExistingTitle" xml:space="preserve">
+    <value>Verwijder het?</value>
+  </data>
+  <data name="strSelection" xml:space="preserve">
+    <value>Selectie</value>
+  </data>
+  <data name="strSend" xml:space="preserve">
+    <value>Versturen</value>
+  </data>
+  <data name="strSettingDefaultStretching" xml:space="preserve">
+    <value>Standaard uitrekken voor ingevoegde afbeeldingen:</value>
+  </data>
+  <data name="strSettings" xml:space="preserve">
+    <value>Instellingen</value>
+  </data>
+  <data name="strSettings_DeactivateTouchScreenIfInForeground_Explanation" xml:space="preserve">
+    <value>Schakelt het touchscreen uit wanneer SimpleJournal op de voorgrond staat, maar schakelt het ook in wanneer SimpleJournal niet meer op de voorgrond staat. Deze optie is handig zodat het touchscreen ook buiten SimpleJournal kan worden gebruikt, b.v. om in PDF-documenten te scrollen!</value>
+  </data>
+  <data name="strSettings_DisableTouchscreenIfInForeground" xml:space="preserve">
+    <value>Schakel het Windows-aanraakscherm alleen uit als SimpleJournal op de voorgrond staat</value>
+  </data>
+  <data name="strSettings_OpenAutoSaveDirectory" xml:space="preserve">
+    <value>AutoSave map openen</value>
+  </data>
+  <data name="strSettings_OpenAutoSaveDirectory_ToolTip" xml:space="preserve">
+    <value>Opent de map met de automatisch gemaakte back-ups.</value>
+  </data>
+  <data name="strSettings_OpenBackupDirectory" xml:space="preserve">
+    <value>Open back-up map</value>
+  </data>
+  <data name="strSettings_OpenBackupDirectory_ToDo" xml:space="preserve">
+    <value>Opent de map met de gemaakte back-ups (van oude documenten).</value>
+  </data>
+  <data name="strSettingsActivateGlowingEffect" xml:space="preserve">
+    <value>Actief gloeiende raameffect</value>
+  </data>
+  <data name="strSettingsActivateTouchButtons" xml:space="preserve">
+    <value>Toon aanraakknoppen in de snelkeuzebalk</value>
+  </data>
+  <data name="strSettingsBackgroundCustom" xml:space="preserve">
+    <value>Aangepaste achtergrondafbeelding instellen</value>
+  </data>
+  <data name="strSettingsBackgroundDefault" xml:space="preserve">
+    <value>Geen achtergrond (standaard, grijs)</value>
+  </data>
+  <data name="strSettingsBackgroundHeader" xml:space="preserve">
+    <value>Achtergrond</value>
+  </data>
+  <data name="strSettingsCheckBoxDisableTouchscreen" xml:space="preserve">
+    <value>Windows-aanraakscherm uitschakelen bij opstarten</value>
+  </data>
+  <data name="strSettingsClearLastOpenedDocumentsToolTip" xml:space="preserve">
+    <value>Wist de lijst met recent geopende documenten in het menu</value>
+  </data>
+  <data name="strSettingsDialogTouchDeviceManagerDescription" xml:space="preserve">
+    <value>Door ontbrekende rechten is het in deze versie helaas niet mogelijk om het touchscreen automatisch uit te schakelen. Daarom is de Touchscreen Device Manager hier beschikbaar om te downloaden. Hiermee kunt u het touchscreen voor het werk deactiveren en daarna weer activeren (indien nodig). Het programma werkt op dezelfde manier als de apparaatbeheerder en vereist beheerdersrechten!
+
+Als alternatief kunt u de normale versie van SimpleJournal gebruiken!</value>
+  </data>
+  <data name="strSettingsDisableTouchExplanation" xml:space="preserve">
+    <value>Deactiveert het aanraakscherm bij het opstarten en reactiveert het bij het afsluiten. Deze optie kan handig zijn als u met een pen schrijft, dan kunt u uw hand op het display leggen zonder dat uw hand als invoer wordt herkend.</value>
+  </data>
+  <data name="strSettingsDisableTouchscreenTitle" xml:space="preserve">
+    <value>Touchscreen uitschakelen (voor geavanceerde gebruikers)Touchscreen uitschakelen (voor geavanceerde gebruikers)</value>
+  </data>
+  <data name="strSettingsDisableTouchUWP1" xml:space="preserve">
+    <value>SimpleJournal kan geen onderscheid maken tussen pen- en vingerinvoer of er is geen manier om vingerinvoer volledig uit te schakelen.</value>
+  </data>
+  <data name="strSettingsDisableTouchUWP2" xml:space="preserve">
+    <value>Er is echter de mogelijkheid om een ​​Powershell-script uit te voeren voor het starten en na het sluiten van SimpleJournal, die hier kan worden gegenereerd!</value>
+  </data>
+  <data name="strSettingsDisableTouchUWP3" xml:space="preserve">
+    <value>Om deze scripts uit te voeren, moet aan 2 voorwaarden worden voldaan: </value>
+  </data>
+  <data name="strSettingsDisableTouchUWP4" xml:space="preserve">
+    <value>1) Voer het script uit als beheerder!</value>
+  </data>
+  <data name="strSettingsDisableTouchUWP5" xml:space="preserve">
+    <value>2) U moet Powershell toestaan ​​om het script één keer uit te voeren (voer de volgende opdracht in en bevestig deze bij Powershell)</value>
+  </data>
+  <data name="strSettingsDownloadTouchDeviceManager" xml:space="preserve">
+    <value>Touchscreen Apparaatbeheer Downloaden</value>
+  </data>
+  <data name="strSettingsFeatureBar" xml:space="preserve">
+    <value>Extra functies</value>
+  </data>
+  <data name="strSettingsImportantDirectories" xml:space="preserve">
+    <value>Belangrijke mappen</value>
+  </data>
+  <data name="strSettingsOpenSetupAssistantTooltip" xml:space="preserve">
+    <value>Biedt u de mogelijkheid om SimpleJournal opnieuw in te stellen</value>
+  </data>
+  <data name="strSettingsResetPensTooltip" xml:space="preserve">
+    <value>Zet de pennen terug naar hun oorspronkelijke instellingen</value>
+  </data>
+  <data name="strSettingsSetFileAssoc" xml:space="preserve">
+    <value>Herstel bestandstypeassociatie</value>
+  </data>
+  <data name="strSettingsSetFileAssocToolTip" xml:space="preserve">
+    <value>Stelt dit programma in als standaard voor .Journal-bestanden</value>
+  </data>
+  <data name="strSettingsSidebarTransparency" xml:space="preserve">
+    <value>Zijbalk licht transparant weergeven</value>
+  </data>
+  <data name="strSettingsSidebarTransparency_Description" xml:space="preserve">
+    <value>Voegt een licht transparantie-effect toe aan de zijbalk.</value>
+  </data>
+  <data name="strSettingsTouchScreenExplanationNormal1" xml:space="preserve">
+    <value>SimpleJournal kan geen onderscheid maken tussen pen- en vingerinvoer, er is geen mogelijkheid om vingerinvoer volledig uit te schakelen. Daarom is er nu een optie om een ​​powershell-script uit te voeren bij het starten/afsluiten van SimpleJournal dat aanraakinvoer voor het hele systeem in-/uitschakelt.</value>
+  </data>
+  <data name="strSettingsTouchScreenExplanationNormal2" xml:space="preserve">
+    <value>Om het Powershell-script uit te voeren, moet u de volgende stappen uitvoeren:</value>
+  </data>
+  <data name="strSettingsTouchScreenExplanationNormal3" xml:space="preserve">
+    <value>1) Voer SimpleJournal uit als beheerder (dit is standaard)</value>
+  </data>
+  <data name="strSettingsTouchScreenExplanationNormal4" xml:space="preserve">
+    <value>2) Het Powershell-script moet worden geautoriseerd (voer het volgende commando uit in Powershell en bevestig het):</value>
+  </data>
+  <data name="strSettingsUseBackstageMenu" xml:space="preserve">
+    <value>Gebruik modern menu</value>
+  </data>
+  <data name="strSettingsUseBackstageMenu_Description" xml:space="preserve">
+    <value>Wanneer geactiveerd, wordt het menu vervangen door een moderner backstage-menu.</value>
+  </data>
+  <data name="strSetupCompleted" xml:space="preserve">
+    <value>Je hebt de installatie van SimpleJournal succesvol voltooid!
+Hier wil ik je nog een paar belangrijke tips geven die je zullen helpen om SimpleJournal effectiever te gebruiken.
+
+1. Als je iets wilt kopiëren en plakken: Het kopiëren gaat als volgt: Als je iets hebt geselecteerd klik je op "Kopiëren". Om iets te plakken, klikt u op "Plakken". Er is echter nog niets geplakt, u kunt namelijk zelf bepalen op welke pagina/positie het object geplakt wordt. Klik eenvoudig op een willekeurige positie op een pagina.
+
+2. Als u een document als PDF wilt exporteren, klikt u in het menu op "Afdrukken" en selecteert u een PDF-printer. Helaas werkt "Microsoft Print To PDF" niet naar wens, dus het is aan te raden om een ​​alternatieve PDF-printer te installeren! Een journaal kan echter ook als fotoserie worden geëxporteerd!</value>
+  </data>
+  <data name="strSetupCompletedTitle" xml:space="preserve">
+    <value>Installatie succesvol voltooid!</value>
+  </data>
+  <data name="strSetupDarkModeDescription" xml:space="preserve">
+    <value>De donkere modus heeft momenteel alleen invloed op de menuband. De dialogen blijven normaal. De instellingen kunnen later allemaal worden gewijzigd!</value>
+  </data>
+  <data name="strSetupDarkModeTitle" xml:space="preserve">
+    <value>Houd je van de duisternis?</value>
+  </data>
+  <data name="strSetupDarkModeYes" xml:space="preserve">
+    <value>Ja, ik hou van donker</value>
+  </data>
+  <data name="strSetupDarModeNo" xml:space="preserve">
+    <value>Nee, ik hou van helder</value>
+  </data>
+  <data name="strSetupDialogTitle" xml:space="preserve">
+    <value>SimpleJournal - Configuratie-assistent</value>
+  </data>
+  <data name="strSetupExitDialog" xml:space="preserve">
+    <value>Weet u zeker dat u de installatiewizard wilt afsluiten?</value>
+  </data>
+  <data name="strSetupExitDialogTitle" xml:space="preserve">
+    <value>Overslaan?</value>
+  </data>
+  <data name="strSetupHDDescription" xml:space="preserve">
+    <value>Een HD-resolutie biedt voldoende ruimte voor de elementen van SimpleJournal, zodat je toch de hele pagina kunt zien. Voor kleine resoluties wordt bijvoorbeeld de zijbalk niet automatisch weergegeven en wordt de schuifbalk vergroot.</value>
+  </data>
+  <data name="strSetupHighResolution" xml:space="preserve">
+    <value>Ja (optimaal voor grote schermen)</value>
+  </data>
+  <data name="strSetupInitalText" xml:space="preserve">
+    <value>Deze assistent helpt je om SimpleJournal optimaal in te richten. Er zijn enkele instellingen die beter geschikt zijn voor kleinere of grotere schermen. Deze instellingen kunnen op elk moment in het instellingendialoogvenster worden gewijzigd en de assistent kan van daaruit ook op elk moment worden opgeroepen.</value>
+  </data>
+  <data name="strSetupLowResolution" xml:space="preserve">
+    <value>Nee (optimaal voor kleine schermen)</value>
+  </data>
+  <data name="strSetupReplaceEllipsesWithCirclesDescription" xml:space="preserve">
+    <value>Door de nauwkeurigheid van de vormherkenning kan het snel gebeuren dat de getekende cirkel een ellips wordt en dit kun je met deze instelling voorkomen.</value>
+  </data>
+  <data name="strSetupRotationComparisonDescription" xml:space="preserve">
+    <value>De rotatiecompensatie zorgt ervoor dat uw vormen recht worden getekend, aangezien de vormherkenning zeer nauwkeurig is, worden schuine randen b.v. een schuine rechthoek en dit kan worden gecorrigeerd met deze instelling.</value>
+  </data>
+  <data name="strSetupSetp4" xml:space="preserve">
+    <value>Stap 4: Pas de liniaal aan</value>
+  </data>
+  <data name="strSetupStep1" xml:space="preserve">
+    <value>Stap 1: Heeft uw scherm een ​​HD-resolutie?</value>
+  </data>
+  <data name="strSetupStep2" xml:space="preserve">
+    <value>Stap 2: Pas het paginaformaat aan</value>
+  </data>
+  <data name="strSetupStep3" xml:space="preserve">
+    <value>Stap 3: De pen aanpassen</value>
+  </data>
+  <data name="strSetupStep3ContactPressureTitle" xml:space="preserve">
+    <value>Contactdruk</value>
+  </data>
+  <data name="strSetupStep3Description" xml:space="preserve">
+    <value>De contactdruk verwijst naar de pen waarmee u schrijft. Hoe harder je drukt, hoe dikker je tekent. Deze functie is vaak handig als u een grotere slag wilt maken en daarom is deze functie standaard ingeschakeld. Maar het kan ook handig zijn om deze functie uit te schakelen.</value>
+  </data>
+  <data name="strSetupStep5" xml:space="preserve">
+    <value>Stap 5: Vormherkenning aanpassen</value>
+  </data>
+  <data name="strSetupStep5Description" xml:space="preserve">
+    <value>Met de vormherkenning van SimpleJournal teken je eenvoudig cirkels, ellipsen en vormen van veelhoeken tot zeshoeken. Uw tekening wordt automatisch geconverteerd naar een vorm wanneer een vorm wordt herkend.</value>
+  </data>
+  <data name="strSetupStep6" xml:space="preserve">
+    <value>Stap 6: pennen aanpassen</value>
+  </data>
+  <data name="strSetupStep6Description" xml:space="preserve">
+    <value>U kunt de pennen aanpassen. SimpleJournal biedt je 4 pennen zodat je snel kunt wisselen tussen verschillende kleuren/maten. U kunt de pennen echter op elk moment bovenaan het menu wijzigen, d.w.z. als u nog niet weet hoe u uw pennen moet aanpassen, kunt u eenvoudig op "Volgende" klikken.</value>
+  </data>
+  <data name="strSetupStep7" xml:space="preserve">
+    <value>Stap 7: markeerstift aanpassen</value>
+  </data>
+  <data name="strSetupStep7Description" xml:space="preserve">
+    <value>Hier kunt u uw highlighter optimaal aanpassen aan uw wensen. Ook hier kun je deze instelling op elk moment bovenaan in het menu heel eenvoudig wijzigen. Als u nog niet weet hoe de markeerstift moet worden ingesteld, klikt u gewoon op "Volgende".</value>
+  </data>
+  <data name="strSetupTitle" xml:space="preserve">
+    <value>Welkom bij de SimpleJournal setup-assistent!</value>
+  </data>
+  <data name="strShape" xml:space="preserve">
+    <value>Vorm</value>
+  </data>
+  <data name="strShapes" xml:space="preserve">
+    <value>Vormen:</value>
+  </data>
+  <data name="strShapesHeader" xml:space="preserve">
+    <value>Vormen</value>
+  </data>
+  <data name="strSidepage" xml:space="preserve">
+    <value>Zijbalk</value>
+  </data>
+  <data name="strSinglePage" xml:space="preserve">
+    <value>Enkele Pagina</value>
+  </data>
+  <data name="strSizes" xml:space="preserve">
+    <value>Maten:</value>
+  </data>
+  <data name="strSJTerminated" xml:space="preserve">
+    <value>SimpleJournal is onverwacht beëindigd!</value>
+  </data>
+  <data name="strSkip" xml:space="preserve">
+    <value>Overslaan</value>
+  </data>
+  <data name="strSquare" xml:space="preserve">
+    <value>Vierkant</value>
+  </data>
+  <data name="strStart" xml:space="preserve">
+    <value>Start</value>
+  </data>
+  <data name="strStateExportAsJournal" xml:space="preserve">
+    <value>Journaal exporteren ...</value>
+  </data>
+  <data name="strStateExportAsPDF" xml:space="preserve">
+    <value>PDF exporteren ...</value>
+  </data>
+  <data name="strStatePrinting" xml:space="preserve">
+    <value>Journaal afdrukken ...</value>
+  </data>
+  <data name="strStateSaving" xml:space="preserve">
+    <value>Opslaan ...</value>
+  </data>
+  <data name="strStretch_Fill" xml:space="preserve">
+    <value>Vullen</value>
+  </data>
+  <data name="strStretching" xml:space="preserve">
+    <value>Uitrekken:</value>
+  </data>
+  <data name="strStretching_Uniform" xml:space="preserve">
+    <value>Proportioneel</value>
+  </data>
+  <data name="strStrikethrough" xml:space="preserve">
+    <value>S</value>
+  </data>
+  <data name="strStrokes" xml:space="preserve">
+    <value>Stroken</value>
+  </data>
+  <data name="strStrokesDescription" xml:space="preserve">
+    <value>Je kunt een hele streek wissen als je hem aanraakt</value>
+  </data>
+  <data name="strSuccess" xml:space="preserve">
+    <value>Succes!</value>
+  </data>
+  <data name="strSure" xml:space="preserve">
+    <value>Zeker?</value>
+  </data>
+  <data name="strTestPreview" xml:space="preserve">
+    <value>Preview - Hier kun je testen!</value>
+  </data>
+  <data name="strText" xml:space="preserve">
+    <value>Text</value>
+  </data>
+  <data name="strTextDectection" xml:space="preserve">
+    <value>Voorspellende tekst</value>
+  </data>
+  <data name="strTextDot" xml:space="preserve">
+    <value>Text:</value>
+  </data>
+  <data name="strTextInput" xml:space="preserve">
+    <value>Voer tekst in:</value>
+  </data>
+  <data name="strTextInputTitle" xml:space="preserve">
+    <value>Tekst invoegen</value>
+  </data>
+  <data name="strTextNotFound" xml:space="preserve">
+    <value>Niet gevonden, of de tekst bestaat niet, of je moet netter schrijven!</value>
+  </data>
+  <data name="strTextNotFoundTitle" xml:space="preserve">
+    <value>Geen resultaten gevonden!</value>
+  </data>
+  <data name="strTextRecognization" xml:space="preserve">
+    <value>Tekstanalyse</value>
+  </data>
+  <data name="strTextSearch" xml:space="preserve">
+    <value>Zoeken</value>
+  </data>
+  <data name="strTextToHightlight" xml:space="preserve">
+    <value>Dit is een tekst die gemarkeerd moet worden</value>
+  </data>
+  <data name="strTheme" xml:space="preserve">
+    <value>Accent kleur:</value>
+  </data>
+  <data name="strTo" xml:space="preserve">
+    <value>Naar</value>
+  </data>
+  <data name="strToolFormFixed" xml:space="preserve">
+    <value>Gemaakt</value>
+  </data>
+  <data name="strToolFormFree" xml:space="preserve">
+    <value>Gratis</value>
+  </data>
+  <data name="strTools" xml:space="preserve">
+    <value>Tools</value>
+  </data>
+  <data name="strTouchScreen" xml:space="preserve">
+    <value>Touchscreen</value>
+  </data>
+  <data name="strTransparent" xml:space="preserve">
+    <value>Transparant</value>
+  </data>
+  <data name="strTrapeze" xml:space="preserve">
+    <value>Trapeze</value>
+  </data>
+  <data name="strTriangle" xml:space="preserve">
+    <value>Driehoek (veelhoek)</value>
+  </data>
+  <data name="strUnderline" xml:space="preserve">
+    <value>O</value>
+  </data>
+  <data name="strUndo" xml:space="preserve">
+    <value>Ongedaan maken</value>
+  </data>
+  <data name="strUnexceptedFailure" xml:space="preserve">
+    <value>Er is een onverwachte fout opgetreden!</value>
+  </data>
+  <data name="strUnexceptedFailureLine1" xml:space="preserve">
+    <value>SimpleJournal maakt nu een back-up, even geduld a.u.b. Daarna wordt het programma afgesloten!</value>
+  </data>
+  <data name="strUnexceptedFailureTitle" xml:space="preserve">
+    <value>Ongekende mislukking!</value>
+  </data>
+  <data name="strUnknown" xml:space="preserve">
+    <value>Onbekend</value>
+  </data>
+  <data name="strUnknownVersion" xml:space="preserve">
+    <value>Versie onbekend</value>
+  </data>
+  <data name="strUnpublishedDevVersion" xml:space="preserve">
+    <value>Niet-gepubliceerde ontwikkelingsversie!</value>
+  </data>
+  <data name="strUnssportedFormatTitle" xml:space="preserve">
+    <value>Niet ondersteund formaat!</value>
+  </data>
+  <data name="strUnsupportedFormat" xml:space="preserve">
+    <value>Dit formaat wordt momenteel niet ondersteund! Zorg ervoor dat je een geldige tekst/afbeelding op je klembord hebt staan!</value>
+  </data>
+  <data name="strUpdateDialogDownload" xml:space="preserve">
+    <value>Download en installeer</value>
+  </data>
+  <data name="strUpdateDialogFailedToOpenBrowserAutomatically" xml:space="preserve">
+    <value>Uw browser kon niet automatisch worden geopend: {0}. Open uw browser en voer de volgende URL in: {1}. Als alternatief kunt u eenvoudig de nieuwste versie downloaden op {2}!</value>
+  </data>
+  <data name="strUpdateDialogNewVersionAvailable" xml:space="preserve">
+    <value>Er is een nieuwe update beschikbaar!</value>
+  </data>
+  <data name="strUpdateDialogTitle" xml:space="preserve">
+    <value>Nieuwe Update!</value>
+  </data>
+  <data name="strUpdateDialogVersionText" xml:space="preserve">
+    <value>Versie {0} is nu beschikbaar!</value>
+  </data>
+  <data name="strUpdateDownloadDialog_DownloadText" xml:space="preserve">
+    <value>SimpleJournal v{0} downloaden ...</value>
+  </data>
+  <data name="strUpdateDownloadDialog_FailedToDownloadUpdate" xml:space="preserve">
+    <value>Er is een fout opgetreden tijdens het downloaden van de update! Probeer het later opnieuw!</value>
+  </data>
+  <data name="strUpdateDownloadDialog_FailedToOpenSetup" xml:space="preserve">
+    <value>Fout bij het openen van de setup!</value>
+  </data>
+  <data name="strUpdateDownloadDialog_PleaseWait" xml:space="preserve">
+    <value>Wacht alsjeblieft:</value>
+  </data>
+  <data name="strUpdateDownloadDialog_Title" xml:space="preserve">
+    <value>Downloaden...</value>
+  </data>
+  <data name="strUpdateDownloadSpeedMessage" xml:space="preserve">
+    <value>{0} of {1} ({2})</value>
+  </data>
+  <data name="strUseAutoSave" xml:space="preserve">
+    <value>Automatisch opslaan inschakelen</value>
+  </data>
+  <data name="strUseBigScrollbar" xml:space="preserve">
+    <value>Vergroot horizontale schuifbalk</value>
+  </data>
+  <data name="strUseBigScrollbarDescription" xml:space="preserve">
+    <value>Deze instelling is handig als je een klein scherm hebt, dan kun je de pen gebruiken om beter bij de schuifbalk te komen.</value>
+  </data>
+  <data name="strUseContactPressure" xml:space="preserve">
+    <value>Gebruik contactdruk</value>
+  </data>
+  <data name="strUseFitToCurve" xml:space="preserve">
+    <value>Gebruik Bezier-afvlakking</value>
+  </data>
+  <data name="strUseNaturalScrolling" xml:space="preserve">
+    <value>Gebruik natuurlijk scrollen</value>
+  </data>
+  <data name="strUseNaturalScrollingDescription" xml:space="preserve">
+    <value>Bij scrollen door middel van slepen/duwen wordt de natuurlijke scrollrichting gebruikt.</value>
+  </data>
+  <data name="strUseOldChequeredPatternLine1" xml:space="preserve">
+    <value>Gebruik oud patroon voor aangevinkte pagina's (voor oude documenten)</value>
+  </data>
+  <data name="strUseOldChequeredPatternLine2" xml:space="preserve">
+    <value>Het wijzigen van deze instelling heeft geen invloed op het momenteel geladen document.</value>
+  </data>
+  <data name="strUseReplaceEllipsesWithCircles" xml:space="preserve">
+    <value>Vervang ellipsen door cirkels</value>
+  </data>
+  <data name="strUseRotationCompensation" xml:space="preserve">
+    <value>Rotatiecompensatie gebruiken</value>
+  </data>
+  <data name="strUseRulerCompensation" xml:space="preserve">
+    <value>Liniaalcompensatie gebruiken</value>
+  </data>
+  <data name="strWantToClearPageTitle" xml:space="preserve">
+    <value>Wissen?</value>
+  </data>
+  <data name="strWaitingDialogReadingDocument" xml:space="preserve">
+    <value>Document lezen...</value>
+  </data>
+  <data name="strView" xml:space="preserve">
+    <value>Zicht</value>
+  </data>
+  <data name="strVersionUpToDate" xml:space="preserve">
+    <value>Actueel!</value>
+  </data>
+  <data name="strWantToCreateNewJournal" xml:space="preserve">
+    <value>Wilt u een nieuw journaal maken zonder het oude op te slaan?</value>
+  </data>
+  <data name="strWantToClearPage" xml:space="preserve">
+    <value>Wil je deze pagina echt wissen?</value>
+  </data>
+  <data name="strWantToDeletePage" xml:space="preserve">
+    <value>Weet je zeker dat je deze pagina wilt verwijderen?</value>
+  </data>
+  <data name="strUseRulerCompensation_Description" xml:space="preserve">
+    <value>De liniaalcompensatie zorgt ervoor dat lijnen die minimaal scheef zijn getekend automatisch recht worden getrokken.</value>
+  </data>
+  <data name="strWaitingDialogReadingPage" xml:space="preserve">
+    <value>Leespagina {0} van {1} ...</value>
+  </data>
+  <data name="strWaitingDialogCurrentProgress" xml:space="preserve">
+    <value>Huidige vooruitgang:</value>
+  </data>
+  <data name="strWaitingDialogTotalProgress" xml:space="preserve">
+    <value>Totale vooruitgang:</value>
+  </data>
+  <data name="strWrongFileFormatTitle" xml:space="preserve">
+    <value>Verkeerd bestandsformaat!</value>
+  </data>
+  <data name="strWrongFileFormat" xml:space="preserve">
+    <value>Het opgegeven bestand heeft niet het juiste bestandsformaat!</value>
+  </data>
+  <data name="strWrite" xml:space="preserve">
+    <value>Schrijven</value>
+  </data>
+  <data name="strWindowSize" xml:space="preserve">
+    <value>Venstergrootte bij opstarten:</value>
+  </data>
+  <data name="strZoom" xml:space="preserve">
+    <value>Zoom</value>
+  </data>
+  <data name="strWindowModeMaximized" xml:space="preserve">
+    <value>Gemaximaliseerd</value>
+  </data>
+  <data name="strWantToDeletePageTitle" xml:space="preserve">
+    <value>Pagina verwijderen?</value>
+  </data>
+  <data name="strWindowModeNormal" xml:space="preserve">
+    <value>Normaal</value>
+  </data>
+  <data name="strWindowModeFullscreen" xml:space="preserve">
+    <value>Volledig scherm</value>
+  </data>
+  <data name="strWindowMode" xml:space="preserve">
+    <value>Raam modus:</value>
+  </data>
+  <data name="strWindow" xml:space="preserve">
+    <value>Venster</value>
+  </data>
+  <data name="strWatingText" xml:space="preserve">
+    <value>Even geduld a.u.b. document "{0}" wordt geladen...</value>
+  </data>
+  <data name="strWantToLoadNewJournalTitle" xml:space="preserve">
+    <value>Wijzigingen afwijzen?</value>
+  </data>
+  <data name="strWantToLoadNewJournal" xml:space="preserve">
+    <value>Wilt u een journaal laden zonder het oude op te slaan?</value>
+  </data>
+  <data name="strSetupSetp1_Description" xml:space="preserve">
+    <value>Heeft uw scherm een HD-resolutie?</value>
+  </data>
+  <data name="strSetupSetp1_Title" xml:space="preserve">
+    <value>Stap 1: Algemene instellingen</value>
+  </data>
+  <data name="strPDFFile" xml:space="preserve">
+    <value>PDF Document</value>
+  </data>
+  <data name="strRecentDocumentLastChange" xml:space="preserve">
+    <value>Laatste veranderingen:</value>
+  </data>
+  <data name="strForward" xml:space="preserve">
+    <value>Opni...</value>
+  </data>
+</root>

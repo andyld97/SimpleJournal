@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:res="clr-namespace:SimpleJournal.Properties" xmlns:wpf="clr-namespace:Microsoft.Web.WebView2.Wpf;assembly=Microsoft.Web.WebView2.Wpf"
         mc:Ignorable="d"
-        Title="{x:Static res:Resources.strAbout}" Height="630" Width="420"
+        Title="{x:Static res:Resources.strAbout}" Height="670" Width="420"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen">
     <Grid Background="{DynamicResource WhiteBrush}">
@@ -57,7 +57,7 @@
                         <LineBreak />
                         <LineBreak />
                         <Run x:Name="TextNewVersionAvailable" FontWeight="Bold" />
-                        <LineBreak />
+                        <LineBreak />                        
                         <Run Text="Powered by .NET 6.0.2" FontWeight="Bold" />
                     </TextBlock>
                 </StackPanel>

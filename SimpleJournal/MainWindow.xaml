@@ -29,7 +29,7 @@
                 <StackPanel VerticalAlignment="Center" Grid.Column="1" Margin="10,0,0,0">
                     <TextBlock Text="{Binding Name}" FontWeight="Bold" Foreground="{DynamicResource BlackBrush}" />
                     <TextBlock Foreground="{DynamicResource BlackBrush}">
-                        <Run Text="Zuletzt geändert:" />
+                        <Run Text="{x:Static res:Resources.strRecentDocumentLastChange}" />
                         <Run Text="{Binding LastModified, StringFormat=d, ConverterCulture={x:Static gl:CultureInfo.CurrentCulture}}" />
                         <Run Text="{Binding LastModified, StringFormat=t, ConverterCulture={x:Static gl:CultureInfo.CurrentCulture}}" />
                     </TextBlock>
@@ -197,7 +197,7 @@
                             </Viewbox>
                         </controls:DropDownToggleButton.LargeIcon>
                     </controls:DropDownToggleButton>
-                    <controls:DropDownToggleButton x:Name="btnSelect" Click="btnSelect_Click" Header="{x:Static res:Resources.strSelect}" ToolTip="{x:Static res:Resources.strSelectDescription}" Width="52">
+                    <controls:DropDownToggleButton x:Name="btnSelect" Click="btnSelect_Click" ToolTip="{x:Static res:Resources.strSelectDescription}" Header="{x:Static res:Resources.strSelect}" Width="52">
                         <controls:DropDownToggleButton.LargeIcon>
                             <Viewbox Width="32" Height="32">
                                 <Image Source="pack://application:,,,/SimpleJournal;component/resources/selectarea.png"/>

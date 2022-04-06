@@ -135,7 +135,8 @@ Programmed by Andreas L.
 
 Many thanks ...
 
-... to Daniel S. and Stefan E. for the ideas/programm tests!</value>
+... to Daniel S. and Stefan E. for the ideas/programm tests!
+... to Elmo who made the dutch translation!</value>
     <comment>About.xaml</comment>
   </data>
   <data name="strAboutTextFluentRibbon_1" xml:space="preserve">
@@ -180,7 +181,7 @@ Many thanks ...
   </data>
   <data name="strAutoSaveDateTimeFileFormat" xml:space="preserve">
     <value>yyyy.MM.dd-HH.mm.ss.fff</value>
-    <comment>Window2.xaml</comment>
+    <comment>MainWindow.xaml</comment>
   </data>
   <data name="strAutoSaveDescription" xml:space="preserve">
     <value>AutoSave is a feature that always makes a backup at a predefined interval (e.g. every 5 minutes). In other words, if SimpleJournal terminates unexpectedly, you can save the document from AutoSave and load it again.</value>
@@ -216,11 +217,11 @@ Many thanks ...
   </data>
   <data name="strBackupFileCannotBeOpened" xml:space="preserve">
     <value>This journal cannot be opened because it is a backup!</value>
-    <comment>Window2.xaml.cs</comment>
+    <comment>MainWindow.xaml</comment>
   </data>
   <data name="strBackupFileCannotBeOpenedTitle" xml:space="preserve">
     <value>Backup cannot be opened!</value>
-    <comment>Window2.xaml.cs</comment>
+    <comment>MainWindow.xaml</comment>
   </data>
   <data name="strBackupOriginExplanation" xml:space="preserve">
     <value>Backups that have an origin are restored to the location of origin, for all other backups you have to choose to which folder the files should be restored!</value>
@@ -554,7 +555,7 @@ Many thanks ...
   </data>
   <data name="strFailedToLoadJournalFromNetwork" xml:space="preserve">
     <value>Error while loading the journal, make sure that the journal is located locally on your computer. No journal can be loaded from the network!</value>
-    <comment>Window2.xaml.cs</comment>
+    <comment>MainWindow.xaml</comment>
   </data>
   <data name="strFailedToLoadJournalTitle" xml:space="preserve">
     <value>Critical error!</value>
@@ -628,7 +629,7 @@ Your data will not be shared with third parties, but will only be used to give y
   </data>
   <data name="strFile" xml:space="preserve">
     <value>File</value>
-    <comment>Window2.xaml</comment>
+    <comment>MainWindow.xaml</comment>
   </data>
   <data name="strFinish" xml:space="preserve">
     <value>Finish</value>
@@ -722,7 +723,7 @@ Your data will not be shared with third parties, but will only be used to give y
     <value>Note: Please click anywhere on any page to insert the object there.
 Click on Yes to ignore this hint!
 Click on No to continue to receive this message!</value>
-    <comment>Window2.xaml.cs</comment>
+    <comment>MainWindow.xaml</comment>
   </data>
   <data name="strHintTitle" xml:space="preserve">
     <value>Hint</value>
@@ -742,7 +743,7 @@ Click on No to continue to receive this message!</value>
   </data>
   <data name="strInsertFromClipboard" xml:space="preserve">
     <value>Paste image from clipboard ...</value>
-    <comment>Window2.xaml</comment>
+    <comment>MainWindow.xaml</comment>
   </data>
   <data name="strInsertImage" xml:space="preserve">
     <value>Image</value>
@@ -782,11 +783,11 @@ Click on No to continue to receive this message!</value>
   </data>
   <data name="strJournalIsAlreadyOpened" xml:space="preserve">
     <value>This journal is already opened in another instance of SimpleJournal and therefore cannot be opened!</value>
-    <comment>Window2.xaml.cs</comment>
+    <comment>MainWindow.xaml</comment>
   </data>
   <data name="strJournalIsAlreadyOpenedTitle" xml:space="preserve">
-    <value>Dokument bereits geöffnet!</value>
-    <comment>Window2.xaml.cs</comment>
+    <value>Document already open!</value>
+    <comment>MainWindow.xaml</comment>
   </data>
   <data name="strJournalNeedsOnePageMinimum" xml:space="preserve">
     <value>There must be at least one page in the journal!</value>
@@ -1090,7 +1091,7 @@ Click on No to continue to receive this message!</value>
   </data>
   <data name="strPolygonButton" xml:space="preserve">
     <value>Polygon</value>
-    <comment>Window2.xaml</comment>
+    <comment>MainWindow.xaml</comment>
   </data>
   <data name="strPolygonToolTip" xml:space="preserve">
     <value>Draw a polygon by defining a starting point once (click). There you will get a circle, now you can add more edges, at the end an edge has to end at the starting point again to get a shape</value>
@@ -1113,7 +1114,7 @@ Click on No to continue to receive this message!</value>
   </data>
   <data name="strRecentFiles" xml:space="preserve">
     <value>Recent documents</value>
-    <comment>Window2.xaml</comment>
+    <comment>MainWindow.xaml</comment>
   </data>
   <data name="strRecognization" xml:space="preserve">
     <value>Shapes</value>
@@ -1136,7 +1137,7 @@ Click on No to continue to receive this message!</value>
     <comment>MainWindow.xaml</comment>
   </data>
   <data name="strReleaseDate" xml:space="preserve">
-    <value>03/25/2022 10:29 AM</value>
+    <value>04/06/2022 3:00 PM</value>
     <comment>About.xaml</comment>
   </data>
   <data name="strRemove" xml:space="preserve">
@@ -1578,7 +1579,7 @@ Here I would like to give you a few more important hints that will help you to u
   </data>
   <data name="strUnexceptedFailureLine1" xml:space="preserve">
     <value>SimpleJournal will now create a backup, please wait a moment. Afterwards the program will be closed!</value>
-    <comment>Window2.xaml.cs</comment>
+    <comment>MainWindow.xaml.cs</comment>
   </data>
   <data name="strUnexceptedFailureTitle" xml:space="preserve">
     <value>Unexcepted failure!</value>
@@ -1766,13 +1767,15 @@ Here I would like to give you a few more important hints that will help you to u
   </data>
   <data name="strPageManagmentButtonInsertPageBeforeIndexDotted" xml:space="preserve">
     <value>Inserts a dotted page before the current page</value>
-    <comment>*</comment>
+    <comment>PageManagmentDialog.xaml.cs</comment>
   </data>
   <data name="strPageManagmentButtonInsertPageAfterIndexDotted" xml:space="preserve">
     <value>Inserts a dotted page after the current page</value>
+    <comment>PageManagmentDialog.xaml.cs</comment>
   </data>
   <data name="strPageManagmentToggleButtonDotted" xml:space="preserve">
     <value>Changes the current page to the paper format: Dotted</value>
+    <comment>PageManagmentDialog.xaml.cs</comment>
   </data>
   <data name="strSettingsDownloadTouchDeviceManager" xml:space="preserve">
     <value>Download Touchscreen Device Manager</value>
@@ -1865,6 +1868,7 @@ Alternatively, you can use the normal version of SimpleJournal!</value>
   </data>
   <data name="strAboutTextMagickNET" xml:space="preserve">
     <value>... to</value>
+    <comment>AboutDialog.xaml</comment>
   </data>
   <data name="strInsertNewObjects" xml:space="preserve">
     <value>New Objects</value>
@@ -1974,11 +1978,11 @@ Alternatively, you can use the normal version of SimpleJournal!</value>
     <comment>SettingsDialog.xaml</comment>
   </data>
   <data name="strImportPDFFile" xml:space="preserve">
-    <value>Import PDF FIle</value>
+    <value>Import PDF Document</value>
     <comment>MainWindow.xaml</comment>
   </data>
   <data name="strPDFFile" xml:space="preserve">
-    <value>PDF File</value>
+    <value>PDF Document</value>
     <comment>*</comment>
   </data>
   <data name="strPDFConversationDialog_UseOnlineConversation" xml:space="preserve">
@@ -2018,7 +2022,7 @@ Alternatively, you can use the normal version of SimpleJournal!</value>
     <comment>PDFConversationDialog.xaml.cs</comment>
   </data>
   <data name="strFileNotFound" xml:space="preserve">
-    <value> File "{0}" not found!</value>
+    <value>File "{0}" not found!</value>
     <comment>*</comment>
   </data>
   <data name="strUseRulerCompensation" xml:space="preserve">
@@ -2054,12 +2058,8 @@ Alternatively, you can use the normal version of SimpleJournal!</value>
     <comment>UpdateDownloadDialog.xaml</comment>
   </data>
   <data name="strUpdateDownloadDialog_DownloadText" xml:space="preserve">
-    <value>Downloading SimpleJournal v</value>
-    <comment>UpdateDownloadDialog.xaml</comment>
-  </data>
-  <data name="strUpdateDownloadDialog_DownloadText2" xml:space="preserve">
-    <value>...</value>
-    <comment>UpdateDownloadDialog.xaml</comment>
+    <value>Downloading SimpleJournal v{0} ...</value>
+    <comment>UpdateDownloadDialog.xaml.cs</comment>
   </data>
   <data name="strUpdateDownloadDialog_PleaseWait" xml:space="preserve">
     <value>Please wait:</value>
@@ -2100,5 +2100,17 @@ Alternatively, you can use the normal version of SimpleJournal!</value>
   <data name="strFailedToExtractSJFileAssoc" xml:space="preserve">
     <value>Failed to extract SJFileAssoc for creating the file association: {0}</value>
     <comment>GeneralHelper.cs</comment>
+  </data>
+  <data name="strSetupSetp1_Title" xml:space="preserve">
+    <value>Step 1: General settings</value>
+    <comment>MainWindow.xaml</comment>
+  </data>
+  <data name="strSetupSetp1_Description" xml:space="preserve">
+    <value>Does your screen have HD resolution?</value>
+    <comment>MainWindow.xaml</comment>
+  </data>
+  <data name="strRecentDocumentLastChange" xml:space="preserve">
+    <value>Last change:</value>
+    <comment>MainWindow.xaml</comment>
   </data>
 </root>
