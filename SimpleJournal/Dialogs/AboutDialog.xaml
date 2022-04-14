@@ -59,7 +59,7 @@
                         <LineBreak />
                         <Run x:Name="TextNewVersionAvailable" FontWeight="Bold" />
                         <LineBreak />                        
-                        <Run Text="Powered by .NET 6.0.2" FontWeight="Bold" />
+                        <Run Text="Powered by .NET 6.0.3" FontWeight="Bold" />
                     </TextBlock>
                 </StackPanel>
             </TabItem>
