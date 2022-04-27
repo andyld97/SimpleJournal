@@ -1137,7 +1137,7 @@ Click on No to continue to receive this message!</value>
     <comment>MainWindow.xaml</comment>
   </data>
   <data name="strReleaseDate" xml:space="preserve">
-    <value>04/06/2022 3:26 PM</value>
+    <value>04/27/2022 3:00 PM</value>
     <comment>About.xaml</comment>
   </data>
   <data name="strRemove" xml:space="preserve">
@@ -2112,5 +2112,9 @@ Alternatively, you can use the normal version of SimpleJournal!</value>
   <data name="strRecentDocumentLastChange" xml:space="preserve">
     <value>Last change:</value>
     <comment>MainWindow.xaml</comment>
+  </data>
+  <data name="strPageManagmentControl_SaveError" xml:space="preserve">
+    <value>An error occurred while saving: {0}</value>
+    <comment>PageManagmentControl.xaml.cs</comment>
   </data>
 </root>

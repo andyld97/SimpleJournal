@@ -59,7 +59,7 @@
                         <LineBreak />
                         <Run x:Name="TextNewVersionAvailable" FontWeight="Bold" />
                         <LineBreak />                        
-                        <Run Text="Powered by .NET 6.0.2" FontWeight="Bold" />
+                        <Run Text="Powered by .NET 6.0.3" FontWeight="Bold" />
                     </TextBlock>
                 </StackPanel>
             </TabItem>
@@ -69,32 +69,41 @@
                 </ScrollViewer>
             </TabItem>
             <TabItem Header="{x:Static res:Resources.strFeedback}">
-                <StackPanel>
-                    <StackPanel.Resources>
-                        <Style TargetType="{x:Type TextBlock}">
-                            <Setter Property="Foreground" Value="{DynamicResource BlackBrush}" />
-                        </Style>
-                        <Style TargetType="{x:Type TextBox}">
-                            <Setter Property="Foreground" Value="{DynamicResource BlackBrush}" />
-                            <Setter Property="Background" Value="{DynamicResource WhiteBrush}" />
-                        </Style>
-                    </StackPanel.Resources>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <StackPanel>
+                        <StackPanel.Resources>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="Foreground" Value="{DynamicResource BlackBrush}" />
+                            </Style>
+                            <Style TargetType="{x:Type TextBox}">
+                                <Setter Property="Foreground" Value="{DynamicResource BlackBrush}" />
+                                <Setter Property="Background" Value="{DynamicResource WhiteBrush}" />
+                            </Style>
+                        </StackPanel.Resources>
+
+                        <TextBlock TextWrapping="Wrap" Margin="5" Text="{x:Static res:Resources.strFeedbackDescription}"/>
+
+                        <TextBlock Text="{x:Static res:Resources.strName}" Margin="5,5,0,0" FontWeight="Bold" />
+                        <TextBox x:Name="txtName" Text="Anonym" Margin="5,2,5,0" Padding="2" />
+
+                        <TextBlock Text="{x:Static res:Resources.strMail}" Margin="5,5,0,0" FontWeight="Bold" />
+                        <TextBox x:Name="txtMail" Margin="5,2,5,0" Padding="2" />
+
+                        <TextBlock Text="{x:Static res:Resources.strContent}" Margin="5,5,0,0" FontWeight="Bold" />
+                    </StackPanel>
+
+                    <TextBox Margin="5,2,5,0" Background="{DynamicResource WhiteBrush}" Foreground="{DynamicResource BlackBrush}" Grid.Row="1" Padding="2" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" x:Name="txtFeedback" AcceptsReturn="True" />
                     
-                    <TextBlock TextWrapping="Wrap" Margin="5" Text="{x:Static res:Resources.strFeedbackDescription}"/>
-                    
-                    <TextBlock Text="{x:Static res:Resources.strName}" Margin="5,5,0,0" />                    
-                    <TextBox x:Name="txtName" Text="Anonym" Margin="5,0,5,0" Padding="2" />
-                    
-                    <TextBlock Text="{x:Static res:Resources.strMail}" Margin="5,5,0,0" />                    
-                    <TextBox x:Name="txtMail" Margin="5,0,5,0" Padding="2" />
-                    
-                    <TextBlock Text="{x:Static res:Resources.strContent}" Margin="5,5,0,0" />                    
-                    <TextBox Margin="5,0,5,0" Padding="2" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" Height="200" x:Name="txtFeedback" AcceptsReturn="True"/>
-                    
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                    <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
                         <Button x:Name="btnSendFeedback" Click="btnSendFeedback_Click" Content="{x:Static res:Resources.strSend}" Padding="5" Margin="5" Width="100" FontWeight="Bold" />
                     </StackPanel>
-                </StackPanel>
+                </Grid>
             </TabItem>
         </TabControl>
     </Grid>

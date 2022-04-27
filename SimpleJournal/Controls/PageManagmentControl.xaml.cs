@@ -27,6 +27,7 @@ namespace SimpleJournal.Controls
         private double[] zoomValues = { 1.0, 1.2, 1.5, 1.8, 2.0 };
         private bool isInitalized = false;
         private bool ignoreCheckedChanged = false;
+        private int changesMade = 0;
         private ToggleButton[] toggleButtons = null;
         private static Dictionary<UIElement, string> toolTips = new Dictionary<UIElement, string>();
         private Window owner;
@@ -226,6 +227,7 @@ namespace SimpleJournal.Controls
 
                 ListViewPages.SelectedIndex = idx;
                 FocusManager.SetFocusedElement(FocusManager.GetFocusScope(ListViewPages), ListViewPages);
+                changesMade++;
             }
         }
 
@@ -241,6 +243,7 @@ namespace SimpleJournal.Controls
 
                 ListViewPages.SelectedIndex = idx + 1;
                 FocusManager.SetFocusedElement(FocusManager.GetFocusScope(ListViewPages), ListViewPages);
+                changesMade++;
             }
         }
         #endregion
@@ -320,6 +323,7 @@ namespace SimpleJournal.Controls
                     RefreshListView();
                     ListViewPages.SelectedIndex = idx;
                     FocusManager.SetFocusedElement(FocusManager.GetFocusScope(ListViewPages), ListViewPages);
+                    changesMade++;
                 }
             }
             ignoreCheckedChanged = false;
@@ -346,38 +350,55 @@ namespace SimpleJournal.Controls
 
         private void ButtonOK_Click(object sender, RoutedEventArgs e)
         {
+            if (changesMade == 0)
+            {
+                // No changes made, so just quit the dialog directly (with a false dialog result)
+                DialogClosed?.Invoke(this, false);
+                return;
+            }
             IsEnabled = false;
 
             // Convert pages to JournalPages for Result
-            List<JournalPage> resultPages = new List<JournalPage>();
-
-            foreach (var page in pages)
+            try
             {
-                JournalPage jp = null;
-                if (page is Custom pdf)
-                    jp = new PdfJournalPage { PaperPattern = PaperType.Custom, PageBackground = pdf.PageBackground };
-                else
-                    jp = new JournalPage { PaperPattern = page.Type };
+                List<JournalPage> resultPages = new List<JournalPage>();
 
-                using (MemoryStream ms = new MemoryStream())
+                foreach (var page in pages)
                 {
-                    page.Canvas.Strokes.Save(ms);
-                    jp.Data = ms.ToArray();
+                    JournalPage jp = null;
+                    if (page is Custom pdf)
+                        jp = new PdfJournalPage { PaperPattern = PaperType.Custom, PageBackground = pdf.PageBackground, Orientation = pdf.Orientation };
+                    else
+                        jp = new JournalPage { PaperPattern = page.Type };
 
-                    // Check for additional ressources
-                    if (page.Canvas.Children.Count > 0)
+                    using (MemoryStream ms = new MemoryStream())
                     {
-                        foreach (UIElement element in page.Canvas.Children)
+                        page.Canvas.Strokes.Save(ms);
+                        jp.Data = ms.ToArray();
+
+                        // Check for additional ressources
+                        if (page.Canvas.Children.Count > 0)
                         {
-                            var result = element.ConvertFromUIElement();
-                            if (result != null)
-                                jp.JournalResources.Add(result);
+                            foreach (UIElement element in page.Canvas.Children)
+                            {
+                                var result = element.ConvertFromUIElement();
+                                if (result != null)
+                                    jp.JournalResources.Add(result);
+                            }
                         }
                     }
+
+                    resultPages.Add(jp);
                 }
 
-                resultPages.Add(jp);
+
                 Result = resultPages;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(string.Format(Properties.Resources.strPageManagmentControl_SaveError, ex.Message), SharedResources.Resources.strError, MessageBoxButton.OK, MessageBoxImage.Error);
+                IsEnabled = true;
+                return;
             }
 
             IsEnabled = true;
@@ -415,12 +436,11 @@ namespace SimpleJournal.Controls
                             ListViewPages.SelectedIndex = 0;
 
                         FocusManager.SetFocusedElement(FocusManager.GetFocusScope(ListViewPages), ListViewPages);
+                        changesMade++;
                     }
                 }
                 else
-                {
                     MessageBox.Show(owner, Properties.Resources.strJournalNeedsOnePageMinimum, Properties.Resources.strJournalNeedsOnePageMinimumTitle, MessageBoxButton.OK, MessageBoxImage.Error);
-                }
             }
         }
 
@@ -438,6 +458,7 @@ namespace SimpleJournal.Controls
                     RefreshListView();
                     ListViewPages.SelectedIndex = idx;
                     FocusManager.SetFocusedElement(FocusManager.GetFocusScope(ListViewPages), ListViewPages);
+                    changesMade++;
                 }
             }
         }
@@ -455,6 +476,7 @@ namespace SimpleJournal.Controls
 
                 ListViewPages.SelectedIndex = pages.Count - 1;
                 FocusManager.SetFocusedElement(FocusManager.GetFocusScope(ListViewPages), ListViewPages);
+                changesMade++;
             }
         }
 
@@ -469,6 +491,7 @@ namespace SimpleJournal.Controls
 
                 ListViewPages.SelectedIndex = 0;
                 FocusManager.SetFocusedElement(FocusManager.GetFocusScope(ListViewPages), ListViewPages);
+                changesMade++;
             }
         }
 
@@ -485,6 +508,7 @@ namespace SimpleJournal.Controls
 
                 ListViewPages.SelectedIndex = idx - 1;
                 FocusManager.SetFocusedElement(FocusManager.GetFocusScope(ListViewPages), ListViewPages);
+                changesMade++;
             }
         }
 
@@ -498,6 +522,7 @@ namespace SimpleJournal.Controls
 
                 ListViewPages.SelectedIndex = idx + 1;
                 FocusManager.SetFocusedElement(FocusManager.GetFocusScope(ListViewPages), ListViewPages);
+                changesMade++;
             }
         }
         #endregion

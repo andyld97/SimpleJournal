@@ -275,12 +275,12 @@
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
 		<PackageReference Include="Fluent.Ribbon" Version="9.0.4" />
-		<PackageReference Include="Magick.NET-Q16-AnyCPU" Version="11.0.0" />
-		<PackageReference Include="Magick.NET.Core" Version="11.0.0" />
+		<PackageReference Include="Magick.NET-Q16-AnyCPU" Version="11.1.0" />
+		<PackageReference Include="Magick.NET.Core" Version="11.1.0" />
 		<PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
-		<PackageReference Include="Microsoft.Web.WebView2" Version="1.0.1189-prerelease" />
+		<PackageReference Include="Microsoft.Web.WebView2" Version="1.0.1222-prerelease" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-		<PackageReference Include="Microsoft.Windows.Compatibility" Version="7.0.0-preview.2.22152.2" />
+		<PackageReference Include="Microsoft.Windows.Compatibility" Version="7.0.0-preview.3.22175.4" />
 	</ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\Shared Libraries\SimpleJournal.Common\SimpleJournal.Common.csproj" />

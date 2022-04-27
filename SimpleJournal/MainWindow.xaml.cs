@@ -3392,10 +3392,15 @@ namespace SimpleJournal
                 {
                     DrawingCanvas canvas = null;
                     byte[] background = null;
-                    if (page is PdfJournalPage pdf)
-                        background = pdf.PageBackground;
+                    Orientation orientation = Orientation.Portrait;
 
-                    canvas = AddPage(GeneratePage(page.PaperPattern, background));
+                    if (page is PdfJournalPage pdf)
+                    {
+                        background = pdf.PageBackground;
+                        orientation = pdf.Orientation;
+                    }
+
+                    canvas = AddPage(GeneratePage(page.PaperPattern, background, orientation));
 
                     if (countPages == 0)
                     {

@@ -78,7 +78,7 @@ namespace SimpleJournal.Dialogs
 				if (lastSecond != now.Second)
 				{
 					// x MB of 5,5 GB (11,3 MB/s)
-					RunSpeed.Text = string.Format(Properties.Resources.strUpdateDownloadSpeedMessage, ByteUnit.Calculate(totalBytesRead), ByteUnit.Calculate(length), ByteUnit.Calculate(bytesInLastSecond).ToString(true));
+					RunSpeed.Text = string.Format(Properties.Resources.strUpdateDownloadSpeedMessage, ByteUnit.FindUnit(totalBytesRead), ByteUnit.FindUnit(length), ByteUnit.FindUnit(bytesInLastSecond).ToString(true));
 					bytesInLastSecond = 0;
 					lastSecond = now.Second;
 				}
