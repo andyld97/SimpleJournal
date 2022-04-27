@@ -98,7 +98,7 @@
                         <TextBlock Text="{x:Static res:Resources.strContent}" Margin="5,5,0,0" FontWeight="Bold" />
                     </StackPanel>
 
-                    <TextBox Margin="5,2,5,0" Grid.Row="1" Padding="2" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" x:Name="txtFeedback" AcceptsReturn="True" />
+                    <TextBox Margin="5,2,5,0" Background="{DynamicResource WhiteBrush}" Foreground="{DynamicResource BlackBrush}" Grid.Row="1" Padding="2" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" x:Name="txtFeedback" AcceptsReturn="True" />
                     
                     <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
                         <Button x:Name="btnSendFeedback" Click="btnSendFeedback_Click" Content="{x:Static res:Resources.strSend}" Padding="5" Margin="5" Width="100" FontWeight="Bold" />

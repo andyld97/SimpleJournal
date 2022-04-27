@@ -1017,7 +1017,7 @@ Klik op Nee om dit bericht te blijven ontvangen!</value>
     <value>Opnieuw</value>
   </data>
   <data name="strReleaseDate" xml:space="preserve">
-    <value>06/04/2022 15:26</value>
+    <value>27/04/2022 15:00</value>
   </data>
   <data name="strRemove" xml:space="preserve">
     <value>Verwijderen</value>
@@ -1607,5 +1607,8 @@ Hier wil ik je nog een paar belangrijke tips geven die je zullen helpen om Simpl
   </data>
   <data name="strForward" xml:space="preserve">
     <value>Opni...</value>
+  </data>
+  <data name="strPageManagmentControl_SaveError" xml:space="preserve">
+    <value>Er is een fout opgetreden tijdens het opslaan: {0}</value>
   </data>
 </root>

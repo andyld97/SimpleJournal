@@ -1118,7 +1118,7 @@ Klicken Sie auf Nein, um diesen Hinweis weiterhin zu erhalten!</value>
     <comment>MainWindow.xaml</comment>
   </data>
   <data name="strReleaseDate" xml:space="preserve">
-    <value>06.04.2022 15:26 Uhr</value>
+    <value>27.04.2022 15:00 Uhr</value>
     <comment>*</comment>
   </data>
   <data name="strRemove" xml:space="preserve">
@@ -2031,5 +2031,8 @@ Alternativ können Sie die normale Version von SimpleJournal verwenden!</value>
   </data>
   <data name="strRecentDocumentLastChange" xml:space="preserve">
     <value>Zuletzt geändert:</value>
+  </data>
+  <data name="strPageManagmentControl_SaveError" xml:space="preserve">
+    <value>Es ist ein Fehler beim Speichern aufgetreten: {0}</value>
   </data>
 </root>

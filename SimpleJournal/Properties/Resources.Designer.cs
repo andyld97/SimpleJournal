@@ -2080,6 +2080,15 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to An error occurred while saving: {0}.
+        /// </summary>
+        public static string strPageManagmentControl_SaveError {
+            get {
+                return ResourceManager.GetString("strPageManagmentControl_SaveError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Manage Pages.
         /// </summary>
         public static string strPageManagmentTitle {
@@ -2845,7 +2854,7 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 04/06/2022 3:26 PM.
+        ///   Looks up a localized string similar to 04/27/2022 3:00 PM.
         /// </summary>
         public static string strReleaseDate {
             get {
