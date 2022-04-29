@@ -23,7 +23,11 @@ namespace SimpleJournal
         public static readonly string HomePageUrl = "https://simplejournal.ca-soft.net";
         public static readonly string HelpUrl = "https://simplejournal.ca-soft.net/faq";
         public static readonly string GhostScriptDownloadUrl = "https://ghostscript.com/releases/gsdnld.html";
+#if !DEBUG
         public static readonly string ConverterAPIUrl = "http://cas-server2.ddns.net:8080";
+#else
+        public static readonly string ConverterAPIUrl = "http://127.0.0.1:5290";
+#endif
         public static readonly string Google204Url = "http://clients3.google.com/generate_204";
 
         public static readonly string UpdaterExe = "7244a3f048e82af354eb3cfa3089a3035ff8768f";
@@ -32,7 +36,7 @@ namespace SimpleJournal
         public static readonly Version StoreVersion = new Version(Strings.StoreVersion);
         public static readonly Version NormalVersion = typeof(Consts).Assembly.GetName().Version;
 
-        #region Pens
+#region Pens
         public const int AMOUNT_PENS = 4;
 
         public static Common.Data.Color[] PEN_COLORS = new Common.Data.Color[] 
@@ -44,7 +48,7 @@ namespace SimpleJournal
             new Common.Data.Color(127, 127, 127)
         };
 
-        #endregion
+#endregion
 
 
         public static readonly string WebView2CachePath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "SimpleJournal", "WebView2");
@@ -90,29 +94,29 @@ namespace SimpleJournal
         }
 #endif
 
-        #region Scrollbar
+#region Scrollbar
         public const int ScrollBarDefaultWidth = 17;
         public const int ScrollBarExtendedWidth = 30;
-        #endregion
+#endregion
 
-        #region Insert
+#region Insert
         public const double InsertImagePositionX = 200D;
         public const double InsertImagePositionY = 200D;
         public const double InsertImageWidth = 200D;
         public const double InsertImageHeight = 200D;
         public const double InsertTextWidth = 150D;
         public const double InsertTextHeight = 50D;
-        #endregion
+#endregion
 
-        #region TextMarker
+#region TextMarker
         public const double TextMarkerHeight = 30.0;
         public const double TextMarkerWidth = 20.0;
         public static readonly Color TextMarkerColor = Colors.Yellow;
-        #endregion
+#endregion
 
-        #region Sidebar
+#region Sidebar
         public const double SidebarListBoxItemHeight = 50;
         public const double SidebarListBoxItemViewboxSize = 40;
-        #endregion    
+#endregion
     }
 }
