@@ -1931,7 +1931,7 @@ Alternativ können Sie die normale Version von SimpleJournal verwenden!</value>
     <value>Wichtige Verzeichnisse</value>
   </data>
   <data name="strImportPDFFile" xml:space="preserve">
-    <value>PDF-Dokumentimportieren</value>
+    <value>PDF-Dokument importieren</value>
   </data>
   <data name="strPDFFile" xml:space="preserve">
     <value>PDF Dokument</value>

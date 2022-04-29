@@ -24,7 +24,7 @@ namespace SimpleJournal.Controls
         #region Private Members
         private List<IPaper> pages = null;
         private double scaleFactor = 1.0;
-        private double[] zoomValues = { 1.0, 1.2, 1.5, 1.8, 2.0 };
+        private double[] zoomValues = { 0.2, 0.5, 1.0, 1.2, 1.5, 1.8, 2.0 };
         private bool isInitalized = false;
         private bool ignoreCheckedChanged = false;
         private int changesMade = 0;
@@ -190,7 +190,7 @@ namespace SimpleJournal.Controls
             // Display a kind of a tooltip at the bottom, right gray bar (when hovering buttons to explain them)
             string result = toolTips[sender as UIElement];
 
-            TextInfoLabel.Text = $"{Properties.Resources.strHint}: {result}";
+            TextInfoLabel.Text = $"{Properties.Resources.strHint}: {result}!";
             TextInfoLabel.Visibility = Visibility.Visible;
         }
 

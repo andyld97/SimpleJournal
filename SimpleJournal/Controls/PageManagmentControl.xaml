@@ -14,15 +14,15 @@
             </Style>
         </Grid.Resources>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <Border Grid.Column="0" BorderBrush="Black" BorderThickness="0 0 1 0">
+        <Border Grid.Column="0" BorderBrush="LightGray" BorderThickness="0 0 2 0">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -33,8 +33,8 @@
                 <TextBlock Margin="5,5,2,2" FontSize="16" FontWeight="Bold" Grid.Row="0">
                     <Run Text="{x:Static res:Resources.strPages}"/><Run Text=":"/>
                 </TextBlock>
-                <Border Grid.Row="1" BorderBrush="Black" BorderThickness="0 0 0 1">
-                    <ListBox Background="Transparent" ItemContainerStyle="{DynamicResource _ListBoxItemStyle}" x:Name="ListViewPages" SelectionChanged="ListViewPages_SelectionChanged" Margin="5">
+                <Border Margin="5,5,0,5" Grid.Row="1" BorderBrush="LightGray" BorderThickness="0 0 0 2">
+                    <ListBox Background="Transparent" ItemContainerStyle="{DynamicResource _ListBoxItemStyle}" x:Name="ListViewPages" SelectionChanged="ListViewPages_SelectionChanged" Margin="0,5,5,5">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding .}" Foreground="{DynamicResource BlackBrush}" />
@@ -45,7 +45,6 @@
                 <Grid Grid.Row="2">
                     <StackPanel HorizontalAlignment="Left">
                         <StackPanel Orientation="Horizontal">
-                            <!--pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages-->
                             <Button x:Name="ButtonInsertPageBeforeIndexChequered" Click="ButtonInsertPageBeforeIndexChequered_Click" Height="48" Width="48" Margin="5">
                                 <Image Source="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/addchequeredpageup.png"/>
                             </Button>
@@ -109,19 +108,19 @@
             </Grid.RowDefinitions>
 
             <TextBlock x:Name="TextZoomLabel" FontWeight="Bold" Margin="5,5,2,2" FontSize="16" Grid.Row="0" Text="{x:Static res:Resources.strPageManagmentZoomLabel}"/>
-            <Border Grid.Row="1" BorderBrush="Black" BorderThickness="0 0 0 1">
-                <ScrollViewer x:Name="displayFrameScrollViewer" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                    <Border x:Name="displayFrame" Margin="5" Background="#e1e1e1" />
+            <Border Grid.Row="1" Margin="0,5,5,5" BorderBrush="LightGray" BorderThickness="0 0 0 2">
+                <ScrollViewer x:Name="displayFrameScrollViewer" Margin="5" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                    <Border x:Name="displayFrame" Background="#e1e1e1" />
                 </ScrollViewer>
             </Border>
             <Grid Grid.Row="2">
                 <Grid HorizontalAlignment="Left">
                     <StackPanel Orientation="Horizontal">
-                        <Button x:Name="btnIncreaseZoom" Click="BtnIncreaseZoom_Click" Height="48" Width="48" Margin="5">
-                            <Image Source="pack://application:,,,/SimpleJournal;component/resources/zoom.png"/>
-                        </Button>
                         <Button x:Name="btnDecreaseZoom" Click="BtnDecreaseZoom_Click" Height="48" Width="48" Margin="5">
                             <Image Source="pack://application:,,,/SimpleJournal;component/resources/zoom_out.png"/>
+                        </Button>
+                        <Button x:Name="btnIncreaseZoom" Click="BtnIncreaseZoom_Click" Height="48" Width="48" Margin="5">
+                            <Image Source="pack://application:,,,/SimpleJournal;component/resources/zoom.png"/>
                         </Button>
                     </StackPanel>
                 </Grid>

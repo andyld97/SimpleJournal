@@ -40,7 +40,8 @@ namespace SimpleJournal.Controls
         /// </summary>
         public int Value
         {
-            get => value; set
+            get => value; 
+            set
             {
                 handleTextChanged = false;
                 int oldValue = this.value;
