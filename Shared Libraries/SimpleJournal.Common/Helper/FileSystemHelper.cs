@@ -2,7 +2,6 @@
 using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace SimpleJournal.Common.Helper
 {
@@ -95,8 +94,13 @@ namespace SimpleJournal.Common.Helper
             {
                 foreach (var entry in zipArchive.Entries)
                 {
-                    // Get the target file path and the parent directory
-                    string targetPath = System.IO.Path.Combine(targetDirectoryPath, entry.FullName);
+                    // Get the target file path and the parent directory and validate it due to security issues (Zip Slip) (CWE22)
+                    string targetPath = System.IO.Path.GetFullPath(System.IO.Path.Combine(targetDirectoryPath, entry.FullName));
+                    string fullDestDirPath = System.IO.Path.GetFullPath(targetDirectoryPath + System.IO.Path.DirectorySeparatorChar);
+                   
+                    if (!targetPath.StartsWith(fullDestDirPath))
+                        throw new InvalidOperationException($"Entry is outside the target dir: {targetPath}");
+
                     string parentDirectory = System.IO.Path.GetDirectoryName(targetPath);
 
                     // Create parent directory (if it doesn't exists)
@@ -111,36 +115,6 @@ namespace SimpleJournal.Common.Helper
                     using (System.IO.FileStream stream = new System.IO.FileStream(targetPath, System.IO.FileMode.Create))
                     using (var e = entry.Open())
                         e.CopyTo(stream);
-                }
-            }
-        }
-
-        public static async Task ExtractZipFileAsync(byte[] data, string targetDirectoryPath)
-        {
-            if (!System.IO.Directory.Exists(targetDirectoryPath))
-                System.IO.Directory.CreateDirectory(targetDirectoryPath);
-
-            using (System.IO.MemoryStream ms = new System.IO.MemoryStream(data))
-            using (System.IO.Compression.ZipArchive zipArchive = new System.IO.Compression.ZipArchive(ms, System.IO.Compression.ZipArchiveMode.Read, false))
-            {
-                foreach (var entry in zipArchive.Entries)
-                {
-                    // Get the target file path and the parent directory
-                    string targetPath = System.IO.Path.Combine(targetDirectoryPath, entry.FullName);
-                    string parentDirectory = System.IO.Path.GetDirectoryName(targetPath);
-
-                    // Create parent directory (if it doesn't exists)
-                    if (!System.IO.Directory.Exists(parentDirectory))
-                        System.IO.Directory.CreateDirectory(parentDirectory);
-
-                    // Ignore empty folder entries
-                    if (string.IsNullOrEmpty(entry.Name) && entry.Length == 0)
-                        continue;
-
-                    // Write the file to disk
-                    using (System.IO.FileStream stream = new System.IO.FileStream(targetPath, System.IO.FileMode.Create))
-                    using (var e = entry.Open())
-                        await e.CopyToAsync(stream);
                 }
             }
         }

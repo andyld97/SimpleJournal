@@ -319,10 +319,17 @@ namespace SimpleJournal
            
             if (System.IO.File.Exists(execuatable))
             {
-                string fileVersion = FileVersionInfo.GetVersionInfo(execuatable).FileVersion;
+                try
+                {
+                    string fileVersion = FileVersionInfo.GetVersionInfo(execuatable).FileVersion;
 
-                if (fileVersion == "0.5.0.7")
-                    return false;
+                    if (fileVersion == "0.5.1.0")
+                        return false;
+                }
+                catch
+                {
+
+                }
             }
 
             try

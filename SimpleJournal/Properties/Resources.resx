@@ -2094,9 +2094,6 @@ Alternatively, you can use the normal version of SimpleJournal!</value>
   <data name="strSettingDefaultStretching" xml:space="preserve">
     <value>Standard stretching for inserted images:</value>
   </data>
-  <data name="SJFileAssoc" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\SJFileAssoc.zip;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="strFailedToExtractSJFileAssoc" xml:space="preserve">
     <value>Failed to extract SJFileAssoc for creating the file association: {0}</value>
     <comment>GeneralHelper.cs</comment>
@@ -2116,5 +2113,8 @@ Alternatively, you can use the normal version of SimpleJournal!</value>
   <data name="strPageManagmentControl_SaveError" xml:space="preserve">
     <value>An error occurred while saving: {0}</value>
     <comment>PageManagmentControl.xaml.cs</comment>
+  </data>
+  <data name="SJFileAssoc" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\SJFileAssoc.zip;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>
