@@ -13,6 +13,7 @@ using SimpleJournal.Documents;
 using SimpleJournal.Documents.UI.Extensions;
 using SimpleJournal.Documents.UI;
 using SimpleJournal.Documents.UI.Controls.Paper;
+using Orientation = SimpleJournal.Common.Orientation;
 
 namespace SimpleJournal.Controls
 {
@@ -199,15 +200,15 @@ namespace SimpleJournal.Controls
             TextInfoLabel.Visibility = Visibility.Hidden;
         }
 
-        private IPaper CreateEmptyTemplate(PaperType paperType)
+        private IPaper CreateEmptyTemplate(PaperType paperType, Orientation orientation)
         {
             IPaper template = null;
             switch (paperType)
             {
-                case PaperType.Blanco: template = new Blanco(); break;
-                case PaperType.Chequeued: template = new Chequered(); break;
-                case PaperType.Ruled: template = new Ruled(); break;
-                case PaperType.Dotted: template = new Dotted(); break;
+                case PaperType.Blanco: template = new Blanco(orientation); break;
+                case PaperType.Chequeued: template = new Chequered(orientation); break;
+                case PaperType.Ruled: template = new Ruled(orientation); break;
+                case PaperType.Dotted: template = new Dotted(orientation); break;
             }
 
             // Make sure canvas is non editable
@@ -215,13 +216,13 @@ namespace SimpleJournal.Controls
             return template;
         }
 
-        private void InsertPageBeforeIndex(PaperType type)
+        private void InsertPageBeforeIndex(PaperType type, Orientation orientation)
         {
             int idx = ListViewPages.SelectedIndex;
             if (idx >= 0)
             {
                 // Insert with CurrentSelectedPaperType
-                var template = CreateEmptyTemplate(type);
+                var template = CreateEmptyTemplate(type, orientation);
                 pages.Insert(idx, template);
                 RefreshListView();
 
@@ -231,13 +232,13 @@ namespace SimpleJournal.Controls
             }
         }
 
-        private void InsertPageAfterIndex(PaperType type)
+        private void InsertPageAfterIndex(PaperType type, Orientation orientation)
         {
             int idx = ListViewPages.SelectedIndex;
             if (idx >= 0)
             {
                 // Insert with CurrentSelectedPaperType
-                var template = CreateEmptyTemplate(type);
+                var template = CreateEmptyTemplate(type, orientation);
                 pages.Insert(idx + 1, template);
                 RefreshListView();
 
@@ -303,7 +304,7 @@ namespace SimpleJournal.Controls
                 if (page.Type != CurrentSelectedPaperType)
                 {
                     // Refresh page 
-                    var nPage = CreateEmptyTemplate(CurrentSelectedPaperType);
+                    var nPage = CreateEmptyTemplate(CurrentSelectedPaperType, page.Orientation);
 
                     // Move strokes
                     nPage.Canvas.Strokes = page.Canvas.Strokes.Clone();
@@ -530,44 +531,52 @@ namespace SimpleJournal.Controls
         #region InsertPageBefore
         private void ButtonInsertPageBeforeIndexChequered_Click(object sender, RoutedEventArgs e)
         {
-            InsertPageBeforeIndex(PaperType.Chequeued);
+            // ToDo: *** Add landscape drop down/selection
+            InsertPageBeforeIndex(PaperType.Chequeued, Orientation.Portrait);
         }
 
         private void ButtonInsertPageBeforeIndexDotted_Click(object sender, RoutedEventArgs e)
         {
-            InsertPageBeforeIndex(PaperType.Dotted);
+            // ToDo: *** Add landscape drop down/selection
+            InsertPageBeforeIndex(PaperType.Dotted, Orientation.Portrait);
         }
 
         private void ButtonInsertPageBeforeIndexRuled_Click(object sender, RoutedEventArgs e)
         {
-            InsertPageBeforeIndex(PaperType.Ruled);
+            // ToDo: *** Add landscape drop down/selection
+            InsertPageBeforeIndex(PaperType.Ruled, Orientation.Portrait);
         }
 
         private void ButtonInsertPageBeforeIndexBlanko_Click(object sender, RoutedEventArgs e)
         {
-            InsertPageBeforeIndex(PaperType.Blanco);
+            // ToDo: *** Add landscape drop down/selection
+            InsertPageBeforeIndex(PaperType.Blanco, Orientation.Portrait);
         }
         #endregion
 
         #region InsertPageAfter
         private void ButtonInsertPageAfterIndexBlanko_Click(object sender, RoutedEventArgs e)
         {
-            InsertPageAfterIndex(PaperType.Blanco);
+            // ToDo: *** Add landscape drop down/selection
+            InsertPageAfterIndex(PaperType.Blanco, Orientation.Portrait);
         }
 
         private void ButtonInsertPageAfterIndexDotted_Click(object sender, RoutedEventArgs e)
         {
-            InsertPageAfterIndex(PaperType.Dotted);
+            // ToDo: *** Add landscape drop down/selection
+            InsertPageAfterIndex(PaperType.Dotted, Orientation.Portrait);
         }
 
         private void ButtonInsertPageAfterIndexRuled_Click(object sender, RoutedEventArgs e)
         {
-            InsertPageAfterIndex(PaperType.Ruled);
+            // ToDo: *** Add landscape drop down/selection
+            InsertPageAfterIndex(PaperType.Ruled, Orientation.Portrait);
         }
 
         private void ButtonInsertPageAfterIndexChequered_Click(object sender, RoutedEventArgs e)
         {
-            InsertPageAfterIndex(PaperType.Chequeued);
+            // ToDo: *** Add landscape drop down/selection
+            InsertPageAfterIndex(PaperType.Chequeued, Orientation.Portrait);
         }
         #endregion
 

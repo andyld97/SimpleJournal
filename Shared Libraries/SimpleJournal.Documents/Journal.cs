@@ -259,7 +259,7 @@ namespace SimpleJournal.Documents
 
                 if (wasSavedAlready)
                 {
-                    // ToDo: ***Only update the archive and (eventually delete pages/images, add pages)
+                    // ToDo: *** Only update the archive and (eventually delete pages/images, add pages)
                     // If the file exists already and is valid zip file we do not need to re-create the entire file, but open
                     // it as as ZipArchiveMode.Update and only update the bin files
                     // But remember to ensure that if a PdfJournalPage gets deleted, we need to delete the file from the zip archive also!

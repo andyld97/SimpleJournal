@@ -12,10 +12,9 @@ namespace SimpleJournal.Common.Helper
 
         public static string GetDownloadsPath()
         {
-            string downloads;
             try
             {
-                SHGetKnownFolderPath(KnownFolder.Downloads, 0, IntPtr.Zero, out downloads);
+                SHGetKnownFolderPath(KnownFolder.Downloads, 0, IntPtr.Zero, out string downloads);
                 return downloads;
             }
             catch

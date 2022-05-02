@@ -41,6 +41,11 @@ namespace SimpleJournal.Documents
         /// </summary>
         public PaperType PaperPattern { get; set; } = PaperType.Chequeued;
 
+        /// <summary>
+        /// The page orientation (default = portrait)
+        /// </summary>
+        public Orientation Orientation { get; set; } = Orientation.Portrait;
+
         public byte[] Data
         {
             get => cache;

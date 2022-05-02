@@ -1,7 +1,7 @@
 ﻿using SimpleJournal.Common;
 using System.Windows.Controls;
-using SimpleJournal.Documents.UI.Controls;
 using SimpleJournal.Documents.UI.Helper;
+using Orientation = SimpleJournal.Common.Orientation;
 
 namespace SimpleJournal.Documents.UI.Controls.Paper
 {
@@ -10,10 +10,19 @@ namespace SimpleJournal.Documents.UI.Controls.Paper
     /// </summary>
     public partial class Dotted : UserControl, IPaper
     {
-        public Dotted()
+        public Dotted(Orientation orientation)
         {
             InitializeComponent();
+            Orientation = orientation;
+
+            if (Orientation == Common.Orientation.Landscape)
+            {
+                // Swap width and height
+                (Height, Width) = (Width, Height);
+            }
         }
+
+        public Orientation Orientation { get; set; }
 
         public Format Format => Format.A4;
 
@@ -25,7 +34,7 @@ namespace SimpleJournal.Documents.UI.Controls.Paper
 
         public IPaper ClonePage(bool isReadonly)
         {
-            Dotted dotted = new Dotted();
+            Dotted dotted = new Dotted(Orientation);
 
             if (isReadonly)
                 dotted.Canvas.EditingMode = InkCanvasEditingMode.None;

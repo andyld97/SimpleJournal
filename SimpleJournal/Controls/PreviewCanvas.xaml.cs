@@ -5,6 +5,7 @@ using SimpleJournal.Documents.UI.Helper;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Ink;
+using Orientation = SimpleJournal.Common.Orientation;
 
 namespace SimpleJournal.Controls
 {
@@ -34,14 +35,17 @@ namespace SimpleJournal.Controls
                 {
                     currentPaperType = value;
 
+                    // For preview canvas no landsacpe is required
+                    Orientation orientation = Orientation.Portrait;
+
                     // Switch canvas
                     UIElement control = null;
                     switch (currentPaperType)
                     {
-                        case PaperType.Blanco: control = new Blanco(); break;
-                        case PaperType.Chequeued: control = new Chequered(); break;
-                        case PaperType.Ruled: control = new Ruled(); break;
-                        case PaperType.Dotted: control = new Dotted(); break;
+                        case PaperType.Blanco: control = new Blanco(orientation); break;
+                        case PaperType.Chequeued: control = new Chequered(orientation); break;
+                        case PaperType.Ruled: control = new Ruled(orientation); break;
+                        case PaperType.Dotted: control = new Dotted(orientation); break;
                     }
 
                     // Debug means that this is a preview canvas and e.g. Change will not be affected

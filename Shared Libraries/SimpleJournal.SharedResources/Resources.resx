@@ -157,4 +157,12 @@
     <value>Failed to set file association: {0}</value>
     <comment>*</comment>
   </data>
+  <data name="strPortrait" xml:space="preserve">
+    <value>Portrait</value>
+    <comment>*</comment>
+  </data>
+  <data name="strLandscape" xml:space="preserve">
+    <value>Landscape</value>
+    <comment>*</comment>
+  </data>
 </root>

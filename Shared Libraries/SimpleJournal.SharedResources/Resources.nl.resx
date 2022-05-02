@@ -147,4 +147,10 @@
   <data name="strError" xml:space="preserve">
     <value>Fout!</value>
   </data>
+  <data name="strLandscape" xml:space="preserve">
+    <value>Landschap</value>
+  </data>
+  <data name="strPortrait" xml:space="preserve">
+    <value>Portret</value>
+  </data>
 </root>

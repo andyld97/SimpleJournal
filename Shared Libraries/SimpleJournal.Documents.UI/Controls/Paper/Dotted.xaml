@@ -3,8 +3,8 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:controls="clr-namespace:SimpleJournal.Documents.UI.Controls"
-             mc:Ignorable="d" 
-      Height="29.7cm" Width="21cm">
+      Height="29.7cm" Width="21cm" Background="White"
+       mc:Ignorable="d">
     <UserControl.Resources>      
         <DrawingBrush Stretch="None" TileMode="Tile" x:Key="DottetBrush" Viewport="0,0,20,20" ViewportUnits="Absolute">
             <DrawingBrush.Drawing>
@@ -22,8 +22,8 @@
         </DrawingBrush>
     </UserControl.Resources>
     <Grid>
-        <Border Background="White" UseLayoutRounding="True" SnapsToDevicePixels="True">
-            <controls:DrawingCanvas Background="{StaticResource DottetBrush}" x:Name="canvas" Height="29.7cm" Width="21cm"/>
+        <Border UseLayoutRounding="True" SnapsToDevicePixels="True">
+            <controls:DrawingCanvas Background="{StaticResource DottetBrush}" x:Name="canvas" />
         </Border>
     </Grid>
 </UserControl>

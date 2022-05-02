@@ -394,7 +394,7 @@ namespace SimpleJournal
             RecentlyOpenedDocumentsBackstage.Items.Clear();
             RecentlyOpenedDocumentsBackstage.ItemsSource = RecentlyOpenedDocuments.Instance;
 
-            int entries = RecentlyOpenedDocuments.Instance.Count();
+            int entries = RecentlyOpenedDocuments.Instance.Count;
             string text = entries > 0 ? entries.ToString() : Properties.Resources.strRecentlyOpenedDocuments_No;
 
             MenuAppRecentlyOpendedFilesCount.Text = text;
@@ -1396,10 +1396,10 @@ namespace SimpleJournal
 
             switch (paperPattern)
             {
-                case PaperType.Blanco: pageContent = new Blanco(); break;
-                case PaperType.Chequeued: pageContent = new Chequered(); break;
-                case PaperType.Ruled: pageContent = new Ruled(); break;
-                case PaperType.Dotted: pageContent = new Dotted(); break;
+                case PaperType.Blanco: pageContent = new Blanco(orientation); break;
+                case PaperType.Chequeued: pageContent = new Chequered(orientation); break;
+                case PaperType.Ruled: pageContent = new Ruled(orientation); break;
+                case PaperType.Dotted: pageContent = new Dotted(orientation); break;
                 case PaperType.Custom: pageContent = new Custom(background, orientation); break;
             }
 
@@ -1473,9 +1473,9 @@ namespace SimpleJournal
 
 
             PageSplitter pageSplitter = new PageSplitter();
-            pageSplitter.OnPageAdded += delegate (PageSplitter owner, PaperType type)
+            pageSplitter.OnPageAdded += delegate (PageSplitter owner, PaperType type, Orientation orientation)
             {
-                var newPage = GeneratePage(type);
+                var newPage = GeneratePage(type, orientation: orientation);
                 int pageIndex = pages.Children.IndexOf(elementToAdd);
 
                 // Adjust page index
@@ -2497,8 +2497,7 @@ namespace SimpleJournal
 
                 try
                 {
-                    Blanco bl = new Blanco();
-                    var pageSize = new Size(bl.Width, bl.Height);
+                    var pageSize = new Size(Documents.Consts.A4WidthP, Documents.Consts.A4HeightP);
 
                     List<IPaper> pages = new List<IPaper>();
 
@@ -2516,8 +2515,8 @@ namespace SimpleJournal
                     {
                         var ui = item.Canvas;
 
-                        if (item is Custom c && c.Orientation == Orientation.Landscape)
-                            pageSize = new Size(bl.Height, bl.Width);
+                        if (item.Orientation == Orientation.Landscape)
+                            pageSize = new Size(Documents.Consts.A4WidthL, Documents.Consts.A4HeightP);
 
                         // Create FixedPage
                         var fixedPage = new FixedPage
@@ -2545,8 +2544,8 @@ namespace SimpleJournal
 
                     xpsWriter.WritingPrintTicketRequired += (s, e) =>
                     {
-                        Orientation orientation = Orientation.Portrait;
                         var page = pages[e.Sequence - 1];
+                        Orientation orientation = page.Orientation;
 
                         if (page is Custom c)
                             orientation = c.Orientation;
@@ -3120,8 +3119,9 @@ namespace SimpleJournal
 
                         JournalPage jp = new JournalPage();
                         if (paper is Custom custom)
-                            jp = new PdfJournalPage() { PageBackground = custom.PageBackground, Orientation = custom.Orientation };
+                            jp = new PdfJournalPage() { PageBackground = custom.PageBackground };
 
+                        jp.Orientation = paper.Orientation;
                         jp.PaperPattern = paper.Type;
                         jp.Data = ms.ToArray();
 
@@ -3239,13 +3239,10 @@ namespace SimpleJournal
                     {
                         DrawingCanvas canvas = null;
                         byte[] background = null;
-                        Orientation orientation = Orientation.Portrait;
+                        Orientation orientation = jp.Orientation;
 
                         if (jp is PdfJournalPage pdf)
-                        {
                             background = pdf.PageBackground;
-                            orientation = pdf.Orientation;
-                        }
 
                         canvas = AddPage(GeneratePage(jp.PaperPattern, background, orientation));
 

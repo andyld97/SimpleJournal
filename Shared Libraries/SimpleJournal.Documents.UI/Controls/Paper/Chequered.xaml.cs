@@ -1,10 +1,8 @@
 ﻿using SimpleJournal.Common;
 using System.Windows.Controls;
-using System.Windows.Input;
 using System.Windows.Media;
-using SimpleJournal.Documents.UI;
-using SimpleJournal.Documents.UI.Controls;
 using SimpleJournal.Documents.UI.Helper;
+using Orientation = SimpleJournal.Common.Orientation;
 
 namespace SimpleJournal.Documents.UI.Controls.Paper
 {
@@ -13,9 +11,10 @@ namespace SimpleJournal.Documents.UI.Controls.Paper
     /// </summary>
     public partial class Chequered : UserControl, IPaper
     {
-        public Chequered()
+        public Chequered(Orientation orientation)
         {
             InitializeComponent();
+            Orientation = orientation;
 
             // Load the correct drawing brush for the canvas
             if (Settings.Instance.UseOldChequeredPattern)
@@ -28,8 +27,16 @@ namespace SimpleJournal.Documents.UI.Controls.Paper
                 if (FindResource("CurrentChequeredBrush") is DrawingBrush drawingBrush)
                     canvas.Background = drawingBrush;
             }
+
+            if (Orientation == Common.Orientation.Landscape)
+            {
+                // Swap width and height
+                (Height, Width) = (Width, Height);
+            }
         }
-        
+
+        public Orientation Orientation { get; set; }
+
         public Format Format => Format.A4;
 
         public PaperType Type => PaperType.Chequeued;
@@ -40,7 +47,7 @@ namespace SimpleJournal.Documents.UI.Controls.Paper
 
         public IPaper ClonePage(bool isReadonly)
         {
-            Chequered chq = new Chequered();
+            Chequered chq = new Chequered(Orientation);
 
             if (isReadonly)
                 chq.Canvas.EditingMode = InkCanvasEditingMode.None;

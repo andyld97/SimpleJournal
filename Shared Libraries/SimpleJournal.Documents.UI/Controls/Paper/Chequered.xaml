@@ -3,8 +3,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:controls="clr-namespace:SimpleJournal.Documents.UI.Controls"
-             mc:Ignorable="d" 
-      Height="29.7cm" Width="21cm">
+      mc:Ignorable="d" Height="29.7cm" Width="21cm" Background="White">
     <UserControl.Resources>
         <DrawingBrush x:Key="CurrentChequeredBrush"
                       Stretch="Fill"
@@ -49,8 +48,8 @@
         </DrawingBrush>
     </UserControl.Resources>
     <Grid>
-        <Border Background="White">
-            <controls:DrawingCanvas x:Name="canvas" Height="29.7cm" Width="21cm"/>
+        <Border>
+            <controls:DrawingCanvas x:Name="canvas" />
         </Border>
     </Grid>
 </UserControl>
