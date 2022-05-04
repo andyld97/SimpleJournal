@@ -1222,14 +1222,14 @@ namespace SimpleJournal
                 case PaperType.Dotted: resourceImageName = "adddottedpage"; break;
             }
 
+            // In case of a new PaperType is not 100% supported/implemented
+            if (string.IsNullOrEmpty(resourceImageName))
+                return;
+
             if (Settings.Instance.OrientationLastInserted == Orientation.Landscape)
                 resourceImageName += "_landscape";
 
             resourceImageName += ".png";
-
-            // In case of a new PaperType is not 100% supported/implemented
-            if (string.IsNullOrEmpty(resourceImageName))
-                return;
 
             try
             {
