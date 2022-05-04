@@ -69,6 +69,7 @@ namespace SimpleJournal.Controls
         public PageManagmentControl()
         {
             InitializeComponent();
+            ResetHoverText();
         }
 
         public void Initalize(List<IPaper> pages, Window owner)
@@ -191,15 +192,19 @@ namespace SimpleJournal.Controls
             string result = toolTips[sender as UIElement];
 
             TextInfoLabel.Text = $"{Properties.Resources.strHint}: {result}!";
-            TextInfoLabel.Visibility = Visibility.Visible;
         }
 
         private void OnMouseLeave(object sender)
         {
-            TextInfoLabel.Visibility = Visibility.Hidden;
+            ResetHoverText();
         }
 
-        private IPaper CreateEmptyTemplate(PaperType paperType, Orientation orientation)
+        private void ResetHoverText()
+        {
+            TextInfoLabel.Text = Properties.Resources.strPageManagmentDialog_HoverDefaultText;
+        }
+
+        private static IPaper CreateEmptyTemplate(PaperType paperType, Orientation orientation)
         {
             IPaper template = null;
             switch (paperType)

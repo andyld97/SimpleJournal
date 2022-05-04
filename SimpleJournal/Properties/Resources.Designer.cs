@@ -2089,6 +2089,15 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Hover the mouse over one of the buttons and the function is displayed here!.
+        /// </summary>
+        public static string strPageManagmentDialog_HoverDefaultText {
+            get {
+                return ResourceManager.GetString("strPageManagmentDialog_HoverDefaultText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Manage Pages.
         /// </summary>
         public static string strPageManagmentTitle {

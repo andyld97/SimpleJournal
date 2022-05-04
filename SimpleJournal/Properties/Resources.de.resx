@@ -2035,4 +2035,7 @@ Alternativ können Sie die normale Version von SimpleJournal verwenden!</value>
   <data name="strPageManagmentControl_SaveError" xml:space="preserve">
     <value>Es ist ein Fehler beim Speichern aufgetreten: {0}</value>
   </data>
+  <data name="strPageManagmentDialog_HoverDefaultText" xml:space="preserve">
+    <value>Fahren Sie mit der Maus über einen der Buttons und die Funktion wird hier angezeigt!</value>
+  </data>
 </root>

@@ -40,7 +40,7 @@ namespace SimpleJournal.Documents.UI.Controls
 
         private void ShowContextMenu(object sender, RoutedEventArgs e, PaperType type)
         {
-            var btn = sender as Button;
+            var btn = sender as TransparentImageButton;
             ContextMenu contextMenu = btn.ContextMenu;
             contextMenu.PlacementTarget = btn;
             contextMenu.IsOpen = true;

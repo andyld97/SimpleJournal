@@ -48,19 +48,19 @@
                             <Button x:Name="ButtonInsertPageBeforeIndexChequered" Click="ButtonInsertPageBeforeIndexChequered_Click" Height="48" Width="48" Margin="5">
                                 <Image Source="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/addchequeredpageup.png"/>
                             </Button>
-                            <Button x:Name="ButtonInsertPageBeforeIndexDotted" Click="ButtonInsertPageBeforeIndexDotted_Click" Height="48" Width="48" Margin="5">
+                            <Button x:Name="ButtonInsertPageBeforeIndexDotted" Click="ButtonInsertPageBeforeIndexDotted_Click" Height="48" Width="48" Margin="3">
                                 <Image Source="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/adddottedpageup.png"/>
                             </Button>
-                            <Button x:Name="ButtonInsertPageBeforeIndexRuled" Click="ButtonInsertPageBeforeIndexRuled_Click" Height="48" Width="48" Margin="5">
+                            <Button x:Name="ButtonInsertPageBeforeIndexRuled" Click="ButtonInsertPageBeforeIndexRuled_Click" Height="48" Width="48" Margin="3">
                                 <Image Source="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/addruledpageup.png"/>
                             </Button>
-                            <Button x:Name="ButtonInsertPageBeforeIndexBlanko" Click="ButtonInsertPageBeforeIndexBlanko_Click" Height="48" Width="48" Margin="5">
+                            <Button x:Name="ButtonInsertPageBeforeIndexBlanko" Click="ButtonInsertPageBeforeIndexBlanko_Click" Height="48" Width="48" Margin="3">
                                 <Image Source="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/addblancopageup.png"/>
                             </Button>
-                            <Button x:Name="ButtonMovePageUp" Click="ButtonMovePageUp_Click" Height="48" Width="48" Margin="5">
+                            <Button x:Name="ButtonMovePageUp" Click="ButtonMovePageUp_Click" Height="48" Width="48" Margin="3">
                                 <Image Source="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/pageup.png"/>
                             </Button>
-                            <Button x:Name="ButtonInsertTop" Click="ButtonInsertTop_Click"  Height="48" Width="48" Margin="5">
+                            <Button x:Name="ButtonInsertTop" Click="ButtonInsertTop_Click"  Height="48" Width="48" Margin="3">
                                 <Image Source="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/pagetop.png"/>
                             </Button>
                         </StackPanel>
@@ -68,24 +68,24 @@
                             <Button x:Name="ButtonInsertPageAfterIndexChequered" Click="ButtonInsertPageAfterIndexChequered_Click" Height="48" Width="48" Margin="5">
                                 <Image Source="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/addchequeredpagedown.png"/>
                             </Button>
-                            <Button x:Name="ButtonInsertPageAfterIndexDotted" Click="ButtonInsertPageAfterIndexDotted_Click" Height="48" Width="48" Margin="5">
+                            <Button x:Name="ButtonInsertPageAfterIndexDotted" Click="ButtonInsertPageAfterIndexDotted_Click" Height="48" Width="48" Margin="3">
                                 <Image Source="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/adddottedpagedown.png"/>
                             </Button>
-                            <Button x:Name="ButtonInsertPageAfterIndexRuled" Click="ButtonInsertPageAfterIndexRuled_Click" Height="48" Width="48" Margin="5">
+                            <Button x:Name="ButtonInsertPageAfterIndexRuled" Click="ButtonInsertPageAfterIndexRuled_Click" Height="48" Width="48" Margin="3">
                                 <Image Source="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/addruledpagedown.png"/>
                             </Button>
-                            <Button x:Name="ButtonInsertPageAfterIndexBlanko" Click="ButtonInsertPageAfterIndexBlanko_Click" Height="48" Width="48" Margin="5">
+                            <Button x:Name="ButtonInsertPageAfterIndexBlanko" Click="ButtonInsertPageAfterIndexBlanko_Click" Height="48" Width="48" Margin="3">
                                 <Image Source="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/addblancopagedown.png"/>
                             </Button>
-                            <Button x:Name="ButtonMovePageDown" Click="ButtonMovePageDown_Click" Height="48" Width="48" Margin="5">
+                            <Button x:Name="ButtonMovePageDown" Click="ButtonMovePageDown_Click" Height="48" Width="48" Margin="3">
                                 <Image Source="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/pagedown.png"/>
                             </Button>
-                            <Button x:Name="ButtonInsertDown" Click="ButtonInsertDown_Click" Height="48" Width="48" Margin="5">
+                            <Button x:Name="ButtonInsertDown" Click="ButtonInsertDown_Click" Height="48" Width="48" Margin="3">
                                 <Image Source="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/pagebottom.png"/>
                             </Button>
                         </StackPanel>
                     </StackPanel>
-                    <StackPanel HorizontalAlignment="Right">
+                    <StackPanel HorizontalAlignment="Right" Margin="0,0,1,0">
                         <StackPanel Orientation="Horizontal">
                             <Button x:Name="ButtonClearPage" Click="ButtonClearPage_Click"  Height="48" Width="48" Margin="5">
                                 <Image Source="pack://application:,,,/SimpleJournal;component/resources/clear.png"/>
@@ -116,7 +116,7 @@
             <Grid Grid.Row="2">
                 <Grid HorizontalAlignment="Left">
                     <StackPanel Orientation="Horizontal">
-                        <Button x:Name="btnDecreaseZoom" Click="BtnDecreaseZoom_Click" Height="48" Width="48" Margin="5">
+                        <Button x:Name="btnDecreaseZoom" Click="BtnDecreaseZoom_Click" Height="48" Width="48" Margin="3">
                             <Image Source="pack://application:,,,/SimpleJournal;component/resources/zoom_out.png"/>
                         </Button>
                         <Button x:Name="btnIncreaseZoom" Click="BtnIncreaseZoom_Click" Height="48" Width="48" Margin="5">
@@ -143,15 +143,17 @@
             </Grid>
         </Grid>
         <Grid Grid.Row="2" Grid.ColumnSpan="3" Background="DarkGray">
-            <Border HorizontalAlignment="Right">
-                <StackPanel Orientation="Horizontal">
-                    <Button x:Name="ButtonOK" Click="ButtonOK_Click" Margin="5" Width="100" Height="30" FontWeight="Bold" Content="{x:Static res:Resources.strOK}"/>
-                    <Button x:Name="ButtonCancel" Click="ButtonCancel_Click" Margin="5" Width="100" Height="30" Content="{x:Static res:Resources.strCancel}"/>
-                </StackPanel>
-            </Border>
-            <Grid HorizontalAlignment="Left">
-                <TextBlock x:Name="TextInfoLabel" Visibility="Hidden" Margin="5,2,2,2" Foreground="DimGray" FontSize="16" FontWeight="Bold" VerticalAlignment="Center" Text="Info: Mit diesem Button leeren Sie die Seite"/>
-            </Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <TextBlock x:Name="TextInfoLabel" ToolTip="{Binding ElementName=TextInfoLabel, Path=Text}" Visibility="Visible" Margin="5,2,2,2" Foreground="DimGray" FontSize="16" FontWeight="Bold" VerticalAlignment="Center" Text="Info: Mit diesem Button leeren Sie die Seite" TextTrimming="CharacterEllipsis"/>
+            
+            <StackPanel Orientation="Horizontal" Grid.Column="1">
+                <Button x:Name="ButtonOK" Click="ButtonOK_Click" Margin="5" Width="100" Height="30" FontWeight="Bold" Content="{x:Static res:Resources.strOK}"/>
+                <Button x:Name="ButtonCancel" Click="ButtonCancel_Click" Margin="5" Width="100" Height="30" Content="{x:Static res:Resources.strCancel}"/>
+            </StackPanel>
         </Grid>
     </Grid>
 </UserControl>

@@ -1611,4 +1611,7 @@ Hier wil ik je nog een paar belangrijke tips geven die je zullen helpen om Simpl
   <data name="strPageManagmentControl_SaveError" xml:space="preserve">
     <value>Er is een fout opgetreden tijdens het opslaan: {0}</value>
   </data>
+  <data name="strPageManagmentDialog_HoverDefaultText" xml:space="preserve">
+    <value>Beweeg de muis over een van de knoppen en de functie wordt hier weergegeven!</value>
+  </data>
 </root>

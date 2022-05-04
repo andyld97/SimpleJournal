@@ -2117,4 +2117,8 @@ Alternatively, you can use the normal version of SimpleJournal!</value>
   <data name="SJFileAssoc" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\SJFileAssoc.zip;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="strPageManagmentDialog_HoverDefaultText" xml:space="preserve">
+    <value>Hover the mouse over one of the buttons and the function is displayed here!</value>
+    <comment>PageManagmentDialog.xaml.cs</comment>
+  </data>
 </root>
