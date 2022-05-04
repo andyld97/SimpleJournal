@@ -433,9 +433,9 @@ namespace SimpleJournal
         {
             RefreshPages();
         }
-#endregion
+        #endregion
 
-#region AutoSave - Backup
+        #region AutoSave - Backup
 
         private string lastBackupFileName = string.Empty;
 
@@ -622,9 +622,9 @@ namespace SimpleJournal
             }
         }
 
-#endregion
+        #endregion
 
-#region Error Handling
+        #region Error Handling
 
         // ToDO: *** https://github.com/Tyrrrz/DotnetRuntimeBootstrapper/issues/23
         // Related:  https://github.com/Tyrrrz/DotnetRuntimeBootstrapper/issues/27
@@ -663,7 +663,7 @@ namespace SimpleJournal
         }
 #endregion
 
-#region Determine which Canvas is the last modifed while scrolling
+        #region Determine which Canvas is the last modifed while scrolling
 
         private void mainScrollView_ScrollChanged(object sender, ScrollChangedEventArgs e)
         {
@@ -717,7 +717,7 @@ namespace SimpleJournal
         }
 #endregion
 
-#region Sidebar Handling
+        #region Sidebar Handling
 
         public bool IsSideBarVisible => pnlSidebar.IsVisible;
 
@@ -1115,7 +1115,7 @@ namespace SimpleJournal
 
 #endregion
 
-#region Private Methods
+        #region Private Methods
 
         public void UpdateTextMarkerAttributes(bool reset = false)
         {
@@ -1202,9 +1202,9 @@ namespace SimpleJournal
             penTemplates[3].LoadPen(currentPens[3]);
         }
 
-        private void AddNewPage(PaperType paperType)
+        private void AddNewPage(PaperType paperType, Orientation orientation)
         {
-            AddPage(GeneratePage(paperType));
+            AddPage(GeneratePage(paperType, orientation: orientation));
             RefreshInsertIcon();
             ScrollToPage(CurrentJournalPages.Count - 1);
             DrawingCanvas.Change = true;
@@ -1216,11 +1216,16 @@ namespace SimpleJournal
             // Switch icon to paperType
             switch (Settings.Instance.PaperTypeLastInserted)
             {
-                case PaperType.Blanco: resourceImageName = "addblankopage.png"; break;
-                case PaperType.Chequeued: resourceImageName = "addchequeredpage.png"; break;
-                case PaperType.Ruled: resourceImageName = "addruledpage.png"; break;
-                case PaperType.Dotted: resourceImageName = "adddotted.png"; break;
+                case PaperType.Blanco: resourceImageName = "addblankopage"; break;
+                case PaperType.Chequeued: resourceImageName = "addchequeredpage"; break;
+                case PaperType.Ruled: resourceImageName = "addruledpage"; break;
+                case PaperType.Dotted: resourceImageName = "adddottedpage"; break;
             }
+
+            if (Settings.Instance.OrientationLastInserted == Orientation.Landscape)
+                resourceImageName += "_landscape";
+
+            resourceImageName += ".png";
 
             // In case of a new PaperType is not 100% supported/implemented
             if (string.IsNullOrEmpty(resourceImageName))
@@ -1236,9 +1241,9 @@ namespace SimpleJournal
             }
         }
 
-        private void AddPageDropDownTemplate_AddPage(PaperType paperType)
+        private void AddPageDropDownTemplate_AddPage(PaperType paperType, Orientation orientation)
         {
-            AddNewPage(paperType);
+            AddNewPage(paperType, orientation);
             DrawingCanvas.Change = true;
         }
 
@@ -1796,9 +1801,9 @@ namespace SimpleJournal
         }
 #endregion
 
-#region Toolbar Handling / Private Event Handling
+        #region Toolbar Handling / Private Event Handling
 
-#region Tool Handling
+        #region Tool Handling
 
         private InkCanvasEditingMode ConvertTool(Tools tool)
         {
@@ -2182,9 +2187,9 @@ namespace SimpleJournal
 
 #endregion
 
-#region Event Handling / Menu
+        #region Event Handling / Menu
 
-#region Commands
+        #region Commands
 
         private void DisableTouchScreenCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
@@ -2612,7 +2617,7 @@ namespace SimpleJournal
 
         private void BtnInsertNewPage_Click(object sender, EventArgs e)
         {
-            AddNewPage(Settings.Instance.PaperTypeLastInserted);
+            AddNewPage(Settings.Instance.PaperTypeLastInserted, Settings.Instance.OrientationLastInserted);
         }
 
         private bool AskForOpeningAfterModifying()
@@ -2934,9 +2939,9 @@ namespace SimpleJournal
 
 #endregion
 
-#endregion
+        #endregion
 
-#region Zoom
+        #region Zoom
 
         private void ZoomByScale(double scale)
         {
@@ -3000,7 +3005,7 @@ namespace SimpleJournal
         }
 #endregion
 
-#region Scroll Handling
+        #region Scroll Handling
         private Point p1 = new Point();
         private readonly Stopwatch timer = new Stopwatch();
         private Storyboard sbScrollViewerAnimation = new Storyboard();
@@ -3087,7 +3092,7 @@ namespace SimpleJournal
 
 #endregion
 
-#region Internal Save and Load
+        #region Internal Save and Load
         private async Task<bool> SaveJournal(string path, bool saveAsBackup = false)
         {
             try
@@ -3370,7 +3375,7 @@ namespace SimpleJournal
 
 #endregion
 
-#region Pagemanagment Dialog
+        #region Pagemanagment Dialog
 
         private async Task ApplyPageManagmentDialog(List<JournalPage> result)
         {
@@ -3394,13 +3399,10 @@ namespace SimpleJournal
                 {
                     DrawingCanvas canvas = null;
                     byte[] background = null;
-                    Orientation orientation = Orientation.Portrait;
+                    Orientation orientation = page.Orientation;
 
                     if (page is PdfJournalPage pdf)
-                    {
                         background = pdf.PageBackground;
-                        orientation = pdf.Orientation;
-                    }
 
                     canvas = AddPage(GeneratePage(page.PaperPattern, background, orientation));
 
@@ -3485,7 +3487,7 @@ namespace SimpleJournal
     
 #endregion
 
-#region Export
+        #region Export
 
         private void btnExport_Click(object sender, RoutedEventArgs e)
         {
@@ -3501,9 +3503,9 @@ namespace SimpleJournal
             ExportControl.Initalize(CurrentJournalPages, CurrentJournalPages[cmbPages.SelectedIndex], this);
         }
 
-#endregion
+        #endregion
 
-#region Copy / Paste
+        #region Copy / Paste
         private Clipboard clipboard = new Clipboard();
         private bool waitingForClickToPaste = false;
         private Tools pasteBackupTool = Tools.Pencil1;
@@ -3601,7 +3603,7 @@ namespace SimpleJournal
 
 #endregion
 
-#region Insert
+        #region Insert
 
         private UIElement insertClipboard = null;
 #pragma warning disable IDE0052 // Ungelesene private Member entfernen
@@ -3744,7 +3746,7 @@ namespace SimpleJournal
 
 #endregion
 
-#region Background
+        #region Background
 
         public void ApplyBackground()
         {
@@ -3790,9 +3792,9 @@ namespace SimpleJournal
                 mainScrollView.Background = Consts.DefaultBackground;
             }
         }
-#endregion
+        #endregion
 
-#region General Events / Touch
+        #region General Events / Touch
 
         private void RibbonWindow_Activated(object sender, EventArgs e)
         {
@@ -3834,11 +3836,10 @@ namespace SimpleJournal
 #endif
         }
 
-#endregion
+        #endregion
     }
 
-#region Converters
-
+    #region Converter
     public class SelectedIndexToColumnSpanConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)

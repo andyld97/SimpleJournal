@@ -1,9 +1,9 @@
-﻿using SimpleJournal.Data;
-using SimpleJournal.Common;
+﻿using SimpleJournal.Common;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using SimpleJournal.Documents.UI;
+using Orientation = SimpleJournal.Common.Orientation;
 
 namespace SimpleJournal.Controls.Templates
 {
@@ -12,7 +12,7 @@ namespace SimpleJournal.Controls.Templates
     /// </summary>
     public partial class AddPageDropDownTemplate : DropDownTemplate
     {
-        public delegate void addPage(PaperType paperType);
+        public delegate void addPage(PaperType paperType, Orientation orientation);
         public event addPage AddPage;
 
         public AddPageDropDownTemplate()
@@ -30,24 +30,39 @@ namespace SimpleJournal.Controls.Templates
             else if (Settings.Instance.PaperTypeLastInserted == PaperType.Ruled) index = 2;
             else index = 3;
 
-            ListBoxPageType.SelectedIndex = index;
+            if (Settings.Instance.OrientationLastInserted == Orientation.Portrait)
+                ListBoxPageType.SelectedIndex = index;
+            else
+                ListBoxPageTypeLandsacpe.SelectedIndex = index;
         }
 
         private void ListBoxPageType_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
-            if (e.LeftButton == MouseButtonState.Pressed)
+            if (e.LeftButton == MouseButtonState.Pressed && ItemsControl.ContainerFromElement(sender as ListBox, e.OriginalSource as DependencyObject) is ListBoxItem item)
             {
-                if (ItemsControl.ContainerFromElement(sender as ListBox, e.OriginalSource as DependencyObject) is ListBoxItem item)
-                {
-                    int index = ListBoxPageType.Items.IndexOf(item);
+                int index = ListBoxPageType.Items.IndexOf(item);
 
-                    if (index >= 0)
-                        Run(index);
-                }
+                ListBoxPageTypeLandsacpe.UnselectAll();
+
+                if (index >= 0)
+                    RaiseAddPage(index, Orientation.Portrait);
             }
         }
 
-        private void Run(int index)
+        private void ListBoxPageTypeLandsacpe_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed && ItemsControl.ContainerFromElement(sender as ListBox, e.OriginalSource as DependencyObject) is ListBoxItem item)
+            {
+                int index = ListBoxPageTypeLandsacpe.Items.IndexOf(item);
+
+                ListBoxPageType.UnselectAll();
+
+                if (index >= 0)
+                    RaiseAddPage(index, Orientation.Landscape);
+            }
+        }
+
+        private void RaiseAddPage(int index, Orientation orientation)
         {
             switch (index)
             {
@@ -56,10 +71,11 @@ namespace SimpleJournal.Controls.Templates
                 case 2: Settings.Instance.PaperTypeLastInserted = PaperType.Ruled; break;
                 case 3: Settings.Instance.PaperTypeLastInserted = PaperType.Blanco; break;
             }
+            Settings.Instance.OrientationLastInserted = orientation;
             Settings.Instance.Save();
 
             CloseDropDown();
-            AddPage?.Invoke(Settings.Instance.PaperTypeLastInserted);
+            AddPage?.Invoke(Settings.Instance.PaperTypeLastInserted, orientation);
         }
     }
 }

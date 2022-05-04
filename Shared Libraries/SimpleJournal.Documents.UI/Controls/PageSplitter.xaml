@@ -19,13 +19,13 @@
                     <Image Source="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/addchequeredpage.png"/>
                 </Button>
                 <Button x:Name="ButtonDotted" Click="ButtonDotted_Click"  Width="48" Height="48" Margin="5,0,0,0" ToolTip="{x:Static res:Resources.strDottet}" ContextMenu="{StaticResource menu}">
-                    <Image Source="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/adddotted.png"/>
+                    <Image Source="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/adddottedpage.png"/>
                 </Button>
                 <Button x:Name="ButtonRuled" Click="ButtonRuled_Click" Width="48" Height="48" Margin="5,0,0,0" ToolTip="{x:Static res:Resources.strRuled}" ContextMenu="{StaticResource menu}">
                     <Image Source="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/addruledpage.png"/>
                 </Button>
                 <Button x:Name="ButtonBlanko" Click="ButtonBlanko_Click" Width="48" Height="48" Margin="5,0,0,0" ToolTip="{x:Static res:Resources.strPlain}" ContextMenu="{StaticResource menu}">
-                    <Image Source="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/addblankopage.png"/>
+                    <Image Source="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/addblancopage.png"/>
                 </Button>
             </StackPanel>
         </Grid>

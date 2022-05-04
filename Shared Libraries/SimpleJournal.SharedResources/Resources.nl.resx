@@ -148,9 +148,9 @@
     <value>Fout!</value>
   </data>
   <data name="strLandscape" xml:space="preserve">
-    <value>Landschap</value>
+    <value>Liggend</value>
   </data>
   <data name="strPortrait" xml:space="preserve">
-    <value>Portret</value>
+    <value>Staand</value>
   </data>
 </root>

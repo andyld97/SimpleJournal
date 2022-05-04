@@ -1,5 +1,4 @@
-﻿using SimpleJournal.Data;
-using SimpleJournal.Common;
+﻿using SimpleJournal.Common;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -164,7 +163,7 @@ namespace SimpleJournal.Controls
 
             int pageCount = 0;
             foreach (var page in pages)
-                ListViewPages.Items.Add($"{Properties.Resources.strPage} {++pageCount}");
+                ListViewPages.Items.Add($"{Properties.Resources.strPage} {++pageCount} ({(page.Orientation == Orientation.Portrait ? SharedResources.Resources.strPortrait : SharedResources.Resources.strLandscape)})");
         }
 
         private void ZoomByScale(double scale)
@@ -370,7 +369,7 @@ namespace SimpleJournal.Controls
                     if (page is Custom pdf)
                         jp = new PdfJournalPage { PaperPattern = PaperType.Custom, PageBackground = pdf.PageBackground, Orientation = pdf.Orientation };
                     else
-                        jp = new JournalPage { PaperPattern = page.Type };
+                        jp = new JournalPage { PaperPattern = page.Type, Orientation = page.Orientation };
 
                     using (MemoryStream ms = new MemoryStream())
                     {
@@ -391,7 +390,6 @@ namespace SimpleJournal.Controls
 
                     resultPages.Add(jp);
                 }
-
 
                 Result = resultPages;
             }

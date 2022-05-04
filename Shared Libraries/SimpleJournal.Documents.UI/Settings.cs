@@ -43,6 +43,11 @@ namespace SimpleJournal.Documents.UI
         public PaperType PaperTypeLastInserted { get; set; } = PaperType.Chequeued;
 
         /// <summary>
+        /// Determine the orientation which was used while inserting a page
+        /// </summary>
+        public Orientation OrientationLastInserted { get; set; } = Orientation.Portrait;
+
+        /// <summary>
         /// Determines the format of the paper. Currently only A4 is supported
         /// </summary>
         public Format PaperFormat { get; set; } = Format.A4;

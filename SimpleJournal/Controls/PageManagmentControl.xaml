@@ -51,11 +51,11 @@
                             <Button x:Name="ButtonInsertPageBeforeIndexDotted" Click="ButtonInsertPageBeforeIndexDotted_Click" Height="48" Width="48" Margin="5">
                                 <Image Source="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/adddottedpageup.png"/>
                             </Button>
-                            <Button x:Name="ButtonInsertPageBeforeIndexRuled" Click="ButtonInsertPageBeforeIndexRuled_Click"  Height="48" Width="48" Margin="5">
+                            <Button x:Name="ButtonInsertPageBeforeIndexRuled" Click="ButtonInsertPageBeforeIndexRuled_Click" Height="48" Width="48" Margin="5">
                                 <Image Source="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/addruledpageup.png"/>
                             </Button>
-                            <Button x:Name="ButtonInsertPageBeforeIndexBlanko" Click="ButtonInsertPageBeforeIndexBlanko_Click"  Height="48" Width="48" Margin="5">
-                                <Image Source="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/addblankopageup.png"/>
+                            <Button x:Name="ButtonInsertPageBeforeIndexBlanko" Click="ButtonInsertPageBeforeIndexBlanko_Click" Height="48" Width="48" Margin="5">
+                                <Image Source="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/addblancopageup.png"/>
                             </Button>
                             <Button x:Name="ButtonMovePageUp" Click="ButtonMovePageUp_Click" Height="48" Width="48" Margin="5">
                                 <Image Source="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/pageup.png"/>
@@ -68,14 +68,14 @@
                             <Button x:Name="ButtonInsertPageAfterIndexChequered" Click="ButtonInsertPageAfterIndexChequered_Click" Height="48" Width="48" Margin="5">
                                 <Image Source="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/addchequeredpagedown.png"/>
                             </Button>
-                            <Button x:Name="ButtonInsertPageAfterIndexDotted" Click="ButtonInsertPageAfterIndexDotted_Click"  Height="48" Width="48" Margin="5">
+                            <Button x:Name="ButtonInsertPageAfterIndexDotted" Click="ButtonInsertPageAfterIndexDotted_Click" Height="48" Width="48" Margin="5">
                                 <Image Source="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/adddottedpagedown.png"/>
                             </Button>
-                            <Button x:Name="ButtonInsertPageAfterIndexRuled" Click="ButtonInsertPageAfterIndexRuled_Click"  Height="48" Width="48" Margin="5">
+                            <Button x:Name="ButtonInsertPageAfterIndexRuled" Click="ButtonInsertPageAfterIndexRuled_Click" Height="48" Width="48" Margin="5">
                                 <Image Source="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/addruledpagedown.png"/>
                             </Button>
-                            <Button x:Name="ButtonInsertPageAfterIndexBlanko" Click="ButtonInsertPageAfterIndexBlanko_Click"  Height="48" Width="48" Margin="5">
-                                <Image Source="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/addblankopagedown.png"/>
+                            <Button x:Name="ButtonInsertPageAfterIndexBlanko" Click="ButtonInsertPageAfterIndexBlanko_Click" Height="48" Width="48" Margin="5">
+                                <Image Source="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/addblancopagedown.png"/>
                             </Button>
                             <Button x:Name="ButtonMovePageDown" Click="ButtonMovePageDown_Click" Height="48" Width="48" Margin="5">
                                 <Image Source="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/pagedown.png"/>
