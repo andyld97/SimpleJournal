@@ -1216,7 +1216,7 @@ namespace SimpleJournal
             // Switch icon to paperType
             switch (Settings.Instance.PaperTypeLastInserted)
             {
-                case PaperType.Blanco: resourceImageName = "addblankopage"; break;
+                case PaperType.Blanco: resourceImageName = "addblancopage"; break;
                 case PaperType.Chequeued: resourceImageName = "addchequeredpage"; break;
                 case PaperType.Ruled: resourceImageName = "addruledpage"; break;
                 case PaperType.Dotted: resourceImageName = "adddottedpage"; break;
@@ -3057,6 +3057,10 @@ namespace SimpleJournal
         {
             foreach (UIElement uIElement in collection)
             {
+                // Prevent PageSplitter from triggering scrolling event!
+                if (uIElement is PageSplitter prg && prg.BoundsRelativeTo(pages).Contains(ps))
+                    return true;
+
                 if (uIElement is UserControl p && p is IPaper ip)
                 {
                     var bounds = ip.Canvas.BoundsRelativeTo(pages);

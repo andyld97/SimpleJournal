@@ -1,5 +1,5 @@
 ﻿using SimpleJournal.Documents.UI.Extensions;
-using System.Windows;
+using System.Collections.Generic;
 using System.Windows.Media;
 
 namespace SimpleJournal.Controls.Templates
@@ -30,14 +30,35 @@ namespace SimpleJournal.Controls.Templates
             PenSize.SetTextMarker();
         }
 
+        private int FindIndex(List<Common.Data.Size> list, Common.Data.Size size)
+        {
+            int index = 0;
+            bool notFound = true;
+            foreach (var item in list)
+            {
+                if (item.Width == size.Width && item.Height == size.Height)
+                {
+                    notFound = false;
+                    break;
+                }
+                else
+                    index += 1;
+            }
+
+            if (notFound)
+                return -1;
+
+            return index;
+        }
+
         public void LoadPen(Data.Pen p)
         {
             int index;
 
             if (isTextMarker)
-                index = Documents.UI.Consts.TextMarkerSizes.IndexOf(new Common.Data.Size(p.Width, p.Height));
+                index = FindIndex(Documents.UI.Consts.TextMarkerSizes, new Common.Data.Size(p.Width, p.Height));
             else
-                index = Documents.UI.Consts.StrokeSizes.IndexOf(new Common.Data.Size(p.Width, p.Height));
+                index = FindIndex(Documents.UI.Consts.StrokeSizes, new Common.Data.Size(p.Width, p.Height));
 
             PenSize.SetColor(p.FontColor.ToColor());
             PenSize.SetIndex(index);

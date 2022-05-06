@@ -5,45 +5,38 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SimpleJournal.Controls.Templates"
              xmlns:res="clr-namespace:SimpleJournal.SharedResources;assembly=SimpleJournal.SharedResources"
-             mc:Ignorable="d" Width="150" BorderBrush="Black" BorderThickness="0.8">
+             mc:Ignorable="d" Width="143" BorderBrush="Black" BorderThickness="0.8">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <ListBox x:Name="ListBoxPageType" Background="{DynamicResource WhiteBrush}" ItemContainerStyle="{DynamicResource ListBoxSelectionHoldActiveContainerStyle}" HorizontalContentAlignment="Center" PreviewMouseDown="ListBoxPageType_PreviewMouseDown">
-            <ListBox.Items>
-                <ListBoxItem ToolTip="{x:Static res:Resources.strChequered}">
-                    <Image Source="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/addchequeredpage.png" Width="48" Height="48" Margin="5" />
-                </ListBoxItem>
-                <ListBoxItem ToolTip="{x:Static res:Resources.strDottet}">
-                    <Image Source="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/adddottedpage.png" Width="48" Height="48" Margin="5" />
-                </ListBoxItem>
-                <ListBoxItem ToolTip="{x:Static res:Resources.strRuled}">
-                    <Image Source="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/addruledpage.png" Width="48" Height="48" Margin="5" />
-                </ListBoxItem>
-                <ListBoxItem ToolTip="{x:Static res:Resources.strPlain}">
-                    <Image Source="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/addblancopage.png" Width="48" Height="48" Margin="5" />
-                </ListBoxItem>
-            </ListBox.Items>
-        </ListBox>
-
-        <ListBox x:Name="ListBoxPageTypeLandsacpe" Background="{DynamicResource WhiteBrush}" Grid.Column="1" ItemContainerStyle="{DynamicResource ListBoxSelectionHoldActiveContainerStyle}" HorizontalContentAlignment="Center" PreviewMouseDown="ListBoxPageTypeLandsacpe_PreviewMouseDown">
-            <ListBox.Items>
-                <ListBoxItem ToolTip="{x:Static res:Resources.strChequered}">
-                    <Image Source="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/addchequeredpage_landscape.png" Width="48" Height="48" Margin="5" />
-                </ListBoxItem>
-                <ListBoxItem ToolTip="{x:Static res:Resources.strDottet}">
-                    <Image Source="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/adddottedpage_landscape.png" Width="48" Height="48" Margin="5" />
-                </ListBoxItem>
-                <ListBoxItem ToolTip="{x:Static res:Resources.strRuled}">
-                    <Image Source="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/addruledpage_landscape.png" Width="48" Height="48" Margin="5" />
-                </ListBoxItem>
-                <ListBoxItem ToolTip="{x:Static res:Resources.strPlain}">
-                    <Image Source="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/addblancopage_landscape.png" Width="48" Height="48" Margin="5 "/>
-                </ListBoxItem>
-            </ListBox.Items>
-        </ListBox>
+        <ListView x:Name="ListViewAddPages" SelectionChanged="ListViewAddPages_SelectionChanged" Grid.Column="0" Grid.ColumnSpan="2"  Background="{DynamicResource WhiteBrush}">
+            <ListView.Resources>
+                <Style TargetType="{x:Type Image}">
+                    <Setter Property="Width" Value="48" />
+                    <Setter Property="Height" Value="48"  />
+                    <Setter Property="Margin" Value="5" />
+                    <Setter Property="RenderOptions.BitmapScalingMode" Value="Fant" />
+                </Style>
+            </ListView.Resources>
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <!-- MinWidth="{Binding ItemWidth, RelativeSource={RelativeSource Self}}" ItemHeight="{Binding (ListView.View).ItemHeight, RelativeSource={RelativeSource AncestorType=ListView}}" -->
+                    <WrapPanel Width="{Binding (FrameworkElement.ActualWidth), RelativeSource={RelativeSource AncestorType=ScrollContentPresenter}}" ItemWidth="{Binding (ListView.View).ItemWidth, RelativeSource={RelativeSource AncestorType=ListView}}" IsItemsHost="True" />
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+            <ListView.Items>
+                <Image Source="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/addchequeredpage.png" ToolTip="{x:Static res:Resources.strChequered}" />
+                <Image Source="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/addchequeredpage_landscape.png" ToolTip="{x:Static res:Resources.strChequered}" />
+                <Image Source="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/adddottedpage.png" ToolTip="{x:Static res:Resources.strDottet}" />
+                <Image Source="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/adddottedpage_landscape.png" ToolTip="{x:Static res:Resources.strDottet}" />
+                <Image Source="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/addruledpage.png" ToolTip="{x:Static res:Resources.strRuled}" />
+                <Image Source="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/addruledpage_landscape.png" ToolTip="{x:Static res:Resources.strRuled}"  />
+                <Image Source="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/addblancopage.png" ToolTip="{x:Static res:Resources.strPlain}" />
+                <Image Source="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/addblancopage_landscape.png" ToolTip="{x:Static res:Resources.strPlain}"  />
+            </ListView.Items>
+        </ListView>
     </Grid>
 </local:DropDownTemplate>

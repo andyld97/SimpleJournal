@@ -1,7 +1,6 @@
 ﻿using SimpleJournal.Common;
 using SimpleJournal.Common.Data;
 using System.Linq;
-using System.Windows;
 using Size = SimpleJournal.Common.Data.Size;
 
 namespace SimpleJournal.Data

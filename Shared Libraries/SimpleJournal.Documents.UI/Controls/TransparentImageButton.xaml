@@ -9,7 +9,7 @@
     <UserControl.Background>
         <SolidColorBrush Opacity="0.6" Color="White" />
     </UserControl.Background>
-    <Grid>
-        <Image Source="{Binding Image}" Cursor="Hand" Margin="2" MouseDown="Image_MouseDown"  MouseMove="Image_MouseMove"/>
+    <Grid Background="Transparent">
+        <Image Source="{Binding Image}" RenderOptions.BitmapScalingMode="Fant" Cursor="Hand" Margin="2" MouseDown="Image_MouseDown" />
     </Grid>
 </UserControl>
