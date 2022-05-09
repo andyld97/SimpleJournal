@@ -13,6 +13,9 @@ using SimpleJournal.Documents.UI.Extensions;
 using SimpleJournal.Documents.UI;
 using SimpleJournal.Documents.UI.Controls.Paper;
 using Orientation = SimpleJournal.Common.Orientation;
+using System.Windows.Data;
+using System.Globalization;
+using SimpleJournal.Documents.UI.Helper;
 
 namespace SimpleJournal.Controls
 {
@@ -20,7 +23,7 @@ namespace SimpleJournal.Controls
     /// Interaction logic for PageManagmentControl.xaml
     /// </summary>
     public partial class PageManagmentControl : UserControl, IDialog
-    {  
+    {
         #region Private Members
         private List<IPaper> pages = null;
         private double scaleFactor = 1.0;
@@ -50,7 +53,7 @@ namespace SimpleJournal.Controls
                 if (ToggleButtonBlanko.IsChecked.Value)
                     return PaperType.Blanco;
                 else if (ToggleButtonChequered.IsChecked.Value)
-                    return PaperType.Chequeued;
+                    return PaperType.Chequered;
                 else if (ToggleButtonDotted.IsChecked.Value)
                     return PaperType.Dotted;
 
@@ -83,7 +86,7 @@ namespace SimpleJournal.Controls
             switch (Settings.Instance.PaperType)
             {
                 case PaperType.Blanco: ToggleButtonBlanko.IsChecked = true; break;
-                case PaperType.Chequeued: ToggleButtonChequered.IsChecked = true; break;
+                case PaperType.Chequered: ToggleButtonChequered.IsChecked = true; break;
                 case PaperType.Ruled: ToggleButtonRuled.IsChecked = true; break;
                 case PaperType.Dotted: ToggleButtonDotted.IsChecked = true; break;
             }
@@ -101,8 +104,8 @@ namespace SimpleJournal.Controls
                 ToggleButtonDotted,
                 btnIncreaseZoom,
                 btnDecreaseZoom,
-                ButtonClearPage,
                 ButtonDeletePage,
+                ButtonRotatePage,
 
                 ButtonInsertPageBeforeIndexChequered,
                 ButtonInsertPageBeforeIndexDotted,
@@ -129,7 +132,6 @@ namespace SimpleJournal.Controls
                 { ToggleButtonDotted, Properties.Resources.strPageManagmentToggleButtonDotted },
                 { btnIncreaseZoom, Properties.Resources.strPageManagmentButtonIncreaseZoom },
                 { btnDecreaseZoom, Properties.Resources.strPageManagmentButtonDecreaseZoom },
-                { ButtonClearPage, Properties.Resources.strPageManagmentButtonClearPage },
                 { ButtonDeletePage, Properties.Resources.strPageManagmentButtonDeletePage },
                 { ButtonInsertPageBeforeIndexChequered, Properties.Resources.strPageManagmentButtonInsertPageBeforeIndexChequered },
                 { ButtonInsertPageBeforeIndexDotted, Properties.Resources.strPageManagmentButtonInsertPageBeforeIndexDotted },
@@ -143,6 +145,7 @@ namespace SimpleJournal.Controls
                 { ButtonMovePageDown, Properties.Resources.strPageManagmentButtonMovePageDown },
                 { ButtonInsertTop, Properties.Resources.strPageManagmentButtonInsertTop },
                 { ButtonInsertDown, Properties.Resources.strPageManagmentButtonInsertBottom },
+                { ButtonRotatePage, Properties.Resources.strPageManagmentDialogButtonRotatePage}
             };
 
             // Add events for buttons (tooltip)
@@ -160,11 +163,8 @@ namespace SimpleJournal.Controls
         #region Private Methods
         private void RefreshListView()
         {
-            ListViewPages.Items.Clear();
-
-            int pageCount = 0;
-            foreach (var page in pages)
-                ListViewPages.Items.Add($"{Properties.Resources.strPage} {++pageCount} ({(page.Orientation == Orientation.Portrait ? SharedResources.Resources.strPortrait : SharedResources.Resources.strLandscape)})");
+            ListViewPages.ItemsSource = null;
+            ListViewPages.ItemsSource = pages;
         }
 
         private void ZoomByScale(double scale)
@@ -210,7 +210,7 @@ namespace SimpleJournal.Controls
             switch (paperType)
             {
                 case PaperType.Blanco: template = new Blanco(orientation); break;
-                case PaperType.Chequeued: template = new Chequered(orientation); break;
+                case PaperType.Chequered: template = new Chequered(orientation); break;
                 case PaperType.Ruled: template = new Ruled(orientation); break;
                 case PaperType.Dotted: template = new Dotted(orientation); break;
             }
@@ -272,7 +272,7 @@ namespace SimpleJournal.Controls
                 switch (template.Type)
                 {
                     case PaperType.Blanco: tb = ToggleButtonBlanko; break;
-                    case PaperType.Chequeued: tb = ToggleButtonChequered; break;
+                    case PaperType.Chequered: tb = ToggleButtonChequered; break;
                     case PaperType.Ruled: tb = ToggleButtonRuled; break;
                     case PaperType.Dotted: tb = ToggleButtonDotted; break;
                 }
@@ -418,7 +418,7 @@ namespace SimpleJournal.Controls
 
         #region Delete/Clear Page
 
-        private void ButtonDeletePage_Click(object sender, RoutedEventArgs e)
+        private void DeletePage()
         {
             int idx = ListViewPages.SelectedIndex;
             if (idx >= 0)
@@ -448,7 +448,7 @@ namespace SimpleJournal.Controls
             }
         }
 
-        private void ButtonClearPage_Click(object sender, RoutedEventArgs e)
+        private void ClearPage()
         {
             int idx = ListViewPages.SelectedIndex;
             if (idx >= 0)
@@ -466,7 +466,46 @@ namespace SimpleJournal.Controls
                 }
             }
         }
+
+        private void ButtonDeletePage_Click(object sender, RoutedEventArgs e)
+        {
+            if (ListViewPages.SelectedItem == null)
+                return;
+
+            ShowContextMenu(sender, e);
+        }
+
+        private void MenuButtonDeletePage_Click(object sender, RoutedEventArgs e)
+        {
+            DeletePage();
+        }
+
+        private void MenuButtonClearPage_Click(object sender, RoutedEventArgs e)
+        {
+            ClearPage();
+        }
+
         #endregion
+
+        private void ShowContextMenu(object sender, RoutedEventArgs e, PaperType type, bool before)
+        {
+            var btn = sender as FrameworkElement;
+            ContextMenu contextMenu = btn.ContextMenu;
+            contextMenu.PlacementTarget = btn;
+            contextMenu.IsOpen = true;
+            contextMenu.Tag = (type, before);
+            e.Handled = true;
+        }
+
+        private void ShowContextMenu(object sender, RoutedEventArgs e)
+        {
+            var btn = sender as FrameworkElement;
+            ContextMenu contextMenu = btn.ContextMenu;
+            contextMenu.PlacementTarget = btn;
+            contextMenu.IsOpen = true;
+            e.Handled = true;
+        }
+
 
         #region Insert Top/Down
         private void ButtonInsertDown_Click(object sender, RoutedEventArgs e)
@@ -534,55 +573,133 @@ namespace SimpleJournal.Controls
         #region InsertPageBefore
         private void ButtonInsertPageBeforeIndexChequered_Click(object sender, RoutedEventArgs e)
         {
-            // ToDo: *** Add landscape drop down/selection
-            InsertPageBeforeIndex(PaperType.Chequeued, Orientation.Portrait);
+            ShowContextMenu(sender, e, PaperType.Chequered, true);
         }
 
         private void ButtonInsertPageBeforeIndexDotted_Click(object sender, RoutedEventArgs e)
         {
-            // ToDo: *** Add landscape drop down/selection
-            InsertPageBeforeIndex(PaperType.Dotted, Orientation.Portrait);
+            ShowContextMenu(sender, e, PaperType.Dotted, true);
         }
 
         private void ButtonInsertPageBeforeIndexRuled_Click(object sender, RoutedEventArgs e)
         {
-            // ToDo: *** Add landscape drop down/selection
-            InsertPageBeforeIndex(PaperType.Ruled, Orientation.Portrait);
+            ShowContextMenu(sender, e, PaperType.Ruled, true);
         }
 
         private void ButtonInsertPageBeforeIndexBlanko_Click(object sender, RoutedEventArgs e)
         {
-            // ToDo: *** Add landscape drop down/selection
-            InsertPageBeforeIndex(PaperType.Blanco, Orientation.Portrait);
+            ShowContextMenu(sender, e, PaperType.Blanco, true);
         }
         #endregion
 
         #region InsertPageAfter
         private void ButtonInsertPageAfterIndexBlanko_Click(object sender, RoutedEventArgs e)
         {
-            // ToDo: *** Add landscape drop down/selection
-            InsertPageAfterIndex(PaperType.Blanco, Orientation.Portrait);
+            ShowContextMenu(sender, e, PaperType.Blanco, false);
         }
 
         private void ButtonInsertPageAfterIndexDotted_Click(object sender, RoutedEventArgs e)
         {
-            // ToDo: *** Add landscape drop down/selection
-            InsertPageAfterIndex(PaperType.Dotted, Orientation.Portrait);
+            ShowContextMenu(sender, e, PaperType.Dotted, false);
         }
 
         private void ButtonInsertPageAfterIndexRuled_Click(object sender, RoutedEventArgs e)
         {
-            // ToDo: *** Add landscape drop down/selection
-            InsertPageAfterIndex(PaperType.Ruled, Orientation.Portrait);
+            ShowContextMenu(sender, e, PaperType.Ruled, false);
         }
 
         private void ButtonInsertPageAfterIndexChequered_Click(object sender, RoutedEventArgs e)
         {
-            // ToDo: *** Add landscape drop down/selection
-            InsertPageAfterIndex(PaperType.Chequeued, Orientation.Portrait);
+            ShowContextMenu(sender, e, PaperType.Chequered, false);
         }
         #endregion
 
+        private void MenuButtonPortrait_Click(object sender, RoutedEventArgs e)
+        {
+            HandleMenuButtonClick(sender, Orientation.Portrait);
+        }
+
+        private void MenuButtonLandscape_Click(object sender, RoutedEventArgs e)
+        {
+            HandleMenuButtonClick(sender, Orientation.Landscape);
+        }
+
+        private void HandleMenuButtonClick(object sender, Orientation orientation)
+        {
+            if (sender is MenuItem rm && rm.Parent is ContextMenu cm && cm.Tag is (PaperType pt, bool before))
+            {
+                if (before)
+                    InsertPageBeforeIndex(pt, orientation);
+                else
+                    InsertPageAfterIndex(pt, orientation);
+            }
+        }
+
         #endregion
+
+        private void ButtonRotatePage_Click(object sender, RoutedEventArgs e)
+        {
+            int index = ListViewPages.SelectedIndex;
+
+            if (index == -1)
+                return;
+
+            if (MessageBox.Show(Properties.Resources.strPageManagmentDialog_RotatePage_Message, Properties.Resources.strPageManagmentDialog_RotatePage_Title, MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.No)
+                return;
+
+            var pg = pages[index];
+            if (pg.Orientation == Orientation.Portrait)
+                pg.Orientation = Orientation.Landscape;
+            else
+                pg.Orientation = Orientation.Portrait;
+
+            RefreshListView();
+            ListViewPages.SelectedIndex = index;
+            changesMade++;
+        }
     }
+
+    #region Converter
+
+    public class PageToImageConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value is IPaper jp)
+            {                
+                string icon = jp.Type.ToString().ToLower();
+
+                if (jp.Orientation == Orientation.Landscape)
+                    icon += "_landscape";
+
+                icon += ".png";
+
+                return ImageHelper.LoadImage(new Uri($"pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/{icon}"));
+            }
+
+            return null;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public class PageToTextConverter : IMultiValueConverter
+    {
+        public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (values.Length >= 2 && values[0] is IPaper paper && values[1] is ItemCollection ic)
+                return System.Convert.ToString(ic.IndexOf(paper) + 1);
+
+            return "0";
+        }
+
+        public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+    #endregion
 }

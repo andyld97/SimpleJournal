@@ -24,7 +24,7 @@ namespace SimpleJournal.Controls.Templates
             base.OnDropDownOpened();
 
             int index;
-            if (Settings.Instance.PaperTypeLastInserted == PaperType.Chequeued) index = 0;
+            if (Settings.Instance.PaperTypeLastInserted == PaperType.Chequered) index = 0;
             else if (Settings.Instance.PaperTypeLastInserted == PaperType.Dotted) index = 2;
             else if (Settings.Instance.PaperTypeLastInserted == PaperType.Ruled) index = 4;
             else index = 6;
@@ -59,9 +59,9 @@ namespace SimpleJournal.Controls.Templates
             // 6|7
 
             Orientation orientation = (index % 2 == 0 ? Orientation.Portrait : Orientation.Landscape);
-            PaperType paperType = PaperType.Chequeued;
+            PaperType paperType = PaperType.Chequered;
 
-            if (index == 0 || index == 1) paperType = PaperType.Chequeued;
+            if (index == 0 || index == 1) paperType = PaperType.Chequered;
             if (index == 2 || index == 3) paperType = PaperType.Dotted;
             if (index == 4 || index == 5) paperType = PaperType.Ruled;
             if (index == 6 || index == 7) paperType = PaperType.Blanco;

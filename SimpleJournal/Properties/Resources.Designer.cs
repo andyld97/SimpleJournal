@@ -1936,15 +1936,6 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Clears the currently selected page.
-        /// </summary>
-        public static string strPageManagmentButtonClearPage {
-            get {
-                return ResourceManager.GetString("strPageManagmentButtonClearPage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Decreases the zoom factor of the preview.
         /// </summary>
         public static string strPageManagmentButtonDecreaseZoom {
@@ -1954,7 +1945,7 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Deletes the currently selected page.
+        ///   Looks up a localized string similar to Clears or deletes the currently selected page, depending on the selection.
         /// </summary>
         public static string strPageManagmentButtonDeletePage {
             get {
@@ -2089,11 +2080,56 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Clear Page.
+        /// </summary>
+        public static string strPageManagmentDialog_ClearPage {
+            get {
+                return ResourceManager.GetString("strPageManagmentDialog_ClearPage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete Page.
+        /// </summary>
+        public static string strPageManagmentDialog_DeletePage {
+            get {
+                return ResourceManager.GetString("strPageManagmentDialog_DeletePage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Hover the mouse over one of the buttons and the function is displayed here!.
         /// </summary>
         public static string strPageManagmentDialog_HoverDefaultText {
             get {
                 return ResourceManager.GetString("strPageManagmentDialog_HoverDefaultText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Do you really want to rotate this page?\nIf there is already drawing on the page, all drawings are moved!.
+        /// </summary>
+        public static string strPageManagmentDialog_RotatePage_Message {
+            get {
+                return ResourceManager.GetString("strPageManagmentDialog_RotatePage_Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rotate Page?.
+        /// </summary>
+        public static string strPageManagmentDialog_RotatePage_Title {
+            get {
+                return ResourceManager.GetString("strPageManagmentDialog_RotatePage_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rotates the page (change from portrait to landscape or landscape to portrait).
+        /// </summary>
+        public static string strPageManagmentDialogButtonRotatePage {
+            get {
+                return ResourceManager.GetString("strPageManagmentDialogButtonRotatePage", resourceCulture);
             }
         }
         

@@ -20,7 +20,7 @@ namespace SimpleJournal.Documents.UI.Controls
 
         private void ButtonChequered_Click(object sender, RoutedEventArgs e)
         {
-            ShowContextMenu(sender, e, PaperType.Chequeued);
+            ShowContextMenu(sender, e, PaperType.Chequered);
         }
 
         private void ButtonRuled_Click(object sender, RoutedEventArgs e)

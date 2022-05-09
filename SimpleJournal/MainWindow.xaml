@@ -234,11 +234,11 @@
                 <Fluent:RibbonGroupBox x:Name="GroupPages" Header="{x:Static res:Resources.strPages}" KeyTip="S">
                     <controls:DropDownToggleButton x:Name="btnInsertNewPage" Click="BtnInsertNewPage_Click" Header="{x:Static res:Resources.strAddPage}" ToolTip="{x:Static res:Resources.strAddPageTooltip}" IsToggleable="False" Width="65">
                         <controls:DropDownToggleButton.LargeIcon>
-                            <Image x:Name="ButtonInsertNewPageIcon" Width="32" Height="32" Source="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/pageadd.png" />
+                           <Image x:Name="ButtonInsertNewPageIcon" RenderOptions.BitmapScalingMode="Fant" Width="32" Height="32" Source="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/pageadd.png" />
                         </controls:DropDownToggleButton.LargeIcon>
                     </controls:DropDownToggleButton>
                     <controls:FluentToggleButtonRemovedToggle x:Name="btnDeletePage" Click="btnDeletePage_Click" Header="{x:Static res:Resources.strDeletePage}" ToolTip="{x:Static res:Resources.strDeletePageTooltip}" Width="55" LargeIcon="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/pagedelete.png"/>
-                    <controls:FluentToggleButtonRemovedToggle x:Name="btnClearPage" Click="btnClearPage_Click" Header="{x:Static res:Resources.strClearPage}" ToolTip="{x:Static res:Resources.strClearPageTooltip}" Width="55" LargeIcon="pack://application:,,,/SimpleJournal;component/resources/clear.png"/>
+                    <controls:FluentToggleButtonRemovedToggle x:Name="btnClearPage" Click="btnClearPage_Click" Header="{x:Static res:Resources.strClearPage}" ToolTip="{x:Static res:Resources.strClearPageTooltip}" Width="55" LargeIcon="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/blanco.png"/>
                     <controls:FluentToggleButtonRemovedToggle x:Name="btnManagePages" Click="btnManagePages_Click" Header="{x:Static res:Resources.strManagePage}" ToolTip="{x:Static res:Resources.strManagePageTooltip}" Width="60" LargeIcon="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/editpage.png"/>
 
                     <!-- Make some space for the ComboBox-->

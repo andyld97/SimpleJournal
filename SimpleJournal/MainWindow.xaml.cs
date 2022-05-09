@@ -1217,7 +1217,7 @@ namespace SimpleJournal
             switch (Settings.Instance.PaperTypeLastInserted)
             {
                 case PaperType.Blanco: resourceImageName = "addblancopage"; break;
-                case PaperType.Chequeued: resourceImageName = "addchequeredpage"; break;
+                case PaperType.Chequered: resourceImageName = "addchequeredpage"; break;
                 case PaperType.Ruled: resourceImageName = "addruledpage"; break;
                 case PaperType.Dotted: resourceImageName = "adddottedpage"; break;
             }
@@ -1402,7 +1402,7 @@ namespace SimpleJournal
             switch (paperPattern)
             {
                 case PaperType.Blanco: pageContent = new Blanco(orientation); break;
-                case PaperType.Chequeued: pageContent = new Chequered(orientation); break;
+                case PaperType.Chequered: pageContent = new Chequered(orientation); break;
                 case PaperType.Ruled: pageContent = new Ruled(orientation); break;
                 case PaperType.Dotted: pageContent = new Dotted(orientation); break;
                 case PaperType.Custom: pageContent = new Custom(background, orientation); break;

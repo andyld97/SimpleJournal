@@ -877,16 +877,12 @@ Klicken Sie auf Nein, um diesen Hinweis weiterhin zu erhalten!</value>
     <value>Seite</value>
     <comment>MainWindow.xaml.cs</comment>
   </data>
-  <data name="strPageManagmentButtonClearPage" xml:space="preserve">
-    <value>Leert die aktuell ausgewählte Seite</value>
-    <comment>PageManagmentDialog.xaml.cs</comment>
-  </data>
   <data name="strPageManagmentButtonDecreaseZoom" xml:space="preserve">
     <value>Verringert den Zoom-Faktor der Vorschau</value>
     <comment>PageManagmentDialog.xaml.cs</comment>
   </data>
   <data name="strPageManagmentButtonDeletePage" xml:space="preserve">
-    <value>Löscht die aktuell ausgewählte Seite</value>
+    <value>Leert oder löscht die aktuell ausgewählte Seite, je nach Auswahl</value>
     <comment>PageManagmentDialog.xaml.cs</comment>
   </data>
   <data name="strPageManagmentButtonIncreaseZoom" xml:space="preserve">
@@ -2037,5 +2033,20 @@ Alternativ können Sie die normale Version von SimpleJournal verwenden!</value>
   </data>
   <data name="strPageManagmentDialog_HoverDefaultText" xml:space="preserve">
     <value>Fahren Sie mit der Maus über einen der Buttons und die Funktion wird hier angezeigt!</value>
+  </data>
+  <data name="strPageManagmentDialogButtonRotatePage" xml:space="preserve">
+    <value>Dreht die Seite (Wechsel von Hochformat zu Querformat oder Querformat zu Hochformat)</value>
+  </data>
+  <data name="strPageManagmentDialog_ClearPage" xml:space="preserve">
+    <value>Seite leeren</value>
+  </data>
+  <data name="strPageManagmentDialog_DeletePage" xml:space="preserve">
+    <value>Seite löschen</value>
+  </data>
+  <data name="strPageManagmentDialog_RotatePage_Message" xml:space="preserve">
+    <value>Möchten Sie diese Seite wirklich drehen?\nWenn schon auf der Seite gezeichnet wurde, sind alle Zeichnungen verschoben!</value>
+  </data>
+  <data name="strPageManagmentDialog_RotatePage_Title" xml:space="preserve">
+    <value>Seite drehen?</value>
   </data>
 </root>

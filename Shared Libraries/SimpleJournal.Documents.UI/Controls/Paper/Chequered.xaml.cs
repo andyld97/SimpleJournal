@@ -39,7 +39,7 @@ namespace SimpleJournal.Documents.UI.Controls.Paper
 
         public Format Format => Format.A4;
 
-        public PaperType Type => PaperType.Chequeued;
+        public PaperType Type => PaperType.Chequered;
 
         public DrawingCanvas Canvas => canvas;
 

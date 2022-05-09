@@ -35,12 +35,12 @@ namespace SimpleJournal.Documents.UI
         /// <summary>
         /// Determine the type of the paper.
         /// </summary>
-        public PaperType PaperType { get; set; } = PaperType.Chequeued;
+        public PaperType PaperType { get; set; } = PaperType.Chequered;
 
         /// <summary>
         /// Determine the type of the paper which was used while inserting a page
         /// </summary>
-        public PaperType PaperTypeLastInserted { get; set; } = PaperType.Chequeued;
+        public PaperType PaperTypeLastInserted { get; set; } = PaperType.Chequered;
 
         /// <summary>
         /// Determine the orientation which was used while inserting a page

@@ -43,7 +43,7 @@ namespace SimpleJournal.Controls
                     switch (currentPaperType)
                     {
                         case PaperType.Blanco: control = new Blanco(orientation); break;
-                        case PaperType.Chequeued: control = new Chequered(orientation); break;
+                        case PaperType.Chequered: control = new Chequered(orientation); break;
                         case PaperType.Ruled: control = new Ruled(orientation); break;
                         case PaperType.Dotted: control = new Dotted(orientation); break;
                     }
