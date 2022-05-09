@@ -25,6 +25,7 @@
 		<UseWindowsForms>true</UseWindowsForms>
 		<UseWPF>true</UseWPF>
 		<PublishReadyToRun>true</PublishReadyToRun>
+		<EmbeddedResourceUseDependentUponConvention>true</EmbeddedResourceUseDependentUponConvention>
 		<ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
 		<Configurations>Debug;Release;UWPNew;Normal</Configurations>
 		<MSBuildWarningsAsMessages>NU1702</MSBuildWarningsAsMessages>
@@ -278,7 +279,7 @@
 		<PackageReference Include="Magick.NET-Q16-AnyCPU" Version="11.1.0" />
 		<PackageReference Include="Magick.NET.Core" Version="11.1.0" />
 		<PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
-		<PackageReference Include="Microsoft.Web.WebView2" Version="1.0.1222-prerelease" />
+		<PackageReference Include="Microsoft.Web.WebView2" Version="1.0.1248-prerelease" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
 		<PackageReference Include="Microsoft.Windows.Compatibility" Version="7.0.0-preview.3.22175.4" />
 	</ItemGroup>
@@ -298,14 +299,17 @@
 	</ItemGroup>
 	<ItemGroup>
 		<EmbeddedResource Update="Properties\Resources.de.resx">
-			<Generator>PublicResXFileCodeGenerator</Generator>
+		  <Generator>PublicResXFileCodeGenerator</Generator>
+		  <CustomToolNamespace></CustomToolNamespace>
 		</EmbeddedResource>
 		<EmbeddedResource Update="Properties\Resources.nl.resx">
 		  <Generator>PublicResXFileCodeGenerator</Generator>
+		  <CustomToolNamespace></CustomToolNamespace>
 		</EmbeddedResource>
 		<EmbeddedResource Update="Properties\Resources.resx">
 			<Generator>PublicResXFileCodeGenerator</Generator>
 			<LastGenOutput>Resources.Designer.cs</LastGenOutput>
+			<CustomToolNamespace></CustomToolNamespace>
 		</EmbeddedResource>
 	</ItemGroup>
 	<Target Name="PostPublish" AfterTargets="Publish">

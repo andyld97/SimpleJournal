@@ -2107,7 +2107,8 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Do you really want to rotate this page?\nIf there is already drawing on the page, all drawings are moved!.
+        ///   Looks up a localized string similar to Do you really want to rotate this page?
+        ///If there is already drawing on the page, all drawings are moved!.
         /// </summary>
         public static string strPageManagmentDialog_RotatePage_Message {
             get {

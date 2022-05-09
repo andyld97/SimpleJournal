@@ -107,7 +107,11 @@ namespace SimpleJournal.Documents
 
                     }
 
-                    var result = Serialization.Read<Journal>(path, Serialization.Mode.XML);
+                    string xmlData = await System.IO.File.ReadAllTextAsync(path);
+                    // Correct old documents misspelled pattern!
+                    xmlData = xmlData.Replace("<PaperPattern>Chequeued</PaperPattern>", "<PaperPattern>Chequered</PaperPattern>");
+
+                    var result = Serialization.Read<Journal>(xmlData, Serialization.Mode.XML);
                     if (result != null)
                         return result;
                 }

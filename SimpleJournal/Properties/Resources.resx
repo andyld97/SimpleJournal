@@ -2130,7 +2130,8 @@ Alternatively, you can use the normal version of SimpleJournal!</value>
     <comment>PageManamgentDialog.xaml</comment>
   </data>
   <data name="strPageManagmentDialog_RotatePage_Message" xml:space="preserve">
-    <value>Do you really want to rotate this page?\nIf there is already drawing on the page, all drawings are moved!</value>
+    <value>Do you really want to rotate this page?
+If there is already drawing on the page, all drawings are moved!</value>
     <comment>PageManagmentDialog.xaml.cs</comment>
   </data>
   <data name="strPageManagmentDialog_RotatePage_Title" xml:space="preserve">

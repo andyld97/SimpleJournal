@@ -2044,7 +2044,8 @@ Alternativ können Sie die normale Version von SimpleJournal verwenden!</value>
     <value>Seite löschen</value>
   </data>
   <data name="strPageManagmentDialog_RotatePage_Message" xml:space="preserve">
-    <value>Möchten Sie diese Seite wirklich drehen?\nWenn schon auf der Seite gezeichnet wurde, sind alle Zeichnungen verschoben!</value>
+    <value>Möchten Sie diese Seite wirklich drehen?
+Wenn schon auf der Seite gezeichnet wurde, sind alle Zeichnungen verschoben!</value>
   </data>
   <data name="strPageManagmentDialog_RotatePage_Title" xml:space="preserve">
     <value>Seite drehen?</value>

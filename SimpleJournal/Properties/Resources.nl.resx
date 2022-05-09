@@ -1623,4 +1623,8 @@ Hier wil ik je nog een paar belangrijke tips geven die je zullen helpen om Simpl
   <data name="strPageManagmentDialog_RotatePage_Title" xml:space="preserve">
     <value>Bladzijde omslaan?</value>
   </data>
+  <data name="strPageManagmentDialog_RotatePage_Message" xml:space="preserve">
+    <value>Wilt u deze pagina echt roteren?
+Als er al een tekening op de pagina staat, worden alle tekeningen verplaatst!</value>
+  </data>
 </root>
