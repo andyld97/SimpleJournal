@@ -3,24 +3,23 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:res="clr-namespace:SimpleJournal.SharedResources;assembly=SimpleJournal.SharedResources"
+             xmlns:res="clr-namespace:SimpleJournal.SharedResources;assembly=SimpleJournal.SharedResources" xmlns:controls="clr-namespace:SimpleJournal.Documents.UI.Controls"
              mc:Ignorable="d" 
-             d:DesignHeight="75" d:DesignWidth="800">
+             HorizontalAlignment="Center"
+             d:DesignHeight="75" d:DesignWidth="220" Background="Transparent">
+    <UserControl.Resources>
+        <ContextMenu x:Key="menu">
+            <MenuItem x:Name="MenuButtonPortrait" Click="MenuButtonPortrait_Click" Header="{x:Static res:Resources.strPortrait}" />
+            <MenuItem x:Name="MenuButtonLandscape" Click="MenuButtonLandscape_Click" Header="{x:Static res:Resources.strLandscape}" />
+        </ContextMenu>
+    </UserControl.Resources>
     <Border Height="75">
-        <Grid HorizontalAlignment="Center">
+        <Grid Background="Transparent">
             <StackPanel Orientation="Horizontal">
-                <Button x:Name="ButtonChequered" Click="ButtonChequered_Click" Width="48" Height="48" Margin="5,0,0,0" ToolTip="{x:Static res:Resources.strChequered}">
-                    <Image Source="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/addchequeredpage.png"/>
-                </Button>
-                <Button x:Name="ButtonDotted" Click="ButtonDotted_Click"  Width="48" Height="48" Margin="5,0,0,0" ToolTip="{x:Static res:Resources.strDottet}">
-                    <Image Source="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/adddotted.png"/>
-                </Button>
-                <Button x:Name="ButtonRuled" Click="ButtonRuled_Click" Width="48" Height="48" Margin="5,0,0,0" ToolTip="{x:Static res:Resources.strRuled}">
-                    <Image Source="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/addruledpage.png"/>
-                </Button>
-                <Button x:Name="ButtonBlanko" Click="ButtonBlanko_Click" Width="48" Height="48" Margin="5,0,0,0" ToolTip="{x:Static res:Resources.strPlain}">
-                    <Image Source="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/addblankopage.png"/>
-                </Button>
+                <controls:TransparentImageButton x:Name="ButtonChequered" Click="ButtonChequered_Click" Width="48" Height="48" Margin="5,0,0,0" ToolTip="{x:Static res:Resources.strChequered}" Image="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/addchequeredpage.png" ContextMenu="{StaticResource menu}" />
+                <controls:TransparentImageButton x:Name="ButtonDotted" Click="ButtonDotted_Click"  Width="48" Height="48" Margin="5,0,0,0" ToolTip="{x:Static res:Resources.strDottet}" Image="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/adddottedpage.png" ContextMenu="{StaticResource menu}" />
+                <controls:TransparentImageButton x:Name="ButtonRuled" Click="ButtonRuled_Click" Width="48" Height="48" Margin="5,0,0,0" ToolTip="{x:Static res:Resources.strRuled}" Image="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/addruledpage.png" ContextMenu="{StaticResource menu}" />
+                <controls:TransparentImageButton x:Name="ButtonBlanko" Click="ButtonBlanko_Click" Width="48" Height="48" Margin="5,0,0,0" ToolTip="{x:Static res:Resources.strPlain}" Image="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/addblancopage.png" ContextMenu="{StaticResource menu}" />
             </StackPanel>
         </Grid>
     </Border>

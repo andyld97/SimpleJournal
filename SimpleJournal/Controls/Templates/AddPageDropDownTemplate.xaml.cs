@@ -1,9 +1,7 @@
-﻿using SimpleJournal.Data;
-using SimpleJournal.Common;
-using System.Windows;
+﻿using SimpleJournal.Common;
 using System.Windows.Controls;
-using System.Windows.Input;
 using SimpleJournal.Documents.UI;
+using Orientation = SimpleJournal.Common.Orientation;
 
 namespace SimpleJournal.Controls.Templates
 {
@@ -12,8 +10,9 @@ namespace SimpleJournal.Controls.Templates
     /// </summary>
     public partial class AddPageDropDownTemplate : DropDownTemplate
     {
-        public delegate void addPage(PaperType paperType);
+        public delegate void addPage(PaperType paperType, Orientation orientation);
         public event addPage AddPage;
+        private bool ignoreSelectionChanged = false;
 
         public AddPageDropDownTemplate()
         {
@@ -25,41 +24,49 @@ namespace SimpleJournal.Controls.Templates
             base.OnDropDownOpened();
 
             int index;
-            if (Settings.Instance.PaperTypeLastInserted == PaperType.Chequeued) index = 0;
-            else if (Settings.Instance.PaperTypeLastInserted == PaperType.Dotted) index = 1;
-            else if (Settings.Instance.PaperTypeLastInserted == PaperType.Ruled) index = 2;
-            else index = 3;
+            if (Settings.Instance.PaperTypeLastInserted == PaperType.Chequered) index = 0;
+            else if (Settings.Instance.PaperTypeLastInserted == PaperType.Dotted) index = 2;
+            else if (Settings.Instance.PaperTypeLastInserted == PaperType.Ruled) index = 4;
+            else index = 6;
 
-            ListBoxPageType.SelectedIndex = index;
+            if (Settings.Instance.OrientationLastInserted == Orientation.Landscape)
+                index++;
+
+            ignoreSelectionChanged = true;
+            ListViewAddPages.SelectedIndex = index;
+            ignoreSelectionChanged = false;
         }
 
-        private void ListBoxPageType_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        private void RaiseAddPage(PaperType paperType, Orientation orientation)
         {
-            if (e.LeftButton == MouseButtonState.Pressed)
-            {
-                if (ItemsControl.ContainerFromElement(sender as ListBox, e.OriginalSource as DependencyObject) is ListBoxItem item)
-                {
-                    int index = ListBoxPageType.Items.IndexOf(item);
-
-                    if (index >= 0)
-                        Run(index);
-                }
-            }
-        }
-
-        private void Run(int index)
-        {
-            switch (index)
-            {
-                case 0: Settings.Instance.PaperTypeLastInserted = PaperType.Chequeued; break;
-                case 1: Settings.Instance.PaperTypeLastInserted = PaperType.Dotted; break;
-                case 2: Settings.Instance.PaperTypeLastInserted = PaperType.Ruled; break;
-                case 3: Settings.Instance.PaperTypeLastInserted = PaperType.Blanco; break;
-            }
+            Settings.Instance.PaperTypeLastInserted = paperType;
+            Settings.Instance.OrientationLastInserted = orientation;
             Settings.Instance.Save();
 
             CloseDropDown();
-            AddPage?.Invoke(Settings.Instance.PaperTypeLastInserted);
+            AddPage?.Invoke(Settings.Instance.PaperTypeLastInserted, orientation);
+        }
+
+        private void ListViewAddPages_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            int index = ListViewAddPages.SelectedIndex;
+            if (ignoreSelectionChanged || index == -1)
+                return;            
+
+            // 0|1
+            // 2|3
+            // 4|5
+            // 6|7
+
+            Orientation orientation = (index % 2 == 0 ? Orientation.Portrait : Orientation.Landscape);
+            PaperType paperType = PaperType.Chequered;
+
+            if (index == 0 || index == 1) paperType = PaperType.Chequered;
+            if (index == 2 || index == 3) paperType = PaperType.Dotted;
+            if (index == 4 || index == 5) paperType = PaperType.Ruled;
+            if (index == 6 || index == 7) paperType = PaperType.Blanco;
+
+            RaiseAddPage(paperType, orientation);
         }
     }
 }

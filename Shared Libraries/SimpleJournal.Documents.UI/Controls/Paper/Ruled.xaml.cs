@@ -1,7 +1,7 @@
 ﻿using SimpleJournal.Common;
 using System.Windows.Controls;
-using SimpleJournal.Documents.UI.Controls;
 using SimpleJournal.Documents.UI.Helper;
+using Orientation = SimpleJournal.Common.Orientation;
 
 namespace SimpleJournal.Documents.UI.Controls.Paper
 {
@@ -10,9 +10,16 @@ namespace SimpleJournal.Documents.UI.Controls.Paper
     /// </summary>
     public partial class Ruled : UserControl, IPaper 
     {
-        public Ruled()
+        public Ruled(Orientation orientation)
         {
             InitializeComponent();
+            Orientation = orientation; 
+
+            if (Orientation == Common.Orientation.Landscape)
+            {
+                // Swap width and height
+                (Height, Width) = (Width, Height);
+            }
         }
 
         public Format Format => Format.A4;
@@ -21,11 +28,13 @@ namespace SimpleJournal.Documents.UI.Controls.Paper
 
         public DrawingCanvas Canvas => this.canvas;
 
+        public Orientation Orientation { get; set; }
+
         public PageSplitter Border { get; set; }
 
         public IPaper ClonePage(bool isReadonly)
         {
-            Ruled ruled = new Ruled();
+            Ruled ruled = new Ruled(Orientation);
 
             if (isReadonly)
                 ruled.Canvas.EditingMode = InkCanvasEditingMode.None;

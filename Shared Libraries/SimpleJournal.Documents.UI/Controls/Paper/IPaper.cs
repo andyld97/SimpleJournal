@@ -1,6 +1,4 @@
 ﻿using SimpleJournal.Common;
-using System;
-using SimpleJournal.Documents.UI.Controls;
 
 namespace SimpleJournal.Documents.UI.Controls.Paper
 {
@@ -11,6 +9,8 @@ namespace SimpleJournal.Documents.UI.Controls.Paper
         PaperType Type { get; }
 
         DrawingCanvas Canvas { get;  }
+
+        Orientation Orientation { get; set; }
 
         PageSplitter Border { get; set; }
 

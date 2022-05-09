@@ -1,18 +1,7 @@
 ﻿using SimpleJournal.Common;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using Orientation = SimpleJournal.Common.Orientation;
 
 namespace SimpleJournal.Documents.UI.Controls
 {
@@ -21,7 +10,7 @@ namespace SimpleJournal.Documents.UI.Controls
     /// </summary>
     public partial class PageSplitter : UserControl
     {
-        public delegate void onPageAdded(PageSplitter sender, PaperType paperType);
+        public delegate void onPageAdded(PageSplitter sender, PaperType paperType, Orientation orientation);
         public event onPageAdded OnPageAdded;
 
         public PageSplitter()
@@ -31,22 +20,49 @@ namespace SimpleJournal.Documents.UI.Controls
 
         private void ButtonChequered_Click(object sender, RoutedEventArgs e)
         {
-            OnPageAdded?.Invoke(this, PaperType.Chequeued);
+            ShowContextMenu(sender, e, PaperType.Chequered);
         }
 
         private void ButtonRuled_Click(object sender, RoutedEventArgs e)
         {
-            OnPageAdded?.Invoke(this, PaperType.Ruled);
+            ShowContextMenu(sender, e,  PaperType.Ruled);
         }
 
         private void ButtonBlanko_Click(object sender, RoutedEventArgs e)
         {
-            OnPageAdded?.Invoke(this, PaperType.Blanco);
+            ShowContextMenu(sender, e, PaperType.Blanco);
         }
 
         private void ButtonDotted_Click(object sender, RoutedEventArgs e)
         {
-            OnPageAdded?.Invoke(this, PaperType.Dotted);
+            ShowContextMenu(sender, e, PaperType.Dotted);  
+        }
+
+        private void ShowContextMenu(object sender, RoutedEventArgs e, PaperType type)
+        {
+            var btn = sender as TransparentImageButton;
+            ContextMenu contextMenu = btn.ContextMenu;
+            contextMenu.PlacementTarget = btn;
+            contextMenu.IsOpen = true;
+            contextMenu.Tag = type;
+            e.Handled = true;
+        }
+
+        private void RaisePageAddedEvent(PaperType paperType, Orientation orientation)
+        {
+            OnPageAdded?.Invoke(this, paperType, orientation);
+        }
+
+        private void MenuButtonPortrait_Click(object sender, RoutedEventArgs e)
+        {
+            if (sender is MenuItem rm && rm.Parent is ContextMenu cm && cm.Tag is PaperType pt)
+                RaisePageAddedEvent(pt, Orientation.Portrait);
+        }
+
+        private void MenuButtonLandscape_Click(object sender, RoutedEventArgs e)
+        {
+            if (sender is MenuItem rm && rm.Parent is ContextMenu cm && cm.Tag is PaperType pt)
+                RaisePageAddedEvent(pt, Orientation.Landscape);
         }
     }
 }

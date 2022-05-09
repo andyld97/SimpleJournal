@@ -130,7 +130,12 @@ namespace SimpleJournal.Documents
                                 string pageNumber = currentEntry.Name.Replace("page", string.Empty).Replace(".png", string.Empty).Replace(".pdf", string.Empty).Replace(".xml", string.Empty);
 
                                 if (currentEntry.Name == "journal.xml")
-                                    journal = Serialization.ReadBytes<Journal>(data, Serialization.Mode.XML);
+                                {
+                                    string xmlData = System.Text.Encoding.UTF8.GetString(data);
+                                    // Correct old documents misspelled pattern!
+                                    xmlData = xmlData.Replace("<PaperPattern>Chequeued</PaperPattern>", "<PaperPattern>Chequered</PaperPattern>");
+                                    journal = Serialization.ReadString<Journal>(xmlData, System.Text.Encoding.UTF8);
+                                }
                                 else if (int.TryParse(pageNumber, out int page))
                                 {
                                     if (currentEntry.Name.EndsWith(".png"))
@@ -146,7 +151,11 @@ namespace SimpleJournal.Documents
                                     else if (currentEntry.Name.EndsWith(".xml"))
                                     {
                                         // normal page
-                                        journalPages.Add(page, Serialization.ReadBytes<JournalPage>(data, Serialization.Mode.XML));
+                                        string xmlData = System.Text.Encoding.UTF8.GetString(data);
+
+                                        // Correct old documents misspelled pattern!
+                                        xmlData = xmlData.Replace("<PaperPattern>Chequeued</PaperPattern>", "<PaperPattern>Chequered</PaperPattern>");
+                                        journalPages.Add(page, Serialization.ReadString<JournalPage>(xmlData, System.Text.Encoding.UTF8));
                                     }
                                 }
                                 else
@@ -259,7 +268,7 @@ namespace SimpleJournal.Documents
 
                 if (wasSavedAlready)
                 {
-                    // ToDo: ***Only update the archive and (eventually delete pages/images, add pages)
+                    // ToDo: *** Only update the archive and (eventually delete pages/images, add pages)
                     // If the file exists already and is valid zip file we do not need to re-create the entire file, but open
                     // it as as ZipArchiveMode.Update and only update the bin files
                     // But remember to ensure that if a PdfJournalPage gets deleted, we need to delete the file from the zip archive also!

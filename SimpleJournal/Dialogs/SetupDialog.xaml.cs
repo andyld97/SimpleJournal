@@ -44,7 +44,7 @@ namespace SimpleJournal.Dialogs
             };
 
             foreach (var prev in previewCanvas)
-                prev.PaperType = PaperType.Chequeued;
+                prev.PaperType = PaperType.Chequered;
 
             btnTextMarker.DropDown = textMarkerTemplate;
 
