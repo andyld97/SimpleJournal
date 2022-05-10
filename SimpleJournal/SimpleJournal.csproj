@@ -25,7 +25,6 @@
 		<UseWindowsForms>true</UseWindowsForms>
 		<UseWPF>true</UseWPF>
 		<PublishReadyToRun>true</PublishReadyToRun>
-		<EmbeddedResourceUseDependentUponConvention>true</EmbeddedResourceUseDependentUponConvention>
 		<ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
 		<Configurations>Debug;Release;UWPNew;Normal</Configurations>
 		<MSBuildWarningsAsMessages>NU1702</MSBuildWarningsAsMessages>
@@ -100,7 +99,7 @@
 		<AdditionalFiles Remove="C:\Users\andre\.nuget\packages\microsoft.dotnet.upgradeassistant.extensions.default.analyzers\0.2.231403\build\\WebTypeReplacements.typemap" />
 	</ItemGroup>
 	<ItemGroup>
-		<None Remove="resources\pdf.png" />
+	  <None Remove="resources\pdf_small.png" />
 	</ItemGroup>
 	<ItemGroup>
 		<None Update="app.normal.manifest">
@@ -135,7 +134,7 @@
 	</ItemGroup>
 	<ItemGroup>
 		<Resource Include="resources\caslogo.ico" />
-		<Resource Include="resources\pdf.png" />
+		<Resource Include="resources\pdf_small.png" />
 	</ItemGroup>
 	<ItemGroup>
 		<Resource Include="resources\selectarea.png" />

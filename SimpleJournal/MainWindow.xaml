@@ -71,9 +71,9 @@
                                 <ListBox x:Name="ListRecentlyOpenedDocuments" ItemTemplate="{StaticResource RecentlyOpenedDocumentsTemplate}" ItemContainerStyle="{DynamicResource _ListBoxItemStyle}" Background="Transparent" BorderThickness="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" SelectionChanged="ListRecentlyOpenedDocuments_SelectionChanged" />
                             </StackPanel>
                         </Fluent:ApplicationMenu.RightPaneContent>
-                        <Fluent:MenuItem x:Name="btnNew" Command="ApplicationCommands.New" Header="{x:Static res:Resources.strNewDocument}" KeyTip="N" Icon="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/add.png"  />
+                        <Fluent:MenuItem x:Name="btnNew" Command="ApplicationCommands.New" Header="{x:Static res:Resources.strNewDocument}" KeyTip="N" Icon="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/pageadd.png"  />
                         <Fluent:MenuItem x:Name="btnOpen" Click="btnOpen_Click" Header="{x:Static res:Resources.strOpenDocument}" KeyTip="O" Icon="pack://application:,,,/SimpleJournal;component/resources/open.png"  />
-                        <Fluent:MenuItem x:Name="btnImportPDF" Header="{x:Static res:Resources.strImportPDFFile}" Icon="/resources/pdf.png" Click="MenuButtonImportPDF_Click"  />
+                        <Fluent:MenuItem x:Name="btnImportPDF" Header="{x:Static res:Resources.strImportPDFFile}" Icon="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/custom.png" Click="MenuButtonImportPDF_Click"  />
                         <Fluent:MenuItem x:Name="btnSaveProject"  Command="ApplicationCommands.Save" Header="{x:Static res:Resources.strSaveDocument}" KeyTip="S" Icon="pack://application:,,,/SimpleJournal;component/resources/save.png"  />
                         <Fluent:MenuItem x:Name="btnSave" Click="btnSave_Click" Header="{x:Static res:Resources.strSaveAsDocument}" KeyTip="S" Icon="pack://application:,,,/SimpleJournal;component/resources/save.png"  />
                         <Fluent:MenuItem x:Name="btnPrint" Command="ApplicationCommands.Print" Header="{x:Static res:Resources.strPrintDocument}" KeyTip="D" Icon="pack://application:,,,/SimpleJournal;component/resources/print.png"  />
@@ -99,7 +99,7 @@
                                 </GroupBox>
                             </Fluent:BackstageTabItem>
                             <Fluent:Button Icon="/resources/open.png" Header="{x:Static res:Resources.strOpenDocument}" Click="btnOpen_Click" />
-                            <Fluent:Button x:Name="MenuButtonImportPDF" Icon="/resources/pdf.png" Header="{x:Static res:Resources.strImportPDFFile}" Click="MenuButtonImportPDF_Click" />
+                            <Fluent:Button x:Name="MenuButtonImportPDF" Icon="pack://application:,,,/SimpleJournal;component/resources/pdf_small.png" Header="{x:Static res:Resources.strImportPDFFile}" Click="MenuButtonImportPDF_Click" />
                             <Fluent:Button Icon="/resources/save.png" Header="{x:Static res:Resources.strSaveDocument}" Command="ApplicationCommands.Save" />
                             <Fluent:Button Icon="/resources/save.png" Header="{x:Static res:Resources.strSaveAsDocument}" Click="btnSave_Click" />
                             <Fluent:SeparatorTabItem />
