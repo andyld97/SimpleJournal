@@ -22,7 +22,7 @@ namespace PDF2J
         /// <summary>
         /// This version must only be changed if there are changes due to the document format!
         /// </summary>
-        public static readonly Version MinSJVersionRequired = new Version(0, 5, 0, 2);
+        public static readonly Version MinSJVersionRequired = new Version(0, 5, 1, 0);
         
         private static bool isRunning = false;
         private static object sync = new object();

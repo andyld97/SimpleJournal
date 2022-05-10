@@ -133,11 +133,29 @@ namespace SimpleJournal.SharedResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Landscape.
+        /// </summary>
+        public static string strLandscape {
+            get {
+                return ResourceManager.GetString("strLandscape", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Blanco.
         /// </summary>
         public static string strPlain {
             get {
                 return ResourceManager.GetString("strPlain", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Portrait.
+        /// </summary>
+        public static string strPortrait {
+            get {
+                return ResourceManager.GetString("strPortrait", resourceCulture);
             }
         }
         

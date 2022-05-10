@@ -41,18 +41,19 @@ namespace PDF2J.Controllers
             return DeleteTicket(id);
         }
 
-        [HttpGet("{id}/download/{document}")]
-        public IActionResult DownloadDocument(string id, string document)
+        [HttpGet("{id}/download/{document:int}")]
+        public IActionResult DownloadDocument(string id, int document)
         {
             var result = Program.PrintTickets.FirstOrDefault(t => t.ID == id);
 
             if (result == null)
                 return BadRequest($"Ticket {id} not found!");
 
-            if (string.IsNullOrEmpty(document))
+            if (document < 0 || document >= result.Documents.Count)
                 return BadRequest("Invalid document specified!");
 
-            return Ok(new System.IO.FileStream(System.IO.Path.Combine(result.TempPath, document), System.IO.FileMode.Open));
+            var docName = result.Documents[document];
+            return Ok(new System.IO.FileStream(System.IO.Path.Combine(result.TempPath, docName), System.IO.FileMode.Open));
         }
 
         [HttpGet("all")]

@@ -3,15 +3,15 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:controls="clr-namespace:SimpleJournal.Documents.UI.Controls"
-             mc:Ignorable="d" 
-      Height="29.7cm" Width="21cm">
+      Background="White" Height="29.7cm" Width="21cm"
+      mc:Ignorable="d">
     <!--
     For more infos see this url
     https://stackoverflow.com/questions/20748651/wpf-drawing-colored-grid-lines-on-a-canvas-panel-background 
     -->
     <Grid>
-        <Border Background="White">
-            <controls:DrawingCanvas x:Name="canvas" Height="29.7cm" Width="21cm">
+        <Border>
+            <controls:DrawingCanvas x:Name="canvas">
                 <controls:DrawingCanvas.Background>
                     <DrawingBrush Stretch="None" TileMode="Tile"
                           Viewport="0,0 50,50" ViewportUnits="Absolute">

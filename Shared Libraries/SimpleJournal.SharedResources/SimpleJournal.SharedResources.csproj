@@ -7,16 +7,37 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="icons\pages\add.png" />
-    <None Remove="icons\pages\addblankopage.png" />
-    <None Remove="icons\pages\deletepage.png" />
+    <None Remove="icons\pages\addblancopage.png" />
+    <None Remove="icons\pages\addblancopage_landscape.png" />
+    <None Remove="icons\pages\addchequeredpage_landscape.png" />
+    <None Remove="icons\pages\adddottedpage_landscape.png" />
+    <None Remove="icons\pages\addruledpage_landscape.png" />
+    <None Remove="icons\pages\blanco.png" />
+    <None Remove="icons\pages\blanco_landscape.png" />
+    <None Remove="icons\pages\chequered_landscape.png" />
+    <None Remove="icons\pages\custom.png" />
+    <None Remove="icons\pages\custom_landscape.png" />
     <None Remove="icons\pages\dotted.png" />
+    <None Remove="icons\pages\dotted_landscape.png" />
     <None Remove="icons\pages\editpage.png" />
     <None Remove="icons\pages\pagedown.png" />
+    <None Remove="icons\pages\rotatepage.png" />
+    <None Remove="icons\pages\ruled_landscape.png" />
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="icons\pages\pagedown.png" />
+    <Resource Include="icons\pages\addblancopage_landscape.png" />
+    <Resource Include="icons\pages\addchequeredpage_landscape.png" />
+    <Resource Include="icons\pages\adddottedpage_landscape.png" />
+    <Resource Include="icons\pages\addruledpage_landscape.png" />
+    <Resource Include="icons\pages\blanco.png" />
+    <Resource Include="icons\pages\blanco_landscape.png" />
+    <Resource Include="icons\pages\chequered_landscape.png" />
+    <Resource Include="icons\pages\custom.png" />
+    <Resource Include="icons\pages\custom_landscape.png" />
+    <Resource Include="icons\pages\dotted_landscape.png" />
+    <Resource Include="icons\pages\rotatepage.png" />
+    <Resource Include="icons\pages\ruled_landscape.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -24,21 +45,19 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="icons\pages\add.png" />
-    <Resource Include="icons\pages\addblankopage.png" />
-    <Resource Include="icons\pages\addblankopagedown.png" />
-    <Resource Include="icons\pages\addblankopageup.png" />
+    <Resource Include="icons\pages\addblancopage.png" />
+    <Resource Include="icons\pages\addblancopagedown.png" />
+    <Resource Include="icons\pages\addblancopageup.png" />
     <Resource Include="icons\pages\addchequeredpage.png" />
     <Resource Include="icons\pages\addchequeredpagedown.png" />
     <Resource Include="icons\pages\addchequeredpageup.png" />
-    <Resource Include="icons\pages\adddotted.png" />
+    <Resource Include="icons\pages\adddottedpage.png" />
     <Resource Include="icons\pages\adddottedpagedown.png" />
     <Resource Include="icons\pages\adddottedpageup.png" />
     <Resource Include="icons\pages\addruledpage.png" />
     <Resource Include="icons\pages\addruledpagedown.png" />
     <Resource Include="icons\pages\addruledpageup.png" />
-    <Resource Include="icons\pages\chequred.png" />
-    <Resource Include="icons\pages\deletepage.png" />
+    <Resource Include="icons\pages\chequered.png" />
     <Resource Include="icons\pages\dotted.png" />
     <Resource Include="icons\pages\editpage.png" />
     <Resource Include="icons\pages\pageadd.png" />
@@ -60,6 +79,9 @@
 
   <ItemGroup>
     <EmbeddedResource Update="Resources.de.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources.nl.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Resources.resx">

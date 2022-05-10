@@ -136,4 +136,10 @@
   <data name="strFailedToSetFileAssoc_Message" xml:space="preserve">
     <value>Die Dateizuordnung konnte nicht festgelegt werden: {0}</value>
   </data>
+  <data name="strLandscape" xml:space="preserve">
+    <value>Querformat</value>
+  </data>
+  <data name="strPortrait" xml:space="preserve">
+    <value>Hochformat</value>
+  </data>
 </root>

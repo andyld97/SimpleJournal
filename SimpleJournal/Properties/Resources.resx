@@ -897,16 +897,12 @@ Click on No to continue to receive this message!</value>
     <value>Page</value>
     <comment>MainWindow.xaml.cs</comment>
   </data>
-  <data name="strPageManagmentButtonClearPage" xml:space="preserve">
-    <value>Clears the currently selected page</value>
-    <comment>PageManagmentDialog.xaml.cs</comment>
-  </data>
   <data name="strPageManagmentButtonDecreaseZoom" xml:space="preserve">
     <value>Decreases the zoom factor of the preview</value>
     <comment>PageManagmentDialog.xaml.cs</comment>
   </data>
   <data name="strPageManagmentButtonDeletePage" xml:space="preserve">
-    <value>Deletes the currently selected page</value>
+    <value>Clears or deletes the currently selected page, depending on the selection</value>
     <comment>PageManagmentDialog.xaml.cs</comment>
   </data>
   <data name="strPageManagmentButtonIncreaseZoom" xml:space="preserve">
@@ -1137,7 +1133,7 @@ Click on No to continue to receive this message!</value>
     <comment>MainWindow.xaml</comment>
   </data>
   <data name="strReleaseDate" xml:space="preserve">
-    <value>04/27/2022 3:00 PM</value>
+    <value>05/10/2022 3:00 PM</value>
     <comment>About.xaml</comment>
   </data>
   <data name="strRemove" xml:space="preserve">
@@ -2094,9 +2090,6 @@ Alternatively, you can use the normal version of SimpleJournal!</value>
   <data name="strSettingDefaultStretching" xml:space="preserve">
     <value>Standard stretching for inserted images:</value>
   </data>
-  <data name="SJFileAssoc" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\SJFileAssoc.zip;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="strFailedToExtractSJFileAssoc" xml:space="preserve">
     <value>Failed to extract SJFileAssoc for creating the file association: {0}</value>
     <comment>GeneralHelper.cs</comment>
@@ -2116,5 +2109,33 @@ Alternatively, you can use the normal version of SimpleJournal!</value>
   <data name="strPageManagmentControl_SaveError" xml:space="preserve">
     <value>An error occurred while saving: {0}</value>
     <comment>PageManagmentControl.xaml.cs</comment>
+  </data>
+  <data name="SJFileAssoc" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\SJFileAssoc.zip;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="strPageManagmentDialog_HoverDefaultText" xml:space="preserve">
+    <value>Hover the mouse over one of the buttons and the function is displayed here!</value>
+    <comment>PageManagmentDialog.xaml.cs</comment>
+  </data>
+  <data name="strPageManagmentDialogButtonRotatePage" xml:space="preserve">
+    <value>Rotates the page (change from portrait to landscape or landscape to portrait)</value>
+    <comment>PageManagmentDialog.xaml.cs</comment>
+  </data>
+  <data name="strPageManagmentDialog_DeletePage" xml:space="preserve">
+    <value>Delete Page</value>
+    <comment>PageManamgentDialog.xaml</comment>
+  </data>
+  <data name="strPageManagmentDialog_ClearPage" xml:space="preserve">
+    <value>Clear Page</value>
+    <comment>PageManamgentDialog.xaml</comment>
+  </data>
+  <data name="strPageManagmentDialog_RotatePage_Message" xml:space="preserve">
+    <value>Do you really want to rotate this page?
+If there is already drawing on the page, all drawings are moved!</value>
+    <comment>PageManagmentDialog.xaml.cs</comment>
+  </data>
+  <data name="strPageManagmentDialog_RotatePage_Title" xml:space="preserve">
+    <value>Rotate Page?</value>
+    <comment>PageManagmentDialog.xaml.cs</comment>
   </data>
 </root>

@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SimpleJournal.Controls"
              xmlns:res="clr-namespace:SimpleJournal.Properties"
+             xmlns:sres="clr-namespace:SimpleJournal.SharedResources;assembly=SimpleJournal.SharedResources"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid Background="{DynamicResource WhiteBrush}">
@@ -12,89 +13,118 @@
             <Style TargetType="{x:Type TextBlock}">
                 <Setter Property="Foreground" Value="{DynamicResource BlackBrush}" />
             </Style>
+            <local:PageToImageConverter x:Key="pageToImageConverter" />
+            <local:PageToTextConverter x:Key="pageToTextConverter" />
         </Grid.Resources>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <Border Grid.Column="0" BorderBrush="Black" BorderThickness="0 0 1 0">
+        <Border Grid.Column="0" BorderBrush="LightGray" BorderThickness="0 0 2 0">
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
 
                 <TextBlock Margin="5,5,2,2" FontSize="16" FontWeight="Bold" Grid.Row="0">
                     <Run Text="{x:Static res:Resources.strPages}"/><Run Text=":"/>
                 </TextBlock>
-                <Border Grid.Row="1" BorderBrush="Black" BorderThickness="0 0 0 1">
-                    <ListBox Background="Transparent" ItemContainerStyle="{DynamicResource _ListBoxItemStyle}" x:Name="ListViewPages" SelectionChanged="ListViewPages_SelectionChanged" Margin="5">
-                        <ListBox.ItemTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="{Binding .}" Foreground="{DynamicResource BlackBrush}" />
-                            </DataTemplate>
-                        </ListBox.ItemTemplate>
-                    </ListBox>
+                <Border Margin="0,5,0,5" Grid.Row="1" BorderBrush="LightGray" BorderThickness="0 0 0 2">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+
+                        <ListBox Background="Transparent" ItemContainerStyle="{DynamicResource _ListBoxItemStyle}" x:Name="ListViewPages" SelectionChanged="ListViewPages_SelectionChanged" Margin="0,5,5,5">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
+
+                                        <Image Width="48" Source="{Binding ., Converter={StaticResource pageToImageConverter}}" RenderOptions.BitmapScalingMode="Fant" />
+                                        <TextBlock Margin="5,0,0,0" Grid.Column="1" Foreground="{DynamicResource BlackBrush}" FontWeight="Bold" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Stretch" TextAlignment="Left" >
+                                            <Run Text="{x:Static res:Resources.strPage}" />
+                                            <Run>
+                                                <Run.Text>
+                                                    <MultiBinding Converter="{StaticResource pageToTextConverter}">
+                                                        <Binding Path="." />
+                                                        <Binding ElementName="ListViewPages" Path="Items" Mode="OneWay" />                                                    
+                                                    </MultiBinding>
+                                                </Run.Text>
+                                            </Run>
+                                        </TextBlock>
+                                    </Grid>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </Grid>
                 </Border>
                 <Grid Grid.Row="2">
+                    <Grid.Resources>
+                        <ContextMenu x:Key="menu">
+                            <MenuItem x:Name="MenuButtonPortrait" Click="MenuButtonPortrait_Click"  Header="{x:Static sres:Resources.strPortrait}" />
+                            <MenuItem x:Name="MenuButtonLandscape" Click="MenuButtonLandscape_Click" Header="{x:Static sres:Resources.strLandscape}" />
+                        </ContextMenu>
+                    </Grid.Resources>                    
                     <StackPanel HorizontalAlignment="Left">
+                        <StackPanel.Resources>
+                            <Style TargetType="{x:Type Image}">
+                                <Setter Property="RenderOptions.BitmapScalingMode" Value="Fant" />
+                            </Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Width" Value="56" />
+                                <Setter Property="Height" Value="56" />
+                            </Style>
+                        </StackPanel.Resources>
                         <StackPanel Orientation="Horizontal">
-                            <!--pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages-->
-                            <Button x:Name="ButtonInsertPageBeforeIndexChequered" Click="ButtonInsertPageBeforeIndexChequered_Click" Height="48" Width="48" Margin="5">
+                            <Button x:Name="ButtonInsertPageBeforeIndexChequered" Click="ButtonInsertPageBeforeIndexChequered_Click" Margin="3" ContextMenu="{StaticResource menu}">
                                 <Image Source="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/addchequeredpageup.png"/>
                             </Button>
-                            <Button x:Name="ButtonInsertPageBeforeIndexDotted" Click="ButtonInsertPageBeforeIndexDotted_Click" Height="48" Width="48" Margin="5">
+                            <Button x:Name="ButtonInsertPageBeforeIndexDotted" Click="ButtonInsertPageBeforeIndexDotted_Click" Margin="3" ContextMenu="{StaticResource menu}">
                                 <Image Source="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/adddottedpageup.png"/>
                             </Button>
-                            <Button x:Name="ButtonInsertPageBeforeIndexRuled" Click="ButtonInsertPageBeforeIndexRuled_Click"  Height="48" Width="48" Margin="5">
+                            <Button x:Name="ButtonInsertPageBeforeIndexRuled" Click="ButtonInsertPageBeforeIndexRuled_Click" Margin="3" ContextMenu="{StaticResource menu}">
                                 <Image Source="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/addruledpageup.png"/>
                             </Button>
-                            <Button x:Name="ButtonInsertPageBeforeIndexBlanko" Click="ButtonInsertPageBeforeIndexBlanko_Click"  Height="48" Width="48" Margin="5">
-                                <Image Source="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/addblankopageup.png"/>
+                            <Button x:Name="ButtonInsertPageBeforeIndexBlanko" Click="ButtonInsertPageBeforeIndexBlanko_Click" Margin="3" ContextMenu="{StaticResource menu}">
+                                <Image Source="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/addblancopageup.png"/>
                             </Button>
-                            <Button x:Name="ButtonMovePageUp" Click="ButtonMovePageUp_Click" Height="48" Width="48" Margin="5">
+                            <Button x:Name="ButtonMovePageUp" Click="ButtonMovePageUp_Click" Margin="3">
                                 <Image Source="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/pageup.png"/>
                             </Button>
-                            <Button x:Name="ButtonInsertTop" Click="ButtonInsertTop_Click"  Height="48" Width="48" Margin="5">
+                            <Button x:Name="ButtonInsertTop" Click="ButtonInsertTop_Click"  Margin="3">
                                 <Image Source="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/pagetop.png"/>
                             </Button>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
-                            <Button x:Name="ButtonInsertPageAfterIndexChequered" Click="ButtonInsertPageAfterIndexChequered_Click" Height="48" Width="48" Margin="5">
+                            <Button x:Name="ButtonInsertPageAfterIndexChequered" Click="ButtonInsertPageAfterIndexChequered_Click" Margin="3" ContextMenu="{StaticResource menu}">
                                 <Image Source="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/addchequeredpagedown.png"/>
                             </Button>
-                            <Button x:Name="ButtonInsertPageAfterIndexDotted" Click="ButtonInsertPageAfterIndexDotted_Click"  Height="48" Width="48" Margin="5">
+                            <Button x:Name="ButtonInsertPageAfterIndexDotted" Click="ButtonInsertPageAfterIndexDotted_Click" Margin="3" ContextMenu="{StaticResource menu}">
                                 <Image Source="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/adddottedpagedown.png"/>
                             </Button>
-                            <Button x:Name="ButtonInsertPageAfterIndexRuled" Click="ButtonInsertPageAfterIndexRuled_Click"  Height="48" Width="48" Margin="5">
+                            <Button x:Name="ButtonInsertPageAfterIndexRuled" Click="ButtonInsertPageAfterIndexRuled_Click" Margin="3" ContextMenu="{StaticResource menu}">
                                 <Image Source="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/addruledpagedown.png"/>
                             </Button>
-                            <Button x:Name="ButtonInsertPageAfterIndexBlanko" Click="ButtonInsertPageAfterIndexBlanko_Click"  Height="48" Width="48" Margin="5">
-                                <Image Source="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/addblankopagedown.png"/>
+                            <Button x:Name="ButtonInsertPageAfterIndexBlanko" Click="ButtonInsertPageAfterIndexBlanko_Click" Margin="3" ContextMenu="{StaticResource menu}">
+                                <Image Source="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/addblancopagedown.png"/>
                             </Button>
-                            <Button x:Name="ButtonMovePageDown" Click="ButtonMovePageDown_Click" Height="48" Width="48" Margin="5">
+                            <Button x:Name="ButtonMovePageDown" Click="ButtonMovePageDown_Click" Margin="3">
                                 <Image Source="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/pagedown.png"/>
                             </Button>
-                            <Button x:Name="ButtonInsertDown" Click="ButtonInsertDown_Click" Height="48" Width="48" Margin="5">
+                            <Button x:Name="ButtonInsertDown" Click="ButtonInsertDown_Click" Margin="3">
                                 <Image Source="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/pagebottom.png"/>
-                            </Button>
-                        </StackPanel>
-                    </StackPanel>
-                    <StackPanel HorizontalAlignment="Right">
-                        <StackPanel Orientation="Horizontal">
-                            <Button x:Name="ButtonClearPage" Click="ButtonClearPage_Click"  Height="48" Width="48" Margin="5">
-                                <Image Source="pack://application:,,,/SimpleJournal;component/resources/clear.png"/>
-                            </Button>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <Button x:Name="ButtonDeletePage" Click="ButtonDeletePage_Click" Height="48" Width="48" Margin="5">
-                                <Image Source="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/pagedelete.png"/>
                             </Button>
                         </StackPanel>
                     </StackPanel>
@@ -109,50 +139,90 @@
             </Grid.RowDefinitions>
 
             <TextBlock x:Name="TextZoomLabel" FontWeight="Bold" Margin="5,5,2,2" FontSize="16" Grid.Row="0" Text="{x:Static res:Resources.strPageManagmentZoomLabel}"/>
-            <Border Grid.Row="1" BorderBrush="Black" BorderThickness="0 0 0 1">
-                <ScrollViewer x:Name="displayFrameScrollViewer" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                    <Border x:Name="displayFrame" Margin="5" Background="#e1e1e1" />
+            <Border Grid.Row="1" Margin="0,5,0,5" BorderBrush="LightGray" BorderThickness="0 0 0 2">
+                <ScrollViewer x:Name="displayFrameScrollViewer" Margin="5" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                    <Border x:Name="displayFrame" Background="#e1e1e1" />
                 </ScrollViewer>
             </Border>
             <Grid Grid.Row="2">
                 <Grid HorizontalAlignment="Left">
-                    <StackPanel Orientation="Horizontal">
-                        <Button x:Name="btnIncreaseZoom" Click="BtnIncreaseZoom_Click" Height="48" Width="48" Margin="5">
-                            <Image Source="pack://application:,,,/SimpleJournal;component/resources/zoom.png"/>
-                        </Button>
-                        <Button x:Name="btnDecreaseZoom" Click="BtnDecreaseZoom_Click" Height="48" Width="48" Margin="5">
+                    <StackPanel Orientation="Vertical">
+                        <StackPanel.Resources>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Width" Value="56" />
+                                <Setter Property="Height" Value="56" />
+                            </Style>
+                            <Style TargetType="{x:Type Image}">
+                                <Setter Property="RenderOptions.BitmapScalingMode" Value="Fant" />
+                            </Style>
+                        </StackPanel.Resources>
+                        <Button x:Name="btnDecreaseZoom" Click="BtnDecreaseZoom_Click" Margin="3">
                             <Image Source="pack://application:,,,/SimpleJournal;component/resources/zoom_out.png"/>
+                        </Button>
+                        <Button x:Name="btnIncreaseZoom" Click="BtnIncreaseZoom_Click" Margin="3">
+                            <Image Source="pack://application:,,,/SimpleJournal;component/resources/zoom.png"/>
                         </Button>
                     </StackPanel>
                 </Grid>
                 <Grid HorizontalAlignment="Right">
-                    <StackPanel Orientation="Horizontal">
-                        <ToggleButton x:Name="ToggleButtonChequered" Checked="ToggleButton_Checked" Unchecked="ToggleButton_Checked" Width="48" Height="48" Margin="5">
-                            <Image Source="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/chequred.png"/>
-                        </ToggleButton>
-                        <ToggleButton x:Name="ToggleButtonDotted" Checked="ToggleButton_Checked" Unchecked="ToggleButton_Checked"  Width="48" Height="48" Margin="5">
-                            <Image Source="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/dotted.png"/>
-                        </ToggleButton>
-                        <ToggleButton x:Name="ToggleButtonRuled" Checked="ToggleButton_Checked" Unchecked="ToggleButton_Checked" Width="48" Height="48" Margin="5">
-                            <Image Source="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/ruled.png"/>
-                        </ToggleButton>
-                        <ToggleButton x:Name="ToggleButtonBlanko" Checked="ToggleButton_Checked" Unchecked="ToggleButton_Checked" Width="48" Height="48" Margin="5">
-                            <Image Source="pack://application:,,,/SimpleJournal;component/resources/clear.png"/>
-                        </ToggleButton>
+                    <Grid.Resources>
+                        <Style TargetType="{x:Type Image}">
+                            <Setter Property="RenderOptions.BitmapScalingMode" Value="Fant" />
+                        </Style>
+                        <Style TargetType="{x:Type ToggleButton}">
+                            <Setter Property="Width" Value="56" />
+                            <Setter Property="Height" Value="56" />
+                        </Style>
+                        <Style TargetType="{x:Type Button}">
+                            <Setter Property="Width" Value="56" />
+                            <Setter Property="Height" Value="56" />
+                        </Style>
+                    </Grid.Resources>
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Button x:Name="ButtonRotatePage" Click="ButtonRotatePage_Click" Margin="3">
+                                <Image Source="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/rotatepage.png" />
+                            </Button>                           
+                            <ToggleButton x:Name="ToggleButtonChequered" Checked="ToggleButton_Checked" Unchecked="ToggleButton_Checked" Margin="3">
+                                <Image Source="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/chequered.png" />
+                            </ToggleButton>
+                            <ToggleButton x:Name="ToggleButtonDotted" Checked="ToggleButton_Checked" Unchecked="ToggleButton_Checked" Margin="3">
+                                <Image Source="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/dotted.png" />
+                            </ToggleButton>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                            <Button x:Name="ButtonDeletePage" Click="ButtonDeletePage_Click" Margin="3">
+                                <Button.ContextMenu>
+                                    <ContextMenu>
+                                        <MenuItem x:Name="MenuButtonDeletePage" Click="MenuButtonDeletePage_Click" Header="{x:Static res:Resources.strPageManagmentDialog_DeletePage}" />
+                                        <MenuItem x:Name="MenuButtonClearPage" Click="MenuButtonClearPage_Click" Header="{x:Static res:Resources.strPageManagmentDialog_ClearPage}" />
+                                    </ContextMenu>
+                                </Button.ContextMenu>
+                                <Image Source="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/pagedelete.png"/>
+                            </Button>
+                            <ToggleButton x:Name="ToggleButtonRuled" Checked="ToggleButton_Checked" Unchecked="ToggleButton_Checked" Margin="3">
+                                <Image Source="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/ruled.png" />
+                            </ToggleButton>
+                            <ToggleButton x:Name="ToggleButtonBlanko" Checked="ToggleButton_Checked" Unchecked="ToggleButton_Checked" Margin="3">
+                                <Image Source="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/blanco.png"/>
+                            </ToggleButton>
+                        </StackPanel>
                     </StackPanel>
                 </Grid>
             </Grid>
         </Grid>
         <Grid Grid.Row="2" Grid.ColumnSpan="3" Background="DarkGray">
-            <Border HorizontalAlignment="Right">
-                <StackPanel Orientation="Horizontal">
-                    <Button x:Name="ButtonOK" Click="ButtonOK_Click" Margin="5" Width="100" Height="30" FontWeight="Bold" Content="{x:Static res:Resources.strOK}"/>
-                    <Button x:Name="ButtonCancel" Click="ButtonCancel_Click" Margin="5" Width="100" Height="30" Content="{x:Static res:Resources.strCancel}"/>
-                </StackPanel>
-            </Border>
-            <Grid HorizontalAlignment="Left">
-                <TextBlock x:Name="TextInfoLabel" Visibility="Hidden" Margin="5,2,2,2" Foreground="DimGray" FontSize="16" FontWeight="Bold" VerticalAlignment="Center" Text="Info: Mit diesem Button leeren Sie die Seite"/>
-            </Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <TextBlock x:Name="TextInfoLabel" ToolTip="{Binding ElementName=TextInfoLabel, Path=Text}" Visibility="Visible" Margin="5,2,2,2" Foreground="DimGray" FontSize="16" FontWeight="Bold" VerticalAlignment="Center" Text="Info: Mit diesem Button leeren Sie die Seite" TextTrimming="CharacterEllipsis"/>
+
+            <StackPanel Orientation="Horizontal" Grid.Column="1">
+                <Button x:Name="ButtonOK" Click="ButtonOK_Click" Margin="5" Width="100" Height="30" FontWeight="Bold" Content="{x:Static res:Resources.strOK}"/>
+                <Button x:Name="ButtonCancel" Click="ButtonCancel_Click" Margin="5" Width="100" Height="30" Content="{x:Static res:Resources.strCancel}"/>
+            </StackPanel>
         </Grid>
     </Grid>
 </UserControl>

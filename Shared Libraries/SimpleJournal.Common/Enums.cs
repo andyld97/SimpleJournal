@@ -57,7 +57,7 @@
     public enum PaperType
     {
         Blanco,
-        Chequeued,
+        Chequered, // ToDo: *** Rename to Chequered (old: Chequeued)
         Ruled,
         Dotted,
         Custom

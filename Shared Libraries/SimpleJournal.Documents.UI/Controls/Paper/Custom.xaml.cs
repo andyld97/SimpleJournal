@@ -1,9 +1,8 @@
 ﻿using SimpleJournal.Common;
 using System.Windows.Controls;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using SimpleJournal.Documents.UI.Helper;
-using SimpleJournal.Documents.UI.Controls;
+using Orientation = SimpleJournal.Common.Orientation;
 
 namespace SimpleJournal.Documents.UI.Controls.Paper
 {
@@ -14,7 +13,7 @@ namespace SimpleJournal.Documents.UI.Controls.Paper
     {
         public byte[] PageBackground { get; private set; }
 
-        public Common.Orientation Orientation { get; private set; }
+        public Orientation Orientation { get; set; }
 
         public Custom(byte[] background, Common.Orientation orientation)
         {
@@ -33,9 +32,10 @@ namespace SimpleJournal.Documents.UI.Controls.Paper
             if (orientation == Common.Orientation.Landscape)
             {
                 // Swap width and height
-                double temp = Width;
-                Width = Height;
-                Height = temp;
+                double width = Canvas.Width;
+                Canvas.Width = Canvas.Height;
+                Canvas.Height = Width;
+                (Height, Width) = (Width, Height);
             }
         }
 

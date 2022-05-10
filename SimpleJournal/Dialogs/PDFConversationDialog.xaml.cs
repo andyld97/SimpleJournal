@@ -322,7 +322,7 @@ namespace SimpleJournal.Dialogs
                                 if (counter == 1 && currentTicket.Documents.Count > 1)
                                     destinationFileName = newFileName;
 
-                                var response = await client.GetAsync($"{Consts.ConverterAPIUrl}/api/ticket/{currentTicket.ID}/download/{journal}");
+                                var response = await client.GetAsync($"{Consts.ConverterAPIUrl}/api/ticket/{currentTicket.ID}/download/{counter - 1}");
                                 if (response.IsSuccessStatusCode)
                                 {
                                     var str = await response.Content.ReadAsStreamAsync();

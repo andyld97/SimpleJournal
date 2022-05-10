@@ -71,9 +71,9 @@
                                 <ListBox x:Name="ListRecentlyOpenedDocuments" ItemTemplate="{StaticResource RecentlyOpenedDocumentsTemplate}" ItemContainerStyle="{DynamicResource _ListBoxItemStyle}" Background="Transparent" BorderThickness="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" SelectionChanged="ListRecentlyOpenedDocuments_SelectionChanged" />
                             </StackPanel>
                         </Fluent:ApplicationMenu.RightPaneContent>
-                        <Fluent:MenuItem x:Name="btnNew" Command="ApplicationCommands.New" Header="{x:Static res:Resources.strNewDocument}" KeyTip="N" Icon="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/add.png"  />
+                        <Fluent:MenuItem x:Name="btnNew" Command="ApplicationCommands.New" Header="{x:Static res:Resources.strNewDocument}" KeyTip="N" Icon="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/pageadd.png"  />
                         <Fluent:MenuItem x:Name="btnOpen" Click="btnOpen_Click" Header="{x:Static res:Resources.strOpenDocument}" KeyTip="O" Icon="pack://application:,,,/SimpleJournal;component/resources/open.png"  />
-                        <Fluent:MenuItem x:Name="btnImportPDF" Header="{x:Static res:Resources.strImportPDFFile}" Icon="/resources/pdf.png" Click="MenuButtonImportPDF_Click"  />
+                        <Fluent:MenuItem x:Name="btnImportPDF" Header="{x:Static res:Resources.strImportPDFFile}" Icon="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/custom.png" Click="MenuButtonImportPDF_Click"  />
                         <Fluent:MenuItem x:Name="btnSaveProject"  Command="ApplicationCommands.Save" Header="{x:Static res:Resources.strSaveDocument}" KeyTip="S" Icon="pack://application:,,,/SimpleJournal;component/resources/save.png"  />
                         <Fluent:MenuItem x:Name="btnSave" Click="btnSave_Click" Header="{x:Static res:Resources.strSaveAsDocument}" KeyTip="S" Icon="pack://application:,,,/SimpleJournal;component/resources/save.png"  />
                         <Fluent:MenuItem x:Name="btnPrint" Command="ApplicationCommands.Print" Header="{x:Static res:Resources.strPrintDocument}" KeyTip="D" Icon="pack://application:,,,/SimpleJournal;component/resources/print.png"  />
@@ -87,7 +87,7 @@
 
                     <Fluent:Backstage x:Name="MenuBackstage" Margin="0,1,0,1" IsOpenChanged="Backstage_IsOpenChanged" BorderBrush="Blue" Background="{DynamicResource Fluent.Ribbon.Brushes.AccentBaseColorBrush}">
                         <Fluent:BackstageTabControl x:Name="MenuBackstageTabControl">
-                            <Fluent:BackstageTabItem x:Name="MenuBackstageNewFile" MouseDown="BackstageTabItem_MouseDown" Icon="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/add.png" Header="{x:Static res:Resources.strNewDocument}">
+                            <Fluent:BackstageTabItem x:Name="MenuBackstageNewFile" MouseDown="BackstageTabItem_MouseDown" Icon="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/pageadd.png" Header="{x:Static res:Resources.strNewDocument}">
                                 <GroupBox Margin="10" BorderThickness="0">
                                     <GroupBox.Header>
                                         <TextBlock Foreground="{DynamicResource BlackBrush}">
@@ -99,7 +99,7 @@
                                 </GroupBox>
                             </Fluent:BackstageTabItem>
                             <Fluent:Button Icon="/resources/open.png" Header="{x:Static res:Resources.strOpenDocument}" Click="btnOpen_Click" />
-                            <Fluent:Button x:Name="MenuButtonImportPDF" Icon="/resources/pdf.png" Header="{x:Static res:Resources.strImportPDFFile}" Click="MenuButtonImportPDF_Click" />
+                            <Fluent:Button x:Name="MenuButtonImportPDF" Icon="pack://application:,,,/SimpleJournal;component/resources/pdf_small.png" Header="{x:Static res:Resources.strImportPDFFile}" Click="MenuButtonImportPDF_Click" />
                             <Fluent:Button Icon="/resources/save.png" Header="{x:Static res:Resources.strSaveDocument}" Command="ApplicationCommands.Save" />
                             <Fluent:Button Icon="/resources/save.png" Header="{x:Static res:Resources.strSaveAsDocument}" Click="btnSave_Click" />
                             <Fluent:SeparatorTabItem />
@@ -182,9 +182,7 @@
                     </controls:DropDownToggleButton>
                     <controls:DropDownToggleButton x:Name="btnRuler" Click="btnRuler_Click" Header="{x:Static res:Resources.strRuler}" ToolTip="{x:Static res:Resources.strRulerDescription}" Width="50">
                         <controls:DropDownToggleButton.LargeIcon>
-                            <Viewbox Width="32" Height="32">
-                                <Image Source="pack://application:,,,/SimpleJournal;component/resources/ruler.png"/>
-                            </Viewbox>
+                            <Image Width="32" Height="32" Source="pack://application:,,,/SimpleJournal;component/resources/ruler.png" />
                         </controls:DropDownToggleButton.LargeIcon>
                     </controls:DropDownToggleButton>
                 </Fluent:RibbonGroupBox>
@@ -192,16 +190,12 @@
                     <Fluent:ToggleButton x:Name="btnRubberGrob" Click="btnRubberGrob_Click" Header="{x:Static res:Resources.strStrokes}" ToolTip="{x:Static res:Resources.strStrokesDescription}" LargeIcon="pack://application:,,,/SimpleJournal;component/resources/rubber.png"/>
                     <controls:DropDownToggleButton x:Name="btnRubberFine" Click="btnRubberFine_Click" Width="45" Header="{x:Static res:Resources.strFree}" ToolTip="{x:Static res:Resources.strFreeDescription}">
                         <controls:DropDownToggleButton.LargeIcon>
-                            <Viewbox Width="32" Height="32">
-                                <Image Source="pack://application:,,,/SimpleJournal;component/resources/rubber.png"/>
-                            </Viewbox>
+                            <Image Width="32" Height="32" Source="pack://application:,,,/SimpleJournal;component/resources/rubber.png"/>
                         </controls:DropDownToggleButton.LargeIcon>
                     </controls:DropDownToggleButton>
                     <controls:DropDownToggleButton x:Name="btnSelect" Click="btnSelect_Click" ToolTip="{x:Static res:Resources.strSelectDescription}" Header="{x:Static res:Resources.strSelect}" Width="52">
                         <controls:DropDownToggleButton.LargeIcon>
-                            <Viewbox Width="32" Height="32">
-                                <Image Source="pack://application:,,,/SimpleJournal;component/resources/selectarea.png"/>
-                            </Viewbox>
+                            <Image Width="32" Height="32" Source="pack://application:,,,/SimpleJournal;component/resources/selectarea.png" />
                         </controls:DropDownToggleButton.LargeIcon>
                     </controls:DropDownToggleButton>
                     <Fluent:Button x:Name="btnRemoveSelectedStrokes" Click="btnRemoveSelectedStrokes_Click" SizeDefinition="Middle,Small" ToolTip="{x:Static res:Resources.strRemoveDescription}" Header="{x:Static res:Resources.strRemove}" Icon="pack://application:,,,/SimpleJournal;component/resources/delete.png"/>
@@ -212,17 +206,13 @@
                 <Fluent:RibbonGroupBox x:Name="GroupForms" Header="{x:Static res:Resources.strShapesHeader}">
                     <controls:DropDownToggleButton x:Name="btnInsertSimpleForm" Click="btnInsertSimpleForm_Click_1" Header="{x:Static res:Resources.strToolFormFixed}" ToolTip="{x:Static res:Resources.strInsertSimpleFormToolTip}" Width="52">
                         <controls:DropDownToggleButton.LargeIcon>
-                            <Viewbox Width="32" Height="32">
-                                <Image Source="pack://application:,,,/SimpleJournal;component/resources/shapes.png"/>
-                            </Viewbox>
+                            <Image Width="32" Height="32" Source="pack://application:,,,/SimpleJournal;component/resources/shapes.png" />
                         </controls:DropDownToggleButton.LargeIcon>
                     </controls:DropDownToggleButton>
                     <Fluent:ToggleButton x:Name="btnRecogniziation" Click="btnRecogniziation_Click" Header="{x:Static res:Resources.strToolFormFree}" ToolTip="{x:Static res:Resources.strRecognizationDescription}" Width="50" LargeIcon="pack://application:,,,/SimpleJournal;component/resources/shapes.png"/>
                     <controls:DropDownToggleButton x:Name="btnFreeHandPolygon" Click="BtnFreeHandPolygon_Click" Header="{x:Static res:Resources.strPolygonButton}" ToolTip="{x:Static res:Resources.strPolygonToolTip}" Width="50">
                         <controls:DropDownToggleButton.LargeIcon>
-                            <Viewbox Width="32" Height="32">
-                                <Image Source="pack://application:,,,/SimpleJournal;component/resources/polygon.png"/>
-                            </Viewbox>
+                            <Image Width="32" Height="32" Source="pack://application:,,,/SimpleJournal;component/resources/polygon.png"/>
                         </controls:DropDownToggleButton.LargeIcon>
                     </controls:DropDownToggleButton>
                     <controls:DropDownToggleButton x:Name="btnInsertPlot" Header="XY" Foreground="{DynamicResource BlackBrush}" Width="50" Click="btnCooardinateSystem_Click" ToolTip="{x:Static res:Resources.strInsertPlotToolTip}">
@@ -244,13 +234,11 @@
                 <Fluent:RibbonGroupBox x:Name="GroupPages" Header="{x:Static res:Resources.strPages}" KeyTip="S">
                     <controls:DropDownToggleButton x:Name="btnInsertNewPage" Click="BtnInsertNewPage_Click" Header="{x:Static res:Resources.strAddPage}" ToolTip="{x:Static res:Resources.strAddPageTooltip}" IsToggleable="False" Width="65">
                         <controls:DropDownToggleButton.LargeIcon>
-                            <Viewbox Width="32" Height="32">
-                                <Image x:Name="ButtonInsertNewPageIcon" Source="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/add.png"/>
-                            </Viewbox>
+                           <Image x:Name="ButtonInsertNewPageIcon" RenderOptions.BitmapScalingMode="Fant" Width="32" Height="32" Source="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/pageadd.png" />
                         </controls:DropDownToggleButton.LargeIcon>
                     </controls:DropDownToggleButton>
-                    <controls:FluentToggleButtonRemovedToggle x:Name="btnDeletePage" Click="btnDeletePage_Click" Header="{x:Static res:Resources.strDeletePage}" ToolTip="{x:Static res:Resources.strDeletePageTooltip}" Width="55" LargeIcon="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/deletepage.png"/>
-                    <controls:FluentToggleButtonRemovedToggle x:Name="btnClearPage" Click="btnClearPage_Click" Header="{x:Static res:Resources.strClearPage}" ToolTip="{x:Static res:Resources.strClearPageTooltip}" Width="55" LargeIcon="pack://application:,,,/SimpleJournal;component/resources/clear.png"/>
+                    <controls:FluentToggleButtonRemovedToggle x:Name="btnDeletePage" Click="btnDeletePage_Click" Header="{x:Static res:Resources.strDeletePage}" ToolTip="{x:Static res:Resources.strDeletePageTooltip}" Width="55" LargeIcon="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/pagedelete.png"/>
+                    <controls:FluentToggleButtonRemovedToggle x:Name="btnClearPage" Click="btnClearPage_Click" Header="{x:Static res:Resources.strClearPage}" ToolTip="{x:Static res:Resources.strClearPageTooltip}" Width="55" LargeIcon="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/blanco.png"/>
                     <controls:FluentToggleButtonRemovedToggle x:Name="btnManagePages" Click="btnManagePages_Click" Header="{x:Static res:Resources.strManagePage}" ToolTip="{x:Static res:Resources.strManagePageTooltip}" Width="60" LargeIcon="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/editpage.png"/>
 
                     <!-- Make some space for the ComboBox-->
@@ -309,7 +297,7 @@
             </Fluent:Ribbon.ToolBarItems>
             <Fluent:Ribbon.QuickAccessItems>
                 <Fluent:QuickAccessMenuItem x:Name="QuickAccessButtonNew" IsChecked="True">
-                    <Fluent:Button Header="{x:Static res:Resources.strNewDocument}" Command="ApplicationCommands.New" Icon="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/add.png" />
+                    <Fluent:Button Header="{x:Static res:Resources.strNewDocument}" Command="ApplicationCommands.New" Icon="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/pageadd.png" />
                 </Fluent:QuickAccessMenuItem>
                 <Fluent:QuickAccessMenuItem x:Name="QuickAccessButtonSave" IsChecked="True">
                     <Fluent:Button Header="{x:Static res:Resources.strSave}" Command="ApplicationCommands.Save" Icon="pack://application:,,,/SimpleJournal;component/resources/save.png" />

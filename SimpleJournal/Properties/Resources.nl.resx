@@ -731,14 +731,11 @@ Klik op Nee om dit bericht te blijven ontvangen!</value>
   <data name="strMessageFailedToExportPsScripts" xml:space="preserve">
     <value>Fout bij het exporteren van de bestanden: {0}</value>
   </data>
-  <data name="strPageManagmentButtonClearPage" xml:space="preserve">
-    <value>Wist de momenteel geselecteerde pagina</value>
-  </data>
   <data name="strPageManagmentButtonDecreaseZoom" xml:space="preserve">
     <value>Verlaagt de zoomfactor van het voorbeeld</value>
   </data>
   <data name="strPageManagmentButtonDeletePage" xml:space="preserve">
-    <value>Verwijdert de momenteel geselecteerde pagina</value>
+    <value>Wist of verwijdert de momenteel geselecteerde pagina, afhankelijk van de selectie</value>
   </data>
   <data name="strPageManagmentButtonIncreaseZoom" xml:space="preserve">
     <value>Verhoogt de zoomfactor van het voorbeeld</value>
@@ -1017,7 +1014,7 @@ Klik op Nee om dit bericht te blijven ontvangen!</value>
     <value>Opnieuw</value>
   </data>
   <data name="strReleaseDate" xml:space="preserve">
-    <value>27/04/2022 15:00</value>
+    <value>10/05/2022 15:00</value>
   </data>
   <data name="strRemove" xml:space="preserve">
     <value>Verwijderen</value>
@@ -1610,5 +1607,24 @@ Hier wil ik je nog een paar belangrijke tips geven die je zullen helpen om Simpl
   </data>
   <data name="strPageManagmentControl_SaveError" xml:space="preserve">
     <value>Er is een fout opgetreden tijdens het opslaan: {0}</value>
+  </data>
+  <data name="strPageManagmentDialog_HoverDefaultText" xml:space="preserve">
+    <value>Beweeg de muis over een van de knoppen en de functie wordt hier weergegeven!</value>
+  </data>
+  <data name="strPageManagmentDialogButtonRotatePage" xml:space="preserve">
+    <value>Draait de pagina (van staand naar liggend of van liggend naar staand)</value>
+  </data>
+  <data name="strPageManagmentDialog_ClearPage" xml:space="preserve">
+    <value>Bladzijde Pagina</value>
+  </data>
+  <data name="strPageManagmentDialog_DeletePage" xml:space="preserve">
+    <value>Verwijder Pagina</value>
+  </data>
+  <data name="strPageManagmentDialog_RotatePage_Title" xml:space="preserve">
+    <value>Bladzijde omslaan?</value>
+  </data>
+  <data name="strPageManagmentDialog_RotatePage_Message" xml:space="preserve">
+    <value>Wilt u deze pagina echt roteren?
+Als er al een tekening op de pagina staat, worden alle tekeningen verplaatst!</value>
   </data>
 </root>

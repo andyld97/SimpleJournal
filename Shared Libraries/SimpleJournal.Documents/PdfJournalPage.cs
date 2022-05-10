@@ -11,7 +11,5 @@ namespace SimpleJournal.Documents
         }
 
         public byte[] PageBackground { get; set; }
-
-        public Orientation Orientation { get; set; }    
     }
 }

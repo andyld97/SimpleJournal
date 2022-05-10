@@ -84,7 +84,7 @@
 
             <Border Margin="0,5,0,5" Grid.Row="1" BorderBrush="White" BorderThickness="1">
                 <ScrollViewer x:Name="DisplayFrameScrollViewer" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                    <StackPanel x:Name="Pages" Background="#E1E1E1" HorizontalAlignment="Center" />
+                    <StackPanel x:Name="Pages" Background="#E1E1E1" HorizontalAlignment="Stretch" />
                 </ScrollViewer>
             </Border>
         </Grid>
