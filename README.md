@@ -1,4 +1,5 @@
 # SimpleJournal
+![Lines Of Code](https://tokei.rs/b1/github/andyld97/SimpleJournal)
 ![GitHub](https://img.shields.io/github/license/andyld97/SimpleJournal)
 ![GitHub issues](https://img.shields.io/github/issues/andyld97/SimpleJournal)
 ![GitHub all releases](https://img.shields.io/github/downloads/andyld97/SimpleJournal/total)
