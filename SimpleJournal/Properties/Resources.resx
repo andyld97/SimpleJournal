@@ -2138,4 +2138,12 @@ If there is already drawing on the page, all drawings are moved!</value>
     <value>Rotate Page?</value>
     <comment>PageManagmentDialog.xaml.cs</comment>
   </data>
+  <data name="strNavigateToNextPage" xml:space="preserve">
+    <value>Navigate to next page</value>
+    <comment>MainWindow.xaml</comment>
+  </data>
+  <data name="strNavigateToPreviousPage" xml:space="preserve">
+    <value>Navigate to previous page</value>
+    <comment>MainWindow.xaml</comment>
+  </data>
 </root>

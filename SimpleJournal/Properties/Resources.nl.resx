@@ -1627,4 +1627,10 @@ Hier wil ik je nog een paar belangrijke tips geven die je zullen helpen om Simpl
     <value>Wilt u deze pagina echt roteren?
 Als er al een tekening op de pagina staat, worden alle tekeningen verplaatst!</value>
   </data>
+  <data name="strNavigateToPreviousPage" xml:space="preserve">
+    <value>Naar vorige pagina gaan</value>
+  </data>
+  <data name="strNavigateToNextPage" xml:space="preserve">
+    <value>Navigeer naar de volgende pagina</value>
+  </data>
 </root>

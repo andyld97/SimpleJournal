@@ -99,6 +99,8 @@
 		<AdditionalFiles Remove="C:\Users\andre\.nuget\packages\microsoft.dotnet.upgradeassistant.extensions.default.analyzers\0.2.231403\build\\WebTypeReplacements.typemap" />
 	</ItemGroup>
 	<ItemGroup>
+	  <None Remove="resources\arrow_down.png" />
+	  <None Remove="resources\arrow_up.png" />
 	  <None Remove="resources\pdf_small.png" />
 	</ItemGroup>
 	<ItemGroup>
@@ -133,6 +135,8 @@
 		<None Include="Store Packages\ReferencePackage %28SimpleJournal%29 %2849%29 %281.430.0.0%29 %2829.04.21%29.msix" />
 	</ItemGroup>
 	<ItemGroup>
+		<Resource Include="resources\arrow_down.png" />
+		<Resource Include="resources\arrow_up.png" />
 		<Resource Include="resources\caslogo.ico" />
 		<Resource Include="resources\pdf_small.png" />
 	</ItemGroup>
@@ -172,9 +176,6 @@
 	</ItemGroup>
 	<ItemGroup>
 		<Resource Include="resources\sidebar.png" />
-	</ItemGroup>
-	<ItemGroup>
-		<Resource Include="resources\pen.png" />
 	</ItemGroup>
 	<ItemGroup>
 		<Resource Include="resources\clear.png" />
@@ -262,12 +263,6 @@
 	</ItemGroup>
 	<ItemGroup>
 		<Resource Include="resources\backgrounds\wooden-2.jpg" />
-	</ItemGroup>
-	<ItemGroup>
-		<Resource Include="resources\touch_off.png" />
-	</ItemGroup>
-	<ItemGroup>
-		<Resource Include="resources\touch_on.png" />
 	</ItemGroup>
 	<ItemGroup>
 		<PackageReference Include="DotnetRuntimeBootstrapper" Version="2.2.0">

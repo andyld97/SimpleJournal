@@ -120,7 +120,7 @@ namespace SimpleJournal.Documents.UI.Helper
 
             if (element is Image oldImage)
             {
-                var img = new Image() { Source = (element as Image).Source.Clone() };
+                var img = new Image() { Source = ((Image)element).Source.Clone() };
                 img.Width = oldImage.Width;
                 img.Height = oldImage.Height;
 
@@ -171,7 +171,7 @@ namespace SimpleJournal.Documents.UI.Helper
 
                 for (int i = 0; i < canvas.Children.Count; i++)
                 {
-                    if (canvas.Children[i] is UIElement && canvas.Children[i] != element)
+                    if (canvas.Children[i] is not null && canvas.Children[i] != element)
                         maxZ = Math.Max(maxZ, Canvas.GetZIndex(canvas.Children[i]));
                 }
                 Canvas.SetZIndex(element, Math.Min(++maxZ, int.MaxValue));
@@ -221,7 +221,7 @@ namespace SimpleJournal.Documents.UI.Helper
                 Point point = DeterminePointFromUIElement(element, can);
 
                 // Reset old transform to replace it with roation angle with origin (0,0)!
-                if (!(element.RenderTransform is RotateTransform))
+                if (element.RenderTransform is not RotateTransform)
                 {
                     element.RenderTransform = null;
                     element.SetValue(InkCanvas.LeftProperty, point.X);

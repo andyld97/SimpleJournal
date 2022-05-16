@@ -1,13 +1,20 @@
 ﻿using Fluent;
 using Microsoft.Win32;
-using SimpleJournal.Documents.UI.Actions;
+using SimpleJournal.Common;
 using SimpleJournal.Controls;
 using SimpleJournal.Controls.Templates;
 using SimpleJournal.Data;
 using SimpleJournal.Dialogs;
-using SimpleJournal.Helper;
-using SimpleJournal.Common;
+using SimpleJournal.Documents;
+using SimpleJournal.Documents.UI;
+using SimpleJournal.Documents.UI.Actions;
 using SimpleJournal.Documents.UI.Controls;
+using SimpleJournal.Documents.UI.Controls.Paper;
+using SimpleJournal.Documents.UI.Data;
+using SimpleJournal.Documents.UI.Extensions;
+using SimpleJournal.Documents.UI.Helper;
+using SimpleJournal.Helper;
+using SimpleJournal.Helper.PDF;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -31,18 +38,10 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 using System.Windows.Xps;
+using Action = SimpleJournal.Documents.UI.Actions.Action;
+using Clipboard = SimpleJournal.Documents.UI.Data.Clipboard;
 using Orientation = SimpleJournal.Common.Orientation;
 using Pen = SimpleJournal.Data.Pen;
-using SimpleJournal.Documents;
-using SimpleJournal.Documents.UI.Extensions;
-using SimpleJournal.Documents.UI.Helper;
-using SimpleJournal.Common.FileAssociations;
-using SimpleJournal.Helper.PDF;
-using Action = SimpleJournal.Documents.UI.Actions.Action;
-using SimpleJournal.Documents.UI;
-using SimpleJournal.Documents.UI.Data;
-using Clipboard = SimpleJournal.Documents.UI.Data.Clipboard;
-using SimpleJournal.Documents.UI.Controls.Paper;
 using Stretch = System.Windows.Media.Stretch;
 
 namespace SimpleJournal
@@ -661,7 +660,7 @@ namespace SimpleJournal
             // Try at least to create a backup - if SJ crashes - the user can restore the backup and everything should be fine though.
             await CreateBackup();
         }
-#endregion
+        #endregion
 
         #region Determine which Canvas is the last modifed while scrolling
 
@@ -715,7 +714,7 @@ namespace SimpleJournal
                     counter++;
             }
         }
-#endregion
+        #endregion
 
         #region Sidebar Handling
 
@@ -1113,7 +1112,7 @@ namespace SimpleJournal
         }
 
 
-#endregion
+        #endregion
 
         #region Private Methods
 
@@ -1799,7 +1798,7 @@ namespace SimpleJournal
 
             isInitalized = true;
         }
-#endregion
+        #endregion
 
         #region Toolbar Handling / Private Event Handling
 
@@ -2185,7 +2184,7 @@ namespace SimpleJournal
         }
 
 
-#endregion
+        #endregion
 
         #region Event Handling / Menu
 
@@ -2297,7 +2296,7 @@ namespace SimpleJournal
             InsertFromClipboard();
         }
 
-#endregion
+        #endregion
 
         private void Backstage_IsOpenChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
@@ -2369,6 +2368,21 @@ namespace SimpleJournal
             }
         }
 
+        private void ButtonPreviousPage_Click(object sender, RoutedEventArgs e)
+        {
+            int index = cmbPages.SelectedIndex - 1;
+            if (index < 0)
+                index = CurrentPages - 1;
+
+            ScrollToPage(index);
+        }
+
+        private void ButtonNextPage_Click(object sender, RoutedEventArgs e)
+        {
+            int index = (cmbPages.SelectedIndex + 1) % CurrentPages;
+            ScrollToPage(index);
+        }
+
         private async Task<bool> SaveProject(bool forceNewPath)
         {
             bool resultSaving = false;
@@ -2379,8 +2393,8 @@ namespace SimpleJournal
                 var result = dialog.ShowDialog();
                 if (result.HasValue && result.Value)
                 {
-                    resultSaving =  await SaveJournal(dialog.FileName);
-                    this.UpdateTitle(System.IO.Path.GetFileNameWithoutExtension(dialog.FileName));
+                    resultSaving = await SaveJournal(dialog.FileName);
+                    UpdateTitle(System.IO.Path.GetFileNameWithoutExtension(dialog.FileName));
                 }
             }
             else
@@ -2394,6 +2408,11 @@ namespace SimpleJournal
             await SaveProject(true);
         }
 
+        /// <summary>
+        /// This button is currently hidden, because using a pdf printer results in a better quality
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void MenuButtonBackstageExportPdf_Click(object sender, RoutedEventArgs e)
         {
             SaveFileDialog dialog = new SaveFileDialog() { Filter = Properties.Resources.strPDFFilter, Title = Properties.Resources.strPDFDialogTitle };
@@ -2823,7 +2842,7 @@ namespace SimpleJournal
             }
         }
 
-#region Exit
+        #region Exit
         private bool closedButtonWasPressed = false;
 
         private async void btnExit_Click(object sender, RoutedEventArgs e)
@@ -2935,9 +2954,9 @@ namespace SimpleJournal
             AboutDialog aboutDialog = new AboutDialog();
             aboutDialog.ShowDialog();
         }
-#endregion
+        #endregion
 
-#endregion
+        #endregion
 
         #endregion
 
@@ -2952,13 +2971,16 @@ namespace SimpleJournal
                 // CenterY = (mainScrollView.ScrollOffset / mainScrollView.VerticalOffset)
             };
 
+            btnZoom80.IsChecked =
             btnZoom100.IsChecked =
             btnZoom120.IsChecked =
             btnZoom150.IsChecked =
             btnZoom180.IsChecked =
             btnZoom200.IsChecked = false;
 
-            if (scale == 1.0)
+            if (scale == 0.8)
+                btnZoom80.IsChecked = true;
+            else if (scale == 1.0)
                 btnZoom100.IsChecked = true;
             else if (scale == 1.2)
                 btnZoom120.IsChecked = true;
@@ -2970,13 +2992,20 @@ namespace SimpleJournal
                 btnZoom200.IsChecked = true;
 
             pages.LayoutTransform = lt;
+
             // This is for prevent jumping while switching zoom
             mainScrollView.ScrollToVerticalOffset((mainScrollView.VerticalOffset / currentScaleFactor) * scale);
+
             currentScaleFactor = scale;
 
             // Save scale to settings
             Settings.Instance.Zoom = (int)(scale * 100);
             Settings.Instance.Save();
+        }
+
+        private void btnZoom80_Click(object sender, RoutedEventArgs e)
+        {
+            ZoomByScale(0.8);
         }
 
         private void btnZoom100_Click(object sender, RoutedEventArgs e)
@@ -3003,7 +3032,7 @@ namespace SimpleJournal
         {
             ZoomByScale(1.8);
         }
-#endregion
+        #endregion
 
         #region Scroll Handling
         private Point p1 = new Point();
@@ -3094,7 +3123,7 @@ namespace SimpleJournal
             mainScrollView.BeginStoryboard(sbScrollViewerAnimation);
         }
 
-#endregion
+        #endregion
 
         #region Internal Save and Load
         private async Task<bool> SaveJournal(string path, bool saveAsBackup = false)
@@ -3377,7 +3406,7 @@ namespace SimpleJournal
         }
 
 
-#endregion
+        #endregion
 
         #region Pagemanagment Dialog
 
@@ -3488,8 +3517,8 @@ namespace SimpleJournal
         {
             PageManagementControl.Initalize(CurrentJournalPages.ToList(), this);
         }
-    
-#endregion
+
+        #endregion
 
         #region Export
 
@@ -3605,7 +3634,7 @@ namespace SimpleJournal
             clipboard.Renew();
         }
 
-#endregion
+        #endregion
 
         #region Insert
 
@@ -3711,15 +3740,12 @@ namespace SimpleJournal
             }
         }
 
-        private void ShowInsertHint()
+        private static void ShowInsertHint()
         {
-            if (!Settings.Instance.DoesNotShowInsertHint)
+            if (!Settings.Instance.DoesNotShowInsertHint && MessageBox.Show(Properties.Resources.strHintInsert, Properties.Resources.strHintTitle, MessageBoxButton.YesNo, MessageBoxImage.Information) == MessageBoxResult.Yes)
             {
-                if (MessageBox.Show(Properties.Resources.strHintInsert, Properties.Resources.strHintTitle, MessageBoxButton.YesNo, MessageBoxImage.Information) == MessageBoxResult.Yes)
-                {
-                    Settings.Instance.DoesNotShowInsertHint = true;
-                    Settings.Instance.Save();
-                }
+                Settings.Instance.DoesNotShowInsertHint = true;
+                Settings.Instance.Save();
             }
         }
 
@@ -3748,7 +3774,7 @@ namespace SimpleJournal
             InsertText(toInsert);
         }
 
-#endregion
+        #endregion
 
         #region Background
 
@@ -3891,5 +3917,5 @@ namespace SimpleJournal
             throw new NotImplementedException();
         }
     }
-#endregion
+    #endregion
 }
