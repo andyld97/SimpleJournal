@@ -510,7 +510,7 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Colors:.
+        ///   Looks up a localized string similar to More Colors:.
         /// </summary>
         public static string strColors {
             get {

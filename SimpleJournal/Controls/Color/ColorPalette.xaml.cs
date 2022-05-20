@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using SimpleJournal.Documents.UI.Extensions;
+using System.Linq;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
@@ -10,7 +12,7 @@ namespace SimpleJournal.Controls
     public partial class ColorPalette : UserControl
     {
         #region Color Definitons
-        private readonly Color[] colorMatrix = new Color[]
+       /* private readonly Color[] colorMatrix = new Color[]
         {
             Colors.White,
             Colors.Black,
@@ -96,11 +98,28 @@ namespace SimpleJournal.Controls
             Color.FromRgb(0,112,192),
             Color.FromRgb(0,32,96),
             Color.FromRgb(112,48,160),
-        };
+        };*/
         #endregion
 
         public delegate void onColorChanged(Color color);
         public event onColorChanged OnColorChanged;
+
+        public static Color[] StandardColorsPalette;
+
+        static ColorPalette()
+        {
+            MahApps.Metro.Controls.BuildInColorPalettes.WpfColorsPalette.Remove(System.Windows.Media.Colors.Transparent);
+
+            // Ignore first transparent entry
+            StandardColorsPalette = new Color[MahApps.Metro.Controls.BuildInColorPalettes.StandardColorsPalette.Length - 1];
+            for (int i = 1; i <= StandardColorsPalette.Length; i++)
+                StandardColorsPalette[i - 1] = MahApps.Metro.Controls.BuildInColorPalettes.StandardColorsPalette[i];
+
+            // Restore old SimpleJournal colors!
+            StandardColorsPalette[5] = Consts.PEN_COLORS[1].ToColor();
+            StandardColorsPalette[10] = Consts.PEN_COLORS[2].ToColor();
+            StandardColorsPalette[14] = Consts.PEN_COLORS[3].ToColor();
+        }
 
         public ColorPalette()
         {
@@ -108,7 +127,7 @@ namespace SimpleJournal.Controls
 
             // Add colors dynamically
             // So we have 60 colors to add to grid
-            int currentColumn = 0;
+            /*int currentColumn = 0;
             int currentRow = 0;
             for (int i = 0; i < 60; i++)
             {
@@ -145,23 +164,68 @@ namespace SimpleJournal.Controls
                 grd.Children.Add(template);
                 template.SetValue(Grid.ColumnProperty, currentColumn);
                 currentColumn += 2;
-            }
+            }*/
         }
 
-        public Button GenerateTemplate()
+        /*  public Button GenerateTemplate()
+          {
+              return new Button
+              {
+                  BorderBrush = Brushes.Gray,
+                  BorderThickness = new Thickness(0.6),
+                  Style = Application.Current.Resources["buttonWithoutSelection"] as Style
+              };
+          }
+
+          private void Template_Click(object sender, RoutedEventArgs e)
+          {
+              var col = ((sender as Button).Background as SolidColorBrush).Color;
+              OnColorChanged?.Invoke(col);           
+          }
+
+          */
+
+        private bool ignoreSelectionChanged = false;
+
+        public void SetSelectedColor(Color color)
         {
-            return new Button
+            ignoreSelectionChanged = true;
+
+            DefaultColors.UnselectAll();
+            AdvancedColors.UnselectAll();
+
+            if (StandardColorsPalette.Any(p => p == color))
+                DefaultColors.SelectedItem = color;
+            else
             {
-                BorderBrush = Brushes.Gray,
-                BorderThickness = new Thickness(0.6),
-                Style = Application.Current.Resources["buttonWithoutSelection"] as Style
-            };
+                Expander.IsExpanded = true;
+                AdvancedColors.SelectedItem = color;
+            }
+            ignoreSelectionChanged = false;
         }
 
-        private void Template_Click(object sender, RoutedEventArgs e)
+        private void AdvancedColors_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var col = ((sender as Button).Background as SolidColorBrush).Color;
-            OnColorChanged?.Invoke(col);           
+            if (ignoreSelectionChanged)
+                return;
+
+            ignoreSelectionChanged = true;
+            DefaultColors.UnselectAll();
+            ignoreSelectionChanged = false;
+
+            OnColorChanged?.Invoke((Color)AdvancedColors.SelectedItem);
+        }
+
+        private void DefaultColors_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (ignoreSelectionChanged)
+                return;
+
+            ignoreSelectionChanged = true;
+            AdvancedColors.UnselectAll();
+            ignoreSelectionChanged = false;
+
+            OnColorChanged?.Invoke((Color)DefaultColors.SelectedItem);
         }
     }
 }

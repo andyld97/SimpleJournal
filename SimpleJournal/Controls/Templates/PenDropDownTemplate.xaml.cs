@@ -60,8 +60,10 @@ namespace SimpleJournal.Controls.Templates
             else
                 index = FindIndex(Documents.UI.Consts.StrokeSizes, new Common.Data.Size(p.Width, p.Height));
 
-            PenSize.SetColor(p.FontColor.ToColor());
+            var fontColor = p.FontColor.ToColor();
+            PenSize.SetColor(fontColor);
             PenSize.SetIndex(index);
+            colorPalette.SetSelectedColor(fontColor);
         }
 
         private void ColorPalette_OnColorChanged(Color color)

@@ -302,7 +302,7 @@ Vielen Dank ...
     <comment>*</comment>
   </data>
   <data name="strColors" xml:space="preserve">
-    <value>Farben:</value>
+    <value>Weitere Farben:</value>
     <comment>ColorPicker.xaml</comment>
   </data>
   <data name="strContent" xml:space="preserve">
