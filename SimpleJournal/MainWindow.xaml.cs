@@ -54,7 +54,7 @@ namespace SimpleJournal
         public ObservableCollection<IPaper> CurrentJournalPages { get; private set; } = new ObservableCollection<IPaper>();
         public static MainWindow W_INSTANCE = null;
 
-        #region Private Members
+#region Private Members
         private InkCanvasEditingMode currentkInkMode = InkCanvasEditingMode.Ink;
         private readonly DrawingAttributes CurrentDrawingAttributes = new DrawingAttributes() { FitToCurve = Settings.Instance.UseFitToCurve, IsHighlighter = false };
         private readonly DrawingAttributes currentTextMarkerAttributes = new DrawingAttributes() { IsHighlighter = true };
@@ -117,9 +117,9 @@ namespace SimpleJournal
         // Pens
         public Pen[] currentPens = new Data.Pen[Consts.AMOUNT_PENS];
 
-        #endregion
+#endregion
 
-        #region Private Properties
+#region Private Properties
         private int SelectedPen
         {
             get
@@ -135,9 +135,9 @@ namespace SimpleJournal
                 return result;
             }
         }
-        #endregion
+#endregion
 
-        #region Constructor
+#region Constructor
         static MainWindow()
         {
             DrawingCanvas.HideSidebar += DrawingCanvas_HideSidebar;
@@ -199,7 +199,7 @@ namespace SimpleJournal
                 string executable = Consts.Executable;
                 try
                 {
-                    FileAssociations.EnsureAssociationsSet(executable);
+                    SimpleJournal.Common.FileAssociations.FileAssociations.EnsureAssociationsSet(executable);
                 }
                 catch (Exception ex)
                 {
@@ -432,9 +432,9 @@ namespace SimpleJournal
         {
             RefreshPages();
         }
-        #endregion
+#endregion
 
-        #region AutoSave - Backup
+#region AutoSave - Backup
 
         private string lastBackupFileName = string.Empty;
 
@@ -621,9 +621,9 @@ namespace SimpleJournal
             }
         }
 
-        #endregion
+#endregion
 
-        #region Error Handling
+#region Error Handling
 
         // ToDO: *** https://github.com/Tyrrrz/DotnetRuntimeBootstrapper/issues/23
         // Related:  https://github.com/Tyrrrz/DotnetRuntimeBootstrapper/issues/27
@@ -660,9 +660,9 @@ namespace SimpleJournal
             // Try at least to create a backup - if SJ crashes - the user can restore the backup and everything should be fine though.
             await CreateBackup();
         }
-        #endregion
+#endregion
 
-        #region Determine which Canvas is the last modifed while scrolling
+#region Determine which Canvas is the last modifed while scrolling
 
         private void mainScrollView_ScrollChanged(object sender, ScrollChangedEventArgs e)
         {
@@ -714,9 +714,9 @@ namespace SimpleJournal
                     counter++;
             }
         }
-        #endregion
+#endregion
 
-        #region Sidebar Handling
+#region Sidebar Handling
 
         public bool IsSideBarVisible => pnlSidebar.IsVisible;
 
@@ -1112,9 +1112,9 @@ namespace SimpleJournal
         }
 
 
-        #endregion
+#endregion
 
-        #region Private Methods
+#region Private Methods
 
         public void UpdateTextMarkerAttributes(bool reset = false)
         {
@@ -1798,11 +1798,11 @@ namespace SimpleJournal
 
             isInitalized = true;
         }
-        #endregion
+#endregion
 
-        #region Toolbar Handling / Private Event Handling
+#region Toolbar Handling / Private Event Handling
 
-        #region Tool Handling
+#region Tool Handling
 
         private InkCanvasEditingMode ConvertTool(Tools tool)
         {
@@ -2184,11 +2184,11 @@ namespace SimpleJournal
         }
 
 
-        #endregion
+#endregion
 
-        #region Event Handling / Menu
+#region Event Handling / Menu
 
-        #region Commands
+#region Commands
 
         private void DisableTouchScreenCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
@@ -2296,7 +2296,7 @@ namespace SimpleJournal
             InsertFromClipboard();
         }
 
-        #endregion
+#endregion
 
         private void Backstage_IsOpenChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
@@ -2842,7 +2842,7 @@ namespace SimpleJournal
             }
         }
 
-        #region Exit
+#region Exit
         private bool closedButtonWasPressed = false;
 
         private async void btnExit_Click(object sender, RoutedEventArgs e)
@@ -2954,13 +2954,13 @@ namespace SimpleJournal
             AboutDialog aboutDialog = new AboutDialog();
             aboutDialog.ShowDialog();
         }
-        #endregion
+#endregion
 
-        #endregion
+#endregion
 
-        #endregion
+#endregion
 
-        #region Zoom
+#region Zoom
 
         private void ZoomByScale(double scale)
         {
@@ -3032,9 +3032,9 @@ namespace SimpleJournal
         {
             ZoomByScale(1.8);
         }
-        #endregion
+#endregion
 
-        #region Scroll Handling
+#region Scroll Handling
         private Point p1 = new Point();
         private readonly Stopwatch timer = new Stopwatch();
         private Storyboard sbScrollViewerAnimation = new Storyboard();
@@ -3123,9 +3123,9 @@ namespace SimpleJournal
             mainScrollView.BeginStoryboard(sbScrollViewerAnimation);
         }
 
-        #endregion
+#endregion
 
-        #region Internal Save and Load
+#region Internal Save and Load
         private async Task<bool> SaveJournal(string path, bool saveAsBackup = false)
         {
             try
@@ -3406,9 +3406,9 @@ namespace SimpleJournal
         }
 
 
-        #endregion
+#endregion
 
-        #region Pagemanagment Dialog
+#region Pagemanagment Dialog
 
         private async Task ApplyPageManagmentDialog(List<JournalPage> result)
         {
@@ -3518,9 +3518,9 @@ namespace SimpleJournal
             PageManagementControl.Initalize(CurrentJournalPages.ToList(), this);
         }
 
-        #endregion
+#endregion
 
-        #region Export
+#region Export
 
         private void btnExport_Click(object sender, RoutedEventArgs e)
         {
@@ -3536,9 +3536,9 @@ namespace SimpleJournal
             ExportControl.Initalize(CurrentJournalPages, CurrentJournalPages[cmbPages.SelectedIndex], this);
         }
 
-        #endregion
+#endregion
 
-        #region Copy / Paste
+#region Copy / Paste
         private Clipboard clipboard = new Clipboard();
         private bool waitingForClickToPaste = false;
         private Tools pasteBackupTool = Tools.Pencil1;
@@ -3634,9 +3634,9 @@ namespace SimpleJournal
             clipboard.Renew();
         }
 
-        #endregion
+#endregion
 
-        #region Insert
+#region Insert
 
         private UIElement insertClipboard = null;
 #pragma warning disable IDE0052 // Ungelesene private Member entfernen
@@ -3774,9 +3774,9 @@ namespace SimpleJournal
             InsertText(toInsert);
         }
 
-        #endregion
+#endregion
 
-        #region Background
+#region Background
 
         public void ApplyBackground()
         {
@@ -3822,9 +3822,9 @@ namespace SimpleJournal
                 mainScrollView.Background = Consts.DefaultBackground;
             }
         }
-        #endregion
+#endregion
 
-        #region General Events / Touch
+#region General Events / Touch
 
         private void RibbonWindow_Activated(object sender, EventArgs e)
         {
@@ -3866,10 +3866,10 @@ namespace SimpleJournal
 #endif
         }
 
-        #endregion
+#endregion
     }
 
-    #region Converter
+#region Converter
     public class SelectedIndexToColumnSpanConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
@@ -3917,5 +3917,5 @@ namespace SimpleJournal
             throw new NotImplementedException();
         }
     }
-    #endregion
+#endregion
 }
