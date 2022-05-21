@@ -302,7 +302,7 @@ Vielen Dank ...
     <comment>*</comment>
   </data>
   <data name="strColors" xml:space="preserve">
-    <value>Farben:</value>
+    <value>Weitere Farben:</value>
     <comment>ColorPicker.xaml</comment>
   </data>
   <data name="strContent" xml:space="preserve">
@@ -1114,7 +1114,7 @@ Klicken Sie auf Nein, um diesen Hinweis weiterhin zu erhalten!</value>
     <comment>MainWindow.xaml</comment>
   </data>
   <data name="strReleaseDate" xml:space="preserve">
-    <value>10.05.2022 15:00 Uhr</value>
+    <value>21.05.2022 15:00 Uhr</value>
     <comment>*</comment>
   </data>
   <data name="strRemove" xml:space="preserve">
@@ -2049,5 +2049,11 @@ Wenn schon auf der Seite gezeichnet wurde, sind alle Zeichnungen verschoben!</va
   </data>
   <data name="strPageManagmentDialog_RotatePage_Title" xml:space="preserve">
     <value>Seite drehen?</value>
+  </data>
+  <data name="strNavigateToNextPage" xml:space="preserve">
+    <value>Zur nächsten Seite wechseln</value>
+  </data>
+  <data name="strNavigateToPreviousPage" xml:space="preserve">
+    <value>Zur vorherigen Seite wechseln</value>
   </data>
 </root>

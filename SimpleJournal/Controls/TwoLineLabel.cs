@@ -23,9 +23,9 @@ namespace SimpleJournal.Controls
         /// <summary>
         /// Run with text
         /// </summary>
-        private AccessText? textRun;
+        private AccessText textRun;
 
-        private AccessText? textRun2;
+        private AccessText textRun2;
 
         #endregion
 
@@ -80,19 +80,15 @@ namespace SimpleJournal.Controls
         /// <summary>
         /// Gets or sets the text
         /// </summary>
-#pragma warning disable WPF0012
-        public string? Text
-#pragma warning restore WPF0012
+        public string Text
         {
-            get { return (string?)this.GetValue(TextProperty); }
+            get { return (string)this.GetValue(TextProperty); }
             set { this.SetValue(TextProperty, value); }
         }
 
         /// <summary>Identifies the <see cref="Text"/> dependency property.</summary>
         public static readonly DependencyProperty TextProperty =
-#pragma warning disable WPF0010 // Default value type must match registered type.
             DependencyProperty.Register(nameof(Text), typeof(string), typeof(TwoLineLabel), new PropertyMetadata(string.Empty, OnTextChanged));
-#pragma warning restore WPF0010 // Default value type must match registered type.
 
         #endregion
 
@@ -183,14 +179,12 @@ namespace SimpleJournal.Controls
             }
 
             // Find soft hyphen, break at its position and display a normal hyphen.
-#pragma warning disable CA1307 // Specify StringComparison for clarity
             var hyphenIndex = text!.IndexOf((char)173);
-#pragma warning restore CA1307 // Specify StringComparison for clarity
 
             if (hyphenIndex >= 0)
             {
-                this.textRun.Text = text.Substring(0, hyphenIndex) + "-";
-                this.textRun2.Text = text.Substring(hyphenIndex) + " ";
+                this.textRun.Text = string.Concat(text.AsSpan(0, hyphenIndex), "-");
+                this.textRun2.Text = string.Concat(text.AsSpan(hyphenIndex), " ");
             }
             else
             {
@@ -209,27 +203,27 @@ namespace SimpleJournal.Controls
                 else if (leftSpaceIndex == -1)
                 {
                     // Finds only space from right. New line adds on it
-                    this.textRun.Text = text.Substring(0, rightSpaceIndex);
-                    this.textRun2.Text = text.Substring(rightSpaceIndex) + " ";
+                    this.textRun.Text = text[..rightSpaceIndex];
+                    this.textRun2.Text = string.Concat(text.AsSpan(rightSpaceIndex), " ");
                 }
                 else if (rightSpaceIndex == -1)
                 {
                     // Finds only space from left. New line adds on it
-                    this.textRun.Text = text.Substring(0, leftSpaceIndex);
-                    this.textRun2.Text = text.Substring(leftSpaceIndex) + " ";
+                    this.textRun.Text = text[..leftSpaceIndex];
+                    this.textRun2.Text = string.Concat(text.AsSpan(leftSpaceIndex), " ");
                 }
                 else
                 {
                     // Find nearest to center space and add new line on it
                     if (Math.Abs(centerIndex - leftSpaceIndex) < Math.Abs(centerIndex - rightSpaceIndex))
                     {
-                        this.textRun.Text = text.Substring(0, leftSpaceIndex);
-                        this.textRun2.Text = text.Substring(leftSpaceIndex) + " ";
+                        this.textRun.Text = text[..leftSpaceIndex];
+                        this.textRun2.Text = string.Concat(text.AsSpan(leftSpaceIndex), " ");
                     }
                     else
                     {
-                        this.textRun.Text = text.Substring(0, rightSpaceIndex);
-                        this.textRun2.Text = text.Substring(rightSpaceIndex) + " ";
+                        this.textRun.Text = text[..rightSpaceIndex];
+                        this.textRun2.Text = string.Concat(text.AsSpan(rightSpaceIndex), " ");
                     }
                 }
             }

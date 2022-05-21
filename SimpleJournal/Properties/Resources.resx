@@ -307,7 +307,7 @@ Many thanks ...
     <comment>*</comment>
   </data>
   <data name="strColors" xml:space="preserve">
-    <value>Colors:</value>
+    <value>More Colors:</value>
     <comment>ColorPicker.xaml</comment>
   </data>
   <data name="strContent" xml:space="preserve">
@@ -1133,7 +1133,7 @@ Click on No to continue to receive this message!</value>
     <comment>MainWindow.xaml</comment>
   </data>
   <data name="strReleaseDate" xml:space="preserve">
-    <value>05/10/2022 3:00 PM</value>
+    <value>05/21/2022 3:00 PM</value>
     <comment>About.xaml</comment>
   </data>
   <data name="strRemove" xml:space="preserve">
@@ -2137,5 +2137,13 @@ If there is already drawing on the page, all drawings are moved!</value>
   <data name="strPageManagmentDialog_RotatePage_Title" xml:space="preserve">
     <value>Rotate Page?</value>
     <comment>PageManagmentDialog.xaml.cs</comment>
+  </data>
+  <data name="strNavigateToNextPage" xml:space="preserve">
+    <value>Navigate to next page</value>
+    <comment>MainWindow.xaml</comment>
+  </data>
+  <data name="strNavigateToPreviousPage" xml:space="preserve">
+    <value>Navigate to previous page</value>
+    <comment>MainWindow.xaml</comment>
   </data>
 </root>

@@ -245,7 +245,7 @@ Erg bedankt ...
     <value>Kleur:</value>
   </data>
   <data name="strColors" xml:space="preserve">
-    <value>Kleuren:</value>
+    <value>Meer  Kleuren:</value>
   </data>
   <data name="strContent" xml:space="preserve">
     <value>Inhoud:</value>
@@ -1014,7 +1014,7 @@ Klik op Nee om dit bericht te blijven ontvangen!</value>
     <value>Opnieuw</value>
   </data>
   <data name="strReleaseDate" xml:space="preserve">
-    <value>10/05/2022 15:00</value>
+    <value>21/05/2022 15:00</value>
   </data>
   <data name="strRemove" xml:space="preserve">
     <value>Verwijderen</value>
@@ -1626,5 +1626,11 @@ Hier wil ik je nog een paar belangrijke tips geven die je zullen helpen om Simpl
   <data name="strPageManagmentDialog_RotatePage_Message" xml:space="preserve">
     <value>Wilt u deze pagina echt roteren?
 Als er al een tekening op de pagina staat, worden alle tekeningen verplaatst!</value>
+  </data>
+  <data name="strNavigateToPreviousPage" xml:space="preserve">
+    <value>Naar vorige pagina gaan</value>
+  </data>
+  <data name="strNavigateToNextPage" xml:space="preserve">
+    <value>Navigeer naar de volgende pagina</value>
   </data>
 </root>

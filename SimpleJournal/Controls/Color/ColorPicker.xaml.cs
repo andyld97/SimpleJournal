@@ -27,6 +27,9 @@ namespace SimpleJournal.Controls
 
                 var r = (cmb.GetTemplateChild("contentFill1") as Rectangle);
                 r.Fill = new SolidColorBrush(value);
+
+                var pal = cmb.GetTemplateChild("colorPalette") as ColorPalette;
+                pal.SetSelectedColor(value);
             }
         }
 
@@ -39,7 +42,6 @@ namespace SimpleJournal.Controls
 
             var r = cmb.GetTemplateChild("contentFill1") as Rectangle;
             r.Visibility = Visibility.Visible;
-
         }
 
         public ColorPicker()

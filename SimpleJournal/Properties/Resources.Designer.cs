@@ -510,7 +510,7 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Colors:.
+        ///   Looks up a localized string similar to More Colors:.
         /// </summary>
         public static string strColors {
             get {
@@ -1783,6 +1783,24 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Navigate to next page.
+        /// </summary>
+        public static string strNavigateToNextPage {
+            get {
+                return ResourceManager.GetString("strNavigateToNextPage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Navigate to previous page.
+        /// </summary>
+        public static string strNavigateToPreviousPage {
+            get {
+                return ResourceManager.GetString("strNavigateToPreviousPage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to New Document.
         /// </summary>
         public static string strNewDocument {
@@ -2900,7 +2918,7 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 04/27/2022 3:00 PM.
+        ///   Looks up a localized string similar to 05/21/2022 3:00 PM.
         /// </summary>
         public static string strReleaseDate {
             get {

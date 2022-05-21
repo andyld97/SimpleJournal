@@ -36,7 +36,7 @@ namespace SimpleJournal
         public static readonly Version StoreVersion = new Version(Strings.StoreVersion);
         public static readonly Version NormalVersion = typeof(Consts).Assembly.GetName().Version;
 
-#region Pens
+        #region Pens
         public const int AMOUNT_PENS = 4;
 
         public static Common.Data.Color[] PEN_COLORS = new Common.Data.Color[] 
@@ -45,7 +45,6 @@ namespace SimpleJournal
             new Common.Data.Color(180, 30, 40), // red
             new Common.Data.Color(30, 190, 20), // green
             new Common.Data.Color(30, 40, 210), // blue
-            new Common.Data.Color(127, 127, 127)
         };
 
 #endregion
@@ -94,12 +93,12 @@ namespace SimpleJournal
         }
 #endif
 
-#region Scrollbar
+        #region Scrollbar
         public const int ScrollBarDefaultWidth = 17;
         public const int ScrollBarExtendedWidth = 30;
 #endregion
 
-#region Insert
+        #region Insert
         public const double InsertImagePositionX = 200D;
         public const double InsertImagePositionY = 200D;
         public const double InsertImageWidth = 200D;
@@ -108,13 +107,13 @@ namespace SimpleJournal
         public const double InsertTextHeight = 50D;
 #endregion
 
-#region TextMarker
+        #region TextMarker
         public const double TextMarkerHeight = 30.0;
         public const double TextMarkerWidth = 20.0;
         public static readonly Color TextMarkerColor = Colors.Yellow;
 #endregion
 
-#region Sidebar
+        #region Sidebar
         public const double SidebarListBoxItemHeight = 50;
         public const double SidebarListBoxItemViewboxSize = 40;
 #endregion

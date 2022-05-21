@@ -24,7 +24,7 @@
                             <Setter Property="Foreground" Value="{DynamicResource BlackBrush}" />
                         </Style>
                     </StackPanel.Resources>
-                    <Image Source="../resources/logo.png" Width="230" Margin="0,15,0,0"/>
+                    <Image Source="../resources/logo.png" Width="200" Margin="0,15,0,0"/>
                     <TextBlock Margin="5,10,0,0" HorizontalAlignment="Center" Foreground="{DynamicResource BlackBrush}">
                         <Run Text="{x:Static res:Resources.strAboutText1}" FontWeight="Bold"/>
                         <LineBreak />
@@ -37,12 +37,16 @@
                         <Hyperlink NavigateUri="https://github.com/fluentribbon/Fluent.Ribbon" RequestNavigate="Hyperlink_RequestNavigate">Fluent.Ribbon</Hyperlink>
                         <Run Text="{x:Static res:Resources.strAboutTextFluentRibbon_2}"/>
                         <LineBreak />
+                        <Run Text="{x:Static res:Resources.strAboutTextFluentRibbon_1}" />
+                        <Hyperlink NavigateUri="https://github.com/MahApps/MahApps.Metro" RequestNavigate="Hyperlink_RequestNavigate">MahApps/MahApps.Metro (GitHub)</Hyperlink>
+                        <LineBreak />
                         <Run Text="{x:Static res:Resources.strAboutTextMagickNET}" />
                         <Hyperlink NavigateUri="https://github.com/dlemstra/Magick.NET" RequestNavigate="Hyperlink_RequestNavigate">Magick.NET</Hyperlink>
                         <Run Text="(PDF Support)!" />                                                                    
                         <LineBreak />
                         <Run Text="{x:Static res:Resources.strAboutTextFluentRibbon_1}"/>
                         <Hyperlink NavigateUri="https://github.com/Tyrrrz/DotnetRuntimeBootstrapper" RequestNavigate="Hyperlink_RequestNavigate">Tyrrrz/DotnetRuntimeBootstrapper (GitHub)</Hyperlink>
+                        <LineBreak />
                         <LineBreak />
                         <LineBreak />
                         <Hyperlink NavigateUri="https://simplejournal.ca-soft.net/" RequestNavigate="Hyperlink_RequestNavigate">Homepage</Hyperlink>
@@ -59,7 +63,7 @@
                         <LineBreak />
                         <Run x:Name="TextNewVersionAvailable" FontWeight="Bold" />
                         <LineBreak />                        
-                        <Run Text="Powered by .NET 6.0.3" FontWeight="Bold" />
+                        <Run Text="Powered by .NET 6.0.5" FontWeight="Bold" />
                     </TextBlock>
                 </StackPanel>
             </TabItem>
