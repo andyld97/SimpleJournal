@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SimpleJournal.Controls.Templates"
              xmlns:controls="clr-namespace:SimpleJournal.Controls"
-             mc:Ignorable="d" Width="230" BorderBrush="Black" BorderThickness="1">
+             mc:Ignorable="d" Width="6.3cm" BorderBrush="Black" BorderThickness="1">
     <Grid>
         <StackPanel Background="{DynamicResource Fluent.Ribbon.Brushes.RibbonTabItem.Active.Background}">
             <controls:PenSizeControl x:Name="PenSize" SwitchtedPenSize="PenSize_SwitchtedPenSize" IsToggleable="False" />
