@@ -45,7 +45,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Touch Device Manager", "Hel
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Assets", "Assets", "{6A57219C-E00D-4AE4-9684-CF40422AA0C2}"
 	ProjectSection(SolutionItems) = preProject
-		F:\Eigene Dateien\Desktop\screenshot.png = F:\Eigene Dateien\Desktop\screenshot.png
+		Assets\screenshot.png = Assets\screenshot.png
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Store Packages", "Store Packages", "{A197C0D2-44F2-4733-B665-C8DFD5C8C1AC}"
