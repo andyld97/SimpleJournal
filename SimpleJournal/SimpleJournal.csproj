@@ -96,6 +96,12 @@
 		<DefineConstants>TRACE;UWP</DefineConstants>
 	</PropertyGroup>
 	<ItemGroup>
+	  <Compile Remove="Store Packages\**" />
+	  <EmbeddedResource Remove="Store Packages\**" />
+	  <None Remove="Store Packages\**" />
+	  <Page Remove="Store Packages\**" />
+	</ItemGroup>
+	<ItemGroup>
 		<AdditionalFiles Remove="C:\Users\andre\.nuget\packages\microsoft.dotnet.upgradeassistant.extensions.default.analyzers\0.2.231403\build\\WebTypeReplacements.typemap" />
 	</ItemGroup>
 	<ItemGroup>
@@ -110,29 +116,6 @@
 		<None Update="app.uwp.manifest">
 			<SubType>Designer</SubType>
 		</None>
-		<None Include="Store Packages\ReferencePackage %28SimpleJournal%29 %2826%29 %281.2.418.0%29 %2830.03.19%29.msix" />
-		<None Include="Store Packages\ReferencePackage %28SimpleJournal%29 %2827%29 %281.2.500.0%29 %2813.04.19%29.msix" />
-		<None Include="Store Packages\ReferencePackage %28SimpleJournal%29 %2828%29 %281.2.501.0%29 %2815.04.19%29.msix" />
-		<None Include="Store Packages\ReferencePackage %28SimpleJournal%29 %2829%29 %281.2.605.0%29 %2822.04.19%29.msix" />
-		<None Include="Store Packages\ReferencePackage %28SimpleJournal%29 %2830%29 %281.2.701.0%29 %2819.05.19%29.msix" />
-		<None Include="Store Packages\ReferencePackage %28SimpleJournal%29 %2831%29 %281.2.803.0%29 %2809.09.19%29.msix" />
-		<None Include="Store Packages\ReferencePackage %28SimpleJournal%29 %2832%29 %281.2.804.0%29 %2813.09.19%29.msix" />
-		<None Include="Store Packages\ReferencePackage %28SimpleJournal%29 %2834%29 %281.2.902.0%29 %2822.09.19%29.msix" />
-		<None Include="Store Packages\ReferencePackage %28SimpleJournal%29 %2835%29 %281.2.903.0%29 %2822.09.19%29.msix" />
-		<None Include="Store Packages\ReferencePackage %28SimpleJournal%29 %2836%29 %281.3.0.0%29 %2828.09.19%29.msix" />
-		<None Include="Store Packages\ReferencePackage %28SimpleJournal%29 %2837%29 %281.301.0.0%29 %2803.10.19%29.msix" />
-		<None Include="Store Packages\ReferencePackage %28SimpleJournal%29 %2838%29 %281.303.0.0%29 %2826.06.20%29.msix" />
-		<None Include="Store Packages\ReferencePackage %28SimpleJournal%29 %2839%29 %281.303.0.0%29 %2805.07.20%29.msix" />
-		<None Include="Store Packages\ReferencePackage %28SimpleJournal%29 %2840%29 %281.304.0.0%29 %2815.07.20%29.msix" />
-		<None Include="Store Packages\ReferencePackage %28SimpleJournal%29 %2841%29 %281.305.0.0%29 %2822.07.20%29.msix" />
-		<None Include="Store Packages\ReferencePackage %28SimpleJournal%29 %2842%29 %281.306.0.0%29 %2812.09.20%29.msix" />
-		<None Include="Store Packages\ReferencePackage %28SimpleJournal%29 %2843%29 %281.307.0.0%29 %2816.09.20%29.msix" />
-		<None Include="Store Packages\ReferencePackage %28SimpleJournal%29 %2844%29 %281.308.0.0%29 %2831.10.20%29.msix" />
-		<None Include="Store Packages\ReferencePackage %28SimpleJournal%29 %2845%29 %281.390.0.0%29 %2801.12.20%29.msix" />
-		<None Include="Store Packages\ReferencePackage %28SimpleJournal%29 %2846%29 %281.400.0.0%29 %2805.12.20%29.msix" />
-		<None Include="Store Packages\ReferencePackage %28SimpleJournal%29 %2847%29 %281.410.0.0%29 %2815.12.20%29.msix" />
-		<None Include="Store Packages\ReferencePackage %28SimpleJournal%29 %2848%29 %281.420.0.0%29 %2828.12.20%29.msix" />
-		<None Include="Store Packages\ReferencePackage %28SimpleJournal%29 %2849%29 %281.430.0.0%29 %2829.04.21%29.msix" />
 	</ItemGroup>
 	<ItemGroup>
 		<Resource Include="resources\arrow_down.png" />
