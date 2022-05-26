@@ -48,6 +48,53 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Assets", "Assets", "{6A5721
 		F:\Eigene Dateien\Desktop\screenshot.png = F:\Eigene Dateien\Desktop\screenshot.png
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Store Packages", "Store Packages", "{A197C0D2-44F2-4733-B665-C8DFD5C8C1AC}"
+	ProjectSection(SolutionItems) = preProject
+		Store Packages\ReferencePackage (SimpleJournal) (26) (1.2.418.0) (30.03.19).msix = Store Packages\ReferencePackage (SimpleJournal) (26) (1.2.418.0) (30.03.19).msix
+		Store Packages\ReferencePackage (SimpleJournal) (27) (1.2.500.0) (13.04.19).msix = Store Packages\ReferencePackage (SimpleJournal) (27) (1.2.500.0) (13.04.19).msix
+		Store Packages\ReferencePackage (SimpleJournal) (28) (1.2.501.0) (15.04.19).msix = Store Packages\ReferencePackage (SimpleJournal) (28) (1.2.501.0) (15.04.19).msix
+		Store Packages\ReferencePackage (SimpleJournal) (29) (1.2.605.0) (22.04.19).msix = Store Packages\ReferencePackage (SimpleJournal) (29) (1.2.605.0) (22.04.19).msix
+		Store Packages\ReferencePackage (SimpleJournal) (30) (1.2.701.0) (19.05.19).msix = Store Packages\ReferencePackage (SimpleJournal) (30) (1.2.701.0) (19.05.19).msix
+		Store Packages\ReferencePackage (SimpleJournal) (31) (1.2.803.0) (09.09.19).msix = Store Packages\ReferencePackage (SimpleJournal) (31) (1.2.803.0) (09.09.19).msix
+		Store Packages\ReferencePackage (SimpleJournal) (32) (1.2.804.0) (13.09.19).msix = Store Packages\ReferencePackage (SimpleJournal) (32) (1.2.804.0) (13.09.19).msix
+		Store Packages\ReferencePackage (SimpleJournal) (34) (1.2.902.0) (22.09.19).msix = Store Packages\ReferencePackage (SimpleJournal) (34) (1.2.902.0) (22.09.19).msix
+		Store Packages\ReferencePackage (SimpleJournal) (35) (1.2.903.0) (22.09.19).msix = Store Packages\ReferencePackage (SimpleJournal) (35) (1.2.903.0) (22.09.19).msix
+		Store Packages\ReferencePackage (SimpleJournal) (36) (1.3.0.0) (28.09.19).msix = Store Packages\ReferencePackage (SimpleJournal) (36) (1.3.0.0) (28.09.19).msix
+		Store Packages\ReferencePackage (SimpleJournal) (37) (1.301.0.0) (03.10.19).msix = Store Packages\ReferencePackage (SimpleJournal) (37) (1.301.0.0) (03.10.19).msix
+		Store Packages\ReferencePackage (SimpleJournal) (38) (1.303.0.0) (26.06.20).msix = Store Packages\ReferencePackage (SimpleJournal) (38) (1.303.0.0) (26.06.20).msix
+		Store Packages\ReferencePackage (SimpleJournal) (39) (1.303.0.0) (05.07.20).msix = Store Packages\ReferencePackage (SimpleJournal) (39) (1.303.0.0) (05.07.20).msix
+		Store Packages\ReferencePackage (SimpleJournal) (40) (1.304.0.0) (15.07.20).msix = Store Packages\ReferencePackage (SimpleJournal) (40) (1.304.0.0) (15.07.20).msix
+		Store Packages\ReferencePackage (SimpleJournal) (41) (1.305.0.0) (22.07.20).msix = Store Packages\ReferencePackage (SimpleJournal) (41) (1.305.0.0) (22.07.20).msix
+		Store Packages\ReferencePackage (SimpleJournal) (42) (1.306.0.0) (12.09.20).msix = Store Packages\ReferencePackage (SimpleJournal) (42) (1.306.0.0) (12.09.20).msix
+		Store Packages\ReferencePackage (SimpleJournal) (43) (1.307.0.0) (16.09.20).msix = Store Packages\ReferencePackage (SimpleJournal) (43) (1.307.0.0) (16.09.20).msix
+		Store Packages\ReferencePackage (SimpleJournal) (44) (1.308.0.0) (31.10.20).msix = Store Packages\ReferencePackage (SimpleJournal) (44) (1.308.0.0) (31.10.20).msix
+		Store Packages\ReferencePackage (SimpleJournal) (45) (1.390.0.0) (01.12.20).msix = Store Packages\ReferencePackage (SimpleJournal) (45) (1.390.0.0) (01.12.20).msix
+		Store Packages\ReferencePackage (SimpleJournal) (46) (1.400.0.0) (05.12.20).msix = Store Packages\ReferencePackage (SimpleJournal) (46) (1.400.0.0) (05.12.20).msix
+		Store Packages\ReferencePackage (SimpleJournal) (47) (1.410.0.0) (15.12.20).msix = Store Packages\ReferencePackage (SimpleJournal) (47) (1.410.0.0) (15.12.20).msix
+		Store Packages\ReferencePackage (SimpleJournal) (48) (1.420.0.0) (28.12.20).msix = Store Packages\ReferencePackage (SimpleJournal) (48) (1.420.0.0) (28.12.20).msix
+		Store Packages\ReferencePackage (SimpleJournal) (49) (1.430.0.0) (29.04.21).msix = Store Packages\ReferencePackage (SimpleJournal) (49) (1.430.0.0) (29.04.21).msix
+		Store Packages\ReferencePackage (SimpleJournal) (50) (1.431.0.0) (04.06.21) [Test].msix = Store Packages\ReferencePackage (SimpleJournal) (50) (1.431.0.0) (04.06.21) [Test].msix
+		Store Packages\ReferencePackage (SimpleJournal) (51) (1.432.0.0) (04.06.21).msix = Store Packages\ReferencePackage (SimpleJournal) (51) (1.432.0.0) (04.06.21).msix
+		Store Packages\ReferencePackage (SimpleJournal) (52) (1.440.1.0) (20.07.21).msix = Store Packages\ReferencePackage (SimpleJournal) (52) (1.440.1.0) (20.07.21).msix
+		Store Packages\ReferencePackage (SimpleJournal) (53) (1.450.0.0) (24.08.21).msix = Store Packages\ReferencePackage (SimpleJournal) (53) (1.450.0.0) (24.08.21).msix
+		Store Packages\ReferencePackage (SimpleJournal) (54) (1.460.0.0) (02.10.21).msix = Store Packages\ReferencePackage (SimpleJournal) (54) (1.460.0.0) (02.10.21).msix
+		Store Packages\ReferencePackage (SimpleJournal) (55) (1.470.0.0) (12.10.21).msix = Store Packages\ReferencePackage (SimpleJournal) (55) (1.470.0.0) (12.10.21).msix
+		Store Packages\ReferencePackage (SimpleJournal) (56) (1.480.0.0) (11.11.21).msix = Store Packages\ReferencePackage (SimpleJournal) (56) (1.480.0.0) (11.11.21).msix
+		Store Packages\ReferencePackage (SimpleJournal) (57) (1.490.0.0) (23.12.21).msix = Store Packages\ReferencePackage (SimpleJournal) (57) (1.490.0.0) (23.12.21).msix
+		Store Packages\ReferencePackage (SimpleJournal) (58) (1.491.0.0) (31.12.21).msix = Store Packages\ReferencePackage (SimpleJournal) (58) (1.491.0.0) (31.12.21).msix
+		Store Packages\ReferencePackage (SimpleJournal) (59) (1.502.0.0) (01.02.22).msix = Store Packages\ReferencePackage (SimpleJournal) (59) (1.502.0.0) (01.02.22).msix
+		Store Packages\ReferencePackage (SimpleJournal) (60) (1.503.0.0) (06.02.22).msix = Store Packages\ReferencePackage (SimpleJournal) (60) (1.503.0.0) (06.02.22).msix
+		Store Packages\ReferencePackage (SimpleJournal) (61) (1.504.0.1) (26.02.22).msix = Store Packages\ReferencePackage (SimpleJournal) (61) (1.504.0.1) (26.02.22).msix
+		Store Packages\ReferencePackage (SimpleJournal) (62) (1.505.0.0) (02.03.22).msix = Store Packages\ReferencePackage (SimpleJournal) (62) (1.505.0.0) (02.03.22).msix
+		Store Packages\ReferencePackage (SimpleJournal) (63) (1.506.0.0) (13.03.22).msix = Store Packages\ReferencePackage (SimpleJournal) (63) (1.506.0.0) (13.03.22).msix
+		Store Packages\ReferencePackage (SimpleJournal) (64) (1.506.1.0) (18.03.22).msix = Store Packages\ReferencePackage (SimpleJournal) (64) (1.506.1.0) (18.03.22).msix
+		Store Packages\ReferencePackage (SimpleJournal) (65) (1.507.0.0) (25.03.22).msix = Store Packages\ReferencePackage (SimpleJournal) (65) (1.507.0.0) (25.03.22).msix
+		Store Packages\ReferencePackage (SimpleJournal) (66) (1.508.0.0) (06.04.22).msix = Store Packages\ReferencePackage (SimpleJournal) (66) (1.508.0.0) (06.04.22).msix
+		Store Packages\ReferencePackage (SimpleJournal) (67) (1.509.0.0) (27.04.22).msix = Store Packages\ReferencePackage (SimpleJournal) (67) (1.509.0.0) (27.04.22).msix
+		Store Packages\ReferencePackage (SimpleJournal) (68) (1.510.0.0) (10.05.22).msix = Store Packages\ReferencePackage (SimpleJournal) (68) (1.510.0.0) (10.05.22).msix
+		Store Packages\ReferencePackage (SimpleJournal) (69) (1.520.0.0) (21.05.22).msix = Store Packages\ReferencePackage (SimpleJournal) (69) (1.520.0.0) (21.05.22).msix
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
