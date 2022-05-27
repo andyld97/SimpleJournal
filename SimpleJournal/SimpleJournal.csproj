@@ -279,15 +279,21 @@
 		<EmbeddedResource Update="Properties\Resources.de.resx">
 		  <Generator>PublicResXFileCodeGenerator</Generator>
 		  <CustomToolNamespace></CustomToolNamespace>
+			<!-- FIX for resgen issues https://stackoverflow.com/a/47071481/6237448-->
+			<LogicalName>Properties.Resources.resources</LogicalName>
 		</EmbeddedResource>
 		<EmbeddedResource Update="Properties\Resources.nl.resx">
 		  <Generator>PublicResXFileCodeGenerator</Generator>
 		  <CustomToolNamespace></CustomToolNamespace>
+			<!-- FIX for resgen issues https://stackoverflow.com/a/47071481/6237448-->
+		  <LogicalName>Properties.Resources.resources</LogicalName>
 		</EmbeddedResource>
 		<EmbeddedResource Update="Properties\Resources.resx">
 			<Generator>PublicResXFileCodeGenerator</Generator>
 			<LastGenOutput>Resources.Designer.cs</LastGenOutput>
 			<CustomToolNamespace></CustomToolNamespace>
+			<!-- FIX for resgen issues https://stackoverflow.com/a/47071481/6237448-->
+			<LogicalName>Properties.Resources.resources</LogicalName>
 		</EmbeddedResource>
 	</ItemGroup>
 	<Target Name="PostPublish" AfterTargets="Publish">
