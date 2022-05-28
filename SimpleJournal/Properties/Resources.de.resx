@@ -1427,7 +1427,7 @@ Hier möchte ich Ihnen noch ein paar wichtige Hinweise geben, die Ihnen helfen w
     <comment>*</comment>
   </data>
   <data name="strSidepage" xml:space="preserve">
-    <value>Seitenbar</value>
+    <value>Seitenleiste</value>
     <comment>MainWindow.xaml</comment>
   </data>
   <data name="strSinglePage" xml:space="preserve">

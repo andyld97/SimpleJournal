@@ -353,7 +353,6 @@ namespace SimpleJournal
             UpdateMenu();
 
 #if !UWP
-            GeneralHelper.RemoveUpdaterIfAny();
             GeneralHelper.SearchForUpdates();            
 #endif
 

@@ -13,19 +13,19 @@ namespace SimpleJournal.Documents.PDF
         public bool UsePageRange { get; set; }
 
         /// <summary>
-        /// Zero based index of the start page (only used if UsePageRange is set to true)
+        /// Zero-based index of the start page (only used if UsePageRange is set to true)
         /// </summary>
         [JsonPropertyName("start_page")]
         public int StartPage { get; set; } = 0;
 
         /// <summary>
-        /// This is required for detecteing incompatible versions
+        /// This is required for detecting incompatible versions
         /// </summary>
         [JsonPropertyName("sj_version")]
         public string CurrentSimpleJounalVersion { get; set; }
 
         /// <summary>
-        /// Zero base index of the last page (only used if UsePageRange is set to true)
+        /// Zero-based index of the last page (only used if UsePageRange is set to true)
         /// </summary>
         [JsonPropertyName("last_page")]
         public int LastPage

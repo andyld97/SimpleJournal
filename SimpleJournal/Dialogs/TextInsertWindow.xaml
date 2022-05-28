@@ -12,12 +12,12 @@
         FocusManager.FocusedElement="{Binding ElementName=txtResult}">
     <Grid Background="{DynamicResource WhiteBrush}">
         <StackPanel Margin="5">
-            <TextBlock Text="{x:Static res:Resources.strTextInput}" Foreground="{DynamicResource BlackBrush}" Padding="3"/>
-            <TextBox x:Name="txtResult" Background="Transparent" Foreground="{DynamicResource BlackBrush}" Margin="0,5,5,5" Padding="2" KeyDown="txtResult_KeyDown"/>
+            <TextBlock Text="{x:Static res:Resources.strTextInput}" Foreground="{DynamicResource BlackBrush}" Padding="3" />
+            <TextBox x:Name="txtResult" Background="Transparent" Foreground="{DynamicResource BlackBrush}" Margin="0,5,5,5" Padding="2" KeyDown="txtResult_KeyDown" />
 
             <Grid HorizontalAlignment="Stretch">
-                <Button Content="Schriftstyle ändern" x:Name="btnChangeFont" Click="btnChangeFont_Click" HorizontalAlignment="Left" Width="120" Margin="0,0,0,0" Padding="3" Visibility="Collapsed"/>
-                <Button Content="{x:Static res:Resources.strOK}" x:Name="btnOK" Click="btnOK_Click" HorizontalAlignment="Right" Width="60" Margin="0,0,5,0" Padding="3"/>
+                <Button Content="Schriftstyle ändern" x:Name="btnChangeFont" Click="btnChangeFont_Click" HorizontalAlignment="Left" Width="120" Margin="0,0,0,0" Padding="3" Visibility="Collapsed" />
+                <Button Content="{x:Static res:Resources.strOK}" x:Name="btnOK" Click="btnOK_Click" HorizontalAlignment="Right" Width="60" Margin="0,0,5,0" Padding="3" />
             </Grid>
         </StackPanel>
     </Grid>

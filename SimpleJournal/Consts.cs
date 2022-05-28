@@ -30,9 +30,6 @@ namespace SimpleJournal
 #endif
         public static readonly string Google204Url = "http://clients3.google.com/generate_204";
 
-        public static readonly string UpdaterExe = "7244a3f048e82af354eb3cfa3089a3035ff8768f";
-        public static readonly string UpdateSystemDotNetDotControllerDotdll = "bbc7224ccc544651d9d844f309721091860f0f92";
-
         public static readonly Version StoreVersion = new Version(Strings.StoreVersion);
         public static readonly Version NormalVersion = typeof(Consts).Assembly.GetName().Version;
 

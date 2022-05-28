@@ -96,20 +96,6 @@
 		<DefineConstants>TRACE;UWP</DefineConstants>
 	</PropertyGroup>
 	<ItemGroup>
-	  <Compile Remove="Store Packages\**" />
-	  <EmbeddedResource Remove="Store Packages\**" />
-	  <None Remove="Store Packages\**" />
-	  <Page Remove="Store Packages\**" />
-	</ItemGroup>
-	<ItemGroup>
-		<AdditionalFiles Remove="C:\Users\andre\.nuget\packages\microsoft.dotnet.upgradeassistant.extensions.default.analyzers\0.2.231403\build\\WebTypeReplacements.typemap" />
-	</ItemGroup>
-	<ItemGroup>
-	  <None Remove="resources\arrow_down.png" />
-	  <None Remove="resources\arrow_up.png" />
-	  <None Remove="resources\pdf_small.png" />
-	</ItemGroup>
-	<ItemGroup>
 		<None Update="app.normal.manifest">
 			<SubType>Designer</SubType>
 		</None>

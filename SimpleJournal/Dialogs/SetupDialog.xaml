@@ -25,17 +25,17 @@
         </Grid.Resources>
         
         <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition Height="40"/>
+            <RowDefinition />
+            <RowDefinition Height="40" />
         </Grid.RowDefinitions>
         <Grid x:Name="pages" Grid.Row="0" Background="Transparent">
             <Grid x:Name="page1" Visibility="Visible">
                 <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                     <TextBlock Margin="5" FontSize="15" TextWrapping="Wrap">
                         <Run FontWeight="Bold" Text="{x:Static res:Resources.strSetupTitle}" FontSize="18" />
-                        <LineBreak/><LineBreak/>
+                        <LineBreak /><LineBreak />
                         <Run Text="{x:Static res:Resources.strSetupInitalText}" />
-                        <LineBreak/><LineBreak/>
+                        <LineBreak /><LineBreak />
                         <Run FontWeight="Bold" Text="{x:Static res:Resources.strSetupSetp1_Title}" />
                         <LineBreak />
                         <LineBreak />
@@ -119,7 +119,7 @@
                     </ListBox>
 
                     <TextBlock Margin="5" FontSize="15" FontWeight="Bold" Text="{x:Static res:Resources.strRulerCompensationTitle}" />
-                    <TextBlock Margin="5" FontSize="15" TextWrapping="Wrap" Text="{x:Static res:Resources.strUseRulerCompensation_Description}"/>
+                    <TextBlock Margin="5" FontSize="15" TextWrapping="Wrap" Text="{x:Static res:Resources.strUseRulerCompensation_Description}" />
                     <Fluent:ComboBox x:Name="cmbUseRulerCompensation" SelectionChanged="cmbUseRulerCompensation_SelectionChanged" IsEditable="False" SelectedIndex="0" Margin="0,5,5,5">
                         <TextBlock Text="{x:Static res:Resources.strUseRulerCompensation}"/>
                         <TextBlock Text="{x:Static res:Resources.strDontUseRulerCompensation}"/>
@@ -154,9 +154,9 @@
             <Grid x:Name="page6" Visibility="Collapsed">
                 <StackPanel>
                     <TextBlock Margin="5" FontSize="15" TextWrapping="Wrap">
-                        <Run FontWeight="Bold" Text="{x:Static res:Resources.strSetupStep6}"/>
+                        <Run FontWeight="Bold" Text="{x:Static res:Resources.strSetupStep6}" />
                     </TextBlock>
-                    <TextBlock Margin="5" FontSize="15" TextWrapping="Wrap" Text="{x:Static res:Resources.strSetupStep6Description}"/>
+                    <TextBlock Margin="5" FontSize="15" TextWrapping="Wrap" Text="{x:Static res:Resources.strSetupStep6Description}" />
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="90"/>
@@ -222,8 +222,8 @@
                     <TextBlock Margin="5" FontSize="15" TextWrapping="Wrap" Text="{x:Static res:Resources.strSetupStep7Description}"/>
                     <Grid>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="70"/>
-                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="70" />
+                            <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
 
                         <Grid Grid.Row="0" Grid.ColumnSpan="2">
@@ -242,7 +242,7 @@
                             </controls:DropDownToggleButton>
                         </Grid>
                         <Border BorderBrush="Black" Grid.Column="1" Grid.Row="1" BorderThickness="2" Margin="0" Height="200">
-                            <controls:PreviewCanvas x:Name="previewCanvasTextMarker" Height="200"/>
+                            <controls:PreviewCanvas x:Name="previewCanvasTextMarker" Height="200" />
                         </Border>
                     </Grid>
                 </StackPanel>
@@ -250,15 +250,15 @@
             <Grid x:Name="page8" Visibility="Collapsed">
                 <StackPanel>
                     <TextBlock Margin="5" FontSize="15" TextWrapping="Wrap">
-                     <Run FontWeight="Bold" Text="{x:Static res:Resources.strSetupCompletedTitle}"/>
+                     <Run FontWeight="Bold" Text="{x:Static res:Resources.strSetupCompletedTitle}" />
                     </TextBlock>
                     <TextBlock Margin="5" FontSize="15" TextWrapping="Wrap">
-                        <Run Text="{x:Static res:Resources.strSetupCompleted}"/>
+                        <Run Text="{x:Static res:Resources.strSetupCompleted}" />
                         <LineBreak/>
                         <LineBreak/>
-                        <Run Text="{x:Static res:Resources.strHelpText}" FontWeight="Bold"/>
+                        <Run Text="{x:Static res:Resources.strHelpText}" FontWeight="Bold" />
                         <Hyperlink x:Name="lnkHelp" Click="LnkHelp_Click">
-                            <Run Text="{x:Static res:Resources.strHelp}" FontWeight="Bold"/>
+                            <Run Text="{x:Static res:Resources.strHelp}" FontWeight="Bold" />
                         </Hyperlink>
                     </TextBlock>
                 </StackPanel>

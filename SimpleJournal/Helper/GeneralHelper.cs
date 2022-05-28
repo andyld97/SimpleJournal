@@ -198,18 +198,6 @@ namespace SimpleJournal
             }
         }
 
-        public static void RemoveUpdaterIfAny()
-        {
-            string pathUpdaterExe = System.IO.Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, "Updater.exe");
-            string pathUpdateSystemDotNetDotControllerDotdll = System.IO.Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, "updateSystemDotNet.Controller.dll");
-
-            if (System.IO.File.Exists(pathUpdaterExe) && FileSystemHelper.BuildSHA1FromFile(pathUpdaterExe) == Consts.UpdaterExe)
-                FileSystemHelper.TryDeleteFile(pathUpdaterExe);
-
-            if (System.IO.File.Exists(pathUpdateSystemDotNetDotControllerDotdll) && FileSystemHelper.BuildSHA1FromFile(pathUpdateSystemDotNetDotControllerDotdll) == Consts.UpdateSystemDotNetDotControllerDotdll)
-                FileSystemHelper.TryDeleteFile(pathUpdateSystemDotNetDotControllerDotdll);
-        }
-
         public static bool IsConnectedToInternet()
         {
             try

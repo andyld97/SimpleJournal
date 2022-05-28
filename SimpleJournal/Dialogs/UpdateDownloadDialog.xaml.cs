@@ -1,35 +1,20 @@
-﻿using SimpleJournal.Common.Data;
-using SimpleJournal.Common.Helper;
+﻿using SimpleJournal.Common.Helper;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using System.Net.Http;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using System.Windows.Threading;
 
 namespace SimpleJournal.Dialogs
 {
-	/// <summary>
-	/// Interaction logic for UpdateDownloadDialog.xaml
-	/// </summary>
-	public partial class UpdateDownloadDialog : Window
+    /// <summary>
+    /// Interaction logic for UpdateDownloadDialog.xaml
+    /// </summary>
+    public partial class UpdateDownloadDialog : Window
 	{
 		private int lastSecond;
 		private long bytesInLastSecond = 0;
-		private Version version;	
+		private readonly Version version;	
 
 		public string LocalFilePath { get; set; }
 
