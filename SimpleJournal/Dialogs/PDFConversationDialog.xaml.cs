@@ -9,6 +9,7 @@ using SimpleJournal.Documents.PDF;
 using SimpleJournal.Data;
 using System.ComponentModel;
 using SimpleJournal.Documents.UI;
+using System.Threading.Tasks;
 
 namespace SimpleJournal.Dialogs
 {
@@ -216,24 +217,30 @@ namespace SimpleJournal.Dialogs
             return true;
         }
 
+        private async Task CancelOrDeleteTicketAsync(string operation = "cancel")
+        {
+            try
+            {
+                using (HttpClient client = new HttpClient() { Timeout = TimeSpan.FromSeconds(1) })
+                {
+                    // Send a message to the api that the ticket should be canceld!
+                    await client.GetAsync($"{Consts.ConverterAPIUrl}/api/ticket/{currentTicket?.ID}/{operation}");
+                }
+            }
+            catch
+            {
+                // ignore
+            }
+        }
+
+
         protected override async void OnClosing(CancelEventArgs e)
         {
             base.OnClosing(e);
             if (timer.Enabled)
             {
                 timer.Stop();
-                try
-                {
-                    using (HttpClient client = new HttpClient())
-                    {
-                        // Send a message to the api that the ticket should be canceld!
-                        await client.GetAsync($"{Consts.ConverterAPIUrl}/api/ticket/{currentTicket?.ID}/cancel");
-                    }
-                }
-                catch
-                {
-                    // ignore
-                }
+                await CancelOrDeleteTicketAsync();
             }
 
             currentConverter?.Cancel();
@@ -338,15 +345,8 @@ namespace SimpleJournal.Dialogs
                                 counter++;
                             }
 
-                            try
-                            {
-                                // Send a message to the api that the ticket can be deleted
-                                await client.GetAsync($"{Consts.ConverterAPIUrl}/api/ticket/{currentTicket.ID}/delete");
-                            }
-                            catch
-                            {
-                                // ignore
-                            }
+                            // Send a message to the api that the ticket can be deleted
+                            await CancelOrDeleteTicketAsync("delete");
                         }
                         catch (Exception ex)
                         {

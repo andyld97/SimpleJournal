@@ -51,6 +51,19 @@ namespace SimpleJournal.Common.Helper
             }
         }
 
+        public static bool TryCreateDirectory(string directoryPath)
+        {
+            try
+            {
+                System.IO.Directory.CreateDirectory(directoryPath);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
         public static string BuildSHA1FromFile(string fileName)
         {
             try

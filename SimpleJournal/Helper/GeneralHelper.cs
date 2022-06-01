@@ -168,6 +168,7 @@ namespace SimpleJournal
         {
             var multiForm = new MultipartFormDataContent();
             multiForm.Headers.Add("options", json);
+            multiForm.Headers.Add("language", Properties.Resources.strLang);
 
             // Add file and directly upload it
             System.IO.FileStream fs = System.IO.File.OpenRead(path);
