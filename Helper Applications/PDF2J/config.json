@@ -1,4 +1,6 @@
 {
+  "url": "http://localhost",
+  "port": 5290,
   "report_failed_tickets": false,
   "report_path": "",
   "webhook_url": ""

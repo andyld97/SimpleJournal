@@ -38,8 +38,26 @@ namespace PDF2J
 
         public static void Main(string[] args)
         {
+            // Read config json (if any) [https://stackoverflow.com/a/28700387/6237448]
+            string configPath = System.IO.Path.Combine(PlatformServices.Default.Application.ApplicationBasePath, "config.json");
+            string preInitalizationLogMessage = string.Empty;
+            if (System.IO.File.Exists(configPath))
+            {
+                string configJson = System.IO.File.ReadAllText(configPath);
+                GlobalConfig = System.Text.Json.JsonSerializer.Deserialize<Config>(configJson);
+                preInitalizationLogMessage = "Successfully initalized config file!";
+            }
+            else
+            {
+                preInitalizationLogMessage = "No config file found ..."; 
+                GlobalConfig = new Config();
+            }
+
             var host = CreateHostBuilder(args).Build();
             logger = host.Services.GetService<ILogger<Program>>();
+
+            if (!string.IsNullOrEmpty(preInitalizationLogMessage))
+                logger.LogInformation(preInitalizationLogMessage);
 
             workingTimer = new System.Timers.Timer() { Interval = TimeSpan.FromSeconds(1).TotalMilliseconds };
             workingTimer.Elapsed += WorkingTimer_Elapsed;
@@ -48,21 +66,6 @@ namespace PDF2J
             cleanUPTimer = new System.Timers.Timer() { Interval = TimeSpan.FromHours(1).TotalMilliseconds };
             cleanUPTimer.Elapsed += CleanUPTimer_Elapsed;
             cleanUPTimer.Start();
-
-            // Read config json (if any)
-            // https://stackoverflow.com/a/28700387/6237448
-            string configPath  = System.IO.Path.Combine(PlatformServices.Default.Application.ApplicationBasePath, "config.json");
-            if (System.IO.File.Exists(configPath))
-            {
-                string configJson = System.IO.File.ReadAllText(configPath);
-                GlobalConfig = System.Text.Json.JsonSerializer.Deserialize<Config>(configJson);
-                logger.LogInformation("Successfully initalized config file!");
-            }
-            else
-            {
-                logger.LogInformation("No config file found ...");
-                GlobalConfig = new Config();
-            }
 
             host.Run();
         }
@@ -213,7 +216,7 @@ namespace PDF2J
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
-                    webBuilder.UseUrls("http://localhost:5290");
+                    webBuilder.UseUrls($"{GlobalConfig.WebAddress}:{GlobalConfig.Port}");
                 });
     }
 }
