@@ -1633,4 +1633,10 @@ Als er al een tekening op de pagina staat, worden alle tekeningen verplaatst!</v
   <data name="strNavigateToNextPage" xml:space="preserve">
     <value>Navigeer naar de volgende pagina</value>
   </data>
+  <data name="strDataProtection" xml:space="preserve">
+    <value>Privacybeleid</value>
+  </data>
+  <data name="strUserFeedback" xml:space="preserve">
+    <value>Gebruikers Feedback</value>
+  </data>
 </root>

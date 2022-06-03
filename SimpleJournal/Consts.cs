@@ -18,6 +18,7 @@ namespace SimpleJournal
 
         public static readonly string ChangelogUrl = "https://simplejournal.ca-soft.net/chg.php?lang={0}&dark={1}";
         public static readonly string DownloadUrl = "https://simplejournal.ca-soft.net/download.php?auto=1";
+        public static readonly string DataProtectionUrl = "https://simplejournal.ca-soft.net/{0}/privacy-policy/";
         public static readonly string VersionUrl = "https://simplejournal.ca-soft.net/versions.json";
         public static readonly string FeedbackUrl = "https://simplejournal.ca-soft.net/feedback.php?name={0}&mail={1}&content={2}";
         public static readonly string HomePageUrl = "https://simplejournal.ca-soft.net";

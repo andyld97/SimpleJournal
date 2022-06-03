@@ -2146,4 +2146,12 @@ If there is already drawing on the page, all drawings are moved!</value>
     <value>Navigate to previous page</value>
     <comment>MainWindow.xaml</comment>
   </data>
+  <data name="strDataProtection" xml:space="preserve">
+    <value>Privacy Policy</value>
+    <comment>*</comment>
+  </data>
+  <data name="strUserFeedback" xml:space="preserve">
+    <value>User Feedback</value>
+    <comment>*</comment>
+  </data>
 </root>

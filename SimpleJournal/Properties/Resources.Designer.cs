@@ -582,6 +582,15 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Privacy Policy.
+        /// </summary>
+        public static string strDataProtection {
+            get {
+                return ResourceManager.GetString("strDataProtection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Date:.
         /// </summary>
         public static string strDate {
@@ -4406,6 +4415,15 @@ namespace SimpleJournal.Properties {
         public static string strUseReplaceEllipsesWithCircles {
             get {
                 return ResourceManager.GetString("strUseReplaceEllipsesWithCircles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User Feedback.
+        /// </summary>
+        public static string strUserFeedback {
+            get {
+                return ResourceManager.GetString("strUserFeedback", resourceCulture);
             }
         }
         

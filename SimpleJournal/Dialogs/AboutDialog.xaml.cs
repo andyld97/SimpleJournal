@@ -28,6 +28,12 @@ namespace SimpleJournal
             Loaded += AboutDialog_Loaded;
         }
 
+        public AboutDialog ShowFeedbackPage()
+        {
+            MainTabControl.SelectedIndex = 2;
+            return this;
+        }
+
         private async void AboutDialog_Loaded(object sender, RoutedEventArgs e)
         {
             // Prevent multiple calls
@@ -135,6 +141,11 @@ namespace SimpleJournal
             {
                 MessageBox.Show(this, $"{Properties.Resources.strFailedToSendFeedback}\n\n{ex.Message}", Properties.Resources.strFailure, MessageBoxButton.OK, MessageBoxImage.Error);
             }
+        }
+
+        private void UrlDataProtection_RequestNavigate(object sender, System.Windows.Navigation.RequestNavigateEventArgs e)
+        {
+            GeneralHelper.OpenUri(new Uri(string.Format(Consts.DataProtectionUrl, Properties.Resources.strLang)));
         }
     }
 }

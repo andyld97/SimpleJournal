@@ -96,6 +96,9 @@
 		<DefineConstants>TRACE;UWP</DefineConstants>
 	</PropertyGroup>
 	<ItemGroup>
+	  <None Remove="resources\feedback.png" />
+	</ItemGroup>
+	<ItemGroup>
 		<None Update="app.normal.manifest">
 			<SubType>Designer</SubType>
 		</None>
@@ -107,6 +110,7 @@
 		<Resource Include="resources\arrow_down.png" />
 		<Resource Include="resources\arrow_up.png" />
 		<Resource Include="resources\caslogo.ico" />
+		<Resource Include="resources\feedback.png" />
 		<Resource Include="resources\pdf_small.png" />
 	</ItemGroup>
 	<ItemGroup>

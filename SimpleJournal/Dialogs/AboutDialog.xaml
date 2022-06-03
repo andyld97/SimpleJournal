@@ -9,7 +9,7 @@
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen">
     <Grid Background="{DynamicResource WhiteBrush}">
-        <TabControl Margin="5,5,5,5" Background="Transparent">
+        <TabControl x:Name="MainTabControl" Margin="5,5,5,5" Background="Transparent">
             <TabControl.Resources>
                 <ResourceDictionary>
                     <ResourceDictionary.MergedDictionaries>
@@ -103,10 +103,17 @@
                     </StackPanel>
 
                     <TextBox Margin="5,2,5,0" Background="{DynamicResource WhiteBrush}" Foreground="{DynamicResource BlackBrush}" Grid.Row="1" Padding="2" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" x:Name="txtFeedback" AcceptsReturn="True" />
-                    
-                    <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
-                        <Button x:Name="btnSendFeedback" Click="btnSendFeedback_Click" Content="{x:Static res:Resources.strSend}" Padding="5" Margin="5" Width="100" FontWeight="Bold" />
-                    </StackPanel>
+
+                    <Grid Grid.Row="2">
+                        <TextBlock VerticalAlignment="Center" Margin="5">
+                            <Hyperlink x:Name="UrlDataProtection" NavigateUri="http://www.google.de" RequestNavigate="UrlDataProtection_RequestNavigate" Foreground="{DynamicResource BlackBrush}">
+                                <TextBlock Text="{x:Static res:Resources.strDataProtection}" />
+                            </Hyperlink>
+                        </TextBlock>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                            <Button x:Name="btnSendFeedback" Click="btnSendFeedback_Click" Content="{x:Static res:Resources.strSend}" Padding="5" Margin="5" Width="100" FontWeight="Bold" />
+                        </StackPanel>
+                    </Grid>
                 </Grid>
             </TabItem>
         </TabControl>

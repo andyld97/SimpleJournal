@@ -2056,4 +2056,10 @@ Wenn schon auf der Seite gezeichnet wurde, sind alle Zeichnungen verschoben!</va
   <data name="strNavigateToPreviousPage" xml:space="preserve">
     <value>Zur vorherigen Seite wechseln</value>
   </data>
+  <data name="strDataProtection" xml:space="preserve">
+    <value>Datenschutzerklärung</value>
+  </data>
+  <data name="strUserFeedback" xml:space="preserve">
+    <value>Benutzer-Feedback</value>
+  </data>
 </root>
