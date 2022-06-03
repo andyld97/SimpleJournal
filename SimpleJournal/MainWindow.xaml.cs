@@ -989,6 +989,12 @@ namespace SimpleJournal
                         IsUnderlined = jrText.IsUnderlined
                     });
                 }
+                else
+                {
+                    objImgSettings.Visibility = Visibility.Collapsed;
+                    objShapeSettings.Visibility = Visibility.Collapsed;
+                    objTextSettings.Visibility = Visibility.Collapsed;
+                }
             }
         }
 
@@ -3734,15 +3740,22 @@ namespace SimpleJournal
 
             if (result.HasValue && result.Value)
             {
-                Image image = new Image
+                try
                 {
-                    Width = Consts.InsertImageWidth,
-                    Height = Consts.InsertImageHeight,
-                    Source = new BitmapImage(new Uri(ofd.FileName, UriKind.Absolute)),
-                    Stretch = Settings.Instance.InsertImageStretchFormat.ConvertStretch()
-                };
+                    Image image = new Image
+                    {
+                        Width = Consts.InsertImageWidth,
+                        Height = Consts.InsertImageHeight,
+                        Source = new BitmapImage(new Uri(ofd.FileName, UriKind.Absolute)),
+                        Stretch = Settings.Instance.InsertImageStretchFormat.ConvertStretch()
+                    };
 
-                InsertUIElement(image);
+                    InsertUIElement(image);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"{Properties.Resources.strFailedToInsertImage} {ex.Message}", SharedResources.Resources.strError, MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
         }
 

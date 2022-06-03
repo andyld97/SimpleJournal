@@ -1104,6 +1104,15 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error while inserting the image:.
+        /// </summary>
+        public static string strFailedToInsertImage {
+            get {
+                return ResourceManager.GetString("strFailedToInsertImage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error loading the image:.
         /// </summary>
         public static string strFailedToLoadImage {

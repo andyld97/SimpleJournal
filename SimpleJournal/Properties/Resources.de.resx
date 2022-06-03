@@ -2062,4 +2062,7 @@ Wenn schon auf der Seite gezeichnet wurde, sind alle Zeichnungen verschoben!</va
   <data name="strUserFeedback" xml:space="preserve">
     <value>Benutzer-Feedback</value>
   </data>
+  <data name="strFailedToInsertImage" xml:space="preserve">
+    <value>Fehler beim Einfügen des Bildes:</value>
+  </data>
 </root>

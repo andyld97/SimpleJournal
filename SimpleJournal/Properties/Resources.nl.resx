@@ -1639,4 +1639,7 @@ Als er al een tekening op de pagina staat, worden alle tekeningen verplaatst!</v
   <data name="strUserFeedback" xml:space="preserve">
     <value>Gebruikers Feedback</value>
   </data>
+  <data name="strFailedToInsertImage" xml:space="preserve">
+    <value>Fout bij het invoegen van de afbeelding:</value>
+  </data>
 </root>

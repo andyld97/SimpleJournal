@@ -2154,4 +2154,8 @@ If there is already drawing on the page, all drawings are moved!</value>
     <value>User Feedback</value>
     <comment>*</comment>
   </data>
+  <data name="strFailedToInsertImage" xml:space="preserve">
+    <value>Error while inserting the image:</value>
+    <comment>MainWindow.xaml.cs</comment>
+  </data>
 </root>
