@@ -212,6 +212,22 @@ namespace SimpleJournal.Documents.UI
         /// </summary>
         public Common.Stretch InsertImageStretchFormat { get; set; } = Common.Stretch.Fill;
 
+        /// <summary>
+        /// Notes if the help (PDFConverstaionDialog) is expanded or not
+        /// </summary>
+        public bool PDFConverstaionDialogIsHelpExpanded { get; set; } = true;
+
+        /// <summary>
+        /// If true a self hosted api will be used if <see cref="SelfHostedPDF2JApiUrl"/> is set
+        /// </summary>
+        public bool UseSelfHostedPDF2JApi { get; set; } = false;
+
+        /// <summary>
+        /// The url and port (e.g. http://my-url.de:8080) where the self-hosted api is listening to.<br/>
+        /// If it's empty the default service endpoint url of PDF2J is used!
+        /// </summary>
+        public string SelfHostedPDF2JApiUrl { get; set; } = string.Empty;
+
         public Settings()
         {
 

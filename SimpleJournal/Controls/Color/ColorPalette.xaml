@@ -10,7 +10,6 @@
     <Grid>
         <Grid.Resources>
             <BooleanToVisibilityConverter x:Key="boolToVisibiltyConverter" />
-
             <Style TargetType="{x:Type TextBlock}">
                 <Setter Property="Foreground" Value="{DynamicResource BlackBrush}" />
                 <Setter Property="FontFamily" Value="Segoe UI" />
@@ -20,80 +19,12 @@
         <StackPanel>
             <mah:ColorPalette x:Name="DefaultColors" SelectionChanged="DefaultColors_SelectionChanged" BorderThickness="0" ItemsSource="{x:Static controls:ColorPalette.StandardColorsPalette}">
                 <mah:ColorPalette.Header>
-                    <TextBlock Text="{x:Static res:Resources.strDefaultColors}" />
+                    <TextBlock Text="{x:Static res:Resources.strDefaultColors}" FontWeight="Bold" />
                 </mah:ColorPalette.Header>
             </mah:ColorPalette>
 
-            <Expander x:Name="Expander" Header="{x:Static res:Resources.strColors}" />
+            <Expander x:Name="Expander" Header="{x:Static res:Resources.strColors}" FontWeight="Bold" />
             <mah:ColorPalette x:Name="AdvancedColors" Visibility="{Binding ElementName=Expander, Path=IsExpanded, Converter={StaticResource boolToVisibilityConverter}}" SelectionChanged="AdvancedColors_SelectionChanged" BorderThickness="0" Header="{x:Null}"     ItemsSource="{x:Static mah:BuildInColorPalettes.WpfColorsPalette}"  />
         </StackPanel>
-        <!--    <StackPanel Margin="0,0,0,0" Visibility="Collapsed" Orientation="Vertical" x:Name="ItemsPresenter" KeyboardNavigation.DirectionalNavigation="Contained" Background="{DynamicResource Fluent.Ribbon.Brushes.DropDown.BackgroundBrush}">
-            <TextBlock Padding="4" Text="{x:Static res:Resources.strDefaultColors}" FontWeight="Bold"/>
-            <Grid Margin="4,0,0,0" Height="20" x:Name="gridStandartColors">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="20"/>
-                    <ColumnDefinition Width="3"/>
-                    <ColumnDefinition Width="20"/>
-                    <ColumnDefinition Width="3"/>
-                    <ColumnDefinition Width="20"/>
-                    <ColumnDefinition Width="3"/>
-                    <ColumnDefinition Width="20"/>
-                    <ColumnDefinition Width="3"/>
-                    <ColumnDefinition Width="20"/>
-                    <ColumnDefinition Width="3"/>
-                    <ColumnDefinition Width="20"/>
-                    <ColumnDefinition Width="3"/>
-                    <ColumnDefinition Width="20"/>
-                    <ColumnDefinition Width="3"/>
-                    <ColumnDefinition Width="20"/>
-                    <ColumnDefinition Width="3"/>
-                    <ColumnDefinition Width="20"/>
-                    <ColumnDefinition Width="3"/>
-                    <ColumnDefinition Width="20"/>
-                    <ColumnDefinition Width="3"/>
-                </Grid.ColumnDefinitions>
-            </Grid>
-            <TextBlock Margin="0,10,0,0" Padding="4" Text="{x:Static res:Resources.strColors}" FontWeight="Bold"/>
-            <Grid Margin="4,0,0,0" Height="170" x:Name="colorsGrid">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="20"/>
-                    <ColumnDefinition Width="3"/>
-                    <ColumnDefinition Width="20"/>
-                    <ColumnDefinition Width="3"/>
-                    <ColumnDefinition Width="20"/>
-                    <ColumnDefinition Width="3"/>
-                    <ColumnDefinition Width="20"/>
-                    <ColumnDefinition Width="3"/>
-                    <ColumnDefinition Width="20"/>
-                    <ColumnDefinition Width="3"/>
-                    <ColumnDefinition Width="20"/>
-                    <ColumnDefinition Width="3"/>
-                    <ColumnDefinition Width="20"/>
-                    <ColumnDefinition Width="3"/>
-                    <ColumnDefinition Width="20"/>
-                    <ColumnDefinition Width="3"/>
-                    <ColumnDefinition Width="20"/>
-                    <ColumnDefinition Width="3"/>
-                    <ColumnDefinition Width="20"/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="20"/>
-                    <RowDefinition Height="20"/>
-                    <RowDefinition Height="20"/>
-                    <RowDefinition Height="3"/>
-                    <RowDefinition Height="20"/>
-                    <RowDefinition Height="3"/>
-                    <RowDefinition Height="20"/>
-                    <RowDefinition Height="3"/>
-                    <RowDefinition Height="20"/>
-                    <RowDefinition Height="3"/>
-                    <RowDefinition Height="20"/>
-                    <RowDefinition Height="3"/>
-                    <RowDefinition Height="20"/>
-                    <RowDefinition Height="3"/>
-                </Grid.RowDefinitions>
-            </Grid>
-
-        </StackPanel> -->
     </Grid>
 </UserControl>

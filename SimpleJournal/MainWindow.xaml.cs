@@ -54,7 +54,7 @@ namespace SimpleJournal
         public ObservableCollection<IPaper> CurrentJournalPages { get; private set; } = new ObservableCollection<IPaper>();
         public static MainWindow W_INSTANCE = null;
 
-#region Private Members
+        #region Private Members
         private InkCanvasEditingMode currentkInkMode = InkCanvasEditingMode.Ink;
         private readonly DrawingAttributes CurrentDrawingAttributes = new DrawingAttributes() { FitToCurve = Settings.Instance.UseFitToCurve, IsHighlighter = false };
         private readonly DrawingAttributes currentTextMarkerAttributes = new DrawingAttributes() { IsHighlighter = true };
@@ -119,7 +119,7 @@ namespace SimpleJournal
 
 #endregion
 
-#region Private Properties
+        #region Private Properties
         private int SelectedPen
         {
             get
@@ -137,7 +137,7 @@ namespace SimpleJournal
         }
 #endregion
 
-#region Constructor
+        #region Constructor
         static MainWindow()
         {
             DrawingCanvas.HideSidebar += DrawingCanvas_HideSidebar;
@@ -353,7 +353,6 @@ namespace SimpleJournal
             UpdateMenu();
 
 #if !UWP
-            GeneralHelper.RemoveUpdaterIfAny();
             GeneralHelper.SearchForUpdates();            
 #endif
 
@@ -434,7 +433,7 @@ namespace SimpleJournal
         }
 #endregion
 
-#region AutoSave - Backup
+        #region AutoSave - Backup
 
         private string lastBackupFileName = string.Empty;
 
@@ -623,7 +622,7 @@ namespace SimpleJournal
 
 #endregion
 
-#region Error Handling
+        #region Error Handling
 
         // ToDO: *** https://github.com/Tyrrrz/DotnetRuntimeBootstrapper/issues/23
         // Related:  https://github.com/Tyrrrz/DotnetRuntimeBootstrapper/issues/27
@@ -662,7 +661,7 @@ namespace SimpleJournal
         }
 #endregion
 
-#region Determine which Canvas is the last modifed while scrolling
+        #region Determine which Canvas is the last modifed while scrolling
 
         private void mainScrollView_ScrollChanged(object sender, ScrollChangedEventArgs e)
         {
@@ -716,7 +715,7 @@ namespace SimpleJournal
         }
 #endregion
 
-#region Sidebar Handling
+        #region Sidebar Handling
 
         public bool IsSideBarVisible => pnlSidebar.IsVisible;
 
@@ -990,6 +989,12 @@ namespace SimpleJournal
                         IsUnderlined = jrText.IsUnderlined
                     });
                 }
+                else
+                {
+                    objImgSettings.Visibility = Visibility.Collapsed;
+                    objShapeSettings.Visibility = Visibility.Collapsed;
+                    objTextSettings.Visibility = Visibility.Collapsed;
+                }
             }
         }
 
@@ -1114,7 +1119,7 @@ namespace SimpleJournal
 
 #endregion
 
-#region Private Methods
+        #region Private Methods
 
         public void UpdateTextMarkerAttributes(bool reset = false)
         {
@@ -1800,9 +1805,9 @@ namespace SimpleJournal
         }
 #endregion
 
-#region Toolbar Handling / Private Event Handling
+        #region Toolbar Handling / Private Event Handling
 
-#region Tool Handling
+        #region Tool Handling
 
         private InkCanvasEditingMode ConvertTool(Tools tool)
         {
@@ -2186,9 +2191,9 @@ namespace SimpleJournal
 
 #endregion
 
-#region Event Handling / Menu
+        #region Event Handling / Menu
 
-#region Commands
+        #region Commands
 
         private void DisableTouchScreenCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
@@ -2313,6 +2318,13 @@ namespace SimpleJournal
         private void ImageCloseStatusBar_MouseDown(object sender, MouseButtonEventArgs e)
         {
             MainStatusBar.Visibility = Visibility.Collapsed;
+        }
+
+        private void btnFeedback_Click(object sender, RoutedEventArgs e)
+        {
+            AboutDialog ad = new AboutDialog();
+            ad.ShowFeedbackPage();
+            ad.ShowDialog();
         }
 
         private async void ListRecentlyOpenedDocuments_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -2958,9 +2970,9 @@ namespace SimpleJournal
 
 #endregion
 
-#endregion
+        #endregion
 
-#region Zoom
+        #region Zoom
 
         private void ZoomByScale(double scale)
         {
@@ -3034,7 +3046,7 @@ namespace SimpleJournal
         }
 #endregion
 
-#region Scroll Handling
+        #region Scroll Handling
         private Point p1 = new Point();
         private readonly Stopwatch timer = new Stopwatch();
         private Storyboard sbScrollViewerAnimation = new Storyboard();
@@ -3125,7 +3137,7 @@ namespace SimpleJournal
 
 #endregion
 
-#region Internal Save and Load
+        #region Internal Save and Load
         private async Task<bool> SaveJournal(string path, bool saveAsBackup = false)
         {
             try
@@ -3408,7 +3420,7 @@ namespace SimpleJournal
 
 #endregion
 
-#region Pagemanagment Dialog
+        #region Pagemanagment Dialog
 
         private async Task ApplyPageManagmentDialog(List<JournalPage> result)
         {
@@ -3520,7 +3532,7 @@ namespace SimpleJournal
 
 #endregion
 
-#region Export
+        #region Export
 
         private void btnExport_Click(object sender, RoutedEventArgs e)
         {
@@ -3538,7 +3550,7 @@ namespace SimpleJournal
 
 #endregion
 
-#region Copy / Paste
+        #region Copy / Paste
         private Clipboard clipboard = new Clipboard();
         private bool waitingForClickToPaste = false;
         private Tools pasteBackupTool = Tools.Pencil1;
@@ -3636,7 +3648,7 @@ namespace SimpleJournal
 
 #endregion
 
-#region Insert
+        #region Insert
 
         private UIElement insertClipboard = null;
 #pragma warning disable IDE0052 // Ungelesene private Member entfernen
@@ -3728,15 +3740,22 @@ namespace SimpleJournal
 
             if (result.HasValue && result.Value)
             {
-                Image image = new Image
+                try
                 {
-                    Width = Consts.InsertImageWidth,
-                    Height = Consts.InsertImageHeight,
-                    Source = new BitmapImage(new Uri(ofd.FileName, UriKind.Absolute)),
-                    Stretch = Settings.Instance.InsertImageStretchFormat.ConvertStretch()
-                };
+                    Image image = new Image
+                    {
+                        Width = Consts.InsertImageWidth,
+                        Height = Consts.InsertImageHeight,
+                        Source = new BitmapImage(new Uri(ofd.FileName, UriKind.Absolute)),
+                        Stretch = Settings.Instance.InsertImageStretchFormat.ConvertStretch()
+                    };
 
-                InsertUIElement(image);
+                    InsertUIElement(image);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"{Properties.Resources.strFailedToInsertImage} {ex.Message}", SharedResources.Resources.strError, MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
         }
 
@@ -3776,7 +3795,7 @@ namespace SimpleJournal
 
 #endregion
 
-#region Background
+        #region Background
 
         public void ApplyBackground()
         {
@@ -3822,9 +3841,9 @@ namespace SimpleJournal
                 mainScrollView.Background = Consts.DefaultBackground;
             }
         }
-#endregion
+        #endregion
 
-#region General Events / Touch
+        #region General Events / Touch
 
         private void RibbonWindow_Activated(object sender, EventArgs e)
         {
@@ -3869,7 +3888,7 @@ namespace SimpleJournal
 #endregion
     }
 
-#region Converter
+    #region Converter
     public class SelectedIndexToColumnSpanConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)

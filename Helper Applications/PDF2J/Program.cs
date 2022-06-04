@@ -1,15 +1,18 @@
-using ImageMagick;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.PlatformAbstractions;
+using PDF2J.Model;
 using SimpleJournal.Common;
-using SimpleJournal.Documents;
+using SimpleJournal.Common.Helper;
 using SimpleJournal.Documents.PDF;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace PDF2J
 {
@@ -18,6 +21,9 @@ namespace PDF2J
         public static List<PrintTicket> PrintTickets = new List<PrintTicket>();
         private static System.Timers.Timer workingTimer = new System.Timers.Timer();
         private static System.Timers.Timer cleanUPTimer = new System.Timers.Timer();
+
+        public static Config GlobalConfig;
+        private static readonly HttpClient httpClient = new HttpClient();
 
         /// <summary>
         /// This version must only be changed if there are changes due to the document format!
@@ -32,8 +38,26 @@ namespace PDF2J
 
         public static void Main(string[] args)
         {
+            // Read config json (if any) [https://stackoverflow.com/a/28700387/6237448]
+            string configPath = System.IO.Path.Combine(PlatformServices.Default.Application.ApplicationBasePath, "config.json");
+            string preInitalizationLogMessage = string.Empty;
+            if (System.IO.File.Exists(configPath))
+            {
+                string configJson = System.IO.File.ReadAllText(configPath);
+                GlobalConfig = System.Text.Json.JsonSerializer.Deserialize<Config>(configJson);
+                preInitalizationLogMessage = "Successfully initalized config file!";
+            }
+            else
+            {
+                preInitalizationLogMessage = "No config file found ..."; 
+                GlobalConfig = new Config();
+            }
+
             var host = CreateHostBuilder(args).Build();
             logger = host.Services.GetService<ILogger<Program>>();
+
+            if (!string.IsNullOrEmpty(preInitalizationLogMessage))
+                logger.LogInformation(preInitalizationLogMessage);
 
             workingTimer = new System.Timers.Timer() { Interval = TimeSpan.FromSeconds(1).TotalMilliseconds };
             workingTimer.Elapsed += WorkingTimer_Elapsed;
@@ -109,20 +133,54 @@ namespace PDF2J
             }
         }
 
-        private static void PdfConverter_Completed(bool success, Exception ex, string destinationFileName)
+        private static async void PdfConverter_Completed(bool success, Exception ex, string destinationFileName)
         {
             if (success)
             {
                 currentTicket.IsCompleted = true;
                 currentTicket.Status = TicketStatus.Completed;
                 logger.LogInformation($"[{currentTicket.Name}] Completed!");
+
+                await NotifyWebHookAsync($"[PDF2J] Successfully converted a pdf document \"{currentTicket.Name}\"");
             }
             else
             {
                 logger.LogError($"[{currentTicket.Name}] Failed: {ex.Message}");
 
                 currentTicket.Status = TicketStatus.Failed;
-                currentTicket.ErorrMessage = ex.ToString();
+                currentTicket.ErorrMessage = ex.ToString() ?? string.Empty;
+
+                if (GlobalConfig.ReportFailedTickets && !string.IsNullOrWhiteSpace(GlobalConfig.ReportPath))
+                {
+                    // Report failed ticket
+                    string path = System.IO.Path.Combine(GlobalConfig.ReportPath, currentTicket.ID);
+                    FileSystemHelper.TryCreateDirectory(path);
+
+                    System.IO.File.Copy(System.IO.Path.Combine(currentTicket.TempPath, "doc.pdf"), System.IO.Path.Combine(path, "doc.pdf"));
+                    System.IO.File.WriteAllText(System.IO.Path.Combine(path, "log.txt"), currentTicket.ErorrMessage);
+
+                    await NotifyWebHookAsync($"[PDF2J] Failed to convert a pdf document \"{currentTicket.Name}\". Ticket-ID: \"{currentTicket.ID}\"");
+                }
+            }
+        }
+
+        private static async Task NotifyWebHookAsync(string message)
+        {
+            if (string.IsNullOrEmpty(GlobalConfig.WebHookUrl))
+                return;
+
+            try
+            {
+                string url = GlobalConfig.WebHookUrl;
+                if (url.EndsWith("/"))
+                    url = url.Substring(0, url.Length - 1);
+                url += $"?message={HttpUtility.UrlEncode(message)}";
+
+                await httpClient.GetAsync(url);
+            }
+            catch (Exception ex)
+            {
+                logger.LogWarning($"Failed to notify webhook: {ex.Message}");
             }
         }
 
@@ -158,7 +216,7 @@ namespace PDF2J
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
-                    webBuilder.UseUrls("http://localhost:5290");
+                    webBuilder.UseUrls($"{GlobalConfig.WebAddress}:{GlobalConfig.Port}");
                 });
     }
 }

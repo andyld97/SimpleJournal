@@ -1014,7 +1014,7 @@ Klik op Nee om dit bericht te blijven ontvangen!</value>
     <value>Opnieuw</value>
   </data>
   <data name="strReleaseDate" xml:space="preserve">
-    <value>21/05/2022 15:00</value>
+    <value>04/06/2022 13:04</value>
   </data>
   <data name="strRemove" xml:space="preserve">
     <value>Verwijderen</value>
@@ -1632,5 +1632,26 @@ Als er al een tekening op de pagina staat, worden alle tekeningen verplaatst!</v
   </data>
   <data name="strNavigateToNextPage" xml:space="preserve">
     <value>Navigeer naar de volgende pagina</value>
+  </data>
+  <data name="strDataProtection" xml:space="preserve">
+    <value>Privacybeleid</value>
+  </data>
+  <data name="strUserFeedback" xml:space="preserve">
+    <value>Gebruikers Feedback</value>
+  </data>
+  <data name="strFailedToInsertImage" xml:space="preserve">
+    <value>Fout bij het invoegen van de afbeelding:</value>
+  </data>
+  <data name="strPDFConversationDialog_HelpToggle" xml:space="preserve">
+    <value>Help weergeven/verbergen</value>
+  </data>
+  <data name="strPDFConversationDialog_Options" xml:space="preserve">
+    <value>Opties:</value>
+  </data>
+  <data name="strPDFConversationDialog_UseSelfHostedPDF2JApi" xml:space="preserve">
+    <value>Gebruik zelf gehoste PDF2J API</value>
+  </data>
+  <data name="strPDFConversationDialog_SelfHostedPDF2JUrlDescription" xml:space="preserve">
+    <value>PDF2J Url (b.v. http://my-url.de:8080):</value>
   </data>
 </root>

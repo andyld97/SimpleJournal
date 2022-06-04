@@ -10,14 +10,14 @@
         Title="{x:Static res:Resources.strOCRLoading}" Height="350" Width="400" MinHeight="350" MinWidth="400">
     <Grid Background="{DynamicResource WhiteBrush}">
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="40"/>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="40" />
         </Grid.RowDefinitions>
         <ScrollViewer Grid.Row="0">
-            <TextBox Background="Transparent" Foreground="{DynamicResource BlackBrush}" x:Name="txtText" IsReadOnly="True" IsEnabled="false"/>
+            <TextBox Background="Transparent" Foreground="{DynamicResource BlackBrush}" x:Name="txtText" IsReadOnly="True" IsEnabled="false" />
         </ScrollViewer>
 
-        <Button Grid.Row="1" IsEnabled="False" Content="{x:Static res:Resources.strOCRCopyToClipboard}" HorizontalAlignment="Left" Margin="5,5,5,5" Width="200" x:Name="btnCopy" Click="btnCopy_Click"/>
+        <Button Grid.Row="1" IsEnabled="False" Content="{x:Static res:Resources.strOCRCopyToClipboard}" HorizontalAlignment="Left" Margin="5,5,5,5" Width="200" x:Name="btnCopy" Click="btnCopy_Click" />
         <Button Grid.Row="1" IsEnabled="False" Content="{x:Static res:Resources.strOK}" Margin="5,5,5,5" HorizontalAlignment="Right" Width="100" x:Name="btnOk" Click="btnOk_Click" />
     </Grid>
 </Window>

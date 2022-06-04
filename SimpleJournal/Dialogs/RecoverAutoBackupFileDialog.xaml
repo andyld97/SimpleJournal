@@ -19,15 +19,15 @@
             </Style>
         </Grid.Resources>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="80"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="80" />
+            <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
         <Border Grid.Column="0">
             <Border.Background>
                 <LinearGradientBrush>
-                    <GradientStop Color="LightGray" Offset="0.1"/>
-                    <GradientStop Color="#FAD69E" Offset="0.4"/>
+                    <GradientStop Color="LightGray" Offset="0.1" />
+                    <GradientStop Color="#FAD69E" Offset="0.4" />
                 </LinearGradientBrush>
             </Border.Background>
             <Grid Margin="0,10,0,0">
@@ -47,14 +47,14 @@
 
                 <CheckBox x:Name="CheckBoxOpenBackupsAfterRestore" Margin="10,5,23,0" IsChecked="True" HorizontalAlignment="Left" Content="{x:Static res:Resources.strOpenBackupsAfterRecovery}"/>
                     <TextBlock Margin="10,8,23,0" Foreground="Red" TextWrapping="Wrap">
-                    <Run Text="{x:Static res:Resources.strHint}" FontWeight="Bold"/><Run Text=":" FontWeight="Bold"/>
-                    <LineBreak/>
-                    <Run Text="{x:Static res:Resources.strBackupOriginExplanation}"/>
+                        <Run Text="{x:Static res:Resources.strHint}" FontWeight="Bold"/><Run Text=":" FontWeight="Bold" />
+                        <LineBreak />
+                        <Run Text="{x:Static res:Resources.strBackupOriginExplanation}" />
                 </TextBlock>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,12,20,10">
-                    <Button x:Name="ButtonRecoverAll" Click="ButtonRecoverAll_Click" Content="{x:Static res:Resources.strAutoSaveDialogButtonRecover}" Margin="3,3,3,3" Padding="3" FontSize="14" FontWeight="Bold" Width="180" Height="30"/>
-                    <Button x:Name="ButtonDiscardAll" Click="ButtonDiscardAll_Click" Content="{x:Static res:Resources.strAutoSaveDialogButtonDiscard}" Margin="3,3,3,3" Padding="3" Width="180" FontSize="14"/>
-                    <Button x:Name="ButtonDisplayDirectoryInExplorer" Click="ButtonDisplayDirectoryInExplorer_Click" Content="{x:Static res:Resources.strButtonDisplayAutoSaveDirectory}" HorizontalAlignment="Right" Width="150" FontSize="14" Height="30" Margin="3"/>
+                    <Button x:Name="ButtonRecoverAll" Click="ButtonRecoverAll_Click" Content="{x:Static res:Resources.strAutoSaveDialogButtonRecover}" Margin="3,3,3,3" Padding="3" FontSize="14" FontWeight="Bold" Width="180" Height="30" />
+                    <Button x:Name="ButtonDiscardAll" Click="ButtonDiscardAll_Click" Content="{x:Static res:Resources.strAutoSaveDialogButtonDiscard}" Margin="3,3,3,3" Padding="3" Width="180" FontSize="14" />
+                    <Button x:Name="ButtonDisplayDirectoryInExplorer" Click="ButtonDisplayDirectoryInExplorer_Click" Content="{x:Static res:Resources.strButtonDisplayAutoSaveDirectory}" HorizontalAlignment="Right" Width="150" FontSize="14" Height="30" Margin="3" />
                 </StackPanel>
             </StackPanel>
         </Grid>

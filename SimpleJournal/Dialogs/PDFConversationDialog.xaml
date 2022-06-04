@@ -24,11 +24,11 @@
             <Setter Property="Padding" Value="3" />
         </Style>
         <Style TargetType="{x:Type Hyperlink}">
-            <Setter Property="Foreground" Value="{DynamicResource BlackBrush}" />
+            <Setter Property="Foreground" Value="Black" />
         </Style>
     </Window.Resources>
 
-    <Grid>
+    <Grid Margin="2">
         <StackPanel x:Name="PanelProgress" Margin="2" Visibility="Collapsed" VerticalAlignment="Center">
             <TextBlock Margin="5" TextWrapping="Wrap">
                 <Run Text="Status:" FontWeight="Bold" />
@@ -38,21 +38,32 @@
         </StackPanel>
 
         <StackPanel x:Name="PanelInput" Margin="2" Visibility="Visible">
-            <Border BorderThickness="1" BorderBrush="{DynamicResource BlackBrush}" CornerRadius="5">
-                <TextBlock TextWrapping="Wrap" FontSize="12">
-                    <Run Text="{x:Static res:Resources.strPDFConversationDialog_Explanation_Line1}" />
-                    <Hyperlink NavigateUri="https://google.de" RequestNavigate="Hyperlink_RequestNavigate">Ghostscript</Hyperlink>
-                    <Run Text="{x:Static res:Resources.strPDFConversationDialog_Explanation_Line2}"/>
-                    <Hyperlink NavigateUri="https://google.de" RequestNavigate="Hyperlink_RequestNavigate">Ghostscript</Hyperlink>
-                    <Run Text="{x:Static res:Resources.strPDFConversationDialog_Explanation_Line3}" />
-                    <LineBreak />
-                    <Run Foreground="Orange" FontWeight="Bold" Text="{x:Static res:Resources.strPDFConversationDialog_Hint}" />
-                </TextBlock>
-            </Border>
+            <Expander x:Name="ExpanderHelp" Expanded="Expander_Expanded" Collapsed="Expander_Expanded">
+                <Expander.Header>
+                    <TextBlock Text="{x:Static res:Resources.strPDFConversationDialog_HelpToggle}" />
+                </Expander.Header>
+
+                <StackPanel>
+                    <Border Background="#E0F2F7" BorderThickness="1" BorderBrush="LightGray" CornerRadius="5">
+                        <TextBlock TextWrapping="Wrap" FontSize="12" Margin="5" Foreground="Black">
+                            <Run Text="{x:Static res:Resources.strPDFConversationDialog_Explanation_Line1}" />
+                            <Hyperlink NavigateUri="https://google.de" RequestNavigate="Hyperlink_RequestNavigate">Ghostscript</Hyperlink>
+                            <Run Text="{x:Static res:Resources.strPDFConversationDialog_Explanation_Line2}"/>
+                            <Hyperlink NavigateUri="https://google.de" RequestNavigate="Hyperlink_RequestNavigate">Ghostscript</Hyperlink>
+                            <Run Text="{x:Static res:Resources.strPDFConversationDialog_Explanation_Line3}" />
+                            <LineBreak />
+                            <Run Foreground="Red" FontWeight="Bold" Text="{x:Static res:Resources.strPDFConversationDialog_Hint}" />
+                        </TextBlock>
+                    </Border>
+
+                    <Separator Margin="0,10,0,2" />
+                </StackPanel>
+            </Expander>
+      
+            <TextBlock Text="{x:Static res:Resources.strPDFConversationDialog_Options}" FontWeight="Bold" />
 
             <RadioButton x:Name="RadioAllPages" Margin="0,5,0,0" Content="{x:Static res:Resources.strPDFConversationDialog_AllPages}" IsChecked="True" />
             <RadioButton x:Name="RadioChoosePageRange" Margin="0,5,0,0" Content="{x:Static res:Resources.strPDFConversationDialog_ConvertOnlySelectedPages}" />
-            <CheckBox x:Name="CheckUseOnlineConverter" Checked="CheckUseOnlineConverter_Checked" Unchecked="CheckUseOnlineConverter_Checked" Foreground="{DynamicResource BlackBrush}" Content="{x:Static res:Resources.strPDFConversationDialog_UseOnlineConversation}" Margin="0,5,0,0" />
 
             <StackPanel Visibility="{Binding ElementName=RadioChoosePageRange, Path=IsChecked, Converter={StaticResource boolToVisibilityConverter}}" Orientation="Horizontal" HorizontalAlignment="Left">
                 <TextBlock Text="{x:Static res:Resources.strPDFConversationDialog_From}" Margin="25,0,0,0" VerticalAlignment="Center" FontWeight="Bold" />
@@ -60,6 +71,20 @@
                 <TextBlock Text="{x:Static res:Resources.strPDFConversationDialog_To}" Margin="10,0,3,0" VerticalAlignment="Center" FontWeight="Bold" />
                 <controls:NumericUpDown x:Name="NumPageTo" Height="25" Value="100" Maximum="100" Minimum="1" Margin="3" />
             </StackPanel>
+
+            <CheckBox x:Name="CheckUseOnlineConverter" Checked="CheckUseOnlineConverter_Checked" Unchecked="CheckUseOnlineConverter_Checked" Foreground="{DynamicResource BlackBrush}" Content="{x:Static res:Resources.strPDFConversationDialog_UseOnlineConversation}" Margin="0,5,0,0" />
+
+            <StackPanel Visibility="{Binding ElementName=CheckUseOnlineConverter, Path=IsChecked, Converter={StaticResource boolToVisibilityConverter}}">
+                <CheckBox x:Name="CheckUseSelfHostedAPI" Checked="CheckUseSelfHostedAPI_Checked" Unchecked="CheckUseSelfHostedAPI_Checked" Content="{x:Static res:Resources.strPDFConversationDialog_UseSelfHostedPDF2JApi}" Margin="0,5,0,0"/>
+
+                <StackPanel Visibility="{Binding ElementName=CheckUseSelfHostedAPI, Path=IsChecked, Converter={StaticResource boolToVisibilityConverter}}">
+                    <TextBlock Text="{x:Static res:Resources.strPDFConversationDialog_SelfHostedPDF2JUrlDescription}" FontWeight="Bold" />
+                    <TextBox x:Name="TextUrl" TextChanged="TextUrl_TextChanged" />
+                    <!-- ToDo: *** Add Blog Article here (if it is available ofc) -->
+                </StackPanel>
+            </StackPanel>
+
+            <Separator Margin="0,10,0,2" />
 
             <TextBlock Text="{x:Static res:Resources.strPDFConversationDialog_SourcePath}" />
             <TextBox x:Name="TextSource" IsReadOnly="True" />
