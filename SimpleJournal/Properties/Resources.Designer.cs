@@ -2423,6 +2423,15 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Show/Hide Help.
+        /// </summary>
+        public static string strPDFConversationDialog_HelpToggle {
+            get {
+                return ResourceManager.GetString("strPDFConversationDialog_HelpToggle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Attention: The original PDF document remains unchanged!.
         /// </summary>
         public static string strPDFConversationDialog_Hint {
@@ -2437,6 +2446,15 @@ namespace SimpleJournal.Properties {
         public static string strPDFConversationDialog_InvalidInputMessage {
             get {
                 return ResourceManager.GetString("strPDFConversationDialog_InvalidInputMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Options:.
+        /// </summary>
+        public static string strPDFConversationDialog_Options {
+            get {
+                return ResourceManager.GetString("strPDFConversationDialog_Options", resourceCulture);
             }
         }
         
@@ -2464,6 +2482,15 @@ namespace SimpleJournal.Properties {
         public static string strPDFConversationDialog_Saving {
             get {
                 return ResourceManager.GetString("strPDFConversationDialog_Saving", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to PDF2J Url (e.g. http://my-url.de:8080):.
+        /// </summary>
+        public static string strPDFConversationDialog_SelfHostedPDF2JUrlDescription {
+            get {
+                return ResourceManager.GetString("strPDFConversationDialog_SelfHostedPDF2JUrlDescription", resourceCulture);
             }
         }
         
@@ -2554,6 +2581,15 @@ namespace SimpleJournal.Properties {
         public static string strPDFConversationDialog_UseOnlineConversation {
             get {
                 return ResourceManager.GetString("strPDFConversationDialog_UseOnlineConversation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Use self-hosted PDF2J API.
+        /// </summary>
+        public static string strPDFConversationDialog_UseSelfHostedPDF2JApi {
+            get {
+                return ResourceManager.GetString("strPDFConversationDialog_UseSelfHostedPDF2JApi", resourceCulture);
             }
         }
         
@@ -2936,7 +2972,7 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 05/21/2022 3:00 PM.
+        ///   Looks up a localized string similar to 06/04/2022 1:04 AM.
         /// </summary>
         public static string strReleaseDate {
             get {

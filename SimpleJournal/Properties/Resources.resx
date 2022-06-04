@@ -1133,7 +1133,7 @@ Click on No to continue to receive this message!</value>
     <comment>MainWindow.xaml</comment>
   </data>
   <data name="strReleaseDate" xml:space="preserve">
-    <value>05/21/2022 3:00 PM</value>
+    <value>06/04/2022 1:04 AM</value>
     <comment>About.xaml</comment>
   </data>
   <data name="strRemove" xml:space="preserve">
@@ -2157,5 +2157,21 @@ If there is already drawing on the page, all drawings are moved!</value>
   <data name="strFailedToInsertImage" xml:space="preserve">
     <value>Error while inserting the image:</value>
     <comment>MainWindow.xaml.cs</comment>
+  </data>
+  <data name="strPDFConversationDialog_HelpToggle" xml:space="preserve">
+    <value>Show/Hide Help</value>
+    <comment>PDFConversationDialog.xaml</comment>
+  </data>
+  <data name="strPDFConversationDialog_Options" xml:space="preserve">
+    <value>Options:</value>
+    <comment>PDFConversationDialog.xaml</comment>
+  </data>
+  <data name="strPDFConversationDialog_UseSelfHostedPDF2JApi" xml:space="preserve">
+    <value>Use self-hosted PDF2J API</value>
+    <comment>PDFConversationDialog.xaml</comment>
+  </data>
+  <data name="strPDFConversationDialog_SelfHostedPDF2JUrlDescription" xml:space="preserve">
+    <value>PDF2J Url (e.g. http://my-url.de:8080):</value>
+    <comment>PDFConversationDialog.xaml</comment>
   </data>
 </root>

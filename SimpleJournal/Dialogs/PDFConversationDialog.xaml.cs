@@ -33,6 +33,17 @@ namespace SimpleJournal.Dialogs
 
         public string DestinationFileName => destinationFileName;
 
+        private static string PDF2JApiUrl
+        {
+            get
+            {
+                if (Settings.Instance.UseSelfHostedPDF2JApi && !string.IsNullOrEmpty(Settings.Instance.SelfHostedPDF2JApiUrl))
+                    return Settings.Instance.SelfHostedPDF2JApiUrl;
+
+                return Consts.ConverterAPIUrl;
+            }
+        }
+
         #region Ctor
         public PDFConversationDialog(string sourceFileName)
         {
@@ -41,6 +52,13 @@ namespace SimpleJournal.Dialogs
             TextSource.Text = sourceFileName;
 
             CheckUseOnlineConverter.IsChecked = Settings.Instance.UseOnlineConversation;
+            ExpanderHelp.IsExpanded = Settings.Instance.PDFConverstaionDialogIsHelpExpanded;
+            CheckUseSelfHostedAPI.IsChecked = Settings.Instance.UseSelfHostedPDF2JApi;
+            TextUrl.Text = Settings.Instance.SelfHostedPDF2JApiUrl;
+
+            // If there is no connection, uncheck online converstaion (must be done here, to prevent this dialog from saving it to settings)
+            if (!GeneralHelper.IsConnectedToInternet())
+                CheckUseOnlineConverter.IsChecked = false;
 
             timer.Tick += Timer_Tick;
             isInitialized = true;
@@ -113,7 +131,7 @@ namespace SimpleJournal.Dialogs
 
                 try
                 {
-                    printTicket = await GeneralHelper.UploadFileAsync(sourceFileName, $"{Consts.ConverterAPIUrl}/api/pdf/upload", System.Text.Json.JsonSerializer.Serialize(options));
+                    printTicket = await GeneralHelper.UploadFileAsync(sourceFileName, $"{PDF2JApiUrl}/api/pdf/upload", System.Text.Json.JsonSerializer.Serialize(options));
                 }
                 catch (Exception ex)
                 {
@@ -224,7 +242,7 @@ namespace SimpleJournal.Dialogs
                 using (HttpClient client = new HttpClient() { Timeout = TimeSpan.FromSeconds(1) })
                 {
                     // Send a message to the api that the ticket should be canceld!
-                    await client.GetAsync($"{Consts.ConverterAPIUrl}/api/ticket/{currentTicket?.ID}/{operation}");
+                    await client.GetAsync($"{PDF2JApiUrl}/api/ticket/{currentTicket?.ID}/{operation}");
                 }
             }
             catch
@@ -232,7 +250,6 @@ namespace SimpleJournal.Dialogs
                 // ignore
             }
         }
-
 
         protected override async void OnClosing(CancelEventArgs e)
         {
@@ -272,7 +289,7 @@ namespace SimpleJournal.Dialogs
             {
                 using (HttpClient client = new HttpClient())
                 {
-                    string url = $"{Consts.ConverterAPIUrl}/api/ticket/{currentTicket.ID}";
+                    string url = $"{PDF2JApiUrl}/api/ticket/{currentTicket.ID}";
 
                     var result = await client.GetAsync(url);
                     var temp = await System.Text.Json.JsonSerializer.DeserializeAsync<PrintTicket>(await result.Content.ReadAsStreamAsync());
@@ -329,7 +346,7 @@ namespace SimpleJournal.Dialogs
                                 if (counter == 1 && currentTicket.Documents.Count > 1)
                                     destinationFileName = newFileName;
 
-                                var response = await client.GetAsync($"{Consts.ConverterAPIUrl}/api/ticket/{currentTicket.ID}/download/{counter - 1}");
+                                var response = await client.GetAsync($"{PDF2JApiUrl}/api/ticket/{currentTicket.ID}/download/{counter - 1}");
                                 if (response.IsSuccessStatusCode)
                                 {
                                     var str = await response.Content.ReadAsStreamAsync();
@@ -368,5 +385,32 @@ namespace SimpleJournal.Dialogs
             }
         }
         #endregion
+
+        private void CheckUseSelfHostedAPI_Checked(object sender, RoutedEventArgs e)
+        {
+            if (!isInitialized)
+                return;
+
+            Settings.Instance.UseSelfHostedPDF2JApi = CheckUseSelfHostedAPI.IsChecked.Value;
+            Settings.Instance.Save();
+        }
+
+        private void Expander_Expanded(object sender, RoutedEventArgs e)
+        {
+            if (!isInitialized)
+                return;
+
+            Settings.Instance.PDFConverstaionDialogIsHelpExpanded = ExpanderHelp.IsExpanded;
+            Settings.Instance.Save();
+        }
+
+        private void TextUrl_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+        {
+            if (!isInitialized)
+                return;
+
+            Settings.Instance.SelfHostedPDF2JApiUrl = TextUrl.Text;
+            Settings.Instance.Save();
+        }
     }
 }

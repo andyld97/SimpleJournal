@@ -1114,7 +1114,7 @@ Klicken Sie auf Nein, um diesen Hinweis weiterhin zu erhalten!</value>
     <comment>MainWindow.xaml</comment>
   </data>
   <data name="strReleaseDate" xml:space="preserve">
-    <value>21.05.2022 15:00 Uhr</value>
+    <value>04.06.2022 13:05 Uhr</value>
     <comment>*</comment>
   </data>
   <data name="strRemove" xml:space="preserve">
@@ -1804,7 +1804,7 @@ Alternativ können Sie die normale Version von SimpleJournal verwenden!</value>
     <comment>PDFConversationDialog.xaml.cs</comment>
   </data>
   <data name="strPDFConversationDialog_Explanation_Line1" xml:space="preserve">
-    <value>Um ein PDF Dokuemnt in SimpleJournal verwenden zu können, muss es zunächst in ein Journal-Dokument konvertiert werden. Dazu wird Magick.NET in Kombination mit</value>
+    <value>Um ein PDF Dokument in SimpleJournal verwenden zu können, muss es zunächst in ein Journal-Dokument konvertiert werden. Dazu wird Magick.NET in Kombination mit</value>
     <comment>PDFConversationDialog.xaml.cs</comment>
   </data>
   <data name="strPDFConversationDialog_Explanation_Line3" xml:space="preserve">
@@ -2064,5 +2064,17 @@ Wenn schon auf der Seite gezeichnet wurde, sind alle Zeichnungen verschoben!</va
   </data>
   <data name="strFailedToInsertImage" xml:space="preserve">
     <value>Fehler beim Einfügen des Bildes:</value>
+  </data>
+  <data name="strPDFConversationDialog_HelpToggle" xml:space="preserve">
+    <value>Hilfe ein-/ausblenden</value>
+  </data>
+  <data name="strPDFConversationDialog_Options" xml:space="preserve">
+    <value>Optionen:</value>
+  </data>
+  <data name="strPDFConversationDialog_UseSelfHostedPDF2JApi" xml:space="preserve">
+    <value>Selbst-gehostete PDF2J API verwenden</value>
+  </data>
+  <data name="strPDFConversationDialog_SelfHostedPDF2JUrlDescription" xml:space="preserve">
+    <value>PDF2J Url (z.B. http://my-url.de:8080):</value>
   </data>
 </root>
