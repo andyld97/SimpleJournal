@@ -57,14 +57,14 @@ namespace PDF2J.Controllers
             };
 
             // Check version            
-            bool isVersionTooOld;
+            bool isVersionTooOld = false;
             if (Version.TryParse(ticket.ConversationOptions.CurrentSimpleJounalVersion, out var version) && version < Program.MinSJVersionRequired)
                 isVersionTooOld = true;
-            else
+            else if (version == null)
                 isVersionTooOld = true;
 
             if (isVersionTooOld)
-                BadRequest(Properties.Resources.ResourceManager.GetString(nameof(Properties.Resources.strVersionTooOld), language));
+                return BadRequest(Properties.Resources.ResourceManager.GetString(nameof(Properties.Resources.strVersionTooOld), language));
 
             // Create the the working directory for this printing ticket
             FileSystemHelper.TryCreateDirectory(ticket.TempPath);
