@@ -61,6 +61,15 @@ namespace SimpleJournal.SharedResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ATTENTION!.
+        /// </summary>
+        public static string strAttention {
+            get {
+                return ResourceManager.GetString("strAttention", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Chequered.
         /// </summary>
         public static string strChequered {

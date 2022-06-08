@@ -2077,4 +2077,22 @@ Wenn schon auf der Seite gezeichnet wurde, sind alle Zeichnungen verschoben!</va
   <data name="strPDFConversationDialog_SelfHostedPDF2JUrlDescription" xml:space="preserve">
     <value>PDF2J Url (z.B. http://my-url.de:8080):</value>
   </data>
+  <data name="strDotnetUpdateSetup_PrepareMessage" xml:space="preserve">
+    <value>Das Setup wird nach dem Herunterladen gestartet und SimpleJournal wird dann beendet (nicht gespeicherte Änderungen gehen verloren)!
+
+ACHTUNG: SimpleJournal wird nicht neu gestartet, bitte starten Sie SimpleJournal nach der .NET-Installation neu!</value>
+  </data>
+  <data name="strDotnetUpdateSetup_FailedToDetermineDownloadUrl" xml:space="preserve">
+    <value>Die Download-URL für .NET {0} konnte nicht bestimmt werden! Das Setup wird abgebrochen.
+
+Details: {1}</value>
+  </data>
+  <data name="strDotnetUpdate_FailedToOpenSetup" xml:space="preserve">
+    <value>Fehler beim Öffnen von "{0}"
+
+Details: {1}</value>
+  </data>
+  <data name="strDotnetUpdateSetup_Downloading" xml:space="preserve">
+    <value>Lade "{0}" herunter ...</value>
+  </data>
 </root>

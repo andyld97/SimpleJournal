@@ -51,6 +51,8 @@
                         <LineBreak />
                         <Hyperlink NavigateUri="https://simplejournal.ca-soft.net/" RequestNavigate="Hyperlink_RequestNavigate">Homepage</Hyperlink>
                         <Run Text="|" />
+                        <Hyperlink NavigateUri="https://simplejournal.ca-soft.net/faq" RequestNavigate="Hyperlink_RequestNavigate">FAQ</Hyperlink>
+                        <Run Text="|" />
                         <Hyperlink NavigateUri="https://github.com/andyld97/SimpleJournal" RequestNavigate="Hyperlink_RequestNavigate">Source Code</Hyperlink>
                         <LineBreak />
                         <LineBreak />
@@ -63,7 +65,11 @@
                         <LineBreak />
                         <Run x:Name="TextNewVersionAvailable" FontWeight="Bold" />
                         <LineBreak />                        
-                        <Run Text="Powered by .NET 6.0.5" FontWeight="Bold" />
+                        <Run Text="Powered by" FontWeight="Bold" />
+                        <Run x:Name="TextDotNetVersion" FontWeight="Bold" />
+                        <Hyperlink x:Name="LinkUpdateNET" RequestNavigate="LinkUpdateNET_RequestNavigate" NavigateUri="http://www.google.de" Foreground="Orange">
+                            <TextBlock x:Name="TextUpdateNet" Foreground="Orange" Text="(Update)" FontWeight="Bold" />
+                        </Hyperlink>
                     </TextBlock>
                 </StackPanel>
             </TabItem>

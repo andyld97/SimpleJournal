@@ -29,6 +29,7 @@ using SimpleJournal.Documents.PDF;
 using System.Threading.Tasks;
 using System.Net.Http;
 using SimpleJournal.Documents.UI;
+using Newtonsoft.Json.Linq;
 
 namespace SimpleJournal
 {
@@ -50,7 +51,9 @@ namespace SimpleJournal
             }
             else
                 throw new ArgumentOutOfRangeException("from or to must be in the range of length!");
-        }      
+        }
+
+        #region Theming
 
         public static string GetCurrentTheme()
         {
@@ -80,7 +83,41 @@ namespace SimpleJournal
             App.Current.Resources["Link.Foreground"] = new SolidColorBrush(linkColor);
 
             ThemeManager.Current.ChangeTheme(Application.Current, GetCurrentTheme());
-        }   
+        }
+
+        #endregion
+
+        /// <summary>
+        /// Determines the win-x86 or win-x64 platform
+        /// </summary>
+        /// <returns>win-x86 or winx64</returns>
+        public static string DetermiePlatform()
+        {
+            string platform = Environment.Is64BitOperatingSystem ? "x64" : "x86";
+            return $"win-{platform}";
+        }
+
+        /// <summary>
+        /// Determines the dotnet download link for <see cref="Consts.CompiledDotnetVersion"/>
+        /// </summary>
+        /// <returns></returns>
+        public static async Task<string> DetermineDotnetDesktpRuntimeDownloadLink()
+        {
+            // Determine lnk
+            using (HttpClient client = new HttpClient())
+            {
+                string releasesJson = await client.GetStringAsync(Consts.DotnetReleaseInfoUrl);
+
+                var root = JsonConvert.DeserializeObject<JObject>(releasesJson);
+                var releases = root["releases"].Value<JArray>();
+
+                var release = releases.FirstOrDefault(p => p.Value<string>("release-version") == Consts.CompiledDotnetVersion.ToString(3));
+                var files = release.Value<JObject>("windowsdesktop").Value<JArray>("files");
+                var file = files.FirstOrDefault(f => f.Value<string>("rid") == DetermiePlatform());
+
+                return file.Value<string>("url");
+            }
+        }
 
         #region RTB
 

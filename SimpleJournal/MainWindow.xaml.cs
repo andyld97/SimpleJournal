@@ -1604,11 +1604,6 @@ namespace SimpleJournal
             markerPath.StrokeThickness = 0.4;
         }
 
-        private void BtnHelp_Click(object sender, RoutedEventArgs e)
-        {
-            GeneralHelper.OpenUri(new Uri(Properties.Resources.strHelpLnk));
-        }
-
         private void RefreshSizeBar()
         {
             if (SelectedPen == -1)
@@ -2325,6 +2320,12 @@ namespace SimpleJournal
             AboutDialog ad = new AboutDialog();
             ad.ShowFeedbackPage();
             ad.ShowDialog();
+        }
+
+        private void BtnHelp_Click(object sender, RoutedEventArgs e)
+        {
+            AboutDialog aboutDialog = new AboutDialog();
+            aboutDialog.ShowDialog();
         }
 
         private async void ListRecentlyOpenedDocuments_SelectionChanged(object sender, SelectionChangedEventArgs e)

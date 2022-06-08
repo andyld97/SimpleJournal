@@ -1,7 +1,11 @@
 ﻿using Microsoft.Web.WebView2.Core;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using SimpleJournal.Common.Helper;
+using SimpleJournal.Dialogs;
 using SimpleJournal.Documents.UI;
 using System;
+using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Windows;
@@ -26,6 +30,56 @@ namespace SimpleJournal
 #endif
 
             Loaded += AboutDialog_Loaded;
+
+            // https://stackoverflow.com/a/58136318/6237448
+            if (System.Environment.Version < Consts.CompiledDotnetVersion)
+            {
+                TextDotNetVersion.Foreground = new SolidColorBrush(Colors.Orange);
+                TextUpdateNet.Visibility = Visibility.Visible;
+            }
+            else
+                TextUpdateNet.Visibility = Visibility.Collapsed;
+
+            TextDotNetVersion.Text = System.Runtime.InteropServices.RuntimeInformation.FrameworkDescription;
+        }
+
+        private async void LinkUpdateNET_RequestNavigate(object sender, System.Windows.Navigation.RequestNavigateEventArgs e)
+        {
+            if (MessageBox.Show(Properties.Resources.strDotnetUpdateSetup_PrepareMessage, SharedResources.Resources.strAttention, MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No)
+                return;
+
+            string url;
+
+            try
+            {
+                url = await GeneralHelper.DetermineDotnetDesktpRuntimeDownloadLink();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(string.Format(Properties.Resources.strDotnetUpdateSetup_FailedToDetermineDownloadUrl, System.Environment.Version.ToString(3), ex.Message), SharedResources.Resources.strError, MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            string platform = GeneralHelper.DetermiePlatform();          
+            string fileName = $"windowsdesktop-runtime-{Consts.CompiledDotnetVersion}-{platform}.exe";
+            string localFilePath = System.IO.Path.Combine(FileSystemHelper.GetDownloadsPath(), fileName);
+            var dialog = new UpdateDownloadDialog(string.Format(Properties.Resources.strDotnetUpdateSetup_Downloading, fileName), url) { LocalFilePath = localFilePath };
+            var result = dialog.ShowDialog();
+
+            if (result.HasValue && result.Value)
+            {
+                try
+                {
+                    System.Diagnostics.Process.Start(localFilePath);
+
+                    // Exit to make sure user can easily update without problems
+                    Application.Current.Shutdown();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(string.Format(Properties.Resources.strDotnetUpdate_FailedToOpenSetup, localFilePath, ex.Message), SharedResources.Resources.strError, MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
         }
 
         public AboutDialog ShowFeedbackPage()

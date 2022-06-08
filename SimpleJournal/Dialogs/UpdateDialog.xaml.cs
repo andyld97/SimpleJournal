@@ -1,4 +1,5 @@
 ﻿using Microsoft.Web.WebView2.Core;
+using SimpleJournal.Common.Helper;
 using SimpleJournal.Data;
 using SimpleJournal.Documents.UI;
 using System;
@@ -11,7 +12,7 @@ namespace SimpleJournal.Dialogs
     /// </summary>
     public partial class UpdateDialog : Window
     {
-        private Version version;
+        private readonly Version version;
 
         public UpdateDialog(Version v)
         {
@@ -50,7 +51,10 @@ namespace SimpleJournal.Dialogs
 
         private void BtnOK_Click(object sender, RoutedEventArgs e)
         {
-            UpdateDownloadDialog updateDownloadDialog = new UpdateDownloadDialog(version);
+            string message = string.Format(Properties.Resources.strUpdateDownloadDialog_DownloadText, version.ToString(4));
+            string localFilePath = System.IO.Path.Combine(FileSystemHelper.GetDownloadsPath(), $"SimpleJournal-{version:4}.exe");
+            UpdateDownloadDialog updateDownloadDialog = new UpdateDownloadDialog(message, Consts.DownloadUrl) { LocalFilePath = localFilePath };
+
             var result = updateDownloadDialog.ShowDialog();
 
             if (result.HasValue && result.Value)

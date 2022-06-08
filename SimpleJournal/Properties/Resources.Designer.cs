@@ -789,6 +789,48 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error opening &quot;{0}&quot;
+        ///
+        ///Details: {1}.
+        /// </summary>
+        public static string strDotnetUpdate_FailedToOpenSetup {
+            get {
+                return ResourceManager.GetString("strDotnetUpdate_FailedToOpenSetup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Downloading &quot;{0}&quot; ....
+        /// </summary>
+        public static string strDotnetUpdateSetup_Downloading {
+            get {
+                return ResourceManager.GetString("strDotnetUpdateSetup_Downloading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The download URL for .NET {0} could not be determined! The setup will be aborted.
+        ///
+        ///Details: {1}.
+        /// </summary>
+        public static string strDotnetUpdateSetup_FailedToDetermineDownloadUrl {
+            get {
+                return ResourceManager.GetString("strDotnetUpdateSetup_FailedToDetermineDownloadUrl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The setup is started after the download and SimpleJournal is then closed (unsaved changes are lost)!
+        ///
+        ///ATTENTION: SimpleJournal will not be restarted, please restart SimpleJournal after the .NET installation!.
+        /// </summary>
+        public static string strDotnetUpdateSetup_PrepareMessage {
+            get {
+                return ResourceManager.GetString("strDotnetUpdateSetup_PrepareMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Draw.
         /// </summary>
         public static string strDraw {

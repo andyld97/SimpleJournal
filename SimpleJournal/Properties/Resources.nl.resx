@@ -1654,4 +1654,22 @@ Als er al een tekening op de pagina staat, worden alle tekeningen verplaatst!</v
   <data name="strPDFConversationDialog_SelfHostedPDF2JUrlDescription" xml:space="preserve">
     <value>PDF2J Url (b.v. http://my-url.de:8080):</value>
   </data>
+  <data name="strDotnetUpdateSetup_PrepareMessage" xml:space="preserve">
+    <value>De setup wordt gestart na het downloaden en SimpleJournal wordt dan afgesloten (niet opgeslagen wijzigingen gaan verloren)!
+
+ATTENTIE: SimpleJournal zal niet herstart worden, herstart SimpleJournal a.u.b. na de .NET installatie!</value>
+  </data>
+  <data name="strDotnetUpdateSetup_FailedToDetermineDownloadUrl" xml:space="preserve">
+    <value>The download URL for .NET {0} could not be determined! The setup is aborted.
+
+Details: {1}</value>
+  </data>
+  <data name="strDotnetUpdate_FailedToOpenSetup" xml:space="preserve">
+    <value>Fout bij het openen van "{0}"
+
+Details: {1}</value>
+  </data>
+  <data name="strDotnetUpdateSetup_Downloading" xml:space="preserve">
+    <value>Download "{0}" ...</value>
+  </data>
 </root>

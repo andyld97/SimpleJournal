@@ -13,23 +13,23 @@ namespace SimpleJournal.Dialogs
     public partial class UpdateDownloadDialog : Window
 	{
 		private int lastSecond;
-		private long bytesInLastSecond = 0;
-		private readonly Version version;	
+		private long bytesInLastSecond = 0;	
 
 		public string LocalFilePath { get; set; }
 
-		public UpdateDownloadDialog(Version version)
+		private string Url { get; set; }
+
+		public UpdateDownloadDialog(string message, string url)
 		{
-			InitializeComponent();
-			this.version = version;
+            InitializeComponent();
+
+            TextDescription.Text = message;
+			Url = url;
 			Loaded += UpdateDownloadDialog_Loaded;
-			TextDescription.Text = string.Format(Properties.Resources.strUpdateDownloadDialog_DownloadText, version.ToString(4));
 		}
 
 		private async void UpdateDownloadDialog_Loaded(object sender, RoutedEventArgs e)
 		{
-			LocalFilePath = System.IO.Path.Combine(FileSystemHelper.GetDownloadsPath(), $"SimpleJournal-{version:4}.exe");
-
 			try
 			{
 				using (HttpClient client = new HttpClient())
@@ -39,7 +39,7 @@ namespace SimpleJournal.Dialogs
 					using (System.IO.FileStream fs = new FileStream(LocalFilePath, FileMode.OpenOrCreate))
 					{
 						lastSecond = DateTime.Now.Second;
-						await client.DownloadDataAsync(Consts.DownloadUrl, fs, progress);
+						await client.DownloadDataAsync(Url, fs, progress);
 						DialogResult = true;
 					}
 				}
