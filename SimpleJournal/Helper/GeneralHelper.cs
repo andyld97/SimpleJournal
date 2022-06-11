@@ -324,20 +324,25 @@ namespace SimpleJournal
             // Display all changes from current version till new version (changelog is enough)
 
             // 1) Get current version
+#if !UWP
             var currentVersion = Consts.NormalVersion;
+#else 
+            var currentVersion = Consts.StoreVersion;
+#endif
 
             // 2) Download version
             try
             {
                 using (HttpClient client = new HttpClient())
                 {
-                    // ToDo: *** Hier eine URL verwenden, die auf ein PHP Skript verweist, statt direkt auf die JSON, um
-                    // hier den Traffic zu tracken!
-
                     string versionJSON = await client.GetStringAsync(Consts.VersionUrl);
                     dynamic versions = JsonConvert.DeserializeObject(versionJSON);
 
+#if !UWP
                     Version onlineVersion = Version.Parse(versions.current.normal.Value);
+#else
+                    Version onlineVersion = Version.Parse(versions.current.store.Value);
+#endif
 
                     var result = onlineVersion.CompareTo(currentVersion);
                     if (result > 0)
@@ -374,7 +379,7 @@ namespace SimpleJournal
             }
         }
 
-#if UWP 
+#if UWP
         public static readonly string FileAssociationIconsPath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "journal", "icon.ico");
 #endif
 

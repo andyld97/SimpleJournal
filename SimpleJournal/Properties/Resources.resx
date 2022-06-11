@@ -1132,10 +1132,6 @@ Click on No to continue to receive this message!</value>
     <value>Redo</value>
     <comment>MainWindow.xaml</comment>
   </data>
-  <data name="strReleaseDate" xml:space="preserve">
-    <value>06/04/2022 1:04 AM</value>
-    <comment>About.xaml</comment>
-  </data>
   <data name="strRemove" xml:space="preserve">
     <value>Remove</value>
     <comment>MainWindow.xaml</comment>

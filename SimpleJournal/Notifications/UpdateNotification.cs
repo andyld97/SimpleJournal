@@ -25,10 +25,14 @@ namespace Notifications
             {
                 var tempVersion = version;
                 if (tempVersion == null)
+#if !UWP
                     tempVersion = Consts.NormalVersion; // for debugging purposes
+#else
+                    tempVersion = Consts.StoreVersion;
+#endif
 
                 Run run1 = new Run(SimpleJournal.Properties.Resources.strNotifications_Update_MessageRun1);
-                Run run2 = new Run($"Version {tempVersion:4}") { IsBold  = true };
+                Run run2 = new Run($"Version {tempVersion:4}") { IsBold = true };
 
                 return new List<Run>() { run1, new LineBreak(), new LineBreak(), run2 };
             }
@@ -55,12 +59,19 @@ namespace Notifications
                         Description = SimpleJournal.Properties.Resources.strNotifications_Update_UserInteraction_ExecuteUpdate,
                         HandleUserInteraction = new Action(() => 
                         {
-                            var tempVersion = version;
-                            if (tempVersion == null)
-                                tempVersion = Consts.NormalVersion; // for debugging purposes!
-
-                            UpdateDialog ud = new UpdateDialog(tempVersion);
+#if !UWP         
+                            UpdateDialog ud = new UpdateDialog(version);
                             ud.ShowDialog();
+#else 
+                            try
+                            {
+                                System.Diagnostics.Process.Start("explorer.exe", "\"ms-windows-store://pdp/?productid=9MV6J44M90N7\"");
+                            }
+                            catch
+                            {
+                                // ignore
+                            }
+#endif
                         })
                     }
                 };
@@ -75,18 +86,17 @@ namespace Notifications
         {
             get
             {
-#if UWP
-                return TimeSpan.Zero;
-#endif
                 return TimeSpan.FromHours(1);
             }
         }
 
-        public override async Task<bool> CheckOccuranceAsync()
+        public override async Task<bool?> CheckOccuranceAsync()
         {
-#if UWP
-            return false;
-#endif
+            // Without this part the notification would be removed if there is not internet connection
+            // and would be added again if the interent connection is back.
+            // But since we know there is a new version avaialbe the notification should stay as long as the version gets updated!
+            if (!GeneralHelper.IsConnectedToInternet())
+                return null;
 
             version = await GeneralHelper.CheckForUpdatesAsync();
             return (version != null);

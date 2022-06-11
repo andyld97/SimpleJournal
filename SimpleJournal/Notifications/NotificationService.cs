@@ -14,7 +14,7 @@ namespace Notifications
 
         public delegate void onNotificationAdded(Notification notification);
         public delegate void onNotificationRemvoved(Notification notification);
-        private Type[] additionalTypes;
+        private readonly Type[] additionalTypes;
 
         public static NotificationService NotificationServiceInstance { get; set; }
 
@@ -88,7 +88,7 @@ namespace Notifications
         public void Start()
         {
             System.Diagnostics.Debug.WriteLine("Starting notification service ...");
-            noticationTimer = new System.Threading.Timer(new System.Threading.TimerCallback(NotificationTimer_Tick), null, 0, Convert.ToInt32(TimeSpan.FromMinutes(10).TotalMilliseconds));
+            noticationTimer = new System.Threading.Timer(new System.Threading.TimerCallback(NotificationTimer_Tick), null, 0, Convert.ToInt32(Consts.NotificationServiceInterval.TotalMilliseconds));
         }
 
         /// <summary>

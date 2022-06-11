@@ -41,6 +41,9 @@ namespace SimpleJournal
                 TextUpdateNet.Visibility = Visibility.Collapsed;
 
             TextDotNetVersion.Text = System.Runtime.InteropServices.RuntimeInformation.FrameworkDescription;
+
+            if (Properties.Resources.strLang != "de")
+                TextClock.Text = string.Empty;
         }
 
         private async void LinkUpdateNET_RequestNavigate(object sender, System.Windows.Navigation.RequestNavigateEventArgs e)
@@ -71,18 +74,41 @@ namespace SimpleJournal
             await Initialize();
         }
 
+        private static string onlineNormalVersionCached;
+        private static string onlineStoreVersionCached;
+        private DateTime lastTimeCachedVersion = DateTime.MinValue;
+
         public async Task Initialize()
         {
             try
-            {           
+            {
+                string currentNormalVersion;
+                string currentStoreVersion;
+
                 // Load version
                 using (HttpClient httpClient = new HttpClient())
                 {
-                    string versionsJSON = await httpClient.GetStringAsync(Consts.VersionUrl);
-                    dynamic result = JsonConvert.DeserializeObject(versionsJSON);
+                    bool resetCache = false;
+                    if (lastTimeCachedVersion != DateTime.MinValue && lastTimeCachedVersion.AddHours(1) <= DateTime.Now)
+                        resetCache = true;
 
-                    string currentNormalVersion = result.current.normal;
-                    string currentStoreVersion = result.current.store;
+                    if (onlineNormalVersionCached == null || onlineStoreVersionCached == null ||resetCache)
+                    {
+                        string versionsJSON = await httpClient.GetStringAsync(Consts.VersionUrl);
+                        dynamic result = JsonConvert.DeserializeObject(versionsJSON);
+
+                        currentNormalVersion = result.current.normal;
+                        currentStoreVersion = result.current.store;
+
+                        onlineNormalVersionCached = currentNormalVersion;
+                        onlineStoreVersionCached = currentStoreVersion;
+                        lastTimeCachedVersion = DateTime.Now;
+                    }
+                    else
+                    {
+                        currentNormalVersion = onlineNormalVersionCached;
+                        currentStoreVersion = onlineStoreVersionCached;
+                    }
 
                     string currentVersion = string.Empty;
                     string newVersion = null;

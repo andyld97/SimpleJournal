@@ -1113,10 +1113,6 @@ Klicken Sie auf Nein, um diesen Hinweis weiterhin zu erhalten!</value>
     <value>Wiederholen</value>
     <comment>MainWindow.xaml</comment>
   </data>
-  <data name="strReleaseDate" xml:space="preserve">
-    <value>04.06.2022 13:05 Uhr</value>
-    <comment>*</comment>
-  </data>
   <data name="strRemove" xml:space="preserve">
     <value>Entfernen</value>
     <comment>MainWindow.xaml</comment>

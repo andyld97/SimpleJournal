@@ -2393,8 +2393,7 @@ namespace SimpleJournal
         private void btnFeedback_Click(object sender, RoutedEventArgs e)
         {
             AboutDialog ad = new AboutDialog();
-            ad.ShowFeedbackPage();
-            ad.ShowDialog();
+            ad.ShowFeedbackPage().ShowDialog();
         }
 
         private void BtnHelp_Click(object sender, RoutedEventArgs e)

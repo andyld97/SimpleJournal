@@ -3086,15 +3086,6 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 06/04/2022 1:04 AM.
-        /// </summary>
-        public static string strReleaseDate {
-            get {
-                return ResourceManager.GetString("strReleaseDate", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Remove.
         /// </summary>
         public static string strRemove {

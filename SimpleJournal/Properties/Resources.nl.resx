@@ -1013,9 +1013,6 @@ Klik op Nee om dit bericht te blijven ontvangen!</value>
   <data name="strRedo" xml:space="preserve">
     <value>Opnieuw</value>
   </data>
-  <data name="strReleaseDate" xml:space="preserve">
-    <value>04/06/2022 13:04</value>
-  </data>
   <data name="strRemove" xml:space="preserve">
     <value>Verwijderen</value>
   </data>

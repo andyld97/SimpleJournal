@@ -57,7 +57,7 @@ namespace Notifications
         public ObsoleteNETVersionNotification(DateTime timestamp) : base(timestamp)
         { }
 
-        public override bool CheckOccurance()
+        public override bool? CheckOccurance()
         {
             return Environment.Version < Consts.CompiledDotnetVersion;
         }

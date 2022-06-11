@@ -14,12 +14,20 @@ namespace SimpleJournal
         public const double SpaceBetweenPages = 75D;
  
         public const double MarkerPathStrokeThickness = 0.4;
-        public const double DefaultTextSize = 15.0;     
+        public const double DefaultTextSize = 15.0;
+
+        public static readonly Version StoreVersion = new Version(Strings.StoreVersion);
+        public static readonly Version NormalVersion = typeof(Consts).Assembly.GetName().Version;
 
         public static readonly string ChangelogUrl = "https://simplejournal.ca-soft.net/chg.php?lang={0}&dark={1}";
         public static readonly string DownloadUrl = "https://simplejournal.ca-soft.net/download.php?auto=1";
         public static readonly string DataProtectionUrl = "https://simplejournal.ca-soft.net/{0}/privacy-policy/";
-        public static readonly string VersionUrl = "https://simplejournal.ca-soft.net/versions.json";
+
+#if UWP
+        public static readonly string VersionUrl = $"http://simplejournal.ca-soft.net/update.php?version={Consts.StoreVersion:4}";
+#else 
+        public static readonly string VersionUrl = $"http://simplejournal.ca-soft.net/update.php?version={Consts.NormalVersion:4}";
+#endif
         public static readonly string FeedbackUrl = "https://simplejournal.ca-soft.net/feedback.php?name={0}&mail={1}&content={2}";
         public static readonly string HomePageUrl = "https://simplejournal.ca-soft.net";
         public static readonly string HelpUrl = "https://simplejournal.ca-soft.net/faq";
@@ -32,13 +40,15 @@ namespace SimpleJournal
 #endif
         public static readonly string Google204Url = "http://clients3.google.com/generate_204";
 
-        public static readonly Version StoreVersion = new Version(Strings.StoreVersion);
-        public static readonly Version NormalVersion = typeof(Consts).Assembly.GetName().Version;
-
         /// <summary>
         /// The .NET version which was used to compile SJ
         /// </summary>
         public static readonly Version CompiledDotnetVersion = new Version(6, 0, 5);
+
+        /// <summary>
+        /// Polling interval for NotificationService
+        /// </summary>
+        public static readonly TimeSpan NotificationServiceInterval = TimeSpan.FromHours(1);
 
         #region Pens
         public const int AMOUNT_PENS = 4;

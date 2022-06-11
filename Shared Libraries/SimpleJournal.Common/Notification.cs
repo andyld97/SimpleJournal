@@ -63,9 +63,9 @@ namespace SimpleJournal.Common
         /// <summary>
         /// Checks if this notifcation should be raised
         /// </summary>
-        /// <returns></returns>
+        /// <returns>null; if this occurance shouldn't be doing anything</returns>
         /// <exception cref="NotImplementedException"></exception>
-        public virtual Task<bool> CheckOccuranceAsync()
+        public virtual Task<bool?> CheckOccuranceAsync()
         {
             throw new NotImplementedException();
         }
@@ -73,9 +73,9 @@ namespace SimpleJournal.Common
         /// <summary>
         /// Checks if this notifcation should be raised
         /// </summary>
-        /// <returns></returns>
+        /// <returns>null; if this occurance shouldn't be doing anything</returns>
         /// <exception cref="NotImplementedException"></exception>
-        public virtual bool CheckOccurance()
+        public virtual bool? CheckOccurance()
         {
             throw new NotImplementedException();
         }
@@ -123,13 +123,13 @@ namespace SimpleJournal.Common
                         continue;
                 }
 
-                bool hasNotificationOccured = false;
+                bool? hasNotificationOccured = null;
                 if (instance.IsAsyncExecutionRequiredForCheckOccurance)
                     hasNotificationOccured = await instance.CheckOccuranceAsync();
                 else
                     hasNotificationOccured = instance.CheckOccurance();
 
-                if (hasNotificationOccured)
+                if (hasNotificationOccured.HasValue && hasNotificationOccured.Value)
                 {
                     instance.Timestamp = now;
                     currentNotifications.Add(instance);
@@ -155,11 +155,19 @@ namespace SimpleJournal.Common
             List<Notification> toRemove = new List<Notification>();
             foreach (var notification in notifications)
             {
-                if (notification.IsAsyncExecutionRequiredForCheckOccurance && !await notification.CheckOccuranceAsync())
-                    toRemove.Add(notification);
+                if (notification.IsAsyncExecutionRequiredForCheckOccurance)
+                {
+                    var result = await notification.CheckOccuranceAsync();
 
-                else if (!notification.IsAsyncExecutionRequiredForCheckOccurance && !notification.CheckOccurance())
-                    toRemove.Add(notification);
+                    if (result.HasValue && !result.Value)
+                        toRemove.Add(notification);
+                }
+                else if (!notification.IsAsyncExecutionRequiredForCheckOccurance)
+                {
+                    var result = notification.CheckOccurance();
+                    if (result.HasValue && !result.Value)
+                        toRemove.Add(notification);
+                }
             }
 
             foreach (var notification in toRemove)
