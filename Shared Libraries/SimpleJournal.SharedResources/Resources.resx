@@ -165,4 +165,8 @@
     <value>Landscape</value>
     <comment>*</comment>
   </data>
+  <data name="strAttention" xml:space="preserve">
+    <value>ATTENTION!</value>
+    <comment>*</comment>
+  </data>
 </root>

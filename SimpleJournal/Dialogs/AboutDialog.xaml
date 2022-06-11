@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:res="clr-namespace:SimpleJournal.Properties" xmlns:wpf="clr-namespace:Microsoft.Web.WebView2.Wpf;assembly=Microsoft.Web.WebView2.Wpf"
+        xmlns:common="clr-namespace:SimpleJournal.Common;assembly=SimpleJournal.Common"
         mc:Ignorable="d"
         Title="{x:Static res:Resources.strAbout}" Height="670" Width="420"
         ResizeMode="NoResize"
@@ -51,6 +52,8 @@
                         <LineBreak />
                         <Hyperlink NavigateUri="https://simplejournal.ca-soft.net/" RequestNavigate="Hyperlink_RequestNavigate">Homepage</Hyperlink>
                         <Run Text="|" />
+                        <Hyperlink NavigateUri="https://simplejournal.ca-soft.net/faq" RequestNavigate="Hyperlink_RequestNavigate">FAQ</Hyperlink>
+                        <Run Text="|" />
                         <Hyperlink NavigateUri="https://github.com/andyld97/SimpleJournal" RequestNavigate="Hyperlink_RequestNavigate">Source Code</Hyperlink>
                         <LineBreak />
                         <LineBreak />
@@ -58,12 +61,17 @@
                         <Run x:Name="TextVersion" Text="{x:Static res:Resources.strUnknownVersion}" FontWeight="Bold"/>
                         <LineBreak />
                         <Run Text="Release:" />
-                        <Run Text="{x:Static res:Resources.strReleaseDate}" FontWeight="Bold" />
+                        <Run Text="{Binding Source={x:Static common:Strings.ReleaseDate}, Mode=OneWay, StringFormat={x:Static res:Resources.strDateTimeFormat}}" FontWeight="Bold" />
+                        <Run x:Name="TextClock" Text="Uhr" FontWeight="Bold" />
                         <LineBreak />
                         <LineBreak />
                         <Run x:Name="TextNewVersionAvailable" FontWeight="Bold" />
                         <LineBreak />                        
-                        <Run Text="Powered by .NET 6.0.5" FontWeight="Bold" />
+                        <Run Text="Powered by" FontWeight="Bold" />
+                        <Run x:Name="TextDotNetVersion" FontWeight="Bold" />
+                        <Hyperlink x:Name="LinkUpdateNET" RequestNavigate="LinkUpdateNET_RequestNavigate" NavigateUri="http://www.google.de" Foreground="Orange">
+                            <TextBlock x:Name="TextUpdateNet" Foreground="Orange" Text="(Update)" FontWeight="Bold" />
+                        </Hyperlink>
                     </TextBlock>
                 </StackPanel>
             </TabItem>

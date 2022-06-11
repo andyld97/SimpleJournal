@@ -1113,10 +1113,6 @@ Klicken Sie auf Nein, um diesen Hinweis weiterhin zu erhalten!</value>
     <value>Wiederholen</value>
     <comment>MainWindow.xaml</comment>
   </data>
-  <data name="strReleaseDate" xml:space="preserve">
-    <value>04.06.2022 13:05 Uhr</value>
-    <comment>*</comment>
-  </data>
   <data name="strRemove" xml:space="preserve">
     <value>Entfernen</value>
     <comment>MainWindow.xaml</comment>
@@ -2076,5 +2072,50 @@ Wenn schon auf der Seite gezeichnet wurde, sind alle Zeichnungen verschoben!</va
   </data>
   <data name="strPDFConversationDialog_SelfHostedPDF2JUrlDescription" xml:space="preserve">
     <value>PDF2J Url (z.B. http://my-url.de:8080):</value>
+  </data>
+  <data name="strDotnetUpdateSetup_PrepareMessage" xml:space="preserve">
+    <value>Das Setup wird nach dem Herunterladen gestartet und SimpleJournal wird dann beendet (nicht gespeicherte Änderungen gehen verloren)!
+
+ACHTUNG: SimpleJournal wird nicht neu gestartet, bitte starten Sie SimpleJournal nach der .NET-Installation neu!</value>
+  </data>
+  <data name="strDotnetUpdateSetup_FailedToDetermineDownloadUrl" xml:space="preserve">
+    <value>Die Download-URL für .NET {0} konnte nicht bestimmt werden! Das Setup wird abgebrochen.
+
+Details: {1}</value>
+  </data>
+  <data name="strDotnetUpdate_FailedToOpenSetup" xml:space="preserve">
+    <value>Fehler beim Öffnen von "{0}"
+
+Details: {1}</value>
+  </data>
+  <data name="strDotnetUpdateSetup_Downloading" xml:space="preserve">
+    <value>Lade "{0}" herunter ...</value>
+  </data>
+  <data name="strObsoleteNETVersionNotification_Message_Run2" xml:space="preserve">
+    <value>). Bitte aktualisieren Sie Ihre .NET Core Version, um sicherzustellen, dass das Programm fehlerfrei funktioniert.</value>
+  </data>
+  <data name="strObsoleteNETVersionNotification_Message_Run1" xml:space="preserve">
+    <value>Sie verwenden eine veraltete .NET Core Version (</value>
+  </data>
+  <data name="strNotifications_UserInteraction_ShowChangelog" xml:space="preserve">
+    <value>Änderungen anzeigen</value>
+  </data>
+  <data name="strNotifications_Update_UserInteraction_ExecuteUpdate" xml:space="preserve">
+    <value>Update ausführen</value>
+  </data>
+  <data name="strNotifications_Update_MessageRun1" xml:space="preserve">
+    <value>Ein Update für SimpleJournal ist nun verfügbar: </value>
+  </data>
+  <data name="strNotifications" xml:space="preserve">
+    <value>Benachrichtigungen</value>
+  </data>
+  <data name="strDateTimeFormat" xml:space="preserve">
+    <value>dd.MM.yyyy HH:mm</value>
+  </data>
+  <data name="strShowNotificationsTooltip" xml:space="preserve">
+    <value>Benachrichtigungen anzeigen</value>
+  </data>
+  <data name="strHideNotifications" xml:space="preserve">
+    <value>Benachrichtigungen ausblenden</value>
   </data>
 </root>

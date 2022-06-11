@@ -1,7 +1,11 @@
 ﻿using Microsoft.Web.WebView2.Core;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using SimpleJournal.Common.Helper;
+using SimpleJournal.Dialogs;
 using SimpleJournal.Documents.UI;
 using System;
+using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Windows;
@@ -26,11 +30,36 @@ namespace SimpleJournal
 #endif
 
             Loaded += AboutDialog_Loaded;
+
+            // https://stackoverflow.com/a/58136318/6237448
+            if (System.Environment.Version < Consts.CompiledDotnetVersion)
+            {
+                TextDotNetVersion.Foreground = new SolidColorBrush(Colors.Orange);
+                TextUpdateNet.Visibility = Visibility.Visible;
+            }
+            else
+                TextUpdateNet.Visibility = Visibility.Collapsed;
+
+            TextDotNetVersion.Text = System.Runtime.InteropServices.RuntimeInformation.FrameworkDescription;
+
+            if (Properties.Resources.strLang != "de")
+                TextClock.Text = string.Empty;
+        }
+
+        private async void LinkUpdateNET_RequestNavigate(object sender, System.Windows.Navigation.RequestNavigateEventArgs e)
+        {
+            await GeneralHelper.UpdateNETCoreVersionAsync();
         }
 
         public AboutDialog ShowFeedbackPage()
         {
             MainTabControl.SelectedIndex = 2;
+            return this;
+        }
+
+        public AboutDialog ShowChangelogPage()
+        {
+            MainTabControl.SelectedIndex = 1;
             return this;
         }
 
@@ -45,18 +74,41 @@ namespace SimpleJournal
             await Initialize();
         }
 
+        private static string onlineNormalVersionCached;
+        private static string onlineStoreVersionCached;
+        private DateTime lastTimeCachedVersion = DateTime.MinValue;
+
         public async Task Initialize()
         {
             try
-            {           
+            {
+                string currentNormalVersion;
+                string currentStoreVersion;
+
                 // Load version
                 using (HttpClient httpClient = new HttpClient())
                 {
-                    string versionsJSON = await httpClient.GetStringAsync(Consts.VersionUrl);
-                    dynamic result = JsonConvert.DeserializeObject(versionsJSON);
+                    bool resetCache = false;
+                    if (lastTimeCachedVersion != DateTime.MinValue && lastTimeCachedVersion.AddHours(1) <= DateTime.Now)
+                        resetCache = true;
 
-                    string currentNormalVersion = result.current.normal;
-                    string currentStoreVersion = result.current.store;
+                    if (onlineNormalVersionCached == null || onlineStoreVersionCached == null ||resetCache)
+                    {
+                        string versionsJSON = await httpClient.GetStringAsync(Consts.VersionUrl);
+                        dynamic result = JsonConvert.DeserializeObject(versionsJSON);
+
+                        currentNormalVersion = result.current.normal;
+                        currentStoreVersion = result.current.store;
+
+                        onlineNormalVersionCached = currentNormalVersion;
+                        onlineStoreVersionCached = currentStoreVersion;
+                        lastTimeCachedVersion = DateTime.Now;
+                    }
+                    else
+                    {
+                        currentNormalVersion = onlineNormalVersionCached;
+                        currentStoreVersion = onlineStoreVersionCached;
+                    }
 
                     string currentVersion = string.Empty;
                     string newVersion = null;

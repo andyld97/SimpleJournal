@@ -13,5 +13,20 @@ namespace SimpleJournal.Documents.UI.Extensions
         {
             return new Color(color.A, color.R, color.G, color.B);
         }
+
+        public static Color FromHex(string hex)
+        {
+            if (string.IsNullOrEmpty(hex))
+                return null;
+
+            try
+            {
+                return ((System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString(hex)).ToColor();
+            }
+            catch
+            {
+                return null;
+            }
+        }
     }
 }

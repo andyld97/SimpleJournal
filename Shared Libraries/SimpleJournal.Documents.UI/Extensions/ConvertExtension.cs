@@ -8,6 +8,7 @@ using System.Windows.Markup;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Documents;
 
 namespace SimpleJournal.Documents.UI.Extensions
 {
@@ -292,6 +293,38 @@ namespace SimpleJournal.Documents.UI.Extensions
 
             return result;
         }
+        #endregion
+
+        #region Run
+        public static System.Windows.Documents.Inline ConvertInline(this SimpleJournal.Common.Data.Run run)
+        {
+            if (run.IsNewLine)
+                return new LineBreak();
+
+            // ToDo: *** Support all run features (e.g. like strike-through etc.)
+            var result = new System.Windows.Documents.Run(run.Text);
+
+            if (run.FontSize.HasValue)
+                result.FontSize = run.FontSize.Value;
+
+            if (!string.IsNullOrEmpty(run.FontFamily))
+                result.FontFamily = new FontFamily(run.FontFamily);
+
+            if (run.Foreground != null)
+                result.Foreground = new SolidColorBrush(run.Foreground.ToColor());
+
+            if (run.IsBold)
+                result.FontWeight = FontWeights.Bold;
+
+            if (run.IsItalic)
+                result.FontStyle = FontStyles.Italic;
+
+            if (run.IsUnderline)
+                result.TextDecorations = TextDecorations.Underline;
+
+            return result;
+        }
+
         #endregion
     }
 }

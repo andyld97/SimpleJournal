@@ -1013,9 +1013,6 @@ Klik op Nee om dit bericht te blijven ontvangen!</value>
   <data name="strRedo" xml:space="preserve">
     <value>Opnieuw</value>
   </data>
-  <data name="strReleaseDate" xml:space="preserve">
-    <value>04/06/2022 13:04</value>
-  </data>
   <data name="strRemove" xml:space="preserve">
     <value>Verwijderen</value>
   </data>
@@ -1653,5 +1650,50 @@ Als er al een tekening op de pagina staat, worden alle tekeningen verplaatst!</v
   </data>
   <data name="strPDFConversationDialog_SelfHostedPDF2JUrlDescription" xml:space="preserve">
     <value>PDF2J Url (b.v. http://my-url.de:8080):</value>
+  </data>
+  <data name="strDotnetUpdateSetup_PrepareMessage" xml:space="preserve">
+    <value>De setup wordt gestart na het downloaden en SimpleJournal wordt dan afgesloten (niet opgeslagen wijzigingen gaan verloren)!
+
+ATTENTIE: SimpleJournal zal niet herstart worden, herstart SimpleJournal a.u.b. na de .NET installatie!</value>
+  </data>
+  <data name="strDotnetUpdateSetup_FailedToDetermineDownloadUrl" xml:space="preserve">
+    <value>The download URL for .NET {0} could not be determined! The setup is aborted.
+
+Details: {1}</value>
+  </data>
+  <data name="strDotnetUpdate_FailedToOpenSetup" xml:space="preserve">
+    <value>Fout bij het openen van "{0}"
+
+Details: {1}</value>
+  </data>
+  <data name="strDotnetUpdateSetup_Downloading" xml:space="preserve">
+    <value>Download "{0}" ...</value>
+  </data>
+  <data name="strNotifications" xml:space="preserve">
+    <value>Kennisgevingen</value>
+  </data>
+  <data name="strNotifications_Update_MessageRun1" xml:space="preserve">
+    <value>Een update voor SimpleJournal is nu beschikbaar: </value>
+  </data>
+  <data name="strNotifications_Update_UserInteraction_ExecuteUpdate" xml:space="preserve">
+    <value>Update uitvoeren</value>
+  </data>
+  <data name="strNotifications_UserInteraction_ShowChangelog" xml:space="preserve">
+    <value>Wijzigingen bekijken</value>
+  </data>
+  <data name="strObsoleteNETVersionNotification_Message_Run1" xml:space="preserve">
+    <value>U gebruikt een verouderde .NET Core versie (</value>
+  </data>
+  <data name="strObsoleteNETVersionNotification_Message_Run2" xml:space="preserve">
+    <value>). Gelieve uw .NET Core versie te updaten om er zeker van te zijn dat het programma zonder fouten werkt.</value>
+  </data>
+  <data name="strDateTimeFormat" xml:space="preserve">
+    <value>dd.MM.yyyy HH:mm</value>
+  </data>
+  <data name="strShowNotificationsTooltip" xml:space="preserve">
+    <value>Meldingen tonen</value>
+  </data>
+  <data name="strHideNotifications" xml:space="preserve">
+    <value>Meldingen verbergen</value>
   </data>
 </root>

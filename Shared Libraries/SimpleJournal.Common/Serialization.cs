@@ -151,14 +151,15 @@ namespace SimpleJournal.Common
         /// <typeparam name="T">The type which you want to deserilize</typeparam>
         /// <param name="fileName">The file to read</param>
         /// <param name="mode">The mode <see cref="Mode"/></param>
+        /// <param name="additionalTypes">AdditionalTypes which are required for deserializiaton</param>
         /// <returns></returns>
-        public static T Read<T>(string fileName, Mode mode = Mode.XML)
+        public static T Read<T>(string fileName, Mode mode = Mode.XML, Type[] additionalTypes = null)
         {
             try
             {
                 if (mode == Mode.XML)
                 {
-                    XmlSerializer xmlSerializer = new XmlSerializer(typeof(T));
+                    XmlSerializer xmlSerializer = new XmlSerializer(typeof(T), additionalTypes);
                     using (FileStream fileStream = new FileStream(fileName, FileMode.Open))
                     {
                         return (T)xmlSerializer.Deserialize(fileStream);

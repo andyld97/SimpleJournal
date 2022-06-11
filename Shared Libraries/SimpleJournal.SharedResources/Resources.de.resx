@@ -142,4 +142,7 @@
   <data name="strPortrait" xml:space="preserve">
     <value>Hochformat</value>
   </data>
+  <data name="strAttention" xml:space="preserve">
+    <value>ACHTUNG!</value>
+  </data>
 </root>

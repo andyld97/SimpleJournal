@@ -153,4 +153,7 @@
   <data name="strPortrait" xml:space="preserve">
     <value>Staand</value>
   </data>
+  <data name="strAttention" xml:space="preserve">
+    <value>ATTENTIE!</value>
+  </data>
 </root>

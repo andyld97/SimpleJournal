@@ -29,6 +29,8 @@ using SimpleJournal.Documents.PDF;
 using System.Threading.Tasks;
 using System.Net.Http;
 using SimpleJournal.Documents.UI;
+using Newtonsoft.Json.Linq;
+using Notifications;
 
 namespace SimpleJournal
 {
@@ -50,7 +52,9 @@ namespace SimpleJournal
             }
             else
                 throw new ArgumentOutOfRangeException("from or to must be in the range of length!");
-        }      
+        }
+
+        #region Theming
 
         public static string GetCurrentTheme()
         {
@@ -80,7 +84,87 @@ namespace SimpleJournal
             App.Current.Resources["Link.Foreground"] = new SolidColorBrush(linkColor);
 
             ThemeManager.Current.ChangeTheme(Application.Current, GetCurrentTheme());
-        }   
+        }
+
+        #endregion
+
+        #region .NET Autodetect/Autoupdate
+        /// <summary>
+        /// Determines the win-x86 or win-x64 platform
+        /// </summary>
+        /// <returns>win-x86 or winx64</returns>
+        public static string DetermiePlatform()
+        {
+            string platform = Environment.Is64BitOperatingSystem ? "x64" : "x86";
+            return $"win-{platform}";
+        }
+
+        /// <summary>
+        /// Determines the dotnet download link for <see cref="Consts.CompiledDotnetVersion"/>
+        /// </summary>
+        /// <returns></returns>
+        public static async Task<string> DetermineDotnetDesktpRuntimeDownloadLink()
+        {
+            // Determine lnk
+            using (HttpClient client = new HttpClient())
+            {
+                string releasesJson = await client.GetStringAsync(Consts.DotnetReleaseInfoUrl);
+
+                var root = JsonConvert.DeserializeObject<JObject>(releasesJson);
+                var releases = root["releases"].Value<JArray>();
+
+                var release = releases.FirstOrDefault(p => p.Value<string>("release-version") == Consts.CompiledDotnetVersion.ToString(3));
+                var files = release.Value<JObject>("windowsdesktop").Value<JArray>("files");
+                var file = files.FirstOrDefault(f => f.Value<string>("rid") == DetermiePlatform());
+
+                return file.Value<string>("url");
+            }
+        }
+
+        /// <summary>
+        /// Downloads the <see cref="Consts.CompiledDotnetVersion"/>-Version, starts the setup and then quits SimpleJournal (a manual restart is required)
+        /// </summary>
+        /// <returns></returns>
+        public static async Task UpdateNETCoreVersionAsync()
+        {
+            if (MessageBox.Show(Properties.Resources.strDotnetUpdateSetup_PrepareMessage, SharedResources.Resources.strAttention, MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No)
+                return;
+
+            string url;
+
+            try
+            {
+                url = await GeneralHelper.DetermineDotnetDesktpRuntimeDownloadLink();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(string.Format(Properties.Resources.strDotnetUpdateSetup_FailedToDetermineDownloadUrl, System.Environment.Version.ToString(3), ex.Message), SharedResources.Resources.strError, MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            string platform = GeneralHelper.DetermiePlatform();
+            string fileName = $"windowsdesktop-runtime-{Consts.CompiledDotnetVersion}-{platform}.exe";
+            string localFilePath = System.IO.Path.Combine(FileSystemHelper.GetDownloadsPath(), fileName);
+            var dialog = new UpdateDownloadDialog(string.Format(Properties.Resources.strDotnetUpdateSetup_Downloading, fileName), url) { LocalFilePath = localFilePath };
+            var result = dialog.ShowDialog();
+
+            if (result.HasValue && result.Value)
+            {
+                try
+                {
+                    System.Diagnostics.Process.Start(localFilePath);
+
+                    // Exit to make sure user can easily update without problems
+                    Shutdown();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(string.Format(Properties.Resources.strDotnetUpdate_FailedToOpenSetup, localFilePath, ex.Message), SharedResources.Resources.strError, MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+        }
+
+        #endregion
 
         #region RTB
 
@@ -140,6 +224,15 @@ namespace SimpleJournal
 
    
         #endregion
+
+        /// <summary>
+        /// Shutdowns the app and stops all services! This should always be called when the app should exit.
+        /// </summary>
+        public static void Shutdown()
+        {
+            NotificationService.NotificationServiceInstance?.Stop();
+            Application.Current.Shutdown();
+        }
 
         /// <summary>
         /// Opens the default system browser with the requested uri
@@ -218,52 +311,75 @@ namespace SimpleJournal
             return false;
         }
 
-        public static void SearchForUpdates()
+        /// <summary>
+        /// Checks if there is a new SimpleJournal version available
+        /// </summary>
+        /// <returns>a version instance if there is a new version, otherwise null</returns>
+        public static async Task<Version> CheckForUpdatesAsync()
         {
-            // Search for updates
-            if (GeneralHelper.IsConnectedToInternet())
+            if (!GeneralHelper.IsConnectedToInternet())
+                return null;
+
+            // If a new update is available
+            // Display all changes from current version till new version (changelog is enough)
+
+            // 1) Get current version
+#if !UWP
+            var currentVersion = Consts.NormalVersion;
+#else 
+            var currentVersion = Consts.StoreVersion;
+#endif
+
+            // 2) Download version
+            try
             {
-                // If a new update is available
-                // Display all changes from current version till new version (changelog is enough)
-
-                // 1) Get current version
-                var currentVersion = Consts.NormalVersion;
-
-                // 2) Download version
-                try
+                using (HttpClient client = new HttpClient())
                 {
-                    using (HttpClient client = new HttpClient())
+                    string versionJSON = await client.GetStringAsync(Consts.VersionUrl);
+                    dynamic versions = JsonConvert.DeserializeObject(versionJSON);
+
+#if !UWP
+                    Version onlineVersion = Version.Parse(versions.current.normal.Value);
+#else
+                    Version onlineVersion = Version.Parse(versions.current.store.Value);
+#endif
+
+                    var result = onlineVersion.CompareTo(currentVersion);
+                    if (result > 0)
                     {
-                        string versionJSON = Task.Run(() => client.GetStringAsync(Consts.VersionUrl)).Result;
-                        dynamic versions = JsonConvert.DeserializeObject(versionJSON);
-
-                        Version onlineVersion = Version.Parse(versions.current.normal.Value);
-
-                        var result = onlineVersion.CompareTo(currentVersion);
-                        if (result > 0)
-                        {
-                            // There is a new version
-                            UpdateDialog ud = new UpdateDialog(onlineVersion);
-                            ud.ShowDialog();
-                        }
-                        else if (result < 0)
-                        {
-                            // Online version is older than this version (impossible case)
-                        }
-                        else
-                        {
-                            // equal
-                        }
+                        // There is a new version
+                        return onlineVersion;
+                    }
+                    else if (result < 0)
+                    {
+                        // Online version is older than this version (dev version)
+                    }
+                    else
+                    {
+                        // equal
                     }
                 }
-                catch (Exception)
-                {
-                    // ignore failed to get updates
-                }
+            }
+            catch (Exception)
+            {
+                // ignore failed to get updates
+            }
+
+            return null;
+        }
+
+        public static void SearchForUpdates()
+        {
+            var result = Task.Run(() => CheckForUpdatesAsync()).Result;
+
+            if (result != null)
+            {
+                UpdateDialog ud = new UpdateDialog(result);
+                ud.ShowDialog();
             }
         }
 
-#if UWP 
+#if UWP
         public static readonly string FileAssociationIconsPath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "journal", "icon.ico");
 #endif
 

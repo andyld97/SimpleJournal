@@ -6,7 +6,8 @@
              xmlns:controls="clr-namespace:SimpleJournal.Controls"
              xmlns:res="clr-namespace:SimpleJournal.Properties" xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="300" d:DesignWidth="300"
+    xmlns:converters="clr-namespace:MahApps.Metro.Converters;assembly=MahApps.Metro">
     <Grid>
         <Grid.Resources>
             <BooleanToVisibilityConverter x:Key="boolToVisibiltyConverter" />
@@ -23,7 +24,13 @@
                 </mah:ColorPalette.Header>
             </mah:ColorPalette>
 
-            <Expander x:Name="Expander" Header="{x:Static res:Resources.strColors}" FontWeight="Bold" />
+            <!-- Tooltip Issue: To fix that make sure .NET 6.0.5 is installed! -->
+            <!-- https://github.com/dotnet/wpf/issues/5716 -->
+            <Expander x:Name="Expander">
+                <Expander.Header>
+                    <TextBlock Text="{x:Static res:Resources.strColors}" FontWeight="Bold" Foreground="{DynamicResource BlackBrush}" />
+                </Expander.Header>
+            </Expander>
             <mah:ColorPalette x:Name="AdvancedColors" Visibility="{Binding ElementName=Expander, Path=IsExpanded, Converter={StaticResource boolToVisibilityConverter}}" SelectionChanged="AdvancedColors_SelectionChanged" BorderThickness="0" Header="{x:Null}"     ItemsSource="{x:Static mah:BuildInColorPalettes.WpfColorsPalette}"  />
         </StackPanel>
     </Grid>

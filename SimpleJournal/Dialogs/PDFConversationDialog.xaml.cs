@@ -1,12 +1,10 @@
 ﻿using SimpleJournal.Common;
 using System;
-using System.Linq;
 using System.Net.Http;
 using System.Windows;
 using System.Windows.Forms;
 using MessageBox = System.Windows.MessageBox;
 using SimpleJournal.Documents.PDF;
-using SimpleJournal.Data;
 using System.ComponentModel;
 using SimpleJournal.Documents.UI;
 using System.Threading.Tasks;
@@ -24,7 +22,7 @@ namespace SimpleJournal.Dialogs
 
         private PdfConverter currentConverter = null;
 
-        private bool isInitialized = false;
+        private readonly bool isInitialized = false;
 
         private readonly Timer timer = new Timer() { Interval = 1000 };
         private PrintTicket currentTicket = null;

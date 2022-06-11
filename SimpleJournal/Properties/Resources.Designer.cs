@@ -609,6 +609,15 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to MM/dd/yyyy HH:mm.
+        /// </summary>
+        public static string strDateTimeFormat {
+            get {
+                return ResourceManager.GetString("strDateTimeFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Default Colors:.
         /// </summary>
         public static string strDefaultColors {
@@ -785,6 +794,48 @@ namespace SimpleJournal.Properties {
         public static string strDontUseRulerCompensation {
             get {
                 return ResourceManager.GetString("strDontUseRulerCompensation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error opening &quot;{0}&quot;
+        ///
+        ///Details: {1}.
+        /// </summary>
+        public static string strDotnetUpdate_FailedToOpenSetup {
+            get {
+                return ResourceManager.GetString("strDotnetUpdate_FailedToOpenSetup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Downloading &quot;{0}&quot; ....
+        /// </summary>
+        public static string strDotnetUpdateSetup_Downloading {
+            get {
+                return ResourceManager.GetString("strDotnetUpdateSetup_Downloading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The download URL for .NET {0} could not be determined! The setup will be aborted.
+        ///
+        ///Details: {1}.
+        /// </summary>
+        public static string strDotnetUpdateSetup_FailedToDetermineDownloadUrl {
+            get {
+                return ResourceManager.GetString("strDotnetUpdateSetup_FailedToDetermineDownloadUrl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The setup is started after the download and SimpleJournal is then closed (unsaved changes are lost)!
+        ///
+        ///ATTENTION: SimpleJournal will not be restarted, please restart SimpleJournal after the .NET installation!.
+        /// </summary>
+        public static string strDotnetUpdateSetup_PrepareMessage {
+            get {
+                return ResourceManager.GetString("strDotnetUpdateSetup_PrepareMessage", resourceCulture);
             }
         }
         
@@ -1493,6 +1544,15 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Hide notifications.
+        /// </summary>
+        public static string strHideNotifications {
+            get {
+                return ResourceManager.GetString("strHideNotifications", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Highlighter.
         /// </summary>
         public static string strHighlight {
@@ -1882,6 +1942,42 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Notifications.
+        /// </summary>
+        public static string strNotifications {
+            get {
+                return ResourceManager.GetString("strNotifications", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An update for SimpleJournal is now available: .
+        /// </summary>
+        public static string strNotifications_Update_MessageRun1 {
+            get {
+                return ResourceManager.GetString("strNotifications_Update_MessageRun1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Run update.
+        /// </summary>
+        public static string strNotifications_Update_UserInteraction_ExecuteUpdate {
+            get {
+                return ResourceManager.GetString("strNotifications_Update_UserInteraction_ExecuteUpdate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to View changes.
+        /// </summary>
+        public static string strNotifications_UserInteraction_ShowChangelog {
+            get {
+                return ResourceManager.GetString("strNotifications_UserInteraction_ShowChangelog", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Object.
         /// </summary>
         public static string strObject {
@@ -1896,6 +1992,24 @@ namespace SimpleJournal.Properties {
         public static string strObjects {
             get {
                 return ResourceManager.GetString("strObjects", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You are using an outdated .NET Core version (.
+        /// </summary>
+        public static string strObsoleteNETVersionNotification_Message_Run1 {
+            get {
+                return ResourceManager.GetString("strObsoleteNETVersionNotification_Message_Run1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ). Please update your .NET Core version to ensure that the program works without errors..
+        /// </summary>
+        public static string strObsoleteNETVersionNotification_Message_Run2 {
+            get {
+                return ResourceManager.GetString("strObsoleteNETVersionNotification_Message_Run2", resourceCulture);
             }
         }
         
@@ -2972,15 +3086,6 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 06/04/2022 1:04 AM.
-        /// </summary>
-        public static string strReleaseDate {
-            get {
-                return ResourceManager.GetString("strReleaseDate", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Remove.
         /// </summary>
         public static string strRemove {
@@ -3830,6 +3935,15 @@ namespace SimpleJournal.Properties {
         public static string strShapesHeader {
             get {
                 return ResourceManager.GetString("strShapesHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Show notifications.
+        /// </summary>
+        public static string strShowNotificationsTooltip {
+            get {
+                return ResourceManager.GetString("strShowNotificationsTooltip", resourceCulture);
             }
         }
         

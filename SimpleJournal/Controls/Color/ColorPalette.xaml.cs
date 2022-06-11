@@ -31,11 +31,21 @@ namespace SimpleJournal.Controls
             StandardColorsPalette[5] = Consts.PEN_COLORS[1].ToColor();
             StandardColorsPalette[10] = Consts.PEN_COLORS[2].ToColor();
             StandardColorsPalette[14] = Consts.PEN_COLORS[3].ToColor();
+
+         
         }
 
         public ColorPalette()
         {
-            InitializeComponent();  
+            InitializeComponent();
+
+            // FIX for MahAppMetro theming issues related due to Colorful-Theme
+            var accentColorHover = (Color)FindResource("Fluent.Ribbon.Colors.AccentColor40");
+            var accentColorSelected = (Color)FindResource("Fluent.Ribbon.Colors.AccentColor60");
+
+            MahApps.Metro.Controls.ItemHelper.SetHoverBackgroundBrush(this, new SolidColorBrush(accentColorHover));
+            MahApps.Metro.Controls.ItemHelper.SetSelectedBackgroundBrush(this, new SolidColorBrush(accentColorSelected));
+            MahApps.Metro.Controls.ItemHelper.SetHoverSelectedBackgroundBrush(this, new SolidColorBrush(accentColorSelected));
         }
 
         public void SetSelectedColor(Color color)

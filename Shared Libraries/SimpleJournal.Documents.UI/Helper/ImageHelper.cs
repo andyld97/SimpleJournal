@@ -81,5 +81,27 @@ namespace SimpleJournal.Documents.UI.Helper
                 return null;
             }
         }
+
+        public static Uri GeneratePackUri(bool isFromSharedResources, string path, string imageName)
+        {
+            string sharedResourcesPackUri = "pack://application:,,,/SimpleJournal.SharedResources;component/";  // icons/pages/{icon}"
+            string packUri = "pack://application:,,,/SimpleJournal;component/";  // icons/pages/{icon}"
+
+            string finalUri = string.Empty;
+
+            if (isFromSharedResources)
+                finalUri = sharedResourcesPackUri;
+            else
+                finalUri = packUri;
+
+            if (!path.EndsWith("/"))
+                path += "/";
+
+            finalUri += path;
+            finalUri += imageName;
+
+            return new Uri(finalUri);
+
+        }
     }
 }
