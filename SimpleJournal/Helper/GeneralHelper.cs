@@ -352,7 +352,7 @@ namespace SimpleJournal
                     }
                     else if (result < 0)
                     {
-                        // Online version is older than this version (impossible case)
+                        // Online version is older than this version (dev version)
                     }
                     else
                     {
