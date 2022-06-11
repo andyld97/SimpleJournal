@@ -1,5 +1,7 @@
-﻿using Fluent;
+﻿using Controls;
+using Fluent;
 using Microsoft.Win32;
+using Notifications;
 using SimpleJournal.Common;
 using SimpleJournal.Controls;
 using SimpleJournal.Controls.Templates;
@@ -322,6 +324,7 @@ namespace SimpleJournal
             // Call other init methods
             RefreshVerticalScrollbarSize();
             UpdateTextMarkerAttributes();
+            UpdateNotificationToolBarAndButton();
 
             DrawingCanvas.ChildElementsSelected += DrawingCanvas_ChildElementsSelected;
 
@@ -403,6 +406,13 @@ namespace SimpleJournal
         {
             base.OnContentRendered(e);
 
+            // Start service
+            NotificationService.NotificationServiceInstance = new NotificationService();
+            RefreshNotifications(); // do it manually here, because otheriwse already added notifications won't get displayed!
+            NotificationService.NotificationServiceInstance.OnNotificationAdded += NotificationServiceInstance_OnNotificationAdded;
+            NotificationService.NotificationServiceInstance.OnNotifcationRemoved += NotificationServiceInstance_OnNotifcationRemoved;
+            NotificationService.NotificationServiceInstance.Start();;
+
             if (startSetupDialog)
             {
                 startSetupDialog = false;
@@ -427,11 +437,73 @@ namespace SimpleJournal
 #endif
         }
 
+
         private void IPages_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
             RefreshPages();
         }
-#endregion
+        #endregion
+
+        #region Notifications
+
+        // ToDo!!!!
+
+        private void NotificationServiceInstance_OnNotifcationRemoved(Notification notification)
+        {
+            Dispatcher.Invoke(() =>
+            {
+                RefreshNotifications();
+            });
+        }
+
+        private void NotificationServiceInstance_OnNotificationAdded(Notification notification)
+        {
+            Dispatcher.Invoke(() => 
+            {
+                RefreshNotifications();
+            });
+        }
+
+        private void RefreshNotifications()
+        {
+            if (NotificationService.NotificationServiceInstance == null)
+                return;
+
+            int count = NotificationService.NotificationServiceInstance.Notifications.Count;
+
+            if (count > 0)
+            {
+                btnToggleNotification.Header = count.ToString();
+                btnToggleNotification.SizeDefinition = new RibbonControlSizeDefinition("middle");
+            }
+            else
+            {
+                btnToggleNotification.Header = string.Empty;
+                btnToggleNotification.SizeDefinition = new RibbonControlSizeDefinition("small");
+            }
+
+            // ToDo: *** Add a setting which can disable notifications completely
+            ListNotifications.Children.Clear();
+            foreach (var notification in NotificationService.NotificationServiceInstance?.Notifications)
+                ListNotifications.Children.Add(new NotificationDisplay(notification) { Margin = new Thickness(3, 4, 3, 4) });
+        }
+
+        public void UpdateNotificationToolBarAndButton()
+        {
+            if (Settings.Instance.HideNotificationToolBar)
+            {
+                btnToggleNotification.IsChecked = false;
+                btnToggleNotification.Visibility = Visibility.Collapsed;
+            }
+            else
+                btnToggleNotification.Visibility = Visibility.Visible;
+        }
+
+        private void ButtonCloseNotificationsPanel_Click(object sender, RoutedEventArgs e)
+        {
+            btnToggleNotification.IsChecked = false;
+        }
+        #endregion
 
         #region AutoSave - Backup
 
@@ -620,7 +692,7 @@ namespace SimpleJournal
             }
         }
 
-#endregion
+        #endregion
 
         #region Error Handling
 
@@ -1783,6 +1855,9 @@ namespace SimpleJournal
             // Refresh recently openend documents
             RefreshRecentlyOpenedFiles();
 
+            // Refresh notifcationbar button
+            UpdateNotificationToolBarAndButton();
+
             // Refresh ruler mode
             rulerDropDownTemplate.lstBoxChooseRulerMode.SelectedIndex = (int)(Settings.Instance.RulerStrokeMode);
 
@@ -2869,18 +2944,21 @@ namespace SimpleJournal
                 else if (result == MessageBoxResult.No)
                 {
                     closedButtonWasPressed = true;
+                    NotificationService.NotificationServiceInstance?.Stop();
                     Close();
                 }
                 else if (result == MessageBoxResult.Yes)
                 {
                     await SaveProject(false);
                     closedButtonWasPressed = true;
+                    NotificationService.NotificationServiceInstance?.Stop();
                     Close();
                 }
             }
             else
             {
                 closedButtonWasPressed = true;
+                NotificationService.NotificationServiceInstance?.Stop();
                 Close();
             }
         }
@@ -2921,6 +2999,7 @@ namespace SimpleJournal
                     e.Cancel = true;
                 else if (result == MessageBoxResult.No)
                 {
+                    NotificationService.NotificationServiceInstance?.Stop();
                     DeleteAutoSaveBackup(true);
                     e.Cancel = false;
 #if !UWP
@@ -2941,12 +3020,13 @@ namespace SimpleJournal
 #if !UWP
                     close = true;
 #else
-                    Application.Current.Shutdown();
+                    GeneralHelper.Shutdown();
 #endif
                 }
             }
             else
             {
+                NotificationService.NotificationServiceInstance?.Stop();
                 DeleteAutoSaveBackup(true);
 #if !UWP
                 close = true;
@@ -2958,7 +3038,7 @@ namespace SimpleJournal
                 TouchHelper.SetTouchState(true);
                 
             if (close && cancelClosing)
-                Application.Current.Shutdown();
+                GeneralHelper.Shutdown();
 #endif
         }
 
@@ -3851,7 +3931,7 @@ namespace SimpleJournal
             if (WindowState == WindowState.Minimized)
                 return;
 
-            Console.WriteLine("MainWindow activated ....");
+            System.Diagnostics.Debug.WriteLine("MainWindow activated ....");
 #if !UWP
 
             // Disable touch screen when window get reactivated ...
@@ -3866,7 +3946,7 @@ namespace SimpleJournal
             if (WindowState == WindowState.Minimized)
                 return;
 
-            Console.WriteLine("MainWindow deactivated ....");
+            System.Diagnostics.Debug.WriteLine("MainWindow deactivated ....");
 #if !UWP
 
             // Enable touch screen when windows gets deactivated ...

@@ -28,6 +28,7 @@
 		<ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
 		<Configurations>Debug;Release;UWPNew;Normal</Configurations>
 		<MSBuildWarningsAsMessages>NU1702</MSBuildWarningsAsMessages>
+		<BootstrapperVariant>GUI</BootstrapperVariant>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
 		<PlatformTarget>x64</PlatformTarget>
@@ -97,6 +98,10 @@
 	</PropertyGroup>
 	<ItemGroup>
 	  <None Remove="resources\feedback.png" />
+	  <None Remove="resources\notification.png" />
+	  <None Remove="resources\notifications\error.png" />
+	  <None Remove="resources\notifications\info.png" />
+	  <None Remove="resources\notifications\warning.png" />
 	</ItemGroup>
 	<ItemGroup>
 		<None Update="app.normal.manifest">
@@ -111,6 +116,9 @@
 		<Resource Include="resources\arrow_up.png" />
 		<Resource Include="resources\caslogo.ico" />
 		<Resource Include="resources\feedback.png" />
+		<Resource Include="resources\notification.png" />
+		<Resource Include="resources\notifications\error.png" />
+		<Resource Include="resources\notifications\info.png" />
 		<Resource Include="resources\pdf_small.png" />
 	</ItemGroup>
 	<ItemGroup>
@@ -200,6 +208,9 @@
 		</BootstrapperPackage>
 	</ItemGroup>
 	<ItemGroup>
+	  <Resource Include="resources\notifications\warning.png" />
+	</ItemGroup>
+	<ItemGroup>
 		<Resource Include="resources\polygon.png" />
 	</ItemGroup>
 	<ItemGroup>
@@ -238,7 +249,7 @@
 		<Resource Include="resources\backgrounds\wooden-2.jpg" />
 	</ItemGroup>
 	<ItemGroup>
-		<PackageReference Include="DotnetRuntimeBootstrapper" Version="2.2.0">
+		<PackageReference Include="DotnetRuntimeBootstrapper" Version="2.3.0">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>

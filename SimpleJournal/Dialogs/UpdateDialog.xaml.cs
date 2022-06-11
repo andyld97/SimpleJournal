@@ -73,7 +73,7 @@ namespace SimpleJournal.Dialogs
                 }
 
                 // Exit to make sure user can easily update without problems
-                Application.Current.Shutdown();
+                GeneralHelper.Shutdown();
             }
             else
             {

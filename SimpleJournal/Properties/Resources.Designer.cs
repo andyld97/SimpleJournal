@@ -609,6 +609,15 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to MM/dd/yyyy HH:mm.
+        /// </summary>
+        public static string strDateTimeFormat {
+            get {
+                return ResourceManager.GetString("strDateTimeFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Default Colors:.
         /// </summary>
         public static string strDefaultColors {
@@ -1535,6 +1544,15 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Hide notifications.
+        /// </summary>
+        public static string strHideNotifications {
+            get {
+                return ResourceManager.GetString("strHideNotifications", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Highlighter.
         /// </summary>
         public static string strHighlight {
@@ -1924,6 +1942,42 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Notifications.
+        /// </summary>
+        public static string strNotifications {
+            get {
+                return ResourceManager.GetString("strNotifications", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An update for SimpleJournal is now available: .
+        /// </summary>
+        public static string strNotifications_Update_MessageRun1 {
+            get {
+                return ResourceManager.GetString("strNotifications_Update_MessageRun1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Run update.
+        /// </summary>
+        public static string strNotifications_Update_UserInteraction_ExecuteUpdate {
+            get {
+                return ResourceManager.GetString("strNotifications_Update_UserInteraction_ExecuteUpdate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to View changes.
+        /// </summary>
+        public static string strNotifications_UserInteraction_ShowChangelog {
+            get {
+                return ResourceManager.GetString("strNotifications_UserInteraction_ShowChangelog", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Object.
         /// </summary>
         public static string strObject {
@@ -1938,6 +1992,24 @@ namespace SimpleJournal.Properties {
         public static string strObjects {
             get {
                 return ResourceManager.GetString("strObjects", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You are using an outdated .NET Core version (.
+        /// </summary>
+        public static string strObsoleteNETVersionNotification_Message_Run1 {
+            get {
+                return ResourceManager.GetString("strObsoleteNETVersionNotification_Message_Run1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ). Please update your .NET Core version to ensure that the program works without errors..
+        /// </summary>
+        public static string strObsoleteNETVersionNotification_Message_Run2 {
+            get {
+                return ResourceManager.GetString("strObsoleteNETVersionNotification_Message_Run2", resourceCulture);
             }
         }
         
@@ -3872,6 +3944,15 @@ namespace SimpleJournal.Properties {
         public static string strShapesHeader {
             get {
                 return ResourceManager.GetString("strShapesHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Show notifications.
+        /// </summary>
+        public static string strShowNotificationsTooltip {
+            get {
+                return ResourceManager.GetString("strShowNotificationsTooltip", resourceCulture);
             }
         }
         

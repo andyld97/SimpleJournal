@@ -158,6 +158,11 @@ namespace SimpleJournal.Documents.UI
         public bool DoesNotShowInsertHint { get; set; } = false;
 
         /// <summary>
+        ///  Determines if the notifications are hidden
+        /// </summary>
+        public bool HideNotificationToolBar { get; set; } = false;
+
+        /// <summary>
         /// Determines if the glowing brush of the mainwindow is disabled or not
         /// </summary>
         public bool ActivateGlowingBrush { get; set; } = true;

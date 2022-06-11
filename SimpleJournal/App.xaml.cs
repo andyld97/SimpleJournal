@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using SimpleJournal.Common;
+using System.Globalization;
 using System.Threading;
 using System.Windows;
 using System.Windows.Markup;
@@ -14,7 +15,7 @@ namespace SimpleJournal
 
         public static bool IgnoreBackups { get; private set; } = false;
 
-        private void Application_Startup(object sender, StartupEventArgs e)
+        private async void Application_Startup(object sender, StartupEventArgs e)
         {
             if (e.Args.Length >= 1)
             {

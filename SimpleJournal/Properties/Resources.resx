@@ -2196,4 +2196,40 @@ Details: {1}</value>
     <value>Downloading "{0}" ...</value>
     <comment>AboutDialog.xaml.cs</comment>
   </data>
+  <data name="strNotifications_Update_MessageRun1" xml:space="preserve">
+    <value>An update for SimpleJournal is now available: </value>
+    <comment>Update</comment>
+  </data>
+  <data name="strNotifications_UserInteraction_ShowChangelog" xml:space="preserve">
+    <value>View changes</value>
+    <comment>Update</comment>
+  </data>
+  <data name="strNotifications_Update_UserInteraction_ExecuteUpdate" xml:space="preserve">
+    <value>Run update</value>
+    <comment>Update</comment>
+  </data>
+  <data name="strNotifications" xml:space="preserve">
+    <value>Notifications</value>
+    <comment>MainWindow.xaml</comment>
+  </data>
+  <data name="strObsoleteNETVersionNotification_Message_Run1" xml:space="preserve">
+    <value>You are using an outdated .NET Core version (</value>
+    <comment>ObsoleteNETVersion</comment>
+  </data>
+  <data name="strObsoleteNETVersionNotification_Message_Run2" xml:space="preserve">
+    <value>). Please update your .NET Core version to ensure that the program works without errors.</value>
+    <comment>ObsoleteNETVersion</comment>
+  </data>
+  <data name="strDateTimeFormat" xml:space="preserve">
+    <value>MM/dd/yyyy HH:mm</value>
+    <comment>*</comment>
+  </data>
+  <data name="strShowNotificationsTooltip" xml:space="preserve">
+    <value>Show notifications</value>
+    <comment>MainWindow.xaml</comment>
+  </data>
+  <data name="strHideNotifications" xml:space="preserve">
+    <value>Hide notifications</value>
+    <comment>SettingsDialog.xaml</comment>
+  </data>
 </root>

@@ -146,6 +146,7 @@
 
                         <CheckBox x:Name="CheckBoxThemeIsColorful" Content="{x:Static res:Resources.strIsColorfulTheme}" Checked="CheckBoxThemeIsColorful_Checked" Unchecked="CheckBoxThemeIsColorful_Unchecked" Margin="0,5,0,0" />
                         <CheckBox x:Name="CheckBoxActivateGlowingBrush" Checked="CheckBoxActivateGlowingBrush_Checked" Unchecked="CheckBoxActivateGlowingBrush_Checked" Content="{x:Static res:Resources.strSettingsActivateGlowingEffect}" Margin="0,5,0,0" />
+                        <CheckBox x:Name="CheckBoxDisableNotificationToolbar" Content="{x:Static res:Resources.strHideNotifications}" Checked="CheckBoxDisableNotificationToolbar_Checked" Unchecked="CheckBoxDisableNotificationToolbar_Checked" Margin="0,5,0,0" />
                     </StackPanel>
                 </Grid>
             </TabItem>

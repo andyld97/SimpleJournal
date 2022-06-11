@@ -58,6 +58,7 @@ namespace SimpleJournal
 
 #if !UWP
         public static readonly string PenSettingsFilePath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Pen.xml");
+        public static readonly string NotificationsFilePath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Notifications.xml");
 
         /// <summary>
         /// Used for old xml journals
@@ -71,6 +72,7 @@ namespace SimpleJournal
         public static readonly string SetTouchOff = "/off";
 #else
         public static readonly string PenSettingsFilePath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "SimpleJournal", "Pen.xml");
+        public static readonly string NotificationsFilePath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "SimpleJournal", "Notifications.xml");
         public static readonly string AutoSaveDirectory = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "SimpleJournal", "AutoSave");
         /// <summary>
         /// Used for old xml journals
@@ -84,7 +86,7 @@ namespace SimpleJournal
         {
             try
             {
-                var path = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Pen.xml");
+                var path = System.IO.Path.GetDirectoryName(Consts.PenSettingsFilePath);
                 if (!System.IO.Directory.Exists(path))
                 {
                     System.IO.Directory.CreateDirectory(path);

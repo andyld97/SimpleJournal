@@ -59,6 +59,7 @@ namespace SimpleJournal
 
             CheckBoxActivateGlowingBrush.IsChecked = Settings.Instance.ActivateGlowingBrush;
             ComboBoxStretch.SelectedIndex = (Settings.Instance.InsertImageStretchFormat == Stretch.Fill ? 0 : 1);
+            CheckBoxDisableNotificationToolbar.IsChecked = Settings.Instance.HideNotificationToolBar;
 
 #if UWP
             TabTouch.Visibility = Visibility.Collapsed;
@@ -364,6 +365,15 @@ namespace SimpleJournal
                 return;
 
             Settings.Instance.InsertImageStretchFormat = (ComboBoxStretch.SelectedIndex == 0 ? Stretch.Fill : Stretch.Uniform);
+            Settings.Instance.Save();
+        }
+
+        private void CheckBoxDisableNotificationToolbar_Checked(object sender, RoutedEventArgs e)
+        {
+            if (editMode)
+                return;
+
+            Settings.Instance.HideNotificationToolBar = CheckBoxDisableNotificationToolbar.IsChecked.Value;
             Settings.Instance.Save();
         }
     }

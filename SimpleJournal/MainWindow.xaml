@@ -10,9 +10,10 @@
         xmlns:controls="clr-namespace:SimpleJournal.Controls"
         StateChanged="RibbonWindow_StateChanged"
         mc:Ignorable="d"
-        xmlns:gl="clr-namespace:System.Globalization;assembly=mscorlib"
-        Title="SimpleJournal - Neues Journal" Height="700" Activated="RibbonWindow_Activated" Deactivated="RibbonWindow_Deactivated"
+        xmlns:gl="clr-namespace:System.Globalization;assembly=mscorlib" xmlns:controls1="clr-namespace:SimpleJournal.Documents.UI.Controls;assembly=SimpleJournal.Documents.UI"
+                     Title="SimpleJournal - Neues Journal" Height="700" Activated="RibbonWindow_Activated" Deactivated="RibbonWindow_Deactivated"
         Width="1130">
+    <!--TextFormattingMode="Display" -->
     <Window.Resources>
         <BooleanToVisibilityConverter x:Key="boolToVisibilityConverter" />
         <local:SelectedIndexToColumnSpanConverter x:Key="indexToColumn" />
@@ -300,6 +301,9 @@
             <Fluent:Ribbon.ToolBarItems>
                 <Fluent:Button Size="Small" Icon="pack://application:,,,/SimpleJournal;component/resources/help.png" x:Name="btnHelp" Click="BtnHelp_Click" ToolTip="{x:Static res:Resources.strHelp}" RenderOptions.BitmapScalingMode="Fant" />
                 <Fluent:Button Size="Small" Icon="pack://application:,,,/SimpleJournal;component/resources/feedback.png" x:Name="btnFeedback" Click="btnFeedback_Click" ToolTip="{x:Static res:Resources.strUserFeedback}" />
+                <StackPanel Orientation="Horizontal">
+                    <Fluent:ToggleButton x:Name="btnToggleNotification" ToolTip="{x:Static res:Resources.strShowNotificationsTooltip}" Size="Small" Icon="pack://application:,,,/SimpleJournal;component/resources/notification.png" />
+                </StackPanel>
             </Fluent:Ribbon.ToolBarItems>
             <Fluent:Ribbon.QuickAccessItems>
                 <Fluent:QuickAccessMenuItem x:Name="QuickAccessButtonNew" IsChecked="True">
@@ -326,12 +330,40 @@
             </Fluent:Ribbon.QuickAccessItems>
         </Fluent:Ribbon>
         <Grid Grid.Row="1">
+            <Grid x:Name="pnlNotificationBar" Panel.ZIndex="1" HorizontalAlignment="Right" Width="250" Background="{DynamicResource WhiteBrush}" Visibility="{Binding ElementName=btnToggleNotification,Path=IsChecked,Converter={StaticResource boolToVisibilityConverter}}">
+                <Border BorderBrush="{DynamicResource BlackBrush}" BorderThickness="1" Margin="1,0,1,1">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Text="{x:Static res:Resources.strNotifications}" Margin="5,0,0,0" VerticalAlignment="Center" FontWeight="Bold" />
+                            <controls1:TransparentImageButton x:Name="ButtonCloseNotificationsPanel" ToolTip="{x:Static res:Resources.strCloseSidebar}" Click="ButtonCloseNotificationsPanel_Click" Grid.Column="1" Image="/resources/close.png" Width="24" Height="24" Margin="5" />
+                        </Grid>
+                        
+                        <Border Grid.Row="1" BorderThickness="0 1 0 1" BorderBrush="{DynamicResource BlackBrush}" Background="{DynamicResource Fluent.Ribbon.Brushes.RibbonTabControl.Content.Background}">
+                            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                                <StackPanel x:Name="ListNotifications" ScrollViewer.HorizontalScrollBarVisibility="Disabled" />
+                            </ScrollViewer>
+                        </Border>
+                    </Grid>
+                </Border>
+            </Grid>
+
             <Grid x:Name="pnlSidebar" Panel.ZIndex="1" HorizontalAlignment="Left" Width="200" Background="{DynamicResource Item.SidebarBackgroundColor}" Visibility="Collapsed">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="40" />
                     <RowDefinition Height="*" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
+
                 <DockPanel Grid.Row="0" HorizontalAlignment="Stretch">
                     <TextBlock Margin="5,0,0,0" FontWeight="Bold" Foreground="{DynamicResource BlackBrush}" VerticalAlignment="Center">
                         <Run Text="{x:Static res:Resources.strObjects}" />
