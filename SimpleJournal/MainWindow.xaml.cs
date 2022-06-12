@@ -482,7 +482,6 @@ namespace SimpleJournal
                 btnToggleNotification.SizeDefinition = new RibbonControlSizeDefinition("small");
             }
 
-            // ToDo: *** Add a setting which can disable notifications completely
             ListNotifications.Children.Clear();
             foreach (var notification in NotificationService.NotificationServiceInstance?.Notifications)
                 ListNotifications.Children.Add(new NotificationDisplay(notification) { Margin = new Thickness(3, 4, 3, 4) });
