@@ -33,6 +33,11 @@ namespace Notifications
         /// </summary>
         public List<Notification> Notifications { get; set; } = new List<Notification>();
 
+        /// <summary>
+        /// Determines whether the service is active or not
+        /// </summary>
+        public bool IsRunning { get; private set; }
+
         public async void NotificationTimer_Tick(object state)
         {
             var now = DateTime.Now;
@@ -87,6 +92,7 @@ namespace Notifications
         /// </summary>
         public void Start()
         {
+            IsRunning = true;
             System.Diagnostics.Debug.WriteLine("Starting notification service ...");
             noticationTimer = new System.Threading.Timer(new System.Threading.TimerCallback(NotificationTimer_Tick), null, 0, Convert.ToInt32(Consts.NotificationServiceInterval.TotalMilliseconds));
         }
@@ -96,6 +102,7 @@ namespace Notifications
         /// </summary>
         public void Stop()
         {
+            IsRunning = false;
             System.Diagnostics.Debug.WriteLine("Stopping notification service ...");
             noticationTimer.Change(Timeout.Infinite, Timeout.Infinite);
         }

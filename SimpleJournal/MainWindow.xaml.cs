@@ -493,9 +493,17 @@ namespace SimpleJournal
             {
                 btnToggleNotification.IsChecked = false;
                 btnToggleNotification.Visibility = Visibility.Collapsed;
+
+                if (NotificationService.NotificationServiceInstance != null && NotificationService.NotificationServiceInstance.IsRunning)
+                    NotificationService.NotificationServiceInstance?.Stop();
             }
             else
+            {
                 btnToggleNotification.Visibility = Visibility.Visible;
+
+                if (NotificationService.NotificationServiceInstance != null && !NotificationService.NotificationServiceInstance.IsRunning)
+                    NotificationService.NotificationServiceInstance.Start();
+            }
         }
 
         private void ButtonCloseNotificationsPanel_Click(object sender, RoutedEventArgs e)
