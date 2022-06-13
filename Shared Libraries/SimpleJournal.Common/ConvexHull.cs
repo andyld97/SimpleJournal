@@ -16,14 +16,13 @@ namespace SimpleJournal.Common
             if (points == null)
                 return null;
 
-            if (points.Count() <= 1)
+            if (points.Count <= 1)
                 return points;
 
-            int n = points.Count(), k = 0;
+            int n = points.Count, k = 0;
             List<Point> H = new List<Point>(new Point[2 * n]);
 
-            points.Sort((a, b) =>
-                 a.X == b.X ? a.Y.CompareTo(b.Y) : a.X.CompareTo(b.X));
+            points.Sort((a, b) => a.X == b.X ? a.Y.CompareTo(b.Y) : a.X.CompareTo(b.X));
 
             // Build lower hull
             for (int i = 0; i < n; ++i)

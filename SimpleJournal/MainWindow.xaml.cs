@@ -831,14 +831,14 @@ namespace SimpleJournal
 
                     if (element is Polygon pol)
                     {
-                        int edge = ConvexHull.GetConvexHull(pol.Points.Select(p => new Common.Data.Point(p.X, p.Y)).ToList()).Count;
-                        if (edge == 3)
+                        int edges = pol.Points.Count; // ConvexHull.GetConvexHull(pol.Points.Select(p => new Common.Data.Point(p.X, p.Y)).ToList()).Count;
+                        if (edges == 3)
                             text = Properties.Resources.strTriangle;
-                        else if (edge == 4)
+                        else if (edges == 4)
                             text = Properties.Resources.strQuad;
-                        else if (edge == 5)
+                        else if (edges == 5)
                             text = Properties.Resources.strPentagon;
-                        else if (edge == 6)
+                        else if (edges == 6)
                             text = Properties.Resources.strHexagon;
                         else
                             text = Properties.Resources.strPolygon;
