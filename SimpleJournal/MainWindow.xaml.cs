@@ -2700,6 +2700,8 @@ namespace SimpleJournal
         {
             if (DrawingCanvas.LastModifiedCanvas.GetSelectedStrokes() != null && DrawingCanvas.LastModifiedCanvas.GetSelectedStrokes().Count > 0 && !DrawingCanvas.LastModifiedCanvas.ConvertSelectedStrokesToShape())
                 MessageBox.Show(this, Properties.Resources.strNoShapeRecognized, Properties.Resources.strNoShapeRecognizedTitle, MessageBoxButton.OK, MessageBoxImage.Information);
+            else
+                RefreshSideBar();
         }
 
         private void btnClearPage_Click(object sender, RoutedEventArgs e)
