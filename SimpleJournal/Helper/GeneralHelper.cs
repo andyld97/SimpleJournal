@@ -335,7 +335,7 @@ namespace SimpleJournal
             {
                 using (HttpClient client = new HttpClient())
                 {
-                    string versionJSON = await client.GetStringAsync(Consts.VersionUrl);
+                    string versionJSON = await client.GetStringAsync($"{Consts.VersionUrl}&lang={System.Globalization.CultureInfo.InstalledUICulture.TwoLetterISOLanguageName}");
                     dynamic versions = JsonConvert.DeserializeObject(versionJSON);
 
 #if !UWP
