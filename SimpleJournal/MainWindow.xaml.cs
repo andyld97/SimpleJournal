@@ -831,7 +831,8 @@ namespace SimpleJournal
 
                     if (element is Polygon pol)
                     {
-                        int edges = pol.Points.Count; // ConvexHull.GetConvexHull(pol.Points.Select(p => new Common.Data.Point(p.X, p.Y)).ToList()).Count;
+                        // Either pol.Points.Count nor the ConvexHull builds the correct amount of points!
+                        int edges = pol.CountEdges();
                         if (edges == 3)
                             text = Properties.Resources.strTriangle;
                         else if (edges == 4)
@@ -1026,6 +1027,8 @@ namespace SimpleJournal
                     int angle = 0;
                     if (sh.RenderTransform is RotateTransform rt)
                         angle = (int)rt.Angle;
+                    if (sh.RenderTransform is TransformGroup tg && tg.Children.Count == 2 && tg.Children.LastOrDefault() is RotateTransform _rt)
+                        angle = (int)_rt.Angle;
 
                     objShapeSettings.Load(new ShapeInfo((sh.Fill == null ? Colors.Transparent : (sh.Fill as SolidColorBrush).Color), (sh.Stroke as SolidColorBrush).Color, (int)sh.StrokeThickness, angle));
                 }
@@ -1141,7 +1144,13 @@ namespace SimpleJournal
                     }
                     else
                     {
-                        sh.RenderTransform = new RotateTransform(info.Angle);
+                        if (sh.RenderTransform is TransformGroup grp && grp.Children.LastOrDefault() is RotateTransform rt)
+                            rt.Angle = info.Angle;
+
+                        if (sh.RenderTransform != null)
+                            (sh.RenderTransform as RotateTransform).Angle = info.Angle;
+                        else 
+                            sh.RenderTransform = new RotateTransform(info.Angle);
                         sh.RenderTransformOrigin = center;
                     }
                     sh.Fill = new SolidColorBrush(info.BackgroundColor);
@@ -1195,8 +1204,7 @@ namespace SimpleJournal
                 elements.BringToFront(DrawingCanvas.LastModifiedCanvas);
         }
 
-
-#endregion
+        #endregion
 
         #region Private Methods
 

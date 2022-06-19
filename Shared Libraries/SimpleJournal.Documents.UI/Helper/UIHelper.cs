@@ -1,10 +1,12 @@
-﻿using SimpleJournal.Documents.UI.Controls;
+﻿using SimpleJournal.Common;
+using SimpleJournal.Documents.UI.Controls;
 using SimpleJournal.Documents.UI.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -217,17 +219,25 @@ namespace SimpleJournal.Documents.UI.Helper
                 Vector rotated = Vector.Multiply(v, element.RenderTransform.Value);
                 double angleBetween = Vector.AngleBetween(v, rotated);
 
+                // Correct negative angles
+                if (angleBetween < 0)
+                    angleBetween = 360 - Math.Abs(angleBetween);
+
                 // Get current position of elem in the InkCanvas
                 Point point = DeterminePointFromUIElement(element, can);
 
                 // Reset old transform to replace it with roation angle with origin (0,0)!
                 if (element.RenderTransform is not RotateTransform)
                 {
-                    element.RenderTransform = null;
+                    element.RenderTransform = new RotateTransform(angleBetween);
                     element.SetValue(InkCanvas.LeftProperty, point.X);
                     element.SetValue(InkCanvas.TopProperty, point.Y);
-                    element.RenderTransform = new RotateTransform(angleBetween);
                     // IMPORTANT: ORIGIN AT (0,0)
+                }
+                else
+                {
+                    if (element.RenderTransform is RotateTransform rt)
+                        rt.Angle = angleBetween;
                 }
 
                 return point;
@@ -238,6 +248,51 @@ namespace SimpleJournal.Documents.UI.Helper
             }
 
             return new Point();
+        }
+
+        private static double CalculeAngle(Point start, Point arrival)
+        {
+            var deltaX = Math.Pow((arrival.X - start.X), 2);
+            var deltaY = Math.Pow((arrival.Y - start.Y), 2);
+
+            var radian = Math.Atan2((arrival.Y - start.Y), (arrival.X - start.X));
+            var angle = (radian * (180 / Math.PI) + 360) % 360;
+
+            return angle;
+        }
+
+        /// <summary>
+        /// Counts all edges of a polygon (
+        /// </summary>
+        /// <param name="polygon"></param>
+        /// <returns></returns>
+        public static int CountEdges(this Polygon polygon)
+        {
+            /*
+             * Concept: Use polygon.Points.Count as start value, then check for points which do not build another edge.
+             * If a point has the same angle to it's previous point, it can be removed (count--)
+             * 
+             * - Start with a lastAngle of the last to the first point
+             * - Due to inaccuracies add a correction factor of 1
+             */
+
+            int count = polygon.Points.Count;
+            int edgeCounter = count;
+            int lastAngle = (int)CalculeAngle(polygon.Points.LastOrDefault(), polygon.Points.FirstOrDefault());
+
+            for (int i = 0; i < count; i++)
+            {
+                Point e1 = polygon.Points[i];
+                Point e2 = polygon.Points[(i + 1) % count];
+
+                int angle = (int)CalculeAngle(e1, e2);
+                if (Math.Abs(angle - lastAngle) <= 1)
+                    edgeCounter--;
+
+                lastAngle = angle;
+            }
+
+            return edgeCounter;
         }
 
         /// <summary>
