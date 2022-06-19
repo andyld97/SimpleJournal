@@ -2689,10 +2689,16 @@ namespace SimpleJournal
 
         private void btnDisplaySidebar_Click(object sender, RoutedEventArgs e)
         {
-            if (DrawingCanvas.LastModifiedCanvas.Children.Omit(typeof(Line)).ToList().Count > 0)
+            var elements = DrawingCanvas.LastModifiedCanvas.Children.Omit(typeof(Line)).ToList();
+
+            if (elements.Count > 0)
             {
                 forceOpenSidebar = true;
-                DrawingCanvas.LastModifiedCanvas.Select(new UIElement[] { DrawingCanvas.LastModifiedCanvas.Children.Omit(typeof(Line)).ToList()[0] });
+                DrawingCanvas.LastModifiedCanvas.Select(new UIElement[] { elements.FirstOrDefault() });
+
+                // If the sidebar is opened manually, ensure that the select tool is properly selected!
+                SetStateForToggleButton(btnSelect, Tools.Select);
+                SwitchTool(Tools.Select, true);
             }
         }
 
