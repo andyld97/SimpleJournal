@@ -44,20 +44,6 @@ namespace SimpleJournal.Documents.UI.Helper
             return new Size(size.Width, size.Height);
         }
 
-        public static double Angle(this Point pt, Point other)
-        {
-            double a = Math.Abs(pt.X - other.X);
-            double result = Math.Acos(a / Math.Sqrt(Math.Pow(a, 2) + Math.Pow(Math.Abs(pt.Y - other.Y), 2)));
-
-            if (other.X < pt.X)
-                return Angle(other, pt) - 180;
-
-            if (other.Y < pt.Y)
-                result = -result;
-
-            return result * (180 / Math.PI);
-        }
-
         public static System.Windows.Media.Color BuildConstrastColor(this System.Windows.Media.Color color)
         {
             // Counting the perceptive luminance - human eye favors green color... 
@@ -262,7 +248,7 @@ namespace SimpleJournal.Documents.UI.Helper
         }
 
         /// <summary>
-        /// Counts all edges of a polygon (
+        /// Counts all edges of a polygon
         /// </summary>
         /// <param name="polygon"></param>
         /// <returns></returns>

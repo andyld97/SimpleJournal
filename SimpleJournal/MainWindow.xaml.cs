@@ -1027,8 +1027,6 @@ namespace SimpleJournal
                     int angle = 0;
                     if (sh.RenderTransform is RotateTransform rt)
                         angle = (int)rt.Angle;
-                    if (sh.RenderTransform is TransformGroup tg && tg.Children.Count == 2 && tg.Children.LastOrDefault() is RotateTransform _rt)
-                        angle = (int)_rt.Angle;
 
                     objShapeSettings.Load(new ShapeInfo((sh.Fill == null ? Colors.Transparent : (sh.Fill as SolidColorBrush).Color), (sh.Stroke as SolidColorBrush).Color, (int)sh.StrokeThickness, angle));
                 }
