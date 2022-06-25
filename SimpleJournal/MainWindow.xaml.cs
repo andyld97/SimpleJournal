@@ -846,7 +846,7 @@ namespace SimpleJournal
                     }
                     else if (element is Ellipse el)
                     {
-                        if (w == h)
+                        if (el.IsCricle())
                             text = Properties.Resources.strCircle;
                         else
                             text = Properties.Resources.strEllipse;
