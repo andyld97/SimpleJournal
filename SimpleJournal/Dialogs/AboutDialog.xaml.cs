@@ -1,13 +1,7 @@
-﻿using ControlzEx.Standard;
-using Helper;
+﻿using Helper;
 using Microsoft.Web.WebView2.Core;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using SimpleJournal.Common.Helper;
-using SimpleJournal.Dialogs;
 using SimpleJournal.Documents.UI;
 using System;
-using System.Diagnostics;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
