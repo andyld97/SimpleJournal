@@ -1,5 +1,6 @@
 ﻿using Controls;
 using Fluent;
+using Helper;
 using Microsoft.Win32;
 using Notifications;
 using SimpleJournal.Common;
@@ -356,7 +357,7 @@ namespace SimpleJournal
             UpdateMenu();
 
 #if !UWP
-            GeneralHelper.SearchForUpdates();            
+            UpdateHelper.SearchForUpdates();            
 #endif
 
             DrawingCanvas.OnChangedDocumentState += DrawingCanvas_OnChangedDocumentState;
@@ -747,7 +748,7 @@ namespace SimpleJournal
             if (!isInitalized)
                 return;
 
-            int index = (int)CalculateCurrentPageIndexOnScrollPosition();
+            int index = (int)CalculateCurrentPageIndex();
             preventPageBoxSelectionChanged = true;
             cmbPages.SelectedIndex = index;
             preventPageBoxSelectionChanged = false;
@@ -1434,23 +1435,16 @@ namespace SimpleJournal
                 cmbPages.Items.Add(new TextBlock() { Text = $"{Properties.Resources.strPage} {counter++}", HorizontalAlignment = HorizontalAlignment.Center });
 
             // Select page which could be selected
-            int pIndex = CalculateCurrentPageIndexOnScrollPosition();
+            int pIndex = CalculateCurrentPageIndex();
             preventPageBoxSelectionChanged = true;
             cmbPages.SelectedIndex = pIndex;
             preventPageBoxSelectionChanged = false;
         }
 
-        private int CalculateCurrentPageIndexOnScrollPosition()
+        private int CalculateCurrentPageIndex()
         {
-            // Do not divide by zero!
-            if (mainScrollView.ScrollableHeight == 0)
-                return 0;
-
-            double totalHeight = mainScrollView.ExtentHeight;
-            double scrollPercentage = mainScrollView.VerticalOffset / mainScrollView.ScrollableHeight;
-            double result = ((totalHeight * scrollPercentage) / totalHeight) * CurrentPages;
-
-            return (int)result;
+            var page = CurrentJournalPages.Where(p => UIHelper.IsUserVisible((UserControl)p, mainScrollView)).OrderByDescending(p => UIHelper.CalculateUserVisibleM2((UserControl)p, mainScrollView)).FirstOrDefault();
+            return CurrentJournalPages.IndexOf(page);
         }
 
         private void ScrollToPage(int pTarget)
@@ -1459,7 +1453,7 @@ namespace SimpleJournal
 
             // Cumulate size height foreach page (because each page can have a different height due to landscape/portrait)
             for (int i = 0; i < pTarget; i++)
-                cumulatedHeight += CurrentJournalPages[i].Canvas.ActualHeight * currentScaleFactor;
+                cumulatedHeight += (CurrentJournalPages[i] as UserControl).ActualHeight * currentScaleFactor;
 
             // Add space
             cumulatedHeight += ((pTarget - 1) * Consts.SpaceBetweenPages * currentScaleFactor);
@@ -2591,7 +2585,7 @@ namespace SimpleJournal
                     break;
                 case PageRangeSelection.CurrentPage:
                     {
-                        from = to = CalculateCurrentPageIndexOnScrollPosition();
+                        from = to = CalculateCurrentPageIndex();
                     }
                     break;
                 case PageRangeSelection.UserPages:

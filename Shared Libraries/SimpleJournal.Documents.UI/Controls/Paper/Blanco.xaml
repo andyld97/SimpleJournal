@@ -5,6 +5,6 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:controls="clr-namespace:SimpleJournal.Documents.UI.Controls"
       mc:Ignorable="d" Height="29.7cm" Width="21cm">
     <Grid>
-        <controls:DrawingCanvas x:Name="canvas" />
+        <controls:DrawingCanvas Background="White" x:Name="canvas" />
     </Grid>
 </UserControl>

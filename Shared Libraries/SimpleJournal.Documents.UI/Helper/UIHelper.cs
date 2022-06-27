@@ -93,8 +93,25 @@ namespace SimpleJournal.Documents.UI.Helper
             Rect bounds = element.TransformToAncestor(container).TransformBounds(new Rect(0.0, 0.0, element.ActualWidth, element.ActualHeight));
             Rect rect = new Rect(0.0, 0.0, container.ActualWidth, container.ActualHeight);
 
-            return rect.Contains(bounds.TopLeft) || rect.Contains(bounds.BottomRight);
+            return rect.IntersectsWith(bounds);
         }
+
+
+        public static double CalculateUserVisibleM2(FrameworkElement element, FrameworkElement container)
+        {
+            if (!element.IsVisible)
+                return 0;
+
+            Rect bounds = element.TransformToAncestor(container).TransformBounds(new Rect(0.0, 0.0, element.ActualWidth, element.ActualHeight));
+            Rect rect = new Rect(0.0, 0.0, container.ActualWidth, container.ActualHeight);
+
+            var test = new Rect(rect.Left, rect.Top, rect.Width, rect.Height);
+            test.Intersect(bounds);
+
+            return test.Width * test.Height;
+
+        }
+
 
         /// <summary>
         /// Creates a clone of input element

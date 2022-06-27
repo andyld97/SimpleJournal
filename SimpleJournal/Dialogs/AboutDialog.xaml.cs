@@ -1,10 +1,12 @@
-﻿using Microsoft.Web.WebView2.Core;
+﻿using Helper;
+using Microsoft.Web.WebView2.Core;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using SimpleJournal.Common.Helper;
 using SimpleJournal.Dialogs;
 using SimpleJournal.Documents.UI;
 using System;
+using System.Diagnostics;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -74,69 +76,24 @@ namespace SimpleJournal
             await Initialize();
         }
 
-        private static string onlineNormalVersionCached;
-        private static string onlineStoreVersionCached;
-        private DateTime lastTimeCachedVersion = DateTime.MinValue;
-
         public async Task Initialize()
         {
-            try
+            var result = await UpdateHelper.CheckForUpdatesAsync();
+
+            if (result.Result == Common.UpdateResult.NoUpdateAvaialble)
+                TextVersion.Text += $" - {Properties.Resources.strVersionUpToDate}";
+            else if (result.Result == Common.UpdateResult.DevVersion)
             {
-                string currentNormalVersion;
-                string currentStoreVersion;
-
-                // Load version
-                using (HttpClient httpClient = new HttpClient())
-                {
-                    bool resetCache = false;
-                    if (lastTimeCachedVersion != DateTime.MinValue && lastTimeCachedVersion.AddHours(1) <= DateTime.Now)
-                        resetCache = true;
-
-                    if (onlineNormalVersionCached == null || onlineStoreVersionCached == null ||resetCache)
-                    {
-                        string versionsJSON = await httpClient.GetStringAsync(Consts.VersionUrl);
-                        dynamic result = JsonConvert.DeserializeObject(versionsJSON);
-
-                        currentNormalVersion = result.current.normal;
-                        currentStoreVersion = result.current.store;
-
-                        onlineNormalVersionCached = currentNormalVersion;
-                        onlineStoreVersionCached = currentStoreVersion;
-                        lastTimeCachedVersion = DateTime.Now;
-                    }
-                    else
-                    {
-                        currentNormalVersion = onlineNormalVersionCached;
-                        currentStoreVersion = onlineStoreVersionCached;
-                    }
-
-                    string currentVersion = string.Empty;
-                    string newVersion = null;
-
-#if UWP
-                    newVersion = currentStoreVersion;
-                    currentVersion = Consts.StoreVersion.ToString();
-#else
-                    currentVersion = Consts.NormalVersion.ToString();
-                    newVersion = currentNormalVersion;
-#endif
-
-                    if (currentVersion == newVersion)
-                        TextVersion.Text += $" - {Properties.Resources.strVersionUpToDate}";
-                    else
-                    {
-                        if (new Version(currentVersion) > new Version(newVersion))
-                        {
-                            TextNewVersionAvailable.Text = Properties.Resources.strUnpublishedDevVersion;
-                            TextNewVersionAvailable.Foreground = new SolidColorBrush(Colors.Red);
-                        }
-                        else
-                            TextNewVersionAvailable.Text = $"*** {Properties.Resources.strNewerVersionAvailable} {newVersion} ***";
-                    }
-                }
+                TextNewVersionAvailable.Text = Properties.Resources.strUnpublishedDevVersion;
+                TextNewVersionAvailable.Foreground = new SolidColorBrush(Colors.Red);
             }
-            catch (Exception)
-            { }
+            else if (result.Result == Common.UpdateResult.UpdateAvailable)
+                TextNewVersionAvailable.Text = $"*** {Properties.Resources.strNewerVersionAvailable} {result.Version} ***";
+            else
+            {
+
+            }
+            
 
             try
             {

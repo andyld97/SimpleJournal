@@ -1,4 +1,5 @@
-﻿using SimpleJournal;
+﻿using Helper;
+using SimpleJournal;
 using SimpleJournal.Common;
 using SimpleJournal.Common.Data;
 using SimpleJournal.Dialogs;
@@ -98,8 +99,16 @@ namespace Notifications
             if (!GeneralHelper.IsConnectedToInternet())
                 return null;
 
-            version = await GeneralHelper.CheckForUpdatesAsync();
-            return (version != null);
+            var result = await UpdateHelper.CheckForUpdatesAsync();
+            if (result.Result == UpdateResult.Unknown)
+                return null;
+            else if (result.Result == UpdateResult.UpdateAvailable)
+            {
+                version = result.Version;
+                return true;
+            }
+
+            return false;
         }
     }
 }
