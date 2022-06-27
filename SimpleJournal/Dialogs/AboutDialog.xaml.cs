@@ -1,8 +1,5 @@
-﻿using Microsoft.Web.WebView2.Core;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using SimpleJournal.Common.Helper;
-using SimpleJournal.Dialogs;
+﻿using Helper;
+using Microsoft.Web.WebView2.Core;
 using SimpleJournal.Documents.UI;
 using System;
 using System.Linq;
@@ -74,69 +71,19 @@ namespace SimpleJournal
             await Initialize();
         }
 
-        private static string onlineNormalVersionCached;
-        private static string onlineStoreVersionCached;
-        private DateTime lastTimeCachedVersion = DateTime.MinValue;
-
         public async Task Initialize()
         {
-            try
+            var result = await UpdateHelper.CheckForUpdatesAsync();
+
+            if (result.Result == Common.UpdateResult.NoUpdateAvaialble)
+                TextVersion.Text += $" - {Properties.Resources.strVersionUpToDate}";
+            else if (result.Result == Common.UpdateResult.DevVersion)
             {
-                string currentNormalVersion;
-                string currentStoreVersion;
-
-                // Load version
-                using (HttpClient httpClient = new HttpClient())
-                {
-                    bool resetCache = false;
-                    if (lastTimeCachedVersion != DateTime.MinValue && lastTimeCachedVersion.AddHours(1) <= DateTime.Now)
-                        resetCache = true;
-
-                    if (onlineNormalVersionCached == null || onlineStoreVersionCached == null ||resetCache)
-                    {
-                        string versionsJSON = await httpClient.GetStringAsync(Consts.VersionUrl);
-                        dynamic result = JsonConvert.DeserializeObject(versionsJSON);
-
-                        currentNormalVersion = result.current.normal;
-                        currentStoreVersion = result.current.store;
-
-                        onlineNormalVersionCached = currentNormalVersion;
-                        onlineStoreVersionCached = currentStoreVersion;
-                        lastTimeCachedVersion = DateTime.Now;
-                    }
-                    else
-                    {
-                        currentNormalVersion = onlineNormalVersionCached;
-                        currentStoreVersion = onlineStoreVersionCached;
-                    }
-
-                    string currentVersion = string.Empty;
-                    string newVersion = null;
-
-#if UWP
-                    newVersion = currentStoreVersion;
-                    currentVersion = Consts.StoreVersion.ToString();
-#else
-                    currentVersion = Consts.NormalVersion.ToString();
-                    newVersion = currentNormalVersion;
-#endif
-
-                    if (currentVersion == newVersion)
-                        TextVersion.Text += $" - {Properties.Resources.strVersionUpToDate}";
-                    else
-                    {
-                        if (new Version(currentVersion) > new Version(newVersion))
-                        {
-                            TextNewVersionAvailable.Text = Properties.Resources.strUnpublishedDevVersion;
-                            TextNewVersionAvailable.Foreground = new SolidColorBrush(Colors.Red);
-                        }
-                        else
-                            TextNewVersionAvailable.Text = $"*** {Properties.Resources.strNewerVersionAvailable} {newVersion} ***";
-                    }
-                }
+                TextNewVersionAvailable.Text = Properties.Resources.strUnpublishedDevVersion;
+                TextNewVersionAvailable.Foreground = new SolidColorBrush(Colors.Red);
             }
-            catch (Exception)
-            { }
+            else if (result.Result == Common.UpdateResult.UpdateAvailable)
+                TextNewVersionAvailable.Text = $"*** {Properties.Resources.strNewerVersionAvailable} {result.Version} ***";            
 
             try
             {
@@ -160,7 +107,7 @@ namespace SimpleJournal
             string mail = txtMail.Text;
             string content = txtFeedback.Text;
 
-            if (string.IsNullOrEmpty(content) || string.IsNullOrWhiteSpace(content))
+            if (string.IsNullOrEmpty(content) || string.IsNullOrWhiteSpace(content) || !ValidateFeedbackText(content))
             {
                 MessageBox.Show(this, Properties.Resources.strPleaseEnterValidText, Properties.Resources.strEmptyText, MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
@@ -193,6 +140,14 @@ namespace SimpleJournal
             {
                 MessageBox.Show(this, $"{Properties.Resources.strFailedToSendFeedback}\n\n{ex.Message}", Properties.Resources.strFailure, MessageBoxButton.OK, MessageBoxImage.Error);
             }
+        }
+
+        private bool ValidateFeedbackText(string text)
+{
+            // Based on ideas of https://stackoverflow.com/questions/35373522/c-sharp-check-if-a-string-is-a-sentence/35373723#35373723
+            string[] words = text.Split(new string[] { " " }, StringSplitOptions.RemoveEmptyEntries);
+            const int w = 3;
+            return (words.Length >  w && words.Average(p => p.Length) > w);
         }
 
         private void UrlDataProtection_RequestNavigate(object sender, System.Windows.Navigation.RequestNavigateEventArgs e)

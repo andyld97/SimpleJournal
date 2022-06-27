@@ -15,7 +15,7 @@
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize">
     <Window.Resources>
-        <BooleanToVisibilityConverter x:Key="BooleanToVisibility"/>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibility" />
         <Style TargetType="{x:Type CheckBox}">
             <Setter Property="Foreground" Value="{DynamicResource BlackBrush}" />
         </Style>

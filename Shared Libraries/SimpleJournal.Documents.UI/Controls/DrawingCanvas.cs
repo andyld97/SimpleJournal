@@ -578,12 +578,14 @@ namespace SimpleJournal.Documents.UI.Controls
                         sh.SetValue(InkCanvas.LeftProperty, location.Left);
                         sh.SetValue(InkCanvas.TopProperty, location.Top);
                     }
+
+                    sh.SetValue(InkCanvas.LeftProperty, location.Left);
+                    sh.SetValue(InkCanvas.TopProperty, location.Top);
                 }
                 else
                 {
-                    if (Settings.Instance.UseCircleCorrection && (sh is Ellipse))
+                    if (Settings.Instance.UseCircleCorrection && (sh is Ellipse el))
                     {
-                        var el = sh as Ellipse;
                         if (el.Width != el.Height)
                         {
                             double center = (el.Width + el.Height) / 2;

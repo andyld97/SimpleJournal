@@ -224,4 +224,27 @@
         Warning,
         Error
     }
+
+    public enum UpdateResult
+    {
+        /// <summary>
+        /// E.g. no internet connection
+        /// </summary>
+        Unknown,
+
+        /// <summary>
+        /// A new update is available
+        /// </summary>
+        UpdateAvailable,
+
+        /// <summary>
+        /// If this version is newer than the version stated online, this is a dev version
+        /// </summary>
+        DevVersion,
+
+        /// <summary>
+        /// There is currently no update available, please try again later :)
+        /// </summary>
+        NoUpdateAvaialble
+    }
 }

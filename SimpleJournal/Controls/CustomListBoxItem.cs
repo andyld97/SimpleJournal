@@ -1,7 +1,6 @@
 ﻿using SimpleJournal.Documents.UI.Helper;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media;
 
 namespace SimpleJournal.Controls
 {
@@ -29,7 +28,12 @@ namespace SimpleJournal.Controls
             }
 
             var element = UIHelper.CloneElement(AssociativeRelation);
-            element.RenderTransform = new RotateTransform();
+
+            /* This leads to missing rotation in the sidebar, but the question is why, because
+             * actually we want to see the rotation also in the sidebar, I think.
+             * If this behaviour should be changed, we can just set element.RenderTransform to null */
+            // element.RenderTransform = new RotateTransform();
+
             Viewport.Child = element;
         }
     }

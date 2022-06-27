@@ -1,5 +1,4 @@
-﻿using SimpleJournal.Data;
-using SimpleJournal.Documents.UI.Data;
+﻿using SimpleJournal.Documents.UI.Data;
 using System;
 using System.Globalization;
 using System.Windows;
@@ -34,7 +33,7 @@ namespace SimpleJournal.Controls
         {
             // Load values from info
             isInitalized = false;
-            this.Info = info;
+            Info = info;
 
             numAngle.Value = info.Angle;
             numBorderWidth.Value = info.BorderWidth;

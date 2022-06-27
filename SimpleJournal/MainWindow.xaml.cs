@@ -1,5 +1,6 @@
 ﻿using Controls;
 using Fluent;
+using Helper;
 using Microsoft.Win32;
 using Notifications;
 using SimpleJournal.Common;
@@ -356,7 +357,7 @@ namespace SimpleJournal
             UpdateMenu();
 
 #if !UWP
-            GeneralHelper.SearchForUpdates();            
+            UpdateHelper.SearchForUpdates();            
 #endif
 
             DrawingCanvas.OnChangedDocumentState += DrawingCanvas_OnChangedDocumentState;
@@ -482,7 +483,6 @@ namespace SimpleJournal
                 btnToggleNotification.SizeDefinition = new RibbonControlSizeDefinition("small");
             }
 
-            // ToDo: *** Add a setting which can disable notifications completely
             ListNotifications.Children.Clear();
             foreach (var notification in NotificationService.NotificationServiceInstance?.Notifications)
                 ListNotifications.Children.Add(new NotificationDisplay(notification) { Margin = new Thickness(3, 4, 3, 4) });
@@ -494,9 +494,17 @@ namespace SimpleJournal
             {
                 btnToggleNotification.IsChecked = false;
                 btnToggleNotification.Visibility = Visibility.Collapsed;
+
+                if (NotificationService.NotificationServiceInstance != null && NotificationService.NotificationServiceInstance.IsRunning)
+                    NotificationService.NotificationServiceInstance?.Stop();
             }
             else
+            {
                 btnToggleNotification.Visibility = Visibility.Visible;
+
+                if (NotificationService.NotificationServiceInstance != null && !NotificationService.NotificationServiceInstance.IsRunning)
+                    NotificationService.NotificationServiceInstance.Start();
+            }
         }
 
         private void ButtonCloseNotificationsPanel_Click(object sender, RoutedEventArgs e)
@@ -740,7 +748,7 @@ namespace SimpleJournal
             if (!isInitalized)
                 return;
 
-            int index = (int)CalculateCurrentPageIndexOnScrollPosition();
+            int index = (int)CalculateCurrentPageIndex();
             preventPageBoxSelectionChanged = true;
             cmbPages.SelectedIndex = index;
             preventPageBoxSelectionChanged = false;
@@ -824,21 +832,22 @@ namespace SimpleJournal
 
                     if (element is Polygon pol)
                     {
-                        int edge = ConvexHull.GetConvexHull(pol.Points.Select(p => new Common.Data.Point(p.X, p.Y)).ToList()).Count;
-                        if (edge == 3)
+                        // Either pol.Points.Count nor the ConvexHull builds the correct amount of points!
+                        int edges = pol.CountEdges();
+                        if (edges == 3)
                             text = Properties.Resources.strTriangle;
-                        else if (edge == 4)
+                        else if (edges == 4)
                             text = Properties.Resources.strQuad;
-                        else if (edge == 5)
+                        else if (edges == 5)
                             text = Properties.Resources.strPentagon;
-                        else if (edge == 6)
+                        else if (edges == 6)
                             text = Properties.Resources.strHexagon;
                         else
                             text = Properties.Resources.strPolygon;
                     }
                     else if (element is Ellipse el)
                     {
-                        if (w == h)
+                        if (el.IsCricle())
                             text = Properties.Resources.strCircle;
                         else
                             text = Properties.Resources.strEllipse;
@@ -1134,7 +1143,13 @@ namespace SimpleJournal
                     }
                     else
                     {
-                        sh.RenderTransform = new RotateTransform(info.Angle);
+                        if (sh.RenderTransform is TransformGroup grp && grp.Children.LastOrDefault() is RotateTransform rt)
+                            rt.Angle = info.Angle;
+
+                        if (sh.RenderTransform != null)
+                            (sh.RenderTransform as RotateTransform).Angle = info.Angle;
+                        else 
+                            sh.RenderTransform = new RotateTransform(info.Angle);
                         sh.RenderTransformOrigin = center;
                     }
                     sh.Fill = new SolidColorBrush(info.BackgroundColor);
@@ -1188,8 +1203,7 @@ namespace SimpleJournal
                 elements.BringToFront(DrawingCanvas.LastModifiedCanvas);
         }
 
-
-#endregion
+        #endregion
 
         #region Private Methods
 
@@ -1421,23 +1435,16 @@ namespace SimpleJournal
                 cmbPages.Items.Add(new TextBlock() { Text = $"{Properties.Resources.strPage} {counter++}", HorizontalAlignment = HorizontalAlignment.Center });
 
             // Select page which could be selected
-            int pIndex = CalculateCurrentPageIndexOnScrollPosition();
+            int pIndex = CalculateCurrentPageIndex();
             preventPageBoxSelectionChanged = true;
             cmbPages.SelectedIndex = pIndex;
             preventPageBoxSelectionChanged = false;
         }
 
-        private int CalculateCurrentPageIndexOnScrollPosition()
+        private int CalculateCurrentPageIndex()
         {
-            // Do not divide by zero!
-            if (mainScrollView.ScrollableHeight == 0)
-                return 0;
-
-            double totalHeight = mainScrollView.ExtentHeight;
-            double scrollPercentage = mainScrollView.VerticalOffset / mainScrollView.ScrollableHeight;
-            double result = ((totalHeight * scrollPercentage) / totalHeight) * CurrentPages;
-
-            return (int)result;
+            var page = CurrentJournalPages.Where(p => UIHelper.IsUserVisible((UserControl)p, mainScrollView)).OrderByDescending(p => UIHelper.CalculateUserVisibleM2((UserControl)p, mainScrollView)).FirstOrDefault();
+            return CurrentJournalPages.IndexOf(page);
         }
 
         private void ScrollToPage(int pTarget)
@@ -1446,7 +1453,7 @@ namespace SimpleJournal
 
             // Cumulate size height foreach page (because each page can have a different height due to landscape/portrait)
             for (int i = 0; i < pTarget; i++)
-                cumulatedHeight += CurrentJournalPages[i].Canvas.ActualHeight * currentScaleFactor;
+                cumulatedHeight += (CurrentJournalPages[i] as UserControl).ActualHeight * currentScaleFactor;
 
             // Add space
             cumulatedHeight += ((pTarget - 1) * Consts.SpaceBetweenPages * currentScaleFactor);
@@ -2578,7 +2585,7 @@ namespace SimpleJournal
                     break;
                 case PageRangeSelection.CurrentPage:
                     {
-                        from = to = CalculateCurrentPageIndexOnScrollPosition();
+                        from = to = CalculateCurrentPageIndex();
                     }
                     break;
                 case PageRangeSelection.UserPages:
@@ -2682,10 +2689,16 @@ namespace SimpleJournal
 
         private void btnDisplaySidebar_Click(object sender, RoutedEventArgs e)
         {
-            if (DrawingCanvas.LastModifiedCanvas.Children.Omit(typeof(Line)).ToList().Count > 0)
+            var elements = DrawingCanvas.LastModifiedCanvas.Children.Omit(typeof(Line)).ToList();
+
+            if (elements.Count > 0)
             {
                 forceOpenSidebar = true;
-                DrawingCanvas.LastModifiedCanvas.Select(new UIElement[] { DrawingCanvas.LastModifiedCanvas.Children.Omit(typeof(Line)).ToList()[0] });
+                DrawingCanvas.LastModifiedCanvas.Select(new UIElement[] { elements.FirstOrDefault() });
+
+                // If the sidebar is opened manually, ensure that the select tool is properly selected!
+                SetStateForToggleButton(btnSelect, Tools.Select);
+                SwitchTool(Tools.Select, true);
             }
         }
 
@@ -2693,6 +2706,8 @@ namespace SimpleJournal
         {
             if (DrawingCanvas.LastModifiedCanvas.GetSelectedStrokes() != null && DrawingCanvas.LastModifiedCanvas.GetSelectedStrokes().Count > 0 && !DrawingCanvas.LastModifiedCanvas.ConvertSelectedStrokesToShape())
                 MessageBox.Show(this, Properties.Resources.strNoShapeRecognized, Properties.Resources.strNoShapeRecognizedTitle, MessageBoxButton.OK, MessageBoxImage.Information);
+            else
+                RefreshSideBar();
         }
 
         private void btnClearPage_Click(object sender, RoutedEventArgs e)

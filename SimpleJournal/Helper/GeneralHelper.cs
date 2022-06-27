@@ -311,73 +311,7 @@ namespace SimpleJournal
             return false;
         }
 
-        /// <summary>
-        /// Checks if there is a new SimpleJournal version available
-        /// </summary>
-        /// <returns>a version instance if there is a new version, otherwise null</returns>
-        public static async Task<Version> CheckForUpdatesAsync()
-        {
-            if (!GeneralHelper.IsConnectedToInternet())
-                return null;
-
-            // If a new update is available
-            // Display all changes from current version till new version (changelog is enough)
-
-            // 1) Get current version
-#if !UWP
-            var currentVersion = Consts.NormalVersion;
-#else 
-            var currentVersion = Consts.StoreVersion;
-#endif
-
-            // 2) Download version
-            try
-            {
-                using (HttpClient client = new HttpClient())
-                {
-                    string versionJSON = await client.GetStringAsync(Consts.VersionUrl);
-                    dynamic versions = JsonConvert.DeserializeObject(versionJSON);
-
-#if !UWP
-                    Version onlineVersion = Version.Parse(versions.current.normal.Value);
-#else
-                    Version onlineVersion = Version.Parse(versions.current.store.Value);
-#endif
-
-                    var result = onlineVersion.CompareTo(currentVersion);
-                    if (result > 0)
-                    {
-                        // There is a new version
-                        return onlineVersion;
-                    }
-                    else if (result < 0)
-                    {
-                        // Online version is older than this version (dev version)
-                    }
-                    else
-                    {
-                        // equal
-                    }
-                }
-            }
-            catch (Exception)
-            {
-                // ignore failed to get updates
-            }
-
-            return null;
-        }
-
-        public static void SearchForUpdates()
-        {
-            var result = Task.Run(() => CheckForUpdatesAsync()).Result;
-
-            if (result != null)
-            {
-                UpdateDialog ud = new UpdateDialog(result);
-                ud.ShowDialog();
-            }
-        }
+       
 
 #if UWP
         public static readonly string FileAssociationIconsPath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "journal", "icon.ico");
