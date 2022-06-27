@@ -1,4 +1,5 @@
-﻿using Helper;
+﻿using ControlzEx.Standard;
+using Helper;
 using Microsoft.Web.WebView2.Core;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -88,12 +89,7 @@ namespace SimpleJournal
                 TextNewVersionAvailable.Foreground = new SolidColorBrush(Colors.Red);
             }
             else if (result.Result == Common.UpdateResult.UpdateAvailable)
-                TextNewVersionAvailable.Text = $"*** {Properties.Resources.strNewerVersionAvailable} {result.Version} ***";
-            else
-            {
-
-            }
-            
+                TextNewVersionAvailable.Text = $"*** {Properties.Resources.strNewerVersionAvailable} {result.Version} ***";            
 
             try
             {
@@ -117,7 +113,7 @@ namespace SimpleJournal
             string mail = txtMail.Text;
             string content = txtFeedback.Text;
 
-            if (string.IsNullOrEmpty(content) || string.IsNullOrWhiteSpace(content))
+            if (string.IsNullOrEmpty(content) || string.IsNullOrWhiteSpace(content) || !ValidateFeedbackText(content))
             {
                 MessageBox.Show(this, Properties.Resources.strPleaseEnterValidText, Properties.Resources.strEmptyText, MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
@@ -150,6 +146,14 @@ namespace SimpleJournal
             {
                 MessageBox.Show(this, $"{Properties.Resources.strFailedToSendFeedback}\n\n{ex.Message}", Properties.Resources.strFailure, MessageBoxButton.OK, MessageBoxImage.Error);
             }
+        }
+
+        private bool ValidateFeedbackText(string text)
+{
+            // Based on ideas of https://stackoverflow.com/questions/35373522/c-sharp-check-if-a-string-is-a-sentence/35373723#35373723
+            string[] words = text.Split(new string[] { " " }, StringSplitOptions.RemoveEmptyEntries);
+            const int w = 3;
+            return (words.Length >  w && words.Average(p => p.Length) > w);
         }
 
         private void UrlDataProtection_RequestNavigate(object sender, System.Windows.Navigation.RequestNavigateEventArgs e)
