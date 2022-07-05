@@ -251,6 +251,14 @@
                             </TextBlock>
 
                             <TextBlock TextWrapping="Wrap" Text="{x:Static res:Resources.strSettingsDialogTouchDeviceManagerDescription}" Margin="5,2,2,5" />
+                            <TextBlock Margin="5,2,2,5">
+                                <LineBreak />
+                                <Run Text="{x:Static res:Resources.strSettingsDialogTouchDeviceManagerDescription_Download1}" />
+                                <Hyperlink x:Name="HyperlinkDownloadNormalVersion" RequestNavigate="HyperlinkDownloadNormalVersion_RequestNavigate" NavigateUri="https://simplejournal.ca-soft.net/download.php" FontWeight="Black">
+                                    <TextBlock Text="{x:Static res:Resources.strThis}" />
+                                </Hyperlink>
+                                <Run Text="{x:Static res:Resources.strSettingsDialogTouchDeviceManagerDescription_Download2}" />
+                            </TextBlock>
                         </StackPanel>
                     </Border>
                 </StackPanel>

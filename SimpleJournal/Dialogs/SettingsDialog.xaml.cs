@@ -376,5 +376,10 @@ namespace SimpleJournal
             Settings.Instance.HideNotificationToolBar = CheckBoxDisableNotificationToolbar.IsChecked.Value;
             Settings.Instance.Save();
         }
+
+        private void HyperlinkDownloadNormalVersion_RequestNavigate(object sender, System.Windows.Navigation.RequestNavigateEventArgs e)
+        {
+            GeneralHelper.OpenUri(e.Uri);
+        }
     }
 }

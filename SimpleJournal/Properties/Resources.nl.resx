@@ -1128,9 +1128,7 @@ Klik op Nee om dit bericht te blijven ontvangen!</value>
     <value>Wist de lijst met recent geopende documenten in het menu</value>
   </data>
   <data name="strSettingsDialogTouchDeviceManagerDescription" xml:space="preserve">
-    <value>Door ontbrekende rechten is het in deze versie helaas niet mogelijk om het touchscreen automatisch uit te schakelen. Daarom is de Touchscreen Device Manager hier beschikbaar om te downloaden. Hiermee kunt u het touchscreen voor het werk deactiveren en daarna weer activeren (indien nodig). Het programma werkt op dezelfde manier als de apparaatbeheerder en vereist beheerdersrechten!
-
-Als alternatief kunt u de normale versie van SimpleJournal gebruiken!</value>
+    <value>Door ontbrekende rechten is het in deze versie helaas niet mogelijk om het touchscreen automatisch uit te schakelen. Daarom is de Touchscreen Device Manager hier beschikbaar om te downloaden. Hiermee kunt u het touchscreen voor het werk deactiveren en daarna weer activeren (indien nodig). Het programma werkt op dezelfde manier als de apparaatbeheerder en vereist beheerdersrechten!</value>
   </data>
   <data name="strSettingsDisableTouchExplanation" xml:space="preserve">
     <value>Deactiveert het aanraakscherm bij het opstarten en reactiveert het bij het afsluiten. Deze optie kan handig zijn als u met een pen schrijft, dan kunt u uw hand op het display leggen zonder dat uw hand als invoer wordt herkend.</value>
@@ -1695,5 +1693,14 @@ Details: {1}</value>
   </data>
   <data name="strHideNotifications" xml:space="preserve">
     <value>Meldingen verbergen</value>
+  </data>
+  <data name="strSettingsDialogTouchDeviceManagerDescription_Download1" xml:space="preserve">
+    <value>Als alternatief kunt u de</value>
+  </data>
+  <data name="strSettingsDialogTouchDeviceManagerDescription_Download2" xml:space="preserve">
+    <value>versie van SimpleJournal gebruiken!</value>
+  </data>
+  <data name="strThis" xml:space="preserve">
+    <value>deze</value>
   </data>
 </root>
