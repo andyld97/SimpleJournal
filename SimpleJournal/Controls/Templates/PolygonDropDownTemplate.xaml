@@ -21,7 +21,7 @@
         <TextBlock Margin="2" Text="{x:Static res:Resources.strBackgroundColor}" FontWeight="Bold"/>
         <StackPanel Orientation="Horizontal">
             <controls:ColorPicker x:Name="backgroundColorPicker" ColorChanged="BackgroundColorPicker_ColorChanged" SelectedColor="White" Width="48" Height="32" HorizontalAlignment="Left" Margin="5,2,0,0" IsEnabled="{Binding ElementName=chkBackgroundTransparent, Path=IsChecked, Converter={StaticResource bool}}" />
-            <CheckBox x:Name="chkBackgroundTransparent" Checked="ChkBackgroundTransparent_Checked" Unchecked="ChkBackgroundTransparent_Unchecked"  Margin="10,0,0,0" IsChecked="True" VerticalAlignment="Center" Content="{x:Static res:Resources.strTransparent}" Foreground="{DynamicResource BlackBrush}"/>
+            <CheckBox x:Name="chkBackgroundTransparent" Checked="ChkBackgroundTransparent_Checked" Unchecked="ChkBackgroundTransparent_Unchecked"  Margin="10,0,0,0" IsChecked="True" VerticalAlignment="Center" Content="{x:Static res:Resources.strTransparent}" Foreground="{DynamicResource Fluent.Ribbon.Brushes.Black}"/>
         </StackPanel>
     </StackPanel>
 </local:DropDownTemplate>

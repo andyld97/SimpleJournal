@@ -220,12 +220,12 @@
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
 
-                    <Style x:Key="stl" TargetType="{x:Type controls:DropDownToggleButton}" BasedOn="{StaticResource ResourceKey=RibbonDropDownButtonStyle}">
+                    <Style x:Key="stl" TargetType="{x:Type controls:DropDownToggleButton}" BasedOn="{StaticResource ResourceKey=Fluent.Ribbon.Styles.RibbonDropDownButton}">
                         <Setter Property="Template">
                             <Setter.Value>
                                 <ControlTemplate TargetType="{x:Type controls:DropDownToggleButton}">
                                     <ControlTemplate.Resources>
-                                        <Style BasedOn="{StaticResource MenuSeparatorStyle}" TargetType="{x:Type Separator}" />
+                                        <Style BasedOn="{StaticResource Fluent.Ribbon.Styles.MenuSeparator}" TargetType="{x:Type Separator}" />
                                     </ControlTemplate.Resources>
                                     <Grid>
                                         <Border x:Name="PART_ButtonBorder"

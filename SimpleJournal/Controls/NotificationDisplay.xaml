@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:Controls"  
              xmlns:res="clr-namespace:SimpleJournal.Properties"
              mc:Ignorable="d" d:DesignWidth="800">
-    <Border Height="150" Background="#363636" BorderBrush="{DynamicResource BlackBrush}" BorderThickness="1" CornerRadius="5">
+    <Border Height="150" Background="#363636" BorderBrush="{DynamicResource Fluent.Ribbon.Brushes.Black}" BorderThickness="1" CornerRadius="5">
         <Border.Effect>
             <DropShadowEffect />
         </Border.Effect>

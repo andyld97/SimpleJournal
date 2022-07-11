@@ -15,7 +15,7 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
-            <Grid x:Name="GridTitleBar" Background="{DynamicResource WhiteBrush}">
+            <Grid x:Name="GridTitleBar" Background="{DynamicResource Fluent.Ribbon.Brushes.White}">
                 <TextBlock Text="SimpleJournal" TextAlignment="Center" />
             </Grid>
 

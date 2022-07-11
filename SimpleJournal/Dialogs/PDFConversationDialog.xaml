@@ -5,21 +5,21 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:res="clr-namespace:SimpleJournal.Properties" xmlns:controls="clr-namespace:SimpleJournal.Controls"
         mc:Ignorable="d"
-        WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Background="{DynamicResource WhiteBrush}"
+        WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Background="{DynamicResource Fluent.Ribbon.Brushes.White}"
         Title="{x:Static res:Resources.strPDFConversationDialog_Title}" SizeToContent="Height" Width="500">
 
     <Window.Resources>
         <Style TargetType="{x:Type RadioButton}">
-            <Setter Property="Foreground" Value="{DynamicResource BlackBrush}" />
+            <Setter Property="Foreground" Value="{DynamicResource Fluent.Ribbon.Brushes.Black}" />
             <Setter Property="Margin" Value="3" />
         </Style>
         <Style TargetType="{x:Type TextBlock}">
-            <Setter Property="Foreground" Value="{DynamicResource BlackBrush}" />
+            <Setter Property="Foreground" Value="{DynamicResource Fluent.Ribbon.Brushes.Black}" />
             <Setter Property="Margin" Value="3" />
         </Style>
         <Style TargetType="{x:Type TextBox}">
-            <Setter Property="Background" Value="{DynamicResource WhiteBrush}" />
-            <Setter Property="Foreground" Value="{DynamicResource BlackBrush}" />
+            <Setter Property="Background" Value="{DynamicResource Fluent.Ribbon.Brushes.White}" />
+            <Setter Property="Foreground" Value="{DynamicResource Fluent.Ribbon.Brushes.Black}" />
             <Setter Property="Margin" Value="3" />
             <Setter Property="Padding" Value="3" />
         </Style>
@@ -72,7 +72,7 @@
                 <controls:NumericUpDown x:Name="NumPageTo" Height="25" Value="100" Maximum="100" Minimum="1" Margin="3" />
             </StackPanel>
 
-            <CheckBox x:Name="CheckUseOnlineConverter" Checked="CheckUseOnlineConverter_Checked" Unchecked="CheckUseOnlineConverter_Checked" Foreground="{DynamicResource BlackBrush}" Content="{x:Static res:Resources.strPDFConversationDialog_UseOnlineConversation}" Margin="0,5,0,0" />
+            <CheckBox x:Name="CheckUseOnlineConverter" Checked="CheckUseOnlineConverter_Checked" Unchecked="CheckUseOnlineConverter_Checked" Foreground="{DynamicResource Fluent.Ribbon.Brushes.Black}" Content="{x:Static res:Resources.strPDFConversationDialog_UseOnlineConversation}" Margin="0,5,0,0" />
 
             <StackPanel Visibility="{Binding ElementName=CheckUseOnlineConverter, Path=IsChecked, Converter={StaticResource boolToVisibilityConverter}}">
                 <CheckBox x:Name="CheckUseSelfHostedAPI" Checked="CheckUseSelfHostedAPI_Checked" Unchecked="CheckUseSelfHostedAPI_Checked" Content="{x:Static res:Resources.strPDFConversationDialog_UseSelfHostedPDF2JApi}" Margin="0,5,0,0"/>

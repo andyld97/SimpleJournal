@@ -1610,11 +1610,14 @@ namespace SimpleJournal
         public void UpdateGlowingBrush()
         {
             if (Settings.Instance.ActivateGlowingBrush)
-                GlowBrush = new SolidColorBrush((System.Windows.Media.Color)FindResource("Fluent.Ribbon.Colors.AccentColor60"));
+                GlowColor = (System.Windows.Media.Color)FindResource("Fluent.Ribbon.Colors.Accent60");
             else
-                GlowBrush = null;
+                GlowColor = null;
 
-            NonActiveBorderBrush = GlowBrush;
+            if (!GlowColor.HasValue)
+                NonActiveBorderBrush = null;
+            else 
+                NonActiveBorderBrush = new SolidColorBrush(GlowColor.Value);
         }
 
         // Muste be public for accessing via singleton from the settings

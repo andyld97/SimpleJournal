@@ -40,8 +40,8 @@ namespace SimpleJournal.Controls
             InitializeComponent();
 
             // FIX for MahAppMetro theming issues related due to Colorful-Theme
-            var accentColorHover = (Color)FindResource("Fluent.Ribbon.Colors.AccentColor40");
-            var accentColorSelected = (Color)FindResource("Fluent.Ribbon.Colors.AccentColor60");
+            var accentColorHover = (Color)FindResource("Fluent.Ribbon.Colors.Accent40");
+            var accentColorSelected = (Color)FindResource("Fluent.Ribbon.Colors.Accent60");
 
             MahApps.Metro.Controls.ItemHelper.SetHoverBackgroundBrush(this, new SolidColorBrush(accentColorHover));
             MahApps.Metro.Controls.ItemHelper.SetSelectedBackgroundBrush(this, new SolidColorBrush(accentColorSelected));

@@ -20,15 +20,15 @@
                                  Color="#8C8E94"/>
 
         <SolidColorBrush x:Key="TabItemHotBackground"
-                                 Color="{DynamicResource Fluent.Ribbon.Colors.AccentColor60}"/>
+                                 Color="{DynamicResource Fluent.Ribbon.Colors.Accent60}"/>
         <SolidColorBrush x:Key="TabItemSelectedBackground"
-                                 Color="{DynamicResource Gray7}"/>
+                                 Color="{DynamicResource Fluent.Ribbon.Colors.Gray7}"/>
         <SolidColorBrush x:Key="TabItemDisabledBackground"
-                                 Color="{DynamicResource Gray9}"/>
+                                 Color="{DynamicResource Fluent.Ribbon.Colors.Gray9}"/>
         <SolidColorBrush x:Key="TabItemHotBorderBrush"
-                                 Color="{DynamicResource Fluent.Ribbon.Colors.AccentColor80}"/>
+                                 Color="{DynamicResource Fluent.Ribbon.Colors.Accent80}"/>
         <SolidColorBrush x:Key="TabItemDisabledBorderBrush"
-                                 Color="{DynamicResource Gray10}"/>
+                                 Color="{DynamicResource Fluent.Ribbon.Colors.Gray10}"/>
 
     <Style x:Key="{x:Type TabItem}"
                        TargetType="{x:Type TabItem}">
@@ -39,9 +39,9 @@
         <Setter Property="BorderBrush"
                             Value="{StaticResource TabControlNormalBorderBrush}"/>
         <Setter Property="Background"
-                            Value="{DynamicResource WhiteBrush}" />
+                            Value="{DynamicResource Fluent.Ribbon.Brushes.White}" />
         <Setter Property="Foreground"
-                            Value="{DynamicResource BlackBrush}" />
+                            Value="{DynamicResource Fluent.Ribbon.Brushes.Black}" />
         <Setter Property="HorizontalContentAlignment"
                             Value="Stretch"/>
         <Setter Property="VerticalContentAlignment"

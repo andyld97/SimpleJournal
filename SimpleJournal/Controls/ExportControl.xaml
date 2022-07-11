@@ -13,20 +13,20 @@
         <local:SelectedModeToVisiblityConverter x:Key="selectedModeToVisibiltyConverter" />
 
         <Style TargetType="{x:Type CheckBox}">
-            <Setter Property="Foreground" Value="{DynamicResource BlackBrush}" />
+            <Setter Property="Foreground" Value="{DynamicResource Fluent.Ribbon.Brushes.Black}" />
         </Style>
         <Style TargetType="{x:Type RadioButton}">
-            <Setter Property="Foreground" Value="{DynamicResource BlackBrush}" />
+            <Setter Property="Foreground" Value="{DynamicResource Fluent.Ribbon.Brushes.Black}" />
         </Style>
         <Style TargetType="{x:Type TextBlock}">
-            <Setter Property="Foreground" Value="{DynamicResource BlackBrush}" />
+            <Setter Property="Foreground" Value="{DynamicResource Fluent.Ribbon.Brushes.Black}" />
         </Style>
         <Style TargetType="{x:Type TextBox}">
-            <Setter Property="Foreground" Value="{DynamicResource BlackBrush}" />
-            <Setter Property="Background" Value="{DynamicResource WhiteBrush}" />
+            <Setter Property="Foreground" Value="{DynamicResource Fluent.Ribbon.Brushes.Black}" />
+            <Setter Property="Background" Value="{DynamicResource Fluent.Ribbon.Brushes.White}" />
         </Style>
     </UserControl.Resources>
-    <Grid x:Name="MainGrid" Background="{DynamicResource WhiteBrush}">
+    <Grid x:Name="MainGrid" Background="{DynamicResource Fluent.Ribbon.Brushes.White}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />

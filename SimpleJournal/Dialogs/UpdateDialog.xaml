@@ -9,10 +9,10 @@
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
         Title="{x:Static res:Resources.strUpdateDialogTitle}" SizeToContent="Height" Width="450">
-    <Grid Background="{DynamicResource WhiteBrush}">
+    <Grid Background="{DynamicResource Fluent.Ribbon.Brushes.White}">
         <Grid.Resources>
             <Style TargetType="{x:Type TextBlock}">
-                <Setter Property="Foreground" Value="{DynamicResource BlackBrush}" />
+                <Setter Property="Foreground" Value="{DynamicResource Fluent.Ribbon.Brushes.Black}" />
             </Style>
         </Grid.Resources>
         <Grid.ColumnDefinitions>
