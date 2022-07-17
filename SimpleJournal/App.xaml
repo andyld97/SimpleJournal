@@ -38,7 +38,7 @@
                                 <Trigger Property="IsSelected" Value="True">
                                     <Setter TargetName="_Border" Property="Background">
                                         <Setter.Value>
-                                            <SolidColorBrush Color="{DynamicResource Fluent.Ribbon.Colors.AccentColor60}" />
+                                            <SolidColorBrush Color="{DynamicResource Fluent.Ribbon.Colors.Accent60}" />
                                         </Setter.Value>
                                     </Setter>
                                     <Setter TargetName="_Border" Property="BorderBrush" Value="{DynamicResource Fluent.Ribbon.Brushes.Button.MouseOver.BorderBrush}" />
