@@ -3622,6 +3622,8 @@ namespace SimpleJournal
 
         private void MenuBackstageEditPages_MouseDown(object sender, MouseButtonEventArgs e)
         {
+            // Important: This event will also trigger if the user clicks in some free areas (for example in the ListBox)
+            // This will lead to re-initalization during this "dialog" (See Controls\PageManagmentControl.xaml.cs)
             PageManagementControl.Initalize(CurrentJournalPages.ToList(), this);
         }
 
