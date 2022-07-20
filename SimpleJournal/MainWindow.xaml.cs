@@ -412,7 +412,7 @@ namespace SimpleJournal
             RefreshNotifications(); // do it manually here, because otheriwse already added notifications won't get displayed!
             NotificationService.NotificationServiceInstance.OnNotificationAdded += NotificationServiceInstance_OnNotificationAdded;
             NotificationService.NotificationServiceInstance.OnNotifcationRemoved += NotificationServiceInstance_OnNotifcationRemoved;
-            NotificationService.NotificationServiceInstance.Start();;
+            NotificationService.NotificationServiceInstance.Start();
 
             if (startSetupDialog)
             {
