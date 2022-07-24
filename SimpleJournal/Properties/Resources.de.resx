@@ -1751,9 +1751,7 @@ Hier möchte ich Ihnen noch ein paar wichtige Hinweise geben, die Ihnen helfen w
     <value>Ändert die aktuelle Seite auf das Papierformat: Dotted (Gepunkted)</value>
   </data>
   <data name="strSettingsDialogTouchDeviceManagerDescription" xml:space="preserve">
-    <value>Aufgrund von fehlenden Berechtigungen ist es in dieser Version leider nicht möglich, den Touchscreen automatisch zu deaktivieren. Daher gibt des hier den Touchscreen Device Manager zum Download. Damit können Sie den Touchscreen vor dem Arbeiten deaktivieren und danach wieder aktivieren (sofern dies notwendig ist). Das Programm funktioniert analog zum Geräte-Manager und benötigt Administrator-Rechte!
-
-Alternativ können Sie die normale Version von SimpleJournal verwenden!</value>
+    <value>Aufgrund von fehlenden Berechtigungen ist es in dieser Version leider nicht möglich, den Touchscreen automatisch zu deaktivieren. Daher gibt des hier den Touchscreen Device Manager zum Download. Damit können Sie den Touchscreen vor dem Arbeiten deaktivieren und danach wieder aktivieren (sofern dies notwendig ist). Das Programm funktioniert analog zum Geräte-Manager und benötigt Administrator-Rechte!</value>
   </data>
   <data name="strSettingsDownloadTouchDeviceManager" xml:space="preserve">
     <value>Touchscreen Device Manager herunterladen</value>
@@ -2117,5 +2115,14 @@ Details: {1}</value>
   </data>
   <data name="strHideNotifications" xml:space="preserve">
     <value>Benachrichtigungen ausblenden</value>
+  </data>
+  <data name="strSettingsDialogTouchDeviceManagerDescription_Download1" xml:space="preserve">
+    <value>Alternativ können Sie die</value>
+  </data>
+  <data name="strSettingsDialogTouchDeviceManagerDescription_Download2" xml:space="preserve">
+    <value>Version von SimpleJournal verwenden!</value>
+  </data>
+  <data name="strThis" xml:space="preserve">
+    <value>diese</value>
   </data>
 </root>

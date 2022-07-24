@@ -29,8 +29,8 @@
             <Setter Property="Margin" Value="0,5,0,0" />
         </Style>
     </Window.Resources>
-    <Grid Background="{DynamicResource WhiteBrush}">
-        <TabControl Margin="2" Background="Transparent">
+    <Grid Background="{DynamicResource TabControl.Background}">
+        <TabControl BorderThickness="0" Padding="0" Background="{DynamicResource WhiteBrush}" Margin="2">
             <TabControl.Resources>
                 <ResourceDictionary>
                     <ResourceDictionary.MergedDictionaries>
@@ -38,21 +38,29 @@
                     </ResourceDictionary.MergedDictionaries>
                 </ResourceDictionary>
             </TabControl.Resources>
-            <TabItem Header="{x:Static res:Resources.strGeneral}">
+            <TabItem Header="{x:Static res:Resources.strGeneral}" Width="150">
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="1.8*" />
+                        <ColumnDefinition Width="1.7*" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
 
-                    <Border Grid.Column="1" Background="{DynamicResource Fluent.Ribbon.Brushes.GalleryGroupContainer.Header.Background}" BorderThickness="1" BorderBrush="Black">
-                        <StackPanel Margin="4,0,0,0" >
+                    <!--  Background="{DynamicResource Fluent.Ribbon.Brushes.GalleryGroupContainer.Header.Background}" -->
+                    <Border Margin="5,0,0,0" Grid.Column="1" BorderThickness="1 0 0 0" BorderBrush="{DynamicResource BlackBrush}">
+                        <StackPanel Margin="0,0,0,0" >
                             <StackPanel.Resources>
                                 <Style TargetType="{x:Type Hyperlink}">
                                     <Setter Property="Foreground" Value="{DynamicResource BlackBrush}" />
                                 </Style>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="Foreground" Value="{DynamicResource BlackBrush}" />
+                                    <Setter Property="Margin" Value="2,0,0,0" />
+                                </Style>
                             </StackPanel.Resources>
-                            <TextBlock Text="{x:Static res:Resources.strSettingsFeatureBar}" Margin="5,5" FontWeight="Bold" FontSize="15" />
+                            <StackPanel Orientation="Horizontal" Margin="2,0,0,0">
+                                <Image Source="../resources/features.png" Width="24" />
+                                <TextBlock Text="{x:Static res:Resources.strSettingsFeatureBar}" Margin="5,5" FontWeight="Bold" FontSize="15" />
+                            </StackPanel>
                             <TextBlock FontSize="13" TextTrimming="CharacterEllipsis">
                                 <Run Text="•" />
                                 <Hyperlink x:Name="btnResetPens" Click="BtnResetPens_Click" ToolTip="{x:Static res:Resources.strSettingsResetPensTooltip}">
@@ -76,8 +84,11 @@
                             </TextBlock>
 
                             <Separator Margin="0,10,0,0" Background="{DynamicResource BlackBrush}" />
-                            <TextBlock Text="{x:Static res:Resources.strSettingsImportantDirectories}" Margin="5" FontWeight="Bold" FontSize="15" />
-                            
+                            <StackPanel Orientation="Horizontal" Margin="2,0,0,0">
+                                <Image Source="../resources/folder.png" Width="24" />
+                                <TextBlock Text="{x:Static res:Resources.strSettingsImportantDirectories}" Margin="5" FontWeight="Bold" FontSize="15" />
+                            </StackPanel>
+
                             <TextBlock FontSize="13" TextTrimming="CharacterEllipsis">
                                 <Run Text="•" />
                                 <Hyperlink x:Name="ButtonShowAutoSaveFolder" Click="ButtonShowAutoSaveFolder_Click" ToolTip="{x:Static res:Resources.strSettings_OpenAutoSaveDirectory_ToolTip}">
@@ -150,7 +161,7 @@
                     </StackPanel>
                 </Grid>
             </TabItem>
-            <TabItem Header="{x:Static res:Resources.strGUI}">
+            <TabItem Header="{x:Static res:Resources.strGUI}" Width="150">
                 <ScrollViewer>
                     <StackPanel Margin="3,5,0,0">
                         <Border BorderThickness="1" BorderBrush="LightGray" CornerRadius="3">
@@ -218,7 +229,7 @@
                     </StackPanel>
                 </ScrollViewer>
             </TabItem>
-            <TabItem Header="{x:Static res:Resources.strDraw}">
+            <TabItem Header="{x:Static res:Resources.strDraw}" Width="150">
                 <ScrollViewer>
                     <StackPanel Margin="3,0,0,0">
                         <controls:SettingsItemControl x:Name="SettingFitToCurve" SettingName="{x:Static res:Resources.strFitToCurveTitle}" Description="{x:Static res:Resources.strFitToCurveDescription}" SettingPropertyName="UseFitToCurve" OnSettingChanged="SettingFitToCurve_OnSettingChanged" />
@@ -229,13 +240,13 @@
                     </StackPanel>
                 </ScrollViewer>
             </TabItem>
-            <TabItem x:Name="TabTouch" Header="{x:Static res:Resources.strTouchScreen}">
+            <TabItem x:Name="TabTouch" Header="{x:Static res:Resources.strTouchScreen}" Width="150">
                 <StackPanel Margin="3,0,0,0">
                     <controls:SettingsItemControl SettingName="{x:Static res:Resources.strSettingsCheckBoxDisableTouchscreen}" Description="{x:Static res:Resources.strSettingsDisableTouchExplanation}" SettingPropertyName="UseTouchScreenDisabling" UseBorder="True" />
                     <controls:SettingsItemControl SettingName="{x:Static res:Resources.strSettings_DisableTouchscreenIfInForeground}" Description="{x:Static res:Resources.strSettings_DeactivateTouchScreenIfInForeground_Explanation}" SettingPropertyName="DisableTouchScreenIfInForeground" />
                 </StackPanel>
             </TabItem>
-            <TabItem x:Name="TabTouchUWP" Header="{x:Static res:Resources.strTouchScreen}" Visibility="Collapsed">
+            <TabItem x:Name="TabTouchUWP" Header="{x:Static res:Resources.strTouchScreen}" Visibility="Collapsed" Width="150">
                 <StackPanel Margin="0,2,-3,0">
                     <Border BorderBrush="LightGray" BorderThickness="1" CornerRadius="3" Margin="3">
                         <StackPanel>
@@ -251,6 +262,14 @@
                             </TextBlock>
 
                             <TextBlock TextWrapping="Wrap" Text="{x:Static res:Resources.strSettingsDialogTouchDeviceManagerDescription}" Margin="5,2,2,5" />
+                            <TextBlock Margin="5,2,2,5">
+                                <LineBreak />
+                                <Run Text="{x:Static res:Resources.strSettingsDialogTouchDeviceManagerDescription_Download1}" />
+                                <Hyperlink x:Name="HyperlinkDownloadNormalVersion" RequestNavigate="HyperlinkDownloadNormalVersion_RequestNavigate" NavigateUri="https://simplejournal.ca-soft.net/download.php" FontWeight="Black">
+                                    <TextBlock Text="{x:Static res:Resources.strThis}" />
+                                </Hyperlink>
+                                <Run Text="{x:Static res:Resources.strSettingsDialogTouchDeviceManagerDescription_Download2}" />
+                            </TextBlock>
                         </StackPanel>
                     </Border>
                 </StackPanel>

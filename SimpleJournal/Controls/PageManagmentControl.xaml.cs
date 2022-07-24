@@ -165,6 +165,14 @@ namespace SimpleJournal.Controls
         {
             ListViewPages.ItemsSource = null;
             ListViewPages.ItemsSource = pages;
+            MouseDown += PageManagmentControl_MouseDown;
+        }
+
+        private void PageManagmentControl_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            // Fix for triggering re-initalization of this control!
+            // No mouse down events will be redirected to the parent of this control.
+            e.Handled = true;
         }
 
         private void ZoomByScale(double scale)

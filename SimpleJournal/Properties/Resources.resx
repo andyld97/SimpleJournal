@@ -1774,9 +1774,7 @@ Here I would like to give you a few more important hints that will help you to u
     <comment>SettingsDialog.xaml</comment>
   </data>
   <data name="strSettingsDialogTouchDeviceManagerDescription" xml:space="preserve">
-    <value>Due to missing permissions, it is unfortunately not possible to automatically deactivate the touchscreen in this version. Therefore, the Touchscreen Device Manager is available for download here. With it you can deactivate the touch screen before working and activate it again afterwards (if this is necessary). The programme works in the same way as the device manager and requires administrator rights!
-
-Alternatively, you can use the normal version of SimpleJournal!</value>
+    <value>Due to missing permissions, it is unfortunately not possible to automatically deactivate the touchscreen in this version. Therefore, the Touchscreen Device Manager is available for download here. With it you can deactivate the touch screen before working and activate it again afterwards (if this is necessary). The programme works in the same way as the device manager and requires administrator rights!</value>
     <comment>SettingsDialog.xaml</comment>
   </data>
   <data name="strJournalIsAlreadyOpenedInTheSameWindow" xml:space="preserve">
@@ -2227,5 +2225,17 @@ Details: {1}</value>
   <data name="strHideNotifications" xml:space="preserve">
     <value>Hide notifications</value>
     <comment>SettingsDialog.xaml</comment>
+  </data>
+  <data name="strSettingsDialogTouchDeviceManagerDescription_Download1" xml:space="preserve">
+    <value>Alternatively, you can use</value>
+    <comment>SettingsDialog.xaml</comment>
+  </data>
+  <data name="strSettingsDialogTouchDeviceManagerDescription_Download2" xml:space="preserve">
+    <value>version of SimpleJournal!</value>
+    <comment>SettingsDialog.xaml</comment>
+  </data>
+  <data name="strThis" xml:space="preserve">
+    <value>this</value>
+    <comment>*</comment>
   </data>
 </root>

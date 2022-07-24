@@ -55,7 +55,8 @@ namespace Helper
 #if DEBUG
                     debug = true;
 #endif
-                    string versionJSON = await client.GetStringAsync($"{Consts.VersionUrl}&lang={System.Globalization.CultureInfo.InstalledUICulture.TwoLetterISOLanguageName}&debug={debug}");
+                    string url = $"{Consts.VersionUrl}&lang={System.Globalization.CultureInfo.InstalledUICulture.TwoLetterISOLanguageName}&debug={debug.ToString().ToLower()}";
+                    string versionJSON = await client.GetStringAsync(url);
                     dynamic versions = JsonConvert.DeserializeObject(versionJSON);
 
 #if !UWP

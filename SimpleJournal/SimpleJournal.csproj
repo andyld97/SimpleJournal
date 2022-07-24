@@ -97,7 +97,9 @@
 		<DefineConstants>TRACE;UWP</DefineConstants>
 	</PropertyGroup>
 	<ItemGroup>
+	  <None Remove="resources\features.png" />
 	  <None Remove="resources\feedback.png" />
+	  <None Remove="resources\folder.png" />
 	  <None Remove="resources\notification.png" />
 	  <None Remove="resources\notifications\error.png" />
 	  <None Remove="resources\notifications\info.png" />
@@ -115,7 +117,9 @@
 		<Resource Include="resources\arrow_down.png" />
 		<Resource Include="resources\arrow_up.png" />
 		<Resource Include="resources\caslogo.ico" />
+		<Resource Include="resources\features.png" />
 		<Resource Include="resources\feedback.png" />
+		<Resource Include="resources\folder.png" />
 		<Resource Include="resources\notification.png" />
 		<Resource Include="resources\notifications\error.png" />
 		<Resource Include="resources\notifications\info.png" />
@@ -254,13 +258,13 @@
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
 		<PackageReference Include="Fluent.Ribbon" Version="9.0.4" />
-		<PackageReference Include="Magick.NET-Q16-AnyCPU" Version="11.2.1" />
-		<PackageReference Include="Magick.NET.Core" Version="11.2.0" />
+		<PackageReference Include="Magick.NET-Q16-AnyCPU" Version="11.3.0" />
+		<PackageReference Include="Magick.NET.Core" Version="11.3.0" />
 		<PackageReference Include="MahApps.Metro" Version="2.4.9" />
 		<PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
-		<PackageReference Include="Microsoft.Web.WebView2" Version="1.0.1248-prerelease" />
+		<PackageReference Include="Microsoft.Web.WebView2" Version="1.0.1305-prerelease" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.2-beta1" />
-		<PackageReference Include="Microsoft.Windows.Compatibility" Version="7.0.0-preview.5.22301.12" />
+		<PackageReference Include="Microsoft.Windows.Compatibility" Version="7.0.0-preview.6.22324.4" />
 	</ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\Shared Libraries\SimpleJournal.Common\SimpleJournal.Common.csproj" />

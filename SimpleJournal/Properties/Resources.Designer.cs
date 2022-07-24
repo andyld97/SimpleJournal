@@ -3428,13 +3428,29 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Due to missing permissions, it is unfortunately not possible to automatically deactivate the touchscreen in this version. Therefore, the Touchscreen Device Manager is available for download here. With it you can deactivate the touch screen before working and activate it again afterwards (if this is necessary). The programme works in the same way as the device manager and requires administrator rights!
-        ///
-        ///Alternatively, you can use the normal version of SimpleJournal!.
+        ///   Looks up a localized string similar to Due to missing permissions, it is unfortunately not possible to automatically deactivate the touchscreen in this version. Therefore, the Touchscreen Device Manager is available for download here. With it you can deactivate the touch screen before working and activate it again afterwards (if this is necessary). The programme works in the same way as the device manager and requires administrator rights!.
         /// </summary>
         public static string strSettingsDialogTouchDeviceManagerDescription {
             get {
                 return ResourceManager.GetString("strSettingsDialogTouchDeviceManagerDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Alternatively, you can use.
+        /// </summary>
+        public static string strSettingsDialogTouchDeviceManagerDescription_Download1 {
+            get {
+                return ResourceManager.GetString("strSettingsDialogTouchDeviceManagerDescription_Download1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to version of SimpleJournal!.
+        /// </summary>
+        public static string strSettingsDialogTouchDeviceManagerDescription_Download2 {
+            get {
+                return ResourceManager.GetString("strSettingsDialogTouchDeviceManagerDescription_Download2", resourceCulture);
             }
         }
         
@@ -4223,6 +4239,15 @@ namespace SimpleJournal.Properties {
         public static string strTheme {
             get {
                 return ResourceManager.GetString("strTheme", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to this.
+        /// </summary>
+        public static string strThis {
+            get {
+                return ResourceManager.GetString("strThis", resourceCulture);
             }
         }
         

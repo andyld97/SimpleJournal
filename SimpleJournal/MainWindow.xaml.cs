@@ -412,7 +412,7 @@ namespace SimpleJournal
             RefreshNotifications(); // do it manually here, because otheriwse already added notifications won't get displayed!
             NotificationService.NotificationServiceInstance.OnNotificationAdded += NotificationServiceInstance_OnNotificationAdded;
             NotificationService.NotificationServiceInstance.OnNotifcationRemoved += NotificationServiceInstance_OnNotifcationRemoved;
-            NotificationService.NotificationServiceInstance.Start();;
+            NotificationService.NotificationServiceInstance.Start();
 
             if (startSetupDialog)
             {
@@ -3622,6 +3622,8 @@ namespace SimpleJournal
 
         private void MenuBackstageEditPages_MouseDown(object sender, MouseButtonEventArgs e)
         {
+            // Important: This event will also trigger if the user clicks in some free areas (for example in the ListBox)
+            // This will lead to re-initalization during this "dialog" (See Controls\PageManagmentControl.xaml.cs)
             PageManagementControl.Initalize(CurrentJournalPages.ToList(), this);
         }
 
