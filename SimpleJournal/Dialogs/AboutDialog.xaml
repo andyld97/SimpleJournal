@@ -9,8 +9,8 @@
         Title="{x:Static res:Resources.strAbout}" Height="670" Width="420"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen">
-    <Grid Background="{DynamicResource WhiteBrush}">
-        <TabControl x:Name="MainTabControl" Margin="5,5,5,5" Background="Transparent">
+    <Grid Background="{DynamicResource TabControl.Background}">
+        <TabControl BorderThickness="0" Padding="0" Background="{DynamicResource WhiteBrush}" x:Name="MainTabControl" Margin="0,2,0,0">
             <TabControl.Resources>
                 <ResourceDictionary>
                     <ResourceDictionary.MergedDictionaries>
@@ -18,7 +18,7 @@
                     </ResourceDictionary.MergedDictionaries>
                 </ResourceDictionary>
             </TabControl.Resources>
-            <TabItem Header="{x:Static res:Resources.strAbout}">
+            <TabItem Header="{x:Static res:Resources.strAbout}" Width="120">
                 <StackPanel>
                     <StackPanel.Resources>
                         <Style TargetType="{x:Type Hyperlink}">
@@ -75,12 +75,12 @@
                     </TextBlock>
                 </StackPanel>
             </TabItem>
-            <TabItem Header="{x:Static res:Resources.strChangelog}">
+            <TabItem Header="{x:Static res:Resources.strChangelog}" Width="120">
                 <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
                     <wpf:WebView2 x:Name="BrowserChangelog" Grid.Row="0" />
                 </ScrollViewer>
             </TabItem>
-            <TabItem Header="{x:Static res:Resources.strFeedback}">
+            <TabItem Header="{x:Static res:Resources.strFeedback}" Width="120">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />

@@ -63,8 +63,7 @@ namespace SimpleJournal
 
         public static void ApplyTheming()
         {
-            System.Windows.Media.Color sidebarColor;
-            System.Windows.Media.Color linkColor;
+            System.Windows.Media.Color sidebarColor, linkColor, tabControlBackgroundColor, tabItemBackground, tabItemSelectedBackground;
 
             string transparency = Settings.Instance.UseObjectBarTransparency ? "AF" : "FF";
 
@@ -72,16 +71,27 @@ namespace SimpleJournal
             {
                 sidebarColor = (System.Windows.Media.Color)ColorConverter.ConvertFromString($"#{transparency}252525");
                 linkColor = System.Windows.Media.Colors.White;
+                tabControlBackgroundColor = Colors.Black;
+
+                tabItemBackground = (System.Windows.Media.Color)ColorConverter.ConvertFromString("#AF282828");
+                tabItemSelectedBackground = (System.Windows.Media.Color)ColorConverter.ConvertFromString("#282828"); 
             }
             else
             {
                 sidebarColor = (System.Windows.Media.Color)ColorConverter.ConvertFromString($"#{transparency}CECACA");
                 linkColor = System.Windows.Media.Colors.MediumBlue;
+                tabControlBackgroundColor = (System.Windows.Media.Color)ColorConverter.ConvertFromString($"#DADADA");
+
+                tabItemBackground = (System.Windows.Media.Color)ColorConverter.ConvertFromString("#D7D7D7");
+                tabItemSelectedBackground = (System.Windows.Media.Color)ColorConverter.ConvertFromString("#F9F9F9");
             }
 
             // Apply own theming colors
             App.Current.Resources["Item.SidebarBackgroundColor"] = new SolidColorBrush(sidebarColor);
             App.Current.Resources["Link.Foreground"] = new SolidColorBrush(linkColor);
+            App.Current.Resources["TabControl.Background"] = new SolidColorBrush(tabControlBackgroundColor);
+            App.Current.Resources["TabItemBackground"] = new SolidColorBrush(tabItemBackground);
+            App.Current.Resources["TabItemSelectedBackground"] = new SolidColorBrush(tabItemSelectedBackground);
 
             ThemeManager.Current.ChangeTheme(Application.Current, GetCurrentTheme());
         }
