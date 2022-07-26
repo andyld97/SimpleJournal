@@ -10,12 +10,6 @@
         </Setter>
     </Style>
 
-    <!--<SolidColorBrush x:Key="TabItemBackground" Color="#d7d7d7" />
-    <SolidColorBrush x:Key="TabItemSelectedBackground" Color="#F9F9F9" /> -->
-
-    <!--<SolidColorBrush x:Key="TabItemBackground" Color="#AF282828" />
-    <SolidColorBrush x:Key="TabItemSelectedBackground" Color="#282828" /> -->
-
     <SolidColorBrush x:Key="TabItemDisabledBackground" Color="{DynamicResource Gray9}" />
     <SolidColorBrush x:Key="TabItemDisabledBorderBrush" Color="{DynamicResource Gray10}" />
 
@@ -30,38 +24,44 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TabItem}">
-                    <Grid SnapsToDevicePixels="true">
-                        <Grid SnapsToDevicePixels="True" UseLayoutRounding="True" Height="30" Margin="0" Width="{TemplateBinding Width}"> <!--Width="150">-->
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="Auto" />
-                            </Grid.ColumnDefinitions>
+                    <Grid SnapsToDevicePixels="True" UseLayoutRounding="True" Height="30" Margin="0" Width="{TemplateBinding Width}">
+                        <!--Width="150">-->
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
 
-                            <Path x:Name="Pl" Visibility="Collapsed" Grid.Column="0" VerticalAlignment="Bottom" Width="4" Stretch="Uniform" Fill="{TemplateBinding Background}" Data="M4 0 L4 4 L0 4 A4,4 90 0 0 4 0 Z" />
+                        <Path x:Name="Pl" Visibility="Collapsed" Grid.Column="0" VerticalAlignment="Bottom" Width="4" Stretch="Uniform" Fill="{TemplateBinding Background}" Data="M4 0 L4 4 L0 4 A4,4 90 0 0 4 0 Z" />
 
-                            <Border x:Name="Bd" CornerRadius="5 5 0 0" BorderThickness="0" Grid.Column="1">
-                                <Border.Background>
-                                    <SolidColorBrush Color="{TemplateBinding Background}" />
-                                </Border.Background>
+                        <Border x:Name="Bd" CornerRadius="5 5 0 0" BorderThickness="0" Grid.Column="1">
+                            <Border.Background>
+                                <SolidColorBrush Color="{TemplateBinding Background}" />
+                            </Border.Background>
 
-                                <ContentPresenter 
+                            <ContentPresenter 
                                     x:Name="Content"
                                     ContentSource="Header"
                                     SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
                                     HorizontalAlignment="{Binding Path=HorizontalContentAlignment,RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"
                                     VerticalAlignment="{Binding Path=VerticalContentAlignment,RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"
                                     RecognizesAccessKey="True" />
-                            </Border>
+                        </Border>
 
-                            <Path x:Name="Pr" Visibility="Collapsed" Grid.Column="2" VerticalAlignment="Bottom" Width="4" Stretch="Uniform" Fill="{TemplateBinding Background}" Data="M0 0 L0 4 L4 4 A4 4 90 0 1 0 0 Z" />
-                        </Grid>
+                        <Path x:Name="Pr" Visibility="Collapsed" Grid.Column="2" VerticalAlignment="Bottom" Width="4" Stretch="Uniform" Fill="{TemplateBinding Background}" Data="M0 0 L0 4 L4 4 A4 4 90 0 1 0 0 Z" />
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="true">
                             <Setter TargetName="Bd" Property="Background" Value="{DynamicResource TabItemSelectedBackground}" />
                             <Setter TargetName="Pl" Property="Fill" Value="{DynamicResource TabItemSelectedBackground}" />
                             <Setter TargetName="Pr" Property="Fill" Value="{DynamicResource TabItemSelectedBackground}" />
+                            <Setter TargetName="Pl" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="Pr" Property="Visibility" Value="Visible" />
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="False">
+                            <Setter TargetName="Bd" Property="Background" Value="{DynamicResource TabItemNormalBackground}" />
+                            <Setter TargetName="Pl" Property="Fill" Value="{DynamicResource TabItemNormalBackground}" />
+                            <Setter TargetName="Pr" Property="Fill" Value="{DynamicResource TabItemNormalBackground}" />
                             <Setter TargetName="Pl" Property="Visibility" Value="Visible" />
                             <Setter TargetName="Pr" Property="Visibility" Value="Visible" />
                         </Trigger>
@@ -74,7 +74,7 @@
                             <Setter TargetName="Pr" Property="Visibility" Value="Visible" />
                             <Setter TargetName="Content" Property="TextBlock.FontWeight" Value="Bold" />
                         </Trigger>
-                        <MultiTrigger>
+                       <!-- <MultiTrigger>
                             <MultiTrigger.Conditions>
                                 <Condition Property="IsSelected" Value="false" />
                                 <Condition Property="IsMouseOver" Value="true" />
@@ -84,7 +84,7 @@
                             <Setter TargetName="Pr" Property="Fill" Value="{DynamicResource TabItemSelectedBackground}" />
                             <Setter TargetName="Pl" Property="Visibility" Value="Visible" />
                             <Setter TargetName="Pr" Property="Visibility" Value="Visible" />
-                        </MultiTrigger>
+                        </MultiTrigger>-->
                         <Trigger Property="TabStripPlacement" Value="Bottom">
                             <Setter TargetName="Bd" Property="BorderThickness" Value="1,0,1,1" />
                         </Trigger>
