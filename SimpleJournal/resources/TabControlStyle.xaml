@@ -62,8 +62,8 @@
                             <Setter TargetName="Bd" Property="Background" Value="{DynamicResource TabItemNormalBackground}" />
                             <Setter TargetName="Pl" Property="Fill" Value="{DynamicResource TabItemNormalBackground}" />
                             <Setter TargetName="Pr" Property="Fill" Value="{DynamicResource TabItemNormalBackground}" />
-                            <Setter TargetName="Pl" Property="Visibility" Value="Visible" />
-                            <Setter TargetName="Pr" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="Pl" Property="Visibility" Value="Hidden" />
+                            <Setter TargetName="Pr" Property="Visibility" Value="Hidden" />
                         </Trigger>
                         <Trigger Property="IsSelected" Value="true">
                             <Setter Property="Panel.ZIndex" Value="1" />
