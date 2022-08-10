@@ -43,7 +43,7 @@ namespace SimpleJournal
         /// <summary>
         /// The .NET version which was used to compile SJ
         /// </summary>
-        public static readonly Version CompiledDotnetVersion = new Version(6, 0, 7);
+        public static readonly Version CompiledDotnetVersion = new Version(6, 0, 8);
 
         /// <summary>
         /// Polling interval for NotificationService
@@ -55,7 +55,7 @@ namespace SimpleJournal
 
         public static Common.Data.Color[] PEN_COLORS = new Common.Data.Color[] 
         {
-            new Common.Data.Color(0, 0, 0), // black
+            new Common.Data.Color(0, 0, 0),     // black
             new Common.Data.Color(180, 30, 40), // red
             new Common.Data.Color(30, 190, 20), // green
             new Common.Data.Color(30, 40, 210), // blue
