@@ -66,6 +66,10 @@
         </Style>    
     </mah:MetroWindow.Resources>
     <Grid MouseDown="Grid_MouseDown" Background="{DynamicResource TabControl.Background}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
         <TabControl x:Name="TabControl" SelectionChanged="TabControl_SelectionChanged" BorderThickness="0" Padding="0" Background="{DynamicResource WhiteBrush}" Margin="2">
             <TabControl.Resources>
                 <ResourceDictionary>
@@ -117,19 +121,31 @@
                     <StackPanel Margin="5,2">
                         <StackPanel.Resources>
                             <Style TargetType="{x:Type TextBlock}">
-                                <Setter Property="Margin" Value="2" />
+                                <Setter Property="Margin" Value="0,2" />
                                 <Setter Property="FontWeight" Value="Bold" />
                             </Style>
                         </StackPanel.Resources>
                         
                         <TextBlock Text="Intensität:" />
-                        <Slider x:Name="SliderChequeredIntensity" ValueChanged="SliderChequeredIntensity_ValueChanged" Style="{DynamicResource MahApps.Styles.Slider}" Maximum="100" Value="18"  />
+                        <Slider x:Name="SliderChequeredIntensity" ValueChanged="SliderChequeredIntensity_ValueChanged" Style="{DynamicResource MahApps.Styles.Slider}" Maximum="100" Value="18" Minimum="5"  />
 
                         <TextBlock Text="Kästchen-Abstand:" />
                         <Slider x:Name="SliderChequeredOffset" ValueChanged="SliderChequeredOffset_ValueChanged" Style="{DynamicResource MahApps.Styles.Slider}" Maximum="100" Value="22" />
 
                         <TextBlock Text="Strichstärke:" />
                         <Slider x:Name="SliderChequredStrokeWidth" ValueChanged="SliderChequredStrokeWidth_ValueChanged" Style="{DynamicResource MahApps.Styles.Slider}" Value="0.5" Maximum="1"  />
+
+                        <Grid>
+                            <StackPanel>
+                                <TextBlock Text="Linienfarbe:" />
+                                <controls:ColorPicker x:Name="ChequeredColorPicker" ColorChanged="ChequeredColorPicker_ColorChanged" Height="40"  HorizontalAlignment="left" />
+                            </StackPanel>
+
+                            <StackPanel HorizontalAlignment="Right" VerticalAlignment="Center">
+                                <Button x:Name="ButtonResetChequered" Click="ButtonResetChequered_Click"  Content="Standard wiederherstellen" FontWeight="Bold" Margin="2" Padding="5" />
+                            </StackPanel>
+
+                        </Grid>
                     </StackPanel>
 
                     <controls:PreviewCanvas x:Name="ChequeredPreview" Margin="0,5,0,0" PaperType="Chequered" SnapsToDevicePixels="True" UseLayoutRounding="true" Grid.Row="1" />
@@ -160,5 +176,9 @@
                 </TabItem.Header>
             </TabItem>
         </TabControl>
+
+        <Grid Grid.Row="1">
+            <Button Content="OK" FontWeight="Bold" Margin="5" />
+        </Grid>
     </Grid>
 </mah:MetroWindow>

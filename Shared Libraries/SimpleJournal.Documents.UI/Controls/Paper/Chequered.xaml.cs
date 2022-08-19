@@ -5,6 +5,8 @@ using SimpleJournal.Documents.UI.Helper;
 using Orientation = SimpleJournal.Common.Orientation;
 using System.Windows;
 using System.Reflection;
+using SimpleJournal.Documents.UI.Extensions;
+using SimpleJournal.Documents.Pattern;
 
 namespace SimpleJournal.Documents.UI.Controls.Paper
 {
@@ -39,15 +41,26 @@ namespace SimpleJournal.Documents.UI.Controls.Paper
 
         #region ApplyBackgroundBrushSettings
 
-        private DrawingBrush brush => (DrawingBrush)FindResource(Settings.Instance.UseOldChequeredPattern ? "OldChequeredBrush" : "CurrentChequeredBrush");
+        public void ApplyPattern(IPattern pattern)
+        {
+            if (pattern is ChequeredPattern chequeredPattern)
+            {
+                DrawingBrush brush = (DrawingBrush)FindResource(Settings.Instance.UseOldChequeredPattern ? "OldChequeredBrush" : "CurrentChequeredBrush");
 
-        public void ApplyStrokeThickness(double value)
+                ApplyIntensity(brush, chequeredPattern.ViewPort);
+                ApplyOffset(brush, chequeredPattern.ViewOffset);
+                ApplyLineColor(brush, chequeredPattern.Color);
+                ApplyStrokeThickness(brush, chequeredPattern.StrokeWidth);        
+            }
+        } 
+
+        private void ApplyStrokeThickness(DrawingBrush brush, double value)
         {
             var g = brush.Drawing as GeometryDrawing;
             g.Pen.Thickness = value;
         }
 
-        public void ApplyIntensity(double value)
+        private void ApplyIntensity(DrawingBrush brush, double value)
         {
             var g = brush.Drawing as GeometryDrawing;
             var grp = g.Geometry as GeometryGroup;
@@ -61,9 +74,14 @@ namespace SimpleJournal.Documents.UI.Controls.Paper
             lg2.EndPoint = new Point(0, value);
         }
 
-        public void ApplyOffset(double value)
+        private void ApplyOffset(DrawingBrush brush, double value)
         {
             brush.Viewport = new Rect(0, 0, value, value);
+        }
+
+        private void ApplyLineColor(DrawingBrush brush, SimpleJournal.Common.Data.Color color)
+        {
+            (brush.Drawing as GeometryDrawing).Pen.Brush = new SolidColorBrush(color.ToColor());
         }
 
         #endregion

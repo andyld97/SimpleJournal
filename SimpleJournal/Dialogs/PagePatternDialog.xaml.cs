@@ -1,5 +1,7 @@
 ﻿using MahApps.Metro.Controls;
+using SimpleJournal.Documents.Pattern;
 using SimpleJournal.Documents.UI.Controls.Paper;
+using SimpleJournal.Documents.UI.Extensions;
 using System;
 using System.Windows;
 using System.Windows.Controls;
@@ -98,6 +100,8 @@ namespace Dialogs
 
 
         #region Chequered
+        private ChequeredPattern chequeredPattern = new ChequeredPattern();
+
         private void SliderChequredStrokeWidth_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             if (!isInitalized)
@@ -105,7 +109,8 @@ namespace Dialogs
 
             if (ChequeredPreview.Paper is Chequered chq)
             {
-                chq.ApplyStrokeThickness(e.NewValue);
+                chequeredPattern.StrokeWidth = e.NewValue;
+                chq.ApplyPattern(chequeredPattern);
             }
         }
 
@@ -116,7 +121,8 @@ namespace Dialogs
 
             if (ChequeredPreview.Paper is Chequered chq)
             {
-                chq.ApplyIntensity(e.NewValue);
+                chequeredPattern.ViewPort = e.NewValue;
+                chq.ApplyPattern(chequeredPattern);
             }
         }
 
@@ -128,12 +134,39 @@ namespace Dialogs
             if (ChequeredPreview.Paper is Chequered chq)
             {
                 SliderChequeredIntensity.Value = e.NewValue - 4;
-                chq.ApplyOffset(e.NewValue);
+                chequeredPattern.ViewOffset = e.NewValue;
+                chq.ApplyPattern(chequeredPattern);
             }
         }
 
+        private void ChequeredColorPicker_ColorChanged(System.Windows.Media.Color c)
+        {
+            if (!isInitalized)
+                return;
+
+            if (ChequeredPreview.Paper is Chequered chq)
+            {
+                chequeredPattern.Color = c.ToColor();
+                chq.ApplyPattern(chequeredPattern);
+            }
+        }
+
+        private void ButtonResetChequered_Click(object sender, RoutedEventArgs e)
+        {
+            chequeredPattern.Reset();
+            if (ChequeredPreview.Paper is Chequered chq)
+                chq.ApplyPattern(chequeredPattern);
+
+            isInitalized = false;
+
+            SliderChequeredOffset.Value = chequeredPattern.ViewOffset;
+            SliderChequeredIntensity.Value = chequeredPattern.ViewPort;
+            SliderChequredStrokeWidth.Value = chequeredPattern.StrokeWidth;
+            ChequeredColorPicker.SelectedColor = chequeredPattern.Color.ToColor();
+
+            isInitalized = true;
+        }
+
         #endregion
-
-
     }
 }
