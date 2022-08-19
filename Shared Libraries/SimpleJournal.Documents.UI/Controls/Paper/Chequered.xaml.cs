@@ -3,6 +3,8 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using SimpleJournal.Documents.UI.Helper;
 using Orientation = SimpleJournal.Common.Orientation;
+using System.Windows;
+using System.Reflection;
 
 namespace SimpleJournal.Documents.UI.Controls.Paper
 {
@@ -34,6 +36,37 @@ namespace SimpleJournal.Documents.UI.Controls.Paper
                 (Height, Width) = (Width, Height);
             }
         }
+
+        #region ApplyBackgroundBrushSettings
+
+        private DrawingBrush brush => (DrawingBrush)FindResource(Settings.Instance.UseOldChequeredPattern ? "OldChequeredBrush" : "CurrentChequeredBrush");
+
+        public void ApplyStrokeThickness(double value)
+        {
+            var g = brush.Drawing as GeometryDrawing;
+            g.Pen.Thickness = value;
+        }
+
+        public void ApplyIntensity(double value)
+        {
+            var g = brush.Drawing as GeometryDrawing;
+            var grp = g.Geometry as GeometryGroup;
+
+            var lg1 = (grp.Children[0] as LineGeometry);
+            lg1.StartPoint = new Point(0, value);
+            lg1.EndPoint = new Point(value, value);
+
+            var lg2 = (grp.Children[1] as LineGeometry);
+            lg2.StartPoint = new Point(0, 0);
+            lg2.EndPoint = new Point(0, value);
+        }
+
+        public void ApplyOffset(double value)
+        {
+            brush.Viewport = new Rect(0, 0, value, value);
+        }
+
+        #endregion
 
         public Orientation Orientation { get; set; }
 
