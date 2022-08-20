@@ -107,11 +107,8 @@ namespace Dialogs
             if (!isInitalized)
                 return;
 
-            if (ChequeredPreview.Paper is Chequered chq)
-            {
-                chequeredPattern.StrokeWidth = e.NewValue;
-                chq.ApplyPattern(chequeredPattern);
-            }
+            chequeredPattern.StrokeWidth = e.NewValue;
+            ChequeredPreview.Paper.ApplyPattern(chequeredPattern);
         }
 
         private void SliderChequeredIntensity_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
@@ -119,11 +116,8 @@ namespace Dialogs
             if (!isInitalized)
                 return;
 
-            if (ChequeredPreview.Paper is Chequered chq)
-            {
-                chequeredPattern.ViewPort = e.NewValue;
-                chq.ApplyPattern(chequeredPattern);
-            }
+            chequeredPattern.ViewPort = e.NewValue;
+            ChequeredPreview.Paper.ApplyPattern(chequeredPattern);
         }
 
         private void SliderChequeredOffset_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
@@ -131,12 +125,9 @@ namespace Dialogs
             if (!isInitalized)
                 return;
 
-            if (ChequeredPreview.Paper is Chequered chq)
-            {
-                SliderChequeredIntensity.Value = e.NewValue - 4;
-                chequeredPattern.ViewOffset = e.NewValue;
-                chq.ApplyPattern(chequeredPattern);
-            }
+            SliderChequeredIntensity.Value = e.NewValue - 4;
+            chequeredPattern.ViewOffset = e.NewValue;
+            ChequeredPreview.Paper.ApplyPattern(chequeredPattern);
         }
 
         private void ChequeredColorPicker_ColorChanged(System.Windows.Media.Color c)
@@ -144,18 +135,14 @@ namespace Dialogs
             if (!isInitalized)
                 return;
 
-            if (ChequeredPreview.Paper is Chequered chq)
-            {
                 chequeredPattern.Color = c.ToColor();
-                chq.ApplyPattern(chequeredPattern);
-            }
+                ChequeredPreview.Paper.ApplyPattern(chequeredPattern);
         }
 
         private void ButtonResetChequered_Click(object sender, RoutedEventArgs e)
         {
             chequeredPattern.Reset();
-            if (ChequeredPreview.Paper is Chequered chq)
-                chq.ApplyPattern(chequeredPattern);
+            ChequeredPreview.Paper.ApplyPattern(chequeredPattern);
 
             isInitalized = false;
 
