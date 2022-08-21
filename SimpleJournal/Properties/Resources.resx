@@ -2238,4 +2238,12 @@ Details: {1}</value>
     <value>this</value>
     <comment>*</comment>
   </data>
+  <data name="strPreviewTitle" xml:space="preserve">
+    <value>Preview</value>
+    <comment>PreviewCanvas.xaml</comment>
+  </data>
+  <data name="strPreviewDescription" xml:space="preserve">
+    <value>Here you can test!</value>
+    <comment>PreviewCanvas.xaml</comment>
+  </data>
 </root>

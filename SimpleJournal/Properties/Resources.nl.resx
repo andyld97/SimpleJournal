@@ -1703,4 +1703,10 @@ Details: {1}</value>
   <data name="strThis" xml:space="preserve">
     <value>deze</value>
   </data>
+  <data name="strPreviewDescription" xml:space="preserve">
+    <value>U kunt hier testen!</value>
+  </data>
+  <data name="strPreviewTitle" xml:space="preserve">
+    <value>Voorbeeld</value>
+  </data>
 </root>

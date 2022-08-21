@@ -123,10 +123,7 @@ namespace SimpleJournal.Controls
             }
         }
 
-        private void BtnClear_Click(object sender, RoutedEventArgs e)
-        {
-            ClearCanvas();  
-        }
+ 
 
         private void BtnWrite_Click(object sender, RoutedEventArgs e)
         {
@@ -143,6 +140,11 @@ namespace SimpleJournal.Controls
                 currentCanvas.DefaultDrawingAttributes = new DrawingAttributes();
                 writing = true;
             }
+        }
+
+        private void ButtonClear_Click(object sender, RoutedEventArgs e)
+        {
+            ClearCanvas();
         }
     }
 }

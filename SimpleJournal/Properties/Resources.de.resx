@@ -2125,4 +2125,10 @@ Details: {1}</value>
   <data name="strThis" xml:space="preserve">
     <value>diese</value>
   </data>
+  <data name="strPreviewDescription" xml:space="preserve">
+    <value>Hier können Sie testen!</value>
+  </data>
+  <data name="strPreviewTitle" xml:space="preserve">
+    <value>Vorschau</value>
+  </data>
 </root>

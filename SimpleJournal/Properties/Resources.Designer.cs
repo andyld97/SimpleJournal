@@ -2969,6 +2969,24 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Here you can test!.
+        /// </summary>
+        public static string strPreviewDescription {
+            get {
+                return ResourceManager.GetString("strPreviewDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Preview.
+        /// </summary>
+        public static string strPreviewTitle {
+            get {
+                return ResourceManager.GetString("strPreviewTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Print.
         /// </summary>
         public static string strPrintDocument {

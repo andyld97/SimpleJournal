@@ -104,6 +104,7 @@
 	  <None Remove="resources\notifications\error.png" />
 	  <None Remove="resources\notifications\info.png" />
 	  <None Remove="resources\notifications\warning.png" />
+	  <None Remove="resources\trash.png" />
 	</ItemGroup>
 	<ItemGroup>
 		<None Update="app.normal.manifest">
@@ -138,6 +139,7 @@
 		<Resource Include="resources\settings.png" />
 		<Resource Include="resources\text.png" />
 		<Resource Include="resources\textdetection.png" />
+		<Resource Include="resources\trash.png" />
 		<Resource Include="resources\zoom.png" />
 	</ItemGroup>
 	<ItemGroup>
