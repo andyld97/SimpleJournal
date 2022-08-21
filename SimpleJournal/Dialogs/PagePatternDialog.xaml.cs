@@ -1,7 +1,5 @@
 ﻿using MahApps.Metro.Controls;
 using SimpleJournal.Documents.Pattern;
-using SimpleJournal.Documents.PDF;
-using SimpleJournal.Documents.UI.Controls.Paper;
 using SimpleJournal.Documents.UI.Extensions;
 using System;
 using System.Windows;
@@ -99,7 +97,7 @@ namespace Dialogs
 
         #endregion
 
-
+        #region Paper Pattern
         #region Chequered
         private ChequeredPattern chequeredPattern = new ChequeredPattern();
 
@@ -212,6 +210,54 @@ namespace Dialogs
             isInitalized = true;
         }
 
+        #endregion
+
+        #region Ruled
+        private readonly RuledPattern ruledPattern = new RuledPattern();
+
+
+        private void SliderRuledOffset_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            if (!isInitalized)
+                return;
+
+            ruledPattern.ViewOffset = SliderRuledOffset.Value;
+            RuledPreview.Paper.ApplyPattern(ruledPattern);
+        }
+
+        private void SliderRuledStrokeWdith_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            if (!isInitalized)
+                return;
+
+            ruledPattern.StrokeWidth = SliderRuledStrokeWdith.Value;
+            RuledPreview.Paper.ApplyPattern(ruledPattern);
+        }
+
+        private void RuledColorPicker_ColorChanged(System.Windows.Media.Color c)
+        {
+            if (!isInitalized)
+                return;
+
+            ruledPattern.Color = c.ToColor();
+            RuledPreview.Paper.ApplyPattern(ruledPattern);
+        }
+
+        private void ButtonResetRuled_Click(object sender, RoutedEventArgs e)
+        {
+            ruledPattern.Reset();
+            RuledPreview.Paper.ApplyPattern(ruledPattern);
+
+            isInitalized = false;
+
+            SliderRuledOffset.Value = ruledPattern.ViewOffset;
+            SliderRuledStrokeWdith.Value = ruledPattern.StrokeWidth;
+            RuledColorPicker.SelectedColor = ruledPattern.Color.ToColor();
+
+            isInitalized = true;
+        }
+
+        #endregion
         #endregion
     }
 }

@@ -61,7 +61,7 @@ namespace SimpleJournal.Documents.UI.Controls.Paper
 
         public void ApplyPattern(IPattern pattern)
         {
-            throw new NotImplementedException();
+            
         }
     }
 }

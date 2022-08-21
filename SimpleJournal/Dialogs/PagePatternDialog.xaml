@@ -204,6 +204,41 @@
                         <TextBlock x:Name="TabHeaderRuled" Text="Liniert" VerticalAlignment="Center" />
                     </StackPanel>
                 </TabItem.Header>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <StackPanel Margin="5,2">
+                        <StackPanel.Resources>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="Margin" Value="0,2" />
+                                <Setter Property="FontWeight" Value="Bold" />
+                            </Style>
+                            <Style TargetType="{x:Type Slider}" BasedOn="{StaticResource MahApps.Styles.Slider}" />
+                        </StackPanel.Resources>
+
+                        <TextBlock Text="Linien-Abstand:" />
+                        <Slider x:Name="SliderRuledOffset" ValueChanged="SliderRuledOffset_ValueChanged" Value="50" Minimum="1" Maximum="100" />
+
+                        <TextBlock Text="Strichbreite:" />
+                        <Slider x:Name="SliderRuledStrokeWdith" ValueChanged="SliderRuledStrokeWdith_ValueChanged" Value="0.1" Minimum="0.1" Maximum="1" />
+
+                        <Grid>
+                            <StackPanel>
+                                <TextBlock Text="Farbe:" />
+                                <controls:ColorPicker x:Name="RuledColorPicker" ColorChanged="RuledColorPicker_ColorChanged" Height="40" HorizontalAlignment="Left" />
+                            </StackPanel>
+
+                            <StackPanel HorizontalAlignment="Right" VerticalAlignment="Center">
+                                <Button x:Name="ButtonResetRuled" Click="ButtonResetRuled_Click" Content="Standard wiederherstellen" FontWeight="Bold" Margin="2" Padding="5" />
+                            </StackPanel>
+                        </Grid>
+                    </StackPanel>
+
+                    <controls:PreviewCanvas x:Name="RuledPreview" PaperType="Ruled" Margin="0,5,0,0" Grid.Row="1" SnapsToDevicePixels="true" UseLayoutRounding="true" />
+                </Grid>
             </TabItem>
             <TabItem Width="150">
                 <TabItem.Header>
