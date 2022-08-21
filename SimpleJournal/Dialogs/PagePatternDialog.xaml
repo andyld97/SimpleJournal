@@ -144,7 +144,6 @@
                             <StackPanel HorizontalAlignment="Right" VerticalAlignment="Center">
                                 <Button x:Name="ButtonResetChequered" Click="ButtonResetChequered_Click"  Content="Standard wiederherstellen" FontWeight="Bold" Margin="2" Padding="5" />
                             </StackPanel>
-
                         </Grid>
                     </StackPanel>
 
@@ -158,6 +157,45 @@
                         <TextBlock x:Name="TabHeaderDotted" Text="Dotted" VerticalAlignment="Center" />
                     </StackPanel>
                 </TabItem.Header>
+
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <StackPanel Margin="5,2">
+                        <StackPanel.Resources>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="Margin" Value="0,2" />
+                                <Setter Property="FontWeight" Value="Bold" />
+                            </Style>
+                            <Style TargetType="{x:Type Slider}" BasedOn="{StaticResource MahApps.Styles.Slider}" />
+                        </StackPanel.Resources>
+                        
+                        <TextBlock Text="Abstand:" />
+                        <Slider x:Name="SliderViewPort" ValueChanged="SliderViewPort_ValueChanged" Value="20" Minimum="1" Maximum="50" />
+
+                        <TextBlock Text="Radius:" />
+                        <Slider x:Name="SliderDottedRadius" ValueChanged="SliderDottedRadius_ValueChanged" Value="0.5" Minimum="0.1" Maximum="2" />
+
+                        <TextBlock Text="Strichstärke:" />
+                        <Slider x:Name="SliderDottedStrokeWidth" ValueChanged="SliderDottedStrokeWidth_ValueChanged" Minimum="0.1" Value="2" Maximum="5" />
+                        
+                        <Grid>
+                            <StackPanel>
+                                <TextBlock Text="Farbe:" />
+                                <controls:ColorPicker x:Name="DottedColorPicker" ColorChanged="DottedColorPicker_ColorChanged" Height="40" HorizontalAlignment="Left" />
+                            </StackPanel>
+
+                            <StackPanel HorizontalAlignment="Right" VerticalAlignment="Center">
+                                <Button x:Name="ButtonResetDotted" Click="ButtonResetDotted_Click" Content="Standard wiederherstellen" FontWeight="Bold" Margin="2" Padding="5" />
+                            </StackPanel>
+                        </Grid>
+                    </StackPanel>
+
+                    <controls:PreviewCanvas x:Name="DottedPreview" PaperType="Dotted" Margin="0,5,0,0" Grid.Row="1" SnapsToDevicePixels="true" UseLayoutRounding="True" />
+                </Grid>
             </TabItem>
             <TabItem Width="150">
                 <TabItem.Header>

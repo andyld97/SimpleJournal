@@ -1,5 +1,6 @@
 ﻿using MahApps.Metro.Controls;
 using SimpleJournal.Documents.Pattern;
+using SimpleJournal.Documents.PDF;
 using SimpleJournal.Documents.UI.Controls.Paper;
 using SimpleJournal.Documents.UI.Extensions;
 using System;
@@ -135,8 +136,8 @@ namespace Dialogs
             if (!isInitalized)
                 return;
 
-                chequeredPattern.Color = c.ToColor();
-                ChequeredPreview.Paper.ApplyPattern(chequeredPattern);
+            chequeredPattern.Color = c.ToColor();
+            ChequeredPreview.Paper.ApplyPattern(chequeredPattern);
         }
 
         private void ButtonResetChequered_Click(object sender, RoutedEventArgs e)
@@ -150,6 +151,63 @@ namespace Dialogs
             SliderChequeredIntensity.Value = chequeredPattern.ViewPort;
             SliderChequredStrokeWidth.Value = chequeredPattern.StrokeWidth;
             ChequeredColorPicker.SelectedColor = chequeredPattern.Color.ToColor();
+
+            isInitalized = true;
+        }
+
+        #endregion
+
+        #region Dotted
+
+        private readonly DottedPattern dottedPattern = new DottedPattern();
+
+        private void SliderDottedRadius_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            if (!isInitalized)
+                return;
+
+            dottedPattern.Radius = SliderDottedRadius.Value;
+            DottedPreview.Paper.ApplyPattern(dottedPattern);
+        }
+        private void SliderDottedStrokeWidth_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            if (!isInitalized)
+                return;
+
+            dottedPattern.StrokeWidth = SliderDottedStrokeWidth.Value;
+            DottedPreview.Paper.ApplyPattern(dottedPattern);
+        }
+
+        private void SliderViewPort_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            if (!isInitalized)
+                return;
+
+            dottedPattern.ViewPort = SliderViewPort.Value;
+            DottedPreview.Paper.ApplyPattern(dottedPattern);
+        }
+
+
+        private void DottedColorPicker_ColorChanged(System.Windows.Media.Color c)
+        {
+            if (!isInitalized)
+                return;
+
+            dottedPattern.Color = c.ToColor();
+            DottedPreview.Paper.ApplyPattern(dottedPattern);
+        }
+
+        private void ButtonResetDotted_Click(object sender, RoutedEventArgs e)
+        {
+            dottedPattern.Reset();
+            DottedPreview.Paper.ApplyPattern(dottedPattern);
+
+            isInitalized = false;
+
+            SliderDottedRadius.Value = dottedPattern.Radius;
+            SliderViewPort.Value = dottedPattern.ViewPort;
+            SliderChequredStrokeWidth.Value = dottedPattern.StrokeWidth;
+            DottedColorPicker.SelectedColor = dottedPattern.Color.ToColor();
 
             isInitalized = true;
         }

@@ -3,6 +3,8 @@ using System.Windows.Controls;
 using SimpleJournal.Documents.UI.Helper;
 using Orientation = SimpleJournal.Common.Orientation;
 using SimpleJournal.Documents.Pattern;
+using System.Windows.Media;
+using SimpleJournal.Documents.UI.Extensions;
 
 namespace SimpleJournal.Documents.UI.Controls.Paper
 {
@@ -61,7 +63,19 @@ namespace SimpleJournal.Documents.UI.Controls.Paper
 
         public void ApplyPattern(IPattern pattern)
         {
-            throw new NotImplementedException();
+            if (pattern is DottedPattern dp)
+            {
+                var brush = FindResource("DottetBrush") as DrawingBrush;
+
+                brush.Viewport = new System.Windows.Rect(0, 0, dp.ViewPort, dp.ViewPort);
+                var gd = (brush.Drawing as GeometryDrawing);
+                var gg = gd.Geometry as GeometryGroup;
+                var eg = (gg.Children[0] as EllipseGeometry);
+                eg.RadiusX =  eg.RadiusY = dp.Radius;
+
+                gd.Pen.Thickness = dp.StrokeWidth;
+                gd.Pen.Brush = new SolidColorBrush(dp.Color.ToColor());
+            }
         }
     }
 }
