@@ -1297,26 +1297,34 @@ namespace SimpleJournal
         private IPattern GetPattern(PaperType paperType)
         {
             if (currentJournal == null)
+                currentJournal = new Journal();
+
+            // Apply pattern from document 
+            if (paperType == PaperType.Chequered && currentJournal.ChequeredPattern != null)
+                return currentJournal.ChequeredPattern;
+            else if (paperType == PaperType.Dotted && currentJournal.DottedPattern != null)
+                return currentJournal.DottedPattern;
+            else if (paperType == PaperType.Ruled && currentJournal.RuledPattern != null)
+                return currentJournal.RuledPattern;
+
+            // Apply pattern from settings if any, ensure that the document is considered first
+            if (paperType == PaperType.Chequered && Settings.Instance.ChequeredPattern != null)
             {
-                // Apply pattern from settings if any
-                if (paperType == PaperType.Chequered && Settings.Instance.ChequeredPattern != null)
-                    return Settings.Instance.ChequeredPattern;
-                else if (paperType == PaperType.Dotted && Settings.Instance.DottedPattern != null)
-                    return Settings.Instance.DottedPattern;
-                else if (paperType != PaperType.Ruled && Settings.Instance.RuledPattern != null)
-                    return Settings.Instance.RuledPattern;
+                currentJournal.ChequeredPattern = Settings.Instance.ChequeredPattern;
+                return Settings.Instance.ChequeredPattern;
             }
-            else
+            else if (paperType == PaperType.Dotted && Settings.Instance.DottedPattern != null)
             {
-                // Apply pattern from document 
-                if (paperType == PaperType.Chequered && currentJournal.ChequeredPattern != null)
-                    return currentJournal.ChequeredPattern;
-                else if (paperType == PaperType.Dotted && currentJournal.DottedPattern != null)
-                    return currentJournal.DottedPattern;
-                else if (paperType != PaperType.Ruled && currentJournal.RuledPattern != null)
-                    return currentJournal.RuledPattern;
+                currentJournal.DottedPattern = Settings.Instance.DottedPattern;
+                return Settings.Instance.DottedPattern;
+            }
+            else if (paperType == PaperType.Ruled && Settings.Instance.RuledPattern != null)
+            {
+                currentJournal.RuledPattern = Settings.Instance.RuledPattern;
+                return Settings.Instance.RuledPattern;
             }
 
+            // Returning null here means no pattern is used!
             return null;
         }
 
@@ -1375,9 +1383,9 @@ namespace SimpleJournal
 
         private void PlotDropDownTemplate_OnPlotModeChanged(PlotMode plotMode)
         {
+            this.plotMode = plotMode;
             ApplyToAllCanvas((DrawingCanvas dc) =>
             {
-                this.plotMode = plotMode;
                 dc.SetPlotMode(plotMode);
             });
         }
@@ -1908,7 +1916,7 @@ namespace SimpleJournal
             // Refresh ruler mode
             rulerDropDownTemplate.lstBoxChooseRulerMode.SelectedIndex = (int)(Settings.Instance.RulerStrokeMode);
 
-            if (CurrentJournalPages.Count == 1 && CurrentJournalPages[0].Canvas.Strokes.Count == 0 && CurrentJournalPages[0].Canvas.Children.Count == 0)
+            if (CurrentJournalPages.Count == 1 && CurrentJournalPages[0].Canvas.IsEmpty)
             {
                 // Switch to new format
                 var newPage = GeneratePage(pattern: GetPattern(Settings.Instance.PaperType));

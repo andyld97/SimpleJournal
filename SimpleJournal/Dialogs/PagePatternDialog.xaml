@@ -15,7 +15,7 @@
         ShowMaxRestoreButton="True"        
         WindowStartupLocation="CenterScreen"
         WindowTitleBrush="{DynamicResource TabControl.Background}"
-        Title="PagePatternDialog" Height="600" Width="800">
+        Title="Papiermuster einstellen" Height="600" Width="800">
     <mah:MetroWindow.Resources>
         <Style x:Key="CustomLightMetroWindowButtonCloseStyle" TargetType="{x:Type Button}" BasedOn="{StaticResource MahApps.Styles.Button.MetroWindow.Light}">
             <Setter Property="Background" Value="{DynamicResource TabControl.Background}" />
@@ -175,7 +175,7 @@
                             <Style TargetType="{x:Type Slider}" BasedOn="{StaticResource MahApps.Styles.Slider}" />
                         </StackPanel.Resources>
                         
-                        <TextBlock Text="Abstand:" />
+                        <TextBlock Text="Punkt-Abstand:" />
                         <Slider x:Name="SliderViewPort" ValueChanged="SliderViewPort_ValueChanged" Value="20" Minimum="1" Maximum="50" />
 
                         <TextBlock Text="Radius:" />
@@ -229,7 +229,7 @@
 
                         <Grid>
                             <StackPanel>
-                                <TextBlock Text="Farbe:" />
+                                <TextBlock Text="Linienfarbe:" />
                                 <controls:ColorPicker x:Name="RuledColorPicker" ColorChanged="RuledColorPicker_ColorChanged" Height="40" HorizontalAlignment="Left" />
                             </StackPanel>
 
