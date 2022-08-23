@@ -24,5 +24,18 @@
         // Black
         public Color() : this(255, 0, 0, 0)
         { }
+
+        public static bool operator ==(Color c1, Color c2)
+        {
+            return c1.A == c2.A &&
+                   c1.R == c2.R &&
+                   c1.G == c2.G &&
+                   c2.B == c2.B;
+        }
+
+        public static bool operator !=(Color c1, Color c2)
+        {
+            return c1 != c2;
+        }
     }
 }

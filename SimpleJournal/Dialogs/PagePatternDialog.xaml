@@ -4,7 +4,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:controls="clr-namespace:SimpleJournal.Controls"
-        xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls" xmlns:fluent="urn:fluent-ribbon"
+        xmlns:res="clr-namespace:SimpleJournal.Properties"
+        xmlns:sharedRes="clr-namespace:SimpleJournal.SharedResources;assembly=SimpleJournal.SharedResources"
         mc:Ignorable="d"
         ShowTitleBar="False"        
         ShowSystemMenu="True"
@@ -83,7 +85,7 @@
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal" Margin="2">
                         <Image Width="24" RenderOptions.BitmapScalingMode="Fant" Source="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/chequered.png" />
-                        <TextBlock x:Name="TabHeaderChequered" FontWeight="Bold" Text="Kariert" VerticalAlignment="Center" />
+                        <TextBlock x:Name="TabHeaderChequered" FontWeight="Bold" Text="{x:Static sharedRes:Resources.strChequered}" VerticalAlignment="Center" />
                     </StackPanel>
                 </TabItem.Header>
 
@@ -154,7 +156,7 @@
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal" Margin="2">
                         <Image Width="24" RenderOptions.BitmapScalingMode="Fant" Source="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/dotted.png" />
-                        <TextBlock x:Name="TabHeaderDotted" Text="Dotted" VerticalAlignment="Center" />
+                        <TextBlock x:Name="TabHeaderDotted" Text="{x:Static sharedRes:Resources.strDottet}" VerticalAlignment="Center" />
                     </StackPanel>
                 </TabItem.Header>
 
@@ -201,7 +203,7 @@
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal" Margin="2">
                         <Image Width="24" RenderOptions.BitmapScalingMode="Fant" Source="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/ruled.png" />
-                        <TextBlock x:Name="TabHeaderRuled" Text="Liniert" VerticalAlignment="Center" />
+                        <TextBlock x:Name="TabHeaderRuled" Text="{x:Static sharedRes:Resources.strRuled}" VerticalAlignment="Center" />
                     </StackPanel>
                 </TabItem.Header>
                 <Grid>
@@ -244,14 +246,50 @@
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal" Margin="2">
                         <Image Width="24" RenderOptions.BitmapScalingMode="Fant" Source="pack://application:,,,/SimpleJournal;component/resources/help.png" />
-                        <TextBlock x:Name="TabHeaderHelp" Margin="5,0" Text="Hilfe" VerticalAlignment="Center" />
+                        <TextBlock x:Name="TabHeaderHelp" Margin="5,0" Text="{x:Static res:Resources.strHelp}" VerticalAlignment="Center" />
                     </StackPanel>
                 </TabItem.Header>
+
+
+                <Grid Margin="5,2">
+                    <StackPanel>
+                        <TextBlock TextWrapping="Wrap" FontSize="14">
+                            <Run Text="Erklärung:" FontWeight="Bold" />
+                            <LineBreak />
+                            <LineBreak />
+                            <Run Text="In diesem Dialog haben Sie die Möglichkeit die verschiedenen Papiermuster (kariert, punkte und liniert) optimal einzustellen. Die Muster sind standardmäßig bereits sehr gut zum Arbeiten geeignet. Jedoch kann es durchaus sinnvoll sein, die Muster anzupassen z.B. einen größeren oder kleineren Linienabstand!" />
+                            <LineBreak />
+                            <LineBreak />
+                            <Run Text="Dieser Dialog ist dafür gedacht, die Einstellungen einmal ideal für Ihre Zwecke zu setzen. Wenn Sie andere Dokumente laden, werden Ihre Einstellungen nicht berücksichtigt, d.h. Sie können problemlos andere Dokumente laden und bearbeiten." />
+                            <LineBreak />
+                            <LineBreak />
+                            <Run Text="Wichtiger Hinweis:" FontWeight="Bold" />
+                            <LineBreak />
+                            <LineBreak />
+                            <Run Text="Die Einstellungen beziehen sich nicht auf aktuelle und geladene Dokumente, die eine andere Einstellung haben. Laden Sie beispielsweise alte Dokumente werden die Standard-Einstellungen verwendet, da sonst die Dokumente nicht sauber dargestellt werden können." />
+                            <Run Text="Das bedeutet, dass die Einstellungen die Sie hier vornehmen nur für neue Dokumente gelten. Wenn Sie eine neue Seite einfügen, werden immer die Einstellungen aus dem aktuell geladen Dokument verwendet." />
+                            
+                            <LineBreak />
+                            <Run Text="Die Einstellungen, die hier vorgenommen werden beziehen sich immer auf das gesamte Dokument!" />
+                            
+                            <LineBreak />
+                            <LineBreak />
+                            <Run Text="Zurücksetzen der Einstellungen:" FontWeight="Bold" />
+                            <LineBreak />
+                            <LineBreak />
+                            <Run Text="Die Einstellungen können jederzeit wieder zurückgesetzt werden, aber bitte beachten Sie, dass dies nicht für bereits geladene Dokumente gilt." />
+                        </TextBlock>
+                    </StackPanel>
+                </Grid>
             </TabItem>
+
         </TabControl>
 
         <Grid Grid.Row="1">
-            <Button Content="OK" FontWeight="Bold" Margin="5" />
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="2,5,2,7">
+                <Button x:Name="ButtonApply" Click="ButtonApply_Click" Content="Änderungen übernehmen" FontWeight="Bold" Padding="5" Width="200" />
+                <Button x:Name="ButtonExit" Click="ButtonExit_Click"  Content="Änderungen verwerfen" Margin="5,0,0,0" Width="200" />
+            </StackPanel>
         </Grid>
     </Grid>
 </mah:MetroWindow>

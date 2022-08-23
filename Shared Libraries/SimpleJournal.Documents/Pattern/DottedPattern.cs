@@ -10,6 +10,26 @@
 
         public Common.Data.Color Color { get; set; } = new Common.Data.Color(0x00, 0x00, 0x00); // black
 
+        public bool HasDefaultValues
+        {
+            get
+            {
+                DottedPattern dottedPattern = new DottedPattern();
+                return ViewPort == dottedPattern.ViewPort && Radius == dottedPattern.Radius && StrokeWidth == dottedPattern.StrokeWidth && Color == dottedPattern.Color;
+            }
+        }
+
+        public object Clone()
+        {
+            return new DottedPattern()
+            {
+                ViewPort = this.ViewPort,
+                Radius = this.Radius,
+                StrokeWidth = this.StrokeWidth,
+                Color = this.Color,
+            };
+        }
+
         public void Reset()
         {
             var newInstance = new DottedPattern();

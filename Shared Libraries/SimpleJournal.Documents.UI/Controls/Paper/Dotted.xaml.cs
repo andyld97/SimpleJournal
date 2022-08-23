@@ -13,6 +13,8 @@ namespace SimpleJournal.Documents.UI.Controls.Paper
     /// </summary>
     public partial class Dotted : UserControl, IPaper
     {
+        private IPattern pattern;
+
         public Dotted(Orientation orientation)
         {
             InitializeComponent();
@@ -45,6 +47,8 @@ namespace SimpleJournal.Documents.UI.Controls.Paper
             foreach (var child in Canvas.Children)
                 dotted.Canvas.Children.Add(UIHelper.CloneElement(child));
 
+            dotted.ApplyPattern(pattern);
+
             return dotted;
         }
 
@@ -63,6 +67,7 @@ namespace SimpleJournal.Documents.UI.Controls.Paper
 
         public void ApplyPattern(IPattern pattern)
         {
+            this.pattern = pattern;
             if (pattern is DottedPattern dp)
             {
                 var brush = FindResource("DottetBrush") as DrawingBrush;

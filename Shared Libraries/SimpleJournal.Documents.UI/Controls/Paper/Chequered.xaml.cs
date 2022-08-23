@@ -15,6 +15,8 @@ namespace SimpleJournal.Documents.UI.Controls.Paper
     /// </summary>
     public partial class Chequered : UserControl, IPaper
     {
+        private IPattern pattern;
+
         public Chequered(Orientation orientation)
         {
             InitializeComponent();
@@ -43,6 +45,7 @@ namespace SimpleJournal.Documents.UI.Controls.Paper
 
         public void ApplyPattern(IPattern pattern)
         {
+            this.pattern = pattern;
             if (pattern is ChequeredPattern chequeredPattern)
             {
                 DrawingBrush brush = (DrawingBrush)FindResource(Settings.Instance.UseOldChequeredPattern ? "OldChequeredBrush" : "CurrentChequeredBrush");
@@ -105,6 +108,8 @@ namespace SimpleJournal.Documents.UI.Controls.Paper
             chq.Canvas.Strokes = Canvas.Strokes.Clone();
             foreach (var child in Canvas.Children)
                 chq.Canvas.Children.Add(UIHelper.CloneElement(child));
+
+            chq.ApplyPattern(pattern);
 
             return chq;
         }

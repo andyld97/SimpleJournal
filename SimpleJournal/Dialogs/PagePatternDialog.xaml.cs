@@ -1,5 +1,7 @@
 ﻿using MahApps.Metro.Controls;
+using SimpleJournal;
 using SimpleJournal.Documents.Pattern;
+using SimpleJournal.Documents.UI;
 using SimpleJournal.Documents.UI.Extensions;
 using System;
 using System.Windows;
@@ -26,9 +28,28 @@ namespace Dialogs
             foreach (var tb in TabControl.Items)
             {
                 var tabItem = (tb as TabItem);
-                tabItem.ApplyTemplate();                
+                tabItem.ApplyTemplate();
                 var grid = tabItem.Template.FindName("PART_Header", tabItem) as Grid;
-                grid.PreviewMouseDown += Grid_PreviewMouseDown;               
+                grid.PreviewMouseDown += Grid_PreviewMouseDown;
+            }
+
+            // Load pattern from settings (if any)
+            if (Settings.Instance.ChequeredPattern != null)
+            {
+                chequeredPattern = (ChequeredPattern)Settings.Instance.ChequeredPattern.Clone();
+                ApplyChequeredPattern(chequeredPattern);
+            }
+
+            if (Settings.Instance.DottedPattern != null)
+            {
+                dottedPattern = (DottedPattern)Settings.Instance.DottedPattern.Clone();
+                ApplyDottedPattern(dottedPattern);
+            }
+
+            if (Settings.Instance.RuledPattern != null)
+            {
+                ruledPattern = (RuledPattern)Settings.Instance.RuledPattern.Clone();
+                ApplyRuledPattern(ruledPattern);
             }
 
             isInitalized = true;
@@ -36,6 +57,9 @@ namespace Dialogs
 
         private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            if (!isInitalized)
+                return;
+
             foreach (var header in headers)
                 header.FontWeight = FontWeights.Normal;
 
@@ -98,8 +122,9 @@ namespace Dialogs
         #endregion
 
         #region Paper Pattern
+
         #region Chequered
-        private ChequeredPattern chequeredPattern = new ChequeredPattern();
+        private readonly ChequeredPattern chequeredPattern = new ChequeredPattern();
 
         private void SliderChequredStrokeWidth_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
@@ -138,19 +163,24 @@ namespace Dialogs
             ChequeredPreview.Paper.ApplyPattern(chequeredPattern);
         }
 
-        private void ButtonResetChequered_Click(object sender, RoutedEventArgs e)
+        private void ApplyChequeredPattern(ChequeredPattern pattern)
         {
-            chequeredPattern.Reset();
-            ChequeredPreview.Paper.ApplyPattern(chequeredPattern);
+            ChequeredPreview.Paper.ApplyPattern(pattern);
 
             isInitalized = false;
 
-            SliderChequeredOffset.Value = chequeredPattern.ViewOffset;
-            SliderChequeredIntensity.Value = chequeredPattern.ViewPort;
-            SliderChequredStrokeWidth.Value = chequeredPattern.StrokeWidth;
-            ChequeredColorPicker.SelectedColor = chequeredPattern.Color.ToColor();
+            SliderChequeredOffset.Value = pattern.ViewOffset;
+            SliderChequeredIntensity.Value = pattern.ViewPort;
+            SliderChequredStrokeWidth.Value = pattern.StrokeWidth;
+            ChequeredColorPicker.SelectedColor = pattern.Color.ToColor();
 
             isInitalized = true;
+        }
+
+        private void ButtonResetChequered_Click(object sender, RoutedEventArgs e)
+        {
+            chequeredPattern.Reset();
+            ApplyChequeredPattern(chequeredPattern);
         }
 
         #endregion
@@ -195,9 +225,8 @@ namespace Dialogs
             DottedPreview.Paper.ApplyPattern(dottedPattern);
         }
 
-        private void ButtonResetDotted_Click(object sender, RoutedEventArgs e)
+        private void ApplyDottedPattern(DottedPattern dottedPattern)
         {
-            dottedPattern.Reset();
             DottedPreview.Paper.ApplyPattern(dottedPattern);
 
             isInitalized = false;
@@ -210,11 +239,16 @@ namespace Dialogs
             isInitalized = true;
         }
 
+        private void ButtonResetDotted_Click(object sender, RoutedEventArgs e)
+        {
+            dottedPattern.Reset();
+            ApplyDottedPattern(dottedPattern);
+        }
+
         #endregion
 
         #region Ruled
         private readonly RuledPattern ruledPattern = new RuledPattern();
-
 
         private void SliderRuledOffset_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
@@ -243,9 +277,8 @@ namespace Dialogs
             RuledPreview.Paper.ApplyPattern(ruledPattern);
         }
 
-        private void ButtonResetRuled_Click(object sender, RoutedEventArgs e)
+        private void ApplyRuledPattern(RuledPattern ruledPattern)
         {
-            ruledPattern.Reset();
             RuledPreview.Paper.ApplyPattern(ruledPattern);
 
             isInitalized = false;
@@ -257,7 +290,45 @@ namespace Dialogs
             isInitalized = true;
         }
 
+        private void ButtonResetRuled_Click(object sender, RoutedEventArgs e)
+        {
+            ruledPattern.Reset();
+            ApplyRuledPattern(ruledPattern);
+        }
+
         #endregion
+
+        #endregion
+
+        #region Confirm/Cancel
+
+        private void ButtonExit_Click(object sender, RoutedEventArgs e)
+        {
+            DialogResult = false;
+        }
+
+        private void ButtonApply_Click(object sender, RoutedEventArgs e)
+        {
+            if (!chequeredPattern.HasDefaultValues)
+                Settings.Instance.ChequeredPattern = chequeredPattern;
+            else
+                Settings.Instance.ChequeredPattern = null;
+
+            if (!dottedPattern.HasDefaultValues)
+                Settings.Instance.DottedPattern = dottedPattern;
+            else
+                Settings.Instance.DottedPattern = null;
+
+            if (!ruledPattern.HasDefaultValues)
+                Settings.Instance.RuledPattern = ruledPattern;
+            else
+                Settings.Instance.RuledPattern = null;
+
+            Settings.Instance.Save();
+            MainWindow.W_INSTANCE.ApplySettings();
+
+            DialogResult = true;
+        }
         #endregion
     }
 }

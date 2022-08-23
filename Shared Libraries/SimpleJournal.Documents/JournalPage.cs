@@ -37,7 +37,7 @@ namespace SimpleJournal.Documents
         public Format PageFormat { get; set; } = Format.A4;
 
         /// <summary>
-        /// The pattern of the page (i.e. chequered)
+        /// The pattern of the page (i.e. chequered) (TODO: *** Should be renamed to PageType or PaperType)
         /// </summary>
         public PaperType PaperPattern { get; set; } = PaperType.Chequered;
 

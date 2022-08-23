@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Xml.Serialization;
 using SimpleJournal.Common.Helper;
+using SimpleJournal.Documents.Pattern;
 
 namespace SimpleJournal.Documents
 {
@@ -37,6 +38,14 @@ namespace SimpleJournal.Documents
         /// </summary>
         [XmlElement, DefaultValue("")]
         public string OriginalPath { get; set; } = "";
+
+        #region Pattern
+        public ChequeredPattern ChequeredPattern { get; set; }
+
+        public RuledPattern RuledPattern { get; set; }
+
+        public DottedPattern DottedPattern { get; set; }
+        #endregion
 
         #region Load, Save, Update Methods
 
@@ -234,7 +243,16 @@ namespace SimpleJournal.Documents
 
                             using (var stream = entry.Open())
                             {
-                                var jrn = new Journal() { ProcessID = this.ProcessID, IsBackup = this.IsBackup, OriginalPath = this.OriginalPath };
+                                var jrn = new Journal()
+                                {
+                                    ProcessID = this.ProcessID,
+                                    IsBackup = this.IsBackup,
+                                    OriginalPath = this.OriginalPath,
+                                    ChequeredPattern = (ChequeredPattern)this.ChequeredPattern?.Clone(),
+                                    DottedPattern = (DottedPattern)this.DottedPattern?.Clone(),
+                                    RuledPattern = (RuledPattern)this.RuledPattern?.Clone(),
+                                };
+
                                 // This is just for counting the pages
                                 foreach (var page in Pages)
                                     jrn.Pages.Add(new JournalPage());
@@ -324,7 +342,15 @@ namespace SimpleJournal.Documents
                         var info = zipArchive.CreateEntry("journal.xml");
                         using (System.IO.Stream stream = info.Open())
                         {
-                            var jrn = new Journal() { ProcessID = this.ProcessID, IsBackup = this.IsBackup, OriginalPath = this.OriginalPath };
+                            var jrn = new Journal()
+                            {
+                                ProcessID = this.ProcessID,
+                                IsBackup = this.IsBackup,
+                                OriginalPath = this.OriginalPath,
+                                ChequeredPattern = (ChequeredPattern)this.ChequeredPattern?.Clone(),
+                                DottedPattern = (DottedPattern)this.DottedPattern?.Clone(),
+                                RuledPattern = (RuledPattern)this.RuledPattern?.Clone(),
+                            };
 
                             // This is just for counting the pages
                             foreach (var page in Pages)

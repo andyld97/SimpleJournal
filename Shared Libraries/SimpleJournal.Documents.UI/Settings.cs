@@ -1,5 +1,6 @@
 ﻿using SimpleJournal.Common;
 using SimpleJournal.Common.Data;
+using SimpleJournal.Documents.Pattern;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -232,6 +233,25 @@ namespace SimpleJournal.Documents.UI
         /// If it's empty the default service endpoint url of PDF2J is used!
         /// </summary>
         public string SelfHostedPDF2JApiUrl { get; set; } = string.Empty;
+
+        #region Pattern
+
+        /// <summary>
+        /// null if default
+        /// </summary>
+        public ChequeredPattern ChequeredPattern { get; set; }
+
+        /// <summary>
+        /// null if default
+        /// </summary>
+        public DottedPattern DottedPattern { get; set; }
+
+        /// <summary>
+        /// null if default
+        /// </summary>
+        public RuledPattern RuledPattern { get; set; }
+
+        #endregion
 
         public Settings()
         {

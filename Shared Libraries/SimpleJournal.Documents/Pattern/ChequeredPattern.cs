@@ -10,6 +10,26 @@
 
         public Common.Data.Color Color { get; set; } = new Common.Data.Color(0x80, 0x80, 0x80); // gray
 
+        public bool HasDefaultValues
+        {
+            get
+            {
+                ChequeredPattern chequeredPattern = new ChequeredPattern();
+                return ViewPort == chequeredPattern.ViewPort && ViewOffset == chequeredPattern.ViewOffset && StrokeWidth == chequeredPattern.StrokeWidth && Color == chequeredPattern.Color;
+            }
+        }
+
+        public object Clone()
+        {
+            return new ChequeredPattern()
+            {
+                ViewPort = this.ViewPort,
+                ViewOffset = this.ViewOffset,
+                StrokeWidth = this.StrokeWidth,
+                Color = this.Color
+            };
+        }
+
         public void Reset()
         {
             var newInstance = new ChequeredPattern();

@@ -13,6 +13,8 @@ namespace SimpleJournal.Documents.UI.Controls.Paper
     /// </summary>
     public partial class Ruled : UserControl, IPaper 
     {
+        private IPattern pattern;
+
         public Ruled(Orientation orientation)
         {
             InitializeComponent();
@@ -45,6 +47,8 @@ namespace SimpleJournal.Documents.UI.Controls.Paper
             foreach (var child in Canvas.Children)
                 ruled.Canvas.Children.Add(UIHelper.CloneElement(child));
 
+            ruled.ApplyPattern(pattern);
+
             return ruled;
         }
 
@@ -63,6 +67,7 @@ namespace SimpleJournal.Documents.UI.Controls.Paper
 
         public void ApplyPattern(IPattern pattern)
         {
+            this.pattern = pattern;
              if (pattern is RuledPattern rp)
             {
                 var brush = FindResource("RuledBrush") as DrawingBrush;
