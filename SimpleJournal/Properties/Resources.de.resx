@@ -2131,4 +2131,61 @@ Details: {1}</value>
   <data name="strPreviewTitle" xml:space="preserve">
     <value>Vorschau</value>
   </data>
+  <data name="strPatternDialog_ChequeredOffset" xml:space="preserve">
+    <value>Kästchen-Abstand:</value>
+  </data>
+  <data name="strPatternDialog_DottedColor" xml:space="preserve">
+    <value>Farbe:</value>
+  </data>
+  <data name="strPatternDialog_DottedOffset" xml:space="preserve">
+    <value>Punkt-Abstand:</value>
+  </data>
+  <data name="strPatternDialog_DottedRadius" xml:space="preserve">
+    <value>Radius:</value>
+  </data>
+  <data name="strPatternDialog_Intensity" xml:space="preserve">
+    <value>Intensität:</value>
+  </data>
+  <data name="strPatternDialog_LineColor" xml:space="preserve">
+    <value>Linienfarbe:</value>
+  </data>
+  <data name="strPatternDialog_RuledOffset" xml:space="preserve">
+    <value>Linien-Abstand:</value>
+  </data>
+  <data name="strPatternDialog_StrokeWidth" xml:space="preserve">
+    <value>Strichstärke:</value>
+  </data>
+  <data name="strPatternDialog_ApplyChanges" xml:space="preserve">
+    <value>Änderungen übernehmen</value>
+  </data>
+  <data name="strPatternDialog_DiscardChanges" xml:space="preserve">
+    <value>Änderungen verwerfen</value>
+  </data>
+  <data name="strPatternDialog_HelpText_Description" xml:space="preserve">
+    <value>In diesem Dialog haben Sie die Möglichkeit die verschiedenen Papiermuster (kariert, punkte und liniert) optimal einzustellen. Die Muster sind standardmäßig bereits sehr gut zum Arbeiten geeignet. Jedoch kann es durchaus sinnvoll sein, die Muster anzupassen z.B. einen größeren oder kleineren Linienabstand!</value>
+  </data>
+  <data name="strPatternDialog_HelpText_Description_2" xml:space="preserve">
+    <value>Dieser Dialog ist dafür gedacht, die Einstellungen einmal ideal für Ihre Zwecke zu setzen. Wenn Sie andere Dokumente laden, werden Ihre Einstellungen nicht berücksichtigt, d.h. Sie können problemlos andere Dokumente laden und bearbeiten.</value>
+  </data>
+  <data name="strPatternDialog_HelpText_Head_Description" xml:space="preserve">
+    <value>Beschreibung:</value>
+  </data>
+  <data name="strPatternDialog_HelpText_Head_Hint" xml:space="preserve">
+    <value>Wichtiger Hinweis:</value>
+  </data>
+  <data name="strPatternDialog_HelpText_Head_ResetSettings" xml:space="preserve">
+    <value>Zurücksetzen der Einstellungen:</value>
+  </data>
+  <data name="strPatternDialog_HelpText_Hint" xml:space="preserve">
+    <value>Die Einstellungen beziehen sich nicht auf aktuelle und geladene Dokumente, die eine veränderte oder keine Einstellung haben. Laden Sie beispielsweise alte Dokumente werden die Standard-Einstellungen verwendet, da sonst die Dokumente nicht sauber dargestellt werden können.</value>
+  </data>
+  <data name="strPatternDialog_HelpText_Hint2" xml:space="preserve">
+    <value>Das bedeutet, dass die Einstellungen die Sie hier vornehmen nur für neue Dokumente gelten. Wenn Sie eine neue Seite einfügen, werden immer die Einstellungen aus dem aktuell geladen Dokument verwendet.</value>
+  </data>
+  <data name="strPatternDialog_HelpText_Hint3" xml:space="preserve">
+    <value>Die Einstellungen, die hier vorgenommen werden beziehen sich immer auf das gesamte Dokument!</value>
+  </data>
+  <data name="strPatternDialog_HelpText_ResetSettings" xml:space="preserve">
+    <value>Die Einstellungen können jederzeit wieder zurückgesetzt werden, aber bitte beachten Sie, dass dies nicht für bereits geladene Dokumente gilt.</value>
+  </data>
 </root>

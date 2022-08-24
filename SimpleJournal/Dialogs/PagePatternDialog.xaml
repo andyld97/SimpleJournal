@@ -128,18 +128,18 @@
                             </Style>
                         </StackPanel.Resources>
                         
-                        <TextBlock Text="Intensität:" />
+                        <TextBlock Text="{x:Static res:Resources.strPatternDialog_Intensity}" />
                         <Slider x:Name="SliderChequeredIntensity" ValueChanged="SliderChequeredIntensity_ValueChanged" Style="{DynamicResource MahApps.Styles.Slider}" Maximum="100" Value="18" Minimum="5"  />
 
-                        <TextBlock Text="Kästchen-Abstand:" />
+                        <TextBlock Text="{x:Static res:Resources.strPatternDialog_ChequeredOffset}" />
                         <Slider x:Name="SliderChequeredOffset" ValueChanged="SliderChequeredOffset_ValueChanged" Style="{DynamicResource MahApps.Styles.Slider}" Maximum="100" Value="22" />
 
-                        <TextBlock Text="Strichstärke:" />
+                        <TextBlock Text="{x:Static res:Resources.strPatternDialog_StrokeWidth}" />
                         <Slider x:Name="SliderChequredStrokeWidth" ValueChanged="SliderChequredStrokeWidth_ValueChanged" Style="{DynamicResource MahApps.Styles.Slider}" Value="0.5" Maximum="1"  />
 
                         <Grid>
                             <StackPanel>
-                                <TextBlock Text="Linienfarbe:" />
+                                <TextBlock Text="{x:Static res:Resources.strPatternDialog_LineColor}" />
                                 <controls:ColorPicker x:Name="ChequeredColorPicker" ColorChanged="ChequeredColorPicker_ColorChanged" Height="40"  HorizontalAlignment="left" />
                             </StackPanel>
 
@@ -175,18 +175,18 @@
                             <Style TargetType="{x:Type Slider}" BasedOn="{StaticResource MahApps.Styles.Slider}" />
                         </StackPanel.Resources>
                         
-                        <TextBlock Text="Punkt-Abstand:" />
+                        <TextBlock Text="{x:Static res:Resources.strPatternDialog_DottedOffset}" />
                         <Slider x:Name="SliderViewPort" ValueChanged="SliderViewPort_ValueChanged" Value="20" Minimum="1" Maximum="50" />
 
-                        <TextBlock Text="Radius:" />
+                        <TextBlock Text="{x:Static res:Resources.strPatternDialog_DottedRadius}" />
                         <Slider x:Name="SliderDottedRadius" ValueChanged="SliderDottedRadius_ValueChanged" Value="0.5" Minimum="0.1" Maximum="2" />
 
-                        <TextBlock Text="Strichstärke:" />
+                        <TextBlock Text="{x:Static res:Resources.strPatternDialog_StrokeWidth}" />
                         <Slider x:Name="SliderDottedStrokeWidth" ValueChanged="SliderDottedStrokeWidth_ValueChanged" Minimum="0.1" Value="2" Maximum="5" />
                         
                         <Grid>
                             <StackPanel>
-                                <TextBlock Text="Farbe:" />
+                                <TextBlock Text="{x:Static res:Resources.strPatternDialog_DottedColor}" />
                                 <controls:ColorPicker x:Name="DottedColorPicker" ColorChanged="DottedColorPicker_ColorChanged" Height="40" HorizontalAlignment="Left" />
                             </StackPanel>
 
@@ -221,15 +221,15 @@
                             <Style TargetType="{x:Type Slider}" BasedOn="{StaticResource MahApps.Styles.Slider}" />
                         </StackPanel.Resources>
 
-                        <TextBlock Text="Linien-Abstand:" />
+                        <TextBlock Text="{x:Static res:Resources.strPatternDialog_RuledOffset}" />
                         <Slider x:Name="SliderRuledOffset" ValueChanged="SliderRuledOffset_ValueChanged" Value="50" Minimum="1" Maximum="100" />
 
-                        <TextBlock Text="Strichbreite:" />
+                        <TextBlock Text="{x:Static res:Resources.strPatternDialog_StrokeWidth}" />
                         <Slider x:Name="SliderRuledStrokeWdith" ValueChanged="SliderRuledStrokeWdith_ValueChanged" Value="0.1" Minimum="0.1" Maximum="1" />
 
                         <Grid>
                             <StackPanel>
-                                <TextBlock Text="Linienfarbe:" />
+                                <TextBlock Text="{x:Static res:Resources.strPatternDialog_LineColor}" />
                                 <controls:ColorPicker x:Name="RuledColorPicker" ColorChanged="RuledColorPicker_ColorChanged" Height="40" HorizontalAlignment="Left" />
                             </StackPanel>
 
@@ -249,46 +249,43 @@
                         <TextBlock x:Name="TabHeaderHelp" Margin="5,0" Text="{x:Static res:Resources.strHelp}" VerticalAlignment="Center" />
                     </StackPanel>
                 </TabItem.Header>
-
-
+                
                 <Grid Margin="5,2">
                     <StackPanel>
                         <TextBlock TextWrapping="Wrap" FontSize="14">
-                            <Run Text="Erklärung:" FontWeight="Bold" />
+                            <Run Text="{x:Static res:Resources.strPatternDialog_HelpText_Head_Description}" FontWeight="Bold" />
                             <LineBreak />
                             <LineBreak />
-                            <Run Text="In diesem Dialog haben Sie die Möglichkeit die verschiedenen Papiermuster (kariert, punkte und liniert) optimal einzustellen. Die Muster sind standardmäßig bereits sehr gut zum Arbeiten geeignet. Jedoch kann es durchaus sinnvoll sein, die Muster anzupassen z.B. einen größeren oder kleineren Linienabstand!" />
+                            <Run Text="{x:Static res:Resources.strPatternDialog_HelpText_Description}" />
                             <LineBreak />
                             <LineBreak />
-                            <Run Text="Dieser Dialog ist dafür gedacht, die Einstellungen einmal ideal für Ihre Zwecke zu setzen. Wenn Sie andere Dokumente laden, werden Ihre Einstellungen nicht berücksichtigt, d.h. Sie können problemlos andere Dokumente laden und bearbeiten." />
+                            <Run Text="{x:Static res:Resources.strPatternDialog_HelpText_Description_2}" />
                             <LineBreak />
                             <LineBreak />
-                            <Run Text="Wichtiger Hinweis:" FontWeight="Bold" />
+                            <Run Text="{x:Static res:Resources.strPatternDialog_HelpText_Head_Hint}" FontWeight="Bold" />
                             <LineBreak />
                             <LineBreak />
-                            <Run Text="Die Einstellungen beziehen sich nicht auf aktuelle und geladene Dokumente, die eine andere Einstellung haben. Laden Sie beispielsweise alte Dokumente werden die Standard-Einstellungen verwendet, da sonst die Dokumente nicht sauber dargestellt werden können." />
-                            <Run Text="Das bedeutet, dass die Einstellungen die Sie hier vornehmen nur für neue Dokumente gelten. Wenn Sie eine neue Seite einfügen, werden immer die Einstellungen aus dem aktuell geladen Dokument verwendet." />
-                            
+                            <Run Text="{x:Static res:Resources.strPatternDialog_HelpText_Hint}" />
                             <LineBreak />
-                            <Run Text="Die Einstellungen, die hier vorgenommen werden beziehen sich immer auf das gesamte Dokument!" />
-                            
+                            <Run Text="{x:Static res:Resources.strPatternDialog_HelpText_Hint2}" />                            
                             <LineBreak />
-                            <LineBreak />
-                            <Run Text="Zurücksetzen der Einstellungen:" FontWeight="Bold" />
+                            <Run Text="{x:Static res:Resources.strPatternDialog_HelpText_Hint3}" />                            
                             <LineBreak />
                             <LineBreak />
-                            <Run Text="Die Einstellungen können jederzeit wieder zurückgesetzt werden, aber bitte beachten Sie, dass dies nicht für bereits geladene Dokumente gilt." />
+                            <Run Text="{x:Static res:Resources.strPatternDialog_HelpText_Head_ResetSettings}" FontWeight="Bold" />
+                            <LineBreak />
+                            <LineBreak />
+                            <Run Text="{x:Static res:Resources.strPatternDialog_HelpText_ResetSettings}" />
                         </TextBlock>
                     </StackPanel>
                 </Grid>
             </TabItem>
-
         </TabControl>
 
         <Grid Grid.Row="1">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="2,5,2,7">
-                <Button x:Name="ButtonApply" Click="ButtonApply_Click" Content="Änderungen übernehmen" FontWeight="Bold" Padding="5" Width="200" />
-                <Button x:Name="ButtonExit" Click="ButtonExit_Click"  Content="Änderungen verwerfen" Margin="5,0,0,0" Width="200" />
+                <Button x:Name="ButtonApply" Click="ButtonApply_Click" Content="{x:Static res:Resources.strPatternDialog_ApplyChanges}" FontWeight="Bold" Padding="5" Width="200" />
+                <Button x:Name="ButtonExit" Click="ButtonExit_Click"  Content="{x:Static res:Resources.strPatternDialog_DiscardChanges}" Margin="5,0,0,0" Width="200" />
             </StackPanel>
         </Grid>
     </Grid>

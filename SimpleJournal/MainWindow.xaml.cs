@@ -3312,12 +3312,15 @@ namespace SimpleJournal
         {
             try
             {
-                Journal journal = new Journal { ProcessID = ProcessHelper.CurrentProcID };
-
-                // Apply pattern from document 
-                journal.ChequeredPattern = currentJournal.ChequeredPattern;
-                journal.DottedPattern = currentJournal.DottedPattern;
-                journal.RuledPattern = currentJournal.RuledPattern;
+                Journal journal = new Journal
+                {
+                    ProcessID = ProcessHelper.CurrentProcID,                 
+                                        
+                    // Apply pattern from document 
+                    ChequeredPattern = currentJournal?.ChequeredPattern,
+                    DottedPattern = currentJournal?.DottedPattern,
+                    RuledPattern = currentJournal?.RuledPattern
+                };
 
                 if (saveAsBackup)
                 {
