@@ -424,7 +424,7 @@ namespace SimpleJournal
 
             // Check if command line parameter was passed
             if (!string.IsNullOrEmpty(App.Path) && System.IO.File.Exists(App.Path))
-                await LoadJournal(App.Path);
+                await LoadJournalAsnyc(App.Path);
 
             if (Settings.Instance.UseAutoSave)
                 await ShowRecoverAutoBackupFileDialog();
@@ -634,7 +634,7 @@ namespace SimpleJournal
             backupName += $"{DateTime.Now.ToString(Properties.Resources.strAutoSaveDateTimeFileFormat)}.journal";
 
             string path = System.IO.Path.Combine(Consts.AutoSaveDirectory, backupName);
-            bool result = await SaveJournal(path, true);
+            bool result = await SaveJournalAsync(path, true);
             if (!result)
             {
                 try
@@ -1307,6 +1307,11 @@ namespace SimpleJournal
             else if (paperType == PaperType.Ruled && currentJournal.RuledPattern != null)
                 return currentJournal.RuledPattern;
 
+            // IMPORTANT: If the current journal is loaded from file, it may has patterns or not, but to respect them 
+            // we cannot use the settings in this case, otherwise the settings would ruin the document!
+            if (currentJournalIsLoadedFromFile)
+                return null;
+
             // Apply pattern from settings if any, ensure that the document is considered first
             if (paperType == PaperType.Chequered && Settings.Instance.ChequeredPattern != null)
             {
@@ -1520,12 +1525,24 @@ namespace SimpleJournal
 
             if (pattern == null)
             {
-                if (paperPattern == PaperType.Chequered && Settings.Instance.ChequeredPattern != null)
-                    pattern = Settings.Instance.ChequeredPattern;
-                else if (paperPattern == PaperType.Dotted && Settings.Instance.DottedPattern != null)
-                    pattern = Settings.Instance.DottedPattern;
-                else if (paperPattern == PaperType.Ruled && Settings.Instance.RuledPattern != null)
-                    pattern = Settings.Instance.RuledPattern;
+                if (currentJournal != null)
+                {
+                    if (paperPattern == PaperType.Chequered && currentJournal.ChequeredPattern != null)
+                        pattern = currentJournal.ChequeredPattern;
+                    else if (paperPattern == PaperType.Dotted && currentJournal.DottedPattern != null)
+                        pattern = currentJournal.DottedPattern;
+                    else if (paperPattern == PaperType.Ruled && currentJournal.RuledPattern != null)
+                        pattern = currentJournal.RuledPattern;
+                }
+                else
+                {
+                    if (paperPattern == PaperType.Chequered && Settings.Instance.ChequeredPattern != null)
+                        pattern = Settings.Instance.ChequeredPattern;
+                    else if (paperPattern == PaperType.Dotted && Settings.Instance.DottedPattern != null)
+                        pattern = Settings.Instance.DottedPattern;
+                    else if (paperPattern == PaperType.Ruled && Settings.Instance.RuledPattern != null)
+                        pattern = Settings.Instance.RuledPattern;
+                }
             }
 
             switch (paperPattern)
@@ -2371,7 +2388,7 @@ namespace SimpleJournal
             e.CanExecute = true;
         }
 
-        private void NewCommand_Executed(object sender, ExecutedRoutedEventArgs e)
+        private async void NewCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             bool run;
             if (DrawingCanvas.Change)
@@ -2384,7 +2401,13 @@ namespace SimpleJournal
 
             if (run)
             {
+                // Important to ensure that the old document can be loaded again!
+                await FreeOldJournalAsync();
+
                 // No journal is loaded currently
+                currentJournal = new Journal();
+                currentJournalIsLoadedFromFile = false;
+
                 pages.Children.Clear();
                 CurrentJournalPages.Clear();
                 pnlSidebar.Visibility = Visibility.Hidden;
@@ -2468,7 +2491,7 @@ namespace SimpleJournal
                         RecentlyOpenedDocuments.Remove(d.Path);
                 }
                 else if (AskForOpeningAfterModifying())
-                    await LoadJournal(d.Path);
+                    await LoadJournalAsnyc(d.Path);
 
                 ListRecentlyOpenedDocuments.SelectedItem = null;
             }
@@ -2491,7 +2514,7 @@ namespace SimpleJournal
                     {
                         Dispatcher.Invoke(new System.Action(async () =>
                         {
-                            await LoadJournal(d.Path);
+                            await LoadJournalAsnyc(d.Path);
                         }));
                     });
                 }
@@ -2535,12 +2558,12 @@ namespace SimpleJournal
                 var result = dialog.ShowDialog();
                 if (result.HasValue && result.Value)
                 {
-                    resultSaving = await SaveJournal(dialog.FileName);
+                    resultSaving = await SaveJournalAsync(dialog.FileName);
                     UpdateTitle(System.IO.Path.GetFileNameWithoutExtension(dialog.FileName));
                 }
             }
             else
-                resultSaving = await SaveJournal(currentJournalPath);
+                resultSaving = await SaveJournalAsync(currentJournalPath);
 
             return resultSaving;
         }
@@ -2821,12 +2844,12 @@ namespace SimpleJournal
                         bool? res = pdfConversationDialog.ShowDialog();
 
                         if (res.HasValue && res.Value)
-                            await LoadJournal(pdfConversationDialog.DestinationFileName);
+                            await LoadJournalAsnyc(pdfConversationDialog.DestinationFileName);
 
                         return;
                     }
 
-                    await LoadJournal(ofd.FileName);
+                    await LoadJournalAsnyc(ofd.FileName);
                 }
             }
         }
@@ -2846,7 +2869,7 @@ namespace SimpleJournal
                     bool? res = pdfConversationDialog.ShowDialog();
 
                     if (res.HasValue && res.Value)
-                        await LoadJournal(pdfConversationDialog.DestinationFileName);
+                        await LoadJournalAsnyc(pdfConversationDialog.DestinationFileName);
                 }
             }
         }
@@ -3283,27 +3306,18 @@ namespace SimpleJournal
         #region Internal Save and Load
 
         private Journal currentJournal = null;
+        private bool currentJournalIsLoadedFromFile = false;
 
-        private async Task<bool> SaveJournal(string path, bool saveAsBackup = false)
+        private async Task<bool> SaveJournalAsync(string path, bool saveAsBackup = false)
         {
             try
             {
                 Journal journal = new Journal { ProcessID = ProcessHelper.CurrentProcID };
 
-                if (currentJournal == null)
-                {
-                    // Apply pattern from settings if any
-                    journal.ChequeredPattern = Settings.Instance.ChequeredPattern;
-                    journal.DottedPattern = Settings.Instance.DottedPattern;
-                    journal.RuledPattern = Settings.Instance.RuledPattern;
-                }
-                else
-                {
-                    // Apply pattern from document 
-                    journal.ChequeredPattern = currentJournal.ChequeredPattern;
-                    journal.DottedPattern = currentJournal.DottedPattern;
-                    journal.RuledPattern = currentJournal.RuledPattern;
-                }
+                // Apply pattern from document 
+                journal.ChequeredPattern = currentJournal.ChequeredPattern;
+                journal.DottedPattern = currentJournal.DottedPattern;
+                journal.RuledPattern = currentJournal.RuledPattern;
 
                 if (saveAsBackup)
                 {
@@ -3372,7 +3386,22 @@ namespace SimpleJournal
             }
         }
 
-        private async Task LoadJournal(string fileName)
+        private async Task FreeOldJournalAsync()
+        {
+            if (!string.IsNullOrEmpty(currentJournalPath))
+            {
+                // If a path is set remove the process id
+                var journal = await Journal.LoadJournalMetaAsync(currentJournalPath);
+                if (journal != null)
+                {
+                    journal.ProcessID = -1;
+                    await journal.UpdateJournalMetaAsync(currentJournalPath, true);
+                    currentJournalPath = string.Empty;
+                }
+            }
+        }
+
+        private async Task LoadJournalAsnyc(string fileName)
         {
             if (fileName.EndsWith(".journal"))
             {
@@ -3423,19 +3452,10 @@ namespace SimpleJournal
                     }
 
                     // Okay: User has decided to load / discard old document => remove the process ID
-                    if (!string.IsNullOrEmpty(currentJournalPath))
-                    {
-                        // If a path is set remove the process id
-                        var journal = await Journal.LoadJournalMetaAsync(currentJournalPath);
-                        if (journal != null)
-                        {
-                            journal.ProcessID = -1;
-                            await journal.UpdateJournalMetaAsync(currentJournalPath, true);
-                            currentJournalPath = string.Empty;
-                        }
-                    }
+                    await FreeOldJournalAsync();
 
                     currentJournalPath = fileName;
+                    currentJournalIsLoadedFromFile = true;
 
                     IsEnabled = false;
                     isInitalized = false;
