@@ -132,10 +132,10 @@
                         <Slider x:Name="SliderChequeredIntensity" ValueChanged="SliderChequeredIntensity_ValueChanged" Style="{DynamicResource MahApps.Styles.Slider}" Maximum="100" Value="18" Minimum="5"  />
 
                         <TextBlock Text="{x:Static res:Resources.strPatternDialog_ChequeredOffset}" />
-                        <Slider x:Name="SliderChequeredOffset" ValueChanged="SliderChequeredOffset_ValueChanged" Style="{DynamicResource MahApps.Styles.Slider}" Maximum="100" Value="22" />
+                        <Slider x:Name="SliderChequeredOffset" ValueChanged="SliderChequeredOffset_ValueChanged" Style="{DynamicResource MahApps.Styles.Slider}" Maximum="100" Value="22" Minimum="5" />
 
                         <TextBlock Text="{x:Static res:Resources.strPatternDialog_StrokeWidth}" />
-                        <Slider x:Name="SliderChequredStrokeWidth" ValueChanged="SliderChequredStrokeWidth_ValueChanged" Style="{DynamicResource MahApps.Styles.Slider}" Value="0.5" Maximum="1"  />
+                        <Slider x:Name="SliderChequredStrokeWidth" ValueChanged="SliderChequredStrokeWidth_ValueChanged" Style="{DynamicResource MahApps.Styles.Slider}" Value="0.5" Maximum="1" Minimum="0.1"  />
 
                         <Grid>
                             <StackPanel>
@@ -149,7 +149,7 @@
                         </Grid>
                     </StackPanel>
 
-                    <controls:PreviewCanvas x:Name="ChequeredPreview" Margin="0,5,0,0" PaperType="Chequered" SnapsToDevicePixels="True" UseLayoutRounding="true" Grid.Row="1" />
+                    <controls:PreviewCanvas x:Name="ChequeredPreview" Margin="5,5,5,0" PaperType="Chequered" SnapsToDevicePixels="True" UseLayoutRounding="true" Grid.Row="1" />
                 </Grid>                            
             </TabItem>
             <TabItem Width="150">
@@ -196,7 +196,7 @@
                         </Grid>
                     </StackPanel>
 
-                    <controls:PreviewCanvas x:Name="DottedPreview" PaperType="Dotted" Margin="0,5,0,0" Grid.Row="1" SnapsToDevicePixels="true" UseLayoutRounding="True" />
+                    <controls:PreviewCanvas x:Name="DottedPreview" PaperType="Dotted" Margin="5,5,5,0" Grid.Row="1" SnapsToDevicePixels="true" UseLayoutRounding="True" />
                 </Grid>
             </TabItem>
             <TabItem Width="150">
@@ -222,7 +222,7 @@
                         </StackPanel.Resources>
 
                         <TextBlock Text="{x:Static res:Resources.strPatternDialog_RuledOffset}" />
-                        <Slider x:Name="SliderRuledOffset" ValueChanged="SliderRuledOffset_ValueChanged" Value="50" Minimum="1" Maximum="100" />
+                        <Slider x:Name="SliderRuledOffset" ValueChanged="SliderRuledOffset_ValueChanged" Value="50" Minimum="5" Maximum="100" />
 
                         <TextBlock Text="{x:Static res:Resources.strPatternDialog_StrokeWidth}" />
                         <Slider x:Name="SliderRuledStrokeWdith" ValueChanged="SliderRuledStrokeWdith_ValueChanged" Value="0.1" Minimum="0.1" Maximum="1" />
@@ -239,7 +239,7 @@
                         </Grid>
                     </StackPanel>
 
-                    <controls:PreviewCanvas x:Name="RuledPreview" PaperType="Ruled" Margin="0,5,0,0" Grid.Row="1" SnapsToDevicePixels="true" UseLayoutRounding="true" />
+                    <controls:PreviewCanvas x:Name="RuledPreview" PaperType="Ruled" Margin="5,5,5,0" Grid.Row="1" SnapsToDevicePixels="true" UseLayoutRounding="true" />
                 </Grid>
             </TabItem>
             <TabItem Width="150">
@@ -283,9 +283,9 @@
         </TabControl>
 
         <Grid Grid.Row="1">
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="2,5,2,7">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="2,5,6,7">
                 <Button x:Name="ButtonApply" Click="ButtonApply_Click" Content="{x:Static res:Resources.strPatternDialog_ApplyChanges}" FontWeight="Bold" Padding="5" Width="200" />
-                <Button x:Name="ButtonExit" Click="ButtonExit_Click"  Content="{x:Static res:Resources.strPatternDialog_DiscardChanges}" Margin="5,0,0,0" Width="200" />
+                <Button x:Name="ButtonExit" Click="ButtonExit_Click"  Content="{x:Static res:Resources.strPatternDialog_DiscardChanges}" Margin="5,0,2,0" Width="200" />
             </StackPanel>
         </Grid>
     </Grid>
