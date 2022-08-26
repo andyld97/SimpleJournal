@@ -127,24 +127,29 @@
                                 <Setter Property="FontWeight" Value="Bold" />
                             </Style>
                         </StackPanel.Resources>
-                        
+
                         <TextBlock Text="{x:Static res:Resources.strPatternDialog_Intensity}" />
-                        <Slider x:Name="SliderChequeredIntensity" ValueChanged="SliderChequeredIntensity_ValueChanged" Style="{DynamicResource MahApps.Styles.Slider}" Maximum="100" Value="18" Minimum="5"  />
+                        <Slider x:Name="SliderChequeredIntensity" ValueChanged="SliderChequeredIntensity_ValueChanged" Style="{DynamicResource MahApps.Styles.Slider}" Maximum="100" Value="18" Minimum="5" />
 
                         <TextBlock Text="{x:Static res:Resources.strPatternDialog_ChequeredOffset}" />
                         <Slider x:Name="SliderChequeredOffset" ValueChanged="SliderChequeredOffset_ValueChanged" Style="{DynamicResource MahApps.Styles.Slider}" Maximum="100" Value="22" Minimum="5" />
 
                         <TextBlock Text="{x:Static res:Resources.strPatternDialog_StrokeWidth}" />
-                        <Slider x:Name="SliderChequredStrokeWidth" ValueChanged="SliderChequredStrokeWidth_ValueChanged" Style="{DynamicResource MahApps.Styles.Slider}" Value="0.5" Maximum="1" Minimum="0.1"  />
+                        <Slider x:Name="SliderChequredStrokeWidth" ValueChanged="SliderChequredStrokeWidth_ValueChanged" Style="{DynamicResource MahApps.Styles.Slider}" Maximum="1" Minimum="0.1" Value="0.5"   />
 
                         <Grid>
                             <StackPanel>
                                 <TextBlock Text="{x:Static res:Resources.strPatternDialog_LineColor}" />
-                                <controls:ColorPicker x:Name="ChequeredColorPicker" ColorChanged="ChequeredColorPicker_ColorChanged" Height="40"  HorizontalAlignment="left" />
+                                <controls:ColorPicker x:Name="ChequeredColorPicker" SelectedColor="Gray" ColorChanged="ChequeredColorPicker_ColorChanged" Height="40" HorizontalAlignment="left" />
                             </StackPanel>
 
                             <StackPanel HorizontalAlignment="Right" VerticalAlignment="Center">
-                                <Button x:Name="ButtonResetChequered" Click="ButtonResetChequered_Click"  Content="Standard wiederherstellen" FontWeight="Bold" Margin="2" Padding="5" />
+                                <Button x:Name="ButtonResetChequered" Click="ButtonResetChequered_Click" FontWeight="Bold" Margin="2" Padding="5">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Width="32" Source="../resources/page_pattern/pageresetpatterntodefault.png" />
+                                        <TextBlock Text="{x:Static res:Resources.strPatternDialog_ResetToDefault}" VerticalAlignment="Center" />
+                                    </StackPanel>
+                                </Button>
                             </StackPanel>
                         </Grid>
                     </StackPanel>
@@ -191,7 +196,12 @@
                             </StackPanel>
 
                             <StackPanel HorizontalAlignment="Right" VerticalAlignment="Center">
-                                <Button x:Name="ButtonResetDotted" Click="ButtonResetDotted_Click" Content="Standard wiederherstellen" FontWeight="Bold" Margin="2" Padding="5" />
+                                <Button x:Name="ButtonResetDotted" Click="ButtonResetDotted_Click" FontWeight="Bold" Margin="2" Padding="5">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Width="32" Source="../resources/page_pattern/pageresetpatterntodefault.png" />
+                                        <TextBlock Text="{x:Static res:Resources.strPatternDialog_ResetToDefault}" VerticalAlignment="Center" />
+                                    </StackPanel>
+                                </Button>
                             </StackPanel>
                         </Grid>
                     </StackPanel>
@@ -234,7 +244,12 @@
                             </StackPanel>
 
                             <StackPanel HorizontalAlignment="Right" VerticalAlignment="Center">
-                                <Button x:Name="ButtonResetRuled" Click="ButtonResetRuled_Click" Content="Standard wiederherstellen" FontWeight="Bold" Margin="2" Padding="5" />
+                                <Button x:Name="ButtonResetRuled" Click="ButtonResetRuled_Click" FontWeight="Bold" Margin="2" Padding="5">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Width="32" Source="../resources/page_pattern/pageresetpatterntodefault.png" />
+                                        <TextBlock Text="{x:Static res:Resources.strPatternDialog_ResetToDefault}" VerticalAlignment="Center" />
+                                    </StackPanel>
+                                </Button>
                             </StackPanel>
                         </Grid>
                     </StackPanel>
@@ -245,7 +260,7 @@
             <TabItem Width="150">
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal" Margin="2">
-                        <Image Width="24" RenderOptions.BitmapScalingMode="Fant" Source="pack://application:,,,/SimpleJournal;component/resources/help.png" />
+                        <Image Width="24" RenderOptions.BitmapScalingMode="Fant" Source="pack://application:,,,/SimpleJournal;component/resources/page_pattern/pagehelp.png" />
                         <TextBlock x:Name="TabHeaderHelp" Margin="5,0" Text="{x:Static res:Resources.strHelp}" VerticalAlignment="Center" />
                     </StackPanel>
                 </TabItem.Header>
@@ -284,8 +299,18 @@
 
         <Grid Grid.Row="1">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="2,5,6,7">
-                <Button x:Name="ButtonApply" Click="ButtonApply_Click" Content="{x:Static res:Resources.strPatternDialog_ApplyChanges}" FontWeight="Bold" Padding="5" Width="200" />
-                <Button x:Name="ButtonExit" Click="ButtonExit_Click"  Content="{x:Static res:Resources.strPatternDialog_DiscardChanges}" Margin="5,0,2,0" Width="200" />
+                <Button x:Name="ButtonApply" Click="ButtonApply_Click" FontWeight="Bold" Padding="5" Width="200">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Width="32" Source="../resources/page_pattern/pageapplychanges.png" />
+                        <TextBlock Text="{x:Static res:Resources.strPatternDialog_ApplyChanges}" VerticalAlignment="Center" />
+                    </StackPanel>
+                </Button>
+                <Button x:Name="ButtonExit" Click="ButtonExit_Click" Margin="5,0,2,0" Width="200">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Width="32" Source="../resources/page_pattern/pagediscardchanges.png" />
+                        <TextBlock Text="{x:Static res:Resources.strPatternDialog_DiscardChanges}" VerticalAlignment="Center" />
+                    </StackPanel>
+                </Button>
             </StackPanel>
         </Grid>
     </Grid>

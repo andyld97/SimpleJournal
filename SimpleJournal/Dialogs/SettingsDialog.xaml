@@ -8,7 +8,7 @@
         xmlns:shared="clr-namespace:SimpleJournal.SharedResources;assembly=SimpleJournal.SharedResources"
         xmlns:controlzEx="urn:controlzex"
         xmlns:controls="clr-namespace:SimpleJournal.Controls"
-        xmlns:Fluent="urn:fluent-ribbon" xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:Fluent="urn:fluent-ribbon" xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls" xmlns:controls1="clr-namespace:SimpleJournal.Documents.UI.Controls;assembly=SimpleJournal.Documents.UI"
         mc:Ignorable="d"
         Title="{x:Static res:Resources.strSettings}"
         Height="420" Width="650"
@@ -113,12 +113,11 @@
                         </StackPanel.Resources>
                         <TextBlock Margin="0,3,0,0" Text="{x:Static res:Resources.strPaperFormat}"/>
                         <Grid>
-
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
-                            
+
                             <Fluent:ComboBox Header="{x:Null}" IsEditable="False" Margin="-8,3,3,0" Padding="4" SelectedIndex="1" x:Name="chkPaperType" SelectionChanged="chkPaperType_SelectionChanged">
                                 <ComboBox.Items>
                                     <ComboBoxItem Content="{x:Static shared:Resources.strPlain}"/>
@@ -127,8 +126,8 @@
                                     <ComboBoxItem Content="{x:Static shared:Resources.strDottet}" />
                                 </ComboBox.Items>
                             </Fluent:ComboBox>
-
-                            <Button Grid.Column="1" x:Name="ButtonChangePaperPattern" Click="ButtonChangePaperPattern_Click" Content="Papiermuster anpassen" />
+                            
+                            <Image x:Name="ButtonChangePaperPattern" MouseDown="ButtonChangePaperPattern_MouseDown" ToolTip="{x:Static res:Resources.strSettings_EditPaperPattern}" Cursor="Hand" RenderOptions.BitmapScalingMode="Fant" Margin="0,3,0,0" Height="28" Grid.Column="1" Source="pack://application:,,,/SimpleJournal;component/resources/page_pattern/editpagepattern.png" />
                         </Grid>
                         <TextBlock Margin="0,5,0,0" Text="{x:Static res:Resources.strPaperSize}"/>
                         <Fluent:ComboBox IsEditable="False" Margin="-8,3,3,0" Padding="4" SelectedIndex="0" x:Name="chkPaperFormat">

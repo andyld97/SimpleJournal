@@ -2582,6 +2582,15 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Restore Default.
+        /// </summary>
+        public static string strPatternDialog_ResetToDefault {
+            get {
+                return ResourceManager.GetString("strPatternDialog_ResetToDefault", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Line Spacing:.
         /// </summary>
         public static string strPatternDialog_RuledOffset {
@@ -3514,6 +3523,15 @@ namespace SimpleJournal.Properties {
         public static string strSettings_DisableTouchscreenIfInForeground {
             get {
                 return ResourceManager.GetString("strSettings_DisableTouchscreenIfInForeground", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit paper pattern.
+        /// </summary>
+        public static string strSettings_EditPaperPattern {
+            get {
+                return ResourceManager.GetString("strSettings_EditPaperPattern", resourceCulture);
             }
         }
         

@@ -2188,4 +2188,10 @@ Details: {1}</value>
   <data name="strPatternDialog_HelpText_ResetSettings" xml:space="preserve">
     <value>Die Einstellungen können jederzeit wieder zurückgesetzt werden, aber bitte beachten Sie, dass dies nicht für bereits geladene Dokumente gilt.</value>
   </data>
+  <data name="strSettings_EditPaperPattern" xml:space="preserve">
+    <value>Papiermuster bearbeiten</value>
+  </data>
+  <data name="strPatternDialog_ResetToDefault" xml:space="preserve">
+    <value>Standard wiederherstellen</value>
+  </data>
 </root>

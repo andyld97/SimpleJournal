@@ -1,5 +1,6 @@
 ﻿using MahApps.Metro.Controls;
 using SimpleJournal;
+using SimpleJournal.Common;
 using SimpleJournal.Documents.Pattern;
 using SimpleJournal.Documents.UI;
 using SimpleJournal.Documents.UI.Extensions;
@@ -20,7 +21,7 @@ namespace Dialogs
         private readonly TextBlock[] headers;
         private bool isInitalized = false;
 
-        public PagePatternDialog()
+        public PagePatternDialog(PaperType paperType)
         {
             InitializeComponent();
             headers = new TextBlock[] { TabHeaderChequered, TabHeaderDotted, TabHeaderRuled, TabHeaderHelp };
@@ -32,6 +33,16 @@ namespace Dialogs
                 var grid = tabItem.Template.FindName("PART_Header", tabItem) as Grid;
                 grid.PreviewMouseDown += Grid_PreviewMouseDown;
             }
+
+            if (paperType == PaperType.Chequered)
+                TabControl.SelectedIndex = 0;
+            else if (paperType == PaperType.Dotted)
+                TabControl.SelectedIndex = 1;
+            else if (paperType == PaperType.Ruled)
+                TabControl.SelectedIndex = 2;
+
+            // ChequeredPattern has Gray as default color
+            ChequeredColorPicker.SelectedColor = System.Windows.Media.Colors.Gray;
 
             // Load pattern from settings (if any)
             if (Settings.Instance.ChequeredPattern != null)
@@ -149,8 +160,8 @@ namespace Dialogs
             if (!isInitalized)
                 return;
 
-            SliderChequeredIntensity.Value = e.NewValue - 4;
             chequeredPattern.ViewOffset = e.NewValue;
+            SliderChequeredIntensity.Value = e.NewValue - 4;
             ChequeredPreview.Paper.ApplyPattern(chequeredPattern);
         }
 
@@ -169,8 +180,8 @@ namespace Dialogs
 
             isInitalized = false;
 
-            SliderChequeredOffset.Value = pattern.ViewOffset;
             SliderChequeredIntensity.Value = pattern.ViewPort;
+            SliderChequeredOffset.Value = pattern.ViewOffset;
             SliderChequredStrokeWidth.Value = pattern.StrokeWidth;
             ChequeredColorPicker.SelectedColor = pattern.Color.ToColor();
 
@@ -233,7 +244,7 @@ namespace Dialogs
 
             SliderDottedRadius.Value = dottedPattern.Radius;
             SliderViewPort.Value = dottedPattern.ViewPort;
-            SliderChequredStrokeWidth.Value = dottedPattern.StrokeWidth;
+            SliderDottedStrokeWidth.Value = dottedPattern.StrokeWidth;
             DottedColorPicker.SelectedColor = dottedPattern.Color.ToColor();
 
             isInitalized = true;

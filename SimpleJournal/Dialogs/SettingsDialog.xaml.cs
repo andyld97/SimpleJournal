@@ -383,9 +383,13 @@ namespace SimpleJournal
             GeneralHelper.OpenUri(e.Uri);
         }
 
-        private void ButtonChangePaperPattern_Click(object sender, RoutedEventArgs e)
+        private void ButtonChangePaperPattern_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            new PagePatternDialog().ShowDialog();
+            if (e.ButtonState == System.Windows.Input.MouseButtonState.Pressed)
+            {
+                var paperType = (PaperType)chkPaperType.SelectedIndex;
+                new PagePatternDialog(paperType).ShowDialog();
+            }
         }
     }
 }

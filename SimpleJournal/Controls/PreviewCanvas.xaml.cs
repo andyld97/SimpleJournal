@@ -121,9 +121,7 @@ namespace SimpleJournal.Controls
 
                 currentCanvas.Strokes = new StrokeCollection();
             }
-        }
-
- 
+        } 
 
         private void BtnWrite_Click(object sender, RoutedEventArgs e)
         {

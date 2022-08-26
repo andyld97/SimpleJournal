@@ -1936,6 +1936,7 @@ namespace SimpleJournal
             if (CurrentJournalPages.Count == 1 && CurrentJournalPages[0].Canvas.IsEmpty)
             {
                 // Switch to new format
+                currentJournal = null; // enusure old settings are removed cause the document is empty so we want to apply the new settings in this case!
                 var newPage = GeneratePage(pattern: GetPattern(Settings.Instance.PaperType));
                 CurrentJournalPages.Clear();
                 this.pages.Children.Clear();

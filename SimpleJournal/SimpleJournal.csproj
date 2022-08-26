@@ -104,6 +104,11 @@
 	  <None Remove="resources\notifications\error.png" />
 	  <None Remove="resources\notifications\info.png" />
 	  <None Remove="resources\notifications\warning.png" />
+	  <None Remove="resources\page_pattern\editpagepattern.png" />
+	  <None Remove="resources\page_pattern\pageapplychanges.png" />
+	  <None Remove="resources\page_pattern\pagediscardchanges.png" />
+	  <None Remove="resources\page_pattern\pagehelp.png" />
+	  <None Remove="resources\page_pattern\pageresetpatterntodefault.png" />
 	  <None Remove="resources\trash.png" />
 	</ItemGroup>
 	<ItemGroup>
@@ -124,6 +129,11 @@
 		<Resource Include="resources\notification.png" />
 		<Resource Include="resources\notifications\error.png" />
 		<Resource Include="resources\notifications\info.png" />
+		<Resource Include="resources\page_pattern\editpagepattern.png" />
+		<Resource Include="resources\page_pattern\pageapplychanges.png" />
+		<Resource Include="resources\page_pattern\pagediscardchanges.png" />
+		<Resource Include="resources\page_pattern\pagehelp.png" />
+		<Resource Include="resources\page_pattern\pageresetpatterntodefault.png" />
 		<Resource Include="resources\pdf_small.png" />
 	</ItemGroup>
 	<ItemGroup>

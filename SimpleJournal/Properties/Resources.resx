@@ -2322,4 +2322,12 @@ Details: {1}</value>
     <value>The settings can be reset at any time, but please note that this does not apply to documents that have already been loaded.</value>
     <comment>PagePatternDialog.xaml</comment>
   </data>
+  <data name="strSettings_EditPaperPattern" xml:space="preserve">
+    <value>Edit paper pattern</value>
+    <comment>SettingsDialog.xaml</comment>
+  </data>
+  <data name="strPatternDialog_ResetToDefault" xml:space="preserve">
+    <value>Restore Default</value>
+    <comment>PagePatternDialog.xaml</comment>
+  </data>
 </root>

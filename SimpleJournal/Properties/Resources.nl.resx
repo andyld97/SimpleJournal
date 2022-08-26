@@ -1766,4 +1766,10 @@ Details: {1}</value>
   <data name="strPatternDialog_HelpText_ResetSettings" xml:space="preserve">
     <value>De instellingen kunnen op elk moment worden teruggezet, maar let op: dit geldt niet voor documenten die al zijn geladen.</value>
   </data>
+  <data name="strSettings_EditPaperPattern" xml:space="preserve">
+    <value>Bewerk papier patroon</value>
+  </data>
+  <data name="strPatternDialog_ResetToDefault" xml:space="preserve">
+    <value>Standaard Herstellen</value>
+  </data>
 </root>

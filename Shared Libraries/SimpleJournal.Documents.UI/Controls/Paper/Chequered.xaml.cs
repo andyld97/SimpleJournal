@@ -65,6 +65,11 @@ namespace SimpleJournal.Documents.UI.Controls.Paper
 
         private void ApplyIntensity(DrawingBrush brush, double value)
         {
+            brush.Viewport = new Rect(0, 0, value, value);
+        }
+
+        private void ApplyOffset(DrawingBrush brush, double value)
+        {
             var g = brush.Drawing as GeometryDrawing;
             var grp = g.Geometry as GeometryGroup;
 
@@ -75,11 +80,6 @@ namespace SimpleJournal.Documents.UI.Controls.Paper
             var lg2 = (grp.Children[1] as LineGeometry);
             lg2.StartPoint = new Point(0, 0);
             lg2.EndPoint = new Point(0, value);
-        }
-
-        private void ApplyOffset(DrawingBrush brush, double value)
-        {
-            brush.Viewport = new Rect(0, 0, value, value);
         }
 
         private void ApplyLineColor(DrawingBrush brush, SimpleJournal.Common.Data.Color color)
