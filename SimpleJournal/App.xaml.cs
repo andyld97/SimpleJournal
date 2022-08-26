@@ -31,9 +31,9 @@ namespace SimpleJournal
             }
 
             // Test
-            /*var cultureInfoTest = new CultureInfo("en");
+            var cultureInfoTest = new CultureInfo("en");
             Thread.CurrentThread.CurrentCulture =
-            Thread.CurrentThread.CurrentUICulture = cultureInfoTest;*/
+            Thread.CurrentThread.CurrentUICulture = cultureInfoTest;
 
             GeneralHelper.ApplyTheming();
         }
