@@ -2238,4 +2238,96 @@ Details: {1}</value>
     <value>this</value>
     <comment>*</comment>
   </data>
+  <data name="strPreviewTitle" xml:space="preserve">
+    <value>Preview</value>
+    <comment>PreviewCanvas.xaml</comment>
+  </data>
+  <data name="strPreviewDescription" xml:space="preserve">
+    <value>Here you can test!</value>
+    <comment>PreviewCanvas.xaml</comment>
+  </data>
+  <data name="strPatternDialog_Intensity" xml:space="preserve">
+    <value>Intensity:</value>
+    <comment>PagePatternDialog.xaml</comment>
+  </data>
+  <data name="strPatternDialog_ChequeredOffset" xml:space="preserve">
+    <value>Box Spacing:</value>
+    <comment>PagePatternDialog.xaml</comment>
+  </data>
+  <data name="strPatternDialog_StrokeWidth" xml:space="preserve">
+    <value>Stroke Width:</value>
+    <comment>PagePatternDialog.xaml</comment>
+  </data>
+  <data name="strPatternDialog_LineColor" xml:space="preserve">
+    <value>Line Color:</value>
+    <comment>PagePatternDialog.xaml</comment>
+  </data>
+  <data name="strPatternDialog_DottedOffset" xml:space="preserve">
+    <value>Dot Distance:</value>
+    <comment>PagePatternDialog.xaml</comment>
+  </data>
+  <data name="strPatternDialog_DottedRadius" xml:space="preserve">
+    <value>Radius:</value>
+    <comment>PagePatternDialog.xaml</comment>
+  </data>
+  <data name="strPatternDialog_DottedColor" xml:space="preserve">
+    <value>Color:</value>
+    <comment>PagePatternDialog.xaml</comment>
+  </data>
+  <data name="strPatternDialog_RuledOffset" xml:space="preserve">
+    <value>Line Spacing:</value>
+    <comment>PagePatternDialog.xaml</comment>
+  </data>
+  <data name="strPatternDialog_ApplyChanges" xml:space="preserve">
+    <value>Apply Changes</value>
+    <comment>PagePatternDialog.xaml</comment>
+  </data>
+  <data name="strPatternDialog_DiscardChanges" xml:space="preserve">
+    <value>Discard Changes</value>
+    <comment>PagePatternDialog.xaml</comment>
+  </data>
+  <data name="strPatternDialog_HelpText_Head_Description" xml:space="preserve">
+    <value>Description:</value>
+    <comment>PagePatternDialog.xaml</comment>
+  </data>
+  <data name="strPatternDialog_HelpText_Description" xml:space="preserve">
+    <value>In this dialog you have the option of optimally setting the various paper patterns ( chequered, dotted and ruled). The patterns are already very suitable for working with by default. However, it may be useful to adjust the patterns, e.g. a larger or smaller line spacing!</value>
+    <comment>PagePatternDialog.xaml</comment>
+  </data>
+  <data name="strPatternDialog_HelpText_Description_2" xml:space="preserve">
+    <value>This dialog is intended to set the settings once ideally for your purposes. When you load other documents, your settings are not taken into account, i.e. you can load and edit other documents without any problems.</value>
+    <comment>PagePatternDialog.xaml</comment>
+  </data>
+  <data name="strPatternDialog_HelpText_Head_Hint" xml:space="preserve">
+    <value>Important notice:</value>
+    <comment>PagePatternDialog.xaml</comment>
+  </data>
+  <data name="strPatternDialog_HelpText_Hint" xml:space="preserve">
+    <value>The settings do not apply to current and loaded documents that have a changed setting or no setting. For example, if you load old documents, the default settings are used, otherwise the documents cannot be displayed cleanly.</value>
+    <comment>PagePatternDialog.xaml</comment>
+  </data>
+  <data name="strPatternDialog_HelpText_Hint2" xml:space="preserve">
+    <value>This means that the settings you make here only apply to new documents. If you insert a new page, the settings from the currently loaded document are always used.</value>
+    <comment>PagePatternDialog.xaml</comment>
+  </data>
+  <data name="strPatternDialog_HelpText_Hint3" xml:space="preserve">
+    <value>The settings made here always refer to the entire document!</value>
+    <comment>PagePatternDialog.xaml</comment>
+  </data>
+  <data name="strPatternDialog_HelpText_Head_ResetSettings" xml:space="preserve">
+    <value>Reset the settings:</value>
+    <comment>PagePatternDialog.xaml</comment>
+  </data>
+  <data name="strPatternDialog_HelpText_ResetSettings" xml:space="preserve">
+    <value>The settings can be reset at any time, but please note that this does not apply to documents that have already been loaded.</value>
+    <comment>PagePatternDialog.xaml</comment>
+  </data>
+  <data name="strSettings_EditPaperPattern" xml:space="preserve">
+    <value>Edit paper pattern</value>
+    <comment>SettingsDialog.xaml</comment>
+  </data>
+  <data name="strPatternDialog_ResetToDefault" xml:space="preserve">
+    <value>Restore Default</value>
+    <comment>PagePatternDialog.xaml</comment>
+  </data>
 </root>

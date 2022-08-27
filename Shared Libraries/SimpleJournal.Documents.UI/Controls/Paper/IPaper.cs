@@ -1,4 +1,5 @@
 ﻿using SimpleJournal.Common;
+using SimpleJournal.Documents.Pattern;
 
 namespace SimpleJournal.Documents.UI.Controls.Paper
 {
@@ -9,6 +10,8 @@ namespace SimpleJournal.Documents.UI.Controls.Paper
         PaperType Type { get; }
 
         DrawingCanvas Canvas { get;  }
+
+        void ApplyPattern(IPattern pattern);
 
         Orientation Orientation { get; set; }
 

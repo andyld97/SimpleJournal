@@ -5,31 +5,27 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:controls="clr-namespace:SimpleJournal.Documents.UI.Controls"
       Background="White" Height="29.7cm" Width="21cm"
       mc:Ignorable="d">
+    <UserControl.Resources>
+        <DrawingBrush x:Key="RuledBrush"  Stretch="None" TileMode="Tile" Viewport="0,0 50,50" ViewportUnits="Absolute">
+            <DrawingBrush.Drawing>
+                <GeometryDrawing>
+                    <GeometryDrawing.Geometry>
+                        <GeometryGroup>
+                            <LineGeometry StartPoint="0,0" EndPoint="50,0"/>
+                        </GeometryGroup>
+                    </GeometryDrawing.Geometry>
+                    <GeometryDrawing.Pen>
+                        <Pen Thickness="0.1" Brush="Black"/>
+                    </GeometryDrawing.Pen>
+                </GeometryDrawing>
+            </DrawingBrush.Drawing>
+        </DrawingBrush>
+    </UserControl.Resources>
     <!--
     For more infos see this url
     https://stackoverflow.com/questions/20748651/wpf-drawing-colored-grid-lines-on-a-canvas-panel-background 
     -->
     <Grid>
-        <Border>
-            <controls:DrawingCanvas x:Name="canvas">
-                <controls:DrawingCanvas.Background>
-                    <DrawingBrush Stretch="None" TileMode="Tile"
-                          Viewport="0,0 50,50" ViewportUnits="Absolute">
-                        <DrawingBrush.Drawing>
-                            <GeometryDrawing>
-                                <GeometryDrawing.Geometry>
-                                    <GeometryGroup>
-                                        <LineGeometry StartPoint="0,0" EndPoint="50,0"/>                                        
-                                    </GeometryGroup>
-                                </GeometryDrawing.Geometry>
-                                <GeometryDrawing.Pen>
-                                    <Pen Thickness="0.1" Brush="Black"/>
-                                </GeometryDrawing.Pen>
-                            </GeometryDrawing>
-                        </DrawingBrush.Drawing>
-                    </DrawingBrush>
-                </controls:DrawingCanvas.Background>
-            </controls:DrawingCanvas>
-        </Border>
+        <controls:DrawingCanvas x:Name="canvas" Background="{StaticResource RuledBrush}" />
     </Grid>
 </UserControl>

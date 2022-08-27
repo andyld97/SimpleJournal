@@ -2,6 +2,9 @@
 using System.Windows.Controls;
 using SimpleJournal.Documents.UI.Helper;
 using Orientation = SimpleJournal.Common.Orientation;
+using SimpleJournal.Documents.Pattern;
+using System.Windows.Media;
+using SimpleJournal.Documents.UI.Extensions;
 
 namespace SimpleJournal.Documents.UI.Controls.Paper
 {
@@ -10,6 +13,8 @@ namespace SimpleJournal.Documents.UI.Controls.Paper
     /// </summary>
     public partial class Ruled : UserControl, IPaper 
     {
+        private IPattern pattern;
+
         public Ruled(Orientation orientation)
         {
             InitializeComponent();
@@ -42,6 +47,8 @@ namespace SimpleJournal.Documents.UI.Controls.Paper
             foreach (var child in Canvas.Children)
                 ruled.Canvas.Children.Add(UIHelper.CloneElement(child));
 
+            ruled.ApplyPattern(pattern);
+
             return ruled;
         }
 
@@ -56,6 +63,23 @@ namespace SimpleJournal.Documents.UI.Controls.Paper
             Border = null;
             Canvas.Strokes.Clear();
             Canvas.Children.Clear();
+        }
+
+        public void ApplyPattern(IPattern pattern)
+        {
+            this.pattern = pattern;
+             if (pattern is RuledPattern rp)
+            {
+                var brush = FindResource("RuledBrush") as DrawingBrush;
+                brush.Viewport = new System.Windows.Rect(0, 0, rp.ViewOffset, rp.ViewOffset);
+                var g =  brush.Drawing as GeometryDrawing;
+                var grp = g.Geometry as GeometryGroup;
+                var lg = grp.Children[0] as LineGeometry;
+                lg.StartPoint = new System.Windows.Point(0, 0);
+                lg.EndPoint = new System.Windows.Point(rp.ViewOffset, 0);
+                g.Pen.Brush = new SolidColorBrush(rp.Color.ToColor());
+                g.Pen.Thickness = rp.StrokeWidth;
+            }
         }
     }
 }

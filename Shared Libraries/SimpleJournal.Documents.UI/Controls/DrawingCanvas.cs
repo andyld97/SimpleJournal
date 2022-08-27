@@ -87,6 +87,9 @@ namespace SimpleJournal.Documents.UI.Controls
         #endregion
 
         #region Pubic Properties
+
+        public bool IsEmpty => Strokes.Count == 0 && Children.Count == 0;
+
         public ActionManager Manager { get; } = null;
 
         /// <summary>

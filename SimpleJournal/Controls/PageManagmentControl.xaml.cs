@@ -16,6 +16,7 @@ using Orientation = SimpleJournal.Common.Orientation;
 using System.Windows.Data;
 using System.Globalization;
 using SimpleJournal.Documents.UI.Helper;
+using SimpleJournal.Documents.Pattern;
 
 namespace SimpleJournal.Controls
 {
@@ -34,6 +35,10 @@ namespace SimpleJournal.Controls
         private ToggleButton[] toggleButtons = null;
         private static Dictionary<UIElement, string> toolTips = new Dictionary<UIElement, string>();
         private Window owner;
+
+        private ChequeredPattern chequeredPattern;
+        private DottedPattern dottedPattern;
+        private RuledPattern ruledPattern;
         #endregion
 
         #region Properties
@@ -75,9 +80,13 @@ namespace SimpleJournal.Controls
             ResetHoverText();
         }
 
-        public void Initalize(List<IPaper> pages, Window owner)
+        public void Initalize(List<IPaper> pages, ChequeredPattern chequeredPattern, DottedPattern dottedPattern, RuledPattern ruledPattern, Window owner)
         {
             this.owner = owner;
+            this.chequeredPattern = chequeredPattern;
+            this.dottedPattern = dottedPattern;
+            this.ruledPattern = ruledPattern;
+
             toggleButtons = new ToggleButton[] { ToggleButtonDotted, ToggleButtonChequered, ToggleButtonRuled, ToggleButtonBlanko };
             this.pages = pages;
 
@@ -212,15 +221,30 @@ namespace SimpleJournal.Controls
             TextInfoLabel.Text = Properties.Resources.strPageManagmentDialog_HoverDefaultText;
         }
 
-        private static IPaper CreateEmptyTemplate(PaperType paperType, Orientation orientation)
+        private IPaper CreateEmptyTemplate(PaperType paperType, Orientation orientation)
         {
             IPaper template = null;
             switch (paperType)
             {
                 case PaperType.Blanco: template = new Blanco(orientation); break;
-                case PaperType.Chequered: template = new Chequered(orientation); break;
-                case PaperType.Ruled: template = new Ruled(orientation); break;
-                case PaperType.Dotted: template = new Dotted(orientation); break;
+                case PaperType.Chequered:
+                    {
+                        template = new Chequered(orientation);
+                        template.ApplyPattern(chequeredPattern);
+                    }
+                    break;
+                case PaperType.Ruled:
+                    {
+                        template = new Ruled(orientation);
+                        template.ApplyPattern(ruledPattern);
+                    }
+                    break;
+                case PaperType.Dotted:
+                    {
+                        template = new Dotted(orientation);
+                        template.ApplyPattern(dottedPattern);
+                    }
+                    break;
             }
 
             // Make sure canvas is non editable

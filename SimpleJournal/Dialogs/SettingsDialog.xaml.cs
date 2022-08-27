@@ -10,6 +10,7 @@ using System.Windows.Controls;
 using SimpleJournal.Common.FileAssociations;
 using SimpleJournal.Documents.UI;
 using SimpleJournal.Documents.UI.Controls;
+using Dialogs;
 
 namespace SimpleJournal
 {
@@ -380,6 +381,15 @@ namespace SimpleJournal
         private void HyperlinkDownloadNormalVersion_RequestNavigate(object sender, System.Windows.Navigation.RequestNavigateEventArgs e)
         {
             GeneralHelper.OpenUri(e.Uri);
+        }
+
+        private void ButtonChangePaperPattern_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            if (e.ButtonState == System.Windows.Input.MouseButtonState.Pressed)
+            {
+                var paperType = (PaperType)chkPaperType.SelectedIndex;
+                new PagePatternDialog(paperType).ShowDialog();
+            }
         }
     }
 }
