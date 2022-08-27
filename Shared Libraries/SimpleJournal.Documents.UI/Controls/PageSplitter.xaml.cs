@@ -1,4 +1,5 @@
 ﻿using SimpleJournal.Common;
+using SimpleJournal.Documents.UI.Controls.Paper;
 using System.Windows;
 using System.Windows.Controls;
 using Orientation = SimpleJournal.Common.Orientation;
@@ -17,6 +18,9 @@ namespace SimpleJournal.Documents.UI.Controls
         {
             InitializeComponent();
         }
+
+        public delegate bool onCheckPages(Func<IPaper, bool> evalute);
+        public event onCheckPages OnCheckPages;
 
         private void ButtonChequered_Click(object sender, RoutedEventArgs e)
         {
@@ -40,6 +44,18 @@ namespace SimpleJournal.Documents.UI.Controls
 
         private void ShowContextMenu(object sender, RoutedEventArgs e, PaperType type)
         {
+            if (Settings.Instance.SkipOrientationMenu)
+            {
+                bool result = (bool)(OnCheckPages?.Invoke(new Func<IPaper, bool>((IPaper paper) => paper.Orientation == Orientation.Portrait)));
+
+                if (result)
+                {
+                    // Hide menu and add the page in portrait format
+                    OnPageAdded?.Invoke(this, type, Orientation.Portrait);
+                    return;
+                }
+            }
+
             var btn = sender as TransparentImageButton;
             ContextMenu contextMenu = btn.ContextMenu;
             contextMenu.PlacementTarget = btn;

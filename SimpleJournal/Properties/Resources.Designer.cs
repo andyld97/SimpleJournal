@@ -2429,6 +2429,186 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Apply Changes.
+        /// </summary>
+        public static string strPatternDialog_ApplyChanges {
+            get {
+                return ResourceManager.GetString("strPatternDialog_ApplyChanges", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Box Spacing:.
+        /// </summary>
+        public static string strPatternDialog_ChequeredOffset {
+            get {
+                return ResourceManager.GetString("strPatternDialog_ChequeredOffset", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Discard Changes.
+        /// </summary>
+        public static string strPatternDialog_DiscardChanges {
+            get {
+                return ResourceManager.GetString("strPatternDialog_DiscardChanges", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Color:.
+        /// </summary>
+        public static string strPatternDialog_DottedColor {
+            get {
+                return ResourceManager.GetString("strPatternDialog_DottedColor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dot Distance:.
+        /// </summary>
+        public static string strPatternDialog_DottedOffset {
+            get {
+                return ResourceManager.GetString("strPatternDialog_DottedOffset", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Radius:.
+        /// </summary>
+        public static string strPatternDialog_DottedRadius {
+            get {
+                return ResourceManager.GetString("strPatternDialog_DottedRadius", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to In this dialog you have the option of optimally setting the various paper patterns ( chequered, dotted and ruled). The patterns are already very suitable for working with by default. However, it may be useful to adjust the patterns, e.g. a larger or smaller line spacing!.
+        /// </summary>
+        public static string strPatternDialog_HelpText_Description {
+            get {
+                return ResourceManager.GetString("strPatternDialog_HelpText_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This dialog is intended to set the settings once ideally for your purposes. When you load other documents, your settings are not taken into account, i.e. you can load and edit other documents without any problems..
+        /// </summary>
+        public static string strPatternDialog_HelpText_Description_2 {
+            get {
+                return ResourceManager.GetString("strPatternDialog_HelpText_Description_2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Description:.
+        /// </summary>
+        public static string strPatternDialog_HelpText_Head_Description {
+            get {
+                return ResourceManager.GetString("strPatternDialog_HelpText_Head_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Important notice:.
+        /// </summary>
+        public static string strPatternDialog_HelpText_Head_Hint {
+            get {
+                return ResourceManager.GetString("strPatternDialog_HelpText_Head_Hint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reset the settings:.
+        /// </summary>
+        public static string strPatternDialog_HelpText_Head_ResetSettings {
+            get {
+                return ResourceManager.GetString("strPatternDialog_HelpText_Head_ResetSettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The settings do not apply to current and loaded documents that have a changed setting or no setting. For example, if you load old documents, the default settings are used, otherwise the documents cannot be displayed cleanly..
+        /// </summary>
+        public static string strPatternDialog_HelpText_Hint {
+            get {
+                return ResourceManager.GetString("strPatternDialog_HelpText_Hint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This means that the settings you make here only apply to new documents. If you insert a new page, the settings from the currently loaded document are always used..
+        /// </summary>
+        public static string strPatternDialog_HelpText_Hint2 {
+            get {
+                return ResourceManager.GetString("strPatternDialog_HelpText_Hint2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The settings made here always refer to the entire document!.
+        /// </summary>
+        public static string strPatternDialog_HelpText_Hint3 {
+            get {
+                return ResourceManager.GetString("strPatternDialog_HelpText_Hint3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The settings can be reset at any time, but please note that this does not apply to documents that have already been loaded..
+        /// </summary>
+        public static string strPatternDialog_HelpText_ResetSettings {
+            get {
+                return ResourceManager.GetString("strPatternDialog_HelpText_ResetSettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Intensity:.
+        /// </summary>
+        public static string strPatternDialog_Intensity {
+            get {
+                return ResourceManager.GetString("strPatternDialog_Intensity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Line Color:.
+        /// </summary>
+        public static string strPatternDialog_LineColor {
+            get {
+                return ResourceManager.GetString("strPatternDialog_LineColor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Restore Default.
+        /// </summary>
+        public static string strPatternDialog_ResetToDefault {
+            get {
+                return ResourceManager.GetString("strPatternDialog_ResetToDefault", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Line Spacing:.
+        /// </summary>
+        public static string strPatternDialog_RuledOffset {
+            get {
+                return ResourceManager.GetString("strPatternDialog_RuledOffset", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stroke Width:.
+        /// </summary>
+        public static string strPatternDialog_StrokeWidth {
+            get {
+                return ResourceManager.GetString("strPatternDialog_StrokeWidth", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Convert all pages (max. 100 per journal).
         /// </summary>
         public static string strPDFConversationDialog_AllPages {
@@ -2969,6 +3149,24 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Here you can test!.
+        /// </summary>
+        public static string strPreviewDescription {
+            get {
+                return ResourceManager.GetString("strPreviewDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Preview.
+        /// </summary>
+        public static string strPreviewTitle {
+            get {
+                return ResourceManager.GetString("strPreviewTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Print.
         /// </summary>
         public static string strPrintDocument {
@@ -3329,6 +3527,15 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Edit paper pattern.
+        /// </summary>
+        public static string strSettings_EditPaperPattern {
+            get {
+                return ResourceManager.GetString("strSettings_EditPaperPattern", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Open AutoSave directory.
         /// </summary>
         public static string strSettings_OpenAutoSaveDirectory {
@@ -3361,6 +3568,42 @@ namespace SimpleJournal.Properties {
         public static string strSettings_OpenBackupDirectory_ToDo {
             get {
                 return ResourceManager.GetString("strSettings_OpenBackupDirectory_ToDo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to If the document does not contain any pages in landscape format.
+        /// </summary>
+        public static string strSettings_SkipOrientationMenu_Description_1 {
+            get {
+                return ResourceManager.GetString("strSettings_SkipOrientationMenu_Description_1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to and this setting is activated, the menu is hidden when inserting a.
+        /// </summary>
+        public static string strSettings_SkipOrientationMenu_Description_2 {
+            get {
+                return ResourceManager.GetString("strSettings_SkipOrientationMenu_Description_2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to page and the page is inserted directly in portrait format instead!.
+        /// </summary>
+        public static string strSettings_SkipOrientationMenu_Description_3 {
+            get {
+                return ResourceManager.GetString("strSettings_SkipOrientationMenu_Description_3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Automatically insert pages in portrait format.
+        /// </summary>
+        public static string strSettings_SkipOrientationMenu_Title {
+            get {
+                return ResourceManager.GetString("strSettings_SkipOrientationMenu_Title", resourceCulture);
             }
         }
         

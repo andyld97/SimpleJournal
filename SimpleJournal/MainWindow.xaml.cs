@@ -1,6 +1,7 @@
 ﻿using Controls;
 using Fluent;
 using Helper;
+using ImageMagick;
 using Microsoft.Win32;
 using Notifications;
 using SimpleJournal.Common;
@@ -9,6 +10,7 @@ using SimpleJournal.Controls.Templates;
 using SimpleJournal.Data;
 using SimpleJournal.Dialogs;
 using SimpleJournal.Documents;
+using SimpleJournal.Documents.Pattern;
 using SimpleJournal.Documents.UI;
 using SimpleJournal.Documents.UI.Actions;
 using SimpleJournal.Documents.UI.Controls;
@@ -185,7 +187,7 @@ namespace SimpleJournal
             };
 
             CurrentJournalPages.CollectionChanged += IPages_CollectionChanged;
-            var page = GeneratePage();
+            var page = GeneratePage(pattern: null);
             DrawingCanvas.LastModifiedCanvas = AddPage(page);
             cmbPages.SelectedIndex = 0;
 
@@ -422,7 +424,7 @@ namespace SimpleJournal
 
             // Check if command line parameter was passed
             if (!string.IsNullOrEmpty(App.Path) && System.IO.File.Exists(App.Path))
-                await LoadJournal(App.Path);
+                await LoadJournalAsnyc(App.Path);
 
             if (Settings.Instance.UseAutoSave)
                 await ShowRecoverAutoBackupFileDialog();
@@ -632,7 +634,7 @@ namespace SimpleJournal
             backupName += $"{DateTime.Now.ToString(Properties.Resources.strAutoSaveDateTimeFileFormat)}.journal";
 
             string path = System.IO.Path.Combine(Consts.AutoSaveDirectory, backupName);
-            bool result = await SaveJournal(path, true);
+            bool result = await SaveJournalAsync(path, true);
             if (!result)
             {
                 try
@@ -1292,9 +1294,48 @@ namespace SimpleJournal
             penTemplates[3].LoadPen(currentPens[3]);
         }
 
+        private IPattern GetPattern(PaperType paperType)
+        {
+            if (currentJournal == null)
+                currentJournal = new Journal();
+
+            // Apply pattern from document 
+            if (paperType == PaperType.Chequered && currentJournal.ChequeredPattern != null)
+                return currentJournal.ChequeredPattern;
+            else if (paperType == PaperType.Dotted && currentJournal.DottedPattern != null)
+                return currentJournal.DottedPattern;
+            else if (paperType == PaperType.Ruled && currentJournal.RuledPattern != null)
+                return currentJournal.RuledPattern;
+
+            // IMPORTANT: If the current journal is loaded from file, it may has patterns or not, but to respect them 
+            // we cannot use the settings in this case, otherwise the settings would ruin the document!
+            if (currentJournalIsLoadedFromFile)
+                return null;
+
+            // Apply pattern from settings if any, ensure that the document is considered first
+            if (paperType == PaperType.Chequered && Settings.Instance.ChequeredPattern != null)
+            {
+                currentJournal.ChequeredPattern = Settings.Instance.ChequeredPattern;
+                return Settings.Instance.ChequeredPattern;
+            }
+            else if (paperType == PaperType.Dotted && Settings.Instance.DottedPattern != null)
+            {
+                currentJournal.DottedPattern = Settings.Instance.DottedPattern;
+                return Settings.Instance.DottedPattern;
+            }
+            else if (paperType == PaperType.Ruled && Settings.Instance.RuledPattern != null)
+            {
+                currentJournal.RuledPattern = Settings.Instance.RuledPattern;
+                return Settings.Instance.RuledPattern;
+            }
+
+            // Returning null here means no pattern is used!
+            return null;
+        }
+
         private void AddNewPage(PaperType paperType, Orientation orientation)
         {
-            AddPage(GeneratePage(paperType, orientation: orientation));
+            AddPage(GeneratePage(paperType: paperType, orientation: orientation, pattern: GetPattern(paperType)));
             RefreshInsertIcon();
             ScrollToPage(CurrentJournalPages.Count - 1);
             DrawingCanvas.Change = true;
@@ -1347,9 +1388,9 @@ namespace SimpleJournal
 
         private void PlotDropDownTemplate_OnPlotModeChanged(PlotMode plotMode)
         {
+            this.plotMode = plotMode;
             ApplyToAllCanvas((DrawingCanvas dc) =>
             {
-                this.plotMode = plotMode;
                 dc.SetPlotMode(plotMode);
             });
         }
@@ -1474,13 +1515,35 @@ namespace SimpleJournal
             scrollBar.Width = (Settings.Instance.EnlargeScrollbar ? Consts.ScrollBarExtendedWidth : Consts.ScrollBarDefaultWidth);
         }
 
-        private UserControl GeneratePage(PaperType? paperType = null, byte[] background = null, Orientation orientation = Orientation.Portrait)
+        private UserControl GeneratePage(IPattern pattern, PaperType? paperType = null, byte[] background = null, Orientation orientation = Orientation.Portrait)
         {
-            UserControl pageContent = null;
+            IPaper pageContent = null;
             PaperType paperPattern = Settings.Instance.PaperType;
 
             if (paperType.HasValue)
                 paperPattern = paperType.Value;
+
+            if (pattern == null)
+            {
+                if (currentJournal != null)
+                {
+                    if (paperPattern == PaperType.Chequered && currentJournal.ChequeredPattern != null)
+                        pattern = currentJournal.ChequeredPattern;
+                    else if (paperPattern == PaperType.Dotted && currentJournal.DottedPattern != null)
+                        pattern = currentJournal.DottedPattern;
+                    else if (paperPattern == PaperType.Ruled && currentJournal.RuledPattern != null)
+                        pattern = currentJournal.RuledPattern;
+                }
+                else
+                {
+                    if (paperPattern == PaperType.Chequered && Settings.Instance.ChequeredPattern != null)
+                        pattern = Settings.Instance.ChequeredPattern;
+                    else if (paperPattern == PaperType.Dotted && Settings.Instance.DottedPattern != null)
+                        pattern = Settings.Instance.DottedPattern;
+                    else if (paperPattern == PaperType.Ruled && Settings.Instance.RuledPattern != null)
+                        pattern = Settings.Instance.RuledPattern;
+                }
+            }
 
             switch (paperPattern)
             {
@@ -1490,6 +1553,8 @@ namespace SimpleJournal
                 case PaperType.Dotted: pageContent = new Dotted(orientation); break;
                 case PaperType.Custom: pageContent = new Custom(background, orientation); break;
             }
+
+            pageContent.ApplyPattern(pattern);
 
             IPaper page = pageContent as IPaper;
             // Apply properties and events to the new canvas
@@ -1536,7 +1601,7 @@ namespace SimpleJournal
             else if (currentTool == Tools.Recognization)
                 page.Canvas.SetFreeHandDrawingMode();
 
-            return pageContent;
+            return (UserControl)pageContent;
         }
 
         private void Children_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
@@ -1559,11 +1624,11 @@ namespace SimpleJournal
 
             double offset = mainScrollView.VerticalOffset;
 
-
             PageSplitter pageSplitter = new PageSplitter();
+            pageSplitter.OnCheckPages += delegate (Func<IPaper, bool> fn) { return CurrentJournalPages.All(fn); };
             pageSplitter.OnPageAdded += delegate (PageSplitter owner, PaperType type, Orientation orientation)
             {
-                var newPage = GeneratePage(type, orientation: orientation);
+                var newPage = GeneratePage(paperType: type, orientation: orientation, pattern: GetPattern(type));
                 int pageIndex = pages.Children.IndexOf(elementToAdd);
 
                 // Adjust page index
@@ -1868,10 +1933,11 @@ namespace SimpleJournal
             // Refresh ruler mode
             rulerDropDownTemplate.lstBoxChooseRulerMode.SelectedIndex = (int)(Settings.Instance.RulerStrokeMode);
 
-            if (CurrentJournalPages.Count == 1 && CurrentJournalPages[0].Canvas.Strokes.Count == 0 && CurrentJournalPages[0].Canvas.Children.Count == 0)
+            if (CurrentJournalPages.Count == 1 && CurrentJournalPages[0].Canvas.IsEmpty)
             {
                 // Switch to new format
-                var newPage = GeneratePage();
+                currentJournal = null; // enusure old settings are removed cause the document is empty so we want to apply the new settings in this case!
+                var newPage = GeneratePage(pattern: GetPattern(Settings.Instance.PaperType));
                 CurrentJournalPages.Clear();
                 this.pages.Children.Clear();
                 DrawingCanvas.LastModifiedCanvas = AddPage(newPage);
@@ -2323,7 +2389,7 @@ namespace SimpleJournal
             e.CanExecute = true;
         }
 
-        private void NewCommand_Executed(object sender, ExecutedRoutedEventArgs e)
+        private async void NewCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             bool run;
             if (DrawingCanvas.Change)
@@ -2336,12 +2402,18 @@ namespace SimpleJournal
 
             if (run)
             {
+                // Important to ensure that the old document can be loaded again!
+                await FreeOldJournalAsync();
+
                 // No journal is loaded currently
+                currentJournal = new Journal();
+                currentJournalIsLoadedFromFile = false;
+
                 pages.Children.Clear();
                 CurrentJournalPages.Clear();
                 pnlSidebar.Visibility = Visibility.Hidden;
 
-                var page = GeneratePage();
+                var page = GeneratePage(pattern: GetPattern(Settings.Instance.PaperType));
                 AddPage(page);
 
                 // Set last modified canvas to this, because the old is non existing any more
@@ -2420,7 +2492,7 @@ namespace SimpleJournal
                         RecentlyOpenedDocuments.Remove(d.Path);
                 }
                 else if (AskForOpeningAfterModifying())
-                    await LoadJournal(d.Path);
+                    await LoadJournalAsnyc(d.Path);
 
                 ListRecentlyOpenedDocuments.SelectedItem = null;
             }
@@ -2443,7 +2515,7 @@ namespace SimpleJournal
                     {
                         Dispatcher.Invoke(new System.Action(async () =>
                         {
-                            await LoadJournal(d.Path);
+                            await LoadJournalAsnyc(d.Path);
                         }));
                     });
                 }
@@ -2487,12 +2559,12 @@ namespace SimpleJournal
                 var result = dialog.ShowDialog();
                 if (result.HasValue && result.Value)
                 {
-                    resultSaving = await SaveJournal(dialog.FileName);
+                    resultSaving = await SaveJournalAsync(dialog.FileName);
                     UpdateTitle(System.IO.Path.GetFileNameWithoutExtension(dialog.FileName));
                 }
             }
             else
-                resultSaving = await SaveJournal(currentJournalPath);
+                resultSaving = await SaveJournalAsync(currentJournalPath);
 
             return resultSaving;
         }
@@ -2773,12 +2845,12 @@ namespace SimpleJournal
                         bool? res = pdfConversationDialog.ShowDialog();
 
                         if (res.HasValue && res.Value)
-                            await LoadJournal(pdfConversationDialog.DestinationFileName);
+                            await LoadJournalAsnyc(pdfConversationDialog.DestinationFileName);
 
                         return;
                     }
 
-                    await LoadJournal(ofd.FileName);
+                    await LoadJournalAsnyc(ofd.FileName);
                 }
             }
         }
@@ -2798,7 +2870,7 @@ namespace SimpleJournal
                     bool? res = pdfConversationDialog.ShowDialog();
 
                     if (res.HasValue && res.Value)
-                        await LoadJournal(pdfConversationDialog.DestinationFileName);
+                        await LoadJournalAsnyc(pdfConversationDialog.DestinationFileName);
                 }
             }
         }
@@ -2944,7 +3016,7 @@ namespace SimpleJournal
             }
         }
 
-#region Exit
+        #region Exit
         private bool closedButtonWasPressed = false;
 
         private async void btnExit_Click(object sender, RoutedEventArgs e)
@@ -3063,7 +3135,7 @@ namespace SimpleJournal
         }
 #endregion
 
-#endregion
+        #endregion
 
         #endregion
 
@@ -3230,14 +3302,26 @@ namespace SimpleJournal
             mainScrollView.BeginStoryboard(sbScrollViewerAnimation);
         }
 
-#endregion
+        #endregion
 
         #region Internal Save and Load
-        private async Task<bool> SaveJournal(string path, bool saveAsBackup = false)
+
+        private Journal currentJournal = null;
+        private bool currentJournalIsLoadedFromFile = false;
+
+        private async Task<bool> SaveJournalAsync(string path, bool saveAsBackup = false)
         {
             try
             {
-                Journal journal = new Journal { ProcessID = ProcessHelper.CurrentProcID };
+                Journal journal = new Journal
+                {
+                    ProcessID = ProcessHelper.CurrentProcID,                 
+                                        
+                    // Apply pattern from document 
+                    ChequeredPattern = currentJournal?.ChequeredPattern,
+                    DottedPattern = currentJournal?.DottedPattern,
+                    RuledPattern = currentJournal?.RuledPattern
+                };
 
                 if (saveAsBackup)
                 {
@@ -3306,7 +3390,22 @@ namespace SimpleJournal
             }
         }
 
-        private async Task LoadJournal(string fileName)
+        private async Task FreeOldJournalAsync()
+        {
+            if (!string.IsNullOrEmpty(currentJournalPath))
+            {
+                // If a path is set remove the process id
+                var journal = await Journal.LoadJournalMetaAsync(currentJournalPath);
+                if (journal != null)
+                {
+                    journal.ProcessID = -1;
+                    await journal.UpdateJournalMetaAsync(currentJournalPath, true);
+                    currentJournalPath = string.Empty;
+                }
+            }
+        }
+
+        private async Task LoadJournalAsnyc(string fileName)
         {
             if (fileName.EndsWith(".journal"))
             {
@@ -3317,7 +3416,7 @@ namespace SimpleJournal
                         throw new Exception(string.Format(Properties.Resources.strFileNotFound, fileName));
 
                     dialog.Show();
-                    Journal currentJournal = await Journal.LoadJournalAsync(fileName, Consts.BackupDirectory);
+                    currentJournal = await Journal.LoadJournalAsync(fileName, Consts.BackupDirectory);
 
                     if (currentJournal == null)
                     {
@@ -3357,19 +3456,10 @@ namespace SimpleJournal
                     }
 
                     // Okay: User has decided to load / discard old document => remove the process ID
-                    if (!string.IsNullOrEmpty(currentJournalPath))
-                    {
-                        // If a path is set remove the process id
-                        var journal = await Journal.LoadJournalMetaAsync(currentJournalPath);
-                        if (journal != null)
-                        {
-                            journal.ProcessID = -1;
-                            await journal.UpdateJournalMetaAsync(currentJournalPath, true);
-                            currentJournalPath = string.Empty;
-                        }
-                    }
+                    await FreeOldJournalAsync();
 
                     currentJournalPath = fileName;
+                    currentJournalIsLoadedFromFile = true;
 
                     IsEnabled = false;
                     isInitalized = false;
@@ -3389,7 +3479,7 @@ namespace SimpleJournal
                         if (jp is PdfJournalPage pdf)
                             background = pdf.PageBackground;
 
-                        canvas = AddPage(GeneratePage(jp.PaperPattern, background, orientation));
+                        canvas = AddPage(GeneratePage(paperType: jp.PaperPattern, background: background, orientation: orientation, pattern: GetPattern(jp.PaperPattern)));
 
                         if (pageCount == 0)
                         {
@@ -3544,7 +3634,7 @@ namespace SimpleJournal
                     if (page is PdfJournalPage pdf)
                         background = pdf.PageBackground;
 
-                    canvas = AddPage(GeneratePage(page.PaperPattern, background, orientation));
+                    canvas = AddPage(GeneratePage(paperType: page.PaperPattern, background: background, orientation: orientation, pattern: GetPattern(page.PaperPattern)));
 
                     if (countPages == 0)
                     {
@@ -3603,7 +3693,7 @@ namespace SimpleJournal
         private async Task ShowPageManagmentDialog()
         {
             var pgmd = new PageManagmentDialog();
-            pgmd.PageManagmentControl.Initalize(CurrentJournalPages.ToList(), pgmd);
+            pgmd.PageManagmentControl.Initalize(CurrentJournalPages.ToList(), GetPattern(PaperType.Chequered) as ChequeredPattern, GetPattern(PaperType.Dotted) as DottedPattern, GetPattern(PaperType.Ruled) as RuledPattern, pgmd);
             var userResult = pgmd.ShowDialog();
 
             if (userResult.HasValue && userResult.Value)
@@ -3624,7 +3714,7 @@ namespace SimpleJournal
         {
             // Important: This event will also trigger if the user clicks in some free areas (for example in the ListBox)
             // This will lead to re-initalization during this "dialog" (See Controls\PageManagmentControl.xaml.cs)
-            PageManagementControl.Initalize(CurrentJournalPages.ToList(), this);
+            PageManagementControl.Initalize(CurrentJournalPages.ToList(), GetPattern(PaperType.Chequered) as ChequeredPattern, GetPattern(PaperType.Dotted) as DottedPattern, GetPattern(PaperType.Ruled) as RuledPattern, this);
         }
 
 #endregion

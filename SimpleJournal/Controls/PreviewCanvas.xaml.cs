@@ -16,6 +16,7 @@ namespace SimpleJournal.Controls
     {
         private DrawingCanvas currentCanvas;
         private PaperType currentPaperType = PaperType.Blanco;
+        private IPaper paper;
         private readonly DrawingAttributes attributes = new DrawingAttributes();
         private DrawingAttributes old;
         private bool writing;
@@ -39,20 +40,18 @@ namespace SimpleJournal.Controls
                     Orientation orientation = Orientation.Portrait;
 
                     // Switch canvas
-                    UIElement control = null;
                     switch (currentPaperType)
                     {
-                        case PaperType.Blanco: control = new Blanco(orientation); break;
-                        case PaperType.Chequered: control = new Chequered(orientation); break;
-                        case PaperType.Ruled: control = new Ruled(orientation); break;
-                        case PaperType.Dotted: control = new Dotted(orientation); break;
+                        case PaperType.Blanco: paper = new Blanco(orientation); break;
+                        case PaperType.Chequered: paper = new Chequered(orientation); break;
+                        case PaperType.Ruled: paper = new Ruled(orientation); break;
+                        case PaperType.Dotted: paper = new Dotted(orientation); break;
                     }
 
                     // Debug means that this is a preview canvas and e.g. Change will not be affected
-                    (control as IPaper).SetDebug();
+                    paper.SetDebug();
 
-                    currentCanvas = (control as IPaper).Canvas;
-
+                    currentCanvas = paper.Canvas;
 
                     if (IsInRulerMode)
                     {
@@ -61,12 +60,14 @@ namespace SimpleJournal.Controls
                     }
 
                     gridPaperContainer.Children.Clear();
-                    gridPaperContainer.Children.Add(control);
+                    gridPaperContainer.Children.Add(paper as UIElement);
                 }
             }
         }
 
         public DrawingCanvas Canvas => currentCanvas;
+
+        public IPaper Paper => paper;
 
         /// <summary>
         /// Enables switch between writing and text marker
@@ -120,12 +121,7 @@ namespace SimpleJournal.Controls
 
                 currentCanvas.Strokes = new StrokeCollection();
             }
-        }
-
-        private void BtnClear_Click(object sender, RoutedEventArgs e)
-        {
-            ClearCanvas();  
-        }
+        } 
 
         private void BtnWrite_Click(object sender, RoutedEventArgs e)
         {
@@ -142,6 +138,11 @@ namespace SimpleJournal.Controls
                 currentCanvas.DefaultDrawingAttributes = new DrawingAttributes();
                 writing = true;
             }
+        }
+
+        private void ButtonClear_Click(object sender, RoutedEventArgs e)
+        {
+            ClearCanvas();
         }
     }
 }

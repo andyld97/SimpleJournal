@@ -10,6 +10,7 @@ using System.Windows.Controls;
 using SimpleJournal.Common.FileAssociations;
 using SimpleJournal.Documents.UI;
 using SimpleJournal.Documents.UI.Controls;
+using Dialogs;
 
 namespace SimpleJournal
 {
@@ -60,6 +61,7 @@ namespace SimpleJournal
             CheckBoxActivateGlowingBrush.IsChecked = Settings.Instance.ActivateGlowingBrush;
             ComboBoxStretch.SelectedIndex = (Settings.Instance.InsertImageStretchFormat == Stretch.Fill ? 0 : 1);
             CheckBoxDisableNotificationToolbar.IsChecked = Settings.Instance.HideNotificationToolBar;
+            CheckBoxSkipOrientationMenu.IsChecked = Settings.Instance.SkipOrientationMenu;
 
 #if UWP
             TabTouch.Visibility = Visibility.Collapsed;
@@ -377,9 +379,28 @@ namespace SimpleJournal
             Settings.Instance.Save();
         }
 
+
+        private void CheckBoxSkipOrientationMenu_Checked(object sender, RoutedEventArgs e)
+        {
+            if (editMode)
+                return;
+
+            Settings.Instance.SkipOrientationMenu = CheckBoxSkipOrientationMenu.IsChecked.Value;
+            Settings.Instance.Save();
+        }
+
         private void HyperlinkDownloadNormalVersion_RequestNavigate(object sender, System.Windows.Navigation.RequestNavigateEventArgs e)
         {
             GeneralHelper.OpenUri(e.Uri);
+        }
+
+        private void ButtonChangePaperPattern_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            if (e.ButtonState == System.Windows.Input.MouseButtonState.Pressed)
+            {
+                var paperType = (PaperType)chkPaperType.SelectedIndex;
+                new PagePatternDialog(paperType).ShowDialog();
+            }
         }
     }
 }

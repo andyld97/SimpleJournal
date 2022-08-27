@@ -15,7 +15,7 @@ namespace SimpleJournal
 
         public static bool IgnoreBackups { get; private set; } = false;
 
-        private async void Application_Startup(object sender, StartupEventArgs e)
+        private void Application_Startup(object sender, StartupEventArgs e)
         {
             if (e.Args.Length >= 1)
             {
@@ -31,9 +31,11 @@ namespace SimpleJournal
             }
 
             // Test
-            /* var cultureInfoTest = new CultureInfo("nl");
+#if DEBUG
+            var cultureInfoTest = new CultureInfo("en");
             Thread.CurrentThread.CurrentCulture =
-            Thread.CurrentThread.CurrentUICulture = cultureInfoTest; */
+            Thread.CurrentThread.CurrentUICulture = cultureInfoTest;
+#endif
 
             GeneralHelper.ApplyTheming();
         }

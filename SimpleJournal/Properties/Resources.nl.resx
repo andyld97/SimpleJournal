@@ -1703,4 +1703,85 @@ Details: {1}</value>
   <data name="strThis" xml:space="preserve">
     <value>deze</value>
   </data>
+  <data name="strPreviewDescription" xml:space="preserve">
+    <value>U kunt hier testen!</value>
+  </data>
+  <data name="strPreviewTitle" xml:space="preserve">
+    <value>Voorbeeld</value>
+  </data>
+  <data name="strPatternDialog_ChequeredOffset" xml:space="preserve">
+    <value>Box Afstand:</value>
+  </data>
+  <data name="strPatternDialog_DottedColor" xml:space="preserve">
+    <value>Kleur:</value>
+  </data>
+  <data name="strPatternDialog_DottedOffset" xml:space="preserve">
+    <value>Point Gap:</value>
+  </data>
+  <data name="strPatternDialog_DottedRadius" xml:space="preserve">
+    <value>Straal:</value>
+  </data>
+  <data name="strPatternDialog_Intensity" xml:space="preserve">
+    <value>Intensiteit:</value>
+  </data>
+  <data name="strPatternDialog_LineColor" xml:space="preserve">
+    <value>Lijnkleur:</value>
+  </data>
+  <data name="strPatternDialog_RuledOffset" xml:space="preserve">
+    <value>Regelafstand:</value>
+  </data>
+  <data name="strPatternDialog_StrokeWidth" xml:space="preserve">
+    <value>Lijnbreedte:</value>
+  </data>
+  <data name="strPatternDialog_ApplyChanges" xml:space="preserve">
+    <value>Wijzigingen aanbrengen</value>
+  </data>
+  <data name="strPatternDialog_DiscardChanges" xml:space="preserve">
+    <value>Veranderingen weggooien</value>
+  </data>
+  <data name="strPatternDialog_HelpText_Description" xml:space="preserve">
+    <value>In deze dialoog heeft u de mogelijkheid om de verschillende papierpatronen (ruitjes, puntjes en gelijnd) optimaal in te stellen. De patronen zijn standaard al zeer geschikt om mee te werken. Het kan echter nuttig zijn de patronen aan te passen, b.v. een grotere of kleinere regelafstand!</value>
+  </data>
+  <data name="strPatternDialog_HelpText_Description_2" xml:space="preserve">
+    <value>Deze dialoog is bedoeld om de instellingen een keer ideaal voor uw doeleinden in te stellen. Wanneer u andere documenten laadt, wordt geen rekening gehouden met uw instellingen, d.w.z. dat u andere documenten zonder problemen kunt laden en bewerken.</value>
+  </data>
+  <data name="strPatternDialog_HelpText_Head_Description" xml:space="preserve">
+    <value>Beschrijving:</value>
+  </data>
+  <data name="strPatternDialog_HelpText_Head_Hint" xml:space="preserve">
+    <value>Belangrijke mededeling:</value>
+  </data>
+  <data name="strPatternDialog_HelpText_Head_ResetSettings" xml:space="preserve">
+    <value>Reset de instellingen:</value>
+  </data>
+  <data name="strPatternDialog_HelpText_Hint" xml:space="preserve">
+    <value>De instellingen zijn niet van toepassing op huidige en geladen documenten die een gewijzigde instelling of geen instelling hebben. Als u bijvoorbeeld oude documenten laadt, worden de standaardinstellingen gebruikt, anders kunnen de documenten niet netjes worden weergegeven.</value>
+  </data>
+  <data name="strPatternDialog_HelpText_Hint2" xml:space="preserve">
+    <value>Dit betekent dat de instellingen die u hier maakt alleen van toepassing zijn op nieuwe documenten. Als u een nieuwe pagina invoegt, worden altijd de instellingen van het huidige geladen document gebruikt.</value>
+  </data>
+  <data name="strPatternDialog_HelpText_Hint3" xml:space="preserve">
+    <value>De hier gemaakte instellingen hebben altijd betrekking op het gehele document!</value>
+  </data>
+  <data name="strPatternDialog_HelpText_ResetSettings" xml:space="preserve">
+    <value>De instellingen kunnen op elk moment worden teruggezet, maar let op: dit geldt niet voor documenten die al zijn geladen.</value>
+  </data>
+  <data name="strSettings_EditPaperPattern" xml:space="preserve">
+    <value>Bewerk papier patroon</value>
+  </data>
+  <data name="strPatternDialog_ResetToDefault" xml:space="preserve">
+    <value>Standaard Herstellen</value>
+  </data>
+  <data name="strSettings_SkipOrientationMenu_Description_1" xml:space="preserve">
+    <value>Als het document geen pagina's in liggend formaat bevat en deze instelling is</value>
+  </data>
+  <data name="strSettings_SkipOrientationMenu_Description_2" xml:space="preserve">
+    <value>geactiveerd, wordt het menu bij het invoegen van een pagina verborgen en wordt</value>
+  </data>
+  <data name="strSettings_SkipOrientationMenu_Description_3" xml:space="preserve">
+    <value>de pagina in plaats daarvan direct in staand formaat ingevoegd!</value>
+  </data>
+  <data name="strSettings_SkipOrientationMenu_Title" xml:space="preserve">
+    <value>Automatisch invoegen van pagina's in staand formaat</value>
+  </data>
 </root>

@@ -3,6 +3,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using SimpleJournal.Documents.UI.Helper;
 using Orientation = SimpleJournal.Common.Orientation;
+using SimpleJournal.Documents.Pattern;
 
 namespace SimpleJournal.Documents.UI.Controls.Paper
 {
@@ -73,6 +74,11 @@ namespace SimpleJournal.Documents.UI.Controls.Paper
             PageBackground = null;
             Canvas.Strokes.Clear();
             Canvas.Children.Clear();
+        }
+
+        public void ApplyPattern(IPattern pattern)
+        {
+
         }
     }
 }
