@@ -65,7 +65,36 @@
 
             <Setter Property="DarkMaxButtonStyle" Value="{StaticResource CustomDarkMetroWindowButtonMaxStyle}" />
             <Setter Property="DarkCloseButtonStyle" Value="{StaticResource CustomDarkMetroWindowButtonCloseStyle}" />
-        </Style>    
+        </Style>
+
+        <Style TargetType="{x:Type Slider}">
+            <Setter Property="BorderBrush" Value="{DynamicResource MahApps.Brushes.Control.Border}" />
+            <Setter Property="BorderThickness" Value="2" />
+            <Setter Property="Foreground" Value="{DynamicResource GrayBrush1}" />
+            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+            <Setter Property="Maximum" Value="100" />
+            <Setter Property="Minimum" Value="0" />
+            <Setter Property="Template" Value="{DynamicResource MahApps.Templates.Slider.Horizontal}" />
+            <Setter Property="Value" Value="0" />
+            <Setter Property="VerticalContentAlignment" Value="Stretch" />
+            <Setter Property="mah:SliderHelper.ThumbFillBrush" Value="{DynamicResource GrayBrush1}" />
+            <Setter Property="mah:SliderHelper.ThumbFillDisabledBrush" Value="{DynamicResource GrayBrush6}" />
+            <Setter Property="mah:SliderHelper.ThumbFillHoverBrush" Value="{DynamicResource  GrayBrush5}" />
+            <Setter Property="mah:SliderHelper.ThumbFillPressedBrush" Value="{DynamicResource GrayBrush2}" />
+            <Setter Property="mah:SliderHelper.TrackFillBrush" Value="{DynamicResource GrayBrush3}" />
+            <Setter Property="mah:SliderHelper.TrackFillDisabledBrush" Value="{DynamicResource GrayBrush6}" />
+            <Setter Property="mah:SliderHelper.TrackFillHoverBrush" Value="{DynamicResource GrayBrush3}" />
+            <Setter Property="mah:SliderHelper.TrackFillPressedBrush" Value="{DynamicResource GrayBrush3}" />
+            <Setter Property="mah:SliderHelper.TrackValueFillBrush" Value="{DynamicResource Fluent.Ribbon.Brushes.AccentBaseColorBrush}" />
+            <Setter Property="mah:SliderHelper.TrackValueFillDisabledBrush" Value="{DynamicResource GrayBrush6}" />
+            <Setter Property="mah:SliderHelper.TrackValueFillHoverBrush" Value="{DynamicResource Fluent.Ribbon.Brushes.AccentBaseColorBrush}" />
+            <Setter Property="mah:SliderHelper.TrackValueFillPressedBrush" Value="{DynamicResource Fluent.Ribbon.Brushes.AccentBaseColorBrush}" />
+            <Style.Triggers>
+                <Trigger Property="Orientation" Value="Vertical">
+                    <Setter Property="Template" Value="{DynamicResource MahApps.Templates.Slider.Vertical}" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
     </mah:MetroWindow.Resources>
     <Grid MouseDown="Grid_MouseDown" Background="{DynamicResource TabControl.Background}">
         <Grid.RowDefinitions>
@@ -129,13 +158,13 @@
                         </StackPanel.Resources>
 
                         <TextBlock Text="{x:Static res:Resources.strPatternDialog_Intensity}" />
-                        <Slider x:Name="SliderChequeredIntensity" ValueChanged="SliderChequeredIntensity_ValueChanged" Style="{DynamicResource MahApps.Styles.Slider}" Maximum="100" Value="18" Minimum="5" />
+                        <Slider x:Name="SliderChequeredIntensity" ValueChanged="SliderChequeredIntensity_ValueChanged" Maximum="100" Value="18" Minimum="5" />
 
                         <TextBlock Text="{x:Static res:Resources.strPatternDialog_ChequeredOffset}" />
-                        <Slider x:Name="SliderChequeredOffset" ValueChanged="SliderChequeredOffset_ValueChanged" Style="{DynamicResource MahApps.Styles.Slider}" Maximum="100" Value="22" Minimum="5" />
+                        <Slider x:Name="SliderChequeredOffset" ValueChanged="SliderChequeredOffset_ValueChanged" Maximum="100" Value="22" Minimum="5" />
 
                         <TextBlock Text="{x:Static res:Resources.strPatternDialog_StrokeWidth}" />
-                        <Slider x:Name="SliderChequredStrokeWidth" ValueChanged="SliderChequredStrokeWidth_ValueChanged" Style="{DynamicResource MahApps.Styles.Slider}" Maximum="1" Minimum="0.1" Value="0.5"   />
+                        <Slider x:Name="SliderChequredStrokeWidth" ValueChanged="SliderChequredStrokeWidth_ValueChanged" Maximum="1" Minimum="0.1" Value="0.5"   />
 
                         <Grid>
                             <StackPanel>
@@ -177,7 +206,6 @@
                                 <Setter Property="Margin" Value="0,2" />
                                 <Setter Property="FontWeight" Value="Bold" />
                             </Style>
-                            <Style TargetType="{x:Type Slider}" BasedOn="{StaticResource MahApps.Styles.Slider}" />
                         </StackPanel.Resources>
                         
                         <TextBlock Text="{x:Static res:Resources.strPatternDialog_DottedOffset}" />
@@ -228,7 +256,6 @@
                                 <Setter Property="Margin" Value="0,2" />
                                 <Setter Property="FontWeight" Value="Bold" />
                             </Style>
-                            <Style TargetType="{x:Type Slider}" BasedOn="{StaticResource MahApps.Styles.Slider}" />
                         </StackPanel.Resources>
 
                         <TextBlock Text="{x:Static res:Resources.strPatternDialog_RuledOffset}" />

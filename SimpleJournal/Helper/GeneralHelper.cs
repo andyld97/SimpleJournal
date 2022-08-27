@@ -92,6 +92,7 @@ namespace SimpleJournal
             App.Current.Resources["TabControl.Background"] = new SolidColorBrush(tabControlBackgroundColor);
             App.Current.Resources["TabItemBackground"] = new SolidColorBrush(tabItemBackground);
             App.Current.Resources["TabItemSelectedBackground"] = new SolidColorBrush(tabItemSelectedBackground);
+           // App.Current.Resources["MahApps.Brushes.Accent"] = new SolidColorBrush(Colors.Green);
 
             ThemeManager.Current.ChangeTheme(Application.Current, GetCurrentTheme());
         }
