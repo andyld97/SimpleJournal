@@ -1772,4 +1772,16 @@ Details: {1}</value>
   <data name="strPatternDialog_ResetToDefault" xml:space="preserve">
     <value>Standaard Herstellen</value>
   </data>
+  <data name="strSettings_SkipOrientationMenu_Description_1" xml:space="preserve">
+    <value>Als het document geen pagina's in liggend formaat bevat en deze instelling is</value>
+  </data>
+  <data name="strSettings_SkipOrientationMenu_Description_2" xml:space="preserve">
+    <value>geactiveerd, wordt het menu bij het invoegen van een pagina verborgen en wordt</value>
+  </data>
+  <data name="strSettings_SkipOrientationMenu_Description_3" xml:space="preserve">
+    <value>de pagina in plaats daarvan direct in staand formaat ingevoegd!</value>
+  </data>
+  <data name="strSettings_SkipOrientationMenu_Title" xml:space="preserve">
+    <value>Automatisch invoegen van pagina's in staand formaat</value>
+  </data>
 </root>

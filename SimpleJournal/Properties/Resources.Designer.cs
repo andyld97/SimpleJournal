@@ -3572,6 +3572,42 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to If the document does not contain any pages in landscape format.
+        /// </summary>
+        public static string strSettings_SkipOrientationMenu_Description_1 {
+            get {
+                return ResourceManager.GetString("strSettings_SkipOrientationMenu_Description_1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to and this setting is activated, the menu is hidden when inserting a.
+        /// </summary>
+        public static string strSettings_SkipOrientationMenu_Description_2 {
+            get {
+                return ResourceManager.GetString("strSettings_SkipOrientationMenu_Description_2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to page and the page is inserted directly in portrait format instead!.
+        /// </summary>
+        public static string strSettings_SkipOrientationMenu_Description_3 {
+            get {
+                return ResourceManager.GetString("strSettings_SkipOrientationMenu_Description_3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Automatically insert pages in portrait format.
+        /// </summary>
+        public static string strSettings_SkipOrientationMenu_Title {
+            get {
+                return ResourceManager.GetString("strSettings_SkipOrientationMenu_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Active window glowing effect.
         /// </summary>
         public static string strSettingsActivateGlowingEffect {

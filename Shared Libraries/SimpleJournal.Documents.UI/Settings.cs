@@ -234,6 +234,11 @@ namespace SimpleJournal.Documents.UI
         /// </summary>
         public string SelfHostedPDF2JApiUrl { get; set; } = string.Empty;
 
+        /// <summary>
+        /// if true the menu Portrait/Landscape menu is hidden when the document has no landscape pages
+        /// </summary>
+        public bool SkipOrientationMenu { get; set; } = false;
+
         #region Pattern
 
         /// <summary>

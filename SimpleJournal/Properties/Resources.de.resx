@@ -2194,4 +2194,16 @@ Details: {1}</value>
   <data name="strPatternDialog_ResetToDefault" xml:space="preserve">
     <value>Standard wiederherstellen</value>
   </data>
+  <data name="strSettings_SkipOrientationMenu_Title" xml:space="preserve">
+    <value>Seiten automatisch im Hochformat einfügen</value>
+  </data>
+  <data name="strSettings_SkipOrientationMenu_Description_3" xml:space="preserve">
+    <value>ausgeblendet und stattdessen direkt die Seite im Hochformat eingefügt!</value>
+  </data>
+  <data name="strSettings_SkipOrientationMenu_Description_2" xml:space="preserve">
+    <value>Einstellung aktiviert ist, wird das Menü beim Einfügen einer Seite</value>
+  </data>
+  <data name="strSettings_SkipOrientationMenu_Description_1" xml:space="preserve">
+    <value>Sofern das Dokument keine Seiten im Querformat beinhaltet und diese</value>
+  </data>
 </root>

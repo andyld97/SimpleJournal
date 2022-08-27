@@ -129,6 +129,23 @@
                             
                             <Image x:Name="ButtonChangePaperPattern" MouseDown="ButtonChangePaperPattern_MouseDown" ToolTip="{x:Static res:Resources.strSettings_EditPaperPattern}" Cursor="Hand" RenderOptions.BitmapScalingMode="Fant" Margin="0,3,0,0" Height="28" Grid.Column="1" Source="pack://application:,,,/SimpleJournal;component/resources/page_pattern/editpagepattern.png" />
                         </Grid>
+
+                        <CheckBox x:Name="CheckBoxSkipOrientationMenu" Checked="CheckBoxSkipOrientationMenu_Checked" Unchecked="CheckBoxSkipOrientationMenu_Checked" VerticalContentAlignment="Center">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{x:Static res:Resources.strSettings_SkipOrientationMenu_Title}" VerticalAlignment="Center" FontWeight="Normal" />
+                                <Image Margin="3,0,0,0" Width="18" Source="../resources/about.png">
+                                    <Image.ToolTip>
+                                        <TextBlock FontWeight="Normal">
+                                            <Run Text="{x:Static res:Resources.strSettings_SkipOrientationMenu_Description_1}" />
+                                            <LineBreak />
+                                            <Run Text="{x:Static res:Resources.strSettings_SkipOrientationMenu_Description_2}" />
+                                            <LineBreak />
+                                            <Run Text="{x:Static res:Resources.strSettings_SkipOrientationMenu_Description_3}" />
+                                        </TextBlock>
+                                    </Image.ToolTip>
+                                </Image>
+                            </StackPanel>
+                        </CheckBox>
                         <TextBlock Margin="0,5,0,0" Text="{x:Static res:Resources.strPaperSize}"/>
                         <Fluent:ComboBox IsEditable="False" Margin="-8,3,3,0" Padding="4" SelectedIndex="0" x:Name="chkPaperFormat">
                             <ComboBox.Items>

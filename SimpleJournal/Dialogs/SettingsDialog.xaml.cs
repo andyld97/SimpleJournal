@@ -61,6 +61,7 @@ namespace SimpleJournal
             CheckBoxActivateGlowingBrush.IsChecked = Settings.Instance.ActivateGlowingBrush;
             ComboBoxStretch.SelectedIndex = (Settings.Instance.InsertImageStretchFormat == Stretch.Fill ? 0 : 1);
             CheckBoxDisableNotificationToolbar.IsChecked = Settings.Instance.HideNotificationToolBar;
+            CheckBoxSkipOrientationMenu.IsChecked = Settings.Instance.SkipOrientationMenu;
 
 #if UWP
             TabTouch.Visibility = Visibility.Collapsed;
@@ -375,6 +376,16 @@ namespace SimpleJournal
                 return;
 
             Settings.Instance.HideNotificationToolBar = CheckBoxDisableNotificationToolbar.IsChecked.Value;
+            Settings.Instance.Save();
+        }
+
+
+        private void CheckBoxSkipOrientationMenu_Checked(object sender, RoutedEventArgs e)
+        {
+            if (editMode)
+                return;
+
+            Settings.Instance.SkipOrientationMenu = CheckBoxSkipOrientationMenu.IsChecked.Value;
             Settings.Instance.Save();
         }
 

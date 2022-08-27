@@ -2330,4 +2330,20 @@ Details: {1}</value>
     <value>Restore Default</value>
     <comment>PagePatternDialog.xaml</comment>
   </data>
+  <data name="strSettings_SkipOrientationMenu_Title" xml:space="preserve">
+    <value>Automatically insert pages in portrait format</value>
+    <comment>SettingsDialog.xaml.cs</comment>
+  </data>
+  <data name="strSettings_SkipOrientationMenu_Description_1" xml:space="preserve">
+    <value>If the document does not contain any pages in landscape format</value>
+    <comment>SettingsDialog.xaml.cs</comment>
+  </data>
+  <data name="strSettings_SkipOrientationMenu_Description_2" xml:space="preserve">
+    <value>and this setting is activated, the menu is hidden when inserting a</value>
+    <comment>SettingsDialog.xaml.cs</comment>
+  </data>
+  <data name="strSettings_SkipOrientationMenu_Description_3" xml:space="preserve">
+    <value>page and the page is inserted directly in portrait format instead!</value>
+    <comment>SettingsDialog.xaml.cs</comment>
+  </data>
 </root>

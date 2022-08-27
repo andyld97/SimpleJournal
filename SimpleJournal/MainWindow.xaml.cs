@@ -1624,8 +1624,8 @@ namespace SimpleJournal
 
             double offset = mainScrollView.VerticalOffset;
 
-
             PageSplitter pageSplitter = new PageSplitter();
+            pageSplitter.OnCheckPages += delegate (Func<IPaper, bool> fn) { return CurrentJournalPages.All(fn); };
             pageSplitter.OnPageAdded += delegate (PageSplitter owner, PaperType type, Orientation orientation)
             {
                 var newPage = GeneratePage(paperType: type, orientation: orientation, pattern: GetPattern(type));
