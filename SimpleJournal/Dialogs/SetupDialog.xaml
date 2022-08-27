@@ -60,12 +60,22 @@
                          <Run FontWeight="Bold" Text="{x:Static res:Resources.strSetupStep2}"/>
                     </TextBlock>
                     <TextBlock Margin="3" FontSize="15" Text="{x:Static res:Resources.strPaperFormat}"/>
-                    <Fluent:ComboBox IsEditable="False" Margin="0,4,4,4" Padding="4" HorizontalAlignment="Stretch" SelectedIndex="1" x:Name="cmbFormat" SelectionChanged="CmbFormat_SelectionChanged">
-                        <TextBlock Text="{x:Static shared:Resources.strPlain}"/>
-                        <TextBlock Text="{x:Static shared:Resources.strChequered}"/>
-                        <TextBlock Text="{x:Static shared:Resources.strRuled}"/>
-                        <TextBlock Text="{x:Static shared:Resources.strDottet}"/>
-                    </Fluent:ComboBox>
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+
+                        <Fluent:ComboBox IsEditable="False" Margin="0,4,4,4" Padding="4" HorizontalAlignment="Stretch" SelectedIndex="1" x:Name="cmbFormat" SelectionChanged="CmbFormat_SelectionChanged">
+                            <TextBlock Text="{x:Static shared:Resources.strPlain}"/>
+                            <TextBlock Text="{x:Static shared:Resources.strChequered}"/>
+                            <TextBlock Text="{x:Static shared:Resources.strRuled}"/>
+                            <TextBlock Text="{x:Static shared:Resources.strDottet}"/>
+                        </Fluent:ComboBox>
+
+                        <Image x:Name="ButtonChangePaperPattern" MouseDown="ButtonChangePaperPattern_MouseDown" ToolTip="{x:Static res:Resources.strSettings_EditPaperPattern}" Cursor="Hand" RenderOptions.BitmapScalingMode="Fant" Margin="0,3,0,0" Height="28" Grid.Column="1" Source="pack://application:,,,/SimpleJournal;component/resources/page_pattern/editpagepattern.png" />
+                    </Grid>                    
                     <TextBlock Margin="3" FontSize="15" Text="{x:Static res:Resources.strPaperSize}"/>
                     <Fluent:ComboBox IsEditable="False" Margin="0,4,4,4" Padding="4" HorizontalAlignment="Stretch" SelectedIndex="0">
                         <TextBlock Text="{x:Static res:Resources.strA4}"/>
@@ -272,9 +282,10 @@
                     <ColumnDefinition />
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
-                <Button x:Name="btnSkip" Click="btnSkip_Click" Grid.Column="0" Content="{x:Static res:Resources.strSkip}" Margin="5" Padding="5" />
+                
+                <Button x:Name="btnSkip" Click="btnSkip_Click" Grid.Column="0" Content="{x:Static res:Resources.strSkip}" Margin="5" Padding="5" FontWeight="Bold" />
                 <Button x:Name="btnBackwards" Click="btnBackwards_Click" Grid.Column="2" Content="{x:Static res:Resources.strBack}" Margin="5" Padding="5" />
-                <Button x:Name="btnForwards" Click="btnForwards_Click" Grid.Column="3" Content="{x:Static res:Resources.strNext}" Margin="5" Padding="5" />
+                <Button x:Name="btnForwards" Click="btnForwards_Click" Grid.Column="3" Content="{x:Static res:Resources.strNext}" Margin="5" Padding="5" FontWeight="Bold" />
             </Grid>
         </Border>
     </Grid>

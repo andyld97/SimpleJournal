@@ -10,6 +10,7 @@ using System.Windows.Media;
 using Pen = SimpleJournal.Data.Pen;
 using SimpleJournal.Documents.UI.Extensions;
 using SimpleJournal.Documents.UI;
+using Dialogs;
 
 namespace SimpleJournal.Dialogs
 {
@@ -473,6 +474,15 @@ namespace SimpleJournal.Dialogs
         {
             if (isInitalized)
                 InitalizePreviewRulerCanvas();
+        }
+
+        private void ButtonChangePaperPattern_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            if (e.ButtonState == System.Windows.Input.MouseButtonState.Pressed)
+            {
+                var paperType = (PaperType)cmbFormat.SelectedIndex;
+                new PagePatternDialog(paperType).ShowDialog();
+            }
         }
     }
 }
