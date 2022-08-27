@@ -1,4 +1,7 @@
-﻿namespace SimpleJournal.Common.Data
+﻿using System.Data;
+using System.Numerics;
+
+namespace SimpleJournal.Common.Data
 {
     public class Color
     {
@@ -27,15 +30,32 @@
 
         public static bool operator ==(Color c1, Color c2)
         {
-            return c1.A == c2.A &&
-                   c1.R == c2.R &&
-                   c1.G == c2.G &&
-                   c2.B == c2.B;
+            if (c1 is null)
+                return c2 is null;
+
+            return c1.Equals(c2);
         }
 
         public static bool operator !=(Color c1, Color c2)
         {
-            return c1 != c2;
+            return !(c1 == c2);
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+                return false;
+
+            return obj is Color c2 ?
+                   A == c2.A &&
+                   R == c2.R &&
+                   G == c2.G &&
+                   B == c2.B : false;
+        }
+
+        public override int GetHashCode()
+        {
+            return (A, R, G, B).GetHashCode();
         }
     }
 }
