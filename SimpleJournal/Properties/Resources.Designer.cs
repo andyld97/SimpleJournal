@@ -3608,6 +3608,24 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to If activated, some dialogs that contain tabs are displayed in a modern way. The tabs are then in the title bar of the window and there is no longer a real title bar. The window can still be used normally!.
+        /// </summary>
+        public static string strSettings_UseModernDialogs_Description {
+            get {
+                return ResourceManager.GetString("strSettings_UseModernDialogs_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Use modern dialogues.
+        /// </summary>
+        public static string strSettings_UseModernDialogs_Title {
+            get {
+                return ResourceManager.GetString("strSettings_UseModernDialogs_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Active window glowing effect.
         /// </summary>
         public static string strSettingsActivateGlowingEffect {

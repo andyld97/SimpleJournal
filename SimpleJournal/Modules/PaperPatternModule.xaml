@@ -8,7 +8,7 @@
              xmlns:res="clr-namespace:SimpleJournal.Properties"
              xmlns:sharedRes="clr-namespace:SimpleJournal.SharedResources;assembly=SimpleJournal.SharedResources" xmlns:controls="clr-namespace:SimpleJournal.Controls"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:Height="600" d:Width="800">
     <UserControl.Resources>
         <Style TargetType="{x:Type Slider}">
             <Setter Property="BorderBrush" Value="{DynamicResource MahApps.Brushes.Control.Border}" />

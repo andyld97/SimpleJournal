@@ -2346,4 +2346,12 @@ Details: {1}</value>
     <value>page and the page is inserted directly in portrait format instead!</value>
     <comment>SettingsDialog.xaml.cs</comment>
   </data>
+  <data name="strSettings_UseModernDialogs_Title" xml:space="preserve">
+    <value>Use modern dialogues</value>
+    <comment>SettingsModule.xaml</comment>
+  </data>
+  <data name="strSettings_UseModernDialogs_Description" xml:space="preserve">
+    <value>If activated, some dialogs that contain tabs are displayed in a modern way. The tabs are then in the title bar of the window and there is no longer a real title bar. The window can still be used normally!</value>
+    <comment>SettingsModule.xaml</comment>
+  </data>
 </root>

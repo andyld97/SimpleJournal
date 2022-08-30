@@ -48,11 +48,6 @@ namespace Helper
 
         public static void ApplyTabbedModuleToWindow(this ITabbedModule module, Window moduleOwner)
         {
-            module.ModuleClosed += delegate (object? sender, bool result)
-            {
-                moduleOwner.DialogResult = result;
-            };
-
             module.ToggleWindowState += delegate (object? sender, EventArgs e)
             {
                 if (module.CanToggleWindowState)

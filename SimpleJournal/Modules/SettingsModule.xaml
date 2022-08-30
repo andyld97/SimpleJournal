@@ -223,6 +223,7 @@
                         <controls:SettingsItemControl SettingName="{x:Static res:Resources.strUseBigScrollbar}" Description="{x:Static res:Resources.strUseBigScrollbarDescription}" SettingPropertyName="EnlargeScrollbar" />
                         <controls:SettingsItemControl SettingName="{x:Static res:Resources.strUseNaturalScrolling}" Description="{x:Static res:Resources.strUseNaturalScrollingDescription}" SettingPropertyName="UseNaturalScrolling" />
                         <controls:SettingsItemControl SettingName="{x:Static res:Resources.strSettingsUseBackstageMenu}" Description="{x:Static res:Resources.strSettingsUseBackstageMenu_Description}" SettingPropertyName="UseNewMenu" />
+                        <controls:SettingsItemControl SettingName="{x:Static res:Resources.strSettings_UseModernDialogs_Title}" Description="{x:Static res:Resources.strSettings_UseModernDialogs_Description}" SettingPropertyName="UseModernDialogs" />
                         <controls:SettingsItemControl SettingName="{x:Static res:Resources.strDisplaySidebarAutomatically}" Description="{x:Static res:Resources.strDisplaySidebarAutomaticallyDescription}" SettingPropertyName="DisplaySidebarAutomatically" />
                         <controls:SettingsItemControl x:Name="SettingObjectBarTransparency" SettingName="{x:Static res:Resources.strSettingsSidebarTransparency}" Description="{x:Static res:Resources.strSettingsSidebarTransparency_Description}" SettingPropertyName="UseObjectBarTransparency" OnSettingChanged="SettingObjectBarTransparency_OnSettingChanged" />
 

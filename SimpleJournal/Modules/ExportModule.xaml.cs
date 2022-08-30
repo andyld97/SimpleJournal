@@ -65,6 +65,8 @@ namespace SimpleJournal.Modules
 
         public EventHandler<string> TitleChanged { get; set; }
 
+        public Common.Data.Size WindowSize => null;
+
         public ExportModule()
         {
             InitializeComponent();

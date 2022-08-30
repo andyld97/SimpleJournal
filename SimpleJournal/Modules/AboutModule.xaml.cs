@@ -32,6 +32,10 @@ namespace SimpleJournal.Modules
         public EventHandler<string> TitleChanged { get; set; }
 
         public bool CanToggleWindowState => false;
+
+        public string Title => Properties.Resources.strAbout;
+
+        public Common.Data.Size WindowSize => new Common.Data.Size(420, 670);
         #endregion
 
         public AboutModule()
@@ -106,6 +110,18 @@ namespace SimpleJournal.Modules
         private void Hyperlink_RequestNavigate(object sender, System.Windows.Navigation.RequestNavigateEventArgs e)
         {
             GeneralHelper.OpenUri(e.Uri);
+        }
+
+        public AboutModule ShowFeedbackPage()
+        {
+            TabControl.SelectedIndex = 2;
+            return this;
+        }
+
+        public AboutModule ShowChangelogPage()
+        {
+            TabControl.SelectedIndex = 1;
+            return this;
         }
 
         private async void btnSendFeedback_Click(object sender, RoutedEventArgs e)

@@ -11,6 +11,7 @@ using Pen = SimpleJournal.Data.Pen;
 using SimpleJournal.Documents.UI.Extensions;
 using SimpleJournal.Documents.UI;
 using Dialogs;
+using SimpleJournal.Modules;
 
 namespace SimpleJournal.Dialogs
 {
@@ -481,7 +482,9 @@ namespace SimpleJournal.Dialogs
             if (e.ButtonState == System.Windows.Input.MouseButtonState.Pressed)
             {
                 var paperType = (PaperType)cmbFormat.SelectedIndex;
-                new PaperPatternDialog(paperType).ShowDialog();
+                var ppm = new PaperPatternModule();
+                ppm.SelectPaperType(paperType);
+                (ppm as ITabbedModule).ShowModuleWindow(Settings.Instance.UseModernDialogs, this);
             }
         }
     }

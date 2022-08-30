@@ -71,6 +71,10 @@ namespace SimpleJournal.Modules
 
         public EventHandler<string> TitleChanged { get; set; }
 
+        public string Title => string.Empty;
+
+        public Common.Data.Size WindowSize => null;
+
         #endregion
 
         #region Ctor

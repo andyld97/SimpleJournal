@@ -3,10 +3,13 @@ using SimpleJournal;
 using SimpleJournal.Common;
 using SimpleJournal.Common.Data;
 using SimpleJournal.Dialogs;
+using SimpleJournal.Documents.UI;
+using SimpleJournal.Modules;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
+using Consts = SimpleJournal.Consts;
 
 namespace Notifications
 {
@@ -51,8 +54,8 @@ namespace Notifications
                         Description = SimpleJournal.Properties.Resources.strNotifications_UserInteraction_ShowChangelog,
                         HandleUserInteraction = new Action(() => 
                         {
-                            AboutDialog aboutDialog = new AboutDialog();
-                            aboutDialog.ShowChangelogPage().ShowDialog();
+                            AboutModule aboutDialog = new AboutModule();
+                            (aboutDialog.ShowChangelogPage() as ITabbedModule).ShowModuleWindow(Settings.Instance.UseModernDialogs);
                         })
                     },
                     new UserInteraction()

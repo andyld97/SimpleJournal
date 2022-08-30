@@ -1,11 +1,13 @@
 ﻿using Helper;
 using SimpleJournal.Common;
+using SimpleJournal.Common.Data;
 using SimpleJournal.Documents.Pattern;
 using SimpleJournal.Documents.UI;
 using SimpleJournal.Documents.UI.Extensions;
 using System;
 using System.Windows;
 using System.Windows.Controls;
+using Size = SimpleJournal.Common.Data.Size;
 using UserControl = System.Windows.Controls.UserControl;
 
 namespace SimpleJournal.Modules
@@ -32,6 +34,10 @@ namespace SimpleJournal.Modules
         public Grid MainGrid => GridMainContent;
 
         public bool CanToggleWindowState => true;
+
+        public string Title => Properties.Resources.strSettings_EditPaperPattern;
+
+        public Size WindowSize => new Common.Data.Size(800, 600);
 
         #endregion
 

@@ -35,6 +35,10 @@ namespace SimpleJournal.Modules
 
         public bool CanToggleWindowState => false;
 
+        public string Title => Properties.Resources.strSettings;
+
+        public Common.Data.Size WindowSize => new Common.Data.Size(650, 420);
+
         #endregion
 
         public SettingsModule()
@@ -418,7 +422,10 @@ namespace SimpleJournal.Modules
             if (e.ButtonState == System.Windows.Input.MouseButtonState.Pressed)
             {
                 var paperType = (PaperType)chkPaperType.SelectedIndex;
-                new PaperPatternDialog(paperType).ShowDialog();
+                
+                var module = new PaperPatternModule();
+                module.SelectPaperType(paperType);
+                (module as ITabbedModule).ShowModuleWindow(Settings.Instance.UseModernDialogs);
             }
         }
     }
