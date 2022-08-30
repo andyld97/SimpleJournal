@@ -16,13 +16,14 @@ using SimpleJournal.Documents;
 using SimpleJournal.Documents.UI.Extensions;
 using SimpleJournal.Documents.UI;
 using SimpleJournal.Documents.UI.Controls.Paper;
+using SimpleJournal.Modules;
 
-namespace SimpleJournal.Controls
+namespace SimpleJournal.Modules
 {
     /// <summary>
-    /// Interaction logic for ExportControl.xaml
+    /// Interaction logic for ExportModule.xaml
     /// </summary>
-    public partial class ExportControl : UserControl, IDialog, INotifyPropertyChanged
+    public partial class ExportModule : UserControl, IModule, INotifyPropertyChanged
     {
         private ObservableCollection<IPaper> pages = null;
         private ExportMode selectedExportMode = ExportMode.AllPages;
@@ -60,11 +61,11 @@ namespace SimpleJournal.Controls
             }
         }
 
-        public EventHandler<bool> DialogClosed { get; set; }
+        public EventHandler<bool> ModuleClosed { get; set; }
 
         public EventHandler<string> TitleChanged { get; set; }
 
-        public ExportControl()
+        public ExportModule()
         {
             InitializeComponent();
         }
@@ -367,7 +368,7 @@ namespace SimpleJournal.Controls
             Title = Properties.Resources.strExportPages;
 
             if (result)
-                DialogClosed?.Invoke(this, true);
+                ModuleClosed?.Invoke(this, true);
         }
 
         private void Expander_Collapsed(object sender, RoutedEventArgs e)
@@ -391,7 +392,7 @@ namespace SimpleJournal.Controls
 
         private void ButtonCancel_Click(object sender, RoutedEventArgs e)
         {
-            DialogClosed?.Invoke(this, false);
+            ModuleClosed?.Invoke(this, false);
         }
     }
 

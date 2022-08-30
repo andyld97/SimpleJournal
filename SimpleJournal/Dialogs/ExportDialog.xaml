@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SimpleJournal.Dialogs"
-        xmlns:res="clr-namespace:SimpleJournal.Properties" xmlns:fluent="urn:fluent-ribbon" xmlns:controls="clr-namespace:SimpleJournal.Controls"
+        xmlns:res="clr-namespace:SimpleJournal.Properties" xmlns:fluent="urn:fluent-ribbon" xmlns:controls="clr-namespace:SimpleJournal.Controls" xmlns:modules="clr-namespace:SimpleJournal.Modules"
         mc:Ignorable="d"
         Title="{x:Static res:Resources.strExportPages}" Height="500"  Width="400"
         ResizeMode="NoResize"
@@ -12,6 +12,6 @@
         MinWidth="400"
         WindowStartupLocation="CenterScreen" WindowState="Maximized">
     <Grid>
-        <controls:ExportControl x:Name="exportControl" />
+        <modules:ExportModule x:Name="exportControl" />
     </Grid>
 </Window>

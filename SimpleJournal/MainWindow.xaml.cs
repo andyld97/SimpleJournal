@@ -260,7 +260,7 @@ namespace SimpleJournal
 
 
             // Handle events
-            PageManagementControl.DialogClosed += async delegate (object semder, bool e)
+            PageManagementControl.ModuleClosed += async delegate (object semder, bool e)
             {
                 if (e)
                     await ApplyPageManagmentDialog(PageManagementControl.Result);
@@ -268,7 +268,7 @@ namespace SimpleJournal
                 MenuBackstage.IsOpen = false;
             };
 
-            ExportControl.DialogClosed += delegate (object sender, bool e)
+            ExportControl.ModuleClosed += delegate (object sender, bool e)
             {
                 MenuBackstage.IsOpen = false;
             };

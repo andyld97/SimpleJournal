@@ -17,13 +17,14 @@ using System.Windows.Data;
 using System.Globalization;
 using SimpleJournal.Documents.UI.Helper;
 using SimpleJournal.Documents.Pattern;
+using SimpleJournal.Modules;
 
-namespace SimpleJournal.Controls
+namespace SimpleJournal.Modules
 {
     /// <summary>
-    /// Interaction logic for PageManagmentControl.xaml
+    /// Interaction logic for PageManagmentModule.xaml
     /// </summary>
-    public partial class PageManagmentControl : UserControl, IDialog
+    public partial class PageManagmentModule : UserControl, IModule
     {
         #region Private Members
         private List<IPaper> pages = null;
@@ -66,7 +67,7 @@ namespace SimpleJournal.Controls
             }
         }
 
-        public EventHandler<bool> DialogClosed { get; set; }
+        public EventHandler<bool> ModuleClosed { get; set; }
 
         public EventHandler<string> TitleChanged { get; set; }
 
@@ -74,7 +75,7 @@ namespace SimpleJournal.Controls
 
         #region Ctor
 
-        public PageManagmentControl()
+        public PageManagmentModule()
         {
             InitializeComponent();
             ResetHoverText();
@@ -390,7 +391,7 @@ namespace SimpleJournal.Controls
             if (changesMade == 0)
             {
                 // No changes made, so just quit the dialog directly (with a false dialog result)
-                DialogClosed?.Invoke(this, false);
+                ModuleClosed?.Invoke(this, false);
                 return;
             }
             IsEnabled = false;
@@ -438,12 +439,12 @@ namespace SimpleJournal.Controls
             }
 
             IsEnabled = true;
-            DialogClosed?.Invoke(this, true);
+            ModuleClosed?.Invoke(this, true);
         }
 
         private void ButtonCancel_Click(object sender, RoutedEventArgs e)
         {
-            DialogClosed?.Invoke(this, false);
+            ModuleClosed?.Invoke(this, false);
         }
 
         #endregion

@@ -14,7 +14,7 @@ namespace SimpleJournal.Dialogs
             InitializeComponent();
             HideMinimizeButton(this);
 
-            PageManagmentControl.DialogClosed += delegate (object sender, bool e)
+            PageManagmentControl.ModuleClosed += delegate (object sender, bool e)
             {
                 DialogResult = e;
             };
