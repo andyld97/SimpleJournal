@@ -1,27 +1,36 @@
-﻿using MahApps.Metro.Controls;
-using SimpleJournal;
+﻿using SimpleJournal;
 using SimpleJournal.Common;
 using SimpleJournal.Documents.Pattern;
 using SimpleJournal.Documents.UI;
 using SimpleJournal.Documents.UI.Extensions;
+using SimpleJournal.Modules;
 using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
-using System.Windows.Interop;
+using UserControl = System.Windows.Controls.UserControl;
 
-namespace Dialogs
+namespace SimpleJournal.Modules
 {
     /// <summary>
-    /// Interaction logic for PagePatternDialog.xaml
+    /// Interaction logic for PaperPatternModule.xaml
     /// </summary>
-    public partial class PagePatternDialog : MetroWindow
+    public partial class PaperPatternModule : UserControl, ITabbedModule
     {
         private readonly TextBlock[] headers;
         private bool isInitalized = false;
 
-        public PagePatternDialog(PaperType paperType)
+
+        public EventHandler<bool> ModuleClosed { get; set; }
+
+        public EventHandler<string> TitleChanged { get; set; }
+
+        public EventHandler ToggleMinimizeMaximize { get; set; }
+
+        public EventHandler Move { get; set; }
+
+        public PaperPatternModule()
         {
             InitializeComponent();
             headers = new TextBlock[] { TabHeaderChequered, TabHeaderDotted, TabHeaderRuled, TabHeaderHelp };
@@ -34,12 +43,6 @@ namespace Dialogs
                 grid.PreviewMouseDown += Grid_PreviewMouseDown;
             }
 
-            if (paperType == PaperType.Chequered)
-                TabControl.SelectedIndex = 0;
-            else if (paperType == PaperType.Dotted)
-                TabControl.SelectedIndex = 1;
-            else if (paperType == PaperType.Ruled)
-                TabControl.SelectedIndex = 2;
 
             // ChequeredPattern has Gray as default color
             ChequeredColorPicker.SelectedColor = System.Windows.Media.Colors.Gray;
@@ -66,6 +69,16 @@ namespace Dialogs
             isInitalized = true;
         }
 
+        public void SelectPaperType(PaperType paperType)
+        {
+            if (paperType == PaperType.Chequered)
+                TabControl.SelectedIndex = 0;
+            else if (paperType == PaperType.Dotted)
+                TabControl.SelectedIndex = 1;
+            else if (paperType == PaperType.Ruled)
+                TabControl.SelectedIndex = 2;
+        }
+
         private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (!isInitalized)
@@ -75,33 +88,8 @@ namespace Dialogs
                 header.FontWeight = FontWeights.Normal;
 
             headers[(sender as TabControl).SelectedIndex].FontWeight = FontWeights.Bold;
-        }  
-
-        private void ToggleMinMax()
-        {
-            if (WindowState == WindowState.Maximized)
-                WindowState = WindowState.Normal;
-            else if (WindowState == WindowState.Normal)
-                WindowState = WindowState.Maximized;
         }
-
-        #region Move
-        public const int WM_NCLBUTTONDOWN = 0xA1;
-        public const int HT_CAPTION = 0x2;
-
-        [System.Runtime.InteropServices.DllImport("user32.dll")]
-        public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
-
-        [System.Runtime.InteropServices.DllImport("user32.dll")]
-        public static extern bool ReleaseCapture();
-
-        private void Move()
-        {
-            ReleaseCapture();
-            IntPtr windowHandle = new WindowInteropHelper(this).Handle;
-            SendMessage(windowHandle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
-        }
-        #endregion
+     
 
         #region Mouse Move
         private void HandleMouseMove(MouseButtonEventArgs e)
@@ -111,12 +99,12 @@ namespace Dialogs
 
             if (e.ClickCount == 2)
             {
-                ToggleMinMax();
+                ToggleMinimizeMaximize?.Invoke(this, EventArgs.Empty);
                 e.Handled = true;
                 return;
             }
 
-            Move();
+            Move?.Invoke(this, EventArgs.Empty);
         }
 
         private void Grid_PreviewMouseDown(object sender, MouseButtonEventArgs e)
@@ -315,7 +303,7 @@ namespace Dialogs
 
         private void ButtonExit_Click(object sender, RoutedEventArgs e)
         {
-            DialogResult = false;
+            ModuleClosed?.Invoke(sender, false);
         }
 
         private void ButtonApply_Click(object sender, RoutedEventArgs e)
@@ -338,7 +326,7 @@ namespace Dialogs
             Settings.Instance.Save();
             MainWindow.W_INSTANCE.ApplySettings();
 
-            DialogResult = true;
+            ModuleClosed?.Invoke(sender, true);
         }
         #endregion
     }

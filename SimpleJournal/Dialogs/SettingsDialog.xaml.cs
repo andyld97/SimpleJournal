@@ -399,7 +399,7 @@ namespace SimpleJournal
             if (e.ButtonState == System.Windows.Input.MouseButtonState.Pressed)
             {
                 var paperType = (PaperType)chkPaperType.SelectedIndex;
-                new PagePatternDialog(paperType).ShowDialog();
+                new PaperPatternDialog(paperType).ShowDialog();
             }
         }
     }

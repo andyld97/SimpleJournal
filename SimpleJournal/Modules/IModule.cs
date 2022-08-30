@@ -8,4 +8,11 @@ namespace SimpleJournal.Modules
 
         EventHandler<string> TitleChanged { get; set; }
     }
+
+    public interface ITabbedModule : IModule
+    {
+        EventHandler ToggleMinimizeMaximize { get; set; }
+
+        EventHandler Move { get; set; }
+    }
 }

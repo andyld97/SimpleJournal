@@ -481,7 +481,7 @@ namespace SimpleJournal.Dialogs
             if (e.ButtonState == System.Windows.Input.MouseButtonState.Pressed)
             {
                 var paperType = (PaperType)cmbFormat.SelectedIndex;
-                new PagePatternDialog(paperType).ShowDialog();
+                new PaperPatternDialog(paperType).ShowDialog();
             }
         }
     }
