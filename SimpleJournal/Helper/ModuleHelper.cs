@@ -38,7 +38,7 @@ namespace Helper
 
             if (e.ClickCount == 2)
             {
-                module.ToggleMinimizeMaximize?.Invoke(sender, EventArgs.Empty);
+                module.ToggleWindowState?.Invoke(sender, EventArgs.Empty);
                 e.Handled = true;
                 return;
             }
@@ -53,9 +53,10 @@ namespace Helper
                 moduleOwner.DialogResult = result;
             };
 
-            module.ToggleMinimizeMaximize += delegate (object? sender, EventArgs e)
+            module.ToggleWindowState += delegate (object? sender, EventArgs e)
             {
-                ToggleMinMax(moduleOwner);
+                if (module.CanToggleWindowState)
+                    ToggleNormalMax(moduleOwner);
             };
 
             module.Move += delegate (object? sender, EventArgs e)
@@ -65,7 +66,7 @@ namespace Helper
         }
  
         #region Move
-    public const int WM_NCLBUTTONDOWN = 0xA1;
+        public const int WM_NCLBUTTONDOWN = 0xA1;
         public const int HT_CAPTION = 0x2;
 
         [System.Runtime.InteropServices.DllImport("user32.dll")]
@@ -81,7 +82,7 @@ namespace Helper
             SendMessage(windowHandle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
         }
 
-        private static void ToggleMinMax(Window window)
+        private static void ToggleNormalMax(Window window)
         {
             if (window.WindowState == WindowState.Maximized)
                window. WindowState = WindowState.Normal;

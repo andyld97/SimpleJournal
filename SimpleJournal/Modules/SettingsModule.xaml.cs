@@ -20,7 +20,8 @@ namespace SimpleJournal.Modules
     /// </summary>
     public partial class SettingsModule : UserControl, ITabbedModule, INotifyPropertyChanged
     {
-        public EventHandler ToggleMinimizeMaximize { get; set; }
+        #region Interface Impl
+        public EventHandler ToggleWindowState { get; set; }
 
         public EventHandler Move { get; set; }
 
@@ -31,6 +32,10 @@ namespace SimpleJournal.Modules
         public TabControl TabControl => MainTab;
 
         public Grid MainGrid => MainGridContent;
+
+        public bool CanToggleWindowState => false;
+
+        #endregion
 
         public SettingsModule()
         {

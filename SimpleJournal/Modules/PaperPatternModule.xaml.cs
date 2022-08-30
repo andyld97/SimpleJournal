@@ -18,17 +18,22 @@ namespace SimpleJournal.Modules
         private readonly TextBlock[] headers;
         private bool isInitalized = false;
 
+        #region Interface Impl
         public EventHandler<bool> ModuleClosed { get; set; }
 
         public EventHandler<string> TitleChanged { get; set; }
 
-        public EventHandler ToggleMinimizeMaximize { get; set; }
+        public EventHandler ToggleWindowState { get; set; }
 
         public EventHandler Move { get; set; }
 
         public TabControl TabControl => MainTabControl;
 
         public Grid MainGrid => GridMainContent;
+
+        public bool CanToggleWindowState => true;
+
+        #endregion
 
         public PaperPatternModule()
         {
