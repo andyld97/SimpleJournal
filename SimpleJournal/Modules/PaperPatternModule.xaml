@@ -39,12 +39,12 @@
             </Style.Triggers>
         </Style>
     </UserControl.Resources>
-    <Grid MouseDown="Grid_MouseDown" Background="{DynamicResource TabControl.Background}">
+    <Grid x:Name="GridMainContent" Background="{DynamicResource TabControl.Background}">
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <TabControl x:Name="TabControl" SelectionChanged="TabControl_SelectionChanged" BorderThickness="0" Padding="0" Background="{DynamicResource WhiteBrush}" Margin="2">
+        <TabControl x:Name="MainTabControl" SelectionChanged="TabControl_SelectionChanged" BorderThickness="0" Padding="0" Background="{DynamicResource WhiteBrush}" Margin="2">
             <TabControl.Resources>
                 <ResourceDictionary>
                     <ResourceDictionary.MergedDictionaries>

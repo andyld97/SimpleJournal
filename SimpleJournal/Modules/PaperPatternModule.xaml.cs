@@ -1,14 +1,11 @@
-﻿using SimpleJournal;
+﻿using Helper;
 using SimpleJournal.Common;
 using SimpleJournal.Documents.Pattern;
 using SimpleJournal.Documents.UI;
 using SimpleJournal.Documents.UI.Extensions;
-using SimpleJournal.Modules;
 using System;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
-using System.Windows.Input;
 using UserControl = System.Windows.Controls.UserControl;
 
 namespace SimpleJournal.Modules
@@ -21,7 +18,6 @@ namespace SimpleJournal.Modules
         private readonly TextBlock[] headers;
         private bool isInitalized = false;
 
-
         public EventHandler<bool> ModuleClosed { get; set; }
 
         public EventHandler<string> TitleChanged { get; set; }
@@ -30,19 +26,14 @@ namespace SimpleJournal.Modules
 
         public EventHandler Move { get; set; }
 
+        public TabControl TabControl => MainTabControl;
+
+        public Grid MainGrid => GridMainContent;
+
         public PaperPatternModule()
         {
             InitializeComponent();
             headers = new TextBlock[] { TabHeaderChequered, TabHeaderDotted, TabHeaderRuled, TabHeaderHelp };
-
-            foreach (var tb in TabControl.Items)
-            {
-                var tabItem = (tb as TabItem);
-                tabItem.ApplyTemplate();
-                var grid = tabItem.Template.FindName("PART_Header", tabItem) as Grid;
-                grid.PreviewMouseDown += Grid_PreviewMouseDown;
-            }
-
 
             // ChequeredPattern has Gray as default color
             ChequeredColorPicker.SelectedColor = System.Windows.Media.Colors.Gray;
@@ -66,6 +57,7 @@ namespace SimpleJournal.Modules
                 ApplyRuledPattern(ruledPattern);
             }
 
+            ModuleHelper.ApplyTabbedFeatures(this);
             isInitalized = true;
         }
 
@@ -89,36 +81,6 @@ namespace SimpleJournal.Modules
 
             headers[(sender as TabControl).SelectedIndex].FontWeight = FontWeights.Bold;
         }
-     
-
-        #region Mouse Move
-        private void HandleMouseMove(MouseButtonEventArgs e)
-        {
-            if (e.LeftButton != MouseButtonState.Pressed)
-                return;
-
-            if (e.ClickCount == 2)
-            {
-                ToggleMinimizeMaximize?.Invoke(this, EventArgs.Empty);
-                e.Handled = true;
-                return;
-            }
-
-            Move?.Invoke(this, EventArgs.Empty);
-        }
-
-        private void Grid_PreviewMouseDown(object sender, MouseButtonEventArgs e)
-        {
-            HandleMouseMove(e);
-        }
-
-        private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            if (e.OriginalSource is TabPanel)
-                HandleMouseMove(e);
-        }
-
-        #endregion
 
         #region Paper Pattern
 
