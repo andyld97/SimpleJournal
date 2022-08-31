@@ -21,6 +21,8 @@ namespace SimpleJournal.Modules
     public partial class SettingsModule : UserControl, ITabbedModule, INotifyPropertyChanged
     {
         #region Interface Impl
+        private Window owner;
+
         public EventHandler ToggleWindowState { get; set; }
 
         public EventHandler Move { get; set; }
@@ -38,7 +40,6 @@ namespace SimpleJournal.Modules
         public string Title => Properties.Resources.strSettings;
 
         public Common.Data.Size WindowSize => new Common.Data.Size(650, 420);
-
         #endregion
 
         public SettingsModule()
@@ -54,6 +55,11 @@ namespace SimpleJournal.Modules
 #endif
 
             ModuleHelper.ApplyTabbedFeatures(this);
+        }
+
+        public void PassOwner(Window window)
+        {
+            this.owner = window;
         }
 
         private bool editMode;
@@ -425,7 +431,8 @@ namespace SimpleJournal.Modules
                 
                 var module = new PaperPatternModule();
                 module.SelectPaperType(paperType);
-                (module as ITabbedModule).ShowModuleWindow(Settings.Instance.UseModernDialogs);
+
+                (module as ITabbedModule).ShowModuleWindow(Settings.Instance.UseModernDialogs, owner);
             }
         }
     }

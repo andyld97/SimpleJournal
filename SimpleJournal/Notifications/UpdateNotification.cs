@@ -55,7 +55,7 @@ namespace Notifications
                         HandleUserInteraction = new Action(() => 
                         {
                             AboutModule aboutDialog = new AboutModule();
-                            (aboutDialog.ShowChangelogPage() as ITabbedModule).ShowModuleWindow(Settings.Instance.UseModernDialogs);
+                            (aboutDialog.ShowChangelogPage() as ITabbedModule).ShowModuleWindow(Settings.Instance.UseModernDialogs, null);
                         })
                     },
                     new UserInteraction()

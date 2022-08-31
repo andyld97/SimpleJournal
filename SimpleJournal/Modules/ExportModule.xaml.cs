@@ -33,6 +33,7 @@ namespace SimpleJournal.Modules
         private Window owner;
 
         public event PropertyChangedEventHandler PropertyChanged;
+
         private readonly List<Expander> expanders = new List<Expander>();
 
         public ExportMode SelectedExportMode

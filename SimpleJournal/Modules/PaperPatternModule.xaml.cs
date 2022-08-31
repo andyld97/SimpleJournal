@@ -38,7 +38,6 @@ namespace SimpleJournal.Modules
         public string Title => Properties.Resources.strSettings_EditPaperPattern;
 
         public Size WindowSize => new Common.Data.Size(800, 600);
-
         #endregion
 
         public PaperPatternModule()

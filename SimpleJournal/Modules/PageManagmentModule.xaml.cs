@@ -17,7 +17,6 @@ using System.Windows.Data;
 using System.Globalization;
 using SimpleJournal.Documents.UI.Helper;
 using SimpleJournal.Documents.Pattern;
-using SimpleJournal.Modules;
 
 namespace SimpleJournal.Modules
 {

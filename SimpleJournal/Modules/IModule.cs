@@ -45,11 +45,11 @@ namespace SimpleJournal.Modules
         /// <param name="isTabbedDialog"></param>
         /// <param name="owner"></param>
         /// <returns></returns>
-        bool? ShowModuleWindow(bool isTabbedDialog, Window owner = null)
+        bool? ShowModuleWindow(bool isTabbedDialog, Window owner)
         {
             Window result;
             if (isTabbedDialog)
-                result = new DialogWindowTabbed(this as ITabbedModule);
+                result = new DialogWindowTabbed((ITabbedModule)this);
             else
                 result = new DialogWindow(this);
 
@@ -58,6 +58,12 @@ namespace SimpleJournal.Modules
 
             return result.ShowDialog();
         }
+
+        /// <summary>
+        /// Can be used to pass the owner to this module (in case of this module wants to show another window)
+        /// </summary>
+        /// <param name="window"></param>
+        void PassOwner(Window window) { }
     }
 
     public interface ITabbedModule : IModule

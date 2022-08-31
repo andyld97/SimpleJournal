@@ -31,6 +31,7 @@ namespace Dialogs
 
             module.TitleChanged += DialogWindow_TitleChanged;
             module.ModuleClosed += DialogWindow_ModuleClosed;
+            module.PassOwner(this);
 
             Content = module as UserControl;
         }

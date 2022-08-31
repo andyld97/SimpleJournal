@@ -2473,13 +2473,13 @@ namespace SimpleJournal
         private void btnFeedback_Click(object sender, RoutedEventArgs e)
         {
             AboutModule ad  = new AboutModule();
-            (ad.ShowFeedbackPage() as ITabbedModule).ShowModuleWindow(Settings.Instance.UseModernDialogs);
+            (ad.ShowFeedbackPage() as ITabbedModule).ShowModuleWindow(Settings.Instance.UseModernDialogs, this);
         }
 
         private void BtnHelp_Click(object sender, RoutedEventArgs e)
         {
             AboutModule aboutDialog = new AboutModule();
-            (aboutDialog as ITabbedModule).ShowModuleWindow(Settings.Instance.UseModernDialogs);
+            (aboutDialog as ITabbedModule).ShowModuleWindow(Settings.Instance.UseModernDialogs, this);
         }
 
         private async void ListRecentlyOpenedDocuments_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -3132,7 +3132,7 @@ namespace SimpleJournal
         private void btnAbout_Click(object sender, RoutedEventArgs e)
         {
             ITabbedModule aboutDialog = new AboutModule();
-            aboutDialog.ShowModuleWindow(Settings.Instance.UseModernDialogs);
+            aboutDialog.ShowModuleWindow(Settings.Instance.UseModernDialogs, this);
         }
 #endregion
 

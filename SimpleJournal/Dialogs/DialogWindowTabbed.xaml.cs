@@ -39,6 +39,7 @@ namespace Dialogs
 
             module.TitleChanged += DialogWindow_TitleChanged;
             module.ModuleClosed += DialogWindow_ModuleClosed;
+            module.PassOwner(this);
             module.ApplyTabbedModuleToWindow(this);
 
             Content = module as UserControl;
