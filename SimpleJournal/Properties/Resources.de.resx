@@ -2144,7 +2144,7 @@ Details: {1}</value>
     <value>Radius:</value>
   </data>
   <data name="strPatternDialog_Intensity" xml:space="preserve">
-    <value>Intensität:</value>
+    <value>Schärfe:</value>
   </data>
   <data name="strPatternDialog_LineColor" xml:space="preserve">
     <value>Linienfarbe:</value>

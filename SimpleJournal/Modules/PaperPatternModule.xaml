@@ -100,11 +100,16 @@
                             </Style>
                         </StackPanel.Resources>
 
-                        <TextBlock Text="{x:Static res:Resources.strPatternDialog_Intensity}" />
-                        <Slider x:Name="SliderChequeredIntensity" ValueChanged="SliderChequeredIntensity_ValueChanged" Maximum="100" Value="18" Minimum="5" />
-
-                        <TextBlock Text="{x:Static res:Resources.strPatternDialog_ChequeredOffset}" />
+                        <TextBlock>
+                            <Run Text="{x:Static res:Resources.strPatternDialog_Intensity}" />
+                        </TextBlock>
                         <Slider x:Name="SliderChequeredOffset" ValueChanged="SliderChequeredOffset_ValueChanged" Maximum="100" Value="22" Minimum="5" />
+
+                        <TextBlock>
+                            <Run Text="{x:Static res:Resources.strPatternDialog_ChequeredOffset}" />
+                            <Run x:Name="TextCM" Text="0.5cm" />
+                        </TextBlock>
+                        <Slider x:Name="SliderChequeredIntensity" ValueChanged="SliderChequeredIntensity_ValueChanged" Maximum="100" Value="18" Minimum="5" />
 
                         <TextBlock Text="{x:Static res:Resources.strPatternDialog_StrokeWidth}" />
                         <Slider x:Name="SliderChequredStrokeWidth" ValueChanged="SliderChequredStrokeWidth_ValueChanged" Maximum="1" Minimum="0.1" Value="0.5"   />

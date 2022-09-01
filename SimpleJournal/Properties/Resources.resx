@@ -2247,7 +2247,7 @@ Details: {1}</value>
     <comment>PreviewCanvas.xaml</comment>
   </data>
   <data name="strPatternDialog_Intensity" xml:space="preserve">
-    <value>Intensity:</value>
+    <value>Sharpness:</value>
     <comment>PagePatternDialog.xaml</comment>
   </data>
   <data name="strPatternDialog_ChequeredOffset" xml:space="preserve">

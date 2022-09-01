@@ -1722,7 +1722,7 @@ Details: {1}</value>
     <value>Straal:</value>
   </data>
   <data name="strPatternDialog_Intensity" xml:space="preserve">
-    <value>Intensiteit:</value>
+    <value>Scherpte:</value>
   </data>
   <data name="strPatternDialog_LineColor" xml:space="preserve">
     <value>Lijnkleur:</value>

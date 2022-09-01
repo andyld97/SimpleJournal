@@ -67,6 +67,8 @@ namespace SimpleJournal.Modules
                 ApplyRuledPattern(ruledPattern);
             }
 
+            RefreshCM();
+
             ModuleHelper.ApplyTabbedFeatures(this);
             isInitalized = true;
         }
@@ -112,6 +114,8 @@ namespace SimpleJournal.Modules
                 return;
 
             chequeredPattern.ViewPort = e.NewValue;
+            SliderChequeredOffset.Value = e.NewValue + 4;
+            RefreshCM();
             ChequeredPreview.Paper.ApplyPattern(chequeredPattern);
         }
 
@@ -121,8 +125,13 @@ namespace SimpleJournal.Modules
                 return;
 
             chequeredPattern.ViewOffset = e.NewValue;
-            SliderChequeredIntensity.Value = e.NewValue - 4;
             ChequeredPreview.Paper.ApplyPattern(chequeredPattern);
+        }
+
+        private void RefreshCM()
+        {
+            TextCM.Text = Math.Round(SliderChequeredIntensity.Value.PxToCm(), 2) + " cm";
+            // TODO: *** Add TextCM also for Dotted and Ruled
         }
 
         private void ChequeredColorPicker_ColorChanged(System.Windows.Media.Color c)

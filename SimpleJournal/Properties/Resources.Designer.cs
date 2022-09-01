@@ -2564,7 +2564,7 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Intensity:.
+        ///   Looks up a localized string similar to Sharpness:.
         /// </summary>
         public static string strPatternDialog_Intensity {
             get {
