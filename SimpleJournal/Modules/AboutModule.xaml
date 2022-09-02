@@ -7,7 +7,7 @@
              xmlns:common="clr-namespace:SimpleJournal.Common;assembly=SimpleJournal.Common"
              xmlns:res="clr-namespace:SimpleJournal.Properties" xmlns:wpf="clr-namespace:Microsoft.Web.WebView2.Wpf;assembly=Microsoft.Web.WebView2.Wpf"
              mc:Ignorable="d" 
-             d:Height="670" d:Width="420">
+             d:Height="650" d:Width="420">
     <Grid x:Name="MainContentGrid" Background="{DynamicResource TabControl.Background}">
         <TabControl BorderThickness="0" Padding="0" Background="{DynamicResource WhiteBrush}" x:Name="MainTabControl" Margin="0,2,0,0">
             <TabControl.Resources>

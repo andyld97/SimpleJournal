@@ -1,13 +1,11 @@
 ﻿using Helper;
 using SimpleJournal.Common;
-using SimpleJournal.Common.Data;
 using SimpleJournal.Documents.Pattern;
 using SimpleJournal.Documents.UI;
 using SimpleJournal.Documents.UI.Extensions;
 using System;
 using System.Windows;
 using System.Windows.Controls;
-using static System.Net.Mime.MediaTypeNames;
 using Size = SimpleJournal.Common.Data.Size;
 using UserControl = System.Windows.Controls.UserControl;
 
@@ -99,6 +97,7 @@ namespace SimpleJournal.Modules
 
         #region Chequered
         private readonly ChequeredPattern chequeredPattern = new ChequeredPattern();
+
         private void SliderChequredStrokeWidth_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             if (!isInitalized)

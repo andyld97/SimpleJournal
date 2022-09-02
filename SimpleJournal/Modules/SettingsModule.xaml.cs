@@ -2,6 +2,7 @@
 using Dialogs;
 using Helper;
 using SimpleJournal.Common;
+using SimpleJournal.Common.FileAssociations; // don't remove
 using SimpleJournal.Data;
 using SimpleJournal.Dialogs;
 using SimpleJournal.Documents.UI;

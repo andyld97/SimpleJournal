@@ -35,7 +35,7 @@ namespace SimpleJournal.Modules
 
         public string Title => Properties.Resources.strAbout;
 
-        public Common.Data.Size WindowSize => new Common.Data.Size(420, 670);
+        public Common.Data.Size WindowSize => new Common.Data.Size(420, 650);
         #endregion
 
         public AboutModule()
