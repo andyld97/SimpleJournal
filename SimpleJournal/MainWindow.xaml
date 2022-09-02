@@ -10,7 +10,7 @@
         xmlns:controls="clr-namespace:SimpleJournal.Controls"
         StateChanged="RibbonWindow_StateChanged"
         mc:Ignorable="d"
-        xmlns:gl="clr-namespace:System.Globalization;assembly=mscorlib" xmlns:controls1="clr-namespace:SimpleJournal.Documents.UI.Controls;assembly=SimpleJournal.Documents.UI"
+        xmlns:gl="clr-namespace:System.Globalization;assembly=mscorlib" xmlns:controls1="clr-namespace:SimpleJournal.Documents.UI.Controls;assembly=SimpleJournal.Documents.UI" xmlns:modules="clr-namespace:SimpleJournal.Modules"
                      Title="SimpleJournal - Neues Journal" Height="700" Activated="RibbonWindow_Activated" Deactivated="RibbonWindow_Deactivated"
         Width="1130">
     <!--TextFormattingMode="Display" -->
@@ -111,11 +111,11 @@
                                     <StatusBar DockPanel.Dock="Top" Visibility="{Binding ElementName=TextExportStatus, Path=Text, Converter={StaticResource stringToVisilbity}}" Background="{DynamicResource WhiteBrush20}">
                                         <TextBlock x:Name="TextExportStatus" Padding="2" Foreground="{DynamicResource BlackBrush}" />
                                     </StatusBar>
-                                    <controls:ExportControl x:Name="ExportControl" />
+                                    <modules:ExportModule x:Name="ExportControl" />
                                 </DockPanel>
                             </Fluent:BackstageTabItem>
                             <Fluent:BackstageTabItem x:Name="MenuBackstageEditPages" Icon="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/editpage.png" Header="{x:Static res:Resources.strManagePage}" MouseDown="MenuBackstageEditPages_MouseDown">
-                                <controls:PageManagmentControl x:Name="PageManagementControl" />
+                                <modules:PageManagmentModule x:Name="PageManagementControl" />
                             </Fluent:BackstageTabItem>
                             <Fluent:SeparatorTabItem />
                             <Fluent:Button Icon="/resources/settings.png" Header="{x:Static res:Resources.strSettings}" Click="btnSettings_Click"/>

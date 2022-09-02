@@ -4,12 +4,12 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:res="clr-namespace:SimpleJournal.Properties"
-        xmlns:Fluent="urn:fluent-ribbon" xmlns:controls="clr-namespace:SimpleJournal.Controls"
+        xmlns:Fluent="urn:fluent-ribbon" xmlns:controls="clr-namespace:SimpleJournal.Controls" xmlns:modules="clr-namespace:SimpleJournal.Modules"
         mc:Ignorable="d"
         Title="{x:Static res:Resources.strPageManagmentTitle}" Height="499" Width="809"
         WindowStartupLocation="CenterScreen"
         MinHeight="450" MinWidth="800" 
         WindowState="Maximized">
-    
-    <controls:PageManagmentControl x:Name="PageManagmentControl" />
+
+    <modules:PageManagmentModule x:Name="PageManagmentControl" />
 </Window>

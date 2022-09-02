@@ -14,7 +14,7 @@
                 Title = e;
             };
 
-            exportControl.DialogClosed += delegate (object sender, bool e)
+            exportControl.ModuleClosed += delegate (object sender, bool e)
             {
                 DialogResult = e;
             };

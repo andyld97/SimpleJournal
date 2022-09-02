@@ -2144,7 +2144,7 @@ Details: {1}</value>
     <value>Radius:</value>
   </data>
   <data name="strPatternDialog_Intensity" xml:space="preserve">
-    <value>Intensität:</value>
+    <value>Schärfe:</value>
   </data>
   <data name="strPatternDialog_LineColor" xml:space="preserve">
     <value>Linienfarbe:</value>
@@ -2205,5 +2205,11 @@ Details: {1}</value>
   </data>
   <data name="strSettings_SkipOrientationMenu_Description_1" xml:space="preserve">
     <value>Sofern das Dokument keine Seiten im Querformat beinhaltet und diese</value>
+  </data>
+  <data name="strSettings_UseModernDialogs_Title" xml:space="preserve">
+    <value>Moderne Dialoge verwenden</value>
+  </data>
+  <data name="strSettings_UseModernDialogs_Description" xml:space="preserve">
+    <value>Wenn aktiviert werden einige Dialoge, die Tabs enthalten modern dargestellt. Die Tabs befinden sich dann in der Titelleiste des Fensters und es gibt keine richtige Titelleiste mehr. Das Fenster kann trotzdem ganz normal verwendet werden!</value>
   </data>
 </root>

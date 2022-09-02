@@ -1722,7 +1722,7 @@ Details: {1}</value>
     <value>Straal:</value>
   </data>
   <data name="strPatternDialog_Intensity" xml:space="preserve">
-    <value>Intensiteit:</value>
+    <value>Scherpte:</value>
   </data>
   <data name="strPatternDialog_LineColor" xml:space="preserve">
     <value>Lijnkleur:</value>
@@ -1783,5 +1783,11 @@ Details: {1}</value>
   </data>
   <data name="strSettings_SkipOrientationMenu_Title" xml:space="preserve">
     <value>Automatisch invoegen van pagina's in staand formaat</value>
+  </data>
+  <data name="strSettings_UseModernDialogs_Description" xml:space="preserve">
+    <value>Indien geactiveerd, worden sommige dialogen die tabbladen bevatten op een moderne manier weergegeven. De tabs staan dan in de titelbalk van het venster en er is geen echte titelbalk meer. Het venster kan nog steeds normaal gebruikt worden!</value>
+  </data>
+  <data name="strSettings_UseModernDialogs_Title" xml:space="preserve">
+    <value>Gebruik moderne dialogen</value>
   </data>
 </root>

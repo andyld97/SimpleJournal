@@ -20,6 +20,7 @@ using SimpleJournal.Documents.UI.Extensions;
 using SimpleJournal.Documents.UI.Helper;
 using SimpleJournal.Helper;
 using SimpleJournal.Helper.PDF;
+using SimpleJournal.Modules;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -260,7 +261,7 @@ namespace SimpleJournal
 
 
             // Handle events
-            PageManagementControl.DialogClosed += async delegate (object semder, bool e)
+            PageManagementControl.ModuleClosed += async delegate (object semder, bool e)
             {
                 if (e)
                     await ApplyPageManagmentDialog(PageManagementControl.Result);
@@ -268,7 +269,7 @@ namespace SimpleJournal
                 MenuBackstage.IsOpen = false;
             };
 
-            ExportControl.DialogClosed += delegate (object sender, bool e)
+            ExportControl.ModuleClosed += delegate (object sender, bool e)
             {
                 MenuBackstage.IsOpen = false;
             };
@@ -2471,14 +2472,14 @@ namespace SimpleJournal
 
         private void btnFeedback_Click(object sender, RoutedEventArgs e)
         {
-            AboutDialog ad = new AboutDialog();
-            ad.ShowFeedbackPage().ShowDialog();
+            AboutModule ad  = new AboutModule();
+            (ad.ShowFeedbackPage() as ITabbedModule).ShowModuleWindow(Settings.Instance.UseModernDialogs, this);
         }
 
         private void BtnHelp_Click(object sender, RoutedEventArgs e)
         {
-            AboutDialog aboutDialog = new AboutDialog();
-            aboutDialog.ShowDialog();
+            AboutModule aboutDialog = new AboutModule();
+            (aboutDialog as ITabbedModule).ShowModuleWindow(Settings.Instance.UseModernDialogs, this);
         }
 
         private async void ListRecentlyOpenedDocuments_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -2961,8 +2962,8 @@ namespace SimpleJournal
 
         private void btnSettings_Click(object sender, RoutedEventArgs e)
         {
-            SettingsDialog settingsWindow = new SettingsDialog() { Owner = this };
-            settingsWindow.ShowDialog();
+            ITabbedModule settingsWindow = new SettingsModule();
+            settingsWindow.ShowModuleWindow(Settings.Instance.UseModernDialogs, this);
 
             if (!Settings.Instance.UseAutoSave)
             {
@@ -3130,8 +3131,8 @@ namespace SimpleJournal
 
         private void btnAbout_Click(object sender, RoutedEventArgs e)
         {
-            AboutDialog aboutDialog = new AboutDialog();
-            aboutDialog.ShowDialog();
+            ITabbedModule aboutDialog = new AboutModule();
+            aboutDialog.ShowModuleWindow(Settings.Instance.UseModernDialogs, this);
         }
 #endregion
 

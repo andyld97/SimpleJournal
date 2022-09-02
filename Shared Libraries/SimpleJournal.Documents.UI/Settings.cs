@@ -235,9 +235,14 @@ namespace SimpleJournal.Documents.UI
         public string SelfHostedPDF2JApiUrl { get; set; } = string.Empty;
 
         /// <summary>
-        /// if true the menu Portrait/Landscape menu is hidden when the document has no landscape pages
+        /// If true the menu Portrait/Landscape menu is hidden when the document has no landscape pages
         /// </summary>
         public bool SkipOrientationMenu { get; set; } = false;
+
+        /// <summary>
+        /// If true tabbed dialogs are displayed via a MetroWindow where the tabs are in the TitleBar of this window
+        /// </summary>
+        public bool UseModernDialogs { get; set; } = true;
 
         #region Pattern
 
