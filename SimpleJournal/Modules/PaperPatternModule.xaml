@@ -101,16 +101,16 @@
                         </StackPanel.Resources>
 
                         <TextBlock>
-                            <Run Text="{x:Static res:Resources.strPatternDialog_Intensity}" />
-                        </TextBlock>
-                        <Slider x:Name="SliderChequeredOffset" ValueChanged="SliderChequeredOffset_ValueChanged" Maximum="100" Value="22" Minimum="5" />
-
-                        <TextBlock>
                             <Run Text="{x:Static res:Resources.strPatternDialog_ChequeredOffset}" />
-                            <Run x:Name="TextCM" Text="0.5cm" />
+                            <Run x:Name="TextChequeredCM" Text="0.5cm" />
                         </TextBlock>
                         <Slider x:Name="SliderChequeredIntensity" ValueChanged="SliderChequeredIntensity_ValueChanged" Maximum="100" Value="18" Minimum="5" />
 
+                        <TextBlock>
+                            <Run Text="{x:Static res:Resources.strPatternDialog_Intensity}" />
+                        </TextBlock>
+                        <Slider x:Name="SliderChequeredOffset" ValueChanged="SliderChequeredOffset_ValueChanged" Maximum="100" Value="22" Minimum="5" />
+                  
                         <TextBlock Text="{x:Static res:Resources.strPatternDialog_StrokeWidth}" />
                         <Slider x:Name="SliderChequredStrokeWidth" ValueChanged="SliderChequredStrokeWidth_ValueChanged" Maximum="1" Minimum="0.1" Value="0.5"   />
 
@@ -156,8 +156,11 @@
                             </Style>
                         </StackPanel.Resources>
 
-                        <TextBlock Text="{x:Static res:Resources.strPatternDialog_DottedOffset}" />
-                        <Slider x:Name="SliderViewPort" ValueChanged="SliderViewPort_ValueChanged" Value="20" Minimum="1" Maximum="50" />
+                        <TextBlock>
+                            <Run Text="{x:Static res:Resources.strPatternDialog_DottedOffset}" />
+                            <Run x:Name="TextDottedCM" Text="0,5cm" />
+                        </TextBlock>
+                        <Slider x:Name="SliderDottedViewPort" ValueChanged="SliderViewPort_ValueChanged" Value="20" Minimum="3" Maximum="50" />
 
                         <TextBlock Text="{x:Static res:Resources.strPatternDialog_DottedRadius}" />
                         <Slider x:Name="SliderDottedRadius" ValueChanged="SliderDottedRadius_ValueChanged" Value="0.5" Minimum="0.1" Maximum="2" />
@@ -206,7 +209,10 @@
                             </Style>
                         </StackPanel.Resources>
 
-                        <TextBlock Text="{x:Static res:Resources.strPatternDialog_RuledOffset}" />
+                        <TextBlock>
+                            <Run Text="{x:Static res:Resources.strPatternDialog_RuledOffset}" />
+                            <Run x:Name="TextRuledCM" Text="0,5cm" />
+                        </TextBlock>
                         <Slider x:Name="SliderRuledOffset" ValueChanged="SliderRuledOffset_ValueChanged" Value="50" Minimum="5" Maximum="100" />
 
                         <TextBlock Text="{x:Static res:Resources.strPatternDialog_StrokeWidth}" />

@@ -7,6 +7,7 @@ using SimpleJournal.Documents.UI.Extensions;
 using System;
 using System.Windows;
 using System.Windows.Controls;
+using static System.Net.Mime.MediaTypeNames;
 using Size = SimpleJournal.Common.Data.Size;
 using UserControl = System.Windows.Controls.UserControl;
 
@@ -98,7 +99,6 @@ namespace SimpleJournal.Modules
 
         #region Chequered
         private readonly ChequeredPattern chequeredPattern = new ChequeredPattern();
-
         private void SliderChequredStrokeWidth_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             if (!isInitalized)
@@ -108,6 +108,11 @@ namespace SimpleJournal.Modules
             ChequeredPreview.Paper.ApplyPattern(chequeredPattern);
         }
 
+        /*
+         * Important Notice! Sharpness/Offset are swapped here, because I misinterpreted these
+         * values, so SliderChequeredIntensity is actually the offset and SliderChequeredOffset is actually the intensity/sharpness
+         * 
+         */
         private void SliderChequeredIntensity_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             if (!isInitalized)
@@ -130,8 +135,9 @@ namespace SimpleJournal.Modules
 
         private void RefreshCM()
         {
-            TextCM.Text = Math.Round(SliderChequeredIntensity.Value.PxToCm(), 2) + " cm";
-            // TODO: *** Add TextCM also for Dotted and Ruled
+            TextChequeredCM.Text = Math.Round(SliderChequeredIntensity.Value.PxToCm(), 2) + " cm";
+            TextDottedCM.Text = Math.Round(SliderDottedViewPort.Value.PxToCm(), 2) + " cm";
+            TextRuledCM.Text = Math.Round(SliderRuledOffset.Value.PxToCm(), 2) + " cm";
         }
 
         private void ChequeredColorPicker_ColorChanged(System.Windows.Media.Color c)
@@ -153,6 +159,7 @@ namespace SimpleJournal.Modules
             SliderChequeredOffset.Value = pattern.ViewOffset;
             SliderChequredStrokeWidth.Value = pattern.StrokeWidth;
             ChequeredColorPicker.SelectedColor = pattern.Color.ToColor();
+            RefreshCM();
 
             isInitalized = true;
         }
@@ -191,7 +198,8 @@ namespace SimpleJournal.Modules
             if (!isInitalized)
                 return;
 
-            dottedPattern.ViewPort = SliderViewPort.Value;
+            dottedPattern.ViewPort = SliderDottedViewPort.Value;
+            RefreshCM();
             DottedPreview.Paper.ApplyPattern(dottedPattern);
         }
 
@@ -212,9 +220,10 @@ namespace SimpleJournal.Modules
             isInitalized = false;
 
             SliderDottedRadius.Value = dottedPattern.Radius;
-            SliderViewPort.Value = dottedPattern.ViewPort;
+            SliderDottedViewPort.Value = dottedPattern.ViewPort;
             SliderDottedStrokeWidth.Value = dottedPattern.StrokeWidth;
             DottedColorPicker.SelectedColor = dottedPattern.Color.ToColor();
+            RefreshCM();
 
             isInitalized = true;
         }
@@ -236,6 +245,7 @@ namespace SimpleJournal.Modules
                 return;
 
             ruledPattern.ViewOffset = SliderRuledOffset.Value;
+            RefreshCM();
             RuledPreview.Paper.ApplyPattern(ruledPattern);
         }
 
@@ -266,6 +276,7 @@ namespace SimpleJournal.Modules
             SliderRuledOffset.Value = ruledPattern.ViewOffset;
             SliderRuledStrokeWdith.Value = ruledPattern.StrokeWidth;
             RuledColorPicker.SelectedColor = ruledPattern.Color.ToColor();
+            RefreshCM();
 
             isInitalized = true;
         }

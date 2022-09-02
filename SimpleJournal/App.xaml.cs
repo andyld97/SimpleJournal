@@ -32,7 +32,7 @@ namespace SimpleJournal
 
             // Test
 #if DEBUG
-            var cultureInfoTest = new CultureInfo("de");
+            var cultureInfoTest = new CultureInfo("en");
             Thread.CurrentThread.CurrentCulture =
             Thread.CurrentThread.CurrentUICulture = cultureInfoTest;
 #endif
