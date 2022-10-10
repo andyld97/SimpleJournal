@@ -5,21 +5,21 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:res="clr-namespace:SimpleJournal.Properties" xmlns:controls="clr-namespace:SimpleJournal.Controls"
         mc:Ignorable="d"
-        WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Background="{DynamicResource WhiteBrush}"
+        WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Background="{DynamicResource Fluent.Ribbon.Brushes.White}"
         Title="{x:Static res:Resources.strPDFConversationDialog_Title}" SizeToContent="Height" Width="500">
 
     <Window.Resources>
         <Style TargetType="{x:Type RadioButton}">
-            <Setter Property="Foreground" Value="{DynamicResource BlackBrush}" />
+            <Setter Property="Foreground" Value="{DynamicResource Fluent.Ribbon.Brushes.Black}" />
             <Setter Property="Margin" Value="3" />
         </Style>
         <Style TargetType="{x:Type TextBlock}">
-            <Setter Property="Foreground" Value="{DynamicResource BlackBrush}" />
+            <Setter Property="Foreground" Value="{DynamicResource Fluent.Ribbon.Brushes.Black}" />
             <Setter Property="Margin" Value="3" />
         </Style>
         <Style TargetType="{x:Type TextBox}">
-            <Setter Property="Background" Value="{DynamicResource WhiteBrush}" />
-            <Setter Property="Foreground" Value="{DynamicResource BlackBrush}" />
+            <Setter Property="Background" Value="{DynamicResource Fluent.Ribbon.Brushes.White}" />
+            <Setter Property="Foreground" Value="{DynamicResource Fluent.Ribbon.Brushes.Black}" />
             <Setter Property="Margin" Value="3" />
             <Setter Property="Padding" Value="3" />
         </Style>
@@ -65,19 +65,19 @@
             <RadioButton x:Name="RadioAllPages" Margin="0,5,0,0" Content="{x:Static res:Resources.strPDFConversationDialog_AllPages}" IsChecked="True" />
             <RadioButton x:Name="RadioChoosePageRange" Margin="0,5,0,0" Content="{x:Static res:Resources.strPDFConversationDialog_ConvertOnlySelectedPages}" />
 
-            <StackPanel Visibility="{Binding ElementName=RadioChoosePageRange, Path=IsChecked, Converter={StaticResource boolToVisibilityConverter}}" Orientation="Horizontal" HorizontalAlignment="Left">
+            <StackPanel Visibility="{Binding ElementName=RadioChoosePageRange, Path=IsChecked, Converter={StaticResource Fluent.Ribbon.Converters.BoolToVisibilityConverter}}" Orientation="Horizontal" HorizontalAlignment="Left">
                 <TextBlock Text="{x:Static res:Resources.strPDFConversationDialog_From}" Margin="25,0,0,0" VerticalAlignment="Center" FontWeight="Bold" />
                 <controls:NumericUpDown x:Name="NumPageFrom" Height="25" Value="1" Maximum="100" Minimum="1" Margin="3" />
                 <TextBlock Text="{x:Static res:Resources.strPDFConversationDialog_To}" Margin="10,0,3,0" VerticalAlignment="Center" FontWeight="Bold" />
                 <controls:NumericUpDown x:Name="NumPageTo" Height="25" Value="100" Maximum="100" Minimum="1" Margin="3" />
             </StackPanel>
 
-            <CheckBox x:Name="CheckUseOnlineConverter" Checked="CheckUseOnlineConverter_Checked" Unchecked="CheckUseOnlineConverter_Checked" Foreground="{DynamicResource BlackBrush}" Content="{x:Static res:Resources.strPDFConversationDialog_UseOnlineConversation}" Margin="0,5,0,0" />
+            <CheckBox x:Name="CheckUseOnlineConverter" Checked="CheckUseOnlineConverter_Checked" Unchecked="CheckUseOnlineConverter_Checked" Foreground="{DynamicResource Fluent.Ribbon.Brushes.Black}" Content="{x:Static res:Resources.strPDFConversationDialog_UseOnlineConversation}" Margin="0,5,0,0" />
 
-            <StackPanel Visibility="{Binding ElementName=CheckUseOnlineConverter, Path=IsChecked, Converter={StaticResource boolToVisibilityConverter}}">
+            <StackPanel Visibility="{Binding ElementName=CheckUseOnlineConverter, Path=IsChecked, Converter={StaticResource Fluent.Ribbon.Converters.BoolToVisibilityConverter}}">
                 <CheckBox x:Name="CheckUseSelfHostedAPI" Checked="CheckUseSelfHostedAPI_Checked" Unchecked="CheckUseSelfHostedAPI_Checked" Content="{x:Static res:Resources.strPDFConversationDialog_UseSelfHostedPDF2JApi}" Margin="0,5,0,0"/>
 
-                <StackPanel Visibility="{Binding ElementName=CheckUseSelfHostedAPI, Path=IsChecked, Converter={StaticResource boolToVisibilityConverter}}">
+                <StackPanel Visibility="{Binding ElementName=CheckUseSelfHostedAPI, Path=IsChecked, Converter={StaticResource Fluent.Ribbon.Converters.BoolToVisibilityConverter}}">
                     <TextBlock Text="{x:Static res:Resources.strPDFConversationDialog_SelfHostedPDF2JUrlDescription}" FontWeight="Bold" />
                     <TextBox x:Name="TextUrl" TextChanged="TextUrl_TextChanged" />
                     <!-- ToDo: *** Add Blog Article here (if it is available ofc) -->

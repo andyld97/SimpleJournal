@@ -8,10 +8,10 @@
              xmlns:sres="clr-namespace:SimpleJournal.SharedResources;assembly=SimpleJournal.SharedResources"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Background="{DynamicResource WhiteBrush}">
+    <Grid Background="{DynamicResource Fluent.Ribbon.Brushes.White}">
         <Grid.Resources>
             <Style TargetType="{x:Type TextBlock}">
-                <Setter Property="Foreground" Value="{DynamicResource BlackBrush}" />
+                <Setter Property="Foreground" Value="{DynamicResource Fluent.Ribbon.Brushes.Black}" />
             </Style>
             <local:PageToImageConverter x:Key="pageToImageConverter" />
             <local:PageToTextConverter x:Key="pageToTextConverter" />
@@ -53,7 +53,7 @@
                                         </Grid.ColumnDefinitions>
 
                                         <Image Width="48" Source="{Binding ., Converter={StaticResource pageToImageConverter}}" RenderOptions.BitmapScalingMode="Fant" />
-                                        <TextBlock Margin="5,0,0,0" Grid.Column="1" Foreground="{DynamicResource BlackBrush}" FontWeight="Bold" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Stretch" TextAlignment="Left" >
+                                        <TextBlock Margin="5,0,0,0" Grid.Column="1" Foreground="{DynamicResource Fluent.Ribbon.Brushes.Black}" FontWeight="Bold" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Stretch" TextAlignment="Left" >
                                             <Run Text="{x:Static res:Resources.strPage}" />
                                             <Run>
                                                 <Run.Text>

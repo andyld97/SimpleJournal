@@ -917,7 +917,7 @@ namespace SimpleJournal
                 };
 
                 textBlock.FontWeight = FontWeights.Bold;
-                textBlock.SetResourceReference(TextBlock.ForegroundProperty, "BlackBrush"); // new Binding("BlackBrush"));
+                textBlock.SetResourceReference(TextBlock.ForegroundProperty, "Fluent.Ribbon.Brushes.Black"); // new Binding("Fluent.Ribbon.Brushes.Black"));
                 panel.Children.Add(textBlock);
 
                 item.Content = panel;
@@ -1676,11 +1676,14 @@ namespace SimpleJournal
         public void UpdateGlowingBrush()
         {
             if (Settings.Instance.ActivateGlowingBrush)
-                GlowBrush = new SolidColorBrush((System.Windows.Media.Color)FindResource("Fluent.Ribbon.Colors.AccentColor60"));
+                GlowColor = (System.Windows.Media.Color)FindResource("Fluent.Ribbon.Colors.Accent60");
             else
-                GlowBrush = null;
+                GlowColor = null;
 
-            NonActiveBorderBrush = GlowBrush;
+            if (GlowColor.HasValue)
+                NonActiveBorderBrush = new SolidColorBrush(GlowColor.Value);
+            else
+                NonActiveBorderBrush = null;
         }
 
         // Muste be public for accessing via singleton from the settings

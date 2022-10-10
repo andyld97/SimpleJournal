@@ -8,13 +8,13 @@
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize"
         xmlns:res="clr-namespace:SimpleJournal.Properties"
-        Title="{x:Static res:Resources.strUpdateDownloadDialog_Title}" SizeToContent="Height" Width="500" Background="{DynamicResource WhiteBrush}">
+        Title="{x:Static res:Resources.strUpdateDownloadDialog_Title}" SizeToContent="Height" Width="500" Background="{DynamicResource Fluent.Ribbon.Brushes.White}">
     <StackPanel Margin="2">
         <StackPanel.Resources>
             <Style TargetType="{x:Type TextBlock}">
                 <Setter Property="Margin" Value="2" />
                 <Setter Property="Padding" Value="2" />
-                <Setter Property="Foreground" Value="{DynamicResource BlackBrush}" />
+                <Setter Property="Foreground" Value="{DynamicResource Fluent.Ribbon.Brushes.Black}" />
             </Style>
         </StackPanel.Resources>
         <TextBlock x:Name="TextDescription" FontWeight="Bold" />

@@ -45,9 +45,9 @@ namespace SimpleJournal.Controls
             ThemeManager.Current.ChangeTheme(this, themeName);
 
             if (isColorful)
-                GridTitleBar.Background = (SolidColorBrush)FindResource("Fluent.Ribbon.Brushes.AccentBaseColorBrush");
+                GridTitleBar.Background = (SolidColorBrush)FindResource("Fluent.Ribbon.Brushes.AccentBase");
             else
-                GridTitleBar.Background = (SolidColorBrush)FindResource("WhiteBrush");
+                GridTitleBar.Background = (SolidColorBrush)FindResource("Fluent.Ribbon.Brushes.White");
         }
 
         private void SelectTheme()
