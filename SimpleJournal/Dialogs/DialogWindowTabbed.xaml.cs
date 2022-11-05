@@ -1,16 +1,17 @@
-﻿using Helper;
-using MahApps.Metro.Controls;
+﻿using Fluent;
+using Helper;
 using SimpleJournal.Modules;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace Dialogs
 {
     /// <summary>
     /// Interaction logic for DialogWindowTabbed.xaml
     /// </summary>
-    public partial class DialogWindowTabbed : MetroWindow
+    public partial class DialogWindowTabbed : RibbonWindow
     {
         private readonly ITabbedModule module;
 
@@ -42,7 +43,7 @@ namespace Dialogs
             module.PassOwner(this);
             module.ApplyTabbedModuleToWindow(this);
 
-            Content = module as UserControl;
+            MainBorder.Child = module as UserControl;
         }
 
         private void DialogWindow_TitleChanged(object? sender, string title)
@@ -60,5 +61,24 @@ namespace Dialogs
             base.OnClosing(e);
             module.OnClosing();
         }
+
+        #region Closing Button (Workaround for MahApps.Metro Theming)
+
+        private void Grid_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            GridClosingbutton.Background = new SolidColorBrush(Colors.Red);
+        }
+
+        private void Grid_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            GridClosingbutton.Background = new SolidColorBrush(Colors.Transparent);
+        }
+
+        private void GridClosingbutton_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            if (e.LeftButton == System.Windows.Input.MouseButtonState.Pressed)
+                Close();
+        }
+        #endregion
     }
 }
