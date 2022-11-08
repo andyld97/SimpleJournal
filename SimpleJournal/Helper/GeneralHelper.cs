@@ -125,10 +125,15 @@ namespace SimpleJournal
                 var releases = root["releases"].Value<JArray>();
 
                 var release = releases.FirstOrDefault(p => p.Value<string>("release-version") == Consts.CompiledDotnetVersion.ToString(3));
-                var files = release.Value<JObject>("windowsdesktop").Value<JArray>("files");
-                var file = files.FirstOrDefault(f => f.Value<string>("rid") == DetermiePlatform());
+                if (release != null)
+                {
+                    var files = release.Value<JObject>("windowsdesktop").Value<JArray>("files");
+                    var file = files.FirstOrDefault(f => f.Value<string>("rid") == DetermiePlatform());
 
-                return file.Value<string>("url");
+                    return file.Value<string>("url");
+                }
+
+                return string.Empty;
             }
         }
 

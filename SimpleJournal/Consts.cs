@@ -32,7 +32,7 @@ namespace SimpleJournal
         public static readonly string HomePageUrl = "https://simplejournal.ca-soft.net";
         public static readonly string HelpUrl = "https://simplejournal.ca-soft.net/faq";
         public static readonly string GhostScriptDownloadUrl = "https://ghostscript.com/releases/gsdnld.html";
-        public static readonly string DotnetReleaseInfoUrl = "https://dotnetcli.blob.core.windows.net/dotnet/release-metadata/6.0/releases.json";
+        public static readonly string DotnetReleaseInfoUrl = "https://dotnetcli.blob.core.windows.net/dotnet/release-metadata/7.0/releases.json";
 #if !DEBUG
         public static readonly string ConverterAPIUrl = "http://cas-server2.ddns.net:8080";
 #else
@@ -43,7 +43,7 @@ namespace SimpleJournal
         /// <summary>
         /// The .NET version which was used to compile SJ
         /// </summary>
-        public static readonly Version CompiledDotnetVersion = new Version(6, 0, 10);
+        public static readonly Version CompiledDotnetVersion = new Version(7, 0, 0);
 
         /// <summary>
         /// Polling interval for NotificationService
