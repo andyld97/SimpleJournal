@@ -13,7 +13,7 @@
 
 Welcome to the offical GitHub-Repo of SimpleJournal. SimpleJournal is a simple tool similar to OneNote or Windows Journal. The idea came from my best friend (Daniel S.) a few years ago ([see more details](https://simplejournal.ca-soft.net/en/about)) and since then SimpleJournal has evolved to a useful App which is also available in the Micorosft Store!
 
-<a href='https://www.microsoft.com/en-US/p/simplejournal/9mv6j44m90n7?activetab=pivot:overviewtab'><img src='https://developer.microsoft.com/store/badges/images/English_get-it-from-MS.png' alt='English badge' width="150" /></a>
+<a href='https://www.microsoft.com/en-US/p/simplejournal/9mv6j44m90n7?activetab=pivot:overviewtab'><img src='https://get.microsoft.com/images/en-us dark.svg' alt='English badge' width="150" /></a>
 
 ## Screenshot
 ![Screenshot](https://github.com/andyld97/SimpleJournal/blob/dev/Assets/screenshot.png "SimpleJournal App")
