@@ -104,7 +104,7 @@ namespace SimpleJournal
         /// Determines the win-x86 or win-x64 platform
         /// </summary>
         /// <returns>win-x86 or winx64</returns>
-        public static string DetermiePlatform()
+        public static string DeterminePlatform()
         {
             string platform = Environment.Is64BitOperatingSystem ? "x64" : "x86";
             return $"win-{platform}";
@@ -128,7 +128,7 @@ namespace SimpleJournal
                 if (release != null)
                 {
                     var files = release.Value<JObject>("windowsdesktop").Value<JArray>("files");
-                    var file = files.FirstOrDefault(f => f.Value<string>("rid") == DetermiePlatform());
+                    var file = files.FirstOrDefault(f => f.Value<string>("rid") == DeterminePlatform());
 
                     return file.Value<string>("url");
                 }
@@ -158,7 +158,7 @@ namespace SimpleJournal
                 return;
             }
 
-            string platform = GeneralHelper.DetermiePlatform();
+            string platform = GeneralHelper.DeterminePlatform();
             string fileName = $"windowsdesktop-runtime-{Consts.CompiledDotnetVersion}-{platform}.exe";
             string localFilePath = System.IO.Path.Combine(FileSystemHelper.GetDownloadsPath(), fileName);
             var dialog = new UpdateDownloadDialog(string.Format(Properties.Resources.strDotnetUpdateSetup_Downloading, fileName), url) { LocalFilePath = localFilePath };
