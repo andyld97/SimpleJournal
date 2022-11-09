@@ -12,7 +12,7 @@
             <local:NumericUpDown x:Name="numAngle" OnChanged="NumAngle_OnChanged" Margin="5,2,5,0" Step="5" Value="0" Minimum="0" Maximum="360"/>
             
             <TextBlock Margin="5,3,0,0" FontSize="14" Text="{x:Static res:Resources.strTextDot}"/>
-            <TextBox Background="{DynamicResource WhiteBrush}" Foreground="{DynamicResource BlackBrush}" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Visible" x:Name="txtContent" TextChanged="TxtContent_TextChanged" FontSize="13" Height="50" Margin="5,2,5,5" />
+            <TextBox Background="{DynamicResource Fluent.Ribbon.Brushes.White}" Foreground="{DynamicResource Fluent.Ribbon.Brushes.Black}" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Visible" x:Name="txtContent" TextChanged="TxtContent_TextChanged" FontSize="13" Height="50" Margin="5,2,5,5" />
             
             <StackPanel Orientation="Horizontal">
                 <Grid>

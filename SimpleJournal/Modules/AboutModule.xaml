@@ -9,7 +9,7 @@
              mc:Ignorable="d" 
              d:Height="650" d:Width="420">
     <Grid x:Name="MainContentGrid" Background="{DynamicResource TabControl.Background}">
-        <TabControl BorderThickness="0" Padding="0" Background="{DynamicResource WhiteBrush}" x:Name="MainTabControl" Margin="0,2,0,0">
+        <TabControl BorderThickness="0" Padding="0" Background="{DynamicResource Fluent.Ribbon.Brushes.White}" x:Name="MainTabControl" Margin="0,2,0,0">
             <TabControl.Resources>
                 <ResourceDictionary>
                     <ResourceDictionary.MergedDictionaries>
@@ -21,11 +21,11 @@
                 <StackPanel>
                     <StackPanel.Resources>
                         <Style TargetType="{x:Type Hyperlink}">
-                            <Setter Property="Foreground" Value="{DynamicResource BlackBrush}" />
+                            <Setter Property="Foreground" Value="{DynamicResource Fluent.Ribbon.Brushes.Black}" />
                         </Style>
                     </StackPanel.Resources>
                     <Image Source="../resources/logo.png" Width="200" Margin="0,15,0,0"/>
-                    <TextBlock Margin="5,10,0,0" HorizontalAlignment="Center" Foreground="{DynamicResource BlackBrush}">
+                    <TextBlock Margin="5,10,0,0" HorizontalAlignment="Center" Foreground="{DynamicResource Fluent.Ribbon.Brushes.Black}">
                         <Run Text="{x:Static res:Resources.strAboutText1}" FontWeight="Bold"/>
                         <LineBreak />
                         <LineBreak />
@@ -90,11 +90,11 @@
                     <StackPanel>
                         <StackPanel.Resources>
                             <Style TargetType="{x:Type TextBlock}">
-                                <Setter Property="Foreground" Value="{DynamicResource BlackBrush}" />
+                                <Setter Property="Foreground" Value="{DynamicResource Fluent.Ribbon.Brushes.Black}" />
                             </Style>
                             <Style TargetType="{x:Type TextBox}">
-                                <Setter Property="Foreground" Value="{DynamicResource BlackBrush}" />
-                                <Setter Property="Background" Value="{DynamicResource WhiteBrush}" />
+                                <Setter Property="Foreground" Value="{DynamicResource Fluent.Ribbon.Brushes.Black}" />
+                                <Setter Property="Background" Value="{DynamicResource Fluent.Ribbon.Brushes.White}" />
                             </Style>
                         </StackPanel.Resources>
 
@@ -109,11 +109,11 @@
                         <TextBlock Text="{x:Static res:Resources.strContent}" Margin="5,5,0,0" FontWeight="Bold" />
                     </StackPanel>
 
-                    <TextBox Margin="5,2,5,0" Background="{DynamicResource WhiteBrush}" Foreground="{DynamicResource BlackBrush}" Grid.Row="1" Padding="2" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" x:Name="txtFeedback" AcceptsReturn="True" />
+                    <TextBox Margin="5,2,5,0" Background="{DynamicResource Fluent.Ribbon.Brushes.White}" Foreground="{DynamicResource Fluent.Ribbon.Brushes.Black}" Grid.Row="1" Padding="2" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" x:Name="txtFeedback" AcceptsReturn="True" />
 
                     <Grid Grid.Row="2">
                         <TextBlock VerticalAlignment="Center" Margin="5">
-                            <Hyperlink x:Name="UrlDataProtection" NavigateUri="http://www.google.de" RequestNavigate="UrlDataProtection_RequestNavigate" Foreground="{DynamicResource BlackBrush}">
+                            <Hyperlink x:Name="UrlDataProtection" NavigateUri="http://www.google.de" RequestNavigate="UrlDataProtection_RequestNavigate" Foreground="{DynamicResource Fluent.Ribbon.Brushes.Black}">
                                 <TextBlock Text="{x:Static res:Resources.strDataProtection}" />
                             </Hyperlink>
                         </TextBlock>

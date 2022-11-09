@@ -9,12 +9,12 @@
         SizeToContent="Height" Width="600" 
         ResizeMode="NoResize"
         WindowStartupLocation="CenterOwner" 
-        Background="{DynamicResource WhiteBrush}">
+        Background="{DynamicResource Fluent.Ribbon.Brushes.White}">
     <Grid Background="Transparent">
         <StackPanel Margin="2" Background="Transparent">
             <StackPanel.Resources>
                 <Style TargetType="{x:Type TextBlock}">
-                    <Setter Property="Foreground"  Value="{DynamicResource BlackBrush}" />
+                    <Setter Property="Foreground"  Value="{DynamicResource Fluent.Ribbon.Brushes.Black}" />
                 </Style>
             </StackPanel.Resources>
 

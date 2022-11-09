@@ -9,13 +9,13 @@
         Title="{x:Static res:Resources.strRecoverAutoBackupFileDialogTitle}" SizeToContent="Height" Width="650"
         WindowStartupLocation="CenterScreen" 
         ResizeMode="NoResize">
-    <Grid Background="{DynamicResource WhiteBrush}">
+    <Grid Background="{DynamicResource Fluent.Ribbon.Brushes.White}">
         <Grid.Resources>
             <Style TargetType="{x:Type TextBlock}">
-                <Setter Property="Foreground" Value="{DynamicResource BlackBrush}" />
+                <Setter Property="Foreground" Value="{DynamicResource Fluent.Ribbon.Brushes.Black}" />
             </Style>
             <Style TargetType="{x:Type CheckBox}">
-                <Setter Property="Foreground" Value="{DynamicResource BlackBrush}" />
+                <Setter Property="Foreground" Value="{DynamicResource Fluent.Ribbon.Brushes.Black}" />
             </Style>
         </Grid.Resources>
         <Grid.ColumnDefinitions>

@@ -20,18 +20,18 @@
             <Setter Property="Template" Value="{DynamicResource MahApps.Templates.Slider.Horizontal}" />
             <Setter Property="Value" Value="0" />
             <Setter Property="VerticalContentAlignment" Value="Stretch" />
-            <Setter Property="mah:SliderHelper.ThumbFillBrush" Value="{DynamicResource GrayBrush1}" />
-            <Setter Property="mah:SliderHelper.ThumbFillDisabledBrush" Value="{DynamicResource GrayBrush6}" />
-            <Setter Property="mah:SliderHelper.ThumbFillHoverBrush" Value="{DynamicResource  GrayBrush5}" />
-            <Setter Property="mah:SliderHelper.ThumbFillPressedBrush" Value="{DynamicResource GrayBrush2}" />
-            <Setter Property="mah:SliderHelper.TrackFillBrush" Value="{DynamicResource GrayBrush3}" />
-            <Setter Property="mah:SliderHelper.TrackFillDisabledBrush" Value="{DynamicResource GrayBrush6}" />
-            <Setter Property="mah:SliderHelper.TrackFillHoverBrush" Value="{DynamicResource GrayBrush3}" />
-            <Setter Property="mah:SliderHelper.TrackFillPressedBrush" Value="{DynamicResource GrayBrush3}" />
-            <Setter Property="mah:SliderHelper.TrackValueFillBrush" Value="{DynamicResource Fluent.Ribbon.Brushes.AccentBaseColorBrush}" />
-            <Setter Property="mah:SliderHelper.TrackValueFillDisabledBrush" Value="{DynamicResource GrayBrush6}" />
-            <Setter Property="mah:SliderHelper.TrackValueFillHoverBrush" Value="{DynamicResource Fluent.Ribbon.Brushes.AccentBaseColorBrush}" />
-            <Setter Property="mah:SliderHelper.TrackValueFillPressedBrush" Value="{DynamicResource Fluent.Ribbon.Brushes.AccentBaseColorBrush}" />
+            <Setter Property="mah:SliderHelper.ThumbFillBrush" Value="{DynamicResource Fluent.Ribbon.Brushes.Gray1}" />
+            <Setter Property="mah:SliderHelper.ThumbFillDisabledBrush" Value="{DynamicResource Fluent.Ribbon.Brushes.Gray6}" />
+            <Setter Property="mah:SliderHelper.ThumbFillHoverBrush" Value="{DynamicResource Fluent.Ribbon.Brushes.Gray5}" />
+            <Setter Property="mah:SliderHelper.ThumbFillPressedBrush" Value="{DynamicResource Fluent.Ribbon.Brushes.Gray2}" />
+            <Setter Property="mah:SliderHelper.TrackFillBrush" Value="{DynamicResource Fluent.Ribbon.Brushes.Gray3}" />
+            <Setter Property="mah:SliderHelper.TrackFillDisabledBrush" Value="{DynamicResource Fluent.Ribbon.Brushes.Gray6}" />
+            <Setter Property="mah:SliderHelper.TrackFillHoverBrush" Value="{DynamicResource Fluent.Ribbon.Brushes.Gray3}" />
+            <Setter Property="mah:SliderHelper.TrackFillPressedBrush" Value="{DynamicResource Fluent.Ribbon.Brushes.Gray3}" />
+            <Setter Property="mah:SliderHelper.TrackValueFillBrush" Value="{DynamicResource Fluent.Ribbon.Brushes.AccentBase}" />
+            <Setter Property="mah:SliderHelper.TrackValueFillDisabledBrush" Value="{DynamicResource Fluent.Ribbon.Brushes.Gray6}" />
+            <Setter Property="mah:SliderHelper.TrackValueFillHoverBrush" Value="{DynamicResource Fluent.Ribbon.Brushes.AccentBase}" />
+            <Setter Property="mah:SliderHelper.TrackValueFillPressedBrush" Value="{DynamicResource Fluent.Ribbon.Brushes.AccentBase}" />
             <Style.Triggers>
                 <Trigger Property="Orientation" Value="Vertical">
                     <Setter Property="Template" Value="{DynamicResource MahApps.Templates.Slider.Vertical}" />
@@ -44,7 +44,7 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <TabControl x:Name="MainTabControl" SelectionChanged="TabControl_SelectionChanged" BorderThickness="0" Padding="0" Background="{DynamicResource WhiteBrush}" Margin="2">
+        <TabControl x:Name="MainTabControl" SelectionChanged="TabControl_SelectionChanged" BorderThickness="0" Padding="0" Background="{DynamicResource Fluent.Ribbon.Brushes.White}" Margin="2">
             <TabControl.Resources>
                 <ResourceDictionary>
                     <ResourceDictionary.MergedDictionaries>
