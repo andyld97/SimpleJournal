@@ -41,7 +41,9 @@ namespace SimpleJournal.Dialogs
                 webChangelog.Source = new Uri(string.Format(Consts.ChangelogUrl, Properties.Resources.strLang, Settings.Instance.UseDarkMode ? 1 : 0));
             }
             catch (Exception)
-            { }
+            { 
+                // ToDo: *** Show a message that WebView2 must be installed instead of the control (maybe auto install?)
+            }
         }
 
         private void BtnCancel_Click(object sender, RoutedEventArgs e)

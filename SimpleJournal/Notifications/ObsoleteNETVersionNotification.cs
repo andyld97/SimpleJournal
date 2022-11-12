@@ -1,5 +1,4 @@
-﻿#if NET_INSTALL_REQUIRED
-using SimpleJournal;
+﻿using SimpleJournal;
 using SimpleJournal.Common;
 using SimpleJournal.Common.Data;
 using SimpleJournal.Documents.UI.Extensions;
@@ -64,4 +63,3 @@ namespace Notifications
         }
     }  
 }
-#endif

@@ -7,8 +7,16 @@
         mc:Ignorable="d"
         ShowMinButton="False"
         TitleBarHeight="0"
-        ShowMaxRestoreButton="True"        
+        ShowMaxRestoreButton="True"       
         WindowStartupLocation="CenterScreen">
+
+    <!-- ToDo: Issues: Still on 11/12/2022 (ControlEx, MahApps.Metro and Fluent.Ribbon are currently used in their recent alpha versions!)
+         1. With MetroWindow RoundedBorders are cutted of at all edges (RibbonWindow doesn't have this issue)
+         2. Windows10 => Border is cutted off
+         3. Using mah:MetroWindow with WindowTransitionsEnabled="False" have a too large border on Windows 10. On Windows 11 looks fine (without rounded corners)
+         Conclusion: Use Fluent:RibbonWindow for this Window and only allow using this window
+                     on Windows 11. This is a compromise to have at least a consitent look on older windows versions too :(    
+    -->
     <fluent:RibbonWindow.Resources>
         <Style x:Key="CustomLightMetroWindowButtonCloseStyle" TargetType="{x:Type Button}" BasedOn="{StaticResource MahApps.Styles.Button.MetroWindow.Light}">
             <Setter Property="Background" Value="{DynamicResource TabControl.Background}" />
@@ -70,6 +78,5 @@
         </Grid>
 
         <Border x:Name="MainBorder" />
-    </Grid>
- 
+    </Grid> 
 </fluent:RibbonWindow>

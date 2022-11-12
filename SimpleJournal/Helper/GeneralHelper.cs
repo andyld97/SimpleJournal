@@ -248,7 +248,7 @@ namespace SimpleJournal
         {
             NotificationService.NotificationServiceInstance?.Stop();
             Application.Current.Shutdown();
-        }
+        } 
 
         /// <summary>
         /// Opens the default system browser with the requested uri
