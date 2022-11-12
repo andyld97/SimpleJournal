@@ -12,9 +12,9 @@
     <Border BorderBrush="LightGray" BorderThickness="{Binding UseBorder, Converter={StaticResource useBorderToBorderThicknessConverter}}" CornerRadius="3">
         <StackPanel Margin="{Binding UseBorder, Converter={StaticResource useBorderToMarginConverter}}">
             <CheckBox x:Name="chkValue" Content="{Binding SettingName}" Checked="chkValue_Checked" Unchecked="chkValue_Checked" FontWeight="Bold" />
-            <TextBlock x:Name="TextDescription" MouseDown="TextDescription_MouseDown" Margin="0,5,0,0" TextWrapping="Wrap">
+            <TextBlock x:Name="TextDescription" Padding="0,0,0,3" MouseDown="TextDescription_MouseDown" Margin="0,5,0,0" TextWrapping="Wrap">
                 <Run FontWeight="Bold" Text="{x:Static res:Resources.strDescription}" />
-                <Run Text="{Binding Description}"/>
+                <Run Text="{Binding Description}" />
             </TextBlock>
         </StackPanel>
     </Border>

@@ -1,4 +1,5 @@
 ﻿using Controls;
+using ControlzEx;
 using Fluent;
 using Helper;
 using ImageMagick;
@@ -29,6 +30,7 @@ using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Printing;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -37,6 +39,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Ink;
 using System.Windows.Input;
+using System.Windows.Interop;
 using System.Windows.Markup;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
@@ -164,12 +167,20 @@ namespace SimpleJournal
                 MainWindow.W_INSTANCE.pnlSidebar.Visibility = Visibility.Collapsed;
         }
 
+        [DllImport("DwmApi.dll")]
+        public static extern int DwmSetWindowAttribute(IntPtr hwnd, int dwAttribute, ref int pvAttribute, int cbAttribute);
+
+        private const int DWMWA_NCRENDERING_POLICY = 2;
+        private const int DWMNCRP_DISABLED = 1;
+
+
         public MainWindow()
         {
             W_INSTANCE = this;
             isInitalized = false;
-            InitializeComponent();
 
+            InitializeComponent();
+         
             var dpi = VisualTreeHelper.GetDpi(this);
             if (dpi.PixelsPerInchX == 96 && WpfScreen.Primary.DeviceBounds.Width >= 1920 && WpfScreen.Primary.DeviceBounds.Height >= 1080)
                 WindowStartupLocation = WindowStartupLocation.CenterScreen;
@@ -714,7 +725,7 @@ namespace SimpleJournal
         private void Dispatcher_UnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
         {
             // MessageBox.Show(e.Exception.ToString());
-            // MessageBox.Show($"{Properties.Resources.strUnexceptedFailure}{Environment.NewLine}{Environment.NewLine}{e.Exception.Message}", Properties.Resources.strUnexceptedFailureTitle, MessageBoxButton.OK, MessageBoxImage.Error);
+            MessageBox.Show($"{Properties.Resources.strUnexceptedFailure}{Environment.NewLine}{Environment.NewLine}{e.Exception.Message}", Properties.Resources.strUnexceptedFailureTitle, MessageBoxButton.OK, MessageBoxImage.Error);
         }
 
         private async void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)

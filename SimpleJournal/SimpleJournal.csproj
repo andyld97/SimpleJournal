@@ -266,10 +266,10 @@
 	</ItemGroup>
 	<ItemGroup>
 		<PackageReference Include="DotnetRuntimeBootstrapper" Version="2.3.1">
-			<PrivateAssets>all</PrivateAssets>
-			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		  <PrivateAssets>all</PrivateAssets>
+		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
-		<PackageReference Include="Fluent.Ribbon" Version="10.0.0-alpha0188" />
+		<PackageReference Include="Fluent.Ribbon" Version="10.0.0-alpha0197" />
 		<PackageReference Include="Magick.NET-Q16-AnyCPU" Version="12.2.1" />
 		<PackageReference Include="Magick.NET.Core" Version="12.2.1" />
 		<PackageReference Include="MahApps.Metro" Version="3.0.0-alpha0414" />
@@ -295,22 +295,22 @@
 	<ItemGroup>
 		<EmbeddedResource Update="Properties\Resources.de.resx">
 		  <Generator>PublicResXFileCodeGenerator</Generator>
-		  <CustomToolNamespace />
 			<!-- FIX for resgen issues https://stackoverflow.com/a/47071481/6237448-->
-			<LogicalName>Properties.Resources.de.resources</LogicalName>
+			<!-- <LogicalName>SimpleJournal.Properties.Resources.de.resources</LogicalName>
+			<CustomToolNamespace>SimpleJournal</CustomToolNamespace>-->
 		</EmbeddedResource>
 		<EmbeddedResource Update="Properties\Resources.nl.resx">
 		  <Generator>PublicResXFileCodeGenerator</Generator>
-		  <CustomToolNamespace />
 			<!-- FIX for resgen issues https://stackoverflow.com/a/47071481/6237448-->
-			<LogicalName>Properties.Resources.nl.resources</LogicalName>
+			<!--	<LogicalName>SimpleJournal.Properties.Resources.nl.resources</LogicalName>
+			<CustomToolNamespace>SimpleJournal</CustomToolNamespace>-->
 		</EmbeddedResource>
 		<EmbeddedResource Update="Properties\Resources.resx">
 			<Generator>PublicResXFileCodeGenerator</Generator>
 			<LastGenOutput>Resources.Designer.cs</LastGenOutput>
-			<CustomToolNamespace />
 			<!-- FIX for resgen issues https://stackoverflow.com/a/47071481/6237448-->
-			<LogicalName>Properties.Resources.resources</LogicalName>
+			<!--<LogicalName>SimpleJournal.Properties.Resources.resources</LogicalName>
+			<CustomToolNamespace>SimpleJournal</CustomToolNamespace>-->
 		</EmbeddedResource>
 	</ItemGroup>
 	<Target Name="PostPublish" AfterTargets="Publish">

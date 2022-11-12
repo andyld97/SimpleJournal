@@ -32,9 +32,9 @@ namespace SimpleJournal
 
             // Test
 #if DEBUG
-            var cultureInfoTest = new CultureInfo("de");
+            /*var cultureInfoTest = new CultureInfo("de");
             Thread.CurrentThread.CurrentCulture =
-            Thread.CurrentThread.CurrentUICulture = cultureInfoTest;
+            Thread.CurrentThread.CurrentUICulture = cultureInfoTest;*/
 #endif
 
             GeneralHelper.ApplyTheming();

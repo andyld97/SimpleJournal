@@ -1,7 +1,10 @@
 ﻿using Fluent;
 using Helper;
+using MahApps.Metro.Controls;
 using SimpleJournal.Modules;
+using System;
 using System.ComponentModel;
+using System.Security.Cryptography.Pkcs;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -23,6 +26,7 @@ namespace Dialogs
                 Width = module.WindowSize.Width;
                 Height = module.WindowSize.Height;
             }
+
             InitializeComponent();
 
             Title = module.Title;
@@ -66,7 +70,7 @@ namespace Dialogs
 
         private void Grid_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
         {
-            GridClosingbutton.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#A92831"));
+            GridClosingbutton.Background = FindResource("Fluent.Ribbon.Brushes.Accent80") as SolidColorBrush; //  new SolidColorBrush((Color)ColorConverter.ConvertFromString("#A92831"));
         }
 
         private void Grid_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
