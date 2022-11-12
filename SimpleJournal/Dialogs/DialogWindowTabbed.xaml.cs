@@ -66,7 +66,7 @@ namespace Dialogs
 
         private void Grid_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
         {
-            GridClosingbutton.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#A92831"));
+            GridClosingbutton.Background = FindResource("Fluent.Ribbon.Brushes.Accent80") as SolidColorBrush; //  new SolidColorBrush((Color)ColorConverter.ConvertFromString("#A92831"));
         }
 
         private void Grid_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)

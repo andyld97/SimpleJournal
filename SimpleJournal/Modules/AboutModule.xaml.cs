@@ -49,6 +49,7 @@ namespace SimpleJournal.Modules
 
             Loaded += AboutDialog_Loaded;
 
+#if NET_INSTALL_REQUIRED
             // https://stackoverflow.com/a/58136318/6237448
             if (System.Environment.Version < Consts.CompiledDotnetVersion)
             {
@@ -57,6 +58,9 @@ namespace SimpleJournal.Modules
             }
             else
                 TextUpdateNet.Visibility = Visibility.Collapsed;
+#else 
+            TextUpdateNet.Visibility = Visibility.Collapsed;
+#endif
 
             TextDotNetVersion.Text = System.Runtime.InteropServices.RuntimeInformation.FrameworkDescription;
 

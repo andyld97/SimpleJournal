@@ -22,7 +22,7 @@
 
         <DataTemplate x:Key="RecentlyOpenedDocumentsTemplate">
             <Grid Background="Transparent" Height="40" ToolTip="{Binding Path}">
-                <Grid.ColumnDefinitions>A
+                <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="35" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>

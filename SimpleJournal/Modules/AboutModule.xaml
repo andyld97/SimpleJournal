@@ -44,8 +44,8 @@
                         <Hyperlink NavigateUri="https://github.com/dlemstra/Magick.NET" RequestNavigate="Hyperlink_RequestNavigate">Magick.NET</Hyperlink>
                         <Run Text="(PDF Support)!" />                                                                    
                         <LineBreak />
-                        <Run Text="{x:Static res:Resources.strAboutTextFluentRibbon_1}"/>
-                        <Hyperlink NavigateUri="https://github.com/Tyrrrz/DotnetRuntimeBootstrapper" RequestNavigate="Hyperlink_RequestNavigate">Tyrrrz/DotnetRuntimeBootstrapper (GitHub)</Hyperlink>
+                        <!--<Run Text="{x:Static res:Resources.strAboutTextFluentRibbon_1}"/>
+                        <Hyperlink NavigateUri="https://github.com/Tyrrrz/DotnetRuntimeBootstrapper" RequestNavigate="Hyperlink_RequestNavigate">Tyrrrz/DotnetRuntimeBootstrapper (GitHub)</Hyperlink>-->
                         <LineBreak />
                         <LineBreak />
                         <LineBreak />
