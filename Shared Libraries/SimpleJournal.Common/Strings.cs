@@ -9,7 +9,7 @@ namespace SimpleJournal.Common
         public const string Copyright = "Copyright © 2018-2022";
 
 #if UWPNEW || NORMAL
-        public static readonly DateTime ReleaseDate = new DateTime(2022, 11, 12, 23, 43, 0);
+        public static readonly DateTime ReleaseDate = new DateTime(2022, 11, 13, 12, 15, 0);
 #else 
         public static readonly DateTime ReleaseDate = DateTime.Now;
 #endif

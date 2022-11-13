@@ -1,6 +1,8 @@
 ﻿using SimpleJournal.Common;
 using System;
+using System.CodeDom;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Windows;
 using System.Windows.Media;
 
@@ -84,6 +86,7 @@ namespace SimpleJournal
         public static readonly string PenSettingsFilePath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "SimpleJournal", "Pen.xml");
         public static readonly string NotificationsFilePath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "SimpleJournal", "Notifications.xml");
         public static readonly string AutoSaveDirectory = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "SimpleJournal", "AutoSave");
+
         /// <summary>
         /// Used for old xml journals
         /// </summary>

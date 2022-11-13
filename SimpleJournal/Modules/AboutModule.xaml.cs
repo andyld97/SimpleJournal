@@ -8,6 +8,7 @@ using System;
 using System.Windows.Controls;
 using System.Windows.Media;
 using SimpleJournal.Documents.UI;
+using SimpleJournal.Helper;
 
 namespace SimpleJournal.Modules
 {
@@ -62,6 +63,11 @@ namespace SimpleJournal.Modules
 
             if (Properties.Resources.strLang != "de")
                 TextClock.Text = string.Empty;
+
+            var assemblyVersions = new TextBlock();
+            foreach (var inline in AssemblyVersionHelper.GenerateAssemblyText())
+                assemblyVersions.Inlines.Add(inline);
+            TextVersion.ToolTip = assemblyVersions;
 
             ModuleHelper.ApplyTabbedFeatures(this);
         }
