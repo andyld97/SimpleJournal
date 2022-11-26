@@ -11,16 +11,16 @@
         Title="{x:Static res:Resources.strSetupDialogTitle}" SizeToContent="Height" Width="500"
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize">
-    <Grid Background="{DynamicResource WhiteBrush}">
+    <Grid Background="{DynamicResource Fluent.Ribbon.Brushes.White}">
         <Grid.Resources>
             <Style TargetType="{x:Type TextBlock}">
-                <Setter Property="Foreground" Value="{DynamicResource BlackBrush}" />
+                <Setter Property="Foreground" Value="{DynamicResource Fluent.Ribbon.Brushes.Black}" />
             </Style>
             <Style TargetType="{x:Type CheckBox}">
-                <Setter Property="Foreground" Value="{DynamicResource BlackBrush}" />
+                <Setter Property="Foreground" Value="{DynamicResource Fluent.Ribbon.Brushes.Black}" />
             </Style>
             <Style TargetType="{x:Type RadioButton}">
-                <Setter Property="Foreground" Value="{DynamicResource BlackBrush}" />
+                <Setter Property="Foreground" Value="{DynamicResource Fluent.Ribbon.Brushes.Black}" />
             </Style>
         </Grid.Resources>
         
@@ -117,13 +117,13 @@
                     <ListBox x:Name="lstBoxChooseRulerMode" SelectionChanged="lstBoxChooseRulerMode_SelectionChanged" Background="Transparent" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden" ItemContainerStyle="{DynamicResource ListBoxSelectionHoldActiveContainerStyle}" Margin="5,0,5,0"  Padding="0,2,0,0">
                         <ListBox.Items>
                             <ListBoxItem HorizontalAlignment="Stretch">
-                                <Rectangle x:Name="rectFullStroke" Stroke="{DynamicResource BlackBrush}" StrokeThickness="15" Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBox}}, Path=ActualWidth}" Height="5" Margin="0,2" />
+                                <Rectangle x:Name="rectFullStroke" Stroke="{DynamicResource Fluent.Ribbon.Brushes.Black}" StrokeThickness="15" Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBox}}, Path=ActualWidth}" Height="5" Margin="0,2" />
                             </ListBoxItem>
                             <ListBoxItem>
-                                <Rectangle x:Name="rectDashedStroke" Stroke="{DynamicResource BlackBrush}" StrokeThickness="15" Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBox}}, Path=ActualWidth}" StrokeDashArray="0.5,0.8" Height="5" Margin="0,2" />
+                                <Rectangle x:Name="rectDashedStroke" Stroke="{DynamicResource Fluent.Ribbon.Brushes.Black}" StrokeThickness="15" Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBox}}, Path=ActualWidth}" StrokeDashArray="0.5,0.8" Height="5" Margin="0,2" />
                             </ListBoxItem>
                             <ListBoxItem>
-                                <Line x:Name="lineDottetStroke" X1="0" Y1="0" X2="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBox}}, Path=ActualWidth}" Y2="0" Stroke="{DynamicResource BlackBrush}" StrokeDashOffset="-1" StrokeThickness="5" Height="5" Margin="0,2" StrokeDashCap="Round" StrokeDashArray="0.03,2"></Line>
+                                <Line x:Name="lineDottetStroke" X1="0" Y1="0" X2="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBox}}, Path=ActualWidth}" Y2="0" Stroke="{DynamicResource Fluent.Ribbon.Brushes.Black}" StrokeDashOffset="-1" StrokeThickness="5" Height="5" Margin="0,2" StrokeDashCap="Round" StrokeDashArray="0.03,2"></Line>
                             </ListBoxItem>
                         </ListBox.Items>
                     </ListBox>

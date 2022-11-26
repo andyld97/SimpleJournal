@@ -9,70 +9,72 @@
              mc:Ignorable="d" 
              d:Height="650" d:Width="420">
     <Grid x:Name="MainContentGrid" Background="{DynamicResource TabControl.Background}">
-        <TabControl BorderThickness="0" Padding="0" Background="{DynamicResource WhiteBrush}" x:Name="MainTabControl" Margin="0,2,0,0">
+        <TabControl BorderThickness="0" Padding="0" Background="{DynamicResource Fluent.Ribbon.Brushes.White}" x:Name="MainTabControl" Margin="0,2,0,0">
             <TabControl.Resources>
                 <ResourceDictionary>
                     <ResourceDictionary.MergedDictionaries>
-                        <ResourceDictionary Source="..\resources\TabControlStyle.xaml"/>
+                        <ResourceDictionary Source="..\resources\TabControlStyle.xaml" />
                     </ResourceDictionary.MergedDictionaries>
                 </ResourceDictionary>
             </TabControl.Resources>
             <TabItem Header="{x:Static res:Resources.strAbout}" Width="120">
-                <StackPanel>
-                    <StackPanel.Resources>
-                        <Style TargetType="{x:Type Hyperlink}">
-                            <Setter Property="Foreground" Value="{DynamicResource BlackBrush}" />
-                        </Style>
-                    </StackPanel.Resources>
-                    <Image Source="../resources/logo.png" Width="200" Margin="0,15,0,0"/>
-                    <TextBlock Margin="5,10,0,0" HorizontalAlignment="Center" Foreground="{DynamicResource BlackBrush}">
-                        <Run Text="{x:Static res:Resources.strAboutText1}" FontWeight="Bold"/>
-                        <LineBreak />
-                        <LineBreak />
-                        <Run Text="{x:Static res:Resources.strAboutTextIcons8_1}"/>
-                        <Hyperlink NavigateUri="https://icons8.com/" RequestNavigate="Hyperlink_RequestNavigate">Icons8</Hyperlink>
-                        <Run Text="{x:Static res:Resources.strAboutTextIcons8_2}" />
-                        <LineBreak />
-                        <Run Text="{x:Static res:Resources.strAboutTextFluentRibbon_1}"/>
-                        <Hyperlink NavigateUri="https://github.com/fluentribbon/Fluent.Ribbon" RequestNavigate="Hyperlink_RequestNavigate">Fluent.Ribbon</Hyperlink>
-                        <Run Text="{x:Static res:Resources.strAboutTextFluentRibbon_2}"/>
-                        <LineBreak />
-                        <Run Text="{x:Static res:Resources.strAboutTextFluentRibbon_1}" />
-                        <Hyperlink NavigateUri="https://github.com/MahApps/MahApps.Metro" RequestNavigate="Hyperlink_RequestNavigate">MahApps/MahApps.Metro (GitHub)</Hyperlink>
-                        <LineBreak />
-                        <Run Text="{x:Static res:Resources.strAboutTextMagickNET}" />
-                        <Hyperlink NavigateUri="https://github.com/dlemstra/Magick.NET" RequestNavigate="Hyperlink_RequestNavigate">Magick.NET</Hyperlink>
-                        <Run Text="(PDF Support)!" />                                                                    
-                        <LineBreak />
-                        <Run Text="{x:Static res:Resources.strAboutTextFluentRibbon_1}"/>
-                        <Hyperlink NavigateUri="https://github.com/Tyrrrz/DotnetRuntimeBootstrapper" RequestNavigate="Hyperlink_RequestNavigate">Tyrrrz/DotnetRuntimeBootstrapper (GitHub)</Hyperlink>
-                        <LineBreak />
-                        <LineBreak />
-                        <LineBreak />
-                        <Hyperlink NavigateUri="https://simplejournal.ca-soft.net/" RequestNavigate="Hyperlink_RequestNavigate">Homepage</Hyperlink>
-                        <Run Text="|" />
-                        <Hyperlink NavigateUri="https://simplejournal.ca-soft.net/faq" RequestNavigate="Hyperlink_RequestNavigate">FAQ</Hyperlink>
-                        <Run Text="|" />
-                        <Hyperlink NavigateUri="https://github.com/andyld97/SimpleJournal" RequestNavigate="Hyperlink_RequestNavigate">Source Code</Hyperlink>
-                        <LineBreak />
-                        <LineBreak />
-                        <Run Text="Version:" />
-                        <Run x:Name="TextVersion" Text="{x:Static res:Resources.strUnknownVersion}" FontWeight="Bold"/>
-                        <LineBreak />
-                        <Run Text="Release:" />
-                        <Run Text="{Binding Source={x:Static common:Strings.ReleaseDate}, Mode=OneWay, StringFormat={x:Static res:Resources.strDateTimeFormat}}" FontWeight="Bold" />
-                        <Run x:Name="TextClock" Text="Uhr" FontWeight="Bold" />
-                        <LineBreak />
-                        <LineBreak />
-                        <Run x:Name="TextNewVersionAvailable" FontWeight="Bold" />
-                        <LineBreak />                        
-                        <Run Text="Powered by" FontWeight="Bold" />
-                        <Run x:Name="TextDotNetVersion" FontWeight="Bold" />
-                        <Hyperlink x:Name="LinkUpdateNET" RequestNavigate="LinkUpdateNET_RequestNavigate" NavigateUri="http://www.google.de" Foreground="Orange">
-                            <TextBlock x:Name="TextUpdateNet" Foreground="Orange" Text="(Update)" FontWeight="Bold" />
-                        </Hyperlink>
-                    </TextBlock>
-                </StackPanel>
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <StackPanel>
+                        <StackPanel.Resources>
+                            <Style TargetType="{x:Type Hyperlink}">
+                                <Setter Property="Foreground" Value="{DynamicResource Fluent.Ribbon.Brushes.Black}" />
+                            </Style>
+                        </StackPanel.Resources>
+                        <Image Source="../resources/logo.png" Width="200" Margin="0,15,0,0"/>
+                        <TextBlock Margin="5,10,0,0" Padding="0,0,0,10" HorizontalAlignment="Center" Foreground="{DynamicResource Fluent.Ribbon.Brushes.Black}">
+                            <Run Text="{x:Static res:Resources.strAboutText1}" FontWeight="Bold"/>
+                            <LineBreak />
+                            <LineBreak />
+                            <Run Text="{x:Static res:Resources.strAboutTextIcons8_1}"/>
+                            <Hyperlink NavigateUri="https://icons8.com/" RequestNavigate="Hyperlink_RequestNavigate">Icons8</Hyperlink>
+                            <Run Text="{x:Static res:Resources.strAboutTextIcons8_2}" />
+                            <LineBreak />
+                            <Run Text="{x:Static res:Resources.strAboutTextFluentRibbon_1}"/>
+                            <Hyperlink NavigateUri="https://github.com/fluentribbon/Fluent.Ribbon" RequestNavigate="Hyperlink_RequestNavigate">Fluent.Ribbon</Hyperlink>
+                            <Run Text="{x:Static res:Resources.strAboutTextFluentRibbon_2}"/>
+                            <LineBreak />
+                            <Run Text="{x:Static res:Resources.strAboutTextFluentRibbon_1}" />
+                            <Hyperlink NavigateUri="https://github.com/MahApps/MahApps.Metro" RequestNavigate="Hyperlink_RequestNavigate">MahApps/MahApps.Metro (GitHub)</Hyperlink>
+                            <LineBreak />
+                            <Run Text="{x:Static res:Resources.strAboutTextMagickNET}" />
+                            <Hyperlink NavigateUri="https://github.com/dlemstra/Magick.NET" RequestNavigate="Hyperlink_RequestNavigate">Magick.NET</Hyperlink>
+                            <Run Text="(PDF Support)!" />                                                                    
+                            <LineBreak />
+                            <Run Text="{x:Static res:Resources.strAboutTextFluentRibbon_1}"/>
+                            <Hyperlink NavigateUri="https://github.com/Tyrrrz/DotnetRuntimeBootstrapper" RequestNavigate="Hyperlink_RequestNavigate">Tyrrrz/DotnetRuntimeBootstrapper (GitHub)</Hyperlink>
+                            <LineBreak />
+                            <LineBreak />
+                            <LineBreak />
+                            <Hyperlink NavigateUri="https://simplejournal.ca-soft.net/" RequestNavigate="Hyperlink_RequestNavigate">Homepage</Hyperlink>
+                            <Run Text="|" />
+                            <Hyperlink NavigateUri="https://simplejournal.ca-soft.net/faq" RequestNavigate="Hyperlink_RequestNavigate">FAQ</Hyperlink>
+                            <Run Text="|" />
+                            <Hyperlink NavigateUri="https://github.com/andyld97/SimpleJournal" RequestNavigate="Hyperlink_RequestNavigate">Source Code</Hyperlink>
+                            <LineBreak />
+                            <LineBreak />
+                            <Run Text="Version:" />
+                            <Run x:Name="TextVersion" Text="{x:Static res:Resources.strUnknownVersion}" FontWeight="Bold"/>
+                            <LineBreak />
+                            <Run Text="Release:" />
+                            <Run Text="{Binding Source={x:Static common:Strings.ReleaseDate}, Mode=OneWay, StringFormat={x:Static res:Resources.strDateTimeFormat}}" FontWeight="Bold" />
+                            <Run x:Name="TextClock" Text="Uhr" FontWeight="Bold" />
+                            <LineBreak />
+                            <LineBreak />
+                            <Run x:Name="TextNewVersionAvailable" FontWeight="Bold" />
+                            <LineBreak />                        
+                            <Run Text="Powered by" FontWeight="Bold" />
+                            <Run x:Name="TextDotNetVersion" FontWeight="Bold" />
+                            <Hyperlink x:Name="LinkUpdateNET" RequestNavigate="LinkUpdateNET_RequestNavigate" NavigateUri="http://www.google.de" Foreground="Orange">
+                                <TextBlock x:Name="TextUpdateNet" Foreground="Orange" Text="(Update)" FontWeight="Bold" />
+                            </Hyperlink>
+                        </TextBlock>
+                    </StackPanel>
+                </ScrollViewer>
             </TabItem>
             <TabItem Header="{x:Static res:Resources.strChangelog}" Width="120">
                 <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
@@ -90,11 +92,11 @@
                     <StackPanel>
                         <StackPanel.Resources>
                             <Style TargetType="{x:Type TextBlock}">
-                                <Setter Property="Foreground" Value="{DynamicResource BlackBrush}" />
+                                <Setter Property="Foreground" Value="{DynamicResource Fluent.Ribbon.Brushes.Black}" />
                             </Style>
                             <Style TargetType="{x:Type TextBox}">
-                                <Setter Property="Foreground" Value="{DynamicResource BlackBrush}" />
-                                <Setter Property="Background" Value="{DynamicResource WhiteBrush}" />
+                                <Setter Property="Foreground" Value="{DynamicResource Fluent.Ribbon.Brushes.Black}" />
+                                <Setter Property="Background" Value="{DynamicResource Fluent.Ribbon.Brushes.White}" />
                             </Style>
                         </StackPanel.Resources>
 
@@ -109,11 +111,11 @@
                         <TextBlock Text="{x:Static res:Resources.strContent}" Margin="5,5,0,0" FontWeight="Bold" />
                     </StackPanel>
 
-                    <TextBox Margin="5,2,5,0" Background="{DynamicResource WhiteBrush}" Foreground="{DynamicResource BlackBrush}" Grid.Row="1" Padding="2" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" x:Name="txtFeedback" AcceptsReturn="True" />
+                    <TextBox Margin="5,2,5,0" Background="{DynamicResource Fluent.Ribbon.Brushes.White}" Foreground="{DynamicResource Fluent.Ribbon.Brushes.Black}" Grid.Row="1" Padding="2" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" x:Name="txtFeedback" AcceptsReturn="True" />
 
                     <Grid Grid.Row="2">
                         <TextBlock VerticalAlignment="Center" Margin="5">
-                            <Hyperlink x:Name="UrlDataProtection" NavigateUri="http://www.google.de" RequestNavigate="UrlDataProtection_RequestNavigate" Foreground="{DynamicResource BlackBrush}">
+                            <Hyperlink x:Name="UrlDataProtection" NavigateUri="http://www.google.de" RequestNavigate="UrlDataProtection_RequestNavigate" Foreground="{DynamicResource Fluent.Ribbon.Brushes.Black}">
                                 <TextBlock Text="{x:Static res:Resources.strDataProtection}" />
                             </Hyperlink>
                         </TextBlock>

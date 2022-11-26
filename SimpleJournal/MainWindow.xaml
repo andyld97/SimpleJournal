@@ -9,13 +9,14 @@
         FlowDirection="LeftToRight"
         xmlns:controls="clr-namespace:SimpleJournal.Controls"
         StateChanged="RibbonWindow_StateChanged"
-        mc:Ignorable="d"
+        mc:Ignorable="d"   
+                    WindowStyle="None"
         xmlns:gl="clr-namespace:System.Globalization;assembly=mscorlib" xmlns:controls1="clr-namespace:SimpleJournal.Documents.UI.Controls;assembly=SimpleJournal.Documents.UI" xmlns:modules="clr-namespace:SimpleJournal.Modules"
                      Title="SimpleJournal - Neues Journal" Height="700" Activated="RibbonWindow_Activated" Deactivated="RibbonWindow_Deactivated"
         Width="1130">
     <!--TextFormattingMode="Display" -->
     <Window.Resources>
-        <BooleanToVisibilityConverter x:Key="boolToVisibilityConverter" />
+        <BooleanToVisibilityConverter x:Key="Fluent.Ribbon.Converters.BoolToVisibilityConverter" />
         <local:SelectedIndexToColumnSpanConverter x:Key="indexToColumn" />
         <local:SelectedIndexToVisiblityConverter x:Key="indexToVisibilty" />
         <local:StringToVisiblityConverter x:Key="stringToVisilbity" />
@@ -28,8 +29,8 @@
                 </Grid.ColumnDefinitions>
                 <Image Source="pack://application:,,,/SimpleJournal;component/resources/journalicon.png" />
                 <StackPanel VerticalAlignment="Center" Grid.Column="1" Margin="10,0,0,0">
-                    <TextBlock Text="{Binding Name}" FontWeight="Bold" Foreground="{DynamicResource BlackBrush}" />
-                    <TextBlock Foreground="{DynamicResource BlackBrush}">
+                    <TextBlock Text="{Binding Name}" FontWeight="Bold" Foreground="{DynamicResource Fluent.Ribbon.Brushes.Black}" />
+                    <TextBlock Foreground="{DynamicResource Fluent.Ribbon.Brushes.Black}">
                         <Run Text="{x:Static res:Resources.strRecentDocumentLastChange}" />
                         <Run Text="{Binding LastModified, StringFormat=d, ConverterCulture={x:Static gl:CultureInfo.CurrentCulture}}" />
                         <Run Text="{Binding LastModified, StringFormat=t, ConverterCulture={x:Static gl:CultureInfo.CurrentCulture}}" />
@@ -60,7 +61,7 @@
                         <Fluent:ApplicationMenu.RightPaneContent>
                             <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Orientation="Vertical" CanVerticallyScroll="True">
                                 <Border HorizontalAlignment="Stretch" BorderBrush="#64647F" BorderThickness="0,0,0,0">
-                                    <TextBlock Background="{DynamicResource Fluent.Ribbon.Brushes.MenuItem.Background}" Foreground="{DynamicResource BlackBrush}" TextAlignment="Left" Padding="12,4,4,4" FontWeight="SemiBold" FontSize="12">
+                                    <TextBlock Background="{DynamicResource Fluent.Ribbon.Brushes.MenuItem.Background}" Foreground="{DynamicResource Fluent.Ribbon.Brushes.Black}" TextAlignment="Left" Padding="12,4,4,4" FontWeight="SemiBold" FontSize="12">
                                         <Run Text="{x:Static res:Resources.strRecentFiles}" /><Run Text=":" />
                                         <Run x:Name="MenuAppRecentlyOpendedFilesCount" Text="0" />
                                     </TextBlock>
@@ -86,12 +87,12 @@
                         <Fluent:MenuItem x:Name="btnClose" Click="btnExit_Click" Header="{x:Static res:Resources.strClose}" KeyTip="E" Icon="pack://application:,,,/SimpleJournal;component/resources/close.png"  />
                     </Fluent:ApplicationMenu>
 
-                    <Fluent:Backstage x:Name="MenuBackstage" Margin="0,1,0,1" IsOpenChanged="Backstage_IsOpenChanged" BorderBrush="Blue" Background="{DynamicResource Fluent.Ribbon.Brushes.AccentBaseColorBrush}">
+                    <Fluent:Backstage x:Name="MenuBackstage" Margin="0,1,0,1" IsOpenChanged="Backstage_IsOpenChanged" BorderBrush="Blue" Background="{DynamicResource Fluent.Ribbon.Brushes.AccentBase}">
                         <Fluent:BackstageTabControl x:Name="MenuBackstageTabControl">
                             <Fluent:BackstageTabItem x:Name="MenuBackstageNewFile" MouseDown="BackstageTabItem_MouseDown" Icon="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/pageadd.png" Header="{x:Static res:Resources.strNewDocument}">
                                 <GroupBox Margin="10" BorderThickness="0">
                                     <GroupBox.Header>
-                                        <TextBlock Foreground="{DynamicResource BlackBrush}">
+                                        <TextBlock Foreground="{DynamicResource Fluent.Ribbon.Brushes.Black}">
                                            <Run Text="{x:Static res:Resources.strRecentFiles}" /><Run Text=":" />
                                            <Run x:Name="MenuBackstageRecentlyOpendedFilesCount" Text="0" />
                                         </TextBlock>
@@ -108,8 +109,8 @@
                             <Fluent:Button x:Name="MenuButtonBackstageExportPdf" Icon="/resources/pdf.png" Header="{x:Static res:Resources.strExportAsPDF}" Click="MenuButtonBackstageExportPdf_Click" Visibility="Collapsed" />
                             <Fluent:BackstageTabItem x:Name="MenuBackstageExport" Icon="/resources/export.png" Header="{x:Static res:Resources.strExportDocument}" MouseDown="MenuBackstageExport_MouseDown">
                                 <DockPanel LastChildFill="True">
-                                    <StatusBar DockPanel.Dock="Top" Visibility="{Binding ElementName=TextExportStatus, Path=Text, Converter={StaticResource stringToVisilbity}}" Background="{DynamicResource WhiteBrush20}">
-                                        <TextBlock x:Name="TextExportStatus" Padding="2" Foreground="{DynamicResource BlackBrush}" />
+                                    <StatusBar DockPanel.Dock="Top" Visibility="{Binding ElementName=TextExportStatus, Path=Text, Converter={StaticResource stringToVisilbity}}" Background="{DynamicResource Fluent.Ribbon.Brushes.White20}">
+                                        <TextBlock x:Name="TextExportStatus" Padding="2" Foreground="{DynamicResource Fluent.Ribbon.Brushes.Black}" />
                                     </StatusBar>
                                     <modules:ExportModule x:Name="ExportControl" />
                                 </DockPanel>
@@ -216,7 +217,7 @@
                             <Image Width="32" Height="32" Source="pack://application:,,,/SimpleJournal;component/resources/polygon.png"/>
                         </controls:DropDownToggleButton.LargeIcon>
                     </controls:DropDownToggleButton>
-                    <controls:DropDownToggleButton x:Name="btnInsertPlot" Header="XY" Foreground="{DynamicResource BlackBrush}" Width="50" Click="btnCooardinateSystem_Click" ToolTip="{x:Static res:Resources.strInsertPlotToolTip}">
+                    <controls:DropDownToggleButton x:Name="btnInsertPlot" Header="XY" Foreground="{DynamicResource Fluent.Ribbon.Brushes.Black}" Width="50" Click="btnCooardinateSystem_Click" ToolTip="{x:Static res:Resources.strInsertPlotToolTip}">
                         <controls:DropDownToggleButton.LargeIcon>
                             <Viewbox Width="32" Height="32">
                                 <Canvas Width="48" Height="48" UseLayoutRounding="True" SnapsToDevicePixels="True">
@@ -330,8 +331,8 @@
             </Fluent:Ribbon.QuickAccessItems>
         </Fluent:Ribbon>
         <Grid Grid.Row="1">
-            <Grid x:Name="pnlNotificationBar" Panel.ZIndex="1" HorizontalAlignment="Right" Width="250" Background="{DynamicResource WhiteBrush}" Visibility="{Binding ElementName=btnToggleNotification,Path=IsChecked,Converter={StaticResource boolToVisibilityConverter}}">
-                <Border BorderBrush="{DynamicResource BlackBrush}" BorderThickness="1" Margin="1,0,1,1">
+            <Grid x:Name="pnlNotificationBar" Panel.ZIndex="1" HorizontalAlignment="Right" Width="250" Background="{DynamicResource Fluent.Ribbon.Brushes.White}" Visibility="{Binding ElementName=btnToggleNotification,Path=IsChecked,Converter={StaticResource Fluent.Ribbon.Converters.BoolToVisibilityConverter}}">
+                <Border BorderBrush="{DynamicResource Fluent.Ribbon.Brushes.Black}" BorderThickness="1" Margin="1,0,1,1">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
@@ -348,7 +349,7 @@
                             <controls1:TransparentImageButton x:Name="ButtonCloseNotificationsPanel" ToolTip="{x:Static res:Resources.strCloseSidebar}" Click="ButtonCloseNotificationsPanel_Click" Grid.Column="1" Image="/resources/close.png" Width="24" Height="24" Margin="5" />
                         </Grid>
                         
-                        <Border Grid.Row="1" BorderThickness="0 1 0 1" BorderBrush="{DynamicResource BlackBrush}" Background="{DynamicResource Fluent.Ribbon.Brushes.RibbonTabControl.Content.Background}">
+                        <Border Grid.Row="1" BorderThickness="0 1 0 1" BorderBrush="{DynamicResource Fluent.Ribbon.Brushes.Black}" Background="{DynamicResource Fluent.Ribbon.Brushes.RibbonTabControl.Content.Background}">
                             <ScrollViewer VerticalScrollBarVisibility="Auto">
                                 <StackPanel x:Name="ListNotifications" ScrollViewer.HorizontalScrollBarVisibility="Disabled" />
                             </ScrollViewer>
@@ -365,7 +366,7 @@
                 </Grid.RowDefinitions>
 
                 <DockPanel Grid.Row="0" HorizontalAlignment="Stretch">
-                    <TextBlock Margin="5,0,0,0" FontWeight="Bold" Foreground="{DynamicResource BlackBrush}" VerticalAlignment="Center">
+                    <TextBlock Margin="5,0,0,0" FontWeight="Bold" Foreground="{DynamicResource Fluent.Ribbon.Brushes.Black}" VerticalAlignment="Center">
                         <Run Text="{x:Static res:Resources.strObjects}" />
                         <Run x:Name="TextObjectCounter" Text="0" />
                     </TextBlock>

@@ -1,5 +1,6 @@
 ﻿using Dialogs;
 using SimpleJournal.Common.Data;
+using SimpleJournal.Helper;
 using System;
 using System.Windows;
 using System.Windows.Controls;
@@ -48,7 +49,7 @@ namespace SimpleJournal.Modules
         bool? ShowModuleWindow(bool isTabbedDialog, Window owner)
         {
             Window result;
-            if (isTabbedDialog)
+            if (isTabbedDialog) 
                 result = new DialogWindowTabbed((ITabbedModule)this);
             else
                 result = new DialogWindow(this);

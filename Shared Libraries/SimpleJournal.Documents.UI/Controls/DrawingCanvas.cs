@@ -493,7 +493,7 @@ namespace SimpleJournal.Documents.UI.Controls
 
                 // Pass argumentChain to other process (x86)
                 // process will do analysis => and return the result (serialized shape)
-                string path = System.IO.Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, "Analyzer.exe");
+                string path = Consts.AnalyzerPath;
                 Process analyzingProcess = new Process
                 {
                     StartInfo = new ProcessStartInfo()

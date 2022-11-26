@@ -8,6 +8,7 @@ using System;
 using System.Windows.Controls;
 using System.Windows.Media;
 using SimpleJournal.Documents.UI;
+using SimpleJournal.Helper;
 
 namespace SimpleJournal.Modules
 {
@@ -63,6 +64,11 @@ namespace SimpleJournal.Modules
             if (Properties.Resources.strLang != "de")
                 TextClock.Text = string.Empty;
 
+            var assemblyVersions = new TextBlock();
+            foreach (var inline in AssemblyVersionHelper.GenerateAssemblyText())
+                assemblyVersions.Inlines.Add(inline);
+            TextVersion.ToolTip = assemblyVersions;
+
             ModuleHelper.ApplyTabbedFeatures(this);
         }
 
@@ -104,7 +110,9 @@ namespace SimpleJournal.Modules
                 BrowserChangelog.Source = new Uri(string.Format(Consts.ChangelogUrl, Properties.Resources.strLang, Settings.Instance.UseDarkMode ? 1 : 0));
             }
             catch (Exception)
-            { }
+            {
+                // ToDo: *** Show a message that WebView2 must be installed instead of the control (maybe auto install?)
+            }
         }
 
         private void Hyperlink_RequestNavigate(object sender, System.Windows.Navigation.RequestNavigateEventArgs e)

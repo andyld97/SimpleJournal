@@ -8,14 +8,14 @@
              xmlns:controlzEx="urn:controlzex"
              xmlns:res="clr-namespace:SimpleJournal.Properties" xmlns:paper="clr-namespace:SimpleJournal.Documents.UI.Controls.Paper;assembly=SimpleJournal.Documents.UI"
              d:DesignWidth="400" d:DesignHeight="500">
-    <Border BorderBrush="{DynamicResource Fluent.Ribbon.Brushes.AccentBaseColorBrush}" BorderThickness="0">
+    <Border BorderBrush="{DynamicResource Fluent.Ribbon.Brushes.AccentBase}" BorderThickness="0">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="20" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
-            <Grid x:Name="GridTitleBar" Background="{DynamicResource WhiteBrush}">
+            <Grid x:Name="GridTitleBar" Background="{DynamicResource Fluent.Ribbon.Brushes.White}">
                 <TextBlock Text="SimpleJournal" TextAlignment="Center" />
             </Grid>
 

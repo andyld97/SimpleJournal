@@ -37,7 +37,7 @@
                                 <Trigger Property="IsSelected" Value="True">
                                     <Setter TargetName="_Border" Property="Background">
                                         <Setter.Value>
-                                            <SolidColorBrush Color="{DynamicResource Fluent.Ribbon.Colors.AccentColor60}" />
+                                            <SolidColorBrush Color="{DynamicResource Fluent.Ribbon.Colors.Accent60}" />
                                         </Setter.Value>
                                     </Setter>
                                     <Setter TargetName="_Border" Property="BorderBrush" Value="{DynamicResource Fluent.Ribbon.Brushes.Button.MouseOver.BorderBrush}" />
@@ -220,12 +220,12 @@
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
 
-                    <Style x:Key="stl" TargetType="{x:Type controls:DropDownToggleButton}" BasedOn="{StaticResource ResourceKey=RibbonDropDownButtonStyle}">
+                    <Style x:Key="stl" TargetType="{x:Type controls:DropDownToggleButton}" BasedOn="{StaticResource ResourceKey=Fluent.Ribbon.Styles.RibbonDropDownButton}">
                         <Setter Property="Template">
                             <Setter.Value>
                                 <ControlTemplate TargetType="{x:Type controls:DropDownToggleButton}">
                                     <ControlTemplate.Resources>
-                                        <Style BasedOn="{StaticResource MenuSeparatorStyle}" TargetType="{x:Type Separator}" />
+                                        <Style BasedOn="{StaticResource Fluent.Ribbon.Styles.MenuSeparator}" TargetType="{x:Type Separator}" />
                                     </ControlTemplate.Resources>
                                     <Grid>
                                         <Border x:Name="PART_ButtonBorder"

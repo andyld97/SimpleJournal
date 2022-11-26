@@ -7,6 +7,7 @@ using SimpleJournal.Data;
 using SimpleJournal.Dialogs;
 using SimpleJournal.Documents.UI;
 using SimpleJournal.Documents.UI.Controls;
+using SimpleJournal.Helper;
 using System;
 using System.ComponentModel;
 using System.Linq;

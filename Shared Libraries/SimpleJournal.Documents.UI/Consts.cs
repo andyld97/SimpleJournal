@@ -1,9 +1,4 @@
 ﻿using SimpleJournal.Common.Data;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Media;
 
 namespace SimpleJournal.Documents.UI
@@ -15,6 +10,7 @@ namespace SimpleJournal.Documents.UI
         public const int RulerCompensationOffset = 10;
         public static readonly DoubleCollection LineStrokeDottetDashArray = new DoubleCollection() { 0.03, 2 };
         public static readonly DoubleCollection LineStrokeDashedDashArray = new DoubleCollection() { 4, 3 };
+        public static readonly string AnalyzerPath = System.IO.Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, "Analyzer.exe");
 
         #region Pen and Stroke Sizes
         /// <summary>

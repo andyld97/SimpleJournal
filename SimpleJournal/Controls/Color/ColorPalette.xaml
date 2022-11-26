@@ -12,7 +12,7 @@
         <Grid.Resources>
             <BooleanToVisibilityConverter x:Key="boolToVisibiltyConverter" />
             <Style TargetType="{x:Type TextBlock}">
-                <Setter Property="Foreground" Value="{DynamicResource BlackBrush}" />
+                <Setter Property="Foreground" Value="{DynamicResource Fluent.Ribbon.Brushes.Black}" />
                 <Setter Property="FontFamily" Value="Segoe UI" />
                 <Setter Property="FontWeight" Value="Bold" />
             </Style>
@@ -28,10 +28,10 @@
             <!-- https://github.com/dotnet/wpf/issues/5716 -->
             <Expander x:Name="Expander">
                 <Expander.Header>
-                    <TextBlock Text="{x:Static res:Resources.strColors}" FontWeight="Bold" Foreground="{DynamicResource BlackBrush}" />
+                    <TextBlock Text="{x:Static res:Resources.strColors}" FontWeight="Bold" Foreground="{DynamicResource Fluent.Ribbon.Brushes.Black}" />
                 </Expander.Header>
             </Expander>
-            <mah:ColorPalette x:Name="AdvancedColors" Visibility="{Binding ElementName=Expander, Path=IsExpanded, Converter={StaticResource boolToVisibilityConverter}}" SelectionChanged="AdvancedColors_SelectionChanged" BorderThickness="0" Header="{x:Null}"     ItemsSource="{x:Static mah:BuildInColorPalettes.WpfColorsPalette}"  />
+            <mah:ColorPalette x:Name="AdvancedColors" Visibility="{Binding ElementName=Expander, Path=IsExpanded, Converter={StaticResource Fluent.Ribbon.Converters.BoolToVisibilityConverter}}" SelectionChanged="AdvancedColors_SelectionChanged" BorderThickness="0" Header="{x:Null}"     ItemsSource="{x:Static mah:BuildInColorPalettes.WpfColorsPalette}"  />
         </StackPanel>
     </Grid>
 </UserControl>
