@@ -53,7 +53,7 @@ namespace Helper
                 {
                     bool debug = false;
 #if DEBUG
-                    debug = true;
+                    //debug = true;
 #endif
                     string url = $"{Consts.VersionUrl}&lang={System.Globalization.CultureInfo.InstalledUICulture.TwoLetterISOLanguageName}&debug={debug.ToString().ToLower()}";
                     string versionJSON = await client.GetStringAsync(url);
