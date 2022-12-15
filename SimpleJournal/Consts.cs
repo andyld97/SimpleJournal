@@ -30,7 +30,7 @@ namespace SimpleJournal
 #else 
         public static readonly string VersionUrl = $"http://simplejournal.ca-soft.net/update.php?version={Consts.NormalVersion:4}";
 #endif
-        public static readonly string FeedbackUrl = "https://simplejournal.ca-soft.net/feedback.php?name={0}&mail={1}&content={2}";
+        public static readonly string FeedbackUrl = "https://simplejournal.ca-soft.net/nfeedback.php";
         public static readonly string HomePageUrl = "https://simplejournal.ca-soft.net";
         public static readonly string HelpUrl = "https://simplejournal.ca-soft.net/faq";
         public static readonly string GhostScriptDownloadUrl = "https://ghostscript.com/releases/gsdnld.html";
