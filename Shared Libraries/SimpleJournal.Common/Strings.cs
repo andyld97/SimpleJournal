@@ -6,7 +6,7 @@ namespace SimpleJournal.Common
     {
         public const string Version = "0.5.9.0";
         public const string StoreVersion = "1.590.0.0";
-        public const string Copyright = "Copyright © 2018-2022";
+        public const string Copyright = "Copyright © 2018-2023";
 
 #if UWPNEW || NORMAL
         public static readonly DateTime ReleaseDate = new DateTime(2022, 11, 13, 12, 15, 0);
