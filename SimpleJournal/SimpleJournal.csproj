@@ -269,14 +269,14 @@
 		  <PrivateAssets>all</PrivateAssets>
 		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
-		<PackageReference Include="Fluent.Ribbon" Version="10.0.0-alpha0228" />
-		<PackageReference Include="Magick.NET-Q16-AnyCPU" Version="12.2.2" />
-		<PackageReference Include="Magick.NET.Core" Version="12.2.2" />
-		<PackageReference Include="MahApps.Metro" Version="3.0.0-alpha0419" />
+		<PackageReference Include="Fluent.Ribbon" Version="10.0.0-alpha0250" />
+		<PackageReference Include="Magick.NET-Q16-AnyCPU" Version="12.3.0" />
+		<PackageReference Include="Magick.NET.Core" Version="12.3.0" />
+		<PackageReference Include="MahApps.Metro" Version="3.0.0-alpha0447" />
 		<PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
-		<PackageReference Include="Microsoft.Web.WebView2" Version="1.0.1549-prerelease" />
-		<PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
-		<PackageReference Include="Microsoft.Windows.Compatibility" Version="7.0.0" />
+		<PackageReference Include="Microsoft.Web.WebView2" Version="1.0.1671-prerelease" />
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.3-beta1" />
+		<PackageReference Include="Microsoft.Windows.Compatibility" Version="8.0.0-preview.1.23110.8" />
 	</ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\Shared Libraries\SimpleJournal.Common\SimpleJournal.Common.csproj" />
