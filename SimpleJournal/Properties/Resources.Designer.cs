@@ -384,6 +384,15 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Export ähnelt.
+        /// </summary>
+        public static string strButtonExport {
+            get {
+                return ResourceManager.GetString("strButtonExport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Cancel ähnelt.
         /// </summary>
         public static string strCancel {
@@ -1020,6 +1029,33 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Show next page ähnelt.
+        /// </summary>
+        public static string strExportDialog_ButtonNextPage {
+            get {
+                return ResourceManager.GetString("strExportDialog_ButtonNextPage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Show previous page ähnelt.
+        /// </summary>
+        public static string strExportDialog_ButtonPreviousPage {
+            get {
+                return ResourceManager.GetString("strExportDialog_ButtonPreviousPage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Preview (Page {0} of {1}): ähnelt.
+        /// </summary>
+        public static string strExportDialog_PagePreview {
+            get {
+                return ResourceManager.GetString("strExportDialog_PagePreview", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Fold out all the pages or hide all the pages! ähnelt.
         /// </summary>
         public static string strExportDialogExpanderExplanation {
@@ -1061,6 +1097,15 @@ namespace SimpleJournal.Properties {
         public static string strExportFinished {
             get {
                 return ResourceManager.GetString("strExportFinished", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Export Journal ähnelt.
+        /// </summary>
+        public static string strExportJournal {
+            get {
+                return ResourceManager.GetString("strExportJournal", resourceCulture);
             }
         }
         

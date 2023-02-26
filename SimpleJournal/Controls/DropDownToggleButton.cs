@@ -20,8 +20,8 @@ namespace SimpleJournal.Controls
         private ContentPresenter presenter;
         private DropDownTemplate template;
 
-        public delegate void click(object sender, EventArgs e);
-        public event click Click;
+        public delegate void onClick(object sender, EventArgs e);
+        public event onClick Click;
 
         public DropDownTemplate DropDown
         {
