@@ -10,11 +10,11 @@
         xmlns:controls="clr-namespace:SimpleJournal.Controls"
         StateChanged="RibbonWindow_StateChanged"
         mc:Ignorable="d"   
-                    WindowStyle="None"
-        xmlns:gl="clr-namespace:System.Globalization;assembly=mscorlib" xmlns:controls1="clr-namespace:SimpleJournal.Documents.UI.Controls;assembly=SimpleJournal.Documents.UI" xmlns:modules="clr-namespace:SimpleJournal.Modules"
-                     Title="SimpleJournal - Neues Journal" Height="700" Activated="RibbonWindow_Activated" Deactivated="RibbonWindow_Deactivated"
+        xmlns:gl="clr-namespace:System.Globalization;assembly=mscorlib" 
+        xmlns:controls1="clr-namespace:SimpleJournal.Documents.UI.Controls;assembly=SimpleJournal.Documents.UI" 
+        xmlns:modules="clr-namespace:SimpleJournal.Modules"
+        Title="SimpleJournal - New Journal" Height="700" Activated="RibbonWindow_Activated" Deactivated="RibbonWindow_Deactivated"
         Width="1130">
-    <!--TextFormattingMode="Display" -->
     <Window.Resources>
         <BooleanToVisibilityConverter x:Key="Fluent.Ribbon.Converters.BoolToVisibilityConverter" />
         <local:SelectedIndexToColumnSpanConverter x:Key="indexToColumn" />

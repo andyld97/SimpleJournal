@@ -273,10 +273,10 @@
 		  <PrivateAssets>all</PrivateAssets>
 		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
-		<PackageReference Include="Fluent.Ribbon" Version="10.0.0-alpha0250" />
+		<PackageReference Include="Fluent.Ribbon" Version="10.0.0-alpha0256" />
 		<PackageReference Include="Magick.NET-Q16-AnyCPU" Version="12.3.0" />
 		<PackageReference Include="Magick.NET.Core" Version="12.3.0" />
-		<PackageReference Include="MahApps.Metro" Version="3.0.0-alpha0453" />
+		<PackageReference Include="MahApps.Metro" Version="3.0.0-alpha0454" />
 		<PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
 		<PackageReference Include="Microsoft.Web.WebView2" Version="1.0.1671-prerelease" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.3-beta1" />

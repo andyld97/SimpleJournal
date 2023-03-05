@@ -180,7 +180,7 @@ namespace SimpleJournal
             isInitalized = false;
 
             InitializeComponent();
-         
+
             var dpi = VisualTreeHelper.GetDpi(this);
             if (dpi.PixelsPerInchX == 96 && WpfScreen.Primary.DeviceBounds.Width >= 1920 && WpfScreen.Primary.DeviceBounds.Height >= 1080)
                 WindowStartupLocation = WindowStartupLocation.CenterScreen;
