@@ -2212,4 +2212,19 @@ Details: {1}</value>
   <data name="strSettings_UseModernDialogs_Description" xml:space="preserve">
     <value>Wenn aktiviert werden einige Dialoge, die Tabs enthalten modern dargestellt. Die Tabs befinden sich dann in der Titelleiste des Fensters und es gibt keine richtige Titelleiste mehr. Das Fenster kann trotzdem ganz normal verwendet werden!</value>
   </data>
+  <data name="strExportJournal" xml:space="preserve">
+    <value>Journal exportieren</value>
+  </data>
+  <data name="strButtonExport" xml:space="preserve">
+    <value>Exportieren</value>
+  </data>
+  <data name="strExportDialog_ButtonNextPage" xml:space="preserve">
+    <value>Nächste Seite anzeigen</value>
+  </data>
+  <data name="strExportDialog_ButtonPreviousPage" xml:space="preserve">
+    <value>Vorherige Seite anzeigen</value>
+  </data>
+  <data name="strExportDialog_PagePreview" xml:space="preserve">
+    <value>Vorschau (Seite {0} von {1}):</value>
+  </data>
 </root>

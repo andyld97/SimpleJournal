@@ -45,6 +45,12 @@ jobs:
       with:
         dotnet-version: '7.0'
         include-prerelease: True
+                
+    - name: Add package sources
+      run: nuget sources Add -Name "Fluent.Ribbon (AppVeyor)" -Source https://ci.appveyor.com/nuget/fluent-ribbon     
+      
+    - name: Add package sources
+      run: nuget sources Add -Name "MahApps.Metro (AppVeyor)" -Source https://ci.appveyor.com/nuget/mahapps.metro
 
     # Initializes the CodeQL tools for scanning.
     - name: Initialize CodeQL

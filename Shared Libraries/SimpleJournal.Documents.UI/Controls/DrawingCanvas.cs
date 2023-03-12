@@ -26,11 +26,11 @@ namespace SimpleJournal.Documents.UI.Controls
     public class DrawingCanvas : InkCanvas
     {
         #region Public Static Members
-        public static DrawingCanvas LastModifiedCanvas = null;
+        public static DrawingCanvas? LastModifiedCanvas = null;
         private static bool change = false;
 
         public delegate void onChangedDocumentState(bool value);
-        public static event onChangedDocumentState OnChangedDocumentState;
+        public static event onChangedDocumentState? OnChangedDocumentState;
 
         public static bool Change
         {
@@ -48,7 +48,7 @@ namespace SimpleJournal.Documents.UI.Controls
 
         #region Private Members
 
-        private IPolygonTemplateInfo polygonDropDownTemplate = null;
+        private IPolygonTemplateInfo polygonDropDownTemplate;
         private bool isInFreeHandDrawingMode = false;
         //private bool isInFreeHandWritingMode = false;
         private bool isInFreeHandPolygonMode = false;
@@ -76,13 +76,13 @@ namespace SimpleJournal.Documents.UI.Controls
         private int pointCounter = 0;
         private RulerMode rulerMode = RulerMode.Normal;
         private Line line = new Line();
-        private Shape currentShape = new Rectangle();
+        private Shape? currentShape = new Rectangle();
         private Plot plot = new Plot();
 
 
         // Members for Ruler
         private StylusPointCollection pointCollection = new StylusPointCollection();
-        private Stroke currentStroke = null;
+        private Stroke? currentStroke = null;
 
         #endregion
 
@@ -90,7 +90,7 @@ namespace SimpleJournal.Documents.UI.Controls
 
         public bool IsEmpty => Strokes.Count == 0 && Children.Count == 0;
 
-        public ActionManager Manager { get; } = null;
+        public ActionManager? Manager { get; } = null;
 
         /// <summary>
         /// Gets or sets the stroke collection of this canvas
@@ -127,17 +127,18 @@ namespace SimpleJournal.Documents.UI.Controls
         #endregion
 
         #region Events
-        public delegate void onChanged(StrokeCollection strokes, UIElement child, ActionType value);
-        public event onChanged OnChanged;
+        public delegate void onChanged(StrokeCollection? strokes, UIElement? child, ActionType value);
+        public event onChanged? OnChanged;
 
         public delegate void childElementsSelected(UIElement[] elements);
-        public static event childElementsSelected ChildElementsSelected;
+        public static event childElementsSelected? ChildElementsSelected;
         #endregion
 
         #region Ctor
         public DrawingCanvas() : this(false)
         { }
 
+#pragma warning disable CS8618
         public DrawingCanvas(bool isPreview = false)
         {
             this.isPreview = isPreview;
@@ -158,6 +159,7 @@ namespace SimpleJournal.Documents.UI.Controls
             Manager = new ActionManager(this);
             Children.CollectionChanged += Childrens_CollectionChanged;
         }
+#pragma warning restore CS8618
 
         public void Dispose()
         {
@@ -184,10 +186,10 @@ namespace SimpleJournal.Documents.UI.Controls
 
         #region Event Handling SelectionChanged/CollectionChanged
 
-        public static event EventHandler PreventSelection;
-        public static event EventHandler<int> HideSidebar;
+        public static event EventHandler? PreventSelection;
+        public static event EventHandler<int>? HideSidebar;
 
-        private void Childrens_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        private void Childrens_CollectionChanged(object? sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
             // A new child was added => So set Change to true to make sure that on closing will ask the user for saving
             if (!isPreview)
@@ -199,33 +201,39 @@ namespace SimpleJournal.Documents.UI.Controls
             // Notify manger 
             if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Add)
             {
-                foreach (var item in e.NewItems)
+                if (e.NewItems != null)
                 {
-                    var ui = (UIElement)item;
-                    base.Children.Add(ui);
+                    foreach (var item in e.NewItems)
+                    {
+                        var ui = (UIElement)item;
+                        base.Children.Add(ui);
+                    }
                 }
 
                 PreventSelection?.Invoke(sender, EventArgs.Empty);               
 
                 if (notifiyActionManagerOnCollectionChanged)
-                    OnChanged.Invoke(GetSelectedStrokes(), (UIElement)e.NewItems[0], ActionType.AddedChild);
+                    OnChanged?.Invoke(GetSelectedStrokes(), (UIElement?)e.NewItems?[0], ActionType.AddedChild);
             }
             else if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Remove)
             {
-                foreach (var item in e.OldItems)
+                if (e.OldItems != null)
                 {
-                    var ui = (UIElement)item;
-                    base.Children.Remove(ui);
+                    foreach (var item in e.OldItems)
+                    {
+                        var ui = (UIElement)item;
+                        base.Children.Remove(ui);
+                    }
                 }
 
                 HideSidebar?.Invoke(sender, base.Children.Count);
 
                 if (notifiyActionManagerOnCollectionChanged)
-                    OnChanged.Invoke(GetSelectedStrokes(), (UIElement)e.OldItems[0], ActionType.RemovedChild);
+                    OnChanged?.Invoke(GetSelectedStrokes(), (UIElement?)e.OldItems?[0], ActionType.RemovedChild);
             }
         }
 
-        private void DrawingCanvas_SelectionChanged(object sender, EventArgs e)
+        private void DrawingCanvas_SelectionChanged(object? sender, EventArgs e)
         {
             // Show sidebar
             // If a child is selected then show it in the sidebar
@@ -436,14 +444,14 @@ namespace SimpleJournal.Documents.UI.Controls
 
         #region Shape and Text Recognization
 
-        public static string[] StartAnalyzingProcess(StrokeCollection sc, Operation operation, string[] additionalArguments = null)
+        public static string[] StartAnalyzingProcess(StrokeCollection sc, Operation operation, string[]? additionalArguments = null)
         {
             List<string> lines = new List<string>();
 
             try
             {
                 // Convert StrokeCollection to byte[] to convert byte[] to base64 encoded string to pass to process
-                byte[] result = null;
+                byte[]? result = null;
                 using (MemoryStream ms = new MemoryStream())
                 {
                     sc.Save(ms);
@@ -510,7 +518,7 @@ namespace SimpleJournal.Documents.UI.Controls
                 analyzingProcess.Start();
                 while (!analyzingProcess.StandardOutput.EndOfStream)
                 {
-                    string currentLine = analyzingProcess.StandardOutput.ReadLine();
+                    string? currentLine = analyzingProcess.StandardOutput.ReadLine();
                     if (string.IsNullOrEmpty(currentLine))
                         continue;
                     else
@@ -672,10 +680,10 @@ namespace SimpleJournal.Documents.UI.Controls
 
         #region Ruler, Forms, Plot u {Paste, Insert} Handling
         public delegate void onCopyPositionIsKnown(Point e);
-        public event onCopyPositionIsKnown OnCopyPositionIsKnown;
+        public event onCopyPositionIsKnown? OnCopyPositionIsKnown;
 
         public delegate void onInsertPositionIsKnown(Point e);
-        public event onInsertPositionIsKnown OnInsertPositionIsKnown;
+        public event onInsertPositionIsKnown? OnInsertPositionIsKnown;
 
         #region Polygon Drawing
 
@@ -886,8 +894,11 @@ namespace SimpleJournal.Documents.UI.Controls
                 else if (isInFormMode)
                 {
                     // Remove MouseLeftButton event after adding the control finally (to ensure the ruler works properly again on the border of this control - after adding the control, the events are properly working again)
-                    Children.Last().MouseLeftButtonDown -= Control_MouseLeftButtonDown;
-                    OnChanged?.Invoke(null, Children.Last(), ActionType.AddedChild);
+                    if (Children.LastOrDefault() != null)
+                    {
+                        Children.Last().MouseLeftButtonDown -= Control_MouseLeftButtonDown;
+                        OnChanged?.Invoke(null, Children.Last(), ActionType.AddedChild);
+                    }
 
                     // Add rectangle
                     pointCounter = 0;
@@ -900,8 +911,11 @@ namespace SimpleJournal.Documents.UI.Controls
                 else if (isInPlotMode)
                 {
                     // Remove MouseLeftButton event after adding the control finally (to ensure the ruler works properly again on the border of this control - after adding the control, the events are properly working again)
-                    Children.Last().MouseLeftButtonDown -= Control_MouseLeftButtonDown;
-                    OnChanged?.Invoke(null, Children.Last(), ActionType.AddedChild);
+                    if (Children.LastOrDefault() != null)
+                    {
+                        Children.Last().MouseLeftButtonDown -= Control_MouseLeftButtonDown;
+                        OnChanged?.Invoke(null, Children.Last(), ActionType.AddedChild);
+                    }
 
                     // Add rectangle
                     pointCounter = 0;
@@ -1043,7 +1057,8 @@ namespace SimpleJournal.Documents.UI.Controls
                 {
                     notifiyActionManagerOnCollectionChanged = false;
                     bool isPolygon = false;
-                    Children.Remove(currentShape);
+                    if (currentShape != null)
+                        Children.Remove(currentShape);
 
                     switch (ShapeType)
                     {
@@ -1072,10 +1087,13 @@ namespace SimpleJournal.Documents.UI.Controls
                     double w = Math.Abs(xDiff);
                     double h = Math.Abs(yDiff);
 
-                    currentShape.SetValue(InkCanvas.LeftProperty, (xDiff >= 0 ? pm2.X : pm1.X));
-                    currentShape.SetValue(InkCanvas.TopProperty, (yDiff >= 0 ? pm2.Y : pm1.Y));
-                    currentShape.Stroke = new SolidColorBrush(DefaultDrawingAttributes.Color);
-                    currentShape.StrokeThickness = DefaultDrawingAttributes.Width + DefaultDrawingAttributes.Height / 2.0;
+                    currentShape?.SetValue(InkCanvas.LeftProperty, (xDiff >= 0 ? pm2.X : pm1.X));
+                    currentShape?.SetValue(InkCanvas.TopProperty, (yDiff >= 0 ? pm2.Y : pm1.Y));
+                    if (currentShape != null)
+                    {
+                        currentShape.Stroke = new SolidColorBrush(DefaultDrawingAttributes.Color);
+                        currentShape.StrokeThickness = DefaultDrawingAttributes.Width + DefaultDrawingAttributes.Height / 2.0;
+                    }
 
                     if (currentShape is Polygon poly)
                         poly.Points.Clear();
@@ -1137,16 +1155,19 @@ namespace SimpleJournal.Documents.UI.Controls
                         }
                     }
 
-                    if (!isPolygon)
+                    if (!isPolygon && currentShape != null)
                     {
                         currentShape.Width = w;
                         currentShape.Height = h;
                     }
 
-                    // Ensure that if the mouse/pointer lands on the rectangle, that the event will be redirected to OnMouseLeftButtonDown!
-                    currentShape.MouseLeftButtonDown += Control_MouseLeftButtonDown;
+                    if (currentShape != null)
+                    {
+                        // Ensure that if the mouse/pointer lands on the rectangle, that the event will be redirected to OnMouseLeftButtonDown!
+                        currentShape.MouseLeftButtonDown += Control_MouseLeftButtonDown;
 
-                    Children.Add(currentShape);
+                        Children.Add(currentShape);
+                    }
                     notifiyActionManagerOnCollectionChanged = true;
                 }
             }
@@ -1242,7 +1263,7 @@ namespace SimpleJournal.Documents.UI.Controls
                 actions.Add(pca);
             }
 
-            Manager.AddSpecialAction(actions);
+            Manager?.AddSpecialAction(actions);
         }
         #endregion
     }

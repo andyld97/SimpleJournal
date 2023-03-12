@@ -48,13 +48,13 @@ namespace Helper
 
         public static void ApplyTabbedModuleToWindow(this ITabbedModule module, Window moduleOwner)
         {
-            module.ToggleWindowState += delegate (object? sender, EventArgs e)
+            module.ToggleWindowState += delegate (object sender, EventArgs e)
             {
                 if (module.CanToggleWindowState)
                     ToggleNormalMax(moduleOwner);
             };
 
-            module.Move += delegate (object? sender, EventArgs e)
+            module.Move += delegate (object sender, EventArgs e)
             {
                 Move(moduleOwner);
             };

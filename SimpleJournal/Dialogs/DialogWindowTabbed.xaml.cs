@@ -1,10 +1,7 @@
 ﻿using Fluent;
 using Helper;
-using MahApps.Metro.Controls;
 using SimpleJournal.Modules;
-using System;
 using System.ComponentModel;
-using System.Security.Cryptography.Pkcs;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -50,12 +47,12 @@ namespace Dialogs
             MainBorder.Child = module as UserControl;
         }
 
-        private void DialogWindow_TitleChanged(object? sender, string title)
+        private void DialogWindow_TitleChanged(object sender, string title)
         {
             Title = title;
         }
 
-        private void DialogWindow_ModuleClosed(object? sender, bool result)
+        private void DialogWindow_ModuleClosed(object sender, bool result)
         {
             DialogResult = result;
         }

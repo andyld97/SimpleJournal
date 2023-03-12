@@ -1,5 +1,4 @@
 ﻿using Microsoft.Win32;
-using SimpleJournal.Data;
 using SimpleJournal.Common;
 using System;
 using System.Collections.Generic;
@@ -16,7 +15,7 @@ using SimpleJournal.Documents;
 using SimpleJournal.Documents.UI.Extensions;
 using SimpleJournal.Documents.UI;
 using SimpleJournal.Documents.UI.Controls.Paper;
-using SimpleJournal.Modules;
+using System.Windows.Input;
 
 namespace SimpleJournal.Modules
 {
@@ -31,10 +30,10 @@ namespace SimpleJournal.Modules
         private bool isInitalized;
         private string title;
         private Window owner;
+        private readonly List<UIElement> Pages = new List<UIElement>();
+        private int currentPageIndex = 0;
 
         public event PropertyChangedEventHandler PropertyChanged;
-
-        private readonly List<Expander> expanders = new List<Expander>();
 
         public ExportMode SelectedExportMode
         {
@@ -71,6 +70,8 @@ namespace SimpleJournal.Modules
         public ExportModule()
         {
             InitializeComponent();
+            MouseDown += PageManagmentControl_MouseDown;
+            ZoomByScale(scaleFactor);
         }
 
         public void Initalize(ObservableCollection<IPaper> pages, IPaper currentPage, Window owner)
@@ -106,8 +107,7 @@ namespace SimpleJournal.Modules
             if (!isInitalized)
                 return;
 
-            Pages.Children.Clear();
-            expanders.Clear();
+            Pages.Clear();
 
             var range = GetPageRange();
 
@@ -116,25 +116,24 @@ namespace SimpleJournal.Modules
                 for (int i = range.Item1 - 1; i < range.Item2; i++)
                 {
                     var page = pages[i];
-                    int pageIndex = pages.IndexOf(page) + 1;
-                    var expander = new Expander()
-                    {
-                        Header = $"{Properties.Resources.strPage} {pageIndex}",
-                        Foreground = new SolidColorBrush(Colors.Black),
-                        HorizontalAlignment = HorizontalAlignment.Left,
-                        Width = page.Canvas.Width
-                    };
-                    expander.IsExpanded = false;
-                    expander.Content = page.ClonePage(true);
-
-                    expanders.Add(expander);
-                    Pages.Children.Add(expander);
+                    var pageControl = (UIElement)page.ClonePage(true);
+                    Pages.Add(pageControl);
                 }
+
+                currentPageIndex = 0;
+                ShowPage(currentPageIndex);
 
                 TextInvalidSettings.Text = string.Empty;
             }
             else
                 TextInvalidSettings.Text = Properties.Resources.strExportDialogInvalidSettings;
+        }
+
+        private void PageManagmentControl_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            // Fix for triggering re-initalization of this control!
+            // No mouse down events will be redirected to the parent of this control.
+            e.Handled = true;
         }
 
         private (int, int) GetPageRange()
@@ -374,16 +373,6 @@ namespace SimpleJournal.Modules
                 ModuleClosed?.Invoke(this, true);
         }
 
-        private void Expander_Collapsed(object sender, RoutedEventArgs e)
-        {
-            expanders.ForEach(ex => ex.IsExpanded = false);
-        }
-
-        private void Expander_Expanded(object sender, RoutedEventArgs e)
-        {
-            expanders.ForEach(ex => ex.IsExpanded = true);
-        }
-
         private void CheckBoxExportAsJournal_Checked(object sender, RoutedEventArgs e)
         {
             if (!isInitalized)
@@ -397,6 +386,81 @@ namespace SimpleJournal.Modules
         {
             ModuleClosed?.Invoke(this, false);
         }
+
+        #region Navigation
+
+        private void ShowPage(int index)
+        {
+            currentPageIndex = index;
+            TextPreview.Text = string.Format(Properties.Resources.strExportDialog_PagePreview, currentPageIndex + 1, Pages.Count);
+            displayFrame.Child = Pages[index];
+        }
+
+        private void ButtonPreviousPagePreview_Click(object sender, RoutedEventArgs e)
+        {
+            if (currentPageIndex - 1 < 0)
+                currentPageIndex = Pages.Count - 1;
+            else
+                currentPageIndex--;
+
+            ShowPage(currentPageIndex);
+        }
+
+        private void ButtonNextPagePreview_Click(object sender, RoutedEventArgs e)
+        {
+            if (currentPageIndex + 1 >= Pages.Count)
+                currentPageIndex = 0;
+            else
+                currentPageIndex++;
+
+            ShowPage(currentPageIndex);
+        }
+
+        #endregion
+
+        #region Zoom
+
+        private double scaleFactor = 0.6;
+
+        private void ButtonZoomOut_Click(object sender, RoutedEventArgs e)
+        {
+            scaleFactor -= 0.2;
+
+            if (scaleFactor < 0)
+                scaleFactor = 0.6;
+
+            ZoomByScale(scaleFactor);
+        }
+
+        private void ButtonZoomIn_Click(object sender, RoutedEventArgs e)
+        {
+            scaleFactor += 0.2;
+
+            if (scaleFactor > 2)
+                scaleFactor = 0.6;
+
+            ZoomByScale(scaleFactor);
+        }
+
+        private void ZoomByScale(double scale)
+        {
+            // Calculate originX and originY
+            double centerX = 0.0;
+            double centerY = 0.0;
+
+            if (displayFrame.Child is IPaper paper)
+            {
+                centerX = paper.Canvas.ActualWidth * 0.5;
+                centerY = paper.Canvas.ActualHeight * 0.5;
+            }
+
+            displayFrame.LayoutTransform = new ScaleTransform(scale, scale, centerX, centerY);
+            displayFrameScrollViewer.UpdateLayout();
+            displayFrameScrollViewer.ScrollToVerticalOffset((displayFrameScrollViewer.VerticalOffset / scaleFactor) * scale);
+            scaleFactor = scale;
+        }
+
+        #endregion
     }
 
     #region Converter

@@ -36,12 +36,12 @@ namespace Dialogs
             Content = module as UserControl;
         }
 
-        private void DialogWindow_TitleChanged(object? sender, string title)
+        private void DialogWindow_TitleChanged(object sender, string title)
         {
             Title = title;
         }
 
-        private void DialogWindow_ModuleClosed(object? sender, bool result)
+        private void DialogWindow_ModuleClosed(object sender, bool result)
         {
             DialogResult = result;
         }

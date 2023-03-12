@@ -8,8 +8,8 @@ namespace SimpleJournal.Controls
     /// </summary>
     public partial class ImageDesign : UserControl
     {
-        public delegate void changed(int? angle, Stretch? stretch);
-        public event changed OnChanged;
+        public delegate void onChanged(int? angle, Stretch? stretch);
+        public event onChanged OnChanged;
 
         private bool ignoreEvents = false;
 

@@ -13,6 +13,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web;
+using WebhookAPI;
 
 namespace PDF2J
 {
@@ -23,6 +24,7 @@ namespace PDF2J
         private static System.Timers.Timer cleanUPTimer = new System.Timers.Timer();
 
         public static Config GlobalConfig;
+        public static Webhook Webhook;
         private static readonly HttpClient httpClient = new HttpClient();
 
         /// <summary>
@@ -46,6 +48,9 @@ namespace PDF2J
                 string configJson = System.IO.File.ReadAllText(configPath);
                 GlobalConfig = System.Text.Json.JsonSerializer.Deserialize<Config>(configJson);
                 preInitalizationLogMessage = "Successfully initalized config file!";
+
+                if (!string.IsNullOrEmpty(GlobalConfig.WebHookUrl))
+                    Webhook = new Webhook(GlobalConfig.WebHookUrl, "PDF2J");
             }
             else
             {
@@ -141,7 +146,7 @@ namespace PDF2J
                 currentTicket.Status = TicketStatus.Completed;
                 logger.LogInformation($"[{currentTicket.Name}] Completed!");
 
-                await NotifyWebHookAsync($"[PDF2J] Successfully converted a pdf document \"{currentTicket.Name}\"");
+                await Webhook?.PostWebHookAsync(Webhook.LogLevel.Info, $"[PDF2J] Successfully converted a pdf document \"{currentTicket.Name}\"", "Conversation");
             }
             else
             {
@@ -159,28 +164,8 @@ namespace PDF2J
                     System.IO.File.Copy(System.IO.Path.Combine(currentTicket.TempPath, "doc.pdf"), System.IO.Path.Combine(path, "doc.pdf"));
                     System.IO.File.WriteAllText(System.IO.Path.Combine(path, "log.txt"), currentTicket.ErorrMessage);
 
-                    await NotifyWebHookAsync($"[PDF2J] Failed to convert a pdf document \"{currentTicket.Name}\". Ticket-ID: \"{currentTicket.ID}\"");
+                    await Webhook?.PostWebHookAsync(Webhook.LogLevel.Error, $"[PDF2J] Failed to convert a pdf document \"{currentTicket.Name}\". Ticket-ID: \"{currentTicket.ID}\"", "Conversation");
                 }
-            }
-        }
-
-        private static async Task NotifyWebHookAsync(string message)
-        {
-            if (string.IsNullOrEmpty(GlobalConfig.WebHookUrl))
-                return;
-
-            try
-            {
-                string url = GlobalConfig.WebHookUrl;
-                if (url.EndsWith("/"))
-                    url = url.Substring(0, url.Length - 1);
-                url += $"?message={HttpUtility.UrlEncode(message)}";
-
-                await httpClient.GetAsync(url);
-            }
-            catch (Exception ex)
-            {
-                logger.LogWarning($"Failed to notify webhook: {ex.Message}");
             }
         }
 

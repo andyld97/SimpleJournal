@@ -97,6 +97,8 @@
 		<DefineConstants>TRACE;UWP</DefineConstants>
 	</PropertyGroup>
 	<ItemGroup>
+	  <None Remove="resources\arrow_left.png" />
+	  <None Remove="resources\arrow_right.png" />
 	  <None Remove="resources\features.png" />
 	  <None Remove="resources\feedback.png" />
 	  <None Remove="resources\folder.png" />
@@ -121,6 +123,8 @@
 	</ItemGroup>
 	<ItemGroup>
 		<Resource Include="resources\arrow_down.png" />
+		<Resource Include="resources\arrow_left.png" />
+		<Resource Include="resources\arrow_right.png" />
 		<Resource Include="resources\arrow_up.png" />
 		<Resource Include="resources\caslogo.ico" />
 		<Resource Include="resources\features.png" />
@@ -265,18 +269,18 @@
 		<Resource Include="resources\backgrounds\wooden-2.jpg" />
 	</ItemGroup>
 	<ItemGroup>
-		<PackageReference Include="DotnetRuntimeBootstrapper" Version="2.3.1">
+		<PackageReference Include="DotnetRuntimeBootstrapper" Version="2.4.0">
 		  <PrivateAssets>all</PrivateAssets>
 		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
-		<PackageReference Include="Fluent.Ribbon" Version="10.0.0-alpha0197" />
-		<PackageReference Include="Magick.NET-Q16-AnyCPU" Version="12.2.1" />
-		<PackageReference Include="Magick.NET.Core" Version="12.2.1" />
-		<PackageReference Include="MahApps.Metro" Version="3.0.0-alpha0414" />
+		<PackageReference Include="Fluent.Ribbon" Version="10.0.0-alpha0268" />
+		<PackageReference Include="Magick.NET-Q16-AnyCPU" Version="12.3.0" />
+		<PackageReference Include="Magick.NET.Core" Version="12.3.0" />
+		<PackageReference Include="MahApps.Metro" Version="3.0.0-alpha0454" />
 		<PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
-		<PackageReference Include="Microsoft.Web.WebView2" Version="1.0.1466-prerelease" />
-		<PackageReference Include="Newtonsoft.Json" Version="13.0.2-beta2" />
-		<PackageReference Include="Microsoft.Windows.Compatibility" Version="7.0.0" />
+		<PackageReference Include="Microsoft.Web.WebView2" Version="1.0.1671-prerelease" />
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+		<PackageReference Include="Microsoft.Windows.Compatibility" Version="8.0.0-preview.1.23110.8" />
 	</ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\Shared Libraries\SimpleJournal.Common\SimpleJournal.Common.csproj" />

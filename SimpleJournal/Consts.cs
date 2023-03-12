@@ -30,7 +30,7 @@ namespace SimpleJournal
 #else 
         public static readonly string VersionUrl = $"http://simplejournal.ca-soft.net/update.php?version={Consts.NormalVersion:4}";
 #endif
-        public static readonly string FeedbackUrl = "https://simplejournal.ca-soft.net/feedback.php?name={0}&mail={1}&content={2}";
+        public static readonly string FeedbackUrl = "https://simplejournal.ca-soft.net/nfeedback.php";
         public static readonly string HomePageUrl = "https://simplejournal.ca-soft.net";
         public static readonly string HelpUrl = "https://simplejournal.ca-soft.net/faq";
         public static readonly string GhostScriptDownloadUrl = "https://ghostscript.com/releases/gsdnld.html";
@@ -45,7 +45,7 @@ namespace SimpleJournal
         /// <summary>
         /// The .NET version which was used to compile SJ
         /// </summary>
-        public static readonly Version CompiledDotnetVersion = new Version(7, 0, 0);
+        public static readonly Version CompiledDotnetVersion = new Version(7, 0, 3);
 
         /// <summary>
         /// Polling interval for NotificationService

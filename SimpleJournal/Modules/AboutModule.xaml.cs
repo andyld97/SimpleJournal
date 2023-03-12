@@ -9,6 +9,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using SimpleJournal.Documents.UI;
 using SimpleJournal.Helper;
+using Newtonsoft.Json.Linq;
 
 namespace SimpleJournal.Modules
 {
@@ -144,17 +145,18 @@ namespace SimpleJournal.Modules
                 return;
             }
 
-            // Encode to base64 and ensure it can be transmitted via url, so "=" is not allowed in url => use µ instead
-            string nameBase64 = Convert.ToBase64String(System.Text.Encoding.Default.GetBytes(name)).Replace("=", "µ");
-            string mailBase64 = Convert.ToBase64String(System.Text.Encoding.Default.GetBytes(mail)).Replace("=", "µ");
-            string contentBase64 = Convert.ToBase64String(System.Text.Encoding.Default.GetBytes(content)).Replace("=", "µ");
-            string url = string.Format(Consts.FeedbackUrl, nameBase64, mailBase64, contentBase64);
-
+            JObject feedbackInfo = new JObject()
+            {
+                ["name"] = name,
+                ["email"] = mail,
+                ["content"] = content,
+            };
+            
             try
             {
                 using (HttpClient httpClient = new HttpClient())
                 {
-                    var result = await httpClient.GetAsync(url);
+                    var result = await httpClient.PostAsync(Consts.FeedbackUrl, new StringContent(feedbackInfo.ToString(), System.Text.Encoding.UTF8, "application/json"));
 
                     if (result.IsSuccessStatusCode)
                     {
