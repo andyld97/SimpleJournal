@@ -83,13 +83,20 @@
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
 
-                    <Viewbox HorizontalAlignment="Center" VerticalAlignment="Center">
-                        <StackPanel x:Name="PageHolder" />
-                    </Viewbox>
+                    <Border Margin="0,5,0,5" BorderBrush="LightGray" BorderThickness="0 0 0 2">
+                        <ScrollViewer x:Name="displayFrameScrollViewer" Margin="5" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                            <Border x:Name="displayFrame" Background="#e1e1e1" />
+                        </ScrollViewer>
+                    </Border>
                     <Grid Grid.Row="1" Background="{DynamicResource White}" Height="60">
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                             <ui:TransparentImageButton x:Name="ButtonPreviousPagePreview" Click="ButtonPreviousPagePreview_Click" Width="40" Height="40" Margin="5" ToolTip="{x:Static res:Resources.strExportDialog_ButtonPreviousPage}" Image="../../resources/arrow_left.png" />
                             <ui:TransparentImageButton x:Name="ButtonNextPagePreview" Click="ButtonNextPagePreview_Click" Width="40" Height="40" Margin="5" ToolTip="{x:Static res:Resources.strExportDialog_ButtonNextPage}" Image="../../resources/arrow_right.png" />
+                        </StackPanel>
+
+                        <StackPanel Margin="10,0,0,0" Orientation="Horizontal" HorizontalAlignment="Left">
+                            <ui:TransparentImageButton x:Name="ButtonZoomOut" Click="ButtonZoomOut_Click" Width="40" Height="40" Margin="5" Image="../../resources/zoom_out.png" />
+                            <ui:TransparentImageButton x:Name="ButtonZoomIn" Click="ButtonZoomIn_Click" Width="40" Height="40" Margin="5" Image="../../resources/zoom.png" />
                         </StackPanel>
                     </Grid>
                 </Grid>

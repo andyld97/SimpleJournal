@@ -1,5 +1,4 @@
 ﻿using Microsoft.Win32;
-using SimpleJournal.Data;
 using SimpleJournal.Common;
 using System;
 using System.Collections.Generic;
@@ -16,7 +15,6 @@ using SimpleJournal.Documents;
 using SimpleJournal.Documents.UI.Extensions;
 using SimpleJournal.Documents.UI;
 using SimpleJournal.Documents.UI.Controls.Paper;
-using SimpleJournal.Modules;
 using System.Windows.Input;
 
 namespace SimpleJournal.Modules
@@ -73,6 +71,7 @@ namespace SimpleJournal.Modules
         {
             InitializeComponent();
             MouseDown += PageManagmentControl_MouseDown;
+            ZoomByScale(scaleFactor);
         }
 
         public void Initalize(ObservableCollection<IPaper> pages, IPaper currentPage, Window owner)
@@ -394,8 +393,7 @@ namespace SimpleJournal.Modules
         {
             currentPageIndex = index;
             TextPreview.Text = string.Format(Properties.Resources.strExportDialog_PagePreview, currentPageIndex + 1, Pages.Count);
-            PageHolder.Children.Clear();
-            PageHolder.Children.Add(Pages[index]);
+            displayFrame.Child = Pages[index];
         }
 
         private void ButtonPreviousPagePreview_Click(object sender, RoutedEventArgs e)
@@ -416,6 +414,50 @@ namespace SimpleJournal.Modules
                 currentPageIndex++;
 
             ShowPage(currentPageIndex);
+        }
+
+        #endregion
+
+        #region Zoom
+
+        private double scaleFactor = 0.6;
+
+        private void ButtonZoomOut_Click(object sender, RoutedEventArgs e)
+        {
+            scaleFactor -= 0.2;
+
+            if (scaleFactor < 0)
+                scaleFactor = 0.6;
+
+            ZoomByScale(scaleFactor);
+        }
+
+        private void ButtonZoomIn_Click(object sender, RoutedEventArgs e)
+        {
+            scaleFactor += 0.2;
+
+            if (scaleFactor > 2)
+                scaleFactor = 0.6;
+
+            ZoomByScale(scaleFactor);
+        }
+
+        private void ZoomByScale(double scale)
+        {
+            // Calculate originX and originY
+            double centerX = 0.0;
+            double centerY = 0.0;
+
+            if (displayFrame.Child is IPaper paper)
+            {
+                centerX = paper.Canvas.ActualWidth * 0.5;
+                centerY = paper.Canvas.ActualHeight * 0.5;
+            }
+
+            displayFrame.LayoutTransform = new ScaleTransform(scale, scale, centerX, centerY);
+            displayFrameScrollViewer.UpdateLayout();
+            displayFrameScrollViewer.ScrollToVerticalOffset((displayFrameScrollViewer.VerticalOffset / scaleFactor) * scale);
+            scaleFactor = scale;
         }
 
         #endregion
