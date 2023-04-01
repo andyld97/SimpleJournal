@@ -260,7 +260,7 @@ ref PropertyChangeParameters classInstallParams, int classInstallParamsSize);
         /// <param name="classGuid">The class guid of the device. Available in the device manager.</param>
         /// <param name="instanceId">The device instance id of the device. Available in the device manager.</param>
         /// <param name="enable">True to enable, False to disable.</param>
-        /// <remarks>Will throw an exception if the device is not Disableable.</remarks>
+        /// <remarks>Will throw an exception if the device is not disable able.</remarks>
         public static void SetDeviceEnabled(Guid classGuid, string instanceId, bool enable)
         {
             SafeDeviceInfoSetHandle diSetHandle = null;

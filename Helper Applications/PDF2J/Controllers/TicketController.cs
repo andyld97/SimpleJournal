@@ -35,7 +35,7 @@ namespace PDF2J.Controllers
                 return BadRequest($"Ticket {id} not found!");
 
             result.Status = SimpleJournal.Common.TicketStatus.Canceld;
-            _logger.LogInformation($"Ticket {result.Name} was canceld by the user!");
+            _logger.LogInformation($"Ticket {result.Name} was canceled by the user!");
 
             Program.CancelTicket(id);
             return DeleteTicket(id);

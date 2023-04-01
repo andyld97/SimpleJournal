@@ -9,7 +9,7 @@ namespace SimpleJournal.Documents.PDF
         #region Private Members
         private readonly string sourceFilePath;
         private readonly string destinationFileName;
-        private bool isCanceld = false;
+        private bool isCanceled = false;
         private readonly PdfConversationOptions options;
 
         #endregion
@@ -24,7 +24,7 @@ namespace SimpleJournal.Documents.PDF
         public delegate bool OnJournalHasFewerPagesThenRequired(int firstPage, int maxPages);
 
         /// <summary>
-        /// If a page range is sepcified and the journal hasn't enough pages, this should return true if you want to use all pages instead. Otherwise the conversation will be canceld.
+        /// If a page range is specified and the journal hasn't enough pages, this should return true if you want to use all pages instead. Otherwise the conversation will be canceled.
         /// </summary>
         public event OnJournalHasFewerPagesThenRequired JournalHasFewerPagesThenRequired;
 
@@ -48,7 +48,7 @@ namespace SimpleJournal.Documents.PDF
 
         public void Cancel()
         {
-            isCanceld = true;
+            isCanceled = true;
         }
 
         public async Task<List<Journal>> ConvertAsync()
@@ -69,7 +69,7 @@ namespace SimpleJournal.Documents.PDF
                 return null;
             }
 
-            if (isCanceld)
+            if (isCanceled)
                 return null;
 
             // Limit pages to Consts.MaxPDFPagesPerJournal (if more split the document into multiple documents ..100, ..200)
@@ -87,7 +87,7 @@ namespace SimpleJournal.Documents.PDF
                 int journalCounter = 1;
                 for (int p = 0; p < images.Count; p++)
                 {
-                    if (isCanceld)
+                    if (isCanceled)
                         return null;
 
                     var image = images[p];
@@ -111,7 +111,7 @@ namespace SimpleJournal.Documents.PDF
                 int counter = 1;
                 foreach (var journal in journals)
                 {
-                    if (isCanceld)
+                    if (isCanceled)
                         break;
 
                     // Generate fileName
@@ -126,7 +126,7 @@ namespace SimpleJournal.Documents.PDF
                     counter++;
                 }
 
-                if (isCanceld)
+                if (isCanceled)
                     return null;
 
                 Completed?.Invoke(true, null, firstFileName);
@@ -134,7 +134,7 @@ namespace SimpleJournal.Documents.PDF
             }
             else
             {
-                if (isCanceld)
+                if (isCanceled)
                     return null;
 
                 // Create a new journal
@@ -156,7 +156,7 @@ namespace SimpleJournal.Documents.PDF
                             pageTo = nPageTo;                                                
                     }
 
-                    if (isCanceld)
+                    if (isCanceled)
                         return null;
 
                     int start = (!options.UsePageRange ? 0 : pageFrom - 1);
@@ -164,7 +164,7 @@ namespace SimpleJournal.Documents.PDF
 
                     for (int i = start; i < end; i++)
                     {
-                        if (isCanceld)
+                        if (isCanceled)
                             break;
 
                         var image = images[i];
@@ -177,24 +177,24 @@ namespace SimpleJournal.Documents.PDF
                     }
                 }
 
-                if (isCanceld)
+                if (isCanceled)
                     return null;
 
                 // Free resources
                 images.Dispose();
 
-                if (isCanceld)
+                if (isCanceled)
                     return null;
 
                 ProgressChanged?.Invoke(PdfAction.Saving, 100, 0, 0, System.IO.Path.GetFileNameWithoutExtension(destinationFileName) + ".journal");
 
-                if (isCanceld)
+                if (isCanceled)
                     return null;
 
                 // Save the journal and quit (only on success)
                 if (await journal.SaveAsync(destinationFileName, hideStatus: true))
                 {
-                    if (isCanceld)
+                    if (isCanceled)
                         return null;
 
                     Completed?.Invoke(true, null, destinationFileName);
@@ -202,7 +202,7 @@ namespace SimpleJournal.Documents.PDF
                 }
                 else 
                 {
-                    if (isCanceld)
+                    if (isCanceled)
                         return null;
 
                     Completed?.Invoke(false, null, string.Empty);

@@ -1,5 +1,4 @@
 ﻿using System.Reflection;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 // Allgemeine Informationen über eine Assembly werden über die folgenden
@@ -32,5 +31,5 @@ using System.Runtime.InteropServices;
 // Sie können alle Werte angeben oder Standardwerte für die Build- und Revisionsnummern verwenden,
 // übernehmen, indem Sie "*" eingeben:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("0.5.0.5")]
-[assembly: AssemblyFileVersion("0.5.0.5")]
+[assembly: AssemblyVersion(SimpleJournal.Common.Strings.Version)]
+[assembly: AssemblyFileVersion(SimpleJournal.Common.Strings.Version)]

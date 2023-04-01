@@ -229,11 +229,9 @@ namespace SimpleJournal
             }
 
 #if UWP
-            // Do this everytime to ensure the newest SJFileAssoc Update gets applied!
+            // Do this every time to ensure the newest SJFileAssoc Update gets applied!
             GeneralHelper.InstallUWPFileAssoc();
 #endif
-
-
 
             toggleButtons = new Fluent.ToggleButton[]
             {
@@ -423,7 +421,7 @@ namespace SimpleJournal
 
             // Start service
             NotificationService.NotificationServiceInstance = new NotificationService();
-            RefreshNotifications(); // do it manually here, because otheriwse already added notifications won't get displayed!
+            RefreshNotifications(); // do it manually here, because otherwise already added notifications won't get displayed!
             NotificationService.NotificationServiceInstance.OnNotificationAdded += NotificationServiceInstance_OnNotificationAdded;
             NotificationService.NotificationServiceInstance.OnNotifcationRemoved += NotificationServiceInstance_OnNotifcationRemoved;
             NotificationService.NotificationServiceInstance.Start();
@@ -606,7 +604,7 @@ namespace SimpleJournal
                     DeleteAutoSaveBackup();
             }
 
-            // Start timer just after the dialog is appeard (or not)
+            // Start timer just after the dialog is appeared (or not)
             autoSaveBackupTimer.Interval = TimeSpan.FromMinutes(Settings.Instance.AutoSaveIntervalMinutes);
             autoSaveBackupTimer.Tick += AutoSaveBackupTimer_Tick;
             autoSaveBackupTimer.Start();
@@ -660,9 +658,9 @@ namespace SimpleJournal
                 }
             }
 
-            // ToDo: *** Slighty notification that autosave failed (if result == FALSE)?
+            // ToDo: *** Slightly notification that autosave failed (if result == FALSE)?
 
-            // Delete the old backup only if the new one was successfull
+            // Delete the old backup only if the new one was successful
             if (!string.IsNullOrEmpty(lastBackupFileName) && result)
             {
                 try
@@ -682,7 +680,7 @@ namespace SimpleJournal
         public void DeleteAutoSaveBackup(bool onClosing = false)
         {
             // Delete the backup with this ProcessID
-            // Get the backup with this task id - it's obviously the last one, this instace has created!
+            // Get the backup with this task id - it's obviously the last one, this instance has created!
             if (!string.IsNullOrEmpty(lastBackupFileName) && System.IO.File.Exists(lastBackupFileName))
             {
                 try
@@ -725,7 +723,7 @@ namespace SimpleJournal
         private void Dispatcher_UnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
         {
             // MessageBox.Show(e.Exception.ToString());
-            MessageBox.Show($"{Properties.Resources.strUnexceptedFailure}{Environment.NewLine}{Environment.NewLine}{e.Exception.Message}", Properties.Resources.strUnexceptedFailureTitle, MessageBoxButton.OK, MessageBoxImage.Error);
+            MessageBox.Show($"{Properties.Resources.strUnexceptedFailure}{Environment.NewLine}{Environment.NewLine}{e.Exception.Message}", Properties.Resources.strUnexpectedFailureTitle, MessageBoxButton.OK, MessageBoxImage.Error);
         }
 
         private async void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
@@ -748,14 +746,14 @@ namespace SimpleJournal
 #endif
             }
 
-            MessageBox.Show($"{Properties.Resources.strUnexceptedFailure}{Environment.NewLine}{Environment.NewLine}{message}{Environment.NewLine}{Environment.NewLine}{Properties.Resources.strUnexceptedFailureLine1}", Properties.Resources.strUnexceptedFailureTitle, MessageBoxButton.OK, MessageBoxImage.Error);
+            MessageBox.Show($"{Properties.Resources.strUnexceptedFailure}{Environment.NewLine}{Environment.NewLine}{message}{Environment.NewLine}{Environment.NewLine}{Properties.Resources.strUnexceptedFailureLine1}", Properties.Resources.strUnexpectedFailureTitle, MessageBoxButton.OK, MessageBoxImage.Error);
 
             // Try at least to create a backup - if SJ crashes - the user can restore the backup and everything should be fine though.
             await CreateBackup();
         }
 #endregion
 
-        #region Determine which Canvas is the last modifed while scrolling
+        #region Determine which Canvas is the last modified while scrolling
 
         private void mainScrollView_ScrollChanged(object sender, ScrollChangedEventArgs e)
         {
@@ -795,7 +793,7 @@ namespace SimpleJournal
                         }
                         else if (DrawingCanvas.LastModifiedCanvas.GetSelectedElements().Count > 0)
                         {
-                            // Reactive siderbar
+                            // Reactive sidebar
                             DrawingCanvas_ChildElementsSelected(DrawingCanvas.LastModifiedCanvas.GetSelectedElements().ToArray());
                             pnlSidebar.Visibility = Visibility.Visible;
                         }
@@ -823,7 +821,7 @@ namespace SimpleJournal
 
             this.elements = elements;
 
-            // Show sidebar only if there're elements to show (and also ignore lines)
+            // Show sidebar only if there are elements to show (and also ignore lines)
             if (elements.Length == 0 || elements.Where(p => p is Line).Count() == elements.Length)
             {
                 pnlSidebar.Visibility = Visibility.Hidden;
@@ -1607,7 +1605,7 @@ namespace SimpleJournal
             else if (currentTool == Tools.TextMarker)
                 page.Canvas.DefaultDrawingAttributes = currentTextMarkerAttributes;
 
-            // Also apply rubber apperance to new page
+            // Also apply rubber appearance to new page
             else if (currentTool == Tools.RubberFree || currentTool == Tools.RubberStrokes)
                 ApplyRubberSizeAndShape(page.Canvas);
             else if (currentTool == Tools.Recognization)
@@ -1697,17 +1695,17 @@ namespace SimpleJournal
                 NonActiveBorderBrush = null;
         }
 
-        // Muste be public for accessing via singleton from the settings
+        // Must be public for accessing via singleton from the settings
         public void UpdatePenButtons(Pen[] pens = null, bool reset = false)
         {
             if (reset)
             {
-                // Initalize pens
+                // Initialize pens
                 var defaultSize = Documents.UI.Consts.StrokeSizes[0];
                 for (int i = 0; i < currentPens.Length; i++)
                     currentPens[i] = new Pen(Consts.PEN_COLORS[i], defaultSize.Width, defaultSize.Height);
 
-                // Initalize text marker (reset)
+                // Initialize text marker (reset)
                 UpdateTextMarkerAttributes(true);
             }
 
@@ -1726,7 +1724,7 @@ namespace SimpleJournal
             for (int i = 0; i < Consts.AMOUNT_PENS; i++)
                 penTemplates[i].LoadPen(currentPens[i]);
 
-            // Refresh pathes displayed in the menu
+            // Refresh paths displayed in the menu
             Path[] pathes = new Path[] { pathPen1, pathPen2, pathPen3, pathPen4 };
             for (int i = 0; i < currentPens.Length; i++)
             {
@@ -1798,7 +1796,7 @@ namespace SimpleJournal
 
                 wasMaximized = this.WindowState == WindowState.Maximized;
 
-                // Make full screeen
+                // Make fullscreen
                 this.WindowState = WindowState.Maximized;
                 this.WindowStyle = WindowStyle.None;
             }
@@ -1939,10 +1937,10 @@ namespace SimpleJournal
             // Refresh Text marker
             UpdateTextMarkerAttributes();
 
-            // Refresh recently openend documents
+            // Refresh recently opened documents
             RefreshRecentlyOpenedFiles();
 
-            // Refresh notifcationbar button
+            // Refresh notification-bar button
             UpdateNotificationToolBarAndButton();
 
             // Refresh ruler mode
@@ -1951,7 +1949,7 @@ namespace SimpleJournal
             if (CurrentJournalPages.Count == 1 && CurrentJournalPages[0].Canvas.IsEmpty)
             {
                 // Switch to new format
-                currentJournal = null; // enusure old settings are removed cause the document is empty so we want to apply the new settings in this case!
+                currentJournal = null; // ensure old settings are removed cause the document is empty so we want to apply the new settings in this case!
                 var newPage = GeneratePage(pattern: GetPattern(Settings.Instance.PaperType));
                 CurrentJournalPages.Clear();
                 this.pages.Children.Clear();
@@ -1998,7 +1996,7 @@ namespace SimpleJournal
             InkCanvasEditingMode currentMode = ConvertTool(currentTool);
             this.currentTool = currentTool;
 
-            // Disapply old tools 
+            // Dis-apply old tools 
             if (oldTool == Tools.Ruler && currentTool != Tools.Ruler)
             {
                 rulerWasSelected = false;
@@ -2806,7 +2804,7 @@ namespace SimpleJournal
                     if (DrawingCanvas.LastModifiedCanvas.Strokes != null && DrawingCanvas.LastModifiedCanvas.Strokes.Count > 0)
                         DrawingCanvas.LastModifiedCanvas.Strokes.Clear();
 
-                    // This is a workaround for clearing childrens because .Clear() doesn't work
+                    // This is a workaround for clearing children because .Clear() doesn't work
                     DrawingCanvas.LastModifiedCanvas.Children.ClearAll(DrawingCanvas.LastModifiedCanvas);
                     DrawingCanvas.LastModifiedCanvas.Select(new StrokeCollection());
 
@@ -2981,7 +2979,7 @@ namespace SimpleJournal
 
             if (!Settings.Instance.UseAutoSave)
             {
-                // Deactive AutoSave Timer
+                // Deactivate AutoSave Timer
                 autoSaveBackupTimer.Stop();
             }
             else
@@ -3109,7 +3107,7 @@ namespace SimpleJournal
                 }
                 else if (result == MessageBoxResult.Yes)
                 {
-                    // Ensure that closing is canceld to successfully saving the document, if it's finished "Close()" is
+                    // Ensure that closing is canceled to successfully saving the document, if it's finished "Close()" is
                     // called again, but this event is ignored then and the app gets closed - related to https://stackoverflow.com/a/49013345/6237448
                     e.Cancel = true;
                     cancelClosing = true;
@@ -3369,7 +3367,7 @@ namespace SimpleJournal
                         jp.PaperPattern = paper.Type;
                         jp.Data = ms.ToArray();
 
-                        // Check for additional ressources
+                        // Check for additional resources
                         if (currentCanvas.Children.Count > 0)
                         {
                             foreach (UIElement element in currentCanvas.Children)
@@ -3617,10 +3615,9 @@ namespace SimpleJournal
             GC.Collect();
         }
 
+        #endregion
 
-#endregion
-
-        #region Pagemanagment Dialog
+        #region Page-Management-Dialog
 
         private async Task ApplyPageManagmentDialog(List<JournalPage> result)
         {
@@ -3728,7 +3725,7 @@ namespace SimpleJournal
         private void MenuBackstageEditPages_MouseDown(object sender, MouseButtonEventArgs e)
         {
             // Important: This event will also trigger if the user clicks in some free areas (for example in the ListBox)
-            // This will lead to re-initalization during this "dialog" (See Controls\PageManagmentControl.xaml.cs)
+            // This will lead to re-initialization during this "dialog" (See Controls\PageManagmentControl.xaml.cs)
             PageManagementControl.Initalize(CurrentJournalPages.ToList(), GetPattern(PaperType.Chequered) as ChequeredPattern, GetPattern(PaperType.Dotted) as DottedPattern, GetPattern(PaperType.Ruled) as RuledPattern, this);
         }
 

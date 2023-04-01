@@ -10,7 +10,7 @@ namespace SimpleJournal.Common
         public static readonly string DefaultLanguage = "en";
     
         /// <summary>
-        /// Returns the given langauge (if it's supported) otherwise it returns the default langauge
+        /// Returns the given language (if it's supported) otherwise it returns the default language
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>

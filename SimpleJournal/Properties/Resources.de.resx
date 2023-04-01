@@ -610,7 +610,7 @@ Vielen Dank ...
   <data name="strFeedbackDescription" xml:space="preserve">
     <value>Haben Sie einen Fehler gefunden? Was würden Sie verbessern? 
 Ich würde mich über Ihr Feedback freuen!
-Ihre Daten werden nicht an Dritte weitergegeben, sondern auschließlich dazu verwendet, um Ihnen eventuell eine Rückmeldung zu geben.</value>
+Ihre Daten werden nicht an Dritte weitergegeben, sondern ausschließlich dazu verwendet, um Ihnen eventuell eine Rückmeldung zu geben.</value>
     <comment>About.xaml</comment>
   </data>
   <data name="strFeedbackSent" xml:space="preserve">
@@ -626,7 +626,7 @@ Ihre Daten werden nicht an Dritte weitergegeben, sondern auschließlich dazu ver
     <comment>*</comment>
   </data>
   <data name="strFitToCurveDescription" xml:space="preserve">
-    <value>Gibt an, ob die Bézierglättung zum Rendern verwendet werden soll. Nachdem eine Kurve gezeichnet wurde, wird diese geglättet und sieht nicht mehr kantig aus (oft werden Kurven sehr kantig, vorallem wenn man mit der Maus zeichnet, dann ist diese Einstellung sinnvoll).</value>
+    <value>Gibt an, ob die Bézierglättung zum Rendern verwendet werden soll. Nachdem eine Kurve gezeichnet wurde, wird diese geglättet und sieht nicht mehr kantig aus (oft werden Kurven sehr kantig, vor allem wenn man mit der Maus zeichnet, dann ist diese Einstellung sinnvoll).</value>
   </data>
   <data name="strFitToCurveTitle" xml:space="preserve">
     <value>Bézierglättung verwenden</value>
@@ -966,7 +966,7 @@ Klicken Sie auf Nein, um diesen Hinweis weiterhin zu erhalten!</value>
     <comment>MainWindow.xaml</comment>
   </data>
   <data name="strPasteDescription" xml:space="preserve">
-    <value>Klicken Sie auf Einfügen und dann klicken Sie auf eine belibige Position und dort werden die Elemente aus der Zwischenablage dann eingefügt</value>
+    <value>Klicken Sie auf Einfügen und dann klicken Sie auf eine beliebige Position und dort werden die Elemente aus der Zwischenablage dann eingefügt</value>
     <comment>MainWindow.xaml</comment>
   </data>
   <data name="strPatchDownload" xml:space="preserve">
@@ -1054,11 +1054,11 @@ Klicken Sie auf Nein, um diesen Hinweis weiterhin zu erhalten!</value>
     <comment>WaitingDialog.xaml</comment>
   </data>
   <data name="strPlot" xml:space="preserve">
-    <value>Kooardinatensystem</value>
+    <value>Koordinatensystem</value>
     <comment>*</comment>
   </data>
   <data name="strPlotDrawNegativeAxis" xml:space="preserve">
-    <value>Negative Achsen zeichen</value>
+    <value>Negative Achsen zeichnen</value>
     <comment>*</comment>
   </data>
   <data name="strPolygon" xml:space="preserve">
@@ -1122,7 +1122,7 @@ Klicken Sie auf Nein, um diesen Hinweis weiterhin zu erhalten!</value>
     <comment>MainWindow.xaml</comment>
   </data>
   <data name="strRemoveObjectsDescription" xml:space="preserve">
-    <value>Ausgewähte Objekte löschen</value>
+    <value>Ausgewählte Objekte löschen</value>
     <comment>MainWindow.xaml</comment>
   </data>
   <data name="strResetPens" xml:space="preserve">
@@ -1182,7 +1182,7 @@ Klicken Sie auf Nein, um diesen Hinweis weiterhin zu erhalten!</value>
     <comment>MainWindow.xaml</comment>
   </data>
   <data name="strSelectDescription" xml:space="preserve">
-    <value>Wählen Sie einen belibigen Bereich aus, um ihn zu bearbeiten</value>
+    <value>Wählen Sie einen beliebigen Bereich aus, um ihn zu bearbeiten</value>
     <comment>MainWindow.xaml</comment>
   </data>
   <data name="strSelectedDocumentNotExisting" xml:space="preserve">
@@ -1254,7 +1254,7 @@ Klicken Sie auf Nein, um diesen Hinweis weiterhin zu erhalten!</value>
     <comment>*</comment>
   </data>
   <data name="strSettingsDisableTouchUWP4" xml:space="preserve">
-    <value>1) Führen Sie das Skript als Administartor aus!</value>
+    <value>1) Führen Sie das Skript als Administrator aus!</value>
     <comment>*</comment>
   </data>
   <data name="strSettingsDisableTouchUWP5" xml:space="preserve">
@@ -1270,7 +1270,7 @@ Klicken Sie auf Nein, um diesen Hinweis weiterhin zu erhalten!</value>
     <comment>*</comment>
   </data>
   <data name="strSettingsResetPensTooltip" xml:space="preserve">
-    <value>Setzt die Stifte auf Ihre übersprüngliche Einstellung zurück</value>
+    <value>Setzt die Stifte auf Ihre ursprüngliche Einstellung zurück</value>
     <comment>*</comment>
   </data>
   <data name="strSettingsSetFileAssoc" xml:space="preserve">
@@ -1294,7 +1294,7 @@ Klicken Sie auf Nein, um diesen Hinweis weiterhin zu erhalten!</value>
     <comment>*</comment>
   </data>
   <data name="strSettingsTouchScreenExplanationNormal4" xml:space="preserve">
-    <value>2) Das Powershell-Skript muss erlabut werden (führen Sie dazu den folgenden Befehl in Powershell aus und bestätigen ihn):</value>
+    <value>2) Das Powershell-Skript muss erlaubt werden (führen Sie dazu den folgenden Befehl in Powershell aus und bestätigen ihn):</value>
     <comment>*</comment>
   </data>
   <data name="strSetupCompleted" xml:space="preserve">
@@ -1507,7 +1507,7 @@ Hier möchte ich Ihnen noch ein paar wichtige Hinweise geben, die Ihnen helfen w
     <comment>MainWindow.xaml</comment>
   </data>
   <data name="strTextToHightlight" xml:space="preserve">
-    <value>Dies ist ein zu makierender Text</value>
+    <value>Dies ist ein zu markierender Text</value>
     <comment>SetupDialog.xaml</comment>
   </data>
   <data name="strTheme" xml:space="preserve">
@@ -1551,7 +1551,7 @@ Hier möchte ich Ihnen noch ein paar wichtige Hinweise geben, die Ihnen helfen w
     <comment>MainWindow.xaml</comment>
   </data>
   <data name="strUnexceptedFailure" xml:space="preserve">
-    <value>Es ist ein unerwarterer Fehler aufgetreten!</value>
+    <value>Es ist ein unerwarteter Fehler aufgetreten!</value>
     <comment>*</comment>
   </data>
   <data name="strUnexceptedFailureLine1" xml:space="preserve">
@@ -1579,7 +1579,7 @@ Hier möchte ich Ihnen noch ein paar wichtige Hinweise geben, die Ihnen helfen w
     <comment>*</comment>
   </data>
   <data name="strUnsupportedFormat" xml:space="preserve">
-    <value>Das Format wird derzeit nicht unterstüzt, bitte stellen Sie sicher, dass Sie ein gültiges Bild oder einen Text in der Zwischenablage haben!</value>
+    <value>Das Format wird derzeit nicht unterstützt, bitte stellen Sie sicher, dass Sie ein gültiges Bild oder einen Text in der Zwischenablage haben!</value>
     <comment>*</comment>
   </data>
   <data name="strUpdateDialogDownload" xml:space="preserve">
@@ -1679,7 +1679,7 @@ Hier möchte ich Ihnen noch ein paar wichtige Hinweise geben, die Ihnen helfen w
     <comment>*</comment>
   </data>
   <data name="strWantToLoadNewJournalTitle" xml:space="preserve">
-    <value>Änderungen verwefen?</value>
+    <value>Änderungen verwerfen?</value>
     <comment>*</comment>
   </data>
   <data name="strWatingText" xml:space="preserve">
@@ -1727,11 +1727,11 @@ Hier möchte ich Ihnen noch ein paar wichtige Hinweise geben, die Ihnen helfen w
     <comment>MainWindow.xaml</comment>
   </data>
   <data name="strSettings_DeactivateTouchScreenIfInForeground_Explanation" xml:space="preserve">
-    <value>Deaktivert den Touchscreen, wenn SimpleJournal im Vordergrund ist, aber aktiviert ihn auch sobald SimpleJournal nicht mehr im Vordergrund ist. Diese Option ist nützlich, damit der Touchscreen außerhalb von SimpleJournal weiterhin verwendet werden kann, um z.B. in PDF-Dokumenten zu scrollen!</value>
+    <value>Deaktiviert den Touchscreen, wenn SimpleJournal im Vordergrund ist, aber aktiviert ihn auch sobald SimpleJournal nicht mehr im Vordergrund ist. Diese Option ist nützlich, damit der Touchscreen außerhalb von SimpleJournal weiterhin verwendet werden kann, um z.B. in PDF-Dokumenten zu scrollen!</value>
     <comment>*</comment>
   </data>
   <data name="strSettings_DisableTouchscreenIfInForeground" xml:space="preserve">
-    <value>Windows Touchscreen nur deaktiveren, wenn SimpleJournal im Vordergrund ist</value>
+    <value>Windows Touchscreen nur deaktivieren, wenn SimpleJournal im Vordergrund ist</value>
     <comment>SettingsDialog.xaml</comment>
   </data>
   <data name="strTouchScreen" xml:space="preserve">
@@ -1748,7 +1748,7 @@ Hier möchte ich Ihnen noch ein paar wichtige Hinweise geben, die Ihnen helfen w
     <value>Fügt bevor der aktuellen Seite eine gepunktete Seite ein</value>
   </data>
   <data name="strPageManagmentToggleButtonDotted" xml:space="preserve">
-    <value>Ändert die aktuelle Seite auf das Papierformat: Dotted (Gepunkted)</value>
+    <value>Ändert die aktuelle Seite auf das Papierformat: Dotted (Gepunktet)</value>
   </data>
   <data name="strSettingsDialogTouchDeviceManagerDescription" xml:space="preserve">
     <value>Aufgrund von fehlenden Berechtigungen ist es in dieser Version leider nicht möglich, den Touchscreen automatisch zu deaktivieren. Daher gibt des hier den Touchscreen Device Manager zum Download. Damit können Sie den Touchscreen vor dem Arbeiten deaktivieren und danach wieder aktivieren (sofern dies notwendig ist). Das Programm funktioniert analog zum Geräte-Manager und benötigt Administrator-Rechte!</value>
@@ -1867,7 +1867,7 @@ Hier möchte ich Ihnen noch ein paar wichtige Hinweise geben, die Ihnen helfen w
     <value>Als PDF speichern ...</value>
   </data>
   <data name="strPrintingError" xml:space="preserve">
-    <value>Es ist ein kritischer Fehler beim Drucken aufgetretem</value>
+    <value>Es ist ein kritischer Fehler beim Drucken aufgetreten</value>
   </data>
   <data name="strWaitingDialogCurrentProgress" xml:space="preserve">
     <value>Aktueller Fortschritt:</value>

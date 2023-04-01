@@ -20,7 +20,7 @@ namespace SimpleJournal.Documents.UI.Actions
         {
             owner = canvas ?? throw new ArgumentNullException("canvas");
 
-            // Hang on to canvas adding/remove strokes/childs event
+            // Hang on to canvas adding/remove strokes/children event
             owner.OnChanged += Owner_OnChanged;
         }
 

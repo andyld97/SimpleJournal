@@ -33,7 +33,7 @@ namespace SimpleJournal.Data
 
         public static Pen[] Load()
         {
-            // Initalize pens
+            // Initialize pens
             Pen[] pens = new Pen[Consts.AMOUNT_PENS];
             var firstSize = Documents.UI.Consts.StrokeSizes.FirstOrDefault();
             for (int i = 0; i < Consts.AMOUNT_PENS; i++)

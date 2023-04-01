@@ -54,7 +54,7 @@ namespace SimpleJournal.Documents.UI
         public Format PaperFormat { get; set; } = Format.A4;
 
         /// <summary>
-        /// Determines in which state SimpleJournal schould start
+        /// Determines in which state SimpleJournal should start
         /// </summary>
         public WindowState WindowState { get; set; } = WindowState.Minimized;
 
@@ -129,7 +129,7 @@ namespace SimpleJournal.Documents.UI
         public bool UseFitToCurve { get; set; } = false;
 
         /// <summary>
-        /// Determines if the Fluent.Ribbon Backstackage Menu (true) is used, or the default application menu
+        /// Determines if the Fluent.Ribbon Backstage Menu (true) is used, or the default application menu
         /// </summary>
         public bool UseNewMenu { get; set; } = true;
 
@@ -144,12 +144,12 @@ namespace SimpleJournal.Documents.UI
         public bool UserHasSelectedHDScreen { get; set; } = true;
 
         /// <summary>
-        /// Determines if the darkmode is active or not
+        /// Determines if the dark mode is active or not
         /// </summary>
         public bool UseDarkMode { get; set; } = false;
 
         /// <summary>
-        /// The theme which is used in SimpleJournal (hard to describe, because Theme is enogugh)
+        /// The theme which is used in SimpleJournal (hard to describe, because Theme is enough)
         /// </summary>
         public string Theme { get; set; } = "Cobalt"; // Cobalt is the default one used in SJ
 

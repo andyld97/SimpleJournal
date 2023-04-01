@@ -2,7 +2,6 @@
 using SimpleJournal;
 using SimpleJournal.Common;
 using SimpleJournal.Common.Data;
-using SimpleJournal.Dialogs;
 using SimpleJournal.Documents.UI;
 using SimpleJournal.Modules;
 using System;
@@ -14,7 +13,7 @@ using Consts = SimpleJournal.Consts;
 namespace Notifications
 {
     /// <summary>
-    /// Notification if a new SimpleJournal Update is avaialbe
+    /// Notification if a new SimpleJournal Update is available
     /// </summary>
     public class UpdateNotification : Notification
     {
@@ -97,8 +96,8 @@ namespace Notifications
         public override async Task<bool?> CheckOccuranceAsync()
         {
             // Without this part the notification would be removed if there is not internet connection
-            // and would be added again if the interent connection is back.
-            // But since we know there is a new version avaialbe the notification should stay as long as the version gets updated!
+            // and would be added again if the internet connection is back.
+            // But since we know there is a new version available the notification should stay as long as the version gets updated!
             if (!GeneralHelper.IsConnectedToInternet())
                 return null;
 

@@ -66,7 +66,7 @@ namespace PDF2J.Controllers
             if (isVersionTooOld)
                 return BadRequest(Properties.Resources.ResourceManager.GetString(nameof(Properties.Resources.strVersionTooOld), language));
 
-            // Create the the working directory for this printing ticket
+            // Create the working directory for this printing ticket
             FileSystemHelper.TryCreateDirectory(ticket.TempPath);
 
             // Copy the file to temp

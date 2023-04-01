@@ -124,7 +124,7 @@ namespace SimpleJournal.Dialogs
 
         private void InitalizePens()
         {
-            // Initalize pens
+            // Initialize pens
             pens = Pen.Instance;
 
             btnPen1.DropDown = penTemplates[0];

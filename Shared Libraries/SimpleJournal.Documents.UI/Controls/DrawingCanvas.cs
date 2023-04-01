@@ -151,7 +151,7 @@ namespace SimpleJournal.Documents.UI.Controls
             Strokes.StrokesChanged += Strokes_StrokesChanged;
             SelectionChanged += DrawingCanvas_SelectionChanged;
 
-            // Try to get more shapeness
+            // Try to get more sharpness
             UseLayoutRounding = true;
             SnapsToDevicePixels = true;
 
@@ -163,7 +163,7 @@ namespace SimpleJournal.Documents.UI.Controls
 
         public void Dispose()
         {
-            // Unassign all events to ensure gc can clean up 
+            // Detach all events to ensure gc can clean up 
             OnChanged = null;
             OnChangedDocumentState = null;
             OnInsertPositionIsKnown = null;
@@ -245,7 +245,7 @@ namespace SimpleJournal.Documents.UI.Controls
         #region Public Methods (For setting canvas-drawing-mode)
 
         /// <summary>
-        /// Call this on load, because childs were added can't be removed with undo
+        /// Call this on load, because children were added (can't be removed with undo)
         /// </summary>
         /// <param name="child"></param>
         public void LoadChildren(UIElement child)
@@ -442,7 +442,7 @@ namespace SimpleJournal.Documents.UI.Controls
 
         #endregion
 
-        #region Shape and Text Recognization
+        #region Shape and Text Recognition
 
         public static string[] StartAnalyzingProcess(StrokeCollection sc, Operation operation, string[]? additionalArguments = null)
         {
@@ -867,8 +867,8 @@ namespace SimpleJournal.Documents.UI.Controls
                         var stroke = new System.Windows.Ink.Stroke(pointCollection) { DrawingAttributes = DefaultDrawingAttributes.Clone() };
                         Strokes.Add(stroke);
 
-                        // Make sure Action-Manager is notfiyed about this change, because he can't be notifyed when the user is moving the mouse,
-                        // because then everytime when a stroke is added and removed it will be notified.
+                        // Make sure Action-Manager is notified about this change, because he can't be notified when the user is moving the mouse,
+                        // because then every time when a stroke is added and removed it will be notified.
                         OnChanged?.Invoke(new StrokeCollection() { stroke }, null, ActionType.AddedStrokes);
 
                         // Make sure save dialog will also ask only if a stroke was drown in ruler mode
@@ -1190,7 +1190,7 @@ namespace SimpleJournal.Documents.UI.Controls
             if (e.Key == Key.Delete && GetSelectedElements().Count > 0)
             {
                 e.Handled = true;
-                // Handle to make sure object will disapear from object bar (side bar)
+                // Handle to make sure object will disappear from object bar (side bar)
                 List<UIElement> temp = new List<UIElement>();
                 foreach (UIElement child in GetSelectedElements())
                 {

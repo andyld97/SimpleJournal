@@ -28,7 +28,7 @@ namespace Helper
 
             if (!GeneralHelper.IsConnectedToInternet())
             {
-                // Even if the cache is expired (if it has valid value) return it, to prevent overriting valids results due to a lost connection!
+                // Even if the cache is expired (if it has valid value) return it, to prevent overwriting valid results due to a lost connection!
                 if (isCacheExpired && cache != null && cache.Result != SimpleJournal.Common.UpdateResult.Unknown)
                     return cache;
 

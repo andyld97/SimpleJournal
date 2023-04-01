@@ -33,7 +33,7 @@
         Text = 1,
 
         /// <summary>
-        /// A rectangle, circle, ellipse, poligon  or something else which derrivered from shape
+        /// A rectangle, circle, ellipse, polygon  or something else which derived from shape
         /// </summary>
         Shape = 2,
 
@@ -57,7 +57,7 @@
     public enum PaperType
     {
         Blanco,
-        Chequered, // ToDo: *** Rename to Chequered (old: Chequeued)
+        Chequered,
         Ruled,
         Dotted,
         Custom

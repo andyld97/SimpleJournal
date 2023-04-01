@@ -96,7 +96,6 @@ namespace SimpleJournal.Documents.UI.Helper
             return rect.IntersectsWith(bounds);
         }
 
-
         public static double CalculateUserVisibleM2(FrameworkElement element, FrameworkElement container)
         {
             if (!element.IsVisible)
@@ -109,9 +108,7 @@ namespace SimpleJournal.Documents.UI.Helper
             test.Intersect(bounds);
 
             return test.Width * test.Height;
-
         }
-
 
         /// <summary>
         /// Creates a clone of input element
@@ -206,7 +203,7 @@ namespace SimpleJournal.Documents.UI.Helper
         }
 
         /// <summary>
-        /// Removes orignal renderTransform and replace it that there is just a RenderTransform and normal properties
+        /// Removes original renderTransform and replace it that there is just a RenderTransform and normal properties
         /// </summary>
         /// <param name="element"></param>
         /// <param name="can"></param>
@@ -232,7 +229,7 @@ namespace SimpleJournal.Documents.UI.Helper
                 // Get current position of elem in the InkCanvas
                 Point point = DeterminePointFromUIElement(element, can);
 
-                // Reset old transform to replace it with roation angle with origin (0,0)!
+                // Reset old transform to replace it with rotation angle with origin (0,0)!
                 if (element.RenderTransform is not RotateTransform)
                 {
                     element.RenderTransform = new RotateTransform(angleBetween);
@@ -258,8 +255,8 @@ namespace SimpleJournal.Documents.UI.Helper
 
         private static double CalculeAngle(Point start, Point arrival)
         {
-            var deltaX = Math.Pow((arrival.X - start.X), 2);
-            var deltaY = Math.Pow((arrival.Y - start.Y), 2);
+            // var deltaX = Math.Pow((arrival.X - start.X), 2);
+            // var deltaY = Math.Pow((arrival.Y - start.Y), 2);
 
             var radian = Math.Atan2((arrival.Y - start.Y), (arrival.X - start.X));
             var angle = (radian * (180 / Math.PI) + 360) % 360;

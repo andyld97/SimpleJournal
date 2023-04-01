@@ -4,7 +4,7 @@ using System.Xml.Serialization;
 namespace SimpleJournal.Documents.Resources
 {
     /// <summary>
-    /// A journal image resouce
+    /// A journal image resource
     /// </summary>
     public class JournalImage : JournalResource
     {

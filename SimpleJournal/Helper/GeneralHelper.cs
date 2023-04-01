@@ -99,7 +99,7 @@ namespace SimpleJournal
 
         #endregion
 
-        #region .NET Autodetect/Autoupdate
+        #region .NET Auto detect/Autoupdate
         /// <summary>
         /// Determines the win-x86 or win-x64 platform
         /// </summary>
@@ -116,7 +116,7 @@ namespace SimpleJournal
         /// <returns></returns>
         public static async Task<string> DetermineDotnetDesktpRuntimeDownloadLink()
         {
-            // Determine lnk
+            // Determine link
             using (HttpClient client = new HttpClient())
             {
                 string releasesJson = await client.GetStringAsync(Consts.DotnetReleaseInfoUrl);
@@ -219,7 +219,7 @@ namespace SimpleJournal
         }
 
         /// <summary>
-        /// Create a screenshof of UI element
+        /// Create a screenshot of an UI element
         /// </summary>
         /// <param name="element">The element to copy.</param>
         public static RenderTargetBitmap CreateScreenshotOfElement(FrameworkElement element)

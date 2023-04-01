@@ -160,7 +160,7 @@ namespace SimpleJournal.Modules
 
                     if (result.IsSuccessStatusCode)
                     {
-                        // If feedback was sended successfully, clear it
+                        // If feedback was sent successfully, clear it
                         txtFeedback.Text = string.Empty;
 
                         MessageBox.Show(Properties.Resources.strFeedbackSent, Properties.Resources.strSuccess, MessageBoxButton.OK, MessageBoxImage.Information);

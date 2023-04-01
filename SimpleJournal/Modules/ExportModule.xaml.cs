@@ -131,7 +131,7 @@ namespace SimpleJournal.Modules
 
         private void PageManagmentControl_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            // Fix for triggering re-initalization of this control!
+            // Fix for triggering re-initialization of this control!
             // No mouse down events will be redirected to the parent of this control.
             e.Handled = true;
         }
@@ -276,7 +276,7 @@ namespace SimpleJournal.Modules
 
                             journalPage.Data = ms.ToArray();
 
-                            // Check for additional ressources
+                            // Check for additional resources
                             if (currentCanvas.Children.Count > 0)
                             {
                                 foreach (UIElement element in currentCanvas.Children)

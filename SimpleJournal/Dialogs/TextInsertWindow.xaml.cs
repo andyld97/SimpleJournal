@@ -15,11 +15,6 @@ namespace SimpleJournal
             InitializeComponent();
         }
 
-        private void btnChangeFont_Click(object sender, RoutedEventArgs e)
-        {
-            // ToDo: Implement later
-        }
-
         private void btnOK_Click(object sender, RoutedEventArgs e)
         {
             DismissDialog();
