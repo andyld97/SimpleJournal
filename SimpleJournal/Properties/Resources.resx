@@ -229,7 +229,8 @@ Many thanks ...
   </data>
   <data name="strBackwards" xml:space="preserve">
     <value>Undo</value>
-    <comment>MainWindow.xaml</comment>
+    
+    <comment>@MutedRule(PunctuationTail)</comment>
   </data>
   <data name="strBackwardsDescription" xml:space="preserve">
     <value>Undos the last action</value>
@@ -657,7 +658,7 @@ Your data will not be shared with third parties, but will only be used to give y
   </data>
   <data name="strForward" xml:space="preserve">
     <value>Redo</value>
-    <comment>MainWindow.xaml</comment>
+    <comment>MainWindow.xaml@MutedRule(PunctuationTail)</comment>
   </data>
   <data name="strForwardDescription" xml:space="preserve">
     <value>Redos the last action</value>
@@ -1573,10 +1574,6 @@ Here I would like to give you a few more important hints that will help you to u
     <value>SimpleJournal will now create a backup, please wait a moment. Afterwards the program will be closed!</value>
     <comment>MainWindow.xaml.cs</comment>
   </data>
-  <data name="strUnexpectedFailureTitle" xml:space="preserve">
-    <value>Unexpected failure!</value>
-    <comment>*</comment>
-  </data>
   <data name="strUnknown" xml:space="preserve">
     <value>Unknown</value>
     <comment>*</comment>
@@ -2372,5 +2369,14 @@ Details: {1}</value>
   <data name="strExportDialog_ButtonNextPage" xml:space="preserve">
     <value>Show next page</value>
     <comment>ExportDialog.xaml</comment>
+  </data>
+  <data name="strSimpleJournalAssemblies" xml:space="preserve">
+    <value>SimpleJournal Assemblies:</value>
+  </data>
+  <data name="strExternalAssemblies" xml:space="preserve">
+    <value>External Assemblies:</value>
+  </data>
+  <data name="strUnexceptedFailureTitle" xml:space="preserve">
+    <value>Unexpected failure!</value>
   </data>
 </root>

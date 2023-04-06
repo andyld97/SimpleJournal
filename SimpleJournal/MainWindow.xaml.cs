@@ -723,7 +723,7 @@ namespace SimpleJournal
         private void Dispatcher_UnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
         {
             // MessageBox.Show(e.Exception.ToString());
-            MessageBox.Show($"{Properties.Resources.strUnexceptedFailure}{Environment.NewLine}{Environment.NewLine}{e.Exception.Message}", Properties.Resources.strUnexpectedFailureTitle, MessageBoxButton.OK, MessageBoxImage.Error);
+            MessageBox.Show($"{Properties.Resources.strUnexceptedFailure}{Environment.NewLine}{Environment.NewLine}{e.Exception.Message}", Properties.Resources.strUnexceptedFailureTitle, MessageBoxButton.OK, MessageBoxImage.Error);
         }
 
         private async void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
@@ -746,7 +746,7 @@ namespace SimpleJournal
 #endif
             }
 
-            MessageBox.Show($"{Properties.Resources.strUnexceptedFailure}{Environment.NewLine}{Environment.NewLine}{message}{Environment.NewLine}{Environment.NewLine}{Properties.Resources.strUnexceptedFailureLine1}", Properties.Resources.strUnexpectedFailureTitle, MessageBoxButton.OK, MessageBoxImage.Error);
+            MessageBox.Show($"{Properties.Resources.strUnexceptedFailure}{Environment.NewLine}{Environment.NewLine}{message}{Environment.NewLine}{Environment.NewLine}{Properties.Resources.strUnexceptedFailureLine1}", Properties.Resources.strUnexceptedFailureTitle, MessageBoxButton.OK, MessageBoxImage.Error);
 
             // Try at least to create a backup - if SJ crashes - the user can restore the backup and everything should be fine though.
             await CreateBackup();

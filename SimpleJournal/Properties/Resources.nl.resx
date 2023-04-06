@@ -1805,4 +1805,10 @@ Details: {1}</value>
   <data name="strExportDialog_PagePreview" xml:space="preserve">
     <value>Voorbeeld (Pagina {0} van {1}):</value>
   </data>
+  <data name="strExternalAssemblies" xml:space="preserve">
+    <value>Externe afhankelijkheden:</value>
+  </data>
+  <data name="strSimpleJournalAssemblies" xml:space="preserve">
+    <value>SimpleJournal afhankelijkheden:</value>
+  </data>
 </root>

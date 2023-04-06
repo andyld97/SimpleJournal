@@ -2,6 +2,9 @@
 using SimpleJournal;
 using SimpleJournal.Common;
 using SimpleJournal.Common.Data;
+#if !UWP         
+using SimpleJournal.Dialogs;
+#endif
 using SimpleJournal.Documents.UI;
 using SimpleJournal.Modules;
 using System;

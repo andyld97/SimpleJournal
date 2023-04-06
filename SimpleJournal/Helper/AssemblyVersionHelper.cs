@@ -42,11 +42,12 @@ namespace SimpleJournal.Helper
 
         public static List<Inline> GenerateAssemblyText()
         {
-            List<Inline> inlines = new List<Inline>();
-
-            // SimpleJournal Assemblies
-            inlines.Add(new Run() { Text = "SimpleJournal Assemblies:", FontWeight = FontWeights.Bold });
-            inlines.Add(new LineBreak());
+            List<Inline> inlines = new List<Inline>
+            {
+                // SimpleJournal Assemblies
+                new Run() { Text = SimpleJournal.Properties.Resources.strSimpleJournalAssemblies, FontWeight = FontWeights.Bold },
+                new LineBreak()
+            };
 
             foreach (var sjAssembly in types)
             {
@@ -78,19 +79,28 @@ namespace SimpleJournal.Helper
 
             inlines.Add(new LineBreak());
             // External Assemblies
-            inlines.Add(new Run() { Text = "External Assemblies:", FontWeight = FontWeights.Bold });
+            inlines.Add(new Run() { Text = SimpleJournal.Properties.Resources.strExternalAssemblies, FontWeight = FontWeights.Bold });
             inlines.Add(new LineBreak());
 
+            int counter = 0;
             foreach (var externalAssembly in externalDependencies)
             {
+                if (counter > 0)
+                    inlines.Add(new LineBreak());
                 inlines.Add(new Run() { Text = GetAssemblyString(externalAssembly) });
-                inlines.Add(new LineBreak());
+                counter++;
             }
 
+            if (counter > 0)
+                inlines.Add(new LineBreak());
+
+            counter = 0;
             foreach (var externalAssembly in externalStaticVersions)
             {
+                if (counter > 0)
+                    inlines.Add(new LineBreak());
                 inlines.Add(new Run() { Text = GetAssemblyString(externalAssembly.Key, externalAssembly.Value.ToString(3)) });
-                inlines.Add(new LineBreak());
+                counter++;
             }
 
             return inlines;

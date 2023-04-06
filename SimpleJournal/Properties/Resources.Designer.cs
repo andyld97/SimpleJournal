@@ -1128,6 +1128,15 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die External Assemblies: ähnelt.
+        /// </summary>
+        public static string strExternalAssemblies {
+            get {
+                return ResourceManager.GetString("strExternalAssemblies", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Error copying the file! Please choose a different location! ähnelt.
         /// </summary>
         public static string strFailedToCopyFile {
@@ -4279,6 +4288,15 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die SimpleJournal Assemblies: ähnelt.
+        /// </summary>
+        public static string strSimpleJournalAssemblies {
+            get {
+                return ResourceManager.GetString("strSimpleJournalAssemblies", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Single Page ähnelt.
         /// </summary>
         public static string strSinglePage {
@@ -4668,9 +4686,9 @@ namespace SimpleJournal.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Unexpected failure! ähnelt.
         /// </summary>
-        public static string strUnexpectedFailureTitle {
+        public static string strUnexceptedFailureTitle {
             get {
-                return ResourceManager.GetString("strUnexpectedFailureTitle", resourceCulture);
+                return ResourceManager.GetString("strUnexceptedFailureTitle", resourceCulture);
             }
         }
         
