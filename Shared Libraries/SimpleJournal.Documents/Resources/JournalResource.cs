@@ -17,12 +17,12 @@ namespace SimpleJournal.Documents
         protected byte[] cache = null;       
 
         /// <summary>
-        /// Represents the X-Coardinate
+        /// Represents the X-Coordinate
         /// </summary>
         public double Left { get; set; }
 
         /// <summary>
-        /// Represents the Y-Coardinate
+        /// Represents the Y-Coordinate
         /// </summary>
         public double Top { get; set; }
 

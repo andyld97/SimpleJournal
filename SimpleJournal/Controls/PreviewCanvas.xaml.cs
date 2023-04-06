@@ -36,7 +36,7 @@ namespace SimpleJournal.Controls
                 {
                     currentPaperType = value;
 
-                    // For preview canvas no landsacpe is required
+                    // For preview canvas no landscape is required
                     Orientation orientation = Orientation.Portrait;
 
                     // Switch canvas
@@ -114,7 +114,7 @@ namespace SimpleJournal.Controls
         {
             if (currentCanvas != null)
             {
-                // Only remove childrens if this preview canvas is not used to highlighting.
+                // Only remove children if this preview canvas is not used to highlighting.
                 // This is necessary to ensure that the text added to this canvas will not be removed if the user clicks on "Clear"
                 if (!DrawingAttributes.IsHighlighter)
                     currentCanvas.Children.ClearAll(currentCanvas);

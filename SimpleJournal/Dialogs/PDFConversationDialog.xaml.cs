@@ -16,7 +16,7 @@ namespace SimpleJournal.Dialogs
     /// </summary>
     public partial class PDFConversationDialog : Window
     {
-        #region Pivate Members
+        #region Private Members
         private readonly string sourceFileName = string.Empty;
         private string destinationFileName = string.Empty;
 
@@ -54,7 +54,7 @@ namespace SimpleJournal.Dialogs
             CheckUseSelfHostedAPI.IsChecked = Settings.Instance.UseSelfHostedPDF2JApi;
             TextUrl.Text = Settings.Instance.SelfHostedPDF2JApiUrl;
 
-            // If there is no connection, uncheck online converstaion (must be done here, to prevent this dialog from saving it to settings)
+            // If there is no connection, uncheck online conversation (must be done here, to prevent this dialog from saving it to settings)
             if (!GeneralHelper.IsConnectedToInternet())
                 CheckUseOnlineConverter.IsChecked = false;
 
@@ -164,7 +164,7 @@ namespace SimpleJournal.Dialogs
 
                 await pdfConverter.ConvertAsync();
 
-                // Unassign events after completion
+                // Detach events after completion
                 pdfConverter.ProgressChanged -= PdfConverter_ProgressChanged;
                 pdfConverter.JournalHasFewerPagesThenRequired -= PdfConverter_JournalHasFewerPagesThenRequired;
                 pdfConverter.Completed -= PdfConverter_Completed;
@@ -239,7 +239,7 @@ namespace SimpleJournal.Dialogs
             {
                 using (HttpClient client = new HttpClient() { Timeout = TimeSpan.FromSeconds(1) })
                 {
-                    // Send a message to the api that the ticket should be canceld!
+                    // Send a message to the api that the ticket should be canceled!
                     await client.GetAsync($"{PDF2JApiUrl}/api/ticket/{currentTicket?.ID}/{operation}");
                 }
             }
@@ -272,7 +272,7 @@ namespace SimpleJournal.Dialogs
 
         #endregion
 
-        #region Online Converstaion
+        #region Online Conversation
 
         private async void Timer_Tick(object sender, EventArgs e)
         {

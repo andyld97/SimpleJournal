@@ -179,7 +179,7 @@
                             </Grid.Background>
 
                             <StackPanel Orientation="Horizontal">
-                                <controls:DropDownToggleButton x:Name="btnPen1" Margin="3" IsChecked="True" Click="btnPen1_Click" Header="1">
+                                <controls:DropDownToggleButton x:Name="btnPen1" Margin="3" IsChecked="True" Click="btnPen1_Click" Foreground="Black" Header="1">
                                     <controls:DropDownToggleButton.LargeIcon>
                                         <Viewbox Width="32" Height="32">
                                             <Canvas Width="24" Height="24">
@@ -188,7 +188,7 @@
                                         </Viewbox>
                                     </controls:DropDownToggleButton.LargeIcon>
                                 </controls:DropDownToggleButton>
-                                <controls:DropDownToggleButton x:Name="btnPen2" Margin="3" IsChecked="False" Click="btnPen2_Click" Header="2">
+                                <controls:DropDownToggleButton x:Name="btnPen2" Margin="3" IsChecked="False" Click="btnPen2_Click" Foreground="Black" Header="2">
                                     <controls:DropDownToggleButton.LargeIcon>
                                         <Viewbox Width="32" Height="32">
                                             <Canvas Width="24" Height="24">
@@ -197,7 +197,7 @@
                                         </Viewbox>
                                     </controls:DropDownToggleButton.LargeIcon>
                                 </controls:DropDownToggleButton>
-                                <controls:DropDownToggleButton x:Name="btnPen3" Margin="3" IsChecked="False" Click="btnPen3_Click" Header="3">
+                                <controls:DropDownToggleButton x:Name="btnPen3" Margin="3" IsChecked="False" Click="btnPen3_Click" Foreground="Black" Header="3">
                                     <controls:DropDownToggleButton.LargeIcon>
                                         <Viewbox Width="32" Height="32">
                                             <Canvas Width="24" Height="24">
@@ -206,7 +206,7 @@
                                         </Viewbox>
                                     </controls:DropDownToggleButton.LargeIcon>
                                 </controls:DropDownToggleButton>
-                                <controls:DropDownToggleButton x:Name="btnPen4" Margin="3" IsChecked="False" Click="btnPen4_Click" Header="4">
+                                <controls:DropDownToggleButton x:Name="btnPen4" Margin="3" IsChecked="False" Click="btnPen4_Click" Foreground="Black" Header="4">
                                     <controls:DropDownToggleButton.LargeIcon>
                                         <Viewbox Width="32" Height="32">
                                             <Canvas Width="24" Height="24">
@@ -241,7 +241,7 @@
                                 <SolidColorBrush Color="LightGray"/>
                             </Grid.Background>
 
-                            <controls:DropDownToggleButton x:Name="btnTextMarker" IsToggleable="False" Header="{x:Static res:Resources.strHighlight}" HorizontalAlignment="Left" Margin="3">
+                            <controls:DropDownToggleButton x:Name="btnTextMarker" IsToggleable="False" Header="{x:Static res:Resources.strHighlight}" Foreground="Black" HorizontalAlignment="Left" Margin="3">
                                 <controls:DropDownToggleButton.LargeIcon>
                                     <Viewbox Width="32" Height="32">
                                         <Canvas Width="24" Height="24">

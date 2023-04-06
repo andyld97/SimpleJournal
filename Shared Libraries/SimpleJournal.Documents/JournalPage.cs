@@ -27,7 +27,7 @@ namespace SimpleJournal.Documents
         }
 
         /// <summary>
-        /// Additonal data e.g images, text
+        /// Additional data e.g images, text
         /// </summary>
         public List<JournalResource> JournalResources = new List<JournalResource>();
 

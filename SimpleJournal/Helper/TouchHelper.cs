@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Runtime.CompilerServices;
-using System.Windows;
 
 namespace SimpleJournal.Helper
 {
@@ -11,14 +9,13 @@ namespace SimpleJournal.Helper
             try
             {
 #if !UWP
-                //Consts.TouchExecutable
-                string path = Consts.TouchExecutable; // @"C:\Users\andre\source\repos\andyld97\SimpleJournal\Touch\bin\Debug\Touch.exe";
+                string path = Consts.TouchExecutable;
                 System.Diagnostics.Process.Start(path, state ? Consts.SetTouchOn : Consts.SetTouchOff);
 #endif
             }
             catch (Exception)
             {
-                
+
             }
         }
     }

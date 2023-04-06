@@ -37,13 +37,13 @@
             <TabItem Header="{x:Static res:Resources.strGeneral}" Width="150">
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="1.7*" />
+                        <ColumnDefinition Width="1.6*" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
 
                     <!--  Background="{DynamicResource Fluent.Ribbon.Brushes.GalleryGroupContainer.Header.Background}" -->
                     <Border Margin="5,0,0,0" Grid.Column="1" BorderThickness="1 0 0 0" BorderBrush="{DynamicResource Fluent.Ribbon.Brushes.Black}">
-                        <StackPanel Margin="0,0,0,0" >
+                        <StackPanel Margin="5,5,0,0" >
                             <StackPanel.Resources>
                                 <Style TargetType="{x:Type Hyperlink}">
                                     <Setter Property="Foreground" Value="{DynamicResource Fluent.Ribbon.Brushes.Black}" />
@@ -57,7 +57,7 @@
                                 <Image Source="../resources/features.png" Width="24" />
                                 <TextBlock Text="{x:Static res:Resources.strSettingsFeatureBar}" Margin="5,5" FontWeight="Bold" FontSize="15" />
                             </StackPanel>
-                            <TextBlock FontSize="13" TextTrimming="CharacterEllipsis">
+                            <TextBlock Margin="5,5,0,0" FontSize="13" TextTrimming="CharacterEllipsis">
                                 <Run Text="•" />
                                 <Hyperlink x:Name="btnResetPens" Click="BtnResetPens_Click" ToolTip="{x:Static res:Resources.strSettingsResetPensTooltip}">
                                     <Run Text="{x:Static res:Resources.strResetPens}" />
@@ -79,13 +79,12 @@
                                 </Hyperlink>
                             </TextBlock>
 
-                            <Separator Margin="0,10,0,0" Background="{DynamicResource Fluent.Ribbon.Brushes.Black}" />
-                            <StackPanel Orientation="Horizontal" Margin="2,0,0,0">
+                            <StackPanel Orientation="Horizontal" Margin="2,15,0,0">
                                 <Image Source="../resources/folder.png" Width="24" />
                                 <TextBlock Text="{x:Static res:Resources.strSettingsImportantDirectories}" Margin="5" FontWeight="Bold" FontSize="15" />
                             </StackPanel>
 
-                            <TextBlock FontSize="13" TextTrimming="CharacterEllipsis">
+                            <TextBlock Margin="5,5,0,0" FontSize="13" TextTrimming="CharacterEllipsis">
                                 <Run Text="•" />
                                 <Hyperlink x:Name="ButtonShowAutoSaveFolder" Click="ButtonShowAutoSaveFolder_Click" ToolTip="{x:Static res:Resources.strSettings_OpenAutoSaveDirectory_ToolTip}">
                                     <Run Text="{x:Static res:Resources.strSettings_OpenAutoSaveDirectory}" />
@@ -96,12 +95,11 @@
                                     <Run Text="{x:Static res:Resources.strSettings_OpenBackupDirectory}" />
                                 </Hyperlink>
                             </TextBlock>
-
-                            <Separator Margin="0,10,0,0" Background="{DynamicResource Fluent.Ribbon.Brushes.Black}" />
+                            
                             <Button x:Name="DebugTestButton" Click="DebugTestButton_Click" Visibility="Hidden" Margin="5">Show UpdateDialog</Button>
                         </StackPanel>
                     </Border>
-                    <StackPanel Margin="3,0,0,0" Background="Transparent">
+                    <StackPanel Margin="5,2,0,0" Background="Transparent">
                         <StackPanel.Resources>
                             <Style TargetType="{x:Type TextBlock}">
                                 <Setter Property="FontWeight" Value="Bold" />

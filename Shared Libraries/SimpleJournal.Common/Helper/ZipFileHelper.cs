@@ -58,7 +58,7 @@ namespace SimpleJournal.Common.Helper
         private static bool HeaderBytesMatch(byte[] headerBytes, byte[] dataBytes)
         {
             if (dataBytes.Length < headerBytes.Length)
-                throw new ArgumentOutOfRangeException(nameof(dataBytes), $"Passed databytes length ({dataBytes.Length}) is shorter than the headerbytes ({headerBytes.Length})");
+                throw new ArgumentOutOfRangeException(nameof(dataBytes), $"Passed data-bytes length ({dataBytes.Length}) is shorter than the header-bytes ({headerBytes.Length})");
 
             for (var i = 0; i < headerBytes.Length; i++)
             {

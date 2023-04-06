@@ -183,7 +183,7 @@ namespace SimpleJournal.Modules
 
         private void PageManagmentControl_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            // Fix for triggering re-initalization of this control!
+            // Fix for triggering re-initialization of this control!
             // No mouse down events will be redirected to the parent of this control.
             e.Handled = true;
         }
@@ -417,7 +417,7 @@ namespace SimpleJournal.Modules
                         page.Canvas.Strokes.Save(ms);
                         jp.Data = ms.ToArray();
 
-                        // Check for additional ressources
+                        // Check for additional resources
                         if (page.Canvas.Children.Count > 0)
                         {
                             foreach (UIElement element in page.Canvas.Children)
@@ -466,7 +466,7 @@ namespace SimpleJournal.Modules
                         pages.RemoveAt(idx);
                         RefreshListView();
 
-                        // Select the next index to prevent jumping to start (so that the user can contiune work from this index)
+                        // Select the next index to prevent jumping to start (so that the user can continue work from this index)
                         // Check if index + 1 is in range
                         if (idx + 1 < pages.Count)
                             ListViewPages.SelectedIndex = idx + 1;

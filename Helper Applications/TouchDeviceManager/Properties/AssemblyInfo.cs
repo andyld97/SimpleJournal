@@ -1,6 +1,4 @@
 ﻿using System.Reflection;
-using System.Resources;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Windows;
 
@@ -12,7 +10,7 @@ using System.Windows;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Code A Software")]
 [assembly: AssemblyProduct("Touch Device Manager")]
-[assembly: AssemblyCopyright("Copyright ©  2020-2022")]
+[assembly: AssemblyCopyright("Copyright ©  2020-2023")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

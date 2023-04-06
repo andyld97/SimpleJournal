@@ -135,7 +135,7 @@ Programmed by Andreas L.
 
 Many thanks ...
 
-... to Daniel S. and Stefan E. for the ideas/programm tests!
+... to Daniel S. and Stefan E. for the ideas/program tests!
 ... to Elmo who made the dutch translation!</value>
     <comment>About.xaml</comment>
   </data>
@@ -229,14 +229,15 @@ Many thanks ...
   </data>
   <data name="strBackwards" xml:space="preserve">
     <value>Undo</value>
-    <comment>MainWindow.xaml</comment>
+    
+    <comment>@MutedRule(PunctuationTail)</comment>
   </data>
   <data name="strBackwardsDescription" xml:space="preserve">
     <value>Undos the last action</value>
     <comment>MainWindow.xaml</comment>
   </data>
   <data name="strBehaviour" xml:space="preserve">
-    <value>Behaviour</value>
+    <value>Behavior</value>
     <comment>*</comment>
   </data>
   <data name="strBold" xml:space="preserve">
@@ -395,7 +396,7 @@ Many thanks ...
     <comment>SettingsWindows.xaml</comment>
   </data>
   <data name="strDisplaySidebarAutomatically" xml:space="preserve">
-    <value>Display sidedbar automatically</value>
+    <value>Display sidebar automatically</value>
     <comment>*</comment>
   </data>
   <data name="strDisplaySidebarAutomaticallyDescription" xml:space="preserve">
@@ -657,7 +658,7 @@ Your data will not be shared with third parties, but will only be used to give y
   </data>
   <data name="strForward" xml:space="preserve">
     <value>Redo</value>
-    <comment>MainWindow.xaml</comment>
+    <comment>MainWindow.xaml@MutedRule(PunctuationTail)</comment>
   </data>
   <data name="strForwardDescription" xml:space="preserve">
     <value>Redos the last action</value>
@@ -770,7 +771,7 @@ Click on No to continue to receive this message!</value>
     <comment>*</comment>
   </data>
   <data name="strIsColorfulTheme" xml:space="preserve">
-    <value>Show accent color in titlebar</value>
+    <value>Show accent color in title-bar</value>
     <comment>SettingsDialog.xaml</comment>
   </data>
   <data name="strItalic" xml:space="preserve">
@@ -854,7 +855,7 @@ Click on No to continue to receive this message!</value>
     <comment>*</comment>
   </data>
   <data name="strNoShapeRecognizedTitle" xml:space="preserve">
-    <value>No shape recogized!</value>
+    <value>No shape recognized!</value>
     <comment>*</comment>
   </data>
   <data name="strObject" xml:space="preserve">
@@ -986,7 +987,7 @@ Click on No to continue to receive this message!</value>
     <comment>MainWindow.xaml</comment>
   </data>
   <data name="strPasteDescription" xml:space="preserve">
-    <value>Just click on paste and and choose a spot and click on it, then all copied objects will be inserted</value>
+    <value>Just click on paste and choose a spot and click on it, then all copied objects will be inserted</value>
     <comment>MainWindow.xaml</comment>
   </data>
   <data name="strPatchDownload" xml:space="preserve">
@@ -1038,7 +1039,7 @@ Click on No to continue to receive this message!</value>
     <comment>*</comment>
   </data>
   <data name="strPenMidsize" xml:space="preserve">
-    <value>Midsize</value>
+    <value>Mid-size</value>
     <comment>*</comment>
   </data>
   <data name="strPens" xml:space="preserve">
@@ -1573,10 +1574,6 @@ Here I would like to give you a few more important hints that will help you to u
     <value>SimpleJournal will now create a backup, please wait a moment. Afterwards the program will be closed!</value>
     <comment>MainWindow.xaml.cs</comment>
   </data>
-  <data name="strUnexceptedFailureTitle" xml:space="preserve">
-    <value>Unexcepted failure!</value>
-    <comment>*</comment>
-  </data>
   <data name="strUnknown" xml:space="preserve">
     <value>Unknown</value>
     <comment>*</comment>
@@ -1774,7 +1771,7 @@ Here I would like to give you a few more important hints that will help you to u
     <comment>SettingsDialog.xaml</comment>
   </data>
   <data name="strSettingsDialogTouchDeviceManagerDescription" xml:space="preserve">
-    <value>Due to missing permissions, it is unfortunately not possible to automatically deactivate the touchscreen in this version. Therefore, the Touchscreen Device Manager is available for download here. With it you can deactivate the touch screen before working and activate it again afterwards (if this is necessary). The programme works in the same way as the device manager and requires administrator rights!</value>
+    <value>Due to missing permissions, it is unfortunately not possible to automatically deactivate the touchscreen in this version. Therefore, the Touchscreen Device Manager is available for download here. With it you can deactivate the touch screen before working and activate it again afterwards (if this is necessary). The program works in the same way as the device manager and requires administrator rights!</value>
     <comment>SettingsDialog.xaml</comment>
   </data>
   <data name="strJournalIsAlreadyOpenedInTheSameWindow" xml:space="preserve">
@@ -1817,7 +1814,7 @@ Here I would like to give you a few more important hints that will help you to u
     <comment>PDFConversationDialog.xaml</comment>
   </data>
   <data name="strPDFConversationDialog_Explanation_Line1" xml:space="preserve">
-    <value>To use a PDF docuemnt in SimpleJournal, it must first be converted to a journal document. This is done using Magick.NET in combination with</value>
+    <value>To use a PDF document in SimpleJournal, it must first be converted to a journal document. This is done using Magick.NET in combination with</value>
     <comment>PDFConversationDialog.xaml.cs</comment>
   </data>
   <data name="strPDFConversationDialog_Explanation_Line2" xml:space="preserve">
@@ -2347,7 +2344,7 @@ Details: {1}</value>
     <comment>SettingsDialog.xaml.cs</comment>
   </data>
   <data name="strSettings_UseModernDialogs_Title" xml:space="preserve">
-    <value>Use modern dialogues</value>
+    <value>Use modern dialogs</value>
     <comment>SettingsModule.xaml</comment>
   </data>
   <data name="strSettings_UseModernDialogs_Description" xml:space="preserve">
@@ -2372,5 +2369,14 @@ Details: {1}</value>
   <data name="strExportDialog_ButtonNextPage" xml:space="preserve">
     <value>Show next page</value>
     <comment>ExportDialog.xaml</comment>
+  </data>
+  <data name="strSimpleJournalAssemblies" xml:space="preserve">
+    <value>SimpleJournal Assemblies:</value>
+  </data>
+  <data name="strExternalAssemblies" xml:space="preserve">
+    <value>External Assemblies:</value>
+  </data>
+  <data name="strUnexceptedFailureTitle" xml:space="preserve">
+    <value>Unexpected failure!</value>
   </data>
 </root>

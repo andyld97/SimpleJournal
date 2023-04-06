@@ -25,7 +25,7 @@ namespace PDF2J.Model
 
         /// <summary>
         /// The path where failed tickets get copied to, this
-        /// should be a seperate folder. A so called "Report" has<br/><br/>
+        /// should be a separate folder. A so called "Report" has<br/><br/>
         /// - a unique id (the guid of the ticket)<br/>
         /// - exception stacktrace (log.txt)<br/><br/>
         /// and the document itself "doc.pdf"
@@ -37,8 +37,8 @@ namespace PDF2J.Model
         /// Can be specified to notify a webhook (can be empty) <br/>
         /// The url will be called if<br/><br/>
         /// - a conversation has finished successfully<br/>
-        /// - a converstaion has failed<br/><br/>
-        /// The endpoint gets called with a message parameter containg the actual message (urlencoded)<br/>
+        /// - a conversation has failed<br/><br/>
+        /// The endpoint gets called with a message parameter containing the actual message (url-encoded)<br/>
         /// e.g. http://test.de/?message=xyz
         /// </summary>
         [JsonPropertyName("webhook_url")]

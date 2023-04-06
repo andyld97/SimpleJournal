@@ -31,7 +31,7 @@ namespace SimpleJournal.Controls
 
             /* This leads to missing rotation in the sidebar, but the question is why, because
              * actually we want to see the rotation also in the sidebar, I think.
-             * If this behaviour should be changed, we can just set element.RenderTransform to null */
+             * If this behavior should be changed, we can just set element.RenderTransform to null */
             // element.RenderTransform = new RotateTransform();
 
             Viewport.Child = element;

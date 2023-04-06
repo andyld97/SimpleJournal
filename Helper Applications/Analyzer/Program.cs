@@ -136,7 +136,7 @@ namespace Analyzer
                 }
                 catch (Exception ex)
                 {
-                    // Debug: System.Windows.MessageBox.Show("Folgender Fehler ist beim Analyisieren aufgetreten: " + ex.Message);
+                    // Debug: System.Windows.MessageBox.Show("Folgender Fehler ist beim Analysieren aufgetreten: " + ex.Message);
                 }
             }
             System.Windows.Forms.Application.Exit();

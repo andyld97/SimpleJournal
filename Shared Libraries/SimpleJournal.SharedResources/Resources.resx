@@ -122,7 +122,7 @@
     <comment>*</comment>
   </data>
   <data name="strErrorMessageAnalyzingStrokes" xml:space="preserve">
-    <value>An error occurred while analysing: {0}. Make sure SimpleJournal is installed correctly!</value>
+    <value>An error occurred while analyzing: {0}. Make sure SimpleJournal is installed correctly!</value>
     <comment>DrawingCanvas.cs</comment>
   </data>
   <data name="strPlain" xml:space="preserve">

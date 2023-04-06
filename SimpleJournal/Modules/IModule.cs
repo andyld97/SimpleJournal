@@ -26,7 +26,7 @@ namespace SimpleJournal.Modules
         string Title { get; }
 
         /// <summary>
-        /// Is called when the owner of this module shoud change the title
+        /// Is called when the owner of this module should change the title
         /// </summary>
         EventHandler<string> TitleChanged { get; set; }
 

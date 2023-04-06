@@ -10,7 +10,7 @@ using System.Xml.Serialization;
 namespace SimpleJournal.Common
 {
     /// <summary>
-    /// Notifcation data structure for the notification system used in SimpleJournal!
+    /// Notification data structure for the notification system used in SimpleJournal!
     /// </summary>
     public abstract class Notification
     {
@@ -37,7 +37,7 @@ namespace SimpleJournal.Common
         public abstract NotificationType Type { get; }
 
         /// <summary>
-        /// The timestamp when this notifcation is occured
+        /// The timestamp when this notification is occurred
         /// </summary>
         public DateTime Timestamp { get; set; }
 
@@ -54,16 +54,16 @@ namespace SimpleJournal.Common
         public bool IsContinuouslyChecked => ContinuouslyCheckingInterval > TimeSpan.Zero;
 
         /// <summary>
-        /// Determines if this notification should be checked continously or only on startup<br/>
-        /// Set to <see cref="TimeSpan.Zero"/> if you don't want it to be checked continously (default value)
+        /// Determines if this notification should be checked continuously or only on startup<br/>
+        /// Set to <see cref="TimeSpan.Zero"/> if you don't want it to be checked continuously (default value)
         /// </summary>
         [XmlIgnore]
         public virtual TimeSpan ContinuouslyCheckingInterval { get; } = TimeSpan.Zero;
 
         /// <summary>
-        /// Checks if this notifcation should be raised
+        /// Checks if this notification should be raised
         /// </summary>
-        /// <returns>null; if this occurance shouldn't be doing anything</returns>
+        /// <returns>null; if this occurrence shouldn't be doing anything</returns>
         /// <exception cref="NotImplementedException"></exception>
         public virtual Task<bool?> CheckOccuranceAsync()
         {
@@ -71,9 +71,9 @@ namespace SimpleJournal.Common
         }
 
         /// <summary>
-        /// Checks if this notifcation should be raised
+        /// Checks if this notification should be raised
         /// </summary>
-        /// <returns>null; if this occurance shouldn't be doing anything</returns>
+        /// <returns>null; if this occurrence shouldn't be doing anything</returns>
         /// <exception cref="NotImplementedException"></exception>
         public virtual bool? CheckOccurance()
         {
@@ -95,8 +95,8 @@ namespace SimpleJournal.Common
         /// </summary>
         /// <param name="currentNotifications">All previously raised notification (can also be an empty list, but must not be null)</param>
         /// <param name="callingAssembly">The calling assembly is used to determine sub-classes of <see cref="Notification"/> in this assembly</param>
-        /// <param name="lastCheckedTimestamp">When did this method was called the last time (Important for continuosly checked notifications)</param>
-        /// <param name="isCalledFromTimer">If this method is called from a polling timer (Important for continuosly checked notifications)</param>
+        /// <param name="lastCheckedTimestamp">When did this method was called the last time (Important for continuously checked notifications)</param>
+        /// <param name="isCalledFromTimer">If this method is called from a polling timer (Important for continuously checked notifications)</param>
         /// <returns>true; if there were notifications added to the list</returns>
         public static async Task<List<Notification>> CheckNotificationsAsync(List<Notification> currentNotifications, Assembly callingAssembly, DateTime lastCheckedTimestamp, bool isCalledFromTimer)
         {            
@@ -146,7 +146,7 @@ namespace SimpleJournal.Common
         /// Removes all obsolete notifications from the given list
         /// </summary>
         /// <param name="notifications"></param>
-        /// <returns>true, if there were more than one notifcation removed</returns>
+        /// <returns>true, if there were more than one notification removed</returns>
         public static async Task<List<Notification>> RemoveObsoleteNotificationsAsync(List<Notification> notifications)
         {
             if (notifications == null || notifications.Count == 0)

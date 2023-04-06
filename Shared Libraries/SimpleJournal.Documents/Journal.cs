@@ -32,7 +32,7 @@ namespace SimpleJournal.Documents
         public int ProcessID { get; set; } = -1;
 
         /// <summary>
-        /// The path where this journal (backup) was orginally saved
+        /// The path where this journal (backup) was originally saved
         /// Note: This can be empty, although it's a backup! It will only be set, if a journal was loaded while creating the backup!
         /// (It should not be serialized if it's empty)
         /// </summary>
@@ -181,7 +181,7 @@ namespace SimpleJournal.Documents
                             if (fail)
                                 throw new ArgumentException("pageParser failed");
 
-                            // Merge dictonaries together
+                            // Merge dictionaries
                             // Step 1) Add images to PdFJournalPages (if any)
                             foreach (var image in images.Keys)
                             {
@@ -235,7 +235,7 @@ namespace SimpleJournal.Documents
                         {
                             var entry = zipArchive.GetEntry("journal.xml");
 
-                            // Delete entry first to prevent that no old contet will stay there!
+                            // Delete entry first to prevent that no old content will stay there!
                             if (entry != null)
                                 entry.Delete();
 
@@ -292,7 +292,7 @@ namespace SimpleJournal.Documents
                 {
                     // ToDo: *** Only update the archive and (eventually delete pages/images, add pages)
                     // If the file exists already and is valid zip file we do not need to re-create the entire file, but open
-                    // it as as ZipArchiveMode.Update and only update the bin files
+                    // it as ZipArchiveMode.Update and only update the bin files
                     // But remember to ensure that if a PdfJournalPage gets deleted, we need to delete the file from the zip archive also!
                 }
 
@@ -308,7 +308,7 @@ namespace SimpleJournal.Documents
                             {
                                 var pageEntry = zipArchive.CreateEntry($"pages/page{pgCount}.pdf", System.IO.Compression.CompressionLevel.Optimal);
 
-                                // Backgorund will be saved seperatly 
+                                // Background will be saved separately 
                                 PdfJournalPage pdfJournalPage = new PdfJournalPage() { Data = pdf.Data, JournalResources = pdf.JournalResources, Orientation = pdf.Orientation, PageFormat = pdf.PageFormat, PaperPattern = pdf.PaperPattern };
                                 pdfJournalPage.PageBackground = null;
 

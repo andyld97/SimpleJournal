@@ -70,7 +70,7 @@ namespace SimpleJournal.Data
 
         public static void AddDocument(string filePath)
         {
-            // Check if documents existis
+            // Check if documents exists
             var result = Instance.Where(d => d.Path == filePath).FirstOrDefault();
 
             if (result == null)
@@ -83,7 +83,7 @@ namespace SimpleJournal.Data
                 result.LastModified = DateTime.Now;
             }
 
-            // Limit to value of recently used docuemnts
+            // Limit to value of recently used documents
             if (Instance.Count > Consts.LastRecentlyOpenedDocuments)
                 Instance.RemoveAt(Instance.Count - 1);
 

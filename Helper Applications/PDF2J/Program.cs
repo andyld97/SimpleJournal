@@ -47,7 +47,7 @@ namespace PDF2J
             {
                 string configJson = System.IO.File.ReadAllText(configPath);
                 GlobalConfig = System.Text.Json.JsonSerializer.Deserialize<Config>(configJson);
-                preInitalizationLogMessage = "Successfully initalized config file!";
+                preInitalizationLogMessage = "Successfully initialized config file!";
 
                 if (!string.IsNullOrEmpty(GlobalConfig.WebHookUrl))
                     Webhook = new Webhook(GlobalConfig.WebHookUrl, "PDF2J");
@@ -124,7 +124,7 @@ namespace PDF2J
 
                 var result = await currentPdfConverter.ConvertAsync();
 
-                // Unassign events
+                // Detach events
                 currentPdfConverter.ProgressChanged -= PdfConverter_ProgressChanged;
                 currentPdfConverter.JournalHasFewerPagesThenRequired -= PdfConverter_JournalHasFewerPagesThenRequired;
                 currentPdfConverter.Completed -= PdfConverter_Completed;
@@ -179,7 +179,7 @@ namespace PDF2J
         {
             if (status == PdfAction.Reading) 
             {
-                logger.LogInformation($"[{currentTicket.Name}] Prepearing ...");
+                logger.LogInformation($"[{currentTicket.Name}] Preparing ...");
                 currentTicket.Status = TicketStatus.Prepearing;
             }
             else if (status == PdfAction.PagesALL_WritingPage || status == PdfAction.PageRange_WritingPage)

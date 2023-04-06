@@ -104,7 +104,7 @@ namespace SimpleJournal.Properties {
         ///
         ///Many thanks ...
         ///
-        ///... to Daniel S. and Stefan E. for the ideas/programm tests!
+        ///... to Daniel S. and Stefan E. for the ideas/program tests!
         ///... to Elmo who made the dutch translation! ähnelt.
         /// </summary>
         public static string strAboutText1 {
@@ -348,7 +348,7 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Behaviour ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Behavior ähnelt.
         /// </summary>
         public static string strBehaviour {
             get {
@@ -735,7 +735,7 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Display sidedbar automatically ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Display sidebar automatically ähnelt.
         /// </summary>
         public static string strDisplaySidebarAutomatically {
             get {
@@ -1124,6 +1124,15 @@ namespace SimpleJournal.Properties {
         public static string strExportPages {
             get {
                 return ResourceManager.GetString("strExportPages", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die External Assemblies: ähnelt.
+        /// </summary>
+        public static string strExternalAssemblies {
+            get {
+                return ResourceManager.GetString("strExternalAssemblies", resourceCulture);
             }
         }
         
@@ -1753,7 +1762,7 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Show accent color in titlebar ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Show accent color in title-bar ähnelt.
         /// </summary>
         public static string strIsColorfulTheme {
             get {
@@ -1978,7 +1987,7 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die No shape recogized! ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die No shape recognized! ähnelt.
         /// </summary>
         public static string strNoShapeRecognizedTitle {
             get {
@@ -2420,7 +2429,7 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Just click on paste and and choose a spot and click on it, then all copied objects will be inserted ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Just click on paste and choose a spot and click on it, then all copied objects will be inserted ähnelt.
         /// </summary>
         public static string strPasteDescription {
             get {
@@ -2717,7 +2726,7 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die To use a PDF docuemnt in SimpleJournal, it must first be converted to a journal document. This is done using Magick.NET in combination with ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die To use a PDF document in SimpleJournal, it must first be converted to a journal document. This is done using Magick.NET in combination with ähnelt.
         /// </summary>
         public static string strPDFConversationDialog_Explanation_Line1 {
             get {
@@ -3032,7 +3041,7 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Midsize ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Mid-size ähnelt.
         /// </summary>
         public static string strPenMidsize {
             get {
@@ -3662,7 +3671,7 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Use modern dialogues ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Use modern dialogs ähnelt.
         /// </summary>
         public static string strSettings_UseModernDialogs_Title {
             get {
@@ -3734,7 +3743,7 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Due to missing permissions, it is unfortunately not possible to automatically deactivate the touchscreen in this version. Therefore, the Touchscreen Device Manager is available for download here. With it you can deactivate the touch screen before working and activate it again afterwards (if this is necessary). The programme works in the same way as the device manager and requires administrator rights! ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Due to missing permissions, it is unfortunately not possible to automatically deactivate the touchscreen in this version. Therefore, the Touchscreen Device Manager is available for download here. With it you can deactivate the touch screen before working and activate it again afterwards (if this is necessary). The program works in the same way as the device manager and requires administrator rights! ähnelt.
         /// </summary>
         public static string strSettingsDialogTouchDeviceManagerDescription {
             get {
@@ -4279,6 +4288,15 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die SimpleJournal Assemblies: ähnelt.
+        /// </summary>
+        public static string strSimpleJournalAssemblies {
+            get {
+                return ResourceManager.GetString("strSimpleJournalAssemblies", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Single Page ähnelt.
         /// </summary>
         public static string strSinglePage {
@@ -4666,7 +4684,7 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Unexcepted failure! ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Unexpected failure! ähnelt.
         /// </summary>
         public static string strUnexceptedFailureTitle {
             get {

@@ -174,7 +174,7 @@ namespace SimpleJournal.Documents.UI.Extensions
                 Width = text.Width,
                 Height = text.Height,
 
-                // Set speical button
+                // Set special button
                 FontSize = text.FontSize,
                 FontFamily = text.FontFamily.ToString()
             };

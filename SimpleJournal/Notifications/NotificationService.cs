@@ -19,12 +19,12 @@ namespace Notifications
         public static NotificationService NotificationServiceInstance { get; set; }
 
         /// <summary>
-        /// Called when a new notification is occured
+        /// Called when a new notification is occurred
         /// </summary>
         public event onNotificationAdded OnNotificationAdded;
 
         /// <summary>
-        /// Called when a notifcation was removed by the system
+        /// Called when a notification was removed by the system
         /// </summary>
         public event onNotificationRemvoved OnNotifcationRemoved;
 
