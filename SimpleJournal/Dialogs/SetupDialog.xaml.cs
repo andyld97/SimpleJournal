@@ -1,6 +1,5 @@
 ﻿using SimpleJournal.Controls;
 using SimpleJournal.Controls.Templates;
-using SimpleJournal.Data;
 using SimpleJournal.Common;
 using System;
 using System.ComponentModel;
@@ -10,7 +9,6 @@ using System.Windows.Media;
 using Pen = SimpleJournal.Data.Pen;
 using SimpleJournal.Documents.UI.Extensions;
 using SimpleJournal.Documents.UI;
-using Dialogs;
 using SimpleJournal.Modules;
 
 namespace SimpleJournal.Dialogs
@@ -100,7 +98,7 @@ namespace SimpleJournal.Dialogs
             previewCanvasTextMarker.DrawingAttributes.Height = size.Width;
             previewCanvasTextMarker.DrawingAttributes.Color = Settings.Instance.TextMarkerColor.ToColor();
             previewCanvasTextMarker.EnableWriting = true;
-            previewCanvasTextMarker.AddChild(new TextBlock() { Text = Properties.Resources.strTextToHightlight, FontSize = 18 });
+            previewCanvasTextMarker.AddChild(new TextBlock() { Text = Properties.Resources.strTextToHightlight, FontSize = 18, Foreground = Brushes.Black });
         }
 
         #endregion
@@ -194,7 +192,7 @@ namespace SimpleJournal.Dialogs
             pensControls[index].IsChecked = true;
             ignorePenClickedEvent = false;
 
-            var size = Documents.UI.Consts.StrokeSizes[Documents.UI.Consts.StrokeSizes.IndexOf(new Common.Data.Size(pens[index].Width, pens[index].Height))];
+            var size = new Common.Data.Size(pens[index].Width, pens[index].Height);
 
             var currentDrawingAttributes = previewPensCanvas.DrawingAttributes;
             currentDrawingAttributes.Color = pens[index].FontColor.ToColor();
