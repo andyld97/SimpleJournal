@@ -167,13 +167,6 @@ namespace SimpleJournal
                 MainWindow.W_INSTANCE.pnlSidebar.Visibility = Visibility.Collapsed;
         }
 
-        [DllImport("DwmApi.dll")]
-        public static extern int DwmSetWindowAttribute(IntPtr hwnd, int dwAttribute, ref int pvAttribute, int cbAttribute);
-
-        private const int DWMWA_NCRENDERING_POLICY = 2;
-        private const int DWMNCRP_DISABLED = 1;
-
-
         public MainWindow()
         {
             W_INSTANCE = this;
@@ -4135,5 +4128,5 @@ namespace SimpleJournal
             throw new NotImplementedException();
         }
     }
-#endregion
+    #endregion
 }

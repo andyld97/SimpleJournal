@@ -1,11 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
-    <TargetFramework>net48</TargetFramework>
+    <TargetFramework>net7.0-windows</TargetFramework>
     <Configurations>Debug;Release;Normal;UWPNew</Configurations>
-	<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+	<UseWPF>true</UseWPF>
   </PropertyGroup>
-
   <ItemGroup>
     <None Remove="icons\pages\addblancopage.png" />
     <None Remove="icons\pages\addblancopage_landscape.png" />
@@ -24,7 +23,6 @@
     <None Remove="icons\pages\rotatepage.png" />
     <None Remove="icons\pages\ruled_landscape.png" />
   </ItemGroup>
-
   <ItemGroup>
     <Resource Include="icons\pages\addblancopage_landscape.png" />
     <Resource Include="icons\pages\addchequeredpage_landscape.png" />
@@ -39,11 +37,9 @@
     <Resource Include="icons\pages\rotatepage.png" />
     <Resource Include="icons\pages\ruled_landscape.png" />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\SimpleJournal.Common\SimpleJournal.Common.csproj" />
   </ItemGroup>
-
   <ItemGroup>
     <Resource Include="icons\pages\addblancopage.png" />
     <Resource Include="icons\pages\addblancopagedown.png" />
@@ -68,7 +64,6 @@
     <Resource Include="icons\pages\pageup.png" />
     <Resource Include="icons\pages\ruled.png" />
   </ItemGroup>
-
   <ItemGroup>
     <Compile Update="Resources.Designer.cs">
       <DesignTime>True</DesignTime>
@@ -76,7 +71,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
   </ItemGroup>
-
   <ItemGroup>
     <EmbeddedResource Update="Resources.de.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -89,5 +83,9 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
-
+  <ItemGroup>
+    <PackageReference Include="Microsoft.DotNet.UpgradeAssistant.Extensions.Default.Analyzers" Version="0.4.410601">
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+  </ItemGroup>
 </Project>
