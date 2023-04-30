@@ -273,18 +273,18 @@
 		<Resource Include="resources\backgrounds\wooden-2.jpg" />
 	</ItemGroup>
 	<ItemGroup>
-		<PackageReference Include="DotnetRuntimeBootstrapper" Version="2.4.0">
+		<PackageReference Include="DotnetRuntimeBootstrapper" Version="2.4.2">
 		  <PrivateAssets>all</PrivateAssets>
 		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
-		<PackageReference Include="Fluent.Ribbon" Version="10.0.0-alpha0295" />
-		<PackageReference Include="Magick.NET-Q16-AnyCPU" Version="13.0.1" />
-		<PackageReference Include="Magick.NET.Core" Version="13.0.1" />
-		<PackageReference Include="MahApps.Metro" Version="3.0.0-alpha0454" />
+		<PackageReference Include="Fluent.Ribbon" Version="10.0.0-alpha0317" />
+		<PackageReference Include="Magick.NET-Q16-AnyCPU" Version="13.1.0" />
+		<PackageReference Include="Magick.NET.Core" Version="13.1.0" />
+		<PackageReference Include="MahApps.Metro" Version="3.0.0-alpha0456" />
 		<PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
-		<PackageReference Include="Microsoft.Web.WebView2" Version="1.0.1724-prerelease" />
+		<PackageReference Include="Microsoft.Web.WebView2" Version="1.0.1777-prerelease" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-		<PackageReference Include="Microsoft.Windows.Compatibility" Version="8.0.0-preview.2.23128.3" />
+		<PackageReference Include="Microsoft.Windows.Compatibility" Version="8.0.0-preview.3.23174.8" />
 	</ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\Shared Libraries\SimpleJournal.Common\SimpleJournal.Common.csproj" />
