@@ -35,6 +35,23 @@ namespace SimpleJournal.Common.FileAssociations
         public static void EnsureAssociationsSet(params FileAssociation[] associations)
         {
             bool madeChanges = false;
+
+            try
+            {
+                Registry.CurrentUser.DeleteSubKeyTree(@"Software\Classes\SimpleJournal");
+            }
+            catch
+            {
+
+            }
+
+            try
+            {
+                Registry.CurrentUser.DeleteSubKeyTree(@"Software\Classes\SimpleJournal UWP");
+            }
+            catch
+            { }
+
             foreach (var association in associations)
             {
                 madeChanges |= SetAssociation(
@@ -46,7 +63,7 @@ namespace SimpleJournal.Common.FileAssociations
 
             if (madeChanges)
             {
-                SHChangeNotify(SHCNE_ASSOCCHANGED, SHCNF_FLUSH, IntPtr.Zero, IntPtr.Zero);
+                SHChangeNotify(SHCNE_ASSOCCHANGED, 0x2000, IntPtr.Zero, IntPtr.Zero); // 
             }
         }
 

@@ -11,8 +11,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
-using System.Threading.Tasks;
-using System.Web;
 using WebhookAPI;
 
 namespace PDF2J
@@ -79,6 +77,7 @@ namespace PDF2J
         {
             var now = DateTime.Now;
             var ticketsToRemove = PrintTickets.Where(t => (t.Status == TicketStatus.Failed || t.Status == TicketStatus.Completed) && t.DateTimeAdded.AddHours(1) >= now).ToList();
+
             foreach (var ticket in ticketsToRemove)
             {
                 try

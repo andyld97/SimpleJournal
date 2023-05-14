@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using System.Runtime.Serialization.Formatters.Binary;
 using System.Xml.Serialization;
 
 namespace SimpleJournal.Common
@@ -72,13 +71,7 @@ namespace SimpleJournal.Common
                 }
                 else
                 {
-                    using (MemoryStream ms = new MemoryStream())
-                    {
-                        ms.Write(xmlBytes, 0, xmlBytes.Length);
-                        ms.Position = 0;
-                        BinaryFormatter bf = new BinaryFormatter();
-                        instance = (T)bf.Deserialize(ms);
-                    }
+                    throw new NotSupportedException("Binary Serialization is not supported!");
                 }
             }
             catch (Exception e)
@@ -113,13 +106,7 @@ namespace SimpleJournal.Common
                 }
                 else
                 {
-                    using (MemoryStream ms = new MemoryStream())
-                    {
-                        ms.Write(xmlBytes, 0, xmlBytes.Length);
-                        ms.Position = 0;
-                        BinaryFormatter bf = new BinaryFormatter();
-                        instance = bf.Deserialize(ms);
-                    }
+                    throw new NotSupportedException("Binary Serialization is not supported!");
                 }
             }
             catch (Exception e)
@@ -167,14 +154,7 @@ namespace SimpleJournal.Common
                 }
                 else
                 {
-                    using (System.IO.FileStream fileStream = new FileStream(fileName, System.IO.FileMode.Open))
-                    {
-                        BinaryFormatter bf = new BinaryFormatter();
-                        T result = (T)bf.Deserialize(fileStream);
-                        fileStream.Close();
-                        fileStream.Dispose();
-                        return result;
-                    }
+                    throw new NotSupportedException("Binary Serialization is not supported!");
                 }
             }
             catch (Exception)
@@ -204,16 +184,7 @@ namespace SimpleJournal.Common
             }
             else
             {
-                // Clear file first
-                System.IO.File.WriteAllText(fileName, string.Empty);
-                using (System.IO.FileStream fileStream = new System.IO.FileStream(fileName, System.IO.FileMode.OpenOrCreate))
-                {
-                    BinaryFormatter bf = new BinaryFormatter();
-                    bf.Serialize(fileStream, instance);
-                    fileStream.Close();
-                    fileStream.Dispose();
-                    bf = null;
-                }
+                throw new NotSupportedException("Binary Serialization is not supported!");
             }
         }
 
@@ -254,14 +225,7 @@ namespace SimpleJournal.Common
             }
             else
             {
-                using (System.IO.MemoryStream ms = new MemoryStream())
-                {
-                    BinaryFormatter bf = new BinaryFormatter();
-                    bf.Serialize(ms, instance);
-
-                    bf = null;
-                    serializedContent = ms.ToArray();
-                }
+                throw new NotSupportedException("Binary Serialization is not supported!");
 
             }
             return serializedContent;
@@ -289,14 +253,7 @@ namespace SimpleJournal.Common
                 }
                 else
                 {
-                    using (System.IO.MemoryStream ms = new MemoryStream())
-                    {
-                        BinaryFormatter bf = new BinaryFormatter();
-                        bf.Serialize(ms, instance);
-
-                        bf = null;
-                        serializedContent = ms.ToArray();
-                    }
+                    throw new NotSupportedException("Binary Serialization is not supported!");
                 }
             }
             catch (Exception)
@@ -320,5 +277,5 @@ namespace SimpleJournal.Common
         }
 
         #endregion
-            }
+    }
 }

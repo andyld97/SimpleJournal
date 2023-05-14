@@ -132,9 +132,6 @@
   <data name="strFailedToTransformShape" xml:space="preserve">
     <value>Er is een fout opgetreden tijdens het transformeren van de vorm:</value>
   </data>
-  <data name="strFailedToSetFileAssoc_Message" xml:space="preserve">
-    <value>Kan bestandskoppeling niet instellen: {0}</value>
-  </data>
   <data name="strFailedToSaveSettings" xml:space="preserve">
     <value>Fout bij het opslaan van de instellingen:</value>
   </data>
@@ -155,5 +152,8 @@
   </data>
   <data name="strAttention" xml:space="preserve">
     <value>ATTENTIE!</value>
+  </data>
+  <data name="strFailedToSetFileAssoc_Message" xml:space="preserve">
+    <value>Kan bestandskoppeling niet instellen: {0}</value>
   </data>
 </root>
