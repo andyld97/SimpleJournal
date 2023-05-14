@@ -237,7 +237,6 @@ namespace SimpleJournal
             bmpCopied.Render(dv);
             return bmpCopied;
         }
-
    
         #endregion
 
@@ -378,7 +377,7 @@ namespace SimpleJournal
                 {
                     string fileVersion = FileVersionInfo.GetVersionInfo(execuatable).FileVersion;
 
-                    if (fileVersion == "0.5.1.0")
+                    if (fileVersion == "0.6.2.0")
                         return false;
                 }
                 catch

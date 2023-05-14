@@ -13,12 +13,13 @@ namespace SJFileAssoc
         static void Main()
         {
             try
-            {
-                FileAssociations.EnsureAssociationsSet("SimpleJournal UWP", "SimpleJournal UWP");
+            { 
+                // See <uap5:ExecutionAlias Alias="SimpleJournal.exe" />
+                FileAssociations.EnsureAssociationsSet("SimpleJournal", "SimpleJournal UWP");
             }
             catch (Exception ex)
             {
-                MessageBox.Show(string.Format(SimpleJournal.SharedResources.Resources.strFailedToSetFileAssoc_Message, ex.Message), SimpleJournal.SharedResources.Resources.strError, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(string.Format(Properties.Resources.strFailedToSetFileAssoc_Message, ex.Message), Properties.Resources.strError, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }
