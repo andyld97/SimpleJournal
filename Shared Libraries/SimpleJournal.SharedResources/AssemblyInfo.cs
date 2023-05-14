@@ -6,11 +6,11 @@ using System.Runtime.InteropServices;
 // defined in this file are now automatically added during build and populated with
 // values defined in project properties. For details of which attributes are included
 // and how to customize this process see: https://aka.ms/assembly-info-properties
-[assembly: AssemblyTitle("SimpleJournal.Documents.PDF")]
+[assembly: AssemblyTitle("SimpleJournal.SharedResources")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("SimpleJournal.Documents.PDF")]
+[assembly: AssemblyProduct("SimpleJournal.SharedResources")]
 [assembly: AssemblyCopyright(Strings.Copyright)]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
