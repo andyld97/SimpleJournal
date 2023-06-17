@@ -26,9 +26,9 @@ namespace SimpleJournal
         public static readonly string DataProtectionUrl = "https://simplejournal.ca-soft.net/{0}/privacy-policy/";
 
 #if UWP
-        public static readonly string VersionUrl = $"http://simplejournal.ca-soft.net/update.php?version={Consts.StoreVersion:4}";
+        public static readonly string VersionUrl = $"https://simplejournal.ca-soft.net/update.php?version={Consts.StoreVersion:4}";
 #else 
-        public static readonly string VersionUrl = $"http://simplejournal.ca-soft.net/update.php?version={Consts.NormalVersion:4}";
+        public static readonly string VersionUrl = $"https://simplejournal.ca-soft.net/update.php?version={Consts.NormalVersion:4}";
 #endif
         public static readonly string FeedbackUrl = "https://simplejournal.ca-soft.net/nfeedback.php";
         public static readonly string HomePageUrl = "https://simplejournal.ca-soft.net";
@@ -36,11 +36,11 @@ namespace SimpleJournal
         public static readonly string GhostScriptDownloadUrl = "https://ghostscript.com/releases/gsdnld.html";
         public static readonly string DotnetReleaseInfoUrl = "https://dotnetcli.blob.core.windows.net/dotnet/release-metadata/7.0/releases.json";
 #if !DEBUG
-        public static readonly string ConverterAPIUrl = "http://cas-server2.ddns.net:8080";
+        public static readonly string ConverterAPIUrl = "https://cas-server2.ddns.net:8080";
 #else
         public static readonly string ConverterAPIUrl = "http://127.0.0.1:5290";
 #endif
-        public static readonly string Google204Url = "http://clients3.google.com/generate_204";
+        public static readonly string Google204Url = "https://clients3.google.com/generate_204";
 
         /// <summary>
         /// The .NET version which was used to compile SJ
