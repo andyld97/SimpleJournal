@@ -6,8 +6,7 @@
              xmlns:controls="clr-namespace:SimpleJournal.Controls"
              xmlns:res="clr-namespace:SimpleJournal.Properties" xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300"
-    xmlns:converters="clr-namespace:MahApps.Metro.Converters;assembly=MahApps.Metro">
+             d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
         <Grid.Resources>
             <BooleanToVisibilityConverter x:Key="boolToVisibiltyConverter" />
@@ -18,15 +17,16 @@
             </Style>
         </Grid.Resources>
         <StackPanel>
+
+            <TextBlock Text="{x:Static res:Resources.strDefaultColors}" Margin="5,2" FontWeight="Bold" />
+            
             <mah:ColorPalette x:Name="DefaultColors" SelectionChanged="DefaultColors_SelectionChanged" BorderThickness="0" ItemsSource="{x:Static controls:ColorPalette.StandardColorsPalette}">
                 <mah:ColorPalette.Header>
-                    <TextBlock Text="{x:Static res:Resources.strDefaultColors}" FontWeight="Bold" />
+                    <TextBlock Width="0" Height="0" />
                 </mah:ColorPalette.Header>
             </mah:ColorPalette>
 
-            <!-- Tooltip Issue: To fix that make sure .NET 6.0.5 is installed! -->
-            <!-- https://github.com/dotnet/wpf/issues/5716 -->
-            <Expander x:Name="Expander">
+            <Expander x:Name="Expander" Padding="2">
                 <Expander.Header>
                     <TextBlock Text="{x:Static res:Resources.strColors}" FontWeight="Bold" Foreground="{DynamicResource Fluent.Ribbon.Brushes.Black}" />
                 </Expander.Header>
