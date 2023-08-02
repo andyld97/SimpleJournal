@@ -15,10 +15,18 @@ namespace Data
         /// </summary>
         public Version Version { get; set; }
 
+        /// <summary>
+        /// The timestamp when the cache was written
+        /// </summary>
+        public DateTime LastUpdated { get; set; } = DateTime.Now; 
+
         public UpdateInfo(UpdateResult result, Version version)
         {
             Result = result;
             Version = version;
         }
+
+        public UpdateInfo()
+        { }
     }
 }

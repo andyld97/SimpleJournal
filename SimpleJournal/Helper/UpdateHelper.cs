@@ -5,14 +5,14 @@ using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Data;
+using SimpleJournal.Common;
 
 namespace Helper
 {
     public class UpdateHelper
     {
         private static UpdateInfo cache = null;
-        private static DateTime lastTimeCachedVersion = DateTime.MinValue;
-
+   
         /// <summary>
         /// Checks if there is a new SimpleJournal version available
         /// </summary>
@@ -20,7 +20,22 @@ namespace Helper
         public static async Task<UpdateInfo> CheckForUpdatesAsync()
         {
             var now = DateTime.Now;
-            bool isCacheExpired = (lastTimeCachedVersion > DateTime.MinValue && lastTimeCachedVersion.AddMinutes(30) < now);
+      
+            // Load cache from file!
+            if (System.IO.File.Exists(Consts.UpdateCacheFilePath))
+            {
+                try
+                {
+                    cache = Serialization.Read<UpdateInfo>(Consts.UpdateCacheFilePath);
+                }
+                catch
+                {
+
+                }
+            }
+
+            var dt = cache?.LastUpdated ?? DateTime.MinValue;
+            bool isCacheExpired = (dt > DateTime.MinValue && dt.AddMinutes(30) < now);
 
             // Only return cache if it is valid and only if it is valid
             if (cache != null && cache.Result != SimpleJournal.Common.UpdateResult.Unknown && !isCacheExpired)
@@ -69,8 +84,8 @@ namespace Helper
                     if (result > 0)
                     {
                         // There is a new version
-                        cache = new UpdateInfo(SimpleJournal.Common.UpdateResult.UpdateAvailable, onlineVersion);
-                        lastTimeCachedVersion = now;
+                        cache = new UpdateInfo(SimpleJournal.Common.UpdateResult.UpdateAvailable, onlineVersion) { LastUpdated = now };
+                        SaveCache();
                         return cache;
                     }
                     else if (result < 0)
@@ -82,14 +97,15 @@ namespace Helper
                         cache = new UpdateInfo(SimpleJournal.Common.UpdateResult.DevVersion, Consts.NormalVersion);
 #endif
 
-                        lastTimeCachedVersion = now;
+                        cache.LastUpdated = now;
+                        SaveCache();
                         return cache;
                     }
                     else
                     {
                         // equal
-                        cache = new UpdateInfo(SimpleJournal.Common.UpdateResult.NoUpdateAvaialble, onlineVersion);
-                        lastTimeCachedVersion = now;
+                        cache = new UpdateInfo(SimpleJournal.Common.UpdateResult.NoUpdateAvaialble, onlineVersion) { LastUpdated = now };
+                        SaveCache();
                         return cache;
                     }
                 }
@@ -99,9 +115,18 @@ namespace Helper
                 // ignore failed to get updates
             }
 
-            cache = new UpdateInfo(SimpleJournal.Common.UpdateResult.Unknown, null);
-            lastTimeCachedVersion = now;
+            cache = new UpdateInfo(SimpleJournal.Common.UpdateResult.Unknown, null) { LastUpdated = now };
+            SaveCache();
             return cache;
+        }
+
+        private static void SaveCache()
+        {
+            try
+            {
+                Serialization.Save(Consts.UpdateCacheFilePath, cache);
+            }
+            catch { }
         }
 
         public static void SearchForUpdates()
