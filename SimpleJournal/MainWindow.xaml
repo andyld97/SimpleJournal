@@ -126,7 +126,7 @@
                     </Fluent:Backstage>
                 </Grid>
             </Fluent:Ribbon.Menu>
-            <Fluent:RibbonTabItem Style="{DynamicResource RibbonTabItemStyleWithoutFocusBorder}" Header="{x:Static res:Resources.strStart}" ReduceOrder="(GroupEdit),(GroupPens),(GroupRubber),(GroupTools),(GroupPages)" KeyTip="ST">
+            <Fluent:RibbonTabItem Header="{x:Static res:Resources.strStart}" ReduceOrder="(GroupEdit),(GroupPens),(GroupRubber),(GroupTools),(GroupPages)" KeyTip="ST">
                 <Fluent:RibbonTabItem.HeaderTemplate>
                     <DataTemplate>
                         <TextBlock Text="{Binding}" Width="50" TextAlignment="Center" />
@@ -252,7 +252,7 @@
                     </StackPanel>
                 </Fluent:RibbonGroupBox>
             </Fluent:RibbonTabItem>
-            <Fluent:RibbonTabItem Header="{x:Static res:Resources.strPaste}" Style="{DynamicResource RibbonTabItemStyleWithoutFocusBorder}" KeyTip="EI">
+            <Fluent:RibbonTabItem Header="{x:Static res:Resources.strPaste}" KeyTip="EI">
                 <Fluent:RibbonTabItem.HeaderTemplate>
                     <DataTemplate>
                         <TextBlock Text="{Binding}" Width="80" TextAlignment="Center" />
@@ -270,7 +270,7 @@
                     <Fluent:Button x:Name="btnInsertImage" Click="btnInsertImage_Click" Header="{x:Static res:Resources.strInsertImage}" LargeIcon="pack://application:,,,/SimpleJournal;component/resources/image.png"/>
                 </Fluent:RibbonGroupBox>
             </Fluent:RibbonTabItem>
-            <Fluent:RibbonTabItem Header="{x:Static res:Resources.strText}" Style="{DynamicResource RibbonTabItemStyleWithoutFocusBorder}" KeyTip="TE">
+            <Fluent:RibbonTabItem Header="{x:Static res:Resources.strText}" KeyTip="TE">
                 <Fluent:RibbonTabItem.HeaderTemplate>
                     <DataTemplate>
                         <TextBlock Text="{Binding}" Width="50" TextAlignment="Center" />
@@ -281,7 +281,7 @@
                     <Fluent:Button x:Name="btnSearch" Click="btnSearch_Click" Header="{x:Static res:Resources.strTextSearch}" LargeIcon="pack://application:,,,/SimpleJournal;component/resources/search.png"/>
                 </Fluent:RibbonGroupBox>
             </Fluent:RibbonTabItem>
-            <Fluent:RibbonTabItem Header="{x:Static res:Resources.strView}" Style="{DynamicResource RibbonTabItemStyleWithoutFocusBorder}" KeyTip="AN">
+            <Fluent:RibbonTabItem Header="{x:Static res:Resources.strView}" KeyTip="AN">
                 <Fluent:RibbonTabItem.HeaderTemplate>
                     <DataTemplate>
                         <TextBlock Text="{Binding}" Width="50" TextAlignment="Center" />

@@ -61,9 +61,7 @@
                 </StackPanel>
 
                 <controls:NumericUpDown x:Name="UpDownSinglePage" Minimum="1" Height="25" Margin="4,10,5,5" Visibility="{Binding SelectedExportMode, Converter={StaticResource selectedModeToVisibiltyConverter}, ConverterParameter=3}" />
-
                 <CheckBox x:Name="CheckBoxExportAsJournal" Content="{x:Static res:Resources.strExportAsJournal}" Margin="5,10,0,0" VerticalAlignment="Center" VerticalContentAlignment="Center" Checked="CheckBoxExportAsJournal_Checked" Unchecked="CheckBoxExportAsJournal_Checked" ToolTip="{x:Static res:Resources.strExportAsJournalExplanation}" Foreground="{DynamicResource Fluent.Ribbon.Brushes.Black}" />
-
                 <TextBlock x:Name="TextInvalidSettings" Foreground="Red" FontWeight="Bold" Margin="5,10,5,5" />
             </StackPanel>
         </Grid>
@@ -76,38 +74,42 @@
 
             <TextBlock x:Name="TextPreview" Text="Preview (Page 1 of 2):" FontWeight="Bold" />
 
-            <Border Margin="0,5,0,5" Grid.Row="1" BorderBrush="White" BorderThickness="1">
-                <Grid Background="#E1E1E1">
+            <Border Margin="0,5,0,0" Grid.Row="1" BorderBrush="White" BorderThickness="0">
+                <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*" />
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
 
-                    <Border Margin="0,5,0,5" BorderBrush="LightGray" BorderThickness="0 0 0 2">
-                        <ScrollViewer x:Name="displayFrameScrollViewer" Margin="5" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                    <Border Margin="0,0,0,0" BorderBrush="LightGray" BorderThickness="0">
+                        <Border.Effect>
+                            <DropShadowEffect ShadowDepth="2" Direction="270" BlurRadius="10"/>
+                        </Border.Effect>
+                        <ScrollViewer x:Name="displayFrameScrollViewer" Margin="0" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
                             <Border x:Name="displayFrame" Background="#e1e1e1" />
                         </ScrollViewer>
                     </Border>
-                    <Grid Grid.Row="1" Background="{DynamicResource White}" Height="60">
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                            <ui:TransparentImageButton x:Name="ButtonPreviousPagePreview" Click="ButtonPreviousPagePreview_Click" Width="40" Height="40" Margin="5" ToolTip="{x:Static res:Resources.strExportDialog_ButtonPreviousPage}" Image="../../resources/arrow_left.png" />
-                            <ui:TransparentImageButton x:Name="ButtonNextPagePreview" Click="ButtonNextPagePreview_Click" Width="40" Height="40" Margin="5" ToolTip="{x:Static res:Resources.strExportDialog_ButtonNextPage}" Image="../../resources/arrow_right.png" />
-                        </StackPanel>
+                    
+                    <Grid Grid.Row="1" Margin="0,8,0,8" Background="#FFC5C5C5" Height="60">
+                        <Grid Margin="5,0,0,0">
+                            <StackPanel Margin="0,0,5,0" Orientation="Horizontal" HorizontalAlignment="Right">
+                                <ui:TransparentImageButton x:Name="ButtonPreviousPagePreview" Click="ButtonPreviousPagePreview_Click" Width="40" Height="40" Margin="0,5,5,5" ToolTip="{x:Static res:Resources.strExportDialog_ButtonPreviousPage}" Image="../../resources/arrow_left.png" />
+                                <ui:TransparentImageButton x:Name="ButtonNextPagePreview" Click="ButtonNextPagePreview_Click" Width="40" Height="40" Margin="0,5,0,5" ToolTip="{x:Static res:Resources.strExportDialog_ButtonNextPage}" Image="../../resources/arrow_right.png" />
+                            </StackPanel>
 
-                        <StackPanel Margin="10,0,0,0" Orientation="Horizontal" HorizontalAlignment="Left">
-                            <ui:TransparentImageButton x:Name="ButtonZoomOut" Click="ButtonZoomOut_Click" Width="40" Height="40" Margin="5" Image="../../resources/zoom_out.png" />
-                            <ui:TransparentImageButton x:Name="ButtonZoomIn" Click="ButtonZoomIn_Click" Width="40" Height="40" Margin="5" Image="../../resources/zoom.png" />
-                        </StackPanel>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                <Button x:Name="ButtonOK" Click="ButtonOK_Click" HorizontalAlignment="Center" Content="{x:Static res:Resources.strButtonExport}" Width="100" Height="30" FontWeight="Bold" />
+                                <Button x:Name="ButtonCancel" Click="ButtonCancel_Click" Content="{x:Static res:Resources.strCancel}" Height="30" Width="100" Margin="5,0,0,0" />
+                            </StackPanel>
+
+                            <StackPanel Margin="0" Orientation="Horizontal" HorizontalAlignment="Left">
+                                <ui:TransparentImageButton x:Name="ButtonZoomOut" Click="ButtonZoomOut_Click" Width="40" Height="40" Margin="0,5" Image="../../resources/zoom_out.png" />
+                                <ui:TransparentImageButton x:Name="ButtonZoomIn" Click="ButtonZoomIn_Click" Width="40" Height="40" Margin="5" Image="../../resources/zoom.png" />
+                            </StackPanel>
+                        </Grid>
                     </Grid>
                 </Grid>
             </Border>
-        </Grid>
-
-        <Grid Grid.Row="1" Grid.ColumnSpan="2">
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,1,0">
-                <Button x:Name="ButtonOK" Click="ButtonOK_Click" HorizontalAlignment="Right"  Content="{x:Static res:Resources.strButtonExport}" Width="100" Height="30" Margin="5,5,5,7" FontWeight="Bold" />
-                <Button x:Name="ButtonCancel" Click="ButtonCancel_Click"  HorizontalAlignment="Right" Content="{x:Static res:Resources.strCancel}" Margin="5,5,5,7" Width="100" />
-            </StackPanel>
         </Grid>
     </Grid>
 </UserControl>

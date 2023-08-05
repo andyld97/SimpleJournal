@@ -5,14 +5,16 @@ using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Data;
+using SimpleJournal.Common;
+using System.Linq;
+using System.IO;
 
 namespace Helper
 {
     public class UpdateHelper
     {
         private static UpdateInfo cache = null;
-        private static DateTime lastTimeCachedVersion = DateTime.MinValue;
-
+   
         /// <summary>
         /// Checks if there is a new SimpleJournal version available
         /// </summary>
@@ -20,7 +22,22 @@ namespace Helper
         public static async Task<UpdateInfo> CheckForUpdatesAsync()
         {
             var now = DateTime.Now;
-            bool isCacheExpired = (lastTimeCachedVersion > DateTime.MinValue && lastTimeCachedVersion.AddMinutes(30) < now);
+      
+            // Load cache from file!
+            if (System.IO.File.Exists(Consts.UpdateCacheFilePath))
+            {
+                try
+                {
+                    cache = Serialization.Read<UpdateInfo>(Consts.UpdateCacheFilePath);
+                }
+                catch
+                {
+
+                }
+            }
+
+            var dt = cache?.LastUpdated ?? DateTime.MinValue;
+            bool isCacheExpired = (dt > DateTime.MinValue && dt.AddMinutes(30) < now);
 
             // Only return cache if it is valid and only if it is valid
             if (cache != null && cache.Result != SimpleJournal.Common.UpdateResult.Unknown && !isCacheExpired)
@@ -32,7 +49,7 @@ namespace Helper
                 if (isCacheExpired && cache != null && cache.Result != SimpleJournal.Common.UpdateResult.Unknown)
                     return cache;
 
-                cache = new UpdateInfo(SimpleJournal.Common.UpdateResult.Unknown, null);
+                cache = new UpdateInfo(SimpleJournal.Common.UpdateResult.Unknown, null, string.Empty, now);
                 return cache;
             }
 
@@ -57,39 +74,51 @@ namespace Helper
 #endif
                     string url = $"{Consts.VersionUrl}&lang={System.Globalization.CultureInfo.InstalledUICulture.TwoLetterISOLanguageName}&debug={debug.ToString().ToLower()}";
                     string versionJSON = await client.GetStringAsync(url);
-                    dynamic versions = JsonConvert.DeserializeObject(versionJSON);
+                    var versionInfo = JsonConvert.DeserializeObject<VersionInfo>(versionJSON);
 
+                    string onlineVersionString;
 #if !UWP
-                    Version onlineVersion = Version.Parse(versions.current.normal.Value);
+                    onlineVersionString = versionInfo.Current.Normal;
 #else
-                    Version onlineVersion = Version.Parse(versions.current.store.Value);
+                    onlineVersionString = versionInfo.Current.Store;
+#endif
+                    Version onlineVersion = Version.Parse(onlineVersionString);
+
+                    // Find hash
+                    var longVersionInfo = versionInfo.Versions.FirstOrDefault(p => p.Version == versionInfo.Current.Normal);
+                    string hash = longVersionInfo?.Hash;
+
+#if UWP
+                    // Clear hash (there are no hashes for UWP - since it's managed via MS Store)
+                    hash = string.Empty;
 #endif
 
                     var result = onlineVersion.CompareTo(currentVersion);
                     if (result > 0)
                     {
                         // There is a new version
-                        cache = new UpdateInfo(SimpleJournal.Common.UpdateResult.UpdateAvailable, onlineVersion);
-                        lastTimeCachedVersion = now;
+                        cache = new UpdateInfo(SimpleJournal.Common.UpdateResult.UpdateAvailable, onlineVersion, hash, now);
+                        SaveCache();
                         return cache;
                     }
                     else if (result < 0)
                     {
                         // Online version is older than this version (dev version)
 #if UWP
-                        cache = new UpdateInfo(SimpleJournal.Common.UpdateResult.DevVersion, Consts.StoreVersion);
+                        cache = new UpdateInfo(SimpleJournal.Common.UpdateResult.DevVersion, Consts.StoreVersion, hash, now);
 #else
-                        cache = new UpdateInfo(SimpleJournal.Common.UpdateResult.DevVersion, Consts.NormalVersion);
+                        cache = new UpdateInfo(SimpleJournal.Common.UpdateResult.DevVersion, Consts.NormalVersion, hash, now);
 #endif
 
-                        lastTimeCachedVersion = now;
+                        cache.LastUpdated = now;
+                        SaveCache();
                         return cache;
                     }
                     else
                     {
                         // equal
-                        cache = new UpdateInfo(SimpleJournal.Common.UpdateResult.NoUpdateAvaialble, onlineVersion);
-                        lastTimeCachedVersion = now;
+                        cache = new UpdateInfo(SimpleJournal.Common.UpdateResult.NoUpdateAvaialble, onlineVersion, hash, now);
+                        SaveCache();
                         return cache;
                     }
                 }
@@ -99,9 +128,18 @@ namespace Helper
                 // ignore failed to get updates
             }
 
-            cache = new UpdateInfo(SimpleJournal.Common.UpdateResult.Unknown, null);
-            lastTimeCachedVersion = now;
+            cache = new UpdateInfo(SimpleJournal.Common.UpdateResult.Unknown, null, string.Empty, now);
+            SaveCache();
             return cache;
+        }
+
+        private static void SaveCache()
+        {
+            try
+            {
+                Serialization.Save(Consts.UpdateCacheFilePath, cache);
+            }
+            catch { }
         }
 
         public static void SearchForUpdates()
@@ -110,9 +148,11 @@ namespace Helper
 
             if (result.Result == SimpleJournal.Common.UpdateResult.UpdateAvailable && result.Version != null)
             {
-                UpdateDialog ud = new UpdateDialog(result.Version);
+                UpdateDialog ud = new UpdateDialog(result.Version, result.SHA256Hash);
                 ud.ShowDialog();
             }
         }
+
+        internal static string GetLastHash() => cache?.SHA256Hash;
     }
 }

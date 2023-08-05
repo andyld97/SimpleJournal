@@ -1362,6 +1362,15 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die The integrity check of the file failed, so the process was aborted. Please try again later and check your internet connection to avoid compromise! ähnelt.
+        /// </summary>
+        public static string strFailedToVerfiyHashMessage {
+            get {
+                return ResourceManager.GetString("strFailedToVerfiyHashMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Error! ähnelt.
         /// </summary>
         public static string strFailure {
