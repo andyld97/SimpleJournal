@@ -358,7 +358,7 @@ namespace SimpleJournal.Modules
         private void DebugTestButton_Click(object sender, RoutedEventArgs e)
         {
             // This is just for debugging purposes
-            new UpdateDialog(Consts.NormalVersion).ShowDialog();
+            new UpdateDialog(Consts.NormalVersion, UpdateHelper.GetLastHash()).ShowDialog();
         }
 
         private void ButtonShowAutoSaveFolder_Click(object sender, RoutedEventArgs e)

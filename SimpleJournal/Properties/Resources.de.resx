@@ -2233,4 +2233,7 @@ Details: {1}</value>
   <data name="strExternalAssemblies" xml:space="preserve">
     <value>Externe Abhängigkeiten:</value>
   </data>
+  <data name="strFailedToVerfiyHashMessage" xml:space="preserve">
+    <value>Die Integritätsprüfung der Datei ist fehlgeschlagen, daher wurde der Vorgang abgebrochen. Bitte versuchen Sie es später noch einmal und prüfen Sie Ihre Internetverbindung um eine Kompromittierung auszuschließen!</value>
+  </data>
 </root>

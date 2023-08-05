@@ -161,7 +161,7 @@ namespace SimpleJournal
             string platform = GeneralHelper.DeterminePlatform();
             string fileName = $"windowsdesktop-runtime-{Consts.CompiledDotnetVersion}-{platform}.exe";
             string localFilePath = System.IO.Path.Combine(FileSystemHelper.GetDownloadsPath(), fileName);
-            var dialog = new UpdateDownloadDialog(string.Format(Properties.Resources.strDotnetUpdateSetup_Downloading, fileName), url) { LocalFilePath = localFilePath };
+            var dialog = new UpdateDownloadDialog(string.Format(Properties.Resources.strDotnetUpdateSetup_Downloading, fileName), url, string.Empty) { LocalFilePath = localFilePath };
             var result = dialog.ShowDialog();
 
             if (result.HasValue && result.Value)

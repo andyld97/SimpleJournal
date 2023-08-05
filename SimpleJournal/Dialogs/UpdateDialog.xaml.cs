@@ -13,11 +13,13 @@ namespace SimpleJournal.Dialogs
     public partial class UpdateDialog : Window
     {
         private readonly Version version;
+        private readonly string hash;
 
-        public UpdateDialog(Version v)
+        public UpdateDialog(Version v, string hash)
         {
             InitializeComponent();
             this.version = v;
+            this.hash = hash;
 
             try
             {
@@ -35,9 +37,9 @@ namespace SimpleJournal.Dialogs
         {
             try
             {
-                // Load changelog
-                var webView2Envoirnment = await CoreWebView2Environment.CreateAsync(null, Consts.WebView2CachePath);
-                await webChangelog.EnsureCoreWebView2Async(webView2Envoirnment);
+                // Load Changelog
+                var webView2Environment = await CoreWebView2Environment.CreateAsync(null, Consts.WebView2CachePath);
+                await webChangelog.EnsureCoreWebView2Async(webView2Environment);
                 webChangelog.Source = new Uri(string.Format(Consts.ChangelogUrl, Properties.Resources.strLang, Settings.Instance.UseDarkMode ? 1 : 0));
             }
             catch (Exception)
@@ -55,7 +57,7 @@ namespace SimpleJournal.Dialogs
         {
             string message = string.Format(Properties.Resources.strUpdateDownloadDialog_DownloadText, version.ToString(4));
             string localFilePath = System.IO.Path.Combine(FileSystemHelper.GetDownloadsPath(), $"SimpleJournal-{version:4}.exe");
-            UpdateDownloadDialog updateDownloadDialog = new UpdateDownloadDialog(message, Consts.DownloadUrl) { LocalFilePath = localFilePath };
+            UpdateDownloadDialog updateDownloadDialog = new UpdateDownloadDialog(message, Consts.DownloadUrl, hash) { LocalFilePath = localFilePath };
 
             var result = updateDownloadDialog.ShowDialog();
 

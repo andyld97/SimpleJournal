@@ -1,4 +1,5 @@
 ﻿using SimpleJournal.Common.Helper;
+using SimpleJournal.Helper;
 using System;
 using System.IO;
 using System.Net.Http;
@@ -19,12 +20,15 @@ namespace SimpleJournal.Dialogs
 
 		private string Url { get; set; }
 
-		public UpdateDownloadDialog(string message, string url)
+		private string Hash { get; } 
+
+		public UpdateDownloadDialog(string message, string url, string hash)
 		{
             InitializeComponent();
 
             TextDescription.Text = message;
 			Url = url;
+			Hash = hash;
 			Loaded += UpdateDownloadDialog_Loaded;
 		}
 
@@ -32,18 +36,29 @@ namespace SimpleJournal.Dialogs
 		{
 			try
 			{
-				using (HttpClient client = new HttpClient())
+                using HttpClient client = new HttpClient();
+                var progress = new DownloadProgress();
+                progress.OnProgressChanged += Progress_OnProgressChanged;
+                using (System.IO.FileStream fs = new FileStream(LocalFilePath, FileMode.OpenOrCreate))
+                {
+                    lastSecond = DateTime.Now.Second;
+                    await client.DownloadDataAsync(Url, fs, progress);
+                }
+
+				// Verify hash first (if dialog is initialized with a pre set hash)
+				if (!string.IsNullOrEmpty(Hash))
 				{
-					var progress = new DownloadProgress();
-					progress.OnProgressChanged += Progress_OnProgressChanged;
-					using (System.IO.FileStream fs = new FileStream(LocalFilePath, FileMode.OpenOrCreate))
+					string hash = await SHA256Hash.CreateHashFromFileAsync(LocalFilePath);
+					if (Hash != hash)
 					{
-						lastSecond = DateTime.Now.Second;
-						await client.DownloadDataAsync(Url, fs, progress);
-						DialogResult = true;
+						MessageBox.Show(SimpleJournal.Properties.Resources.strFailedToVerfiyHashMessage, SharedResources.Resources.strError, MessageBoxButton.OK, MessageBoxImage.Error);
+						DialogResult = false;
+						return;
 					}
 				}
-			}
+
+                DialogResult = true;
+            }
 			catch (Exception ex)
 			{
 				MessageBox.Show($"{Properties.Resources.strUpdateDownloadDialog_FailedToDownloadUpdate}{Environment.NewLine}{Environment.NewLine}{ex.Message}", SharedResources.Resources.strError, MessageBoxButton.OK, MessageBoxImage.Error);

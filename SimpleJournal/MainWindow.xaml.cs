@@ -365,7 +365,7 @@ namespace SimpleJournal
             UpdateMenu();
 
 #if !UWP
-            UpdateHelper.SearchForUpdates();            
+            UpdateHelper.SearchForUpdates();
 #endif
 
             DrawingCanvas.OnChangedDocumentState += DrawingCanvas_OnChangedDocumentState;

@@ -2379,4 +2379,7 @@ Details: {1}</value>
   <data name="strUnexceptedFailureTitle" xml:space="preserve">
     <value>Unexpected failure!</value>
   </data>
+  <data name="strFailedToVerfiyHashMessage" xml:space="preserve">
+    <value>The integrity check of the file failed, so the process was aborted. Please try again later and check your internet connection to avoid compromise!</value>
+  </data>
 </root>
