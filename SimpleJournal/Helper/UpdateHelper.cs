@@ -78,7 +78,7 @@ namespace Helper
 
                     string onlineVersionString;
 #if !UWP
-                    onlineVersionString = versionInfo.Current.Normal);
+                    onlineVersionString = versionInfo.Current.Normal;
 #else
                     onlineVersionString = versionInfo.Current.Store;
 #endif

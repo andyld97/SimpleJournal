@@ -66,7 +66,7 @@ namespace Notifications
                         HandleUserInteraction = new Action(() => 
                         {
 #if !UWP         
-                            UpdateDialog ud = new UpdateDialog(version);
+                            UpdateDialog ud = new UpdateDialog(version, UpdateHelper.GetLastHash());
                             ud.ShowDialog();
 #else 
                             try
