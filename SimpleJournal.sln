@@ -103,6 +103,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Store Packages", "Store Pac
 		Store Packages\ReferencePackage (SimpleJournal) (78) (1.610.0.0) (06.04.23).msix = Store Packages\ReferencePackage (SimpleJournal) (78) (1.610.0.0) (06.04.23).msix
 		Store Packages\ReferencePackage (SimpleJournal) (79) (1.620.0.0) (14.05.23).msix = Store Packages\ReferencePackage (SimpleJournal) (79) (1.620.0.0) (14.05.23).msix
 		Store Packages\ReferencePackage (SimpleJournal) (80) (1.630.0.0) (05.08.23).msix = Store Packages\ReferencePackage (SimpleJournal) (80) (1.630.0.0) (05.08.23).msix
+		Store Packages\ReferencePackage (SimpleJournal) (81) (1.630.1.0) (06.08.23) HotFix.msix = Store Packages\ReferencePackage (SimpleJournal) (81) (1.630.1.0) (06.08.23) HotFix.msix
 	EndProjectSection
 EndProject
 Global

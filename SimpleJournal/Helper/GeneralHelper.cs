@@ -369,16 +369,16 @@ namespace SimpleJournal
             return false;
 #endif
             string directoryPath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "journal");
-            string execuatable = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "journal", "SjFileAssoc.exe");            
+            string executable = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "journal", "SjFileAssoc.exe");            
            
-            if (System.IO.File.Exists(execuatable))
+            if (System.IO.File.Exists(executable))
             {
                 try
                 {
-                    string fileVersion = FileVersionInfo.GetVersionInfo(execuatable).FileVersion;
+                    string fileVersion = FileVersionInfo.GetVersionInfo(executable).FileVersion;
 
-                    if (fileVersion == "0.6.2.0")
-                        return false;
+                    if (fileVersion == "0.6.4.0")
+                        return true;
                 }
                 catch
                 {

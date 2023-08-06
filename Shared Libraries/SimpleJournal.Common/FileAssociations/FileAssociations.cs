@@ -1,6 +1,5 @@
 ﻿using Microsoft.Win32;
 using System;
-//using System.Windows.Forms;
 
 namespace SimpleJournal.Common.FileAssociations
 {
@@ -77,7 +76,6 @@ namespace SimpleJournal.Common.FileAssociations
             return madeChanges;
         }
 
-
         private static bool SetKeyDefaultValue(string keyPath, string value)
         {
             try
@@ -92,9 +90,7 @@ namespace SimpleJournal.Common.FileAssociations
                 }
             }
             catch (Exception)
-            {
-
-            }
+            { }
 
             return false;
         }
