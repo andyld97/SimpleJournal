@@ -277,7 +277,7 @@
 		  <PrivateAssets>all</PrivateAssets>
 		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
-		<PackageReference Include="Fluent.Ribbon" Version="10.0.1" />
+		<PackageReference Include="Fluent.Ribbon" Version="10.0.2" />
 		<PackageReference Include="Magick.NET-Q16-AnyCPU" Version="13.2.0" />
 		<PackageReference Include="Magick.NET.Core" Version="13.2.0" />
 		<PackageReference Include="MahApps.Metro" Version="3.0.0-alpha0457" />

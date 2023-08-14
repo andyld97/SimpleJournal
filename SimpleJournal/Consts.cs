@@ -1,9 +1,5 @@
 ﻿using SimpleJournal.Common;
 using System;
-using System.CodeDom;
-using System.Collections.Generic;
-using System.Reflection;
-using System.Windows;
 using System.Windows.Media;
 
 namespace SimpleJournal
@@ -45,7 +41,7 @@ namespace SimpleJournal
         /// <summary>
         /// The .NET version which was used to compile SJ
         /// </summary>
-        public static readonly Version CompiledDotnetVersion = new Version(7, 0, 3);
+        public static readonly Version CompiledDotnetVersion = new Version(7, 0, 10);
 
         /// <summary>
         /// Polling interval for NotificationService
@@ -137,6 +133,6 @@ namespace SimpleJournal
         #region Sidebar
         public const double SidebarListBoxItemHeight = 50;
         public const double SidebarListBoxItemViewboxSize = 40;
-#endregion
+        #endregion
     }
 }

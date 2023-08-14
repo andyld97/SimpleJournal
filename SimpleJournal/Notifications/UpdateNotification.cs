@@ -86,7 +86,7 @@ namespace Notifications
 
         public override NotificationType Type => NotificationType.Info;
 
-        public override bool IsAsyncExecutionRequiredForCheckOccurance => true;
+        public override bool IsAsyncExecutionRequiredForCheckOccurrence => true;
 
         public override TimeSpan ContinuouslyCheckingInterval
         {

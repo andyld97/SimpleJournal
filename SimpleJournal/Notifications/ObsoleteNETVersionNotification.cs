@@ -49,7 +49,7 @@ namespace Notifications
 
         public override NotificationType Type => NotificationType.Warning;
 
-        public override bool IsAsyncExecutionRequiredForCheckOccurance => false;
+        public override bool IsAsyncExecutionRequiredForCheckOccurrence => false;
 
         public ObsoleteNETVersionNotification()
         { }
@@ -57,7 +57,7 @@ namespace Notifications
         public ObsoleteNETVersionNotification(DateTime timestamp) : base(timestamp)
         { }
 
-        public override bool? CheckOccurance()
+        public override bool? CheckOccurrence()
         {
             return Environment.Version < Consts.CompiledDotnetVersion;
         }
