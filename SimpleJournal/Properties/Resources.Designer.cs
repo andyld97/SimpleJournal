@@ -1290,6 +1290,17 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die An error occurred while opening the store.
+        ///
+        ///To rate anyway, open the store and search for &quot;SimpleJournal&quot; and click on &quot;How to rate SimpleJournal&quot;, specify the number of stars and then you can click on &quot;Write review&quot; on the right! ähnelt.
+        /// </summary>
+        public static string strFailedToOpenReview {
+            get {
+                return ResourceManager.GetString("strFailedToOpenReview", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Error while restoring the journal: ähnelt.
         /// </summary>
         public static string strFailedToRecoverJournal {
@@ -3388,6 +3399,15 @@ namespace SimpleJournal.Properties {
         public static string strRestoreBackupToolTip {
             get {
                 return ResourceManager.GetString("strRestoreBackupToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Rate SimpleJournal ähnelt.
+        /// </summary>
+        public static string strReviewButton {
+            get {
+                return ResourceManager.GetString("strReviewButton", resourceCulture);
             }
         }
         

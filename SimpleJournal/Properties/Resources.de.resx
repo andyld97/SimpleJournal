@@ -2236,4 +2236,12 @@ Details: {1}</value>
   <data name="strFailedToVerfiyHashMessage" xml:space="preserve">
     <value>Die Integritätsprüfung der Datei ist fehlgeschlagen, daher wurde der Vorgang abgebrochen. Bitte versuchen Sie es später noch einmal und prüfen Sie Ihre Internetverbindung um eine Kompromittierung auszuschließen!</value>
   </data>
+  <data name="strReviewButton" xml:space="preserve">
+    <value>SimpleJournal bewerten</value>
+  </data>
+  <data name="strFailedToOpenReview" xml:space="preserve">
+    <value>Beim Öffnen des Stores ist ein Fehler aufgetreten.
+
+Um die Bewertung trotzdem abzugeben, öffnen Sie den Store und suchen nach "SimpleJournal" und klicken Sie auf "Wie bewerten Sie SimpleJournal", geben die Anzahl der Sterne an und dann können Sie rechts auf "Bewertung schreiben" klicken!</value>
+  </data>
 </root>

@@ -300,6 +300,7 @@
                 </Fluent:RibbonGroupBox>
             </Fluent:RibbonTabItem>
             <Fluent:Ribbon.ToolBarItems>
+                <Fluent:Button x:Name="ButtonReview" Click="ButtonReview_Click" Size="Small" Icon="pack://application:,,,/SimpleJournal;component/resources/review.png" ToolTip="{x:Static res:Resources.strReviewButton}" />
                 <Fluent:Button Size="Small" Icon="pack://application:,,,/SimpleJournal;component/resources/help.png" x:Name="btnHelp" Click="BtnHelp_Click" ToolTip="{x:Static res:Resources.strHelp}" RenderOptions.BitmapScalingMode="Fant" />
                 <Fluent:Button Size="Small" Icon="pack://application:,,,/SimpleJournal;component/resources/feedback.png" x:Name="btnFeedback" Click="btnFeedback_Click" ToolTip="{x:Static res:Resources.strUserFeedback}" />
                 <StackPanel Orientation="Horizontal">

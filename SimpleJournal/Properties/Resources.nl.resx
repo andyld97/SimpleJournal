@@ -1814,4 +1814,12 @@ Details: {1}</value>
   <data name="strFailedToVerfiyHashMessage" xml:space="preserve">
     <value>De integriteitscontrole van het bestand is mislukt, daarom is het proces afgebroken. Probeer het later nog eens en controleer uw internetverbinding om een storing uit te sluiten!</value>
   </data>
+  <data name="strReviewButton" xml:space="preserve">
+    <value>Beoordeel SimpleJournal</value>
+  </data>
+  <data name="strFailedToOpenReview" xml:space="preserve">
+    <value>Er is een fout opgetreden bij het openen van de winkel.
+
+Om het toch te beoordelen, open de winkel en zoek naar "SimpleJournal" en klik op "Hoe SimpleJournal beoordelen", voer het aantal sterren in en vervolgens kunt u rechts klikken op "Schrijf beoordeling"!</value>
+  </data>
 </root>

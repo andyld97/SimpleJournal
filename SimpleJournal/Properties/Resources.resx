@@ -2382,4 +2382,12 @@ Details: {1}</value>
   <data name="strFailedToVerfiyHashMessage" xml:space="preserve">
     <value>The integrity check of the file failed, so the process was aborted. Please try again later and check your internet connection to avoid compromise!</value>
   </data>
+  <data name="strReviewButton" xml:space="preserve">
+    <value>Rate SimpleJournal</value>
+  </data>
+  <data name="strFailedToOpenReview" xml:space="preserve">
+    <value>An error occurred while opening the store.
+
+To rate anyway, open the store and search for "SimpleJournal" and click on "How to rate SimpleJournal", specify the number of stars and then you can click on "Write review" on the right!</value>
+  </data>
 </root>

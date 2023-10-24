@@ -366,6 +366,7 @@ namespace SimpleJournal
 
 #if !UWP
             UpdateHelper.SearchForUpdates();
+            ButtonReview.Visibility = Visibility.Collapsed;
 #endif
 
             DrawingCanvas.OnChangedDocumentState += DrawingCanvas_OnChangedDocumentState;
@@ -4032,10 +4033,17 @@ namespace SimpleJournal
             }
             catch
             {
-                // fallback
+                // Fallback
                 mainScrollView.Background = Consts.DefaultBackground;
             }
         }
+
+        private void ButtonReview_Click(object sender, RoutedEventArgs e)
+        {
+            if (!GeneralHelper.OpenUri(new Uri(Consts.ReviewStore)))
+                MessageBox.Show(SimpleJournal.Properties.Resources.strFailedToOpenReview, SharedResources.Resources.strError, MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+
         #endregion
 
         #region General Events / Touch
