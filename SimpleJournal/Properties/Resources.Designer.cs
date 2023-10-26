@@ -3412,6 +3412,42 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Close ähnelt.
+        /// </summary>
+        public static string strReviewNotification_Close {
+            get {
+                return ResourceManager.GetString("strReviewNotification_Close", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die I would be very happy about constructive criticism, suggestions and ideas! ähnelt.
+        /// </summary>
+        public static string strReviewNotification_Message {
+            get {
+                return ResourceManager.GetString("strReviewNotification_Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Give rating ähnelt.
+        /// </summary>
+        public static string strReviewNotification_RateSimpleJournal {
+            get {
+                return ResourceManager.GetString("strReviewNotification_RateSimpleJournal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Do you like SimpleJournal? ähnelt.
+        /// </summary>
+        public static string strReviewNotification_Title {
+            get {
+                return ResourceManager.GetString("strReviewNotification_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Rotation: ähnelt.
         /// </summary>
         public static string strRotation {

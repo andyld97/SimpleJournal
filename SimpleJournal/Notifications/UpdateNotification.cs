@@ -54,30 +54,27 @@ namespace Notifications
                     new UserInteraction()
                     {
                         Description = SimpleJournal.Properties.Resources.strNotifications_UserInteraction_ShowChangelog,
-                        HandleUserInteraction = new Action(() => 
+                        HandleUserInteractionAsync = new Func<Task>(() => 
                         {
                             AboutModule aboutDialog = new AboutModule();
                             (aboutDialog.ShowChangelogPage() as ITabbedModule).ShowModuleWindow(Settings.Instance.UseModernDialogs, null);
+
+                            return Task.CompletedTask;
                         })
                     },
                     new UserInteraction()
                     {
                         Description = SimpleJournal.Properties.Resources.strNotifications_Update_UserInteraction_ExecuteUpdate,
-                        HandleUserInteraction = new Action(() => 
+                        HandleUserInteractionAsync = new Func<Task>(() => 
                         {
 #if !UWP         
                             UpdateDialog ud = new UpdateDialog(version, UpdateHelper.GetLastHash());
                             ud.ShowDialog();
 #else 
-                            try
-                            {
-                                System.Diagnostics.Process.Start("explorer.exe", "\"ms-windows-store://pdp/?productid=9MV6J44M90N7\"");
-                            }
-                            catch
-                            {
-                                // ignore
-                            }
+                            GeneralHelper.OpenUri(new Uri("ms-windows-store://pdp/?productid=9MV6J44M90N7"));
 #endif
+
+                            return Task.CompletedTask;
                         })
                     }
                 };
@@ -86,20 +83,12 @@ namespace Notifications
 
         public override NotificationType Type => NotificationType.Info;
 
-        public override bool IsAsyncExecutionRequiredForCheckOccurrence => true;
+        public override TimeSpan ContinuouslyCheckingInterval => TimeSpan.FromHours(1);
 
-        public override TimeSpan ContinuouslyCheckingInterval
+        public override async Task<bool?> CheckOccurrenceAsync(bool isCalledFromTimer)
         {
-            get
-            {
-                return TimeSpan.FromHours(1);
-            }
-        }
-
-        public override async Task<bool?> CheckOccuranceAsync()
-        {
-            // Without this part the notification would be removed if there is not internet connection
-            // and would be added again if the internet connection is back.
+            // Without this part the notification would be removed if there is not Internet connection
+            // and would be added again if the Internet connection is back.
             // But since we know there is a new version available the notification should stay as long as the version gets updated!
             if (!GeneralHelper.IsConnectedToInternet())
                 return null;

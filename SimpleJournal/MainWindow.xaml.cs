@@ -367,6 +367,9 @@ namespace SimpleJournal
 #if !UWP
             UpdateHelper.SearchForUpdates();
             ButtonReview.Visibility = Visibility.Collapsed;
+#else 
+            if (Settings.Instance.UserRatedOrCloseNotification)
+                ButtonReview.Visibility = Visibility.Collapsed;
 #endif
 
             DrawingCanvas.OnChangedDocumentState += DrawingCanvas_OnChangedDocumentState;
@@ -420,7 +423,7 @@ namespace SimpleJournal
             NotificationService.NotificationServiceInstance = new NotificationService();
             RefreshNotifications(); // do it manually here, because otherwise already added notifications won't get displayed!
             NotificationService.NotificationServiceInstance.OnNotificationAdded += NotificationServiceInstance_OnNotificationAdded;
-            NotificationService.NotificationServiceInstance.OnNotifcationRemoved += NotificationServiceInstance_OnNotifcationRemoved;
+            NotificationService.NotificationServiceInstance.OnNotificationRemoved += NotificationServiceInstance_OnNotifcationRemoved;
             NotificationService.NotificationServiceInstance.Start();
 
             if (startSetupDialog)
@@ -4042,6 +4045,11 @@ namespace SimpleJournal
         {
             if (!GeneralHelper.OpenUri(new Uri(Consts.ReviewStore)))
                 MessageBox.Show(SimpleJournal.Properties.Resources.strFailedToOpenReview, SharedResources.Resources.strError, MessageBoxButton.OK, MessageBoxImage.Error);
+            else
+            {
+                Settings.Instance.UserRatedOrCloseNotification = true;
+                Settings.Instance.Save();
+            }
         }
 
         #endregion

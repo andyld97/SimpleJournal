@@ -42,12 +42,6 @@ namespace SimpleJournal.Common
         public DateTime Timestamp { get; set; }
 
         /// <summary>
-        /// If true <see cref="CheckOccuranceAsync"/> should be called, otherwise <see cref="CheckOccurrence"/>
-        /// </summary>
-        [XmlIgnore]
-        public abstract bool IsAsyncExecutionRequiredForCheckOccurrence { get; }
-
-        /// <summary>
         /// Determines if this notification is checked continuously
         /// </summary>
         [XmlIgnore]
@@ -63,19 +57,10 @@ namespace SimpleJournal.Common
         /// <summary>
         /// Checks if this notification should be raised
         /// </summary>
+        /// <param name="isCalledFromTimer">True, if this is called from the timer</param>
         /// <returns>null; if this occurrence shouldn't be doing anything</returns>
         /// <exception cref="NotImplementedException"></exception>
-        public virtual Task<bool?> CheckOccuranceAsync()
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// Checks if this notification should be raised
-        /// </summary>
-        /// <returns>null; if this occurrence shouldn't be doing anything</returns>
-        /// <exception cref="NotImplementedException"></exception>
-        public virtual bool? CheckOccurrence()
+        public virtual Task<bool?> CheckOccurrenceAsync(bool isCalledFromTimer)
         {
             throw new NotImplementedException();
         }
@@ -123,11 +108,7 @@ namespace SimpleJournal.Common
                         continue;
                 }
 
-                bool? hasNotificationOccured = null;
-                if (instance.IsAsyncExecutionRequiredForCheckOccurrence)
-                    hasNotificationOccured = await instance.CheckOccuranceAsync();
-                else
-                    hasNotificationOccured = instance.CheckOccurrence();
+                bool? hasNotificationOccured = await instance.CheckOccurrenceAsync(isCalledFromTimer);    
 
                 if (hasNotificationOccured.HasValue && hasNotificationOccured.Value)
                 {
@@ -146,8 +127,9 @@ namespace SimpleJournal.Common
         /// Removes all obsolete notifications from the given list
         /// </summary>
         /// <param name="notifications"></param>
+        /// <param name="isCalledFromTimer"></param>
         /// <returns>true, if there were more than one notification removed</returns>
-        public static async Task<List<Notification>> RemoveObsoleteNotificationsAsync(List<Notification> notifications)
+        public static async Task<List<Notification>> RemoveObsoleteNotificationsAsync(List<Notification> notifications, bool isCalledFromTimer)
         {
             if (notifications == null || notifications.Count == 0)
                 return new List<Notification>();
@@ -155,19 +137,10 @@ namespace SimpleJournal.Common
             List<Notification> toRemove = new List<Notification>();
             foreach (var notification in notifications)
             {
-                if (notification.IsAsyncExecutionRequiredForCheckOccurrence)
-                {
-                    var result = await notification.CheckOccuranceAsync();
+                var result = await notification.CheckOccurrenceAsync(isCalledFromTimer);
 
-                    if (result.HasValue && !result.Value)
-                        toRemove.Add(notification);
-                }
-                else if (!notification.IsAsyncExecutionRequiredForCheckOccurrence)
-                {
-                    var result = notification.CheckOccurrence();
-                    if (result.HasValue && !result.Value)
-                        toRemove.Add(notification);
-                }
+                if (result.HasValue && !result.Value)
+                    toRemove.Add(notification);
             }
 
             foreach (var notification in toRemove)
@@ -205,21 +178,15 @@ namespace SimpleJournal.Common
         public string Description { get; set; }
 
         /// <summary>
-        /// Determines if async execution is required
-        /// </summary>
-        public bool IsExecutionAsync { get; set; }
-
-        /// <summary>
         /// The actual "interaction" (but async)
         /// </summary>
         [XmlIgnore]
         public Func<Task> HandleUserInteractionAsync { get; set; }
-
+        
         /// <summary>
-        /// /// The actual "interaction"
+        /// True if the this interaction closes the notification
         /// </summary>
-        [XmlIgnore]
-        public Action HandleUserInteraction { get; set; }
+        public bool CloseNotification { get; set; } 
 
         /// <summary>
         /// Executes this actions
@@ -227,10 +194,7 @@ namespace SimpleJournal.Common
         /// <returns></returns>
         public async Task ExecuteAsync()
         {
-            if (IsExecutionAsync)
-                await HandleUserInteractionAsync();
-            else
-                HandleUserInteraction?.Invoke();
-        }    
+            await HandleUserInteractionAsync();
+        }
     }
 }

@@ -2390,4 +2390,20 @@ Details: {1}</value>
 
 To rate anyway, open the store and search for "SimpleJournal" and click on "How to rate SimpleJournal", specify the number of stars and then you can click on "Write review" on the right!</value>
   </data>
+  <data name="strReviewNotification_Close" xml:space="preserve">
+    <value>Close</value>
+    <comment>ReviewNotification</comment>
+  </data>
+  <data name="strReviewNotification_RateSimpleJournal" xml:space="preserve">
+    <value>Give rating</value>
+    <comment>ReviewNotification</comment>
+  </data>
+  <data name="strReviewNotification_Title" xml:space="preserve">
+    <value>Do you like SimpleJournal?</value>
+    <comment>ReviewNotification</comment>
+  </data>
+  <data name="strReviewNotification_Message" xml:space="preserve">
+    <value>I would be very happy about constructive criticism, suggestions and ideas!</value>
+    <comment>ReviewNotification</comment>
+  </data>
 </root>

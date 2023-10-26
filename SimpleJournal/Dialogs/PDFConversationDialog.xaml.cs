@@ -50,7 +50,7 @@ namespace SimpleJournal.Dialogs
             TextSource.Text = sourceFileName;
 
             CheckUseOnlineConverter.IsChecked = Settings.Instance.UseOnlineConversation;
-            ExpanderHelp.IsExpanded = Settings.Instance.PDFConverstaionDialogIsHelpExpanded;
+            ExpanderHelp.IsExpanded = Settings.Instance.PDFConversationDialogIsHelpExpanded;
             CheckUseSelfHostedAPI.IsChecked = Settings.Instance.UseSelfHostedPDF2JApi;
             TextUrl.Text = Settings.Instance.SelfHostedPDF2JApiUrl;
 
@@ -398,7 +398,7 @@ namespace SimpleJournal.Dialogs
             if (!isInitialized)
                 return;
 
-            Settings.Instance.PDFConverstaionDialogIsHelpExpanded = ExpanderHelp.IsExpanded;
+            Settings.Instance.PDFConversationDialogIsHelpExpanded = ExpanderHelp.IsExpanded;
             Settings.Instance.Save();
         }
 

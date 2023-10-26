@@ -1822,4 +1822,16 @@ Details: {1}</value>
 
 Om het toch te beoordelen, open de winkel en zoek naar "SimpleJournal" en klik op "Hoe SimpleJournal beoordelen", voer het aantal sterren in en vervolgens kunt u rechts klikken op "Schrijf beoordeling"!</value>
   </data>
+  <data name="strReviewNotification_Close" xml:space="preserve">
+    <value>Sluit</value>
+  </data>
+  <data name="strReviewNotification_Message" xml:space="preserve">
+    <value>Ik ontvang graag opbouwende kritiek, suggesties en ideeën!</value>
+  </data>
+  <data name="strReviewNotification_RateSimpleJournal" xml:space="preserve">
+    <value>Beoordeling indienen</value>
+  </data>
+  <data name="strReviewNotification_Title" xml:space="preserve">
+    <value>Vind je SimpleJournal leuk?</value>
+  </data>
 </root>

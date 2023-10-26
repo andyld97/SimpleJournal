@@ -2244,4 +2244,16 @@ Details: {1}</value>
 
 Um die Bewertung trotzdem abzugeben, öffnen Sie den Store und suchen nach "SimpleJournal" und klicken Sie auf "Wie bewerten Sie SimpleJournal", geben die Anzahl der Sterne an und dann können Sie rechts auf "Bewertung schreiben" klicken!</value>
   </data>
+  <data name="strReviewNotification_Close" xml:space="preserve">
+    <value>Schließen</value>
+  </data>
+  <data name="strReviewNotification_Message" xml:space="preserve">
+    <value>Ich würde mir sehr über konstruktive Kritik, Anregungen und Ideen sehr freuen!</value>
+  </data>
+  <data name="strReviewNotification_RateSimpleJournal" xml:space="preserve">
+    <value>Bewertung abgeben</value>
+  </data>
+  <data name="strReviewNotification_Title" xml:space="preserve">
+    <value>Gefällt Ihnen SimpleJournal?</value>
+  </data>
 </root>

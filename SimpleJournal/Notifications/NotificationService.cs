@@ -13,7 +13,7 @@ namespace Notifications
         private DateTime lastTick = DateTime.MinValue;
 
         public delegate void onNotificationAdded(Notification notification);
-        public delegate void onNotificationRemvoved(Notification notification);
+        public delegate void onNotificationRemoved(Notification notification);
         private readonly Type[] additionalTypes;
 
         public static NotificationService NotificationServiceInstance { get; set; }
@@ -26,7 +26,7 @@ namespace Notifications
         /// <summary>
         /// Called when a notification was removed by the system
         /// </summary>
-        public event onNotificationRemvoved OnNotifcationRemoved;
+        public event onNotificationRemoved OnNotificationRemoved;
 
         /// <summary>
         /// The list of all current notifications
@@ -46,18 +46,17 @@ namespace Notifications
             var addedNotifications = await Notification.CheckNotificationsAsync(Notifications, typeof(NotificationService).Assembly, lastTick, isNotFirstCall);
             addedNotifications?.ForEach(n => OnNotificationAdded?.Invoke(n));
 
-            var removedNotifications = await Notification.RemoveObsoleteNotificationsAsync(Notifications);
+            var removedNotifications = await Notification.RemoveObsoleteNotificationsAsync(Notifications, isNotFirstCall);
             removedNotifications?.ForEach(n =>
             {
                 Notifications.Remove(n);
-                OnNotifcationRemoved?.Invoke(n);
+                OnNotificationRemoved?.Invoke(n);
             });
 
             if (removedNotifications.Count > 0 || addedNotifications.Count > 0)
             {
                 try
                 {
-
                     Serialization.Save(Consts.NotificationsFilePath, Notifications, additionalTypes: additionalTypes);
                 }
                 catch
@@ -69,6 +68,12 @@ namespace Notifications
             lastTick = now;
         }
 
+        public void RemoveNotification(Notification notification)
+        {
+            Notifications.Remove(notification);
+            OnNotificationRemoved?.Invoke(notification);
+        }
+
         public NotificationService()
         {
             additionalTypes = typeof(NotificationService).Assembly.GetTypes().Where(t => typeof(Notification).IsAssignableFrom(t) && !t.IsAbstract).ToArray();
@@ -78,8 +83,7 @@ namespace Notifications
                 if (System.IO.File.Exists(Consts.NotificationsFilePath))
                 {
                     Notifications = Serialization.Read<List<Notification>>(Consts.NotificationsFilePath, additionalTypes: additionalTypes);
-                    if (Notifications == null)
-                        Notifications = new List<Notification>();
+                    Notifications ??= new List<Notification>();
                 }
             }
             catch
