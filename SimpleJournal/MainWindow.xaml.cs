@@ -31,6 +31,7 @@ using System.Globalization;
 using System.Linq;
 using System.Printing;
 using System.Runtime.InteropServices;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -262,6 +263,14 @@ namespace SimpleJournal
                     // Open
                     btnOpen_Click(null, null);
                 }
+                else if (e.Key == Key.PageDown)
+                {
+                    ScrollToNextPage(true); 
+                }
+                else if (e.Key == Key.PageUp)
+                {
+                    ScrollToPreviousPage();
+                }
             };
 
 
@@ -300,7 +309,7 @@ namespace SimpleJournal
                 TextStatusBar.Text = message;
             };
 
-            Journal.OnErrorOccured += delegate (string message, string scope)
+            Journal.OnErrorOccurred += delegate (string message, string scope)
             {
                 if (scope == "load")
                     MessageBox.Show($"{Properties.Resources.strFailedToLoadJournal} {message}", Properties.Resources.strFailedToLoadJournalTitle, MessageBoxButton.OK, MessageBoxImage.Error);
@@ -368,7 +377,7 @@ namespace SimpleJournal
             UpdateHelper.SearchForUpdates();
             ButtonReview.Visibility = Visibility.Collapsed;
 #else 
-            if (Settings.Instance.UserRatedOrCloseNotification)
+            if (Settings.Instance.UserRatedOrClosedNotification)
                 ButtonReview.Visibility = Visibility.Collapsed;
 #endif
 
@@ -1525,6 +1534,36 @@ namespace SimpleJournal
             scrollBar.Width = (Settings.Instance.EnlargeScrollbar ? Consts.ScrollBarExtendedWidth : Consts.ScrollBarDefaultWidth);
         }
 
+        private void RefreshLinkedDocumentButtons()
+        {
+            void UpdateButtons(bool state)
+            {
+                ButtonLoadPreviousLinkedDocument.Visibility = (state ? Visibility.Visible : Visibility.Collapsed);
+                ButtonLoadNextLinkedDocument.Visibility = (state ? Visibility.Visible : Visibility.Collapsed);
+            }
+
+            if (!Settings.Instance.ShowLinkedDocumentButtons)
+            {
+                // Hide buttons
+                UpdateButtons(false);
+                return;
+            }
+
+            if (currentJournal != null)
+            {
+                if (currentJournal.PreviousDocumentIndex == null && currentJournal.NextDocumentIndex == null)
+                    UpdateButtons(false);
+                else
+                {
+                    ButtonLoadPreviousLinkedDocument.Visibility = (currentJournal.PreviousDocumentIndex != null ? Visibility.Visible : Visibility.Collapsed);
+                    ButtonLoadNextLinkedDocument.Visibility = (currentJournal.NextDocumentIndex != null ? Visibility.Visible : Visibility.Collapsed);
+                    return;
+                }
+            }
+
+            UpdateButtons(false);
+        }
+
         private UserControl GeneratePage(IPattern pattern, PaperType? paperType = null, byte[] background = null, Orientation orientation = Orientation.Portrait)
         {
             IPaper pageContent = null;
@@ -1959,7 +1998,7 @@ namespace SimpleJournal
 
             isInitalized = true;
         }
-#endregion
+        #endregion
 
         #region Toolbar Handling / Private Event Handling
 
@@ -2547,7 +2586,7 @@ namespace SimpleJournal
             }
         }
 
-        private void ButtonPreviousPage_Click(object sender, RoutedEventArgs e)
+        private void ScrollToPreviousPage()
         {
             int index = cmbPages.SelectedIndex - 1;
             if (index < 0)
@@ -2556,10 +2595,23 @@ namespace SimpleJournal
             ScrollToPage(index);
         }
 
-        private void ButtonNextPage_Click(object sender, RoutedEventArgs e)
+        private void ScrollToNextPage(bool stopEnd = false)
         {
             int index = (cmbPages.SelectedIndex + 1) % CurrentPages;
+            if (stopEnd && cmbPages.SelectedIndex == CurrentPages - 1)
+                return;
+
             ScrollToPage(index);
+        }
+
+        private void ButtonPreviousPage_Click(object sender, RoutedEventArgs e)
+        {
+            ScrollToPreviousPage();
+        }
+
+        private void ButtonNextPage_Click(object sender, RoutedEventArgs e)
+        {
+            ScrollToNextPage();
         }
 
         private async Task<bool> SaveProject(bool forceNewPath)
@@ -2826,12 +2878,23 @@ namespace SimpleJournal
             AddNewPage(Settings.Instance.PaperTypeLastInserted, Settings.Instance.OrientationLastInserted);
         }
 
-        private bool AskForOpeningAfterModifying()
+        private bool AskForOpeningAfterModifying(bool askForSave = false)
         {
             bool run = false;
             if (DrawingCanvas.Change)
             {
-                var res = MessageBox.Show(this, Properties.Resources.strWantToLoadNewJournal, Properties.Resources.strWantToLoadNewJournalTitle, MessageBoxButton.YesNo, MessageBoxImage.Question);
+                string message = Properties.Resources.strWantToLoadNewJournal;
+                string title = Properties.Resources.strWantToLoadNewJournalTitle;
+                MessageBoxButton buttons = MessageBoxButton.YesNo;
+
+                if (askForSave)
+                {
+                    message = Properties.Resources.strWantToSaveBeforeLoadOtherDocument;
+                    title = Properties.Resources.strWantToSaveBeforeLoadOtherDocument_Title;
+                    buttons = MessageBoxButton.YesNoCancel;
+                }
+
+                var res = MessageBox.Show(this, message, title, buttons, MessageBoxImage.Question);
                 if (res == MessageBoxResult.Yes)
                     run = true;
             }
@@ -2995,6 +3058,7 @@ namespace SimpleJournal
             }
 
             RefreshVerticalScrollbarSize();
+            RefreshLinkedDocumentButtons();
         }
 
         private void btnRemoveSelectedStrokes_Click(object sender, RoutedEventArgs e)
@@ -3333,7 +3397,10 @@ namespace SimpleJournal
                     // Apply pattern from document 
                     ChequeredPattern = currentJournal?.ChequeredPattern,
                     DottedPattern = currentJournal?.DottedPattern,
-                    RuledPattern = currentJournal?.RuledPattern
+                    RuledPattern = currentJournal?.RuledPattern,
+                    
+                    PreviousDocumentIndex = currentJournal?.PreviousDocumentIndex,
+                    NextDocumentIndex = currentJournal?.NextDocumentIndex
                 };
 
                 if (saveAsBackup)
@@ -3544,6 +3611,9 @@ namespace SimpleJournal
                     // Delete old auto save files
                     DeleteAutoSaveBackup();
 
+                    // Refresh link buttons to other documents
+                    RefreshLinkedDocumentButtons();
+
                     // Set process id to document and save it to make sure other instances cannot load this journal
                     currentJournal.ProcessID = ProcessHelper.CurrentProcID;
 
@@ -3564,8 +3634,40 @@ namespace SimpleJournal
             {
                 MessageBox.Show(this, Properties.Resources.strWrongFileFormat, Properties.Resources.strWrongFileFormatTitle, MessageBoxButton.OK, MessageBoxImage.Error);
             }
+
             DrawingCanvas.Change = false;
         }
+
+        #region Journal (PDF) Navigation
+
+        private async void ButtonLoadPreviousLinkedDocument_Click(object sender, RoutedEventArgs e)
+        {
+            await NavigateIndexAsync(currentJournal.PreviousDocumentIndex);
+        }
+
+        private async void ButtonLoadNextLinkedDocument_Click(object sender, RoutedEventArgs e)
+        {
+            await NavigateIndexAsync(currentJournal.NextDocumentIndex);
+        }
+
+        private async Task NavigateIndexAsync(int? index)
+        {
+            if (AskForOpeningAfterModifying(true))
+            {
+                if (DrawingCanvas.Change)
+                    await SaveJournalAsync(currentJournalPath);
+
+                // Generate new journal path
+                string currentFileName = System.IO.Path.GetFileNameWithoutExtension(currentJournalPath);
+                string parent = System.IO.Path.GetDirectoryName(currentJournalPath);
+                string newFileName = Regex.Replace(currentFileName, @"(\.\d*)$", $".{index}.journal");
+
+                // Load this journal
+                await LoadJournalAsnyc(System.IO.Path.Combine(parent, newFileName));
+            }
+        }
+
+        #endregion
 
         private void ClearJournalOld()
         {
@@ -3737,14 +3839,14 @@ namespace SimpleJournal
         {
             var exportDialog = new ExportDialog();
 
-            exportDialog.exportControl.Initalize(CurrentJournalPages, CurrentJournalPages[cmbPages.SelectedIndex], exportDialog);
+            exportDialog.exportControl.Initialize(CurrentJournalPages, CurrentJournalPages[cmbPages.SelectedIndex], exportDialog);
             exportDialog.ShowDialog();
         }
 
         private void MenuBackstageExport_MouseDown(object sender, MouseButtonEventArgs e)
         {
             TextExportStatus.Text = string.Empty;
-            ExportControl.Initalize(CurrentJournalPages, CurrentJournalPages[cmbPages.SelectedIndex], this);
+            ExportControl.Initialize(CurrentJournalPages, CurrentJournalPages[cmbPages.SelectedIndex], this);
         }
 
 #endregion
@@ -4047,7 +4149,7 @@ namespace SimpleJournal
                 MessageBox.Show(SimpleJournal.Properties.Resources.strFailedToOpenReview, SharedResources.Resources.strError, MessageBoxButton.OK, MessageBoxImage.Error);
             else
             {
-                Settings.Instance.UserRatedOrCloseNotification = true;
+                Settings.Instance.UserRatedOrClosedNotification = true;
                 Settings.Instance.Save();
             }
         }

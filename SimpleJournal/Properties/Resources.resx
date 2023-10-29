@@ -2406,4 +2406,30 @@ To rate anyway, open the store and search for "SimpleJournal" and click on "How 
     <value>I would be very happy about constructive criticism, suggestions and ideas!</value>
     <comment>ReviewNotification</comment>
   </data>
+  <data name="strPDFConversationDialog_InvalidRange" xml:space="preserve">
+    <value>Please enter a valid page range!</value>
+  </data>
+  <data name="strWantToSaveBeforeLoadOtherDocument" xml:space="preserve">
+    <value>Do you want to save the changes and open the selected document?</value>
+  </data>
+  <data name="strWantToSaveBeforeLoadOtherDocument_Title" xml:space="preserve">
+    <value>Save Changes?</value>
+  </data>
+  <data name="strFailedToConvertPDFDokument" xml:space="preserve">
+    <value>Error while converting the PDF document: {0}</value>
+  </data>
+  <data name="strPDFLoadPreviousLinkedDocument" xml:space="preserve">
+    <value>Open previous linked journal</value>
+  </data>
+  <data name="strPDFLoadNextLinkedDocument" xml:space="preserve">
+    <value>Open next linked journal</value>
+  </data>
+  <data name="strUseLinkNavigationPDF" xml:space="preserve">
+    <value>Use navigation in PDF journals</value>
+  </data>
+  <data name="strUseLinkNavigationPDF_Description" xml:space="preserve">
+    <value>A journal generated from a PDF document containing over 100 pages consists of multiple journals (due to performance). With this setting buttons are displayed at the beginning and at the end of each document to navigate to the previous linked document or to the last linked document. 
+
+This setting is only relevant for larger documents!</value>
+  </data>
 </root>

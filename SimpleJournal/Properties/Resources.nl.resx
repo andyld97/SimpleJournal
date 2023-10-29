@@ -1834,4 +1834,30 @@ Om het toch te beoordelen, open de winkel en zoek naar "SimpleJournal" en klik o
   <data name="strReviewNotification_Title" xml:space="preserve">
     <value>Vind je SimpleJournal leuk?</value>
   </data>
+  <data name="strPDFConversationDialog_InvalidRange" xml:space="preserve">
+    <value>Voer een geldig paginabereik in!</value>
+  </data>
+  <data name="strWantToSaveBeforeLoadOtherDocument_Title" xml:space="preserve">
+    <value>Wijzigingen opslaan?</value>
+  </data>
+  <data name="strWantToSaveBeforeLoadOtherDocument" xml:space="preserve">
+    <value>Wil je de wijzigingen opslaan en het geselecteerde document openen?</value>
+  </data>
+  <data name="strUseLinkNavigationPDF_Description" xml:space="preserve">
+    <value>Een journaal dat werd aangemaakt vanuit een PDF-document en meer dan 100 pagina's bevat, bestaat uit meerdere journalen (omwille van de prestaties). Met deze instelling worden aan het begin en einde van elk document knoppen weergegeven om naar het vorige gekoppelde document of naar het laatst gekoppelde document te navigeren. 
+
+Deze instelling is alleen relevant voor grotere documenten!</value>
+  </data>
+  <data name="strUseLinkNavigationPDF" xml:space="preserve">
+    <value>Navigeren in PDF-tijdschriften</value>
+  </data>
+  <data name="strPDFLoadPreviousLinkedDocument" xml:space="preserve">
+    <value>Open het vorige gekoppelde tijdschrift</value>
+  </data>
+  <data name="strPDFLoadNextLinkedDocument" xml:space="preserve">
+    <value>Open het volgende gekoppelde tijdschrift</value>
+  </data>
+  <data name="strFailedToConvertPDFDokument" xml:space="preserve">
+    <value>Fout bij het converteren van het PDF-document: {0}</value>
+  </data>
 </root>

@@ -30,7 +30,7 @@ namespace SimpleJournal.Notifications
                 {
                     GeneralHelper.OpenUri(new Uri(Consts.ReviewStore));
 
-                    Settings.Instance.UserRatedOrCloseNotification = true;
+                    Settings.Instance.UserRatedOrClosedNotification = true;
                     Settings.Instance.Save();
 
                     return Task.CompletedTask;
@@ -42,7 +42,7 @@ namespace SimpleJournal.Notifications
                 Description = Properties.Resources.strReviewNotification_Close,
                 HandleUserInteractionAsync = new Func<Task>(() =>
                 {
-                    Settings.Instance.UserRatedOrCloseNotification = true;
+                    Settings.Instance.UserRatedOrClosedNotification = true;
                     Settings.Instance.Save();
 
                     return Task.CompletedTask;
@@ -61,7 +61,7 @@ namespace SimpleJournal.Notifications
 #endif
 
             // Will be shown (not initially), but after the first notification check cycle (duration = 1h)
-            if (Settings.Instance.UserRatedOrCloseNotification || !isCalledFromTimer)
+            if (Settings.Instance.UserRatedOrClosedNotification || !isCalledFromTimer)
                 return Task.FromResult((bool?)false);
 
             return Task.FromResult((bool?)true);

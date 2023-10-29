@@ -1927,7 +1927,7 @@ Hier möchte ich Ihnen noch ein paar wichtige Hinweise geben, die Ihnen helfen w
     <value>PDF Dokument</value>
   </data>
   <data name="strPDFConversationDialog_UseOnlineConversation" xml:space="preserve">
-    <value>Online-Konversation verwenden (wenn Ihr System wenig Speicherplatz hat)</value>
+    <value>Online-Konversation verwenden (wenn Ihr System wenig Arbeitsspeicher hat)</value>
   </data>
   <data name="strMicrosoftPrintToPDFWarning" xml:space="preserve">
     <value>Microsoft Print To PDF funktioniert nicht richtig! Es wird nicht empfohlen, den Drucker zu benutzen, wollen Sie ihn trotzdem verwenden?</value>
@@ -2255,5 +2255,31 @@ Um die Bewertung trotzdem abzugeben, öffnen Sie den Store und suchen nach "Simp
   </data>
   <data name="strReviewNotification_Title" xml:space="preserve">
     <value>Gefällt Ihnen SimpleJournal?</value>
+  </data>
+  <data name="strPDFConversationDialog_InvalidRange" xml:space="preserve">
+    <value>Bitte geben Sie einen gültigen Seiten-Bereich an!</value>
+  </data>
+  <data name="strFailedToConvertPDFDokument" xml:space="preserve">
+    <value>Fehler beim Konvertieren des PDF Dokuments: {0}</value>
+  </data>
+  <data name="strPDFLoadNextLinkedDocument" xml:space="preserve">
+    <value>Nächstes verknüpftes Journal öffnen</value>
+  </data>
+  <data name="strPDFLoadPreviousLinkedDocument" xml:space="preserve">
+    <value>Vorheriges verknüpftes Journal öffnen</value>
+  </data>
+  <data name="strUseLinkNavigationPDF" xml:space="preserve">
+    <value>Navigieren in PDF-Journals verwenden</value>
+  </data>
+  <data name="strUseLinkNavigationPDF_Description" xml:space="preserve">
+    <value>Ein Journal, welches aus einem PDF Dokument generiert wurde und über 100 Seiten beinhaltet, besteht aus mehreren Journals (aufgrund von Performance). Mit dieser Einstellung werden am Anfang und am Ende des jeweiligen Dokument Buttons angezeigt, um zum vorherigen verknüpften Dokument oder zum letzten verknüpften Dokument zu navigieren. 
+
+Diese Einstellung ist nur bei größeren Dokumenten relevant!</value>
+  </data>
+  <data name="strWantToSaveBeforeLoadOtherDocument" xml:space="preserve">
+    <value>Möchten Sie die Änderungen speichern und das ausgewählte Dokument öffnen?</value>
+  </data>
+  <data name="strWantToSaveBeforeLoadOtherDocument_Title" xml:space="preserve">
+    <value>Änderungen speichern?</value>
   </data>
 </root>

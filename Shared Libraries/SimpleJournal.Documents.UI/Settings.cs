@@ -247,7 +247,13 @@ namespace SimpleJournal.Documents.UI
         /// <summary>
         /// Determines if the review notification was already shown
         /// </summary>
-        public bool UserRatedOrCloseNotification { get; set; } = false;
+        public bool UserRatedOrClosedNotification { get; set; } = false;
+
+        /// <summary>
+        /// If true a button is shown at the start and then end of the pages to load linked documents
+        /// These buttons are only shown if this setting is enabled and if the loaded document has a link.
+        /// </summary>
+        public bool ShowLinkedDocumentButtons { get; set; } = true; 
 
         #region Pattern
 
