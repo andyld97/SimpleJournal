@@ -58,7 +58,7 @@
                             <LineBreak />
                             <LineBreak />
                             <Run Text="Version:" />
-                            <Run x:Name="TextVersion" Text="{x:Static res:Resources.strUnknownVersion}" FontWeight="Bold"/>
+                            <Run x:Name="TextVersion" Text="{x:Static res:Resources.strUnknownVersion}" FontWeight="Bold" />
                             <LineBreak />
                             <Run Text="Release:" />
                             <Run Text="{Binding Source={x:Static common:Strings.ReleaseDate}, Mode=OneWay, StringFormat={x:Static res:Resources.strDateTimeFormat}}" FontWeight="Bold" />

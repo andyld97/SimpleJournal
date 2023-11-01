@@ -224,6 +224,7 @@
                         <controls:SettingsItemControl x:Name="settingUseModernDialogs" SettingName="{x:Static res:Resources.strSettings_UseModernDialogs_Title}" Description="{x:Static res:Resources.strSettings_UseModernDialogs_Description}" SettingPropertyName="UseModernDialogs" />
                         <controls:SettingsItemControl SettingName="{x:Static res:Resources.strDisplaySidebarAutomatically}" Description="{x:Static res:Resources.strDisplaySidebarAutomaticallyDescription}" SettingPropertyName="DisplaySidebarAutomatically" />
                         <controls:SettingsItemControl x:Name="SettingObjectBarTransparency" SettingName="{x:Static res:Resources.strSettingsSidebarTransparency}" Description="{x:Static res:Resources.strSettingsSidebarTransparency_Description}" SettingPropertyName="UseObjectBarTransparency" OnSettingChanged="SettingObjectBarTransparency_OnSettingChanged" />
+                        <controls:SettingsItemControl SettingName="{x:Static res:Resources.strUseLinkNavigationPDF}" Description="{x:Static res:Resources.strUseLinkNavigationPDF_Description}" SettingPropertyName="ShowLinkedDocumentButtons" />
 
                         <Border Margin="0,5,0,0" BorderThickness="1" BorderBrush="LightGray" CornerRadius="3">
                             <StackPanel>
@@ -244,7 +245,7 @@
                                 <controls:SettingsItemControl SettingName="{x:Static res:Resources.strUseAutoSave}" Description="{x:Static res:Resources.strAutoSaveDescription}" SettingPropertyName="UseAutoSave" UseBorder="False" />
 
                                 <TextBlock Text="{x:Static res:Resources.strAutoSaveInterval}" FontWeight="Bold" Margin="5,2,0,5"/>
-                                <controls:NumericUpDown x:Name="NumericUpDownAutoSaveInteral" OnChanged="NumericUpDownAutoSaveInteral_OnChanged" Margin="5,1,0,5" Width="180" HorizontalAlignment="Left" Minimum="1" Maximum="60" Value="5"/>
+                                <controls:NumericUpDown x:Name="NumericUpDownAutoSaveInterval" OnChanged="NumericUpDownAutoSaveInterval_OnChanged" Margin="5,1,0,5" Width="180" HorizontalAlignment="Left" Minimum="1" Maximum="60" Value="5" />
                             </StackPanel>
                         </Border>
                     </StackPanel>

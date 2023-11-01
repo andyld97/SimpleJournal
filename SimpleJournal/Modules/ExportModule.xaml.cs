@@ -74,7 +74,7 @@ namespace SimpleJournal.Modules
             ZoomByScale(scaleFactor);
         }
 
-        public void Initalize(ObservableCollection<IPaper> pages, IPaper currentPage, Window owner)
+        public void Initialize(ObservableCollection<IPaper> pages, IPaper currentPage, Window owner)
         {
             DataContext = this;
             this.currentPage = currentPage;
@@ -144,6 +144,8 @@ namespace SimpleJournal.Modules
                 case ExportMode.CurrentPage: return (pages.IndexOf(currentPage) + 1, pages.IndexOf(currentPage) + 1);
                 case ExportMode.SelectedPageRange: return (UpDownFrom.Value, UpDownTo.Value);
                 case ExportMode.SinglePage: return (UpDownSinglePage.Value, UpDownSinglePage.Value);
+                default:
+                    break;
             }
 
             return (0, 0);
@@ -261,8 +263,10 @@ namespace SimpleJournal.Modules
                         using (System.IO.MemoryStream ms = new System.IO.MemoryStream())
                         {
                             currentCanvas.Strokes.Save(ms);
-                            JournalPage journalPage = new JournalPage();
-                            journalPage.PaperPattern = pages[i].Type;
+                            JournalPage journalPage = new JournalPage
+                            {
+                                PaperPattern = pages[i].Type
+                            };
 
                             // Handle PDF pages and test if the result is working
                             if (pages[i] is Custom c)

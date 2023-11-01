@@ -2,7 +2,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.PlatformAbstractions;
 using PDF2J.Model;
 using SimpleJournal.Common;
 using SimpleJournal.Common.Helper;
@@ -28,10 +27,10 @@ namespace PDF2J
         /// <summary>
         /// This version must only be changed if there are changes due to the document format!
         /// </summary>
-        public static readonly Version MinSJVersionRequired = new Version(0, 5, 1, 0);
+        public static readonly Version MinSJVersionRequired = new Version(0, 6, 4, 0);
         
         private static bool isRunning = false;
-        private static object sync = new object();
+        private static readonly object sync = new object();
         private static PrintTicket currentTicket = null;
         private static PdfConverter currentPdfConverter;
         private static ILogger logger;
@@ -39,7 +38,7 @@ namespace PDF2J
         public static void Main(string[] args)
         {
             // Read config json (if any) [https://stackoverflow.com/a/28700387/6237448]
-            string configPath = System.IO.Path.Combine(PlatformServices.Default.Application.ApplicationBasePath, "config.json");
+            string configPath = System.IO.Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, "config.json");
             string preInitalizationLogMessage = string.Empty;
             if (System.IO.File.Exists(configPath))
             {
@@ -83,7 +82,7 @@ namespace PDF2J
                 try
                 {
                     PrintTickets.Remove(ticket);
-                    logger.LogInformation($"[CleanUP] Ticket {ticket.Name} was removed! (Added: {ticket.DateTimeAdded.ToLongDateString()} @ {ticket.DateTimeAdded.ToLongTimeString()})");
+                    logger.LogInformation($"[CleanUP] Ticket {ticket.Name} (Status: {ticket.Status}) was removed! (Added: {ticket.DateTimeAdded.ToLongDateString()} @ {ticket.DateTimeAdded.ToLongTimeString()})");
                 }
                 catch { }
             }
@@ -118,14 +117,20 @@ namespace PDF2J
 
                 currentPdfConverter = new PdfConverter(docPath, System.IO.Path.Combine(ticket.TempPath, newFileName), ticket.ConversationOptions);
                 currentPdfConverter.ProgressChanged += PdfConverter_ProgressChanged;
-                currentPdfConverter.JournalHasFewerPagesThenRequired += PdfConverter_JournalHasFewerPagesThenRequired;
                 currentPdfConverter.Completed += PdfConverter_Completed;
 
-                var result = await currentPdfConverter.ConvertAsync();
+                try
+                {
+                    var result = await currentPdfConverter.ConvertAsync();
+                }
+                catch (Exception ex) 
+                {
+                    ticket.ErorrMessage = ex.Message;
+                    ticket.Status = TicketStatus.Failed;
+                }
 
                 // Detach events
                 currentPdfConverter.ProgressChanged -= PdfConverter_ProgressChanged;
-                currentPdfConverter.JournalHasFewerPagesThenRequired -= PdfConverter_JournalHasFewerPagesThenRequired;
                 currentPdfConverter.Completed -= PdfConverter_Completed;
                 currentPdfConverter = null;
             }
@@ -145,7 +150,7 @@ namespace PDF2J
                 currentTicket.Status = TicketStatus.Completed;
                 logger.LogInformation($"[{currentTicket.Name}] Completed!");
 
-                await Webhook?.PostWebHookAsync(Webhook.LogLevel.Info, $"[PDF2J] Successfully converted a pdf document \"{currentTicket.Name}\"", "Conversation");
+                await Webhook?.PostWebHookAsync(Webhook.LogLevel.Info, $"Successfully converted a pdf document \"{currentTicket.Name}\"", "Conversation");
             }
             else
             {
@@ -163,15 +168,9 @@ namespace PDF2J
                     System.IO.File.Copy(System.IO.Path.Combine(currentTicket.TempPath, "doc.pdf"), System.IO.Path.Combine(path, "doc.pdf"));
                     System.IO.File.WriteAllText(System.IO.Path.Combine(path, "log.txt"), currentTicket.ErorrMessage);
 
-                    await Webhook?.PostWebHookAsync(Webhook.LogLevel.Error, $"[PDF2J] Failed to convert a pdf document \"{currentTicket.Name}\". Ticket-ID: \"{currentTicket.ID}\"", "Conversation");
+                    await Webhook?.PostWebHookAsync(Webhook.LogLevel.Error, $"Failed to convert a PDF document \"{currentTicket.Name}\". Ticket-ID: \"{currentTicket.ID}\"", "Conversation");
                 }
             }
-        }
-
-        private static bool PdfConverter_JournalHasFewerPagesThenRequired(int firstPage, int maxPages)
-        {
-            // No user interaction possible; always return true
-            return true;
         }
 
         private static void PdfConverter_ProgressChanged(PdfAction status, int progress, int currentPage, int maxPages, string journal)

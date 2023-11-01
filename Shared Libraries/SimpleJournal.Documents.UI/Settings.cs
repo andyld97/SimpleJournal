@@ -74,7 +74,7 @@ namespace SimpleJournal.Documents.UI
         public bool UsePreasure { get; set; } = true;
 
         /// <summary>
-        /// Determines whether the app not has been started yet
+        /// Determines whether the App not has been started yet
         /// </summary>
         public bool FirstStart { get; set; } = false;
 
@@ -164,7 +164,7 @@ namespace SimpleJournal.Documents.UI
         public bool HideNotificationToolBar { get; set; } = false;
 
         /// <summary>
-        /// Determines if the glowing brush of the mainwindow is disabled or not
+        /// Determines if the glowing brush of the MainWindow is disabled or not
         /// </summary>
         public bool ActivateGlowingBrush { get; set; } = true;
 
@@ -221,15 +221,15 @@ namespace SimpleJournal.Documents.UI
         /// <summary>
         /// Notes if the help (PDFConverstaionDialog) is expanded or not
         /// </summary>
-        public bool PDFConverstaionDialogIsHelpExpanded { get; set; } = true;
+        public bool PDFConversationDialogIsHelpExpanded { get; set; } = true;
 
         /// <summary>
-        /// If true a self hosted api will be used if <see cref="SelfHostedPDF2JApiUrl"/> is set
+        /// If true a self hosted API will be used if <see cref="SelfHostedPDF2JApiUrl"/> is set
         /// </summary>
         public bool UseSelfHostedPDF2JApi { get; set; } = false;
 
         /// <summary>
-        /// The url and port (e.g. http://my-url.de:8080) where the self-hosted api is listening to.<br/>
+        /// The url and port (e.g. http://my-url.de:8080) where the self-hosted API is listening to.<br/>
         /// If it's empty the default service endpoint url of PDF2J is used!
         /// </summary>
         public string SelfHostedPDF2JApiUrl { get; set; } = string.Empty;
@@ -243,6 +243,17 @@ namespace SimpleJournal.Documents.UI
         /// If true tabbed dialogs are displayed via a MetroWindow where the tabs are in the TitleBar of this window
         /// </summary>
         public bool UseModernDialogs { get; set; } = true;
+
+        /// <summary>
+        /// Determines if the review notification was already shown
+        /// </summary>
+        public bool UserRatedOrClosedNotification { get; set; } = false;
+
+        /// <summary>
+        /// If true a button is shown at the start and then end of the pages to load linked documents
+        /// These buttons are only shown if this setting is enabled and if the loaded document has a link.
+        /// </summary>
+        public bool ShowLinkedDocumentButtons { get; set; } = true; 
 
         #region Pattern
 

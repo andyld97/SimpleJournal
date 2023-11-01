@@ -30,7 +30,9 @@ using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Printing;
+using System.Reflection;
 using System.Runtime.InteropServices;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -189,10 +191,7 @@ namespace SimpleJournal
 
             // Display last opened files
             RefreshRecentlyOpenedFiles();
-            RecentlyOpenedDocuments.DocumentsChanged += delegate ()
-            {
-                RefreshRecentlyOpenedFiles();
-            };
+            RecentlyOpenedDocuments.DocumentsChanged += RefreshRecentlyOpenedFiles;
 
             CurrentJournalPages.CollectionChanged += IPages_CollectionChanged;
             var page = GeneratePage(pattern: null);
@@ -251,19 +250,7 @@ namespace SimpleJournal
             };
 
             // Handle keydown
-            PreviewKeyDown += (s, e) =>
-            {
-                if (e.Key == Key.F11)
-                {
-                    ToggleFullscreen();
-                }
-                else if (e.Key == Key.O && (Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control)
-                {
-                    // Open
-                    btnOpen_Click(null, null);
-                }
-            };
-
+            PreviewKeyDown += MainWindow_PreviewKeyDown;
 
             // Handle events
             PageManagementControl.ModuleClosed += async delegate (object semder, bool e)
@@ -287,7 +274,8 @@ namespace SimpleJournal
                     TextExportStatus.Text = e;
             };
 
-            State.Initalize(new[] {
+            State.Initalize(new[] 
+            {
                 Properties.Resources.strStateSaving,
                 Properties.Resources.strStateExportAsPDF,
                 Properties.Resources.strStateExportAsJournal,
@@ -300,7 +288,7 @@ namespace SimpleJournal
                 TextStatusBar.Text = message;
             };
 
-            Journal.OnErrorOccured += delegate (string message, string scope)
+            Journal.OnErrorOccurred += delegate (string message, string scope)
             {
                 if (scope == "load")
                     MessageBox.Show($"{Properties.Resources.strFailedToLoadJournal} {message}", Properties.Resources.strFailedToLoadJournalTitle, MessageBoxButton.OK, MessageBoxImage.Error);
@@ -347,7 +335,7 @@ namespace SimpleJournal
 
             currentPens = Data.Pen.Instance;
 
-            // Apply pens to gui
+            // Apply pens to GUI
             UpdatePenButtons();
             UpdateTextMarker();
             UpdateDropDownButtons();
@@ -366,6 +354,10 @@ namespace SimpleJournal
 
 #if !UWP
             UpdateHelper.SearchForUpdates();
+            ButtonReview.Visibility = Visibility.Collapsed;
+#else 
+            if (Settings.Instance.UserRatedOrClosedNotification)
+                ButtonReview.Visibility = Visibility.Collapsed;
 #endif
 
             DrawingCanvas.OnChangedDocumentState += DrawingCanvas_OnChangedDocumentState;
@@ -387,6 +379,27 @@ namespace SimpleJournal
             }
 
             ApplyBackground();
+        }
+
+        private void MainWindow_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.F11)
+            {
+                ToggleFullscreen();
+            }
+            else if (e.Key == Key.O && (Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control)
+            {
+                // Open
+                btnOpen_Click(null, null);
+            }
+            else if (e.Key == Key.PageDown)
+            {
+                ScrollToNextPage(true);
+            }
+            else if (e.Key == Key.PageUp)
+            {
+                ScrollToPreviousPage();
+            }
         }
 
         private void DrawingCanvas_OnChangedDocumentState(bool value)
@@ -419,7 +432,7 @@ namespace SimpleJournal
             NotificationService.NotificationServiceInstance = new NotificationService();
             RefreshNotifications(); // do it manually here, because otherwise already added notifications won't get displayed!
             NotificationService.NotificationServiceInstance.OnNotificationAdded += NotificationServiceInstance_OnNotificationAdded;
-            NotificationService.NotificationServiceInstance.OnNotifcationRemoved += NotificationServiceInstance_OnNotifcationRemoved;
+            NotificationService.NotificationServiceInstance.OnNotificationRemoved += NotificationServiceInstance_OnNotifcationRemoved;
             NotificationService.NotificationServiceInstance.Start();
 
             if (startSetupDialog)
@@ -446,7 +459,6 @@ namespace SimpleJournal
 #endif
         }
 
-
         private void IPages_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
             RefreshPages();
@@ -454,8 +466,6 @@ namespace SimpleJournal
         #endregion
 
         #region Notifications
-
-        // ToDo!!!!
 
         private void NotificationServiceInstance_OnNotifcationRemoved(Notification notification)
         {
@@ -519,6 +529,7 @@ namespace SimpleJournal
         {
             btnToggleNotification.IsChecked = false;
         }
+
         #endregion
 
         #region AutoSave - Backup
@@ -1221,10 +1232,10 @@ namespace SimpleJournal
             {
                 // Default values
                 var defaultSettings = new Settings();
-                currentTextMarkerAttributes.Width = defaultSettings.TextMarkerSize.Height; // Consts.TEXT_MARKER_WIDTH;
-                currentTextMarkerAttributes.Height = defaultSettings.TextMarkerSize.Width; // Consts.TEXT_MARKER_HEIGHT;
+                currentTextMarkerAttributes.Width = defaultSettings.TextMarkerSize.Height;
+                currentTextMarkerAttributes.Height = defaultSettings.TextMarkerSize.Width;
                 currentTextMarkerAttributes.StylusTip = StylusTip.Rectangle;
-                currentTextMarkerAttributes.Color = defaultSettings.TextMarkerColor.ToColor(); //Consts.TEXT_MARKER_COLOR;
+                currentTextMarkerAttributes.Color = defaultSettings.TextMarkerColor.ToColor();
 
                 Settings.Instance.TextMarkerSize = Documents.UI.Consts.TextMarkerSizes[0];
                 Settings.Instance.TextMarkerColor = new Common.Data.Color(Consts.TextMarkerColor.A, Consts.TextMarkerColor.R, Consts.TextMarkerColor.G, Consts.TextMarkerColor.B);
@@ -1232,10 +1243,10 @@ namespace SimpleJournal
             }
             else
             {
-                currentTextMarkerAttributes.Width = Settings.Instance.TextMarkerSize.Height; // Consts.TEXT_MARKER_WIDTH;
-                currentTextMarkerAttributes.Height = Settings.Instance.TextMarkerSize.Width; // Consts.TEXT_MARKER_HEIGHT;
+                currentTextMarkerAttributes.Width = Settings.Instance.TextMarkerSize.Height;
+                currentTextMarkerAttributes.Height = Settings.Instance.TextMarkerSize.Width;
                 currentTextMarkerAttributes.StylusTip = StylusTip.Rectangle;
-                currentTextMarkerAttributes.Color = Settings.Instance.TextMarkerColor.ToColor(); //Consts.TEXT_MARKER_COLOR;
+                currentTextMarkerAttributes.Color = Settings.Instance.TextMarkerColor.ToColor();
             }
 
             markerPath.Fill = new SolidColorBrush(currentTextMarkerAttributes.Color);
@@ -1519,6 +1530,39 @@ namespace SimpleJournal
             scrollViewer.ApplyTemplate();
             ScrollBar scrollBar = (ScrollBar)scrollViewer.Template.FindName("PART_VerticalScrollBar", scrollViewer);
             scrollBar.Width = (Settings.Instance.EnlargeScrollbar ? Consts.ScrollBarExtendedWidth : Consts.ScrollBarDefaultWidth);
+        }
+
+        private void RefreshLinkedDocumentButtons()
+        {
+            ButtonLoadPreviousLinkedDocument.ToolTip = PreviousPDFFile;
+            ButtonLoadNextLinkedDocument.ToolTip = NextPDFFile;
+
+            void UpdateButtons(bool state)
+            {
+                ButtonLoadPreviousLinkedDocument.Visibility = (state ? Visibility.Visible : Visibility.Collapsed);
+                ButtonLoadNextLinkedDocument.Visibility = (state ? Visibility.Visible : Visibility.Collapsed);
+            }
+
+            if (!Settings.Instance.ShowLinkedDocumentButtons)
+            {
+                // Hide buttons
+                UpdateButtons(false);
+                return;
+            }
+
+            if (currentJournal != null)
+            {
+                if (currentJournal.PreviousDocumentIndex == null && currentJournal.NextDocumentIndex == null)
+                    UpdateButtons(false);
+                else
+                {
+                    ButtonLoadPreviousLinkedDocument.Visibility = (currentJournal.PreviousDocumentIndex != null ? Visibility.Visible : Visibility.Collapsed);
+                    ButtonLoadNextLinkedDocument.Visibility = (currentJournal.NextDocumentIndex != null ? Visibility.Visible : Visibility.Collapsed);
+                    return;
+                }
+            }
+
+            UpdateButtons(false);
         }
 
         private UserControl GeneratePage(IPattern pattern, PaperType? paperType = null, byte[] background = null, Orientation orientation = Orientation.Portrait)
@@ -1955,7 +1999,7 @@ namespace SimpleJournal
 
             isInitalized = true;
         }
-#endregion
+        #endregion
 
         #region Toolbar Handling / Private Event Handling
 
@@ -2340,8 +2384,7 @@ namespace SimpleJournal
             SwitchTool(Tools.CooardinateSystem);
         }
 
-
-#endregion
+        #endregion
 
         #region Event Handling / Menu
 
@@ -2543,7 +2586,7 @@ namespace SimpleJournal
             }
         }
 
-        private void ButtonPreviousPage_Click(object sender, RoutedEventArgs e)
+        private void ScrollToPreviousPage()
         {
             int index = cmbPages.SelectedIndex - 1;
             if (index < 0)
@@ -2552,10 +2595,23 @@ namespace SimpleJournal
             ScrollToPage(index);
         }
 
-        private void ButtonNextPage_Click(object sender, RoutedEventArgs e)
+        private void ScrollToNextPage(bool stopEnd = false)
         {
             int index = (cmbPages.SelectedIndex + 1) % CurrentPages;
+            if (stopEnd && cmbPages.SelectedIndex == CurrentPages - 1)
+                return;
+
             ScrollToPage(index);
+        }
+
+        private void ButtonPreviousPage_Click(object sender, RoutedEventArgs e)
+        {
+            ScrollToPreviousPage();
+        }
+
+        private void ButtonNextPage_Click(object sender, RoutedEventArgs e)
+        {
+            ScrollToNextPage();
         }
 
         private async Task<bool> SaveProject(bool forceNewPath)
@@ -2584,7 +2640,7 @@ namespace SimpleJournal
         }
 
         /// <summary>
-        /// This button is currently hidden, because using a pdf printer results in a better quality
+        /// This button is currently hidden, because using a PDF printer results in a better quality
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -2822,12 +2878,23 @@ namespace SimpleJournal
             AddNewPage(Settings.Instance.PaperTypeLastInserted, Settings.Instance.OrientationLastInserted);
         }
 
-        private bool AskForOpeningAfterModifying()
+        private bool AskForOpeningAfterModifying(bool askForSave = false)
         {
             bool run = false;
             if (DrawingCanvas.Change)
             {
-                var res = MessageBox.Show(this, Properties.Resources.strWantToLoadNewJournal, Properties.Resources.strWantToLoadNewJournalTitle, MessageBoxButton.YesNo, MessageBoxImage.Question);
+                string message = Properties.Resources.strWantToLoadNewJournal;
+                string title = Properties.Resources.strWantToLoadNewJournalTitle;
+                MessageBoxButton buttons = MessageBoxButton.YesNo;
+
+                if (askForSave)
+                {
+                    message = Properties.Resources.strWantToSaveBeforeLoadOtherDocument;
+                    title = Properties.Resources.strWantToSaveBeforeLoadOtherDocument_Title;
+                    buttons = MessageBoxButton.YesNoCancel;
+                }
+
+                var res = MessageBox.Show(this, message, title, buttons, MessageBoxImage.Question);
                 if (res == MessageBoxResult.Yes)
                     run = true;
             }
@@ -2991,6 +3058,7 @@ namespace SimpleJournal
             }
 
             RefreshVerticalScrollbarSize();
+            RefreshLinkedDocumentButtons();
         }
 
         private void btnRemoveSelectedStrokes_Click(object sender, RoutedEventArgs e)
@@ -3142,7 +3210,7 @@ namespace SimpleJournal
             ITabbedModule aboutDialog = new AboutModule();
             aboutDialog.ShowModuleWindow(Settings.Instance.UseModernDialogs, this);
         }
-#endregion
+        #endregion
 
         #endregion
 
@@ -3329,7 +3397,10 @@ namespace SimpleJournal
                     // Apply pattern from document 
                     ChequeredPattern = currentJournal?.ChequeredPattern,
                     DottedPattern = currentJournal?.DottedPattern,
-                    RuledPattern = currentJournal?.RuledPattern
+                    RuledPattern = currentJournal?.RuledPattern,
+                    
+                    PreviousDocumentIndex = currentJournal?.PreviousDocumentIndex,
+                    NextDocumentIndex = currentJournal?.NextDocumentIndex
                 };
 
                 if (saveAsBackup)
@@ -3540,6 +3611,9 @@ namespace SimpleJournal
                     // Delete old auto save files
                     DeleteAutoSaveBackup();
 
+                    // Refresh link buttons to other documents
+                    RefreshLinkedDocumentButtons();
+
                     // Set process id to document and save it to make sure other instances cannot load this journal
                     currentJournal.ProcessID = ProcessHelper.CurrentProcID;
 
@@ -3560,8 +3634,67 @@ namespace SimpleJournal
             {
                 MessageBox.Show(this, Properties.Resources.strWrongFileFormat, Properties.Resources.strWrongFileFormatTitle, MessageBoxButton.OK, MessageBoxImage.Error);
             }
+
             DrawingCanvas.Change = false;
         }
+
+        #region Journal (PDF) Navigation
+
+        public string PreviousPDFFile
+        {
+            get
+            {
+                if (currentJournal == null || currentJournal.PreviousDocumentIndex == null)
+                    return string.Empty;
+
+                return GeneratePDFFilePath(currentJournal.PreviousDocumentIndex);
+            }
+        }
+
+        public string NextPDFFile
+        {
+            get
+            {
+                if (currentJournal == null || currentJournal.NextDocumentIndex == null)
+                    return string.Empty;
+
+                return GeneratePDFFilePath(currentJournal.NextDocumentIndex);
+            }
+        }
+
+        private string GeneratePDFFilePath(int? index)
+        {
+            string currentFileName = System.IO.Path.GetFileNameWithoutExtension(currentJournalPath);
+            return Regex.Replace(currentFileName, @"(\.\d*)$", $".{index}.journal");
+        }
+
+        private async void ButtonLoadPreviousLinkedDocument_Click(object sender, RoutedEventArgs e)
+        {
+            await NavigateIndexAsync(PreviousPDFFile);
+        }
+
+        private async void ButtonLoadNextLinkedDocument_Click(object sender, RoutedEventArgs e)
+        {
+            await NavigateIndexAsync(NextPDFFile);
+        }
+
+        private async Task NavigateIndexAsync(string fileName)
+        {
+            if (AskForOpeningAfterModifying(true))
+            {
+                // Save old journal
+                if (DrawingCanvas.Change)
+                    await SaveJournalAsync(currentJournalPath);
+
+                // Generate new journal path
+                string parent = System.IO.Path.GetDirectoryName(currentJournalPath);
+
+                // Load this journal
+                await LoadJournalAsnyc(System.IO.Path.Combine(parent, fileName));
+            }
+        }
+
+        #endregion
 
         private void ClearJournalOld()
         {
@@ -3733,14 +3866,14 @@ namespace SimpleJournal
         {
             var exportDialog = new ExportDialog();
 
-            exportDialog.exportControl.Initalize(CurrentJournalPages, CurrentJournalPages[cmbPages.SelectedIndex], exportDialog);
+            exportDialog.exportControl.Initialize(CurrentJournalPages, CurrentJournalPages[cmbPages.SelectedIndex], exportDialog);
             exportDialog.ShowDialog();
         }
 
         private void MenuBackstageExport_MouseDown(object sender, MouseButtonEventArgs e)
         {
             TextExportStatus.Text = string.Empty;
-            ExportControl.Initalize(CurrentJournalPages, CurrentJournalPages[cmbPages.SelectedIndex], this);
+            ExportControl.Initialize(CurrentJournalPages, CurrentJournalPages[cmbPages.SelectedIndex], this);
         }
 
 #endregion
@@ -4032,10 +4165,22 @@ namespace SimpleJournal
             }
             catch
             {
-                // fallback
+                // Fallback
                 mainScrollView.Background = Consts.DefaultBackground;
             }
         }
+
+        private void ButtonReview_Click(object sender, RoutedEventArgs e)
+        {
+            if (!GeneralHelper.OpenUri(new Uri(Consts.ReviewStore)))
+                MessageBox.Show(SimpleJournal.Properties.Resources.strFailedToOpenReview, SharedResources.Resources.strError, MessageBoxButton.OK, MessageBoxImage.Error);
+            else
+            {
+                Settings.Instance.UserRatedOrClosedNotification = true;
+                Settings.Instance.Save();
+            }
+        }
+
         #endregion
 
         #region General Events / Touch

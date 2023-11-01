@@ -6,10 +6,10 @@ namespace SimpleJournal.Documents
     {
         public PdfJournalPage()
         {
-            // Set to custom (because a pdf page can only have custom as pattern!)
+            // Set to custom (because a PDF page can only have custom as pattern!)
             PaperPattern = PaperType.Custom;
         }
 
-        public byte[] PageBackground { get; set; }
+        public byte[] PageBackground { get; set; }   
     }
 }

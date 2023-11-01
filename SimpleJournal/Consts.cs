@@ -1,9 +1,5 @@
 ﻿using SimpleJournal.Common;
 using System;
-using System.CodeDom;
-using System.Collections.Generic;
-using System.Reflection;
-using System.Windows;
 using System.Windows.Media;
 
 namespace SimpleJournal
@@ -24,6 +20,7 @@ namespace SimpleJournal
         public static readonly string ChangelogUrl = "https://simplejournal.ca-soft.net/chg.php?lang={0}&dark={1}";
         public static readonly string DownloadUrl = "https://simplejournal.ca-soft.net/download.php?auto=1";
         public static readonly string DataProtectionUrl = "https://simplejournal.ca-soft.net/{0}/privacy-policy/";
+        public static readonly string ReviewStore = "ms-windows-store://review/?ProductId=9MV6J44M90N7";
 
 #if UWP
         public static readonly string VersionUrl = $"https://simplejournal.ca-soft.net/update.php?version={Consts.StoreVersion:4}";
@@ -45,7 +42,7 @@ namespace SimpleJournal
         /// <summary>
         /// The .NET version which was used to compile SJ
         /// </summary>
-        public static readonly Version CompiledDotnetVersion = new Version(7, 0, 3);
+        public static readonly Version CompiledDotnetVersion = new Version(7, 0, 13);
 
         /// <summary>
         /// Polling interval for NotificationService
@@ -137,6 +134,6 @@ namespace SimpleJournal
         #region Sidebar
         public const double SidebarListBoxItemHeight = 50;
         public const double SidebarListBoxItemViewboxSize = 40;
-#endregion
+        #endregion
     }
 }

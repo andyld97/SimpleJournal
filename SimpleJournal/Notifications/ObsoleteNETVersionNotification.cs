@@ -1,7 +1,6 @@
 ﻿using SimpleJournal;
 using SimpleJournal.Common;
 using SimpleJournal.Common.Data;
-using SimpleJournal.Documents.UI.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -10,7 +9,7 @@ using System.Xml.Serialization;
 namespace Notifications
 {
     /// <summary>
-    /// Notification for old .NET Core versions (e.g. .NET 6.0.2)
+    /// Notification for old .NET Core versions (e.g. .NET 6.0.11)
     /// </summary>
     public class ObsoleteNETVersionNotification : Notification
     {
@@ -40,7 +39,6 @@ namespace Notifications
                     {
                         // Same text
                         Description = SimpleJournal.Properties.Resources.strNotifications_Update_UserInteraction_ExecuteUpdate,
-                        IsExecutionAsync = true,
                         HandleUserInteractionAsync = new Func<Task>(async () => await GeneralHelper.UpdateNETCoreVersionAsync()),
                     }
                 };
@@ -49,17 +47,15 @@ namespace Notifications
 
         public override NotificationType Type => NotificationType.Warning;
 
-        public override bool IsAsyncExecutionRequiredForCheckOccurance => false;
-
         public ObsoleteNETVersionNotification()
         { }
 
         public ObsoleteNETVersionNotification(DateTime timestamp) : base(timestamp)
         { }
 
-        public override bool? CheckOccurance()
+        public override Task<bool?> CheckOccurrenceAsync(bool isisCalledFromTimer)
         {
-            return Environment.Version < Consts.CompiledDotnetVersion;
+            return Task.FromResult((bool?)(Environment.Version < Consts.CompiledDotnetVersion));
         }
     }  
 }

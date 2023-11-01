@@ -1137,6 +1137,15 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Error while converting the PDF document: {0} ähnelt.
+        /// </summary>
+        public static string strFailedToConvertPDFDokument {
+            get {
+                return ResourceManager.GetString("strFailedToConvertPDFDokument", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Error copying the file! Please choose a different location! ähnelt.
         /// </summary>
         public static string strFailedToCopyFile {
@@ -1286,6 +1295,17 @@ namespace SimpleJournal.Properties {
         public static string strFailedToOpenNewSJInstanceTitle {
             get {
                 return ResourceManager.GetString("strFailedToOpenNewSJInstanceTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die An error occurred while opening the store.
+        ///
+        ///To rate anyway, open the store and search for &quot;SimpleJournal&quot; and click on &quot;How to rate SimpleJournal&quot;, specify the number of stars and then you can click on &quot;Write review&quot; on the right! ähnelt.
+        /// </summary>
+        public static string strFailedToOpenReview {
+            get {
+                return ResourceManager.GetString("strFailedToOpenReview", resourceCulture);
             }
         }
         
@@ -2807,6 +2827,15 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Please enter a valid page range! ähnelt.
+        /// </summary>
+        public static string strPDFConversationDialog_InvalidRange {
+            get {
+                return ResourceManager.GetString("strPDFConversationDialog_InvalidRange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Options: ähnelt.
         /// </summary>
         public static string strPDFConversationDialog_Options {
@@ -2983,6 +3012,24 @@ namespace SimpleJournal.Properties {
         public static string strPDFFilter {
             get {
                 return ResourceManager.GetString("strPDFFilter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Open next linked journal ähnelt.
+        /// </summary>
+        public static string strPDFLoadNextLinkedDocument {
+            get {
+                return ResourceManager.GetString("strPDFLoadNextLinkedDocument", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Open previous linked journal ähnelt.
+        /// </summary>
+        public static string strPDFLoadPreviousLinkedDocument {
+            get {
+                return ResourceManager.GetString("strPDFLoadPreviousLinkedDocument", resourceCulture);
             }
         }
         
@@ -3388,6 +3435,51 @@ namespace SimpleJournal.Properties {
         public static string strRestoreBackupToolTip {
             get {
                 return ResourceManager.GetString("strRestoreBackupToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Rate SimpleJournal ähnelt.
+        /// </summary>
+        public static string strReviewButton {
+            get {
+                return ResourceManager.GetString("strReviewButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Close ähnelt.
+        /// </summary>
+        public static string strReviewNotification_Close {
+            get {
+                return ResourceManager.GetString("strReviewNotification_Close", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die I would be very happy about constructive criticism, suggestions and ideas! ähnelt.
+        /// </summary>
+        public static string strReviewNotification_Message {
+            get {
+                return ResourceManager.GetString("strReviewNotification_Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Give rating ähnelt.
+        /// </summary>
+        public static string strReviewNotification_RateSimpleJournal {
+            get {
+                return ResourceManager.GetString("strReviewNotification_RateSimpleJournal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Do you like SimpleJournal? ähnelt.
+        /// </summary>
+        public static string strReviewNotification_Title {
+            get {
+                return ResourceManager.GetString("strReviewNotification_Title", resourceCulture);
             }
         }
         
@@ -4891,6 +4983,26 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Use navigation in PDF journals ähnelt.
+        /// </summary>
+        public static string strUseLinkNavigationPDF {
+            get {
+                return ResourceManager.GetString("strUseLinkNavigationPDF", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die A journal generated from a PDF document containing over 100 pages consists of multiple journals (due to performance). With this setting buttons are displayed at the beginning and at the end of each document to navigate to the previous linked document or to the last linked document. 
+        ///
+        ///This setting is only relevant for larger documents! ähnelt.
+        /// </summary>
+        public static string strUseLinkNavigationPDF_Description {
+            get {
+                return ResourceManager.GetString("strUseLinkNavigationPDF_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Use natural scrolling ähnelt.
         /// </summary>
         public static string strUseNaturalScrolling {
@@ -5085,6 +5197,24 @@ namespace SimpleJournal.Properties {
         public static string strWantToLoadNewJournalTitle {
             get {
                 return ResourceManager.GetString("strWantToLoadNewJournalTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Do you want to save the changes and open the selected document? ähnelt.
+        /// </summary>
+        public static string strWantToSaveBeforeLoadOtherDocument {
+            get {
+                return ResourceManager.GetString("strWantToSaveBeforeLoadOtherDocument", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Save Changes? ähnelt.
+        /// </summary>
+        public static string strWantToSaveBeforeLoadOtherDocument_Title {
+            get {
+                return ResourceManager.GetString("strWantToSaveBeforeLoadOtherDocument_Title", resourceCulture);
             }
         }
         

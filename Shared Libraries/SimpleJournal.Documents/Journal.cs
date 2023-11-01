@@ -11,11 +11,23 @@ namespace SimpleJournal.Documents
         private static bool isSaving = false;
         private static readonly object sync = new object();
 
-        public delegate void onErrorOccured(string message, string scope);
-        public static event onErrorOccured OnErrorOccured;
+        public delegate void onErrorOccurred(string message, string scope);
+        public static event onErrorOccurred OnErrorOccurred;
 
         [XmlIgnore]
         private bool wasSavedAlready = false;
+
+        /// <summary>
+        /// [MultiPageDocument - PDF]: The previous document index to load if the user wants to navigate backwards
+        /// </summary>
+        [XmlElement, DefaultValue(null)]
+        public int? PreviousDocumentIndex { get; set; } = null;
+
+        /// <summary>
+        /// [MultiPageDocument - PDF]: The next document index to load if the user wants to navigate forwards
+        /// </summary>
+        [XmlElement, DefaultValue(null)]
+        public int? NextDocumentIndex { get; set; } = null;
 
         public List<JournalPage> Pages { get; set; } = new List<JournalPage>();
 
@@ -214,7 +226,7 @@ namespace SimpleJournal.Documents
             catch (Exception e)
             {
                 if (!quiet)
-                    OnErrorOccured?.Invoke(e.Message, "load");
+                    OnErrorOccurred?.Invoke(e.Message, "load");
             }
 
             return null;
@@ -241,25 +253,25 @@ namespace SimpleJournal.Documents
 
                             entry = zipArchive.CreateEntry("journal.xml");
 
-                            using (var stream = entry.Open())
+                            using var stream = entry.Open();
+                            var jrn = new Journal()
                             {
-                                var jrn = new Journal()
-                                {
-                                    ProcessID = this.ProcessID,
-                                    IsBackup = this.IsBackup,
-                                    OriginalPath = this.OriginalPath,
-                                    ChequeredPattern = (ChequeredPattern)this.ChequeredPattern?.Clone(),
-                                    DottedPattern = (DottedPattern)this.DottedPattern?.Clone(),
-                                    RuledPattern = (RuledPattern)this.RuledPattern?.Clone(),
-                                };
+                                ProcessID = this.ProcessID,
+                                IsBackup = this.IsBackup,
+                                OriginalPath = this.OriginalPath,
+                                PreviousDocumentIndex = this.PreviousDocumentIndex,
+                                NextDocumentIndex = this.NextDocumentIndex,
+                                ChequeredPattern = (ChequeredPattern)this.ChequeredPattern?.Clone(),
+                                DottedPattern = (DottedPattern)this.DottedPattern?.Clone(),
+                                RuledPattern = (RuledPattern)this.RuledPattern?.Clone(),
+                            };
 
-                                // This is just for counting the pages
-                                foreach (var page in Pages)
-                                    jrn.Pages.Add(new JournalPage());
+                            // This is just for counting the pages
+                            foreach (var page in Pages)
+                                jrn.Pages.Add(new JournalPage());
 
-                                var data = Serialization.SaveToBytes(jrn, Serialization.Mode.XML);
-                                await stream.WriteAsync(data, 0, data.Length);
-                            }
+                            var data = Serialization.SaveToBytes(jrn, Serialization.Mode.XML);
+                            await stream.WriteAsync(data, 0, data.Length);
                         }
                     }
 
@@ -309,8 +321,15 @@ namespace SimpleJournal.Documents
                                 var pageEntry = zipArchive.CreateEntry($"pages/page{pgCount}.pdf", System.IO.Compression.CompressionLevel.Optimal);
 
                                 // Background will be saved separately 
-                                PdfJournalPage pdfJournalPage = new PdfJournalPage() { Data = pdf.Data, JournalResources = pdf.JournalResources, Orientation = pdf.Orientation, PageFormat = pdf.PageFormat, PaperPattern = pdf.PaperPattern };
-                                pdfJournalPage.PageBackground = null;
+                                PdfJournalPage pdfJournalPage = new PdfJournalPage
+                                {
+                                    Data = pdf.Data,
+                                    JournalResources = pdf.JournalResources,
+                                    Orientation = pdf.Orientation,
+                                    PageFormat = pdf.PageFormat,
+                                    PaperPattern = pdf.PaperPattern,
+                                    PageBackground = null
+                                };
 
                                 using (System.IO.Stream stream = pageEntry.Open())
                                 {
@@ -347,6 +366,8 @@ namespace SimpleJournal.Documents
                                 ProcessID = this.ProcessID,
                                 IsBackup = this.IsBackup,
                                 OriginalPath = this.OriginalPath,
+                                PreviousDocumentIndex = this.PreviousDocumentIndex,
+                                NextDocumentIndex = this.NextDocumentIndex,
                                 ChequeredPattern = (ChequeredPattern)this.ChequeredPattern?.Clone(),
                                 DottedPattern = (DottedPattern)this.DottedPattern?.Clone(),
                                 RuledPattern = (RuledPattern)this.RuledPattern?.Clone(),
@@ -378,7 +399,7 @@ namespace SimpleJournal.Documents
                 retVal = false;
 
                 if (!quiet)
-                    OnErrorOccured?.Invoke(e.Message, "save");
+                    OnErrorOccurred?.Invoke(e.Message, "save");
             }
 
             if (!quiet)

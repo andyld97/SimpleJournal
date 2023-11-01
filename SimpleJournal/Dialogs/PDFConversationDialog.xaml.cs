@@ -50,7 +50,7 @@ namespace SimpleJournal.Dialogs
             TextSource.Text = sourceFileName;
 
             CheckUseOnlineConverter.IsChecked = Settings.Instance.UseOnlineConversation;
-            ExpanderHelp.IsExpanded = Settings.Instance.PDFConverstaionDialogIsHelpExpanded;
+            ExpanderHelp.IsExpanded = Settings.Instance.PDFConversationDialogIsHelpExpanded;
             CheckUseSelfHostedAPI.IsChecked = Settings.Instance.UseSelfHostedPDF2JApi;
             TextUrl.Text = Settings.Instance.SelfHostedPDF2JApiUrl;
 
@@ -115,7 +115,7 @@ namespace SimpleJournal.Dialogs
             // Further validation
             if (!useAllPages && pageFrom > pageTo)
             {
-                MessageBox.Show(this, Properties.Resources.strPDFConversationDialog_InvalidInputMessage, SharedResources.Resources.strError, MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(this, SimpleJournal.Properties.Resources.strPDFConversationDialog_InvalidRange, SharedResources.Resources.strError, MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
@@ -156,17 +156,23 @@ namespace SimpleJournal.Dialogs
                 PdfConverter pdfConverter = new PdfConverter(sourceFileName, destinationFileName, options);
                 currentConverter = pdfConverter;
 
-                pdfConverter.JournalHasFewerPagesThenRequired += PdfConverter_JournalHasFewerPagesThenRequired;
                 pdfConverter.Completed += PdfConverter_Completed;
                 pdfConverter.ProgressChanged += PdfConverter_ProgressChanged;
 
                 SetInputPanelState(false);
 
-                await pdfConverter.ConvertAsync();
+                try
+                {
+                    await pdfConverter.ConvertAsync();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(string.Format(Properties.Resources.strFailedToConvertPDFDokument, ex.Message), SharedResources.Resources.strError, MessageBoxButton.OK, MessageBoxImage.Error);
+                    SetInputPanelState(true);
+                }
 
                 // Detach events after completion
                 pdfConverter.ProgressChanged -= PdfConverter_ProgressChanged;
-                pdfConverter.JournalHasFewerPagesThenRequired -= PdfConverter_JournalHasFewerPagesThenRequired;
                 pdfConverter.Completed -= PdfConverter_Completed;
             }
         }
@@ -216,21 +222,6 @@ namespace SimpleJournal.Dialogs
                 MessageBox.Show(Properties.Resources.strPDFConversationDialog_ConversationGeneralError, SharedResources.Resources.strError, MessageBoxButton.OK, MessageBoxImage.Error);
 
             SetInputPanelState(true);
-        }
-
-        private bool PdfConverter_JournalHasFewerPagesThenRequired(int firstPage, int maxPages)
-        {
-            string message = string.Format(Properties.Resources.strPDFCOnversationDialog_TooFewPagesMessage, maxPages, firstPage, maxPages);
-
-            if (MessageBox.Show(this, message, Properties.Resources.strSure, MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.No)
-            {
-                PanelInput.Visibility = Visibility.Visible;
-                PanelProgress.Visibility = Visibility.Collapsed;
-                PanelInput.IsEnabled = true;
-                return false;
-            }
-
-            return true;
         }
 
         private async Task CancelOrDeleteTicketAsync(string operation = "cancel")
@@ -398,7 +389,7 @@ namespace SimpleJournal.Dialogs
             if (!isInitialized)
                 return;
 
-            Settings.Instance.PDFConverstaionDialogIsHelpExpanded = ExpanderHelp.IsExpanded;
+            Settings.Instance.PDFConversationDialogIsHelpExpanded = ExpanderHelp.IsExpanded;
             Settings.Instance.Save();
         }
 

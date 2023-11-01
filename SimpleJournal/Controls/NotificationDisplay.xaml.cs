@@ -1,4 +1,5 @@
-﻿using SimpleJournal.Common;
+﻿using Notifications;
+using SimpleJournal.Common;
 using SimpleJournal.Documents.UI.Extensions;
 using SimpleJournal.Documents.UI.Helper;
 using System;
@@ -66,7 +67,12 @@ namespace Controls
         private async void Link_RequestNavigate(object sender, System.Windows.Navigation.RequestNavigateEventArgs e)
         {
             if ((sender as Hyperlink).Tag is UserInteraction ui)
+            {
                 await ui.ExecuteAsync();
+
+                if (ui.CloseNotification)
+                    NotificationService.NotificationServiceInstance.RemoveNotification(DataContext as Notification);
+            }
         }
     }
 

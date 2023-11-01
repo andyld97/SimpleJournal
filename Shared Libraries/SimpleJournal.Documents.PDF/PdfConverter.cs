@@ -21,13 +21,6 @@ namespace SimpleJournal.Documents.PDF
         public delegate void OnCompleted(bool success, Exception ex, string destinationFileName);
         public event OnCompleted Completed;
 
-        public delegate bool OnJournalHasFewerPagesThenRequired(int firstPage, int maxPages);
-
-        /// <summary>
-        /// If a page range is specified and the journal hasn't enough pages, this should return true if you want to use all pages instead. Otherwise the conversation will be canceled.
-        /// </summary>
-        public event OnJournalHasFewerPagesThenRequired JournalHasFewerPagesThenRequired;
-
         #endregion
 
         #region Ctor
@@ -53,9 +46,6 @@ namespace SimpleJournal.Documents.PDF
 
         public async Task<List<Journal>> ConvertAsync()
         {
-            int pageFrom = options.StartPage;
-            int pageTo = options.LastPage;
-
             // Read PDF Document
             MagickImageCollection images = null;
             try
@@ -72,20 +62,26 @@ namespace SimpleJournal.Documents.PDF
             if (isCanceled)
                 return null;
 
-            // Limit pages to Consts.MaxPDFPagesPerJournal (if more split the document into multiple documents ..100, ..200)
+            // Limit pages to Consts.MaxPDFPagesPerJournal (if more split the document into multiple documents 1..100, 101..200, ...)
             Journal currentJournal = new Journal();
+            int pageCount = DeterminePageCount(options, images.Count);
 
-            if (images.Count > options.PagesPerJournal)
+            if (pageCount > options.PagesPerJournal)
             {
+                // More than one journal is required
                 // Calculate the amount of journals required
-                int n = (int)Math.Ceiling(images.Count / (double)options.PagesPerJournal);
+                int n = (int)Math.Ceiling(pageCount / (double)options.PagesPerJournal);
                 string firstFileName = string.Empty;
 
                 List<Journal> journals = new List<Journal>() { new Journal() };
                 currentJournal = journals.FirstOrDefault();
 
                 int journalCounter = 1;
-                for (int p = 0; p < images.Count; p++)
+                int progress = 0;
+                int sI = (options.UsePageRange ? options.StartPage - 1 : 0);
+                int eI = (options.UsePageRange ? options.LastPage - 1 : pageCount - 1);
+
+                for (int p = sI; p <= eI; p++)
                 {
                     if (isCanceled)
                         return null;
@@ -103,16 +99,43 @@ namespace SimpleJournal.Documents.PDF
                         journalCounter++;
                     }
 
-                    double percentage = Math.Round(((p + 1) / (double)images.Count) * 100.0);
-                    int maxPages = (journals.Count == n ? images.Count % options.PagesPerJournal : options.PagesPerJournal);
-                    ProgressChanged?.Invoke(PdfAction.PagesALL_WritingPage, (int)percentage, (p % options.PagesPerJournal) + 1, maxPages, System.IO.Path.GetFileNameWithoutExtension(destinationFileName) + $".{journalCounter}.journal");
+                    double percentage = Math.Round(((progress + 1) / (double)pageCount) * 100.0);
+                    int maxPages = (journals.Count == n ? pageCount % options.PagesPerJournal : options.PagesPerJournal);
+
+                    ProgressChanged?.Invoke(PdfAction.PagesALL_WritingPage, (int)percentage, (progress % options.PagesPerJournal) + 1, maxPages, System.IO.Path.GetFileNameWithoutExtension(destinationFileName) + $".{journalCounter}.journal");
+                    progress++;
                 }
 
                 int counter = 1;
+                int journalCount = journals.Count;
+
                 foreach (var journal in journals)
                 {
                     if (isCanceled)
                         break;
+
+                    // Page navigation in SimpleJournal PDF document
+                    if (journalCount > 1)
+                    {
+                        if (counter == 1)
+                        {
+                            // First page
+                            journal.PreviousDocumentIndex = null;
+                            journal.NextDocumentIndex = counter + 1;
+                        }
+                        else if (counter == journalCount)
+                        {
+                            // Last page
+                            journal.PreviousDocumentIndex = counter - 1;
+                            journal.NextDocumentIndex = null;
+                        }
+                        else
+                        {
+                            // Page in between
+                            journal.PreviousDocumentIndex = counter - 1;
+                            journal.NextDocumentIndex = counter + 1;
+                        }
+                    }
 
                     // Generate fileName
                     string newFileName = System.IO.Path.Combine(System.IO.Path.GetDirectoryName(destinationFileName), System.IO.Path.GetFileNameWithoutExtension(destinationFileName) + $".{counter}.journal");
@@ -131,9 +154,11 @@ namespace SimpleJournal.Documents.PDF
 
                 Completed?.Invoke(true, null, firstFileName);
                 return journals;
+
             }
             else
             {
+                // Only one journal is required!
                 if (isCanceled)
                     return null;
 
@@ -142,27 +167,14 @@ namespace SimpleJournal.Documents.PDF
 
                 if (images != null)
                 {
-                    // Progress.IsIndeterminate = false;
-                    int count = images.Count;
-
-                    if (options.UsePageRange && pageTo > count)
-                    {
-                        int nPageTo = Math.Min(options.PagesPerJournal, count);
-                      
-                        var result = JournalHasFewerPagesThenRequired?.Invoke(pageFrom, nPageTo);
-                        if (result.HasValue && !result.Value)
-                            return null;
-                        else
-                            pageTo = nPageTo;                                                
-                    }
-
                     if (isCanceled)
                         return null;
 
-                    int start = (!options.UsePageRange ? 0 : pageFrom - 1);
-                    int end = (!options.UsePageRange ? count : pageTo);
+                    int sI = (options.UsePageRange ? options.StartPage - 1 : 0);
+                    int eI = (options.UsePageRange ? options.LastPage - 1 : pageCount - 1);
+                    int progress = 0;
 
-                    for (int i = start; i < end; i++)
+                    for (int i = sI; i <= eI; i++)
                     {
                         if (isCanceled)
                             break;
@@ -170,10 +182,11 @@ namespace SimpleJournal.Documents.PDF
                         var image = images[i];
                         int currentPage = i + 1;
 
-                        double percentage = Math.Round((currentPage / (double)end) * 100.0);
+                        double percentage = Math.Round((progress / (double)pageCount) * 100.0);
 
-                        ProgressChanged?.Invoke(PdfAction.PageRange_WritingPage, (int)percentage, currentPage, end, string.Empty);
+                        ProgressChanged?.Invoke(PdfAction.PageRange_WritingPage, (int)percentage, currentPage, pageCount, string.Empty);
                         journal.Pages.Add(await PdfHelper.CreatePdfJournalPageAsync(image));
+                        progress++;
                     }
                 }
 
@@ -198,9 +211,9 @@ namespace SimpleJournal.Documents.PDF
                         return null;
 
                     Completed?.Invoke(true, null, destinationFileName);
-                    return new List<Journal>() { journal }; 
+                    return new List<Journal>() { journal };
                 }
-                else 
+                else
                 {
                     if (isCanceled)
                         return null;
@@ -210,6 +223,29 @@ namespace SimpleJournal.Documents.PDF
             }
 
             return null;
+        }
+
+        private int DeterminePageCount(PdfConversationOptions options, int pdfPages)
+        {
+            int pageCount = pdfPages;
+
+            if (options.UsePageRange)
+            {
+                int tmp = 0;
+
+                int sp = options.StartPage - 1;
+                int lp = options.LastPage;
+
+                if (sp > pdfPages - 1 || sp > lp || lp > pdfPages - 1)
+                    throw new ArgumentException("Page range is invalid for this document!");
+
+                for (int p = sp; p < lp; p++)
+                    tmp++;
+
+                pageCount = tmp;
+            }
+
+            return pageCount;
         }
     }
 }

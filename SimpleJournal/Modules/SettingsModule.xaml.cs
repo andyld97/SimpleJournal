@@ -117,7 +117,7 @@ namespace SimpleJournal.Modules
             TextCustomImagePath.Text = Settings.Instance.CustomBackgroundImagePath;
             SelectTheme();
 
-            NumericUpDownAutoSaveInteral.Value = Settings.Instance.AutoSaveIntervalMinutes;
+            NumericUpDownAutoSaveInterval.Value = Settings.Instance.AutoSaveIntervalMinutes;
             editMode = false;
         }
 
@@ -197,7 +197,7 @@ namespace SimpleJournal.Modules
             MessageBox.Show(Properties.Resources.strSuccess, Properties.Resources.strSuccess, MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
-        private void NumericUpDownAutoSaveInteral_OnChanged(int oldValue, int newValue)
+        private void NumericUpDownAutoSaveInterval_OnChanged(int oldValue, int newValue)
         {
             if (editMode)
                 return;

@@ -67,9 +67,9 @@
 
             <StackPanel Visibility="{Binding ElementName=RadioChoosePageRange, Path=IsChecked, Converter={StaticResource Fluent.Ribbon.Converters.BoolToVisibilityConverter}}" Orientation="Horizontal" HorizontalAlignment="Left">
                 <TextBlock Text="{x:Static res:Resources.strPDFConversationDialog_From}" Margin="25,0,0,0" VerticalAlignment="Center" FontWeight="Bold" />
-                <controls:NumericUpDown x:Name="NumPageFrom" Height="25" Value="1" Maximum="100" Minimum="1" Margin="3" />
+                <controls:NumericUpDown x:Name="NumPageFrom" Height="25" Value="1" Maximum="1000" Minimum="1" Margin="3" />
                 <TextBlock Text="{x:Static res:Resources.strPDFConversationDialog_To}" Margin="10,0,3,0" VerticalAlignment="Center" FontWeight="Bold" />
-                <controls:NumericUpDown x:Name="NumPageTo" Height="25" Value="100" Maximum="100" Minimum="1" Margin="3" />
+                <controls:NumericUpDown x:Name="NumPageTo" Height="25" Value="100" Maximum="1000" Minimum="1" Margin="3" />
             </StackPanel>
 
             <CheckBox x:Name="CheckUseOnlineConverter" Checked="CheckUseOnlineConverter_Checked" Unchecked="CheckUseOnlineConverter_Checked" Foreground="{DynamicResource Fluent.Ribbon.Brushes.Black}" Content="{x:Static res:Resources.strPDFConversationDialog_UseOnlineConversation}" Margin="0,5,0,0" />

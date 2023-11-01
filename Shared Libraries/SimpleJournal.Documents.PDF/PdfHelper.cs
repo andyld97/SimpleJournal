@@ -15,20 +15,20 @@ namespace SimpleJournal.Helper.PDF
             var settings = new MagickReadSettings
             {
                 // Settings the density to 300 dpi will create an image with a better quality
-                Density = new Density(300, 300)
+                Density = new Density(300, 300),
             };
 
-            // Add all the pages of the pdf file to the collection
+            // Add all the pages of the PDF file to the collection
             var images = new MagickImageCollection();
             await images.ReadAsync(path, settings);
             return images;
         }
 
-        public static async Task<PdfJournalPage> CreatePdfJournalPageAsync(IMagickImage<ushort> image)
+        public static async Task<PdfJournalPage?> CreatePdfJournalPageAsync(IMagickImage<ushort> image)
         {
             Orientation orientation = image.Width >= image.Height ? Orientation.Landscape : Orientation.Portrait;
 
-            PdfJournalPage pdfJournalPage = null;
+            PdfJournalPage? pdfJournalPage = null;
             await Task.Run(() =>
             {
                 // Resize image to A4 pixels (96 dpi)
@@ -47,7 +47,7 @@ namespace SimpleJournal.Helper.PDF
 
         public static async Task<(bool, string)> ExportJournalAsPDF(string outputPath, List<byte[]> pages)
         {
-            // This method shouldn't freeze the whole gui (it's better already)
+            // This method shouldn't freeze the whole GUI (it's better already)
             State.SetAction(StateType.ExportPDF, ProgressState.Start);
 
             try

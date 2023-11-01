@@ -1036,7 +1036,7 @@ namespace SimpleJournal.Documents.UI.Controls
                         {
                             case RulerMode.Dottet:
                                 {
-                                    line.StrokeDashArray = Consts.LineStrokeDottetDashArray;
+                                    line.StrokeDashArray = Consts.LineStrokeDottedDashArray;
                                     line.StrokeDashCap = PenLineCap.Round;
                                 }
                                 break;
