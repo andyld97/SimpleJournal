@@ -30,6 +30,7 @@ using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Printing;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -190,10 +191,7 @@ namespace SimpleJournal
 
             // Display last opened files
             RefreshRecentlyOpenedFiles();
-            RecentlyOpenedDocuments.DocumentsChanged += delegate ()
-            {
-                RefreshRecentlyOpenedFiles();
-            };
+            RecentlyOpenedDocuments.DocumentsChanged += RefreshRecentlyOpenedFiles;
 
             CurrentJournalPages.CollectionChanged += IPages_CollectionChanged;
             var page = GeneratePage(pattern: null);
@@ -252,27 +250,7 @@ namespace SimpleJournal
             };
 
             // Handle keydown
-            PreviewKeyDown += (s, e) =>
-            {
-                if (e.Key == Key.F11)
-                {
-                    ToggleFullscreen();
-                }
-                else if (e.Key == Key.O && (Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control)
-                {
-                    // Open
-                    btnOpen_Click(null, null);
-                }
-                else if (e.Key == Key.PageDown)
-                {
-                    ScrollToNextPage(true); 
-                }
-                else if (e.Key == Key.PageUp)
-                {
-                    ScrollToPreviousPage();
-                }
-            };
-
+            PreviewKeyDown += MainWindow_PreviewKeyDown;
 
             // Handle events
             PageManagementControl.ModuleClosed += async delegate (object semder, bool e)
@@ -296,7 +274,8 @@ namespace SimpleJournal
                     TextExportStatus.Text = e;
             };
 
-            State.Initalize(new[] {
+            State.Initalize(new[] 
+            {
                 Properties.Resources.strStateSaving,
                 Properties.Resources.strStateExportAsPDF,
                 Properties.Resources.strStateExportAsJournal,
@@ -356,7 +335,7 @@ namespace SimpleJournal
 
             currentPens = Data.Pen.Instance;
 
-            // Apply pens to gui
+            // Apply pens to GUI
             UpdatePenButtons();
             UpdateTextMarker();
             UpdateDropDownButtons();
@@ -400,6 +379,27 @@ namespace SimpleJournal
             }
 
             ApplyBackground();
+        }
+
+        private void MainWindow_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.F11)
+            {
+                ToggleFullscreen();
+            }
+            else if (e.Key == Key.O && (Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control)
+            {
+                // Open
+                btnOpen_Click(null, null);
+            }
+            else if (e.Key == Key.PageDown)
+            {
+                ScrollToNextPage(true);
+            }
+            else if (e.Key == Key.PageUp)
+            {
+                ScrollToPreviousPage();
+            }
         }
 
         private void DrawingCanvas_OnChangedDocumentState(bool value)
@@ -459,7 +459,6 @@ namespace SimpleJournal
 #endif
         }
 
-
         private void IPages_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
             RefreshPages();
@@ -467,8 +466,6 @@ namespace SimpleJournal
         #endregion
 
         #region Notifications
-
-        // ToDo!!!!
 
         private void NotificationServiceInstance_OnNotifcationRemoved(Notification notification)
         {
@@ -532,6 +529,7 @@ namespace SimpleJournal
         {
             btnToggleNotification.IsChecked = false;
         }
+
         #endregion
 
         #region AutoSave - Backup
@@ -1234,10 +1232,10 @@ namespace SimpleJournal
             {
                 // Default values
                 var defaultSettings = new Settings();
-                currentTextMarkerAttributes.Width = defaultSettings.TextMarkerSize.Height; // Consts.TEXT_MARKER_WIDTH;
-                currentTextMarkerAttributes.Height = defaultSettings.TextMarkerSize.Width; // Consts.TEXT_MARKER_HEIGHT;
+                currentTextMarkerAttributes.Width = defaultSettings.TextMarkerSize.Height;
+                currentTextMarkerAttributes.Height = defaultSettings.TextMarkerSize.Width;
                 currentTextMarkerAttributes.StylusTip = StylusTip.Rectangle;
-                currentTextMarkerAttributes.Color = defaultSettings.TextMarkerColor.ToColor(); //Consts.TEXT_MARKER_COLOR;
+                currentTextMarkerAttributes.Color = defaultSettings.TextMarkerColor.ToColor();
 
                 Settings.Instance.TextMarkerSize = Documents.UI.Consts.TextMarkerSizes[0];
                 Settings.Instance.TextMarkerColor = new Common.Data.Color(Consts.TextMarkerColor.A, Consts.TextMarkerColor.R, Consts.TextMarkerColor.G, Consts.TextMarkerColor.B);
@@ -1245,10 +1243,10 @@ namespace SimpleJournal
             }
             else
             {
-                currentTextMarkerAttributes.Width = Settings.Instance.TextMarkerSize.Height; // Consts.TEXT_MARKER_WIDTH;
-                currentTextMarkerAttributes.Height = Settings.Instance.TextMarkerSize.Width; // Consts.TEXT_MARKER_HEIGHT;
+                currentTextMarkerAttributes.Width = Settings.Instance.TextMarkerSize.Height;
+                currentTextMarkerAttributes.Height = Settings.Instance.TextMarkerSize.Width;
                 currentTextMarkerAttributes.StylusTip = StylusTip.Rectangle;
-                currentTextMarkerAttributes.Color = Settings.Instance.TextMarkerColor.ToColor(); //Consts.TEXT_MARKER_COLOR;
+                currentTextMarkerAttributes.Color = Settings.Instance.TextMarkerColor.ToColor();
             }
 
             markerPath.Fill = new SolidColorBrush(currentTextMarkerAttributes.Color);
@@ -1536,6 +1534,9 @@ namespace SimpleJournal
 
         private void RefreshLinkedDocumentButtons()
         {
+            ButtonLoadPreviousLinkedDocument.ToolTip = PreviousPDFFile;
+            ButtonLoadNextLinkedDocument.ToolTip = NextPDFFile;
+
             void UpdateButtons(bool state)
             {
                 ButtonLoadPreviousLinkedDocument.Visibility = (state ? Visibility.Visible : Visibility.Collapsed);
@@ -2383,8 +2384,7 @@ namespace SimpleJournal
             SwitchTool(Tools.CooardinateSystem);
         }
 
-
-#endregion
+        #endregion
 
         #region Event Handling / Menu
 
@@ -2640,7 +2640,7 @@ namespace SimpleJournal
         }
 
         /// <summary>
-        /// This button is currently hidden, because using a pdf printer results in a better quality
+        /// This button is currently hidden, because using a PDF printer results in a better quality
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -3210,7 +3210,7 @@ namespace SimpleJournal
             ITabbedModule aboutDialog = new AboutModule();
             aboutDialog.ShowModuleWindow(Settings.Instance.UseModernDialogs, this);
         }
-#endregion
+        #endregion
 
         #endregion
 
@@ -3640,30 +3640,57 @@ namespace SimpleJournal
 
         #region Journal (PDF) Navigation
 
+        public string PreviousPDFFile
+        {
+            get
+            {
+                if (currentJournal == null || currentJournal.PreviousDocumentIndex == null)
+                    return string.Empty;
+
+                return GeneratePDFFilePath(currentJournal.PreviousDocumentIndex);
+            }
+        }
+
+        public string NextPDFFile
+        {
+            get
+            {
+                if (currentJournal == null || currentJournal.NextDocumentIndex == null)
+                    return string.Empty;
+
+                return GeneratePDFFilePath(currentJournal.NextDocumentIndex);
+            }
+        }
+
+        private string GeneratePDFFilePath(int? index)
+        {
+            string currentFileName = System.IO.Path.GetFileNameWithoutExtension(currentJournalPath);
+            return Regex.Replace(currentFileName, @"(\.\d*)$", $".{index}.journal");
+        }
+
         private async void ButtonLoadPreviousLinkedDocument_Click(object sender, RoutedEventArgs e)
         {
-            await NavigateIndexAsync(currentJournal.PreviousDocumentIndex);
+            await NavigateIndexAsync(PreviousPDFFile);
         }
 
         private async void ButtonLoadNextLinkedDocument_Click(object sender, RoutedEventArgs e)
         {
-            await NavigateIndexAsync(currentJournal.NextDocumentIndex);
+            await NavigateIndexAsync(NextPDFFile);
         }
 
-        private async Task NavigateIndexAsync(int? index)
+        private async Task NavigateIndexAsync(string fileName)
         {
             if (AskForOpeningAfterModifying(true))
             {
+                // Save old journal
                 if (DrawingCanvas.Change)
                     await SaveJournalAsync(currentJournalPath);
 
                 // Generate new journal path
-                string currentFileName = System.IO.Path.GetFileNameWithoutExtension(currentJournalPath);
                 string parent = System.IO.Path.GetDirectoryName(currentJournalPath);
-                string newFileName = Regex.Replace(currentFileName, @"(\.\d*)$", $".{index}.journal");
 
                 // Load this journal
-                await LoadJournalAsnyc(System.IO.Path.Combine(parent, newFileName));
+                await LoadJournalAsnyc(System.IO.Path.Combine(parent, fileName));
             }
         }
 

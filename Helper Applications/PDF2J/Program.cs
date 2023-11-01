@@ -150,7 +150,7 @@ namespace PDF2J
                 currentTicket.Status = TicketStatus.Completed;
                 logger.LogInformation($"[{currentTicket.Name}] Completed!");
 
-                await Webhook?.PostWebHookAsync(Webhook.LogLevel.Info, $"[PDF2J] Successfully converted a pdf document \"{currentTicket.Name}\"", "Conversation");
+                await Webhook?.PostWebHookAsync(Webhook.LogLevel.Info, $"Successfully converted a pdf document \"{currentTicket.Name}\"", "Conversation");
             }
             else
             {
@@ -168,7 +168,7 @@ namespace PDF2J
                     System.IO.File.Copy(System.IO.Path.Combine(currentTicket.TempPath, "doc.pdf"), System.IO.Path.Combine(path, "doc.pdf"));
                     System.IO.File.WriteAllText(System.IO.Path.Combine(path, "log.txt"), currentTicket.ErorrMessage);
 
-                    await Webhook?.PostWebHookAsync(Webhook.LogLevel.Error, $"[PDF2J] Failed to convert a pdf document \"{currentTicket.Name}\". Ticket-ID: \"{currentTicket.ID}\"", "Conversation");
+                    await Webhook?.PostWebHookAsync(Webhook.LogLevel.Error, $"Failed to convert a PDF document \"{currentTicket.Name}\". Ticket-ID: \"{currentTicket.ID}\"", "Conversation");
                 }
             }
         }
