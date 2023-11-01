@@ -2,7 +2,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.PlatformAbstractions;
 using PDF2J.Model;
 using SimpleJournal.Common;
 using SimpleJournal.Common.Helper;
@@ -39,7 +38,7 @@ namespace PDF2J
         public static void Main(string[] args)
         {
             // Read config json (if any) [https://stackoverflow.com/a/28700387/6237448]
-            string configPath = System.IO.Path.Combine(PlatformServices.Default.Application.ApplicationBasePath, "config.json");
+            string configPath = System.IO.Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, "config.json");
             string preInitalizationLogMessage = string.Empty;
             if (System.IO.File.Exists(configPath))
             {
