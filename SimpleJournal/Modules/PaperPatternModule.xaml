@@ -280,7 +280,7 @@
 
         <Grid Grid.Row="1">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="2,5,6,7">
-                <Button x:Name="ButtonApply" Click="ButtonApply_Click" FontWeight="Bold" Padding="5" Width="200">
+                <Button x:Name="ButtonApply" Click="ButtonApply_Click" FontWeight="Bold" Margin="0,0,5,0" Padding="5" Width="200">
                     <StackPanel Orientation="Horizontal">
                         <Image Width="32" Source="../resources/page_pattern/pageapplychanges.png" />
                         <TextBlock Text="{x:Static res:Resources.strPatternDialog_ApplyChanges}" VerticalAlignment="Center" />

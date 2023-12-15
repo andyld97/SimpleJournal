@@ -265,9 +265,9 @@
                     <Fluent:Button x:Name="btnCreateForm" Click="btnCreateForm_Click" Header="{x:Static res:Resources.strConvertToForm}" LargeIcon="pack://application:,,,/SimpleJournal;component/resources/shapes.png"/>
                 </Fluent:RibbonGroupBox>
                 <Fluent:RibbonGroupBox Header="{x:Static res:Resources.strInsertNewObjects}" KeyTip="NE">
-                    <Fluent:Button x:Name="btnInsertText" Click="btnInsertText_Click" Header="{x:Static res:Resources.strInsertText}" LargeIcon="pack://application:,,,/SimpleJournal;component/resources/text.png"/>
-                    <Fluent:Button x:Name="btnInsertDate" Click="btnInsertDate_Click" Header="{x:Static res:Resources.strInsertDate}" LargeIcon="pack://application:,,,/SimpleJournal;component/resources/text.png"/>
-                    <Fluent:Button x:Name="btnInsertImage" Click="btnInsertImage_Click" Header="{x:Static res:Resources.strInsertImage}" LargeIcon="pack://application:,,,/SimpleJournal;component/resources/image.png"/>
+                    <Fluent:Button x:Name="btnInsertText" Click="btnInsertText_Click" Width="50" Header="{x:Static res:Resources.strInsertText}" LargeIcon="pack://application:,,,/SimpleJournal;component/resources/text.png" />
+                    <Fluent:Button x:Name="btnInsertDate" Click="btnInsertDate_Click" Width="50" Header="{x:Static res:Resources.strInsertDate}" LargeIcon="pack://application:,,,/SimpleJournal;component/resources/text.png" />
+                    <Fluent:Button x:Name="btnInsertImage" Click="btnInsertImage_Click" Width="50" Header="{x:Static res:Resources.strInsertImage}" LargeIcon="pack://application:,,,/SimpleJournal;component/resources/image.png" />
                 </Fluent:RibbonGroupBox>
             </Fluent:RibbonTabItem>
             <Fluent:RibbonTabItem Header="{x:Static res:Resources.strText}" KeyTip="TE">
@@ -278,7 +278,7 @@
                 </Fluent:RibbonTabItem.HeaderTemplate>
                 <Fluent:RibbonGroupBox Header="{x:Static res:Resources.strTextRecognization}">
                     <Fluent:Button x:Name="btnTextDetection" Click="btnTextDetection_Click" Header="{x:Static res:Resources.strTextDectection}" LargeIcon="pack://application:,,,/SimpleJournal;component/resources/textdetection.png"/>
-                    <Fluent:Button x:Name="btnSearch" Click="btnSearch_Click" Header="{x:Static res:Resources.strTextSearch}" LargeIcon="pack://application:,,,/SimpleJournal;component/resources/search.png"/>
+                    <Fluent:Button x:Name="btnSearch" Click="btnSearch_Click" Header="{x:Static res:Resources.strTextSearch}" LargeIcon="pack://application:,,,/SimpleJournal;component/resources/search.png" Margin="5,0,5,0" />
                 </Fluent:RibbonGroupBox>
             </Fluent:RibbonTabItem>
             <Fluent:RibbonTabItem Header="{x:Static res:Resources.strView}" KeyTip="AN">

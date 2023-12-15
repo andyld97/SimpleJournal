@@ -5,18 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:res="clr-namespace:SimpleJournal.Properties"
         mc:Ignorable="d"
-        Title="{x:Static res:Resources.strTextInputTitle}" Height="150" Width="300"
+        Title="{x:Static res:Resources.strTextInputTitle}" Height="130" Width="300"
         ResizeMode="NoResize"
         WindowStyle="SingleBorderWindow"
         WindowStartupLocation="CenterScreen"
         FocusManager.FocusedElement="{Binding ElementName=txtResult}">
     <Grid Background="{DynamicResource Fluent.Ribbon.Brushes.White}">
         <StackPanel Margin="5">
-            <TextBlock Text="{x:Static res:Resources.strTextInput}" Foreground="{DynamicResource Fluent.Ribbon.Brushes.Black}" Padding="3" />
+            <TextBlock Text="{x:Static res:Resources.strTextInput}" Foreground="{DynamicResource Fluent.Ribbon.Brushes.Black}" Padding="0,3" />
             <TextBox x:Name="txtResult" Background="Transparent" Foreground="{DynamicResource Fluent.Ribbon.Brushes.Black}" Margin="0,5,5,5" Padding="2" KeyDown="txtResult_KeyDown" />
 
             <Grid HorizontalAlignment="Stretch">
-                <Button Content="{x:Static res:Resources.strOK}" x:Name="btnOK" Click="btnOK_Click" HorizontalAlignment="Right" Width="60" Margin="0,0,5,0" Padding="3" />
+                <Button Content="{x:Static res:Resources.strOK}" x:Name="btnOK" Click="btnOK_Click" HorizontalAlignment="Right" Width="100" Margin="0,0,5,0" Padding="3" />
             </Grid>
         </StackPanel>
     </Grid>

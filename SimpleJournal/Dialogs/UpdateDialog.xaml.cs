@@ -1,6 +1,5 @@
 ﻿using Microsoft.Web.WebView2.Core;
 using SimpleJournal.Common.Helper;
-using SimpleJournal.Data;
 using SimpleJournal.Documents.UI;
 using System;
 using System.Windows;
