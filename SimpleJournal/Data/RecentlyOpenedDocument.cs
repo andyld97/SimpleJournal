@@ -16,7 +16,7 @@ namespace SimpleJournal.Data
         public static List<Document> Instance = RecentlyOpenedDocuments.Load();
 
         public delegate void documentsChanged();
-        public static documentsChanged DocumentsChanged;
+        public static event documentsChanged DocumentsChanged;
 
         static RecentlyOpenedDocuments()
         {
