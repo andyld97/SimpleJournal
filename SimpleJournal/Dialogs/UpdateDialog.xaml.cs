@@ -1,4 +1,5 @@
-﻿using Microsoft.Web.WebView2.Core;
+﻿using Helper;
+using Microsoft.Web.WebView2.Core;
 using SimpleJournal.Common.Helper;
 using SimpleJournal.Documents.UI;
 using System;
@@ -56,6 +57,20 @@ namespace SimpleJournal.Dialogs
         {
             string message = string.Format(Properties.Resources.strUpdateDownloadDialog_DownloadText, version.ToString(4));
             string localFilePath = System.IO.Path.Combine(FileSystemHelper.GetDownloadsPath(), $"SimpleJournal-{version:4}.exe");
+
+            if (System.IO.File.Exists(localFilePath))
+            {
+                try
+                {
+                    // Delete file (if it already exists, it will be not overwritten correctly (hash doesn't seem to match then)
+                    System.IO.File.Delete(localFilePath);
+                }
+                catch
+                {
+                    // ignore
+                }
+            }
+
             UpdateDownloadDialog updateDownloadDialog = new UpdateDownloadDialog(message, Consts.DownloadUrl, hash) { LocalFilePath = localFilePath };
 
             var result = updateDownloadDialog.ShowDialog();
@@ -74,6 +89,9 @@ namespace SimpleJournal.Dialogs
                     DialogResult = false;
                     return;
                 }
+
+                // Clear update cache file to ensure no update notifications are displayed!
+                UpdateHelper.ResetCache();
 
                 // Exit to make sure user can easily update without problems
                 GeneralHelper.Shutdown();
