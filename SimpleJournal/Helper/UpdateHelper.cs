@@ -133,6 +133,15 @@ namespace Helper
             return cache;
         }
 
+        public static void ResetCache()
+        {
+            try
+            {
+                System.IO.File.Delete(Consts.UpdateCacheFilePath);
+            }
+            catch { }
+        }
+
         private static void SaveCache()
         {
             try
@@ -148,8 +157,12 @@ namespace Helper
 
             if (result.Result == SimpleJournal.Common.UpdateResult.UpdateAvailable && result.Version != null)
             {
-                UpdateDialog ud = new UpdateDialog(result.Version, result.SHA256Hash);
-                ud.ShowDialog();
+                try
+                {
+                    UpdateDialog ud = new UpdateDialog(result.Version, result.SHA256Hash);
+                    ud.ShowDialog();
+                }
+                catch { }
             }
         }
 

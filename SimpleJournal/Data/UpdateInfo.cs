@@ -3,6 +3,7 @@ using SimpleJournal.Common;
 using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
+using System.Xml.Serialization;
 
 namespace Data
 {
@@ -16,7 +17,14 @@ namespace Data
         /// <summary>
         /// The newest available version (if any, otherwise null)
         /// </summary>
+        [XmlIgnore]
         public Version Version { get; set; }
+
+        public string XmlVersion
+        {
+            get => Version.ToString();
+            set => Version = Version.Parse(value);
+        }
 
         /// <summary>
         /// The updates hash integrity
