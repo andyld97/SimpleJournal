@@ -153,8 +153,6 @@ namespace SimpleJournal
         {
             DrawingCanvas.HideSidebar += DrawingCanvas_HideSidebar;
             DrawingCanvas.PreventSelection += DrawingCanvas_PreventSelection;
-
-          UpdateHelper.  SearchForUpdates();
         }
 
         private static void DrawingCanvas_PreventSelection(object sender, EventArgs e)
