@@ -19,7 +19,7 @@
     <PackageReference Include="Magick.NET-Q16-AnyCPU" Version="13.5.0" />
     <PackageReference Include="Magick.NET.Core" Version="13.5.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
-    <PackageReference Include="WebhookAPI" Version="1.0.4" />
+    <PackageReference Include="WebhookAPI" Version="1.0.5" />
   </ItemGroup>
 
   <ItemGroup>
