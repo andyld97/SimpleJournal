@@ -21,7 +21,7 @@ Welcome to the offical GitHub-Repo of SimpleJournal. SimpleJournal is a simple t
 ## Info
 
 There are two versions of SimpleJournal due to compability issues, e.g. like supporting older versions of Windows. So we have the `normal version` which is running also on Windows 7 and the `store version`. If you want to download the non-store version [click here.](https://simplejournal.ca-soft.net/en/download)
-Due to store-restrictions both versions are different: The normal version supports more features than the other, so therefore there are different builds: `UWP` and `Normal`. As you might have noticed that SimpleJournal is written in `WPF` (`.NET 7`), the Store-Version is not a real UWP-App. It is converted with the `Desktop Brdige` (`MSIX Packaging Tool`)
+Due to store-restrictions both versions are different: The normal version supports more features than the other, so therefore there are different builds: `UWP` and `Normal`. As you might have noticed that SimpleJournal is written in `WPF` (`.NET 8`), the Store-Version is not a real UWP-App. It is converted with the `Desktop Brdige` (`MSIX Packaging Tool`)
 
 ### Features & Version Matrix
 
