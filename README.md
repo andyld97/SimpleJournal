@@ -21,7 +21,7 @@ Welcome to the offical GitHub-Repo of SimpleJournal. SimpleJournal is a simple t
 ## Info
 
 There are two versions of SimpleJournal due to compability issues, e.g. like supporting older versions of Windows. So we have the `normal version` which is running also on Windows 7 and the `store version`. If you want to download the non-store version [click here.](https://simplejournal.ca-soft.net/en/download)
-Due to store-restrictions both versions are different: The normal version supports more features than the other, so therefore there are different builds: `UWP` and `Normal`. As you might have noticed that SimpleJournal is written in `WPF` (`.NET 8`), the Store-Version is not a real UWP-App. It is converted with the `Desktop Brdige` (`MSIX Packaging Tool`)
+Due to store-restrictions both versions are different: The normal version supports more features than the other, so therefore there are different builds: `UWP` and `Normal`. As you might have noticed that SimpleJournal is written in `WPF` (`.NET 8`), the Store-Version is not a real UWP-App. It is converted with the `Desktop Bridge` (`MSIX Packaging Tool`)
 
 ### Features & Version Matrix
 
@@ -58,7 +58,7 @@ Converting large pdf files takes some time and require much computing power, so 
 
 ### Limit: 100 Pages per document
 Either using SimpleJournal itself or the converter api there is a limit of 100 pages per document. For large documents (`> 100 pages`) multiple journals gets created. This limition is to reduce the amount of memory the programm uses when displaying large documents.
-A feature to "concat" the document (load the next document at the end of the current document or load the previous document at the end of the current document) is already planned to simplify the workflow using PDF journals.
+To simplify the workflow regarding large PDF-documents, you can navigate between these documents. At the top you can load the previous document (if available) and at the bottom you can load the next document (if available). This can also be disabeld in the settings dialog.
 
 ## Build
 In order to work with form or text-recognition you need to compile `Analyzer` and then all files should be copied automatically while publishing!
