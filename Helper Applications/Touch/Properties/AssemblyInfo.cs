@@ -8,9 +8,9 @@ using System.Windows;
 [assembly: AssemblyTitle("Touch")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Code  A Software")]
+[assembly: AssemblyCompany("Code A Software")]
 [assembly: AssemblyProduct("Touch")]
-[assembly: AssemblyCopyright("Copyright © 2018-2023")]
+[assembly: AssemblyCopyright("Copyright © 2018-2024")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
