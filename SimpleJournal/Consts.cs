@@ -42,7 +42,7 @@ namespace SimpleJournal
         /// <summary>
         /// The .NET version which was used to compile SJ
         /// </summary>
-        public static readonly Version CompiledDotnetVersion = new Version(8, 0, 1);
+        public static readonly Version CompiledDotnetVersion = new Version(8, 0, 2);
 
         /// <summary>
         /// Polling interval for NotificationService
