@@ -2081,10 +2081,10 @@ Details: {1}</value>
     <value>Lade "{0}" herunter ...</value>
   </data>
   <data name="strObsoleteNETVersionNotification_Message_Run2" xml:space="preserve">
-    <value>). Bitte aktualisieren Sie Ihre .NET Core Version, um sicherzustellen, dass das Programm fehlerfrei funktioniert.</value>
+    <value>). Bitte aktualisieren Sie Ihre .NET Version, um sicherzustellen, dass das Programm fehlerfrei funktioniert.</value>
   </data>
   <data name="strObsoleteNETVersionNotification_Message_Run1" xml:space="preserve">
-    <value>Sie verwenden eine veraltete .NET Core Version (</value>
+    <value>Sie verwenden eine veraltete .NET Version (</value>
   </data>
   <data name="strNotifications_UserInteraction_ShowChangelog" xml:space="preserve">
     <value>Änderungen anzeigen</value>

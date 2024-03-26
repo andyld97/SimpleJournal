@@ -2118,7 +2118,7 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die You are using an outdated .NET Core version ( ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die You are using an outdated .NET version ( ähnelt.
         /// </summary>
         public static string strObsoleteNETVersionNotification_Message_Run1 {
             get {
@@ -2127,7 +2127,7 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die ). Please update your .NET Core version to ensure that the program works without errors. ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die ). Please update your .NET version to ensure that the program works without errors. ähnelt.
         /// </summary>
         public static string strObsoleteNETVersionNotification_Message_Run2 {
             get {

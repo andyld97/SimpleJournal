@@ -2195,11 +2195,11 @@ Details: {1}</value>
     <comment>MainWindow.xaml</comment>
   </data>
   <data name="strObsoleteNETVersionNotification_Message_Run1" xml:space="preserve">
-    <value>You are using an outdated .NET Core version (</value>
+    <value>You are using an outdated .NET version (</value>
     <comment>ObsoleteNETVersion</comment>
   </data>
   <data name="strObsoleteNETVersionNotification_Message_Run2" xml:space="preserve">
-    <value>). Please update your .NET Core version to ensure that the program works without errors.</value>
+    <value>). Please update your .NET version to ensure that the program works without errors.</value>
     <comment>ObsoleteNETVersion</comment>
   </data>
   <data name="strDateTimeFormat" xml:space="preserve">

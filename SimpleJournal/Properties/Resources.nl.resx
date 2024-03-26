@@ -1669,10 +1669,10 @@ Details: {1}</value>
     <value>Wijzigingen bekijken</value>
   </data>
   <data name="strObsoleteNETVersionNotification_Message_Run1" xml:space="preserve">
-    <value>U gebruikt een verouderde .NET Core versie (</value>
+    <value>U gebruikt een verouderde .NET versie (</value>
   </data>
   <data name="strObsoleteNETVersionNotification_Message_Run2" xml:space="preserve">
-    <value>). Gelieve uw .NET Core versie te updaten om er zeker van te zijn dat het programma zonder fouten werkt.</value>
+    <value>). Gelieve uw .NET versie te updaten om er zeker van te zijn dat het programma zonder fouten werkt.</value>
   </data>
   <data name="strDateTimeFormat" xml:space="preserve">
     <value>dd.MM.yyyy HH:mm</value>
