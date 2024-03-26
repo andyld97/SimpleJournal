@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "SimpleJournal": {
+      "commandName": "Project",
+      "commandLineArgs": "/lang=en"
+    }
+  }
+}

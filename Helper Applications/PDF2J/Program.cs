@@ -47,7 +47,7 @@ namespace PDF2J
                 preInitalizationLogMessage = "Successfully initialized config file!";
 
                 if (!string.IsNullOrEmpty(GlobalConfig.WebHookUrl))
-                    Webhook = new Webhook(GlobalConfig.WebHookUrl, "PDF2J");
+                    Webhook = new Webhook(GlobalConfig.WebHookUrl, "PDF2J", true);
             }
             else
             {

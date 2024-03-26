@@ -31,7 +31,7 @@ namespace Notifications
         /// <summary>
         /// The list of all current notifications
         /// </summary>
-        public List<Notification> Notifications { get; set; } = new List<Notification>();
+        public List<Notification> Notifications { get; set; } = [];
 
         /// <summary>
         /// Determines whether the service is active or not
@@ -83,12 +83,12 @@ namespace Notifications
                 if (System.IO.File.Exists(Consts.NotificationsFilePath))
                 {
                     Notifications = Serialization.Read<List<Notification>>(Consts.NotificationsFilePath, additionalTypes: additionalTypes);
-                    Notifications ??= new List<Notification>();
+                    Notifications ??= [];
                 }
             }
             catch
             {
-                Notifications = new List<Notification>();
+                Notifications = [];
             }
         }
         /// <summary>

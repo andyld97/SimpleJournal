@@ -30,7 +30,7 @@ namespace SimpleJournal.Modules
         private bool isInitalized;
         private string title;
         private Window owner;
-        private readonly List<UIElement> Pages = new List<UIElement>();
+        private readonly List<UIElement> Pages = [];
         private int currentPageIndex = 0;
 
         public event PropertyChangedEventHandler PropertyChanged;

@@ -10,7 +10,7 @@ using System.Windows;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Code A Software")]
 [assembly: AssemblyProduct("Touch Device Manager")]
-[assembly: AssemblyCopyright("Copyright ©  2020-2023")]
+[assembly: AssemblyCopyright("Copyright ©  2020-2024")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

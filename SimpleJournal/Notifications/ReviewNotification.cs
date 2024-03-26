@@ -11,18 +11,18 @@ namespace SimpleJournal.Notifications
     {
         public override string ID => "REVIEW-001";
 
-        public override List<Run> Message => new List<Run>()
-        {
+        public override List<Run> Message =>
+        [
             new Run(Properties.Resources.strReviewNotification_Title) { IsBold = true, IsUnderline = true },
             new LineBreak(),
             new LineBreak(),
             new Run(Properties.Resources.strReviewNotification_Message)
-        };
+        ];
 
         public override TimeSpan ContinuouslyCheckingInterval => TimeSpan.FromSeconds(20);
 
-        public override List<UserInteraction> UserInteractions => new List<UserInteraction>()
-        {
+        public override List<UserInteraction> UserInteractions =>
+        [
             new UserInteraction()
             {
                 Description = Properties.Resources.strReviewNotification_RateSimpleJournal,
@@ -49,7 +49,7 @@ namespace SimpleJournal.Notifications
                 }),
                 CloseNotification = true
             }
-        };          
+        ];          
 
         public override NotificationType Type => NotificationType.Info;
 

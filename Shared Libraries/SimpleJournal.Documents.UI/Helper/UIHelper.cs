@@ -53,9 +53,8 @@ namespace SimpleJournal.Documents.UI.Helper
 
         public static void ClearAll(this ObservableCollection<UIElement> collection, DrawingCanvas canvas)
         {
-            List<UIElement> childs = new List<UIElement>();
-            foreach (UIElement child in collection)
-                childs.Add(child);
+            List<UIElement> childs = [.. collection];
+
             foreach (UIElement child in childs)
                 canvas.Children.Remove(child);
         }

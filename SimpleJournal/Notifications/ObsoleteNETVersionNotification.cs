@@ -24,7 +24,7 @@ namespace Notifications
                 Run runText2 = new Run($"{System.Runtime.InteropServices.RuntimeInformation.FrameworkDescription}") { IsBold = true, IsUnderline = true, IsItalic = true  };
                 Run runText3 = new Run(SimpleJournal.Properties.Resources.strObsoleteNETVersionNotification_Message_Run2);
 
-                return new List<Run>() { runText1, runText2, runText3 };
+                return [runText1, runText2, runText3];
             }
         }
 
@@ -33,15 +33,15 @@ namespace Notifications
         {
             get
             {
-                return new List<UserInteraction>()
-                {
+                return
+                [
                     new UserInteraction()
                     {
                         // Same text
                         Description = SimpleJournal.Properties.Resources.strNotifications_Update_UserInteraction_ExecuteUpdate,
                         HandleUserInteractionAsync = new Func<Task>(async () => await GeneralHelper.UpdateNETCoreVersionAsync()),
                     }
-                };
+                ];
             }
         }
 

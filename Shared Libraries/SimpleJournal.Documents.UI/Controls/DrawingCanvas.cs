@@ -446,7 +446,7 @@ namespace SimpleJournal.Documents.UI.Controls
 
         public static string[] StartAnalyzingProcess(StrokeCollection sc, Operation operation, string[]? additionalArguments = null)
         {
-            List<string> lines = new List<string>();
+            List<string> lines = [];
 
             try
             {
@@ -1191,11 +1191,8 @@ namespace SimpleJournal.Documents.UI.Controls
             {
                 e.Handled = true;
                 // Handle to make sure object will disappear from object bar (side bar)
-                List<UIElement> temp = new List<UIElement>();
-                foreach (UIElement child in GetSelectedElements())
-                {
-                    temp.Add(child);
-                }
+                List<UIElement> temp = [.. GetSelectedElements()];
+
                 foreach (UIElement elem in temp)
                     Children.Remove(elem);
 
@@ -1210,7 +1207,7 @@ namespace SimpleJournal.Documents.UI.Controls
             base.OnSelectionMoving(e);
             DrawingCanvas.Change = true;
 
-            List<PropertyChangedAction> actions = new List<PropertyChangedAction>();
+            List<PropertyChangedAction> actions = [];
 
             // Idea:
             // Get current positions and calculate the new ones to get all necessary values for the PropertyChangedAction

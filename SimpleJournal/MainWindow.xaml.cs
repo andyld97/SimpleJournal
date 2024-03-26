@@ -972,7 +972,7 @@ namespace SimpleJournal
 
             if (pnlItems.Items.Count != 0 && pnlItems.SelectedIndex != -1)
             {
-                List<UIElement> selection = new List<UIElement>();
+                List<UIElement> selection = [];
                 foreach (var item in pnlItems.SelectedItems)
                 {
                     int index = pnlItems.Items.IndexOf(item);
@@ -1001,7 +1001,7 @@ namespace SimpleJournal
             if (pnlItems.SelectedItems.Count > 0)
             {
                 preventSelectionChanged = true;
-                List<CustomListBoxItem> customItems = new List<CustomListBoxItem>();
+                List<CustomListBoxItem> customItems = [];
                 foreach (CustomListBoxItem li in pnlItems.SelectedItems)
                     customItems.Add(li);
 
@@ -1017,7 +1017,6 @@ namespace SimpleJournal
 
                 if (pnlItems.Items.Count == 0)
                     pnlSidebar.Visibility = Visibility.Hidden;
-
             }
             else
                 MessageBox.Show(this, Properties.Resources.strNoObjectsToDelete, Properties.Resources.strEmptySelection, MessageBoxButton.OK, MessageBoxImage.Information);
@@ -1415,7 +1414,7 @@ namespace SimpleJournal
         private void SelectDropDownTemplate_OnColorAndSizeChanged(System.Windows.Media.Color? c, int size)
         {
             // If strokes and child elements are selected change their colors
-            List<Action> changedActions = new List<Action>();
+            List<Action> changedActions = [];
 
             foreach (Stroke st in DrawingCanvas.LastModifiedCanvas.GetSelectedStrokes())
             {
@@ -1616,7 +1615,7 @@ namespace SimpleJournal
             page.Canvas.Children.CollectionChanged += Children_CollectionChanged;
             page.Canvas.RemoveElementFromSidebar += delegate (List<UIElement> temp)
             {
-                List<CustomListBoxItem> toRemove = new List<CustomListBoxItem>();
+                List<CustomListBoxItem> toRemove = [];
                 foreach (CustomListBoxItem item in pnlItems.Items)
                 {
                     if (temp.Contains(item.AssociativeRelation))
@@ -2443,38 +2442,37 @@ namespace SimpleJournal
 
         private async void NewCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            bool run;
-            if (DrawingCanvas.Change)
+            var modifyResult = AskForOpeningAfterModifying(true);
+            if (modifyResult == OpenResult.Cancel)
+                return;
+
+            if (modifyResult == OpenResult.SaveAndLoad)
             {
-                var result = MessageBox.Show(this, Properties.Resources.strWantToCreateNewJournal, Properties.Resources.strWantToLoadNewJournalTitle, MessageBoxButton.YesNo, MessageBoxImage.Question);
-                run = (result == MessageBoxResult.Yes);
+                // Cancel on failure
+                if (!await SaveProject(false))
+                    return;
             }
-            else
-                run = true;
 
-            if (run)
-            {
-                // Important to ensure that the old document can be loaded again!
-                await FreeOldJournalAsync();
+            // Important to ensure that the old document can be loaded again!
+            await FreeOldJournalAsync();
 
-                // No journal is loaded currently
-                currentJournal = new Journal();
-                currentJournalIsLoadedFromFile = false;
+            // No journal is loaded currently
+            currentJournal = new Journal();
+            currentJournalIsLoadedFromFile = false;
 
-                pages.Children.Clear();
-                CurrentJournalPages.Clear();
-                pnlSidebar.Visibility = Visibility.Hidden;
+            pages.Children.Clear();
+            CurrentJournalPages.Clear();
+            pnlSidebar.Visibility = Visibility.Hidden;
 
-                var page = GeneratePage(pattern: GetPattern(Settings.Instance.PaperType));
-                AddPage(page);
+            var page = GeneratePage(pattern: GetPattern(Settings.Instance.PaperType));
+            AddPage(page);
 
-                // Set last modified canvas to this, because the old is non existing any more
-                DrawingCanvas.LastModifiedCanvas = (page as IPaper).Canvas as DrawingCanvas;
-                SwitchTool(currentTool, true);
+            // Set last modified canvas to this, because the old is non existing any more
+            DrawingCanvas.LastModifiedCanvas = (page as IPaper).Canvas as DrawingCanvas;
+            SwitchTool(currentTool, true);
 
-                UpdateTitle(Properties.Resources.strNewJournal);
-                currentJournalPath = string.Empty;
-            }
+            UpdateTitle(Properties.Resources.strNewJournal);
+            currentJournalPath = string.Empty;
         }
 
         private void NewCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
@@ -2543,8 +2541,21 @@ namespace SimpleJournal
                     if (MessageBox.Show(this, Properties.Resources.strSelectedDocumentNotExisting, Properties.Resources.strSelectedDocumentNotExistingTitle, MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                         RecentlyOpenedDocuments.Remove(d.Path);
                 }
-                else if (AskForOpeningAfterModifying())
-                    await LoadJournalAsnyc(d.Path);
+                else 
+                {
+                    var modifyResult = AskForOpeningAfterModifying();
+                    if (modifyResult != OpenResult.Cancel)
+                    {
+                        if (modifyResult == OpenResult.SaveAndLoad)
+                        {
+                            // Cancel on failure
+                            if (!await SaveProject(false))
+                                return;
+                        }
+
+                        await LoadJournalAsnyc(d.Path);
+                    }
+                }
 
                 ListRecentlyOpenedDocuments.SelectedItem = null;
             }
@@ -2560,16 +2571,29 @@ namespace SimpleJournal
                     if (MessageBox.Show(this, Properties.Resources.strSelectedDocumentNotExisting, Properties.Resources.strSelectedDocumentNotExistingTitle, MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                         RecentlyOpenedDocuments.Remove(d.Path);
                 }
-                else if (AskForOpeningAfterModifying())
+                else
                 {
+                    var modifyResult = AskForOpeningAfterModifying();
+
                     MenuBackstage.IsOpen = false;
-                    await Task.Delay(500).ContinueWith(delegate (Task t)
+
+                    if (modifyResult != OpenResult.Cancel)
                     {
-                        Dispatcher.Invoke(new System.Action(async () =>
+                        await Task.Delay(500).ContinueWith(delegate (Task t)
                         {
-                            await LoadJournalAsnyc(d.Path);
-                        }));
-                    });
+                            Dispatcher.Invoke(new System.Action(async () =>
+                            {
+                                if (modifyResult == OpenResult.SaveAndLoad)
+                                {
+                                    // Cancel on failure
+                                    if (!await SaveProject(false))
+                                        return;
+                                }
+
+                                await LoadJournalAsnyc(d.Path);
+                            }));
+                        });
+                    }                    
                 }
 
                 RecentlyOpenedDocumentsBackstage.SelectedItem = null;
@@ -2651,7 +2675,7 @@ namespace SimpleJournal
 
             if (dialogResult.HasValue && dialogResult.Value)
             {
-                List<byte[]> data = new List<byte[]>();
+                List<byte[]> data = [];
 
                 foreach (var page in CurrentJournalPages)
                 {
@@ -2754,7 +2778,7 @@ namespace SimpleJournal
                 {
                     var pageSize = new Size(Documents.Consts.A4WidthP, Documents.Consts.A4HeightP);
 
-                    List<IPaper> pages = new List<IPaper>();
+                    List<IPaper> pages = [];
 
                     for (int i = from; i <= to; i++)
                         pages.Add(CurrentJournalPages[i]);
@@ -2878,76 +2902,96 @@ namespace SimpleJournal
             AddNewPage(Settings.Instance.PaperTypeLastInserted, Settings.Instance.OrientationLastInserted);
         }
 
-        private bool AskForOpeningAfterModifying(bool askForSave = false)
+        public enum OpenResult
         {
-            bool run = false;
+            SaveAndLoad,
+            DiscardAndLoad,
+            Load,
+            Cancel
+        }
+
+        private OpenResult AskForOpeningAfterModifying(bool isNewJournal = false)
+        {
             if (DrawingCanvas.Change)
             {
-                string message = Properties.Resources.strWantToLoadNewJournal;
-                string title = Properties.Resources.strWantToLoadNewJournalTitle;
-                MessageBoxButton buttons = MessageBoxButton.YesNo;
+                string message = Properties.Resources.strAskForUnsavedChanges;
+                if (isNewJournal)
+                    message = Properties.Resources.strAskForUnsavedChanges_NewJournal;
 
-                if (askForSave)
-                {
-                    message = Properties.Resources.strWantToSaveBeforeLoadOtherDocument;
-                    title = Properties.Resources.strWantToSaveBeforeLoadOtherDocument_Title;
-                    buttons = MessageBoxButton.YesNoCancel;
-                }
-
-                var res = MessageBox.Show(this, message, title, buttons, MessageBoxImage.Question);
+                var res = MessageBox.Show(this, message, SimpleJournal.Properties.Resources.strAskForUnsavedChanges_Title, MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
                 if (res == MessageBoxResult.Yes)
-                    run = true;
+                    return OpenResult.SaveAndLoad;
+                else if (res == MessageBoxResult.No)
+                    return OpenResult.DiscardAndLoad;
             }
             else
-                run = true;
+                return OpenResult.Load;
 
-            return run;
+            return OpenResult.Cancel;
         }
 
         private async void btnOpen_Click(object sender, RoutedEventArgs e)
         {
-            if (AskForOpeningAfterModifying())
+            var modifyResult = AskForOpeningAfterModifying();
+            if (modifyResult == OpenResult.Cancel)
+                return;
+
+            if (modifyResult == OpenResult.SaveAndLoad)
             {
-                OpenFileDialog ofd = new OpenFileDialog() { Filter = $"{Properties.Resources.strJournalFile}|*.journal;*.pdf" }; // .journal or pdf
-                var result = ofd.ShowDialog();
-
-                if (result.HasValue && result.Value)
-                {
-                    pnlSidebar.Visibility = Visibility.Hidden;
-
-                    if (System.IO.Path.GetExtension(ofd.FileName).ToLower().Contains("pdf"))
-                    {
-                        PDFConversationDialog pdfConversationDialog = new PDFConversationDialog(ofd.FileName);
-                        bool? res = pdfConversationDialog.ShowDialog();
-
-                        if (res.HasValue && res.Value)
-                            await LoadJournalAsnyc(pdfConversationDialog.DestinationFileName);
-
-                        return;
-                    }
-
-                    await LoadJournalAsnyc(ofd.FileName);
-                }
+                // Cancel on failure
+                if (!await SaveProject(false))
+                    return;
             }
-        }
 
-        private async void MenuButtonImportPDF_Click(object sender, RoutedEventArgs e)
-        {
-            if (AskForOpeningAfterModifying())
+            // Load
+            OpenFileDialog ofd = new OpenFileDialog() { Filter = $"{Properties.Resources.strJournalFile}|*.journal;*.pdf" }; // .journal or pdf
+            var result = ofd.ShowDialog();
+
+            if (result.HasValue && result.Value)
             {
-                OpenFileDialog ofd = new OpenFileDialog() { Filter = $"{Properties.Resources.strPDFFile}|*.pdf" };
-                var result = ofd.ShowDialog();
+                pnlSidebar.Visibility = Visibility.Hidden;
 
-                if (result.HasValue && result.Value)
+                if (System.IO.Path.GetExtension(ofd.FileName).ToLower().Contains("pdf"))
                 {
-                    pnlSidebar.Visibility = Visibility.Hidden;
-
                     PDFConversationDialog pdfConversationDialog = new PDFConversationDialog(ofd.FileName);
                     bool? res = pdfConversationDialog.ShowDialog();
 
                     if (res.HasValue && res.Value)
                         await LoadJournalAsnyc(pdfConversationDialog.DestinationFileName);
+
+                    return;
                 }
+
+                await LoadJournalAsnyc(ofd.FileName);
+            }
+        }
+
+        private async void MenuButtonImportPDF_Click(object sender, RoutedEventArgs e)
+        {
+            var modifyResult = AskForOpeningAfterModifying();
+
+            if (modifyResult == OpenResult.Cancel)
+                return;
+
+            if (modifyResult == OpenResult.SaveAndLoad)
+            {
+                // Cancel on failure
+                if (!await SaveProject(false))
+                    return;
+            }
+
+            OpenFileDialog ofd = new OpenFileDialog() { Filter = $"{Properties.Resources.strPDFFile}|*.pdf" };
+            var result = ofd.ShowDialog();
+
+            if (result.HasValue && result.Value)
+            {
+                pnlSidebar.Visibility = Visibility.Hidden;
+
+                PDFConversationDialog pdfConversationDialog = new PDFConversationDialog(ofd.FileName);
+                bool? res = pdfConversationDialog.ShowDialog();
+
+                if (res.HasValue && res.Value)
+                    await LoadJournalAsnyc(pdfConversationDialog.DestinationFileName);
             }
         }
 
@@ -3073,9 +3117,7 @@ namespace SimpleJournal
             if (can.GetSelectedElements() != null && can.GetSelectedElements().Count > 0)
             {
                 var lst = can.GetSelectedElements();
-                List<UIElement> tmpList = new List<UIElement>();
-                foreach (UIElement element in lst)
-                    tmpList.Add(element);
+                List<UIElement> tmpList = [.. lst];
 
                 foreach (UIElement element in tmpList)
                     can.Children.Remove(element);
@@ -3585,7 +3627,7 @@ namespace SimpleJournal
                                     strokes = new StrokeCollection(ms);
                                 }
                                 else
-                                    strokes = new StrokeCollection();
+                                    strokes = [];
                             }
                         }).ContinueWith(new Action<Task>((Task t) =>
                         {
@@ -3680,42 +3722,30 @@ namespace SimpleJournal
 
         private async Task NavigateIndexAsync(string fileName)
         {
-            if (AskForOpeningAfterModifying(true))
+            var modifyResult = AskForOpeningAfterModifying();
+
+            if (modifyResult == OpenResult.Cancel)
+                return;
+
+            if (modifyResult == OpenResult.SaveAndLoad)
             {
-                // Save old journal
-                if (DrawingCanvas.Change)
-                    await SaveJournalAsync(currentJournalPath);
-
-                // Generate new journal path
-                string parent = System.IO.Path.GetDirectoryName(currentJournalPath);
-
-                // Load this journal
-                await LoadJournalAsnyc(System.IO.Path.Combine(parent, fileName));
+                // Cancel on failure
+                if (!await SaveProject(false))
+                    return;
             }
+
+            // Generate new journal path
+            string parent = System.IO.Path.GetDirectoryName(currentJournalPath);
+
+            // Load this journal
+            await LoadJournalAsnyc(System.IO.Path.Combine(parent, fileName));
         }
 
         #endregion
 
-        private void ClearJournalOld()
-        {
-            List<IPaper> toClear = new List<IPaper>();
-            foreach (IPaper page in CurrentJournalPages)
-            {
-                page.Canvas.Strokes = new StrokeCollection();
-                page.Canvas.Children.ClearAll(page.Canvas);
-                toClear.Add(page);
-            }
-            foreach (IPaper page in toClear)
-                CurrentJournalPages.Remove(page);
-            pages.Children.Clear();
-            CurrentJournalPages.Clear();
-            GC.Collect();
-            GC.WaitForPendingFinalizers();
-        }
-
         private void ClearJournal()
         {
-            List<UIElement> toRemove = new List<UIElement>();
+            List<UIElement> toRemove = [];
 
             foreach (var item in pages.Children)
             {

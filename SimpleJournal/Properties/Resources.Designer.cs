@@ -186,6 +186,37 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Your journal has unsaved changes. Do you want to save the changes and load the selected journal (=YES)?
+        ///
+        ///Click on NO to discard the changes and load the selected journal or click on Cancel to end the process. ähnelt.
+        /// </summary>
+        public static string strAskForUnsavedChanges {
+            get {
+                return ResourceManager.GetString("strAskForUnsavedChanges", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Your journal has unsaved changes. Do you want to save the changes and create a new journal (=YES)?
+        ///
+        ///Click on NO to discard the changes and create a new journal or click on Cancel to end the process. ähnelt.
+        /// </summary>
+        public static string strAskForUnsavedChanges_NewJournal {
+            get {
+                return ResourceManager.GetString("strAskForUnsavedChanges_NewJournal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Save or discard changes? ähnelt.
+        /// </summary>
+        public static string strAskForUnsavedChanges_Title {
+            get {
+                return ResourceManager.GetString("strAskForUnsavedChanges_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die The directory does not exist at the moment! But as soon as a new backup is created, the directory will be created again! ähnelt.
         /// </summary>
         public static string strAutoBackupDirectoryDoesNotExists {
@@ -1409,9 +1440,17 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Did you find an issue? What would you improve? 
-        ///I would appreciate your feedback!
-        ///Your data will not be shared with third parties, but will only be used to give you feedback. ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Your data will not be shared with third parties, but will only be used to reply to you! Further information can be found in the ähnelt.
+        /// </summary>
+        public static string strFeedback_Privacy {
+            get {
+                return ResourceManager.GetString("strFeedback_Privacy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die I would be very pleased to receive your feedback, regardless of whether you have a suggestion for improvement, an idea or a bug.
+        ///You can help to significantly improve the quality of the program. ähnelt.
         /// </summary>
         public static string strFeedbackDescription {
             get {
@@ -2079,7 +2118,7 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die You are using an outdated .NET Core version ( ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die You are using an outdated .NET version ( ähnelt.
         /// </summary>
         public static string strObsoleteNETVersionNotification_Message_Run1 {
             get {
@@ -2088,7 +2127,7 @@ namespace SimpleJournal.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die ). Please update your .NET Core version to ensure that the program works without errors. ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die ). Please update your .NET version to ensure that the program works without errors. ähnelt.
         /// </summary>
         public static string strObsoleteNETVersionNotification_Message_Run2 {
             get {
@@ -5179,42 +5218,6 @@ namespace SimpleJournal.Properties {
         public static string strWantToDeletePageTitle {
             get {
                 return ResourceManager.GetString("strWantToDeletePageTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Would you like to load a journal without saving the old one? ähnelt.
-        /// </summary>
-        public static string strWantToLoadNewJournal {
-            get {
-                return ResourceManager.GetString("strWantToLoadNewJournal", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Reject changes? ähnelt.
-        /// </summary>
-        public static string strWantToLoadNewJournalTitle {
-            get {
-                return ResourceManager.GetString("strWantToLoadNewJournalTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Do you want to save the changes and open the selected document? ähnelt.
-        /// </summary>
-        public static string strWantToSaveBeforeLoadOtherDocument {
-            get {
-                return ResourceManager.GetString("strWantToSaveBeforeLoadOtherDocument", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Save Changes? ähnelt.
-        /// </summary>
-        public static string strWantToSaveBeforeLoadOtherDocument_Title {
-            get {
-                return ResourceManager.GetString("strWantToSaveBeforeLoadOtherDocument_Title", resourceCulture);
             }
         }
         

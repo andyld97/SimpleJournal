@@ -276,18 +276,18 @@
 	</ItemGroup>
 	<ItemGroup>
 		<PackageReference Include="ByteUnit" Version="1.0.2" />
-		<PackageReference Include="DotnetRuntimeBootstrapper" Version="2.5.1">
+		<PackageReference Include="DotnetRuntimeBootstrapper" Version="2.5.2">
 		  <PrivateAssets>all</PrivateAssets>
 		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
 		<PackageReference Include="Fluent.Ribbon" Version="10.0.4" />
-		<PackageReference Include="Magick.NET-Q16-AnyCPU" Version="13.5.0" />
-		<PackageReference Include="Magick.NET.Core" Version="13.5.0" />
+		<PackageReference Include="Magick.NET-Q16-AnyCPU" Version="13.6.0" />
+		<PackageReference Include="Magick.NET.Core" Version="13.6.0" />
 		<PackageReference Include="MahApps.Metro" Version="3.0.0-alpha0457" />
 		<PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
-		<PackageReference Include="Microsoft.Web.WebView2" Version="1.0.2210.55" />
+		<PackageReference Include="Microsoft.Web.WebView2" Version="1.0.2420.47" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-		<PackageReference Include="Microsoft.Windows.Compatibility" Version="8.0.0" />
+		<PackageReference Include="Microsoft.Windows.Compatibility" Version="8.0.3" />
 	</ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\Shared Libraries\SimpleJournal.Common\SimpleJournal.Common.csproj" />
@@ -330,10 +330,10 @@
 		</EmbeddedResource>
 	</ItemGroup>
 	<Target Name="PostPublish" AfterTargets="Publish">
-		<Exec Command="copy /Y &quot;$(SolutionDir)Helper Applications\Analyzer\bin\$(ConfigurationName)\Analyzer.exe&quot; &quot;$(SolutionDir)$(ProjectName)\$(PublishDir)\Analyzer.exe&quot;&#xD;&#xA;copy /Y &quot;$(SolutionDir)Helper Applications\Analyzer\bin\$(ConfigurationName)\Analyzer.exe.config&quot; &quot;$(SolutionDir)$(ProjectName)\$(PublishDir)\Analyzer.exe.config&quot;&#xD;&#xA;copy /Y &quot;$(SolutionDir)Helper Applications\Analyzer\bin\$(ConfigurationName)\IACore.dll&quot; &quot;$(SolutionDir)$(ProjectName)\$(PublishDir)\IACore.dll&quot;&#xD;&#xA;copy /Y &quot;$(SolutionDir)Helper Applications\Analyzer\bin\$(ConfigurationName)\IALoader.dll&quot; &quot;$(SolutionDir)$(ProjectName)\$(PublishDir)\IALoader.dll&quot;&#xD;&#xA;copy /Y &quot;$(SolutionDir)Helper Applications\Analyzer\bin\$(ConfigurationName)\IAWinFX.dll&quot; &quot;$(SolutionDir)$(ProjectName)\$(PublishDir)\IAWinFX.dll&quot;&#xD;&#xA;copy /Y &quot;$(SolutionDir)Shared Libraries\SimpleJournal.Common\bin\$(ConfigurationName)\net7.0\SimpleJournal.Common.dll&quot; &quot;$(SolutionDir)$(ProjectName)\$(PublishDir)\SimpleJournal.Common.dll&quot;&#xD;&#xA;copy /Y &quot;$(SolutionDir)Shared Libraries\SimpleJournal.Documents.UI\bin\$(ConfigurationName)\net7.0-windows\SimpleJournal.Documents.dll&quot; &quot;$(SolutionDir)$(ProjectName)\$(PublishDir)\SimpleJournal.Documents.dll&quot;&#xD;&#xA;copy /Y &quot;$(SolutionDir)Shared Libraries\SimpleJournal.Documents.UI\bin\$(ConfigurationName)\net7.0-windows\SimpleJournal.Documents.UI.dll&quot; &quot;$(SolutionDir)$(ProjectName)\$(PublishDir)\SimpleJournal.Documents.UI.dll&quot;&#xD;&#xA;copy /Y &quot;$(SolutionDir)Shared Libraries\SimpleJournal.SharedResources\bin\$(ConfigurationName)\net7.0-windows\SimpleJournal.SharedResources.dll&quot; &quot;$(SolutionDir)$(ProjectName)\$(PublishDir)\SimpleJournal.SharedResources.dll&quot;" />
+		<Exec Command="copy /Y &quot;$(SolutionDir)Helper Applications\Analyzer\bin\$(ConfigurationName)\Analyzer.exe&quot; &quot;$(SolutionDir)$(ProjectName)\$(PublishDir)\Analyzer.exe&quot;&#xD;&#xA;copy /Y &quot;$(SolutionDir)Helper Applications\Analyzer\bin\$(ConfigurationName)\Analyzer.exe.config&quot; &quot;$(SolutionDir)$(ProjectName)\$(PublishDir)\Analyzer.exe.config&quot;&#xD;&#xA;copy /Y &quot;$(SolutionDir)Helper Applications\Analyzer\bin\$(ConfigurationName)\IACore.dll&quot; &quot;$(SolutionDir)$(ProjectName)\$(PublishDir)\IACore.dll&quot;&#xD;&#xA;copy /Y &quot;$(SolutionDir)Helper Applications\Analyzer\bin\$(ConfigurationName)\IALoader.dll&quot; &quot;$(SolutionDir)$(ProjectName)\$(PublishDir)\IALoader.dll&quot;&#xD;&#xA;copy /Y &quot;$(SolutionDir)Helper Applications\Analyzer\bin\$(ConfigurationName)\IAWinFX.dll&quot; &quot;$(SolutionDir)$(ProjectName)\$(PublishDir)\IAWinFX.dll&quot;&#xD;&#xA;copy /Y &quot;$(SolutionDir)Shared Libraries\SimpleJournal.Common\bin\$(ConfigurationName)\net8.0\SimpleJournal.Common.dll&quot; &quot;$(SolutionDir)$(ProjectName)\$(PublishDir)\SimpleJournal.Common.dll&quot;&#xD;&#xA;copy /Y &quot;$(SolutionDir)Shared Libraries\SimpleJournal.Documents.UI\bin\$(ConfigurationName)\net8.0-windows7.0\SimpleJournal.Documents.dll&quot; &quot;$(SolutionDir)$(ProjectName)\$(PublishDir)\SimpleJournal.Documents.dll&quot;&#xD;&#xA;copy /Y &quot;$(SolutionDir)Shared Libraries\SimpleJournal.Documents.UI\bin\$(ConfigurationName)\net8.0-windows7.0\SimpleJournal.Documents.UI.dll&quot; &quot;$(SolutionDir)$(ProjectName)\$(PublishDir)\SimpleJournal.Documents.UI.dll&quot;&#xD;&#xA;copy /Y &quot;$(SolutionDir)Shared Libraries\SimpleJournal.SharedResources\bin\$(ConfigurationName)\net8.0-windows7.0\SimpleJournal.SharedResources.dll&quot; &quot;$(SolutionDir)$(ProjectName)\$(PublishDir)\SimpleJournal.SharedResources.dll&quot;" />
 		<Exec Condition="'$(Configuration)' == 'Normal'" Command="copy /Y &quot;$(SolutionDir)Helper Applications\Touch\bin\Debug\Device.dll&quot; &quot;$(SolutionDir)$(ProjectName)\$(PublishDir)\Device.dll&quot;&#xD;&#xA;copy /Y &quot;$(SolutionDir)Helper Applications\Touch\bin\Debug\Touch.exe&quot; &quot;$(SolutionDir)$(ProjectName)\$(PublishDir)\Touch.exe&quot;&#xD;&#xA;copy /Y &quot;$(SolutionDir)Helper Applications\Touch\bin\Debug\Touch.exe.config&quot; &quot;$(SolutionDir)$(ProjectName)\$(PublishDir)\Touch.exe.config" />
 	</Target>
 	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
-		<Exec Condition="'$(Configuration)' == 'Normal'" Command="copy /Y &quot;$(SolutionDir)Helper Applications\Touch\bin\Debug\Device.dll&quot; &quot;$(SolutionDir)$(ProjectName)\bin\$(ConfigurationName)\net7.0-windows\Device.dll&quot;&#xD;&#xA;copy /Y &quot;$(SolutionDir)Helper Applications\Touch\bin\Debug\Touch.exe&quot; &quot;$(SolutionDir)$(ProjectName)\bin\$(ConfigurationName)\net7.0-windows\Touch.exe&quot;&#xD;&#xA;copy /Y &quot;$(SolutionDir)Helper Applications\Touch\bin\Debug\Touch.exe.config&quot; &quot;$(SolutionDir)$(ProjectName)\bin\$(ConfigurationName)\net7.0-windows\Touch.exe.config" />
+		<Exec Condition="'$(Configuration)' == 'Normal'" Command="copy /Y &quot;$(SolutionDir)Helper Applications\Touch\bin\Debug\Device.dll&quot; &quot;$(SolutionDir)$(ProjectName)\bin\$(ConfigurationName)\net8.0-windows\Device.dll&quot;&#xD;&#xA;copy /Y &quot;$(SolutionDir)Helper Applications\Touch\bin\Debug\Touch.exe&quot; &quot;$(SolutionDir)$(ProjectName)\bin\$(ConfigurationName)\net8.0-windows\Touch.exe&quot;&#xD;&#xA;copy /Y &quot;$(SolutionDir)Helper Applications\Touch\bin\Debug\Touch.exe.config&quot; &quot;$(SolutionDir)$(ProjectName)\bin\$(ConfigurationName)\net8.0-windows\Touch.exe.config" />
 	</Target>
 </Project>
