@@ -22,9 +22,9 @@ namespace SimpleJournal.Dialogs
     {
         private bool ignoreOnClosingEvent = false;
 
-        private List<System.IO.FileInfo> BackupFiles { get; set; } = new List<System.IO.FileInfo>();
+        private List<System.IO.FileInfo> BackupFiles { get; set; } = [];
 
-        private List<BackupDataItem> BackupItems { get; set; } = new List<BackupDataItem>();
+        private List<BackupDataItem> BackupItems { get; set; } = [];
 
         public RecoverAutoBackupFileDialog()
         {
@@ -101,7 +101,7 @@ namespace SimpleJournal.Dialogs
 
         private async Task<List<System.IO.FileInfo>> GetAllBackupFiles()
         {
-            List<System.IO.FileInfo> backupFiles = new List<System.IO.FileInfo>();
+            List<System.IO.FileInfo> backupFiles = [];
 
             if (!System.IO.Directory.Exists(Consts.AutoSaveDirectory))
                 return backupFiles;
@@ -327,8 +327,9 @@ namespace SimpleJournal.Dialogs
                 }
             }
 
-            List<string> filesToOpen = new List<string>();
-            var temp = new List<BackupDataItem>(BackupItems);
+            List<string> filesToOpen = [];
+            List<BackupDataItem> temp = [.. BackupItems];
+
             foreach (var item in temp)
             {
                 // Pass path to make sure opening the FolderBrowserDialog only once!

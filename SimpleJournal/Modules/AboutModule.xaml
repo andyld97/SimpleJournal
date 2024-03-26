@@ -97,32 +97,35 @@
                             <Style TargetType="{x:Type TextBox}">
                                 <Setter Property="Foreground" Value="{DynamicResource Fluent.Ribbon.Brushes.Black}" />
                                 <Setter Property="Background" Value="{DynamicResource Fluent.Ribbon.Brushes.White}" />
+                                <Setter Property="Padding" Value="3" />
                             </Style>
                         </StackPanel.Resources>
-
-                        <TextBlock TextWrapping="Wrap" Margin="5" Text="{x:Static res:Resources.strFeedbackDescription}"/>
+               
+                        <TextBlock TextWrapping="Wrap" Margin="5" Text="{x:Static res:Resources.strFeedbackDescription}"/>            
 
                         <TextBlock Text="{x:Static res:Resources.strName}" Margin="5,5,0,0" FontWeight="Bold" />
-                        <TextBox x:Name="txtName" Text="Anonym" Margin="5,2,5,0" Padding="2" />
+                        <TextBox x:Name="txtName" Text="Anonym" Margin="5,3,5,0" />
 
                         <TextBlock Text="{x:Static res:Resources.strMail}" Margin="5,5,0,0" FontWeight="Bold" />
-                        <TextBox x:Name="txtMail" Margin="5,2,5,0" Padding="2" />
+                        <TextBox x:Name="txtMail" Margin="5,3,5,0" />
 
                         <TextBlock Text="{x:Static res:Resources.strContent}" Margin="5,5,0,0" FontWeight="Bold" />
                     </StackPanel>
 
-                    <TextBox Margin="5,2,5,0" Background="{DynamicResource Fluent.Ribbon.Brushes.White}" Foreground="{DynamicResource Fluent.Ribbon.Brushes.Black}" Grid.Row="1" Padding="2" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" x:Name="txtFeedback" AcceptsReturn="True" />
+                    <TextBox Margin="5,3,5,0" Background="{DynamicResource Fluent.Ribbon.Brushes.White}" Foreground="{DynamicResource Fluent.Ribbon.Brushes.Black}" Grid.Row="1" Padding="2" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" x:Name="txtFeedback" AcceptsReturn="True" />
 
-                    <Grid Grid.Row="2">
-                        <TextBlock VerticalAlignment="Center" Margin="5">
-                            <Hyperlink x:Name="UrlDataProtection" NavigateUri="http://www.google.de" RequestNavigate="UrlDataProtection_RequestNavigate" Foreground="{DynamicResource Fluent.Ribbon.Brushes.Black}">
-                                <TextBlock Text="{x:Static res:Resources.strDataProtection}" />
-                            </Hyperlink>
-                        </TextBlock>
+                    <StackPanel Grid.Row="2">
+                        <TextBlock FontSize="10" VerticalAlignment="Center" Margin="5" TextWrapping="Wrap">
+                                <Run Text="{x:Static res:Resources.strFeedback_Privacy}" />
+                                <Hyperlink x:Name="UrlDataProtection" NavigateUri="http://www.google.de" RequestNavigate="UrlDataProtection_RequestNavigate" Foreground="{DynamicResource Fluent.Ribbon.Brushes.Black}">
+                                    <TextBlock Text="{x:Static res:Resources.strDataProtection}" /><TextBlock Text="." />
+                                </Hyperlink>
+                            </TextBlock>
+
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                             <Button x:Name="btnSendFeedback" Click="btnSendFeedback_Click" Content="{x:Static res:Resources.strSend}" Padding="5" Margin="5" Width="100" FontWeight="Bold" />
                         </StackPanel>
-                    </Grid>
+                    </StackPanel>
                 </Grid>
             </TabItem>
         </TabControl>

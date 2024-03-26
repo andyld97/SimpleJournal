@@ -619,9 +619,8 @@ Many thanks ...
     <comment>About.xaml</comment>
   </data>
   <data name="strFeedbackDescription" xml:space="preserve">
-    <value>Did you find an issue? What would you improve? 
-I would appreciate your feedback!
-Your data will not be shared with third parties, but will only be used to give you feedback.</value>
+    <value>I would be very pleased to receive your feedback, regardless of whether you have a suggestion for improvement, an idea or a bug.
+You can help to significantly improve the quality of the program.</value>
     <comment>About.xaml</comment>
   </data>
   <data name="strFeedbackSent" xml:space="preserve">
@@ -1686,14 +1685,6 @@ Here I would like to give you a few more important hints that will help you to u
     <value>Delete page?</value>
     <comment>*</comment>
   </data>
-  <data name="strWantToLoadNewJournal" xml:space="preserve">
-    <value>Would you like to load a journal without saving the old one?</value>
-    <comment>*</comment>
-  </data>
-  <data name="strWantToLoadNewJournalTitle" xml:space="preserve">
-    <value>Reject changes?</value>
-    <comment>*</comment>
-  </data>
   <data name="strWatingText" xml:space="preserve">
     <value>Please wait while document "{0}" is loading ...</value>
     <comment>WaitingDialog.xaml</comment>
@@ -2409,12 +2400,6 @@ To rate anyway, open the store and search for "SimpleJournal" and click on "How 
   <data name="strPDFConversationDialog_InvalidRange" xml:space="preserve">
     <value>Please enter a valid page range!</value>
   </data>
-  <data name="strWantToSaveBeforeLoadOtherDocument" xml:space="preserve">
-    <value>Do you want to save the changes and open the selected document?</value>
-  </data>
-  <data name="strWantToSaveBeforeLoadOtherDocument_Title" xml:space="preserve">
-    <value>Save Changes?</value>
-  </data>
   <data name="strFailedToConvertPDFDokument" xml:space="preserve">
     <value>Error while converting the PDF document: {0}</value>
   </data>
@@ -2431,5 +2416,21 @@ To rate anyway, open the store and search for "SimpleJournal" and click on "How 
     <value>A journal generated from a PDF document containing over 100 pages consists of multiple journals (due to performance). With this setting buttons are displayed at the beginning and at the end of each document to navigate to the previous linked document or to the last linked document. 
 
 This setting is only relevant for larger documents!</value>
+  </data>
+  <data name="strAskForUnsavedChanges" xml:space="preserve">
+    <value>Your journal has unsaved changes. Do you want to save the changes and load the selected journal (=YES)?
+
+Click on NO to discard the changes and load the selected journal or click on Cancel to end the process.</value>
+  </data>
+  <data name="strAskForUnsavedChanges_Title" xml:space="preserve">
+    <value>Save or discard changes?</value>
+  </data>
+  <data name="strAskForUnsavedChanges_NewJournal" xml:space="preserve">
+    <value>Your journal has unsaved changes. Do you want to save the changes and create a new journal (=YES)?
+
+Click on NO to discard the changes and create a new journal or click on Cancel to end the process.</value>
+  </data>
+  <data name="strFeedback_Privacy" xml:space="preserve">
+    <value>Your data will not be shared with third parties, but will only be used to reply to you! Further information can be found in the</value>
   </data>
 </root>

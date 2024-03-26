@@ -350,9 +350,7 @@ namespace SimpleJournal.Modules
                     nPage.Canvas.Strokes = page.Canvas.Strokes.Clone();
 
                     // Move uiElements
-                    List<UIElement> uIElementsToMove = new List<UIElement>();
-                    foreach (var element in page.Canvas.Children)
-                        uIElementsToMove.Add(element);
+                    List<UIElement> uIElementsToMove = [.. page.Canvas.Children];
 
                     foreach (var element in uIElementsToMove)
                     {
@@ -402,7 +400,7 @@ namespace SimpleJournal.Modules
             // Convert pages to JournalPages for Result
             try
             {
-                List<JournalPage> resultPages = new List<JournalPage>();
+                List<JournalPage> resultPages = [];
 
                 foreach (var page in pages)
                 {

@@ -493,11 +493,6 @@ Erg bedankt ...
   <data name="strFeedback" xml:space="preserve">
     <value>Feedback</value>
   </data>
-  <data name="strFeedbackDescription" xml:space="preserve">
-    <value>Heb je een probleem gevonden? Wat zou je verbeteren?
-Ik zou je feedback heel erg warderen!
-Uw gegevens worden niet met anderen gedeeld, maar alleen gebruikt om u feedback te geven.</value>
-  </data>
   <data name="strFeedbackSent" xml:space="preserve">
     <value>Uw feedback is succesvol verzonden. Heel erg bedankt!</value>
   </data>
@@ -1579,12 +1574,6 @@ Hier wil ik je nog een paar belangrijke tips geven die je zullen helpen om Simpl
   <data name="strWatingText" xml:space="preserve">
     <value>Even geduld a.u.b. document "{0}" wordt geladen...</value>
   </data>
-  <data name="strWantToLoadNewJournalTitle" xml:space="preserve">
-    <value>Wijzigingen afwijzen?</value>
-  </data>
-  <data name="strWantToLoadNewJournal" xml:space="preserve">
-    <value>Wilt u een journaal laden zonder het oude op te slaan?</value>
-  </data>
   <data name="strSetupSetp1_Description" xml:space="preserve">
     <value>Heeft uw scherm een HD-resolutie?</value>
   </data>
@@ -1837,12 +1826,6 @@ Om het toch te beoordelen, open de winkel en zoek naar "SimpleJournal" en klik o
   <data name="strPDFConversationDialog_InvalidRange" xml:space="preserve">
     <value>Voer een geldig paginabereik in!</value>
   </data>
-  <data name="strWantToSaveBeforeLoadOtherDocument_Title" xml:space="preserve">
-    <value>Wijzigingen opslaan?</value>
-  </data>
-  <data name="strWantToSaveBeforeLoadOtherDocument" xml:space="preserve">
-    <value>Wil je de wijzigingen opslaan en het geselecteerde document openen?</value>
-  </data>
   <data name="strUseLinkNavigationPDF_Description" xml:space="preserve">
     <value>Een journaal dat werd aangemaakt vanuit een PDF-document en meer dan 100 pagina's bevat, bestaat uit meerdere journalen (omwille van de prestaties). Met deze instelling worden aan het begin en einde van elk document knoppen weergegeven om naar het vorige gekoppelde document of naar het laatst gekoppelde document te navigeren. 
 
@@ -1859,5 +1842,25 @@ Deze instelling is alleen relevant voor grotere documenten!</value>
   </data>
   <data name="strFailedToConvertPDFDokument" xml:space="preserve">
     <value>Fout bij het converteren van het PDF-document: {0}</value>
+  </data>
+  <data name="strFeedbackDescription" xml:space="preserve">
+    <value>Ik zou heel blij zijn met je feedback, of je nu een suggestie voor verbetering, een idee of een bug hebt.
+Je kunt helpen om de kwaliteit van het programma aanzienlijk te verbeteren.</value>
+  </data>
+  <data name="strAskForUnsavedChanges" xml:space="preserve">
+    <value>Je dagboek heeft niet-opgeslagen wijzigingen. Wil je de wijzigingen opslaan en het geselecteerde journaal laden (= JA)?
+
+Klik op NEE om de wijzigingen te negeren en het geselecteerde journaal te laden of klik op Annuleren om het proces te beëindigen.</value>
+  </data>
+  <data name="strAskForUnsavedChanges_Title" xml:space="preserve">
+    <value>Wijzigingen opslaan of negeren?</value>
+  </data>
+  <data name="strAskForUnsavedChanges_NewJournal" xml:space="preserve">
+    <value>Je dagboek heeft niet-opgeslagen wijzigingen. Wil je de wijzigingen opslaan en een nieuw journaal aanmaken (=JA)?
+
+Klik op NEE om de wijzigingen te negeren en een nieuw journaal aan te maken of klik op Annuleren om het proces te beëindigen.</value>
+  </data>
+  <data name="strFeedback_Privacy" xml:space="preserve">
+    <value>Uw gegevens worden niet doorgegeven aan derden, maar alleen gebruikt om u te antwoorden! Meer informatie kunt u vinden in de</value>
   </data>
 </root>

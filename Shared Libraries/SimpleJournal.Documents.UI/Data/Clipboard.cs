@@ -10,17 +10,17 @@ namespace SimpleJournal.Documents.UI.Data
         /// <summary>
         /// Elements like shapes, images ...
         /// </summary>
-        public List<UIElement> Children { get; set; } = new List<UIElement>();
+        public List<UIElement> Children { get; set; } = [];
 
         /// <summary>
         /// Position of elements
         /// </summary>
-        public List<Point> ChildPoints { get; set; } = new List<Point>();
+        public List<Point> ChildPoints { get; set; } = [];
 
         /// <summary>
         /// Drawn strokes from user
         /// </summary>
-        public StrokeCollection Strokes { get; set; } = new StrokeCollection();
+        public StrokeCollection Strokes { get; set; } = [];
 
         /// <summary>
         /// Determines if the clipboard is empty
@@ -49,7 +49,7 @@ namespace SimpleJournal.Documents.UI.Data
         public void Renew()
         {
             Strokes = Strokes.Clone();
-            List<UIElement> newElements = new List<UIElement>();
+            List<UIElement> newElements = [];
             foreach (UIElement child in Children)
                 newElements.Add(UIHelper.CloneElement(child));
 

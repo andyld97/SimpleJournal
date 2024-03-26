@@ -8,32 +8,31 @@ namespace SimpleJournal.Helper
 {
     public static class AssemblyVersionHelper
     {
-
-        private static readonly List<Type> types = new List<Type>()
-        {
+        private static readonly List<Type> types =
+        [
             typeof(SimpleJournal.Common.Strings),
             typeof(SimpleJournal.Documents.Consts),
             typeof(SimpleJournal.Documents.PDF.PdfConverter),
             typeof(SimpleJournal.Documents.UI.Consts),
             typeof(SimpleJournal.SharedResources.Dummy),
             typeof(SimpleJournal.MainWindow),
-        };
+        ];
 
-        private static readonly List<string> fileAssemblies = new List<string>()
-        {
+        private static readonly List<string> fileAssemblies =
+        [
 #if !UWP
             Consts.TouchExecutable,
 #endif
             SimpleJournal.Documents.UI.Consts.AnalyzerPath
-        };
+        ];
 
-        private static readonly List<Type> externalDependencies = new List<Type>()
-        {
+        private static readonly List<Type> externalDependencies =
+        [
             typeof(ControlzEx.WindowChrome),
             typeof(Fluent.Ribbon),
             typeof(MahApps.Metro.Controls.SplitButton),
             typeof(ImageMagick.MagickColor),
-        };
+        ];
 
         private static readonly Dictionary<string, Version> externalStaticVersions = new Dictionary<string, Version>()
         {
@@ -42,12 +41,12 @@ namespace SimpleJournal.Helper
 
         public static List<Inline> GenerateAssemblyText()
         {
-            List<Inline> inlines = new List<Inline>
-            {
+            List<Inline> inlines =
+            [
                 // SimpleJournal Assemblies
                 new Run() { Text = SimpleJournal.Properties.Resources.strSimpleJournalAssemblies, FontWeight = FontWeights.Bold },
                 new LineBreak()
-            };
+            ];
 
             foreach (var sjAssembly in types)
             {

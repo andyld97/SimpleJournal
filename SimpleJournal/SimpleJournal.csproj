@@ -285,9 +285,9 @@
 		<PackageReference Include="Magick.NET.Core" Version="13.6.0" />
 		<PackageReference Include="MahApps.Metro" Version="3.0.0-alpha0457" />
 		<PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
-		<PackageReference Include="Microsoft.Web.WebView2" Version="1.0.2277.86" />
+		<PackageReference Include="Microsoft.Web.WebView2" Version="1.0.2420.47" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-		<PackageReference Include="Microsoft.Windows.Compatibility" Version="8.0.2" />
+		<PackageReference Include="Microsoft.Windows.Compatibility" Version="8.0.3" />
 	</ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\Shared Libraries\SimpleJournal.Common\SimpleJournal.Common.csproj" />

@@ -41,10 +41,9 @@ namespace SimpleJournal.Data
                 // Silence is golden
             }
 
-
             if (result == null)
             {
-                result = new List<Document>();
+                result = [];
                 Save(result);
             }
 

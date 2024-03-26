@@ -608,9 +608,8 @@ Vielen Dank ...
     <comment>About.xaml</comment>
   </data>
   <data name="strFeedbackDescription" xml:space="preserve">
-    <value>Haben Sie einen Fehler gefunden? Was würden Sie verbessern? 
-Ich würde mich über Ihr Feedback freuen!
-Ihre Daten werden nicht an Dritte weitergegeben, sondern ausschließlich dazu verwendet, um Ihnen eventuell eine Rückmeldung zu geben.</value>
+    <value>Ich würde mich sehr über Ihr Feedback freuen, egal ob Sie einen Verbesserungsvorschlag, eine Idee oder einen Bug gefunden haben.
+Damit können Sie helfen die Qualität des Programms wesentlich zu verbessern.</value>
     <comment>About.xaml</comment>
   </data>
   <data name="strFeedbackSent" xml:space="preserve">
@@ -1674,14 +1673,6 @@ Hier möchte ich Ihnen noch ein paar wichtige Hinweise geben, die Ihnen helfen w
     <value>Seite löschen?</value>
     <comment>*</comment>
   </data>
-  <data name="strWantToLoadNewJournal" xml:space="preserve">
-    <value>Möchten Sie ein Journal laden ohne das alte Journal zu speichern?</value>
-    <comment>*</comment>
-  </data>
-  <data name="strWantToLoadNewJournalTitle" xml:space="preserve">
-    <value>Änderungen verwerfen?</value>
-    <comment>*</comment>
-  </data>
   <data name="strWatingText" xml:space="preserve">
     <value>Bitte warten Sie während das Dokument "{0}" geladen wird ...</value>
     <comment>WaitingDialog.xaml</comment>
@@ -2276,10 +2267,20 @@ Um die Bewertung trotzdem abzugeben, öffnen Sie den Store und suchen nach "Simp
 
 Diese Einstellung ist nur bei größeren Dokumenten relevant!</value>
   </data>
-  <data name="strWantToSaveBeforeLoadOtherDocument" xml:space="preserve">
-    <value>Möchten Sie die Änderungen speichern und das ausgewählte Dokument öffnen?</value>
+  <data name="strAskForUnsavedChanges" xml:space="preserve">
+    <value>Ihr Journal hat ungespeicherte Änderungen. Möchten Sie die Änderungen speichern und das ausgewählte Journal laden (=JA)?
+
+Klicken Sie auf NEIN um die Änderungen zu verwerfen und das ausgewählte Journal zu laden oder klicken Sie auf Abbrechen um den Vorgang zu beenden.</value>
   </data>
-  <data name="strWantToSaveBeforeLoadOtherDocument_Title" xml:space="preserve">
-    <value>Änderungen speichern?</value>
+  <data name="strAskForUnsavedChanges_Title" xml:space="preserve">
+    <value>Änderungen speichern oder verwerfen?</value>
+  </data>
+  <data name="strAskForUnsavedChanges_NewJournal" xml:space="preserve">
+    <value>Ihr Journal hat ungespeicherte Änderungen. Möchten Sie die Änderungen speichern und ein neues Journal erstellen (=JA)?
+
+Klicken Sie auf NEIN um die Änderungen zu verwerfen und ein neues Journal zu erstellen oder klicken Sie auf Abbrechen um den Vorgang zu beenden.</value>
+  </data>
+  <data name="strFeedback_Privacy" xml:space="preserve">
+    <value>Ihre Daten werden nicht an Dritte übermittelt, sondern nur dazu verwendet, um Ihnen antworten zu können! Weitere Informationen finden Sie in der</value>
   </data>
 </root>

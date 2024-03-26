@@ -40,7 +40,7 @@ namespace Notifications
                 Run run1 = new Run(SimpleJournal.Properties.Resources.strNotifications_Update_MessageRun1);
                 Run run2 = new Run($"Version {tempVersion:4}") { IsBold = true };
 
-                return new List<Run>() { run1, new LineBreak(), new LineBreak(), run2 };
+                return [run1, new LineBreak(), new LineBreak(), run2];
             }
         }
 
@@ -49,8 +49,8 @@ namespace Notifications
         {
             get
             {
-                return new List<UserInteraction>()
-                {
+                return
+                [
                     new UserInteraction()
                     {
                         Description = SimpleJournal.Properties.Resources.strNotifications_UserInteraction_ShowChangelog,
@@ -77,7 +77,7 @@ namespace Notifications
                             return Task.CompletedTask;
                         })
                     }
-                };
+                ];
             }
         }
 
