@@ -353,7 +353,7 @@ Many thanks ...
   </data>
   <data name="strDeletePage" xml:space="preserve">
     <value>Remove Page</value>
-    <comment>MainWindow.xaml</comment>
+    <comment>MainWindow.xaml (too long in nl)</comment>
   </data>
   <data name="strDeletePageTooltip" xml:space="preserve">
     <value>Deletes the current page</value>

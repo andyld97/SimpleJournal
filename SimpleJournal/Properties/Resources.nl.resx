@@ -278,7 +278,7 @@ Erg bedankt ...
     <value>Standaard kleuren:</value>
   </data>
   <data name="strDeletePage" xml:space="preserve">
-    <value>Pagina verwijderen</value>
+    <value>Pagina verwijd...</value>
   </data>
   <data name="strDeletePageTooltip" xml:space="preserve">
     <value>Verwijderd de huidige pagina</value>
