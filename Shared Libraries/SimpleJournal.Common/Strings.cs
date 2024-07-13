@@ -4,8 +4,8 @@ namespace SimpleJournal.Common
 {
     public static class Strings
     {
-        public const string Version = "0.6.6.0";
-        public const string StoreVersion = "1.660.0.0";
+        public const string Version = "0.6.7.0";
+        public const string StoreVersion = "1.670.0.0";
         public const string Copyright = "Copyright © 2018-2024";
 
 #if UWPNEW || NORMAL
