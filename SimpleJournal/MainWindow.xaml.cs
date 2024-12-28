@@ -62,7 +62,7 @@ namespace SimpleJournal
     /// </summary>
     public partial class MainWindow : RibbonWindow
     {
-        public ObservableCollection<IPaper> CurrentJournalPages { get; private set; } = new ObservableCollection<IPaper>();
+        public ObservableCollection<IPaper> CurrentJournalPages { get; private set; } = [];
         public static MainWindow W_INSTANCE = null;
 
         #region Private Members
