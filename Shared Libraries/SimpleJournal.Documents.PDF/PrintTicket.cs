@@ -9,7 +9,7 @@ namespace SimpleJournal.Documents.PDF
         public string ID { get; set; } = Guid.NewGuid().ToString();
 
         [JsonPropertyName("documents")]
-        public List<string> Documents { get; set; } = new List<string>();
+        public List<string> Documents { get; set; } = [];
 
         [JsonPropertyName("status")]
         public TicketStatus Status { get; set; }
@@ -24,7 +24,7 @@ namespace SimpleJournal.Documents.PDF
         public int Percentage { get; set; }
 
         [JsonPropertyName("error_message")]
-        public string ErorrMessage { get; set; }
+        public string ErrorMessage { get; set; }
 
         [JsonPropertyName("is_completed")]
         public bool IsCompleted { get; set; }

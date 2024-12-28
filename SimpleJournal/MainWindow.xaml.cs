@@ -2855,7 +2855,7 @@ namespace SimpleJournal
             if (elements.Count > 0)
             {
                 forceOpenSidebar = true;
-                DrawingCanvas.LastModifiedCanvas.Select(new UIElement[] { elements.FirstOrDefault() });
+                DrawingCanvas.LastModifiedCanvas.Select([elements.FirstOrDefault()]);
 
                 // If the sidebar is opened manually, ensure that the select tool is properly selected!
                 SetStateForToggleButton(btnSelect, Tools.Select);
