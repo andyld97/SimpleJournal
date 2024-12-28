@@ -32,7 +32,7 @@ namespace SimpleJournal
         public static readonly string HelpUrl = "https://simplejournal.ca-soft.net/faq";
         public static readonly string GhostScriptDownloadUrl = "https://ghostscript.com/releases/gsdnld.html";
         public static readonly string DotnetReleaseInfoUrl = "https://dotnetcli.blob.core.windows.net/dotnet/release-metadata/9.0/releases.json";
-#if DEBUG //TODO: !
+#if !DEBUG
         public static readonly string ConverterAPIUrl = "https://cas-server2.ddns.net:8080";
 #else
         public static readonly string ConverterAPIUrl = "http://127.0.0.1:5290";
