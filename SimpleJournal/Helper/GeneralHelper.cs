@@ -283,27 +283,25 @@ namespace SimpleJournal
             multiForm.Add(new StreamContent(fs), "file", System.IO.Path.GetFileName(path));
 
             // Send request to API 
-            using (HttpClient client = new HttpClient())
+            using HttpClient client = new HttpClient();
+            var response = await client.PostAsync(url, multiForm);
+
+            if (response.IsSuccessStatusCode)
+                return await System.Text.Json.JsonSerializer.DeserializeAsync<PrintTicket>(await response.Content.ReadAsStreamAsync());
+            else
             {
-                var response = await client.PostAsync(url, multiForm);
-
-                if (response.IsSuccessStatusCode)
-                    return await System.Text.Json.JsonSerializer.DeserializeAsync<PrintTicket>(await response.Content.ReadAsStreamAsync());
-                else
+                string content = string.Empty;
+                try
                 {
-                    string content = string.Empty;
-                    try
-                    {
-                        content = await response.Content.ReadAsStringAsync();
-                    }
-                    catch
-                    { }
-
-                    if (!string.IsNullOrEmpty(content))
-                        throw new Exception($"Http Status Code: {response.StatusCode}{Environment.NewLine}{Environment.NewLine}{content}");
-                    else
-                        throw new Exception($"Http Status Code: {response.StatusCode}");
+                    content = await response.Content.ReadAsStringAsync();
                 }
+                catch
+                { }
+
+                if (!string.IsNullOrEmpty(content))
+                    throw new Exception($"Http Status Code: {response.StatusCode}{Environment.NewLine}{Environment.NewLine}{content}");
+                else
+                    throw new Exception($"Http Status Code: {response.StatusCode}");
             }
         }
 

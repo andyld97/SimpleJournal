@@ -125,7 +125,7 @@ namespace PDF2J
                 }
                 catch (Exception ex) 
                 {
-                    ticket.ErorrMessage = ex.Message;
+                    ticket.ErrorMessage = ex.Message;
                     ticket.Status = TicketStatus.Failed;
                 }
 
@@ -157,7 +157,7 @@ namespace PDF2J
                 logger.LogError($"[{currentTicket.Name}] Failed: {ex.Message}");
 
                 currentTicket.Status = TicketStatus.Failed;
-                currentTicket.ErorrMessage = ex.ToString() ?? string.Empty;
+                currentTicket.ErrorMessage = ex.ToString() ?? string.Empty;
 
                 if (GlobalConfig.ReportFailedTickets && !string.IsNullOrWhiteSpace(GlobalConfig.ReportPath))
                 {
@@ -166,7 +166,7 @@ namespace PDF2J
                     FileSystemHelper.TryCreateDirectory(path);
 
                     System.IO.File.Copy(System.IO.Path.Combine(currentTicket.TempPath, "doc.pdf"), System.IO.Path.Combine(path, "doc.pdf"));
-                    System.IO.File.WriteAllText(System.IO.Path.Combine(path, "log.txt"), currentTicket.ErorrMessage);
+                    System.IO.File.WriteAllText(System.IO.Path.Combine(path, "log.txt"), currentTicket.ErrorMessage);
 
                     await Webhook?.PostWebHookAsync(Webhook.LogLevel.Error, $"Failed to convert a PDF document \"{currentTicket.Name}\". Ticket-ID: \"{currentTicket.ID}\"", "Conversation");
                 }

@@ -32,7 +32,10 @@ namespace SimpleJournal.Helper.PDF
             await Task.Run(() =>
             {
                 // Resize image to A4 pixels (96 dpi)
-                image.Resize(new MagickGeometry(orientation == Orientation.Portrait ? (int)Consts.A4WidthP : (int)Consts.A4WidthL, orientation == Orientation.Portrait ? Consts.A4HeightP : Consts.A4HeightL) { IgnoreAspectRatio = false });
+                image.Resize(new MagickGeometry(orientation == Orientation.Portrait ? (uint)Consts.A4WidthP : (uint)Consts.A4WidthL, orientation == Orientation.Portrait ? (uint)Consts.A4HeightP : (uint)Consts.A4HeightL)
+                {
+                    IgnoreAspectRatio = false
+                });
 
                 pdfJournalPage = new PdfJournalPage
                 {
