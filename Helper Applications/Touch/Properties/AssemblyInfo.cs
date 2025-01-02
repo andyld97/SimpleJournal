@@ -10,7 +10,7 @@ using System.Windows;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Code A Software")]
 [assembly: AssemblyProduct("Touch")]
-[assembly: AssemblyCopyright("Copyright © 2018-2024")]
+[assembly: AssemblyCopyright("Copyright © 2018-2025")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
