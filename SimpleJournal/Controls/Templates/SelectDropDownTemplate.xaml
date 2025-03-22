@@ -7,7 +7,7 @@
              xmlns:controls="clr-namespace:SimpleJournal.Controls"
              mc:Ignorable="d" Width="6.3cm" BorderBrush="Black" BorderThickness="1">
     <Grid>
-        <StackPanel Background="{DynamicResource Fluent.Ribbon.Brushes.RibbonTabItem.Active.Background}">
+        <StackPanel Background="{DynamicResource Fluent.Ribbon.Brushes.RibbonTabControl.Content.Background}">
             <controls:PenSizeControl x:Name="PenSize" SwitchtedPenSize="PenSize_SwitchtedPenSize" IsToggleable="False" />
             <controls:ColorPalette x:Name="colorPalette" Margin="0,5,0,0"/>
         </StackPanel>

@@ -25,7 +25,6 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TabItem}">
                     <Grid x:Name="PART_Header" SnapsToDevicePixels="True" UseLayoutRounding="True" Height="30" Margin="0" Width="{TemplateBinding Width}">
-                        <!--Width="150">-->
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="*" />

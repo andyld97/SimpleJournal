@@ -6,9 +6,9 @@
              xmlns:local="clr-namespace:SimpleJournal.Controls.Templates"
              xmlns:res="clr-namespace:SimpleJournal.Properties" xmlns:fluent="urn:fluent-ribbon"
                         mc:Ignorable="d" Width="195" Height="60" BorderBrush="Black" BorderThickness="1"
-             Background="{DynamicResource Fluent.Ribbon.Brushes.RibbonTabItem.Active.Background}">
+             Background="{DynamicResource Fluent.Ribbon.Brushes.RibbonTabControl.Content.Background}">
     <StackPanel>
-        <TextBlock Text="{x:Static res:Resources.strDropDownTemplateMode}" Margin="5,5,0,0" />
+        <TextBlock Text="{x:Static res:Resources.strDropDownTemplateMode}" Margin="5,5,0,0" FontWeight="Bold" />
 
         <fluent:ComboBox x:Name="CmbChoosePlotMode" SelectionChanged="CmbChoosePlotMode_SelectionChanged" IsEditable="False" Margin="-5,5,5,0" SelectedIndex="0">
             <ComboBoxItem Content="{x:Static res:Resources.strPlotDropDownTemplateOnlyPositiveAxes}" />

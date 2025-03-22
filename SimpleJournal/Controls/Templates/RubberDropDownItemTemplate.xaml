@@ -8,7 +8,7 @@
              xmlns:res="clr-namespace:SimpleJournal.Properties"
              mc:Ignorable="d" 
              Width="260" Height="140" BorderBrush="Black" BorderThickness="1">
-    <StackPanel Background="{DynamicResource Fluent.Ribbon.Brushes.RibbonTabItem.Active.Background}">
+    <StackPanel Background="{DynamicResource Fluent.Ribbon.Brushes.RibbonTabControl.Content.Background}">
         
         <TextBlock Margin="5,5,0,2" FontSize="11" Text="{x:Static res:Resources.strSizes}" FontWeight="Bold"/>
         

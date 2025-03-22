@@ -9,7 +9,7 @@
              mc:Ignorable="d"                             
              Width="6.3cm" BorderBrush="Black" BorderThickness="1">
     <!--Height 300 -->
-    <StackPanel Background="{DynamicResource Fluent.Ribbon.Brushes.RibbonTabItem.Active.Background}">
+    <StackPanel Background="{DynamicResource Fluent.Ribbon.Brushes.RibbonTabControl.Content.Background}">
         <local:PenSizeControl x:Name="PenSize" SwitchtedPenSize="PenSize_SwitchtedPenSize" />
         <local:ColorPalette x:Name="colorPalette" Margin="0,5,0,0"/>
     </StackPanel>

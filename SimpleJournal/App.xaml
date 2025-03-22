@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:system="clr-namespace:System;assembly=System.Runtime" xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
              StartupUri="MainWindow.xaml"
              Startup="Application_Startup"
-    xmlns:Fluent="clr-namespace:Fluent;assembly=Fluent">
+    xmlns:Fluent="clr-namespace:Fluent;assembly=Fluent" xmlns:styleSelectors="clr-namespace:Fluent.StyleSelectors;assembly=Fluent" xmlns:converters="urn:fluent-ribbon">
     <Application.Resources>
         <ResourceDictionary>
             <!-- FIX for MahApps.Metro messing up the styles ... -->
@@ -21,7 +21,7 @@
             <StreamGeometry x:Key="Marker.PathData">m 16.136532 4.6567742 c -0.53 0 -0.579063 0.1782812 -1.21125 0.7753125 L 13.919491 6.432746 c 1.80237 1.7852189 2.841317 2.8807106 4.347209 4.360234 l 1.025842 -1.0119379 c 1.180157 -1.2448437 1.06274 -1.4867679 0.29274 -2.2767679 l -2.09 -2.04875 c -0.39 -0.39 -0.85875 -0.79875 -1.35875 -0.79875 M 13.108327 7.235676 4.4889927 15.805971 c -0.7822224 0.777772 -0.7225643 1.250726 0.077436 2.060726 -0.5958097 0.541549 -1.2081996 1.080702 -3.5105704 3.132633 l 5.0468896 -0.02048 0.8431019 -0.932276 c 0.78 0.76 1.2429005 0.812175 2.0229005 0.04218 l 8.5029657 -8.508719</StreamGeometry>
 
             <Color x:Key="Item.SidebarBackgroundColor" />
-            
+
             <Style x:Key="_ListBoxItemStyle" TargetType="ListBoxItem">
                 <Setter Property="Template">
                     <Setter.Value>
@@ -136,6 +136,378 @@
                     </Setter.Value>
                 </Setter>
             </Style>
+
+
+            <ControlTemplate x:Key="Fluent.Ribbon.Templates.BackstageTabItem1"
+                     TargetType="{x:Type Fluent:BackstageTabItem}">
+                <Border x:Name="rootBorder"
+                BorderThickness="2"
+                ToolTip="{TemplateBinding ToolTip}">
+                    <Grid x:Name="rootGrid"
+                  Background="Transparent">
+
+                        <Border x:Name="underlineBorder"
+                        Margin="4 8 0 8"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Stretch"
+                        Background="Transparent"
+                        BorderBrush="{Binding Path=(Fluent:RibbonProperties.IsSelectedBackground), RelativeSource={RelativeSource TemplatedParent}}"
+                        BorderThickness="4 0 0 0"
+                        Visibility="Collapsed" />
+
+                        <StackPanel Margin="25 0 15 0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Orientation="Horizontal">
+                            <Fluent:IconPresenter x:Name="iconImage"
+                                          Margin="0 0 8 0"
+                                          HorizontalAlignment="Center"
+                                          VerticalAlignment="Center"
+                                          SmallIcon="{Binding Icon, RelativeSource={RelativeSource TemplatedParent}}"
+                                          CustomSize="{Binding Path=(Fluent:RibbonProperties.CustomIconSize), RelativeSource={RelativeSource TemplatedParent}}"
+                                          IconSize="{Binding Path=(Fluent:RibbonProperties.IconSize), RelativeSource={RelativeSource TemplatedParent}}" />
+
+                            <ContentControl x:Name="PART_Header"
+                                    Foreground="{DynamicResource Fluent.Ribbon.Brushes.BackstageTabItem.Header.Foreground}"
+                                    Content="{TemplateBinding Header}"
+                                    ContentTemplate="{TemplateBinding HeaderTemplate}"
+                                    ContentTemplateSelector="{TemplateBinding HeaderTemplateSelector}"
+                                    Focusable="False">
+                                <ContentControl.Resources>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+                                        <Setter Property="TextWrapping" Value="NoWrap" />
+                                    </Style>
+                                </ContentControl.Resources>
+                            </ContentControl>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+                <ControlTemplate.Triggers>
+                    <Trigger Property="IsEnabled" Value="False">
+                        <Setter TargetName="PART_Header" Property="Opacity" Value="0.5" />
+                    </Trigger>
+                    <Trigger SourceName="rootGrid" Property="IsMouseOver" Value="True">
+                        <Setter TargetName="underlineBorder" Property="BorderBrush" Value="{DynamicResource Fluent.Ribbon.Brushes.Gray2}" />
+                        <Setter TargetName="underlineBorder" Property="Visibility" Value="Visible" />
+                        <Setter TargetName="rootBorder" Property="Background" Value="{DynamicResource Fluent.Ribbon.Brushes.Accent40}" />
+                    </Trigger>
+                    <Trigger Property="Selector.IsSelected" Value="True">
+                        <Setter TargetName="underlineBorder" Property="BorderBrush" Value="{Binding Path=(Fluent:RibbonProperties.IsSelectedBackground), RelativeSource={RelativeSource TemplatedParent}}" />
+                        <Setter TargetName="underlineBorder" Property="Visibility" Value="Visible" />
+                    </Trigger>
+                    <Trigger Property="IsKeyboardFocused" Value="True">
+                        <!--<Setter TargetName="rootBorder" Property="BorderBrush" Value="{DynamicResource Fluent.Ribbon.Brushes.Black}" />-->
+                        <Setter TargetName="rootBorder" Property="Background" Value="{DynamicResource Fluent.Ribbon.Brushes.Accent40}" />
+                    </Trigger>
+                    <MultiTrigger>
+                        <MultiTrigger.Conditions>
+                            <Condition Property="Selector.IsSelected" Value="True" />
+                            <Condition Property="IsMouseOver" Value="True" />
+                            <Condition SourceName="rootGrid" Property="IsMouseOver" Value="True" />
+                        </MultiTrigger.Conditions>
+                        <MultiTrigger.EnterActions>
+                            <BeginStoryboard x:Name="beginStoryboardSelectedMouseOver">
+                                <Storyboard>
+                                    <ThicknessAnimation Storyboard.TargetName="underlineBorder"
+                                                Storyboard.TargetProperty="Margin"
+                                                To="0"
+                                                Duration="0:0:0.1" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </MultiTrigger.EnterActions>
+                        <MultiTrigger.ExitActions>
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ThicknessAnimation Storyboard.TargetName="underlineBorder"
+                                                Storyboard.TargetProperty="Margin"
+                                                Duration="0:0:0.1" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </MultiTrigger.ExitActions>
+                    </MultiTrigger>
+                </ControlTemplate.Triggers>
+            </ControlTemplate>
+
+
+            <ControlTemplate x:Key="Fluent.Ribbon.Templates.BackstageTabControl.Button1"
+                     TargetType="{x:Type Fluent:Button}">
+                <Border x:Name="rootBorder"
+                BorderThickness="2"
+                ToolTip="{TemplateBinding ToolTip}">
+                    <Grid Background="Transparent">
+                        <Border x:Name="underlineBorder"
+                        Margin="4 8 0 8"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Stretch"
+                        Background="Transparent"
+                        BorderBrush="{Binding Path=(Fluent:RibbonProperties.IsSelectedBackground), RelativeSource={RelativeSource TemplatedParent}}"
+                        BorderThickness="4 0 0 0"
+                        Visibility="Collapsed" />
+
+                        <StackPanel Margin="25 0 15 0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Orientation="Horizontal">
+                            <Fluent:IconPresenter x:Name="iconImage"
+                                          Margin="0 0 8 0"
+                                          HorizontalAlignment="Center"
+                                          VerticalAlignment="Center"
+                                          SmallIcon="{Binding Icon, RelativeSource={RelativeSource TemplatedParent}}"
+                                          CustomSize="{Binding Path=(Fluent:RibbonProperties.CustomIconSize), RelativeSource={RelativeSource TemplatedParent}}"
+                                          IconSize="{Binding Path=(Fluent:RibbonProperties.IconSize), RelativeSource={RelativeSource TemplatedParent}}" />
+
+                            <ContentControl x:Name="controlLabel"
+                                    VerticalAlignment="Center"
+                                    Content="{TemplateBinding Header}"
+                                    Focusable="False">
+                                <ContentControl.Resources>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+                                        <Setter Property="TextWrapping" Value="NoWrap" />
+                                    </Style>
+                                </ContentControl.Resources>
+                            </ContentControl>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+                <ControlTemplate.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter TargetName="underlineBorder" Property="BorderBrush" Value="{DynamicResource Fluent.Ribbon.Brushes.Gray2}" />
+                        <Setter TargetName="underlineBorder" Property="Visibility" Value="Visible" />
+                        <Setter TargetName="rootBorder" Property="Background" Value="{DynamicResource Fluent.Ribbon.Brushes.Accent40}" />
+                    </Trigger>
+                    <Trigger Property="IsPressed" Value="True">
+                        <Setter TargetName="underlineBorder" Property="BorderBrush" Value="{Binding Path=(Fluent:RibbonProperties.IsSelectedBackground), RelativeSource={RelativeSource TemplatedParent}}" />
+                        <Setter TargetName="underlineBorder" Property="Visibility" Value="Visible" />
+                    </Trigger>
+                    <Trigger Property="IsKeyboardFocused" Value="True">
+                        <!--<Setter TargetName="rootBorder" Property="BorderBrush" Value="{DynamicResource Fluent.Ribbon.Brushes.Black}" />-->
+                        <Setter TargetName="rootBorder" Property="Background" Value="{DynamicResource Fluent.Ribbon.Brushes.Accent40}" />
+                    </Trigger>
+                    <MultiTrigger>
+                        <MultiTrigger.Conditions>
+                            <Condition Property="IsMouseOver" Value="True" />
+                            <Condition Property="IsPressed" Value="True" />
+                        </MultiTrigger.Conditions>
+                        <MultiTrigger.EnterActions>
+                            <BeginStoryboard x:Name="beginStoryboardSelectedMouseOver">
+                                <Storyboard>
+                                    <ThicknessAnimation Storyboard.TargetName="underlineBorder"
+                                                Storyboard.TargetProperty="Margin"
+                                                To="0"
+                                                Duration="0:0:0.1" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </MultiTrigger.EnterActions>
+                        <MultiTrigger.ExitActions>
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ThicknessAnimation Storyboard.TargetName="underlineBorder"
+                                                Storyboard.TargetProperty="Margin"
+                                                Duration="0:0:0.1" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </MultiTrigger.ExitActions>
+                    </MultiTrigger>
+                    <Trigger Property="IsEnabled" Value="False">
+                        <Setter TargetName="controlLabel" Property="Opacity" Value="0.5" />
+                    </Trigger>
+                </ControlTemplate.Triggers>
+            </ControlTemplate>
+
+            <Style x:Key="Fluent.Ribbon.Styles.BackstageTabControl.Button"
+           TargetType="{x:Type Fluent:Button}">
+                <Setter Property="Fluent:RibbonProperties.IconSize" Value="Small" />
+                <Setter Property="Fluent:RibbonProperties.IsSelectedBackground" Value="{DynamicResource Fluent.Ribbon.Brushes.BackstageTabItem.Selected.Background}" />
+                <Setter Property="Fluent:RibbonProperties.MouseOverBackground" Value="{DynamicResource Fluent.Ribbon.Brushes.BackstageTabItem.MouseOver.Background}" />
+                <Setter Property="FocusVisualStyle" Value="{DynamicResource Fluent.Ribbon.Styles.FocusVisual.Empty}" />
+                <Setter Property="Height" Value="38" />
+                <Setter Property="Margin" Value="0" />
+                <Setter Property="Template" Value="{DynamicResource Fluent.Ribbon.Templates.BackstageTabControl.Button}" />
+            </Style>
+
+            <ControlTemplate x:Key="Fluent.Ribbon.Templates.BackstageBackButton"
+                     TargetType="Button">
+                <Grid x:Name="ContentGrid"
+              Background="Transparent"
+              Fluent:FrameworkHelper.UseLayoutRounding="False">
+                    <ContentControl Margin="{TemplateBinding Padding}"
+                            HorizontalAlignment="Left"
+                            Focusable="False">
+                        <Grid>
+                            <Path x:Name="arrowpath"
+                          Width="16"
+                          Height="12"
+                          Data="F1 M 36,22L 36,26L 19.75,26L 27,33L 20.5,33L 11,24L 20.5,15L 27,15L 19.75,22L 36,22 Z "
+                          Fill="{TemplateBinding Foreground}"
+                          Stretch="Uniform" />
+
+                            <Ellipse x:Name="backellipse"
+                             Width="34"
+                             Height="34"
+                             Stroke="{TemplateBinding Foreground}"
+                             StrokeThickness="2" />
+
+                            <Path Margin="0"
+                          HorizontalAlignment="Stretch"
+                          Data="M0,0 C0,35 0,35 0,35 C0,35 35,35 35,35 L35,0 z"
+                          Fill="Transparent"
+                          Stretch="None" />
+                        </Grid>
+                    </ContentControl>
+                </Grid>
+
+                <ControlTemplate.Triggers>
+                    <Trigger Property="IsKeyboardFocused" Value="True">
+                        <Setter Property="Foreground" Value="{Binding Path=(Fluent:RibbonProperties.MouseOverForeground), RelativeSource={RelativeSource Self}}" />
+                        <Setter TargetName="ContentGrid" Property="Background" Value="{Binding Path=(Fluent:RibbonProperties.MouseOverBackground), RelativeSource={RelativeSource TemplatedParent}}" />
+                        <Setter TargetName="arrowpath" Property="Opacity" Value="0.8" />
+                        <Setter TargetName="backellipse" Property="Opacity" Value="0.8" />
+                    </Trigger>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Foreground" Value="{Binding Path=(Fluent:RibbonProperties.MouseOverForeground), RelativeSource={RelativeSource Self}}" />
+                        <Setter TargetName="ContentGrid" Property="Background" Value="{Binding Path=(Fluent:RibbonProperties.MouseOverBackground), RelativeSource={RelativeSource TemplatedParent}}" />
+                        <Setter TargetName="arrowpath" Property="Opacity" Value="0.8" />
+                        <Setter TargetName="backellipse" Property="Opacity" Value="0.8" />
+                    </Trigger>
+                </ControlTemplate.Triggers>
+            </ControlTemplate>
+
+            <Style x:Key="Fluent.Ribbon.Styles.BackstageBackButton"
+           TargetType="{x:Type Button}">
+                <Setter Property="Background" Value="{DynamicResource Fluent.Ribbon.Brushes.Backstage.BackButton.Background}" />
+                <Setter Property="Fluent:RibbonProperties.MouseOverBackground" Value="{DynamicResource Fluent.Ribbon.Brushes.BackstageTabItem.MouseOver.Background}" />
+                <Setter Property="Fluent:RibbonProperties.MouseOverForeground" Value="{DynamicResource Fluent.Ribbon.Brushes.IdealForeground}" />
+                <Setter Property="FocusVisualStyle" Value="{DynamicResource Fluent.Ribbon.Styles.FocusVisual}" />
+                <Setter Property="Foreground" Value="{DynamicResource Fluent.Ribbon.Brushes.Backstage.BackButton.Foreground}" />
+                <Setter Property="Height" Value="48" />
+                <Setter Property="HorizontalAlignment" Value="Stretch" />
+                <Setter Property="Template" Value="{DynamicResource Fluent.Ribbon.Templates.BackstageBackButton}" />
+            </Style>
+
+            <Style x:Key="Fluent.Ribbon.Styles.BackstageTabControl.SeparatorTabItem"
+           TargetType="{x:Type Fluent:SeparatorTabItem}">
+                <Setter Property="Focusable" Value="False" />
+                <Setter Property="Margin" Value="25 10 20 10" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type Fluent:SeparatorTabItem}">
+                            <StackPanel>
+                                <TextBlock x:Name="header"
+                                   Margin="10 5"
+                                   VerticalAlignment="Center"
+                                   FontSize="14"
+                                   FontWeight="SemiBold"
+                                   Text="{Binding Header, RelativeSource={RelativeSource TemplatedParent}}"
+                                   TextWrapping="Wrap"
+                                   Visibility="Visible" />
+                                <Line Height="1"
+                              MinWidth="75"
+                              Stretch="Uniform"
+                              Stroke="{DynamicResource Fluent.Ribbon.Brushes.HighTransparentWhite}"
+                              X2="1" />
+                            </StackPanel>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="HasHeader" Value="False">
+                                    <Setter TargetName="header" Property="Visibility" Value="Collapsed" />
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <ControlTemplate x:Key="Fluent.Ribbon.Templates.BackstageTabControl"
+                     TargetType="{x:Type Fluent:BackstageTabControl}">
+                <ControlTemplate.Resources>
+                    <ResourceDictionary>
+                        <Style x:Key="{x:Type Fluent:Button}"
+                       TargetType="{x:Type Fluent:Button}"
+                       BasedOn="{StaticResource Fluent.Ribbon.Styles.Backstage.Button}" />
+                        <Style x:Key="{x:Type Fluent:ToggleButton}"
+                       TargetType="{x:Type Fluent:ToggleButton}"
+                       BasedOn="{StaticResource Fluent.Ribbon.Styles.Backstage.ToggleButton}" />
+                        <Style x:Key="{x:Type Fluent:DropDownButton}"
+                       TargetType="{x:Type Fluent:DropDownButton}"
+                       BasedOn="{StaticResource Fluent.Ribbon.Styles.Backstage.DropDownButton}" />
+                        <Style x:Key="{x:Type Fluent:ComboBox}"
+                       TargetType="{x:Type Fluent:ComboBox}"
+                       BasedOn="{StaticResource Fluent.Ribbon.Styles.Backstage.ComboBox}" />
+                    </ResourceDictionary>
+                </ControlTemplate.Resources>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"
+                                  MinWidth="{TemplateBinding ItemsPanelMinWidth}" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Grid x:Name="PART_ItemsPanelContainer"
+                  VerticalAlignment="Stretch">
+                        <Grid Background="{TemplateBinding ItemsPanelBackground}"
+                      KeyboardNavigation.DirectionalNavigation="Cycle">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+
+                            <Button x:Name="PART_BackButton"
+                            Uid="{TemplateBinding BackButtonUid}"
+                            Style="{DynamicResource Fluent.Ribbon.Styles.BackstageBackButton}"
+                            Grid.Row="0"
+                            Padding="22 7 0 7"
+                            VerticalAlignment="Top"
+                            AutomationProperties.AcceleratorKey="ESC"
+                            AutomationProperties.Name="{Binding Uid, RelativeSource={RelativeSource Self}}"
+                            Command="{x:Static Fluent:RibbonCommands.OpenBackstage}"
+                            Visibility="{Binding Path=IsBackButtonVisible, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource Fluent.Ribbon.Converters.BoolToVisibilityConverter}}" />
+
+                            <ItemsPresenter Grid.Row="1" />
+                        </Grid>
+                    </Grid>
+
+                    <Grid x:Name="PART_SelectedContentGrid"
+                  Grid.Column="1"
+                  Background="{TemplateBinding Background}">
+                        <ContentPresenter x:Name="PART_SelectedContentHost"
+                                  HorizontalAlignment="Stretch"
+                                  VerticalAlignment="Stretch"
+                                  ContentSource="SelectedContent" />
+                    </Grid>
+                </Grid>
+            </ControlTemplate>
+
+            <Style x:Key="Fluent.Ribbon.Styles.BackstageTabControl"
+           TargetType="{x:Type Fluent:BackstageTabControl}">
+                <Setter Property="BackButtonUid" Value="{Binding Source={x:Static Fluent:RibbonLocalization.Current}, Path=Localization.BackstageBackButtonUid, Mode=OneWay}" />
+                <Setter Property="Background" Value="{DynamicResource Fluent.Ribbon.Brushes.BackstageTabControl.Background}" />
+                <Setter Property="FocusVisualStyle" Value="{DynamicResource Fluent.Ribbon.Styles.FocusVisual.Empty}" />
+                <Setter Property="Foreground" Value="{DynamicResource Fluent.Ribbon.Brushes.LabelText}" />
+                <Setter Property="ItemContainerStyleSelector" Value="{x:Static styleSelectors:BackstageTabControlItemContainerStyleSelector.Instance}" />
+                <Setter Property="ItemsPanel">
+                    <Setter.Value>
+                        <ItemsPanelTemplate>
+                            <DockPanel LastChildFill="False" />
+                        </ItemsPanelTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="ItemsPanelBackground" Value="{DynamicResource Fluent.Ribbon.Brushes.BackstageTabControl.ItemsPanelBackground}" />
+                <Setter Property="Margin">
+                    <Setter.Value>
+                        <MultiBinding Converter="{x:Static converters:StaticConverters.ThicknessConverter}">
+                            <Binding Source="0" />
+                            <Binding FallbackValue="0"
+                             Path="TitleBar.ActualHeight"
+                             RelativeSource="{RelativeSource FindAncestor, AncestorType={x:Type Fluent:IRibbonWindow}}" />
+                            <Binding Source="0" />
+                            <Binding Source="0" />
+                        </MultiBinding>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="Template" Value="{DynamicResource Fluent.Ribbon.Templates.BackstageTabControl}" />
+            </Style>
+
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/Fluent;Component/Themes/Generic.xaml" />
                 <!-- Directly use ColorPalette.xaml to prevent messing up all other styles! -->
@@ -153,12 +525,12 @@
                     <ControlTemplate 
                         x:Key="TwoLineLabelControlTemplateCustom"
                         TargetType="{x:Type controls:TwoLineLabel}">
-                        
+
                         <StackPanel x:Name="stackPanel"
                                     HorizontalAlignment="Center"
                                     VerticalAlignment="Center"
                                     Orientation="Vertical">
-                            
+
                             <AccessText x:Name="PART_TextRun"
                                         HorizontalAlignment="Center"
                                         VerticalAlignment="Center"
@@ -171,7 +543,7 @@
                                         HorizontalAlignment="Center"
                                         VerticalAlignment="Center"
                                         Orientation="Horizontal">
-                                
+
                                 <AccessText x:Name="PART_TextRun2"
                                             HorizontalAlignment="Center"
                                             VerticalAlignment="Center"
@@ -184,7 +556,7 @@
                                         Height="Auto"
                                         Margin="0"
                                         HorizontalAlignment="Center">
-                                    
+
                                     <Path x:Name="path"
                                           Width="5"
                                           Height="3"
@@ -237,12 +609,12 @@
                                                 HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
                                                 VerticalAlignment="{TemplateBinding VerticalAlignment}"
                                                 Height="Auto">
-                                            
+
                                             <StackPanel x:Name="stackPanel"
                                                         Margin="{TemplateBinding Padding}"
                                                         Width="Auto"
                                                         Orientation="Vertical">
-                                                
+
                                                 <ContentPresenter x:Name="iconImage"
                                                                   HorizontalAlignment="Center"
                                                                   Height="32"
@@ -251,7 +623,7 @@
                                                                   Margin="0 2 0 0"
                                                                   SnapsToDevicePixels="True"
                                                                   Content="{Binding LargeIcon, RelativeSource={RelativeSource TemplatedParent}}" />
-                                                
+
                                                 <controls:TwoLineLabel x:Name="controlLabel"
                                                                        Text="{TemplateBinding Header}"
                                                                        Foreground="{TemplateBinding Foreground}"
@@ -275,12 +647,12 @@
                                                Margin="0,0,-4,0"
                                                VerticalAlignment="Top"
                                                Grid.ColumnSpan="2">
-                                            
+
                                             <Grid Name="DropDown"
                                                   SnapsToDevicePixels="True"
                                                   Margin="0"
                                                   VerticalAlignment="Top">
-                                                
+
                                                 <Border x:Name="PART_DropDownBorder"
                                                         MinWidth="{TemplateBinding ActualWidth}"
                                                         SnapsToDevicePixels="True"
@@ -289,27 +661,27 @@
                                                         BorderThickness="1"
                                                         HorizontalAlignment="Stretch"
                                                         VerticalAlignment="Top">
-                                                    
+
                                                     <Grid Width="Auto"
                                                           Height="Auto"
                                                           HorizontalAlignment="Stretch"
                                                           VerticalAlignment="Top">
-                                                        
+
                                                         <Border VerticalAlignment="Top"
                                                                 Width="Auto"
                                                                 Height="Auto"
                                                                 BorderBrush="{DynamicResource Fluent.Ribbon.Brushes.DropDown.BackgroundBrush}"
                                                                 BorderThickness="1" />
-                                                        
+
                                                         <Grid Margin="1"
                                                               HorizontalAlignment="Stretch"
                                                               VerticalAlignment="Top">
-                                                            
+
                                                             <Grid.RowDefinitions>
                                                                 <RowDefinition Height="*" />
                                                                 <RowDefinition Height="Auto" />
                                                             </Grid.RowDefinitions>
-                                                            
+
                                                             <ScrollViewer x:Name="PART_ScrollViewer"
                                                                           Style="{DynamicResource MenuScrollViewer}"
                                                                           IsTabStop="False"
@@ -328,7 +700,7 @@
                                                                     BorderThickness="0,1,0,0"
                                                                     Grid.Row="1"
                                                                     Background="{DynamicResource Fluent.Ribbon.Brushes.DropDown.Resize.BackgroundBrush}">
-                                                                
+
                                                                 <Grid>
                                                                     <Thumb x:Name="PART_ResizeVerticalThumb"
                                                                            HorizontalAlignment="Stretch"
@@ -338,7 +710,7 @@
                                                                            VerticalAlignment="Top"
                                                                            Cursor="SizeNS"
                                                                            Template="{DynamicResource ResizeVerticalThumbControlTemplate}" />
-                                                                    
+
                                                                     <Thumb x:Name="PART_ResizeBothThumb"
                                                                            HorizontalAlignment="Right"
                                                                            Margin="0,0,0,-90"

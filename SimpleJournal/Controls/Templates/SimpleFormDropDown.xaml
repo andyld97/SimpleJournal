@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:SimpleJournal.Controls.Templates"
              xmlns:res="clr-namespace:SimpleJournal.Properties"
              Width="160" Height="170" BorderBrush="Black" BorderThickness="1"
-             Background="{DynamicResource Fluent.Ribbon.Brushes.RibbonTabItem.Active.Background}">
+             Background="{DynamicResource Fluent.Ribbon.Brushes.RibbonTabControl.Content.Background}">
     <StackPanel>
         <StackPanel.Resources>
             <Style TargetType="{x:Type Viewbox}">

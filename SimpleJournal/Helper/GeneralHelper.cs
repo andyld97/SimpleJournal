@@ -63,27 +63,27 @@ namespace SimpleJournal
 
         public static void ApplyTheming()
         {
-            System.Windows.Media.Color sidebarColor, linkColor, tabControlBackgroundColor, tabItemBackground, tabItemSelectedBackground;
+            Color sidebarColor, linkColor, tabControlBackgroundColor, tabItemBackground, tabItemSelectedBackground;
 
             string transparency = Settings.Instance.UseObjectBarTransparency ? "AF" : "FF";
 
             if (Settings.Instance.UseDarkMode)
             {
-                sidebarColor = (System.Windows.Media.Color)ColorConverter.ConvertFromString($"#{transparency}252525");
-                linkColor = System.Windows.Media.Colors.White;
+                sidebarColor = (Color)ColorConverter.ConvertFromString($"#{transparency}252525");
+                linkColor = Colors.White;
                 tabControlBackgroundColor = Colors.Black;
-
-                tabItemBackground = (System.Windows.Media.Color)ColorConverter.ConvertFromString("#AF282828");
-                tabItemSelectedBackground = (System.Windows.Media.Color)ColorConverter.ConvertFromString("#282828"); 
+                
+                tabItemBackground = (Color)ColorConverter.ConvertFromString("#AF282828");
+                tabItemSelectedBackground = (Color)ColorConverter.ConvertFromString("#282828");
             }
             else
             {
-                sidebarColor = (System.Windows.Media.Color)ColorConverter.ConvertFromString($"#{transparency}CECACA");
-                linkColor = System.Windows.Media.Colors.MediumBlue;
-                tabControlBackgroundColor = (System.Windows.Media.Color)ColorConverter.ConvertFromString($"#DADADA");
+                sidebarColor = (Color)ColorConverter.ConvertFromString($"#{transparency}CECACA");
+                linkColor = Colors.MediumBlue;
+                tabControlBackgroundColor = (Color)ColorConverter.ConvertFromString($"#DADADA");
 
-                tabItemBackground = (System.Windows.Media.Color)ColorConverter.ConvertFromString("#D7D7D7");
-                tabItemSelectedBackground = (System.Windows.Media.Color)ColorConverter.ConvertFromString("#F9F9F9");
+                tabItemBackground = (Color)ColorConverter.ConvertFromString("#D7D7D7");
+                tabItemSelectedBackground = (Color)ColorConverter.ConvertFromString("#F9F9F9");
             }
 
             // Apply own theming colors
@@ -92,7 +92,20 @@ namespace SimpleJournal
             App.Current.Resources["TabControl.Background"] = new SolidColorBrush(tabControlBackgroundColor);
             App.Current.Resources["TabItemBackground"] = new SolidColorBrush(tabItemBackground);
             App.Current.Resources["TabItemSelectedBackground"] = new SolidColorBrush(tabItemSelectedBackground);
-           // App.Current.Resources["MahApps.Brushes.Accent"] = new SolidColorBrush(Colors.Green);
+
+            var theme = ThemeManager.Current.GetTheme(GetCurrentTheme()); // ThemeManager.Current.DetectTheme(Application.Current);
+            if (theme != null)
+            {
+                if (Settings.Instance.UseDarkMode)
+                {
+                    var fixedBlack = (Color)ColorConverter.ConvertFromString("#FF252525");
+                    theme.Resources["Fluent.Ribbon.Colors.White"] = fixedBlack;
+                    theme.Resources["Fluent.Ribbon.Brushes.White"] = new SolidColorBrush(fixedBlack);                
+                }
+
+                ThemeManager.Current.ChangeTheme(Application.Current, theme);
+                return;
+            }
 
             ThemeManager.Current.ChangeTheme(Application.Current, GetCurrentTheme());
         }
