@@ -16,9 +16,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Magick.NET-Q16-AnyCPU" Version="14.3.0" />
-    <PackageReference Include="Magick.NET.Core" Version="14.3.0" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="7.2.0" />
+    <PackageReference Include="Magick.NET-Q16-AnyCPU" Version="14.9.1" />
+    <PackageReference Include="Magick.NET.Core" Version="14.9.1" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="9.0.6" />
     <PackageReference Include="WebhookAPI" Version="1.0.7" />
   </ItemGroup>
 
