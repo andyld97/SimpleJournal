@@ -284,7 +284,6 @@
 		<PackageReference Include="Magick.NET-Q16-AnyCPU" Version="14.9.1" />
 		<PackageReference Include="Magick.NET.Core" Version="14.9.1" />
 		<PackageReference Include="MahApps.Metro" Version="3.0.0-alpha0513" />
-		<PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
 		<PackageReference Include="Microsoft.Web.WebView2" Version="1.0.3595.46" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
 		<PackageReference Include="Microsoft.Windows.Compatibility" Version="10.0.0" />

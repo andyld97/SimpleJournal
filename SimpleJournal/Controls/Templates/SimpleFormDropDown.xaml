@@ -16,13 +16,13 @@
         <TextBlock Margin="5,5,0,2" FontSize="12" Text="{x:Static res:Resources.strShapes}" FontWeight="Bold"/>
 
         <StackPanel Orientation="Horizontal" Margin="10,0,0,0">
-            <ToggleButton x:Name="btnShapeRectangle" Click="btnShapeRectangle_Click" Width="40" Margin="0,2,-2,2" IsChecked="True"  ToolTip="{x:Static res:Resources.strRectangle}">
+            <ToggleButton x:Name="btnShapeRectangle" Style="{DynamicResource ToggleFeatureButton}" Click="btnShapeRectangle_Click" Width="40" Margin="0,2,-2,2" IsChecked="True"  ToolTip="{x:Static res:Resources.strRectangle}">
                 <Rectangle Width="25" Height="25" Stroke="Black" Fill="Transparent" StrokeThickness="2" />
             </ToggleButton>
-            <ToggleButton x:Name="btnShapeCircle" Click="btnShapeCircle_Click" Width="40" Margin="10,2,0,2" ToolTip="{x:Static res:Resources.strCircle}">
+            <ToggleButton x:Name="btnShapeCircle" Style="{DynamicResource ToggleFeatureButton}" Click="btnShapeCircle_Click" Width="40" Margin="10,2,0,2" ToolTip="{x:Static res:Resources.strCircle}">
                 <Ellipse Width="25" Height="25" Stroke="Black" Fill="Transparent" StrokeThickness="2"/>
             </ToggleButton>
-            <ToggleButton x:Name="btnShapeTriangleEquilateral" Click="btnShapeTriangleEquilateral_Click" Width="40" Margin="8,2,0,2" ToolTip="{x:Static res:Resources.strTriangle}">
+            <ToggleButton x:Name="btnShapeTriangleEquilateral" Style="{DynamicResource ToggleFeatureButton}" Click="btnShapeTriangleEquilateral_Click" Width="40" Margin="8,2,0,2" ToolTip="{x:Static res:Resources.strTriangle}">
                 <Viewbox>
                     <Polygon Points="20,0 0,40 40,40" Stroke="Black" StrokeThickness="3" />
                 </Viewbox>
@@ -30,17 +30,17 @@
         </StackPanel>
 
         <StackPanel Orientation="Horizontal" Margin="0,2,0,0">
-            <ToggleButton x:Name="btnShapeTriangleEquilateral180" Click="btnShapeTriangleEquilateral180_Click" Width="40" Margin="10,2,-2,2" ToolTip="{x:Static res:Resources.strTriangle}">
+            <ToggleButton x:Name="btnShapeTriangleEquilateral180" Style="{DynamicResource ToggleFeatureButton}" Click="btnShapeTriangleEquilateral180_Click" Width="40" Margin="10,2,-2,2" ToolTip="{x:Static res:Resources.strTriangle}">
                 <Viewbox>
                     <Polygon Points="0,0 60,0 30,60" Stroke="Black" StrokeThickness="3" />
                 </Viewbox>
             </ToggleButton>
-            <ToggleButton x:Name="btnShapeTriangleLeft90" Click="btnShapeTriangleLeft90_Click"  Width="40" Margin="10,2,-2,2" ToolTip="{x:Static res:Resources.strTriangle}">
+            <ToggleButton x:Name="btnShapeTriangleLeft90" Click="btnShapeTriangleLeft90_Click" Style="{DynamicResource ToggleFeatureButton}" Width="40" Margin="10,2,-2,2" ToolTip="{x:Static res:Resources.strTriangle}">
                 <Viewbox>
                     <Polygon Points="0,0 0,60 60,60" Stroke="Black" StrokeThickness="3" />
                 </Viewbox>
             </ToggleButton>
-            <ToggleButton x:Name="btnShapeTriangleRight90" Click="btnShapeTriangleRight90_Click" Width="40" Margin="10,2,0,2" ToolTip="{x:Static res:Resources.strTriangle}">
+            <ToggleButton x:Name="btnShapeTriangleRight90" Click="btnShapeTriangleRight90_Click" Style="{DynamicResource ToggleFeatureButton}" Width="40" Margin="10,2,0,2" ToolTip="{x:Static res:Resources.strTriangle}">
                 <Viewbox>
                     <Polygon Points="60,0 0,60 60,60" Stroke="Black" StrokeThickness="3"/>
                 </Viewbox>
@@ -48,17 +48,17 @@
         </StackPanel>
 
         <StackPanel Orientation="Horizontal" Margin="0,2,0,0">
-            <ToggleButton x:Name="btnShapeTriangleLeft180" Click="btnShapeTriangleLeft180_Click"  Width="40" Margin="10,2,-2,2" ToolTip="{x:Static res:Resources.strTriangle}">
+            <ToggleButton x:Name="btnShapeTriangleLeft180" Style="{DynamicResource ToggleFeatureButton}" Click="btnShapeTriangleLeft180_Click"  Width="40" Margin="10,2,-2,2" ToolTip="{x:Static res:Resources.strTriangle}">
                 <Viewbox>
                     <Polygon Points="0,0 60,0 0,60" Stroke="Black" StrokeThickness="3" />
                 </Viewbox>
             </ToggleButton>
-            <ToggleButton x:Name="btnShapeTriangleRight180" Click="btnShapeTriangleRight180_Click" Width="40" Margin="10,2,-2,2" ToolTip="{x:Static res:Resources.strTriangle}">
+            <ToggleButton x:Name="btnShapeTriangleRight180" Style="{DynamicResource ToggleFeatureButton}" Click="btnShapeTriangleRight180_Click" Width="40" Margin="10,2,-2,2" ToolTip="{x:Static res:Resources.strTriangle}">
                 <Viewbox>
                     <Polygon Points="0,0 60,0 60,60" Stroke="Black" StrokeThickness="3" />
                 </Viewbox>
             </ToggleButton>
-            <ToggleButton x:Name="btnShapeTrapeze" Width="40" Click="btnShapeTrapeze_Click" Margin="10,2,0,2" ToolTip="{x:Static res:Resources.strTrapeze}">
+            <ToggleButton x:Name="btnShapeTrapeze" Width="40" Style="{DynamicResource ToggleFeatureButton}" Click="btnShapeTrapeze_Click" Margin="10,2,0,2" ToolTip="{x:Static res:Resources.strTrapeze}">
                 <Viewbox>
                     <Polygon Points="0,60 10,0 60,0 50,60" Stroke="Black" StrokeThickness="3"/>
                 </Viewbox>
