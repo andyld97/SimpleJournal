@@ -12,7 +12,7 @@ namespace SimpleJournal.Documents
         private static readonly object sync = new object();
 
         public delegate void onErrorOccurred(string message, string scope);
-        public static event onErrorOccurred OnErrorOccurred;
+        public static event onErrorOccurred OnErrorOccurred = null!;
 
         [XmlIgnore]
         private bool wasSavedAlready = false;
@@ -52,11 +52,11 @@ namespace SimpleJournal.Documents
         public string OriginalPath { get; set; } = "";
 
         #region Pattern
-        public ChequeredPattern ChequeredPattern { get; set; }
+        public ChequeredPattern ChequeredPattern { get; set; } = null!;
 
-        public RuledPattern RuledPattern { get; set; }
+        public RuledPattern RuledPattern { get; set; } = null!;
 
-        public DottedPattern DottedPattern { get; set; }
+        public DottedPattern DottedPattern { get; set; } = null!;
         #endregion
 
         #region Load, Save, Update Methods

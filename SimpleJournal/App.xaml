@@ -135,58 +135,7 @@
                         </ControlTemplate>
                     </Setter.Value>
                 </Setter>
-            </Style>
-
-            <Style TargetType="ListBox" x:Key="RulerModeListBoxStyle">
-                <Setter Property="Background" Value="Transparent" />
-                <Setter Property="BorderThickness" Value="0" />
-                <Setter Property="Padding" Value="0" />
-                <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Hidden" />
-                <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Hidden" />
-                <Setter Property="ItemContainerStyle">
-                    <Setter.Value>
-                        <Style TargetType="ListBoxItem">
-                            <Setter Property="HorizontalContentAlignment" Value="Center" />
-                            <Setter Property="VerticalContentAlignment" Value="Center" />
-                            <Setter Property="Padding" Value="0" />
-                            <Setter Property="Margin" Value="0" />
-                            <Setter Property="Background" Value="Transparent" />
-                            <Setter Property="Template">
-                                <Setter.Value>
-                                    <ControlTemplate TargetType="ListBoxItem">
-
-                                        <Grid>
-                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-
-                                            <!-- SELECTION INDICATOR -->
-                                            <Border x:Name="SelectionIndicator"
-                                        Height="3"
-                                        VerticalAlignment="Bottom"
-                                        CornerRadius="2"
-                                        Background="{DynamicResource Fluent.Ribbon.Brushes.Accent80}"
-                                        Opacity="0" />
-                                        </Grid>
-
-                                        <ControlTemplate.Triggers>
-                                            <!-- Selektiert = nur dünner Akzentbalken -->
-                                            <Trigger Property="IsSelected" Value="True">
-                                                <Setter TargetName="SelectionIndicator" Property="Opacity" Value="1" />
-                                            </Trigger>
-
-                                            <!-- Fokus style komplett abschalten -->
-                                            <Trigger Property="IsFocused" Value="True">
-                                                <Setter Property="FocusVisualStyle" Value="{x:Null}" />
-                                            </Trigger>
-                                        </ControlTemplate.Triggers>
-
-                                    </ControlTemplate>
-                                </Setter.Value>
-                            </Setter>
-                        </Style>
-                    </Setter.Value>
-                </Setter>
-            </Style>
-
+            </Style>            
 
             <Style x:Key="ToggleFeatureButton" TargetType="ToggleButton">
                 <Setter Property="Foreground" Value="Black"/>

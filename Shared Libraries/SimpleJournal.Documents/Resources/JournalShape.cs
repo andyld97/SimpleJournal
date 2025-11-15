@@ -18,6 +18,6 @@ namespace SimpleJournal.Documents.Resources
         }
 
         [XmlIgnore]
-        public string ShapeXML { get; set; }
+        public string ShapeXML { get; set; } = null!;
     }
 }

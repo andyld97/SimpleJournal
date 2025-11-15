@@ -81,19 +81,16 @@ namespace SimpleJournal.Common.Helper
 
         private static string SHA1(byte[] input)
         {
-            using (SHA1Managed sha1 = new SHA1Managed())
+            var hash = System.Security.Cryptography.SHA1.HashData(input);
+            var sb = new StringBuilder(hash.Length * 2);
+
+            foreach (byte b in hash)
             {
-                var hash = sha1.ComputeHash(input);
-                var sb = new StringBuilder(hash.Length * 2);
-
-                foreach (byte b in hash)
-                {
-                    // can be "x2" if you want lowercase
-                    sb.Append(b.ToString("x2"));
-                }
-
-                return sb.ToString();
+                // can be "x2" if you want lowercase
+                sb.Append(b.ToString("x2"));
             }
+
+            return sb.ToString();
         }
 
         public static void ExtractZipFile(byte[] data, string targetDirectoryPath)
@@ -124,9 +121,9 @@ namespace SimpleJournal.Common.Helper
                         continue;
 
                     // Write the file to disk
-                    using (System.IO.FileStream stream = new System.IO.FileStream(targetPath, System.IO.FileMode.Create))
-                    using (var e = entry.Open())
-                        e.CopyTo(stream);
+                    using System.IO.FileStream stream = new System.IO.FileStream(targetPath, System.IO.FileMode.Create);
+                    using var e = entry.Open();
+                    e.CopyTo(stream);
                 }
             }
         }

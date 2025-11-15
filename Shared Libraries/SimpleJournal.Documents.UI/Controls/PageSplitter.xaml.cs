@@ -12,7 +12,7 @@ namespace SimpleJournal.Documents.UI.Controls
     public partial class PageSplitter : UserControl
     {
         public delegate void onPageAdded(PageSplitter sender, PaperType paperType, Orientation orientation);
-        public event onPageAdded OnPageAdded;
+        public event onPageAdded OnPageAdded = null;
 
         public PageSplitter()
         {
@@ -46,9 +46,9 @@ namespace SimpleJournal.Documents.UI.Controls
         {
             if (Settings.Instance.SkipOrientationMenu)
             {
-                bool result = (bool)(OnCheckPages?.Invoke(new Func<IPaper, bool>((IPaper paper) => paper.Orientation == Orientation.Portrait)));
+                bool? result = OnCheckPages?.Invoke(new Func<IPaper, bool>((IPaper paper) => paper.Orientation == Orientation.Portrait));
 
-                if (result)
+                if (result == true)
                 {
                     // Hide menu and add the page in portrait format
                     OnPageAdded?.Invoke(this, type, Orientation.Portrait);
