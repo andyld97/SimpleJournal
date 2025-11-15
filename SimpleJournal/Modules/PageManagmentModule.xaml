@@ -8,6 +8,67 @@
              xmlns:sres="clr-namespace:SimpleJournal.SharedResources;assembly=SimpleJournal.SharedResources"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <Style TargetType="Button" x:Key="ImageButtonStyle">
+            <Setter Property="Width" Value="56" />
+            <Setter Property="Height" Value="56" />
+            <Setter Property="Background" Value="{DynamicResource ControlLightBrush}" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Padding" Value="4" />
+            <Setter Property="Margin" Value="2,0,0,0" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid>
+                            <Border x:Name="BackgroundBorder"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="4"
+                            SnapsToDevicePixels="True" />
+
+                            <ContentPresenter 
+                                Margin="3"
+                                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                SnapsToDevicePixels="True" />
+                        </Grid>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="BackgroundBorder"
+                                Property="Background"
+                                Value="{DynamicResource ControlLightBrushHover}" />
+                            </Trigger>
+
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="BackgroundBorder"
+                                Property="Background"
+                                Value="{DynamicResource Fluent.Ribbon.Brushes.Accent80}" />
+                                <Setter TargetName="BackgroundBorder"
+                                Property="Opacity"
+                                Value="0.9" />
+                            </Trigger>
+
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="BackgroundBorder"
+                                Property="Opacity"
+                                Value="0.4" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+
+
+    </UserControl.Resources>
     <Grid Background="{DynamicResource Fluent.Ribbon.Brushes.White}">
         <Grid.Resources>
             <Style TargetType="{x:Type TextBlock}">
@@ -88,42 +149,42 @@
                             </Style>
                         </StackPanel.Resources>
                         <StackPanel Orientation="Horizontal">
-                            <Button x:Name="ButtonInsertPageBeforeIndexChequered" Click="ButtonInsertPageBeforeIndexChequered_Click" Margin="3" ContextMenu="{StaticResource menu}">
-                                <Image Source="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/addchequeredpageup.png"/>
+                            <Button x:Name="ButtonInsertPageBeforeIndexChequered" Style="{StaticResource ImageButtonStyle}" Click="ButtonInsertPageBeforeIndexChequered_Click" Margin="3" ContextMenu="{StaticResource menu}">
+                                <Image Source="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/addchequeredpageup.png" />
                             </Button>
-                            <Button x:Name="ButtonInsertPageBeforeIndexDotted" Click="ButtonInsertPageBeforeIndexDotted_Click" Margin="3" ContextMenu="{StaticResource menu}">
+                            <Button x:Name="ButtonInsertPageBeforeIndexDotted" Style="{StaticResource ImageButtonStyle}" Click="ButtonInsertPageBeforeIndexDotted_Click" Margin="3" ContextMenu="{StaticResource menu}">
                                 <Image Source="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/adddottedpageup.png"/>
                             </Button>
-                            <Button x:Name="ButtonInsertPageBeforeIndexRuled" Click="ButtonInsertPageBeforeIndexRuled_Click" Margin="3" ContextMenu="{StaticResource menu}">
+                            <Button x:Name="ButtonInsertPageBeforeIndexRuled" Style="{StaticResource ImageButtonStyle}" Click="ButtonInsertPageBeforeIndexRuled_Click" Margin="3" ContextMenu="{StaticResource menu}">
                                 <Image Source="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/addruledpageup.png"/>
                             </Button>
-                            <Button x:Name="ButtonInsertPageBeforeIndexBlanko" Click="ButtonInsertPageBeforeIndexBlanko_Click" Margin="3" ContextMenu="{StaticResource menu}">
+                            <Button x:Name="ButtonInsertPageBeforeIndexBlanko" Style="{StaticResource ImageButtonStyle}" Click="ButtonInsertPageBeforeIndexBlanko_Click" Margin="3" ContextMenu="{StaticResource menu}">
                                 <Image Source="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/addblancopageup.png"/>
                             </Button>
-                            <Button x:Name="ButtonMovePageUp" Click="ButtonMovePageUp_Click" Margin="3">
+                            <Button x:Name="ButtonMovePageUp" Style="{StaticResource ImageButtonStyle}" Click="ButtonMovePageUp_Click" Margin="3">
                                 <Image Source="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/pageup.png"/>
                             </Button>
-                            <Button x:Name="ButtonInsertTop" Click="ButtonInsertTop_Click"  Margin="3">
+                            <Button x:Name="ButtonInsertTop" Style="{StaticResource ImageButtonStyle}" Click="ButtonInsertTop_Click"  Margin="3">
                                 <Image Source="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/pagetop.png"/>
                             </Button>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
-                            <Button x:Name="ButtonInsertPageAfterIndexChequered" Click="ButtonInsertPageAfterIndexChequered_Click" Margin="3" ContextMenu="{StaticResource menu}">
+                            <Button x:Name="ButtonInsertPageAfterIndexChequered" Style="{StaticResource ImageButtonStyle}"  Click="ButtonInsertPageAfterIndexChequered_Click" Margin="3" ContextMenu="{StaticResource menu}">
                                 <Image Source="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/addchequeredpagedown.png"/>
                             </Button>
-                            <Button x:Name="ButtonInsertPageAfterIndexDotted" Click="ButtonInsertPageAfterIndexDotted_Click" Margin="3" ContextMenu="{StaticResource menu}">
+                            <Button x:Name="ButtonInsertPageAfterIndexDotted" Style="{StaticResource ImageButtonStyle}"  Click="ButtonInsertPageAfterIndexDotted_Click" Margin="3" ContextMenu="{StaticResource menu}">
                                 <Image Source="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/adddottedpagedown.png"/>
                             </Button>
-                            <Button x:Name="ButtonInsertPageAfterIndexRuled" Click="ButtonInsertPageAfterIndexRuled_Click" Margin="3" ContextMenu="{StaticResource menu}">
+                            <Button x:Name="ButtonInsertPageAfterIndexRuled" Style="{StaticResource ImageButtonStyle}"  Click="ButtonInsertPageAfterIndexRuled_Click" Margin="3" ContextMenu="{StaticResource menu}">
                                 <Image Source="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/addruledpagedown.png"/>
                             </Button>
-                            <Button x:Name="ButtonInsertPageAfterIndexBlanko" Click="ButtonInsertPageAfterIndexBlanko_Click" Margin="3" ContextMenu="{StaticResource menu}">
+                            <Button x:Name="ButtonInsertPageAfterIndexBlanko" Style="{StaticResource ImageButtonStyle}"  Click="ButtonInsertPageAfterIndexBlanko_Click" Margin="3" ContextMenu="{StaticResource menu}">
                                 <Image Source="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/addblancopagedown.png"/>
                             </Button>
-                            <Button x:Name="ButtonMovePageDown" Click="ButtonMovePageDown_Click" Margin="3">
+                            <Button x:Name="ButtonMovePageDown" Style="{StaticResource ImageButtonStyle}"  Click="ButtonMovePageDown_Click" Margin="3">
                                 <Image Source="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/pagedown.png"/>
                             </Button>
-                            <Button x:Name="ButtonInsertDown" Click="ButtonInsertDown_Click" Margin="3">
+                            <Button x:Name="ButtonInsertDown" Style="{StaticResource ImageButtonStyle}"  Click="ButtonInsertDown_Click" Margin="3">
                                 <Image Source="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/pagebottom.png"/>
                             </Button>
                         </StackPanel>
@@ -156,10 +217,10 @@
                                 <Setter Property="RenderOptions.BitmapScalingMode" Value="Fant" />
                             </Style>
                         </StackPanel.Resources>
-                        <Button x:Name="btnDecreaseZoom" Click="BtnDecreaseZoom_Click" Margin="3">
+                        <Button x:Name="btnDecreaseZoom" Style="{StaticResource ImageButtonStyle}"  Click="BtnDecreaseZoom_Click" Margin="3">
                             <Image Source="pack://application:,,,/SimpleJournal;component/resources/zoom_out.png"/>
                         </Button>
-                        <Button x:Name="btnIncreaseZoom" Click="BtnIncreaseZoom_Click" Margin="3">
+                        <Button x:Name="btnIncreaseZoom" Style="{StaticResource ImageButtonStyle}"  Click="BtnIncreaseZoom_Click" Margin="3">
                             <Image Source="pack://application:,,,/SimpleJournal;component/resources/zoom.png"/>
                         </Button>
                     </StackPanel>
@@ -180,18 +241,18 @@
                     </Grid.Resources>
                     <StackPanel>
                         <StackPanel Orientation="Horizontal">
-                            <Button x:Name="ButtonRotatePage" Click="ButtonRotatePage_Click" Margin="3">
+                            <Button x:Name="ButtonRotatePage" Style="{StaticResource ImageButtonStyle}"  Click="ButtonRotatePage_Click" Margin="3">
                                 <Image Source="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/rotatepage.png" />
-                            </Button>                           
-                            <ToggleButton x:Name="ToggleButtonChequered" Checked="ToggleButton_Checked" Unchecked="ToggleButton_Checked" Margin="3">
+                            </Button>
+                            <ToggleButton x:Name="ToggleButtonChequered" Style="{DynamicResource ToggleFeatureButton}" Width="56" Height="56" Checked="ToggleButton_Checked" Unchecked="ToggleButton_Checked" Margin="3">
                                 <Image Source="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/chequered.png" />
                             </ToggleButton>
-                            <ToggleButton x:Name="ToggleButtonDotted" Checked="ToggleButton_Checked" Unchecked="ToggleButton_Checked" Margin="3">
+                            <ToggleButton x:Name="ToggleButtonDotted" Style="{DynamicResource ToggleFeatureButton}" Width="56" Height="56" Checked="ToggleButton_Checked" Unchecked="ToggleButton_Checked" Margin="3">
                                 <Image Source="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/dotted.png" />
                             </ToggleButton>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                            <Button x:Name="ButtonDeletePage" Click="ButtonDeletePage_Click" Margin="3">
+                            <Button x:Name="ButtonDeletePage" Style="{StaticResource ImageButtonStyle}"  Click="ButtonDeletePage_Click" Margin="3">
                                 <Button.ContextMenu>
                                     <ContextMenu>
                                         <MenuItem x:Name="MenuButtonDeletePage" Click="MenuButtonDeletePage_Click" Header="{x:Static res:Resources.strPageManagmentDialog_DeletePage}" />
@@ -200,10 +261,10 @@
                                 </Button.ContextMenu>
                                 <Image Source="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/pagedelete.png"/>
                             </Button>
-                            <ToggleButton x:Name="ToggleButtonRuled" Checked="ToggleButton_Checked" Unchecked="ToggleButton_Checked" Margin="3">
+                            <ToggleButton x:Name="ToggleButtonRuled" Style="{DynamicResource ToggleFeatureButton}" Width="56" Height="56" Checked="ToggleButton_Checked" Unchecked="ToggleButton_Checked" Margin="3">
                                 <Image Source="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/ruled.png" />
                             </ToggleButton>
-                            <ToggleButton x:Name="ToggleButtonBlanko" Checked="ToggleButton_Checked" Unchecked="ToggleButton_Checked" Margin="3">
+                            <ToggleButton x:Name="ToggleButtonBlanko" Style="{DynamicResource ToggleFeatureButton}" Width="56" Height="56" Checked="ToggleButton_Checked" Unchecked="ToggleButton_Checked" Margin="3">
                                 <Image Source="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/blanco.png"/>
                             </ToggleButton>
                         </StackPanel>

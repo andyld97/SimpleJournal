@@ -30,11 +30,10 @@ namespace SimpleJournal
                 }
             }
 
-            // Test
 #if DEBUG
-            /*var cultureInfoTest = new CultureInfo("en-US");
-            Thread.CurrentThread.CurrentCulture =
-            Thread.CurrentThread.CurrentUICulture = cultureInfoTest;*/
+            //var cultureInfoTest = new CultureInfo("en-US");
+            //Thread.CurrentThread.CurrentCulture =
+            //Thread.CurrentThread.CurrentUICulture = cultureInfoTest;
 #endif
 
             GeneralHelper.ApplyTheming();

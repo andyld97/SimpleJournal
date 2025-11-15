@@ -14,7 +14,7 @@
         xmlns:controls1="clr-namespace:SimpleJournal.Documents.UI.Controls;assembly=SimpleJournal.Documents.UI" 
         xmlns:modules="clr-namespace:SimpleJournal.Modules"
         Title="SimpleJournal - New Journal" Height="700" Activated="RibbonWindow_Activated" Deactivated="RibbonWindow_Deactivated"
-        Width="1130">
+        Width="1200">
     <Window.Resources>
         <BooleanToVisibilityConverter x:Key="Fluent.Ribbon.Converters.BoolToVisibilityConverter" />
         <local:SelectedIndexToColumnSpanConverter x:Key="indexToColumn" />
@@ -87,9 +87,12 @@
                         <Fluent:MenuItem x:Name="btnClose" Click="btnExit_Click" Header="{x:Static res:Resources.strClose}" KeyTip="E" Icon="pack://application:,,,/SimpleJournal;component/resources/close.png"  />
                     </Fluent:ApplicationMenu>
 
-                    <Fluent:Backstage x:Name="MenuBackstage" Margin="0,1,0,1" IsOpenChanged="Backstage_IsOpenChanged" BorderBrush="Blue" Background="{DynamicResource Fluent.Ribbon.Brushes.AccentBase}">
+                    <Fluent:Backstage x:Name="MenuBackstage" Margin="0,0,5,0" IsOpenChanged="Backstage_IsOpenChanged" BorderBrush="Blue" Background="{DynamicResource Fluent.Ribbon.Brushes.AccentBase}">
+                        <Fluent:Backstage.Header>
+                            <TextBlock x:Name="TextBackstage" MouseDown="TextBackstage_MouseDown" Text="{x:Static res:Resources.strFile}" Width="40" TextAlignment="Center" Background="Transparent" Foreground="White" />
+                        </Fluent:Backstage.Header>
                         <Fluent:BackstageTabControl x:Name="MenuBackstageTabControl">
-                            <Fluent:BackstageTabItem x:Name="MenuBackstageNewFile" MouseDown="BackstageTabItem_MouseDown" Icon="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/pageadd.png" Header="{x:Static res:Resources.strNewDocument}">
+                            <Fluent:BackstageTabItem x:Name="MenuBackstageNewFile" MouseDown="BackstageTabItem_MouseDown" Icon="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/pageadd.png" Header="{x:Static res:Resources.strNewDocument}" Template="{DynamicResource Fluent.Ribbon.Templates.BackstageTabItem1}">
                                 <GroupBox Margin="10" BorderThickness="0">
                                     <GroupBox.Header>
                                         <TextBlock Foreground="{DynamicResource Fluent.Ribbon.Brushes.Black}">
@@ -100,14 +103,14 @@
                                     <ListBox x:Name="RecentlyOpenedDocumentsBackstage" ItemTemplate="{StaticResource RecentlyOpenedDocumentsTemplate}" ItemContainerStyle="{DynamicResource _ListBoxItemStyle}" Background="Transparent" BorderThickness="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" SelectionChanged="RecentlyOpenedDocumentsBackstage_SelectionChanged" />
                                 </GroupBox>
                             </Fluent:BackstageTabItem>
-                            <Fluent:Button Icon="/resources/open.png" Header="{x:Static res:Resources.strOpenDocument}" Click="btnOpen_Click" />
-                            <Fluent:Button x:Name="MenuButtonImportPDF" Icon="pack://application:,,,/SimpleJournal;component/resources/pdf_small.png" Header="{x:Static res:Resources.strImportPDFFile}" Click="MenuButtonImportPDF_Click" />
-                            <Fluent:Button Icon="/resources/save.png" Header="{x:Static res:Resources.strSaveDocument}" Command="ApplicationCommands.Save" />
-                            <Fluent:Button Icon="/resources/save.png" Header="{x:Static res:Resources.strSaveAsDocument}" Click="btnSave_Click" />
+                            <Fluent:Button Icon="/resources/open.png" Header="{x:Static res:Resources.strOpenDocument}" Click="btnOpen_Click"  Template="{DynamicResource Fluent.Ribbon.Templates.BackstageTabControl.Button1}"/>
+                            <Fluent:Button x:Name="MenuButtonImportPDF" Icon="pack://application:,,,/SimpleJournal;component/resources/pdf_small.png" Header="{x:Static res:Resources.strImportPDFFile}" Click="MenuButtonImportPDF_Click" Template="{DynamicResource Fluent.Ribbon.Templates.BackstageTabControl.Button1}"/>
+                            <Fluent:Button Icon="/resources/save.png" Header="{x:Static res:Resources.strSaveDocument}" Command="ApplicationCommands.Save" Template="{DynamicResource Fluent.Ribbon.Templates.BackstageTabControl.Button1}" />
+                            <Fluent:Button Icon="/resources/save.png" Header="{x:Static res:Resources.strSaveAsDocument}" Click="btnSave_Click" Template="{DynamicResource Fluent.Ribbon.Templates.BackstageTabControl.Button1}"/>
                             <Fluent:SeparatorTabItem />
-                            <Fluent:Button Icon="/resources/print.png" Header="{x:Static res:Resources.strPrintDocument}" Command="ApplicationCommands.Print" />
-                            <Fluent:Button x:Name="MenuButtonBackstageExportPdf" Icon="/resources/pdf.png" Header="{x:Static res:Resources.strExportAsPDF}" Click="MenuButtonBackstageExportPdf_Click" Visibility="Collapsed" />
-                            <Fluent:BackstageTabItem x:Name="MenuBackstageExport" Icon="/resources/export.png" Header="{x:Static res:Resources.strExportDocument}" MouseDown="MenuBackstageExport_MouseDown">
+                            <Fluent:Button Icon="/resources/print.png" Header="{x:Static res:Resources.strPrintDocument}" Command="ApplicationCommands.Print" Template="{DynamicResource Fluent.Ribbon.Templates.BackstageTabControl.Button1}" />
+                            <Fluent:Button x:Name="MenuButtonBackstageExportPdf" Icon="/resources/pdf.png" Header="{x:Static res:Resources.strExportAsPDF}" Click="MenuButtonBackstageExportPdf_Click" Visibility="Collapsed" Template="{DynamicResource Fluent.Ribbon.Templates.BackstageTabControl.Button1}" />
+                            <Fluent:BackstageTabItem x:Name="MenuBackstageExport" Icon="/resources/export.png" Header="{x:Static res:Resources.strExportDocument}" MouseDown="MenuBackstageExport_MouseDown" Template="{DynamicResource Fluent.Ribbon.Templates.BackstageTabItem1}">
                                 <DockPanel LastChildFill="True">
                                     <StatusBar DockPanel.Dock="Top" Visibility="{Binding ElementName=TextExportStatus, Path=Text, Converter={StaticResource stringToVisilbity}}" Background="{DynamicResource Fluent.Ribbon.Brushes.White20}">
                                         <TextBlock x:Name="TextExportStatus" Padding="2" Foreground="{DynamicResource Fluent.Ribbon.Brushes.Black}" />
@@ -115,13 +118,13 @@
                                     <modules:ExportModule x:Name="ExportControl" />
                                 </DockPanel>
                             </Fluent:BackstageTabItem>
-                            <Fluent:BackstageTabItem x:Name="MenuBackstageEditPages" Icon="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/editpage.png" Header="{x:Static res:Resources.strManagePage}" MouseDown="MenuBackstageEditPages_MouseDown">
+                            <Fluent:BackstageTabItem x:Name="MenuBackstageEditPages" Icon="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/editpage.png" Header="{x:Static res:Resources.strManagePage}" MouseDown="MenuBackstageEditPages_MouseDown" Template="{DynamicResource Fluent.Ribbon.Templates.BackstageTabItem1}">
                                 <modules:PageManagmentModule x:Name="PageManagementControl" />
                             </Fluent:BackstageTabItem>
                             <Fluent:SeparatorTabItem />
-                            <Fluent:Button Icon="/resources/settings.png" Header="{x:Static res:Resources.strSettings}" Click="btnSettings_Click"/>
-                            <Fluent:Button Icon="/resources/about.png" Header="{x:Static res:Resources.strAbout}" Click="btnAbout_Click" />
-                            <Fluent:Button Icon="/resources/close.png" Header="{x:Static res:Resources.strClose}" Click="btnExit_Click" />
+                            <Fluent:Button Icon="/resources/settings.png" Header="{x:Static res:Resources.strSettings}" Click="btnSettings_Click" Template="{DynamicResource Fluent.Ribbon.Templates.BackstageTabControl.Button1}"/>
+                            <Fluent:Button Icon="/resources/about.png" Header="{x:Static res:Resources.strAbout}" Click="btnAbout_Click" Template="{DynamicResource Fluent.Ribbon.Templates.BackstageTabControl.Button1}" />
+                            <Fluent:Button Icon="/resources/close.png" Header="{x:Static res:Resources.strClose}" Click="btnExit_Click" Template="{DynamicResource Fluent.Ribbon.Templates.BackstageTabControl.Button1}" />
                         </Fluent:BackstageTabControl>
                     </Fluent:Backstage>
                 </Grid>
@@ -234,9 +237,9 @@
                 </Fluent:RibbonGroupBox>
 
                 <Fluent:RibbonGroupBox x:Name="GroupPages" Header="{x:Static res:Resources.strPages}" KeyTip="S">
-                    <controls:DropDownToggleButton x:Name="btnInsertNewPage" Click="BtnInsertNewPage_Click" Header="{x:Static res:Resources.strAddPage}" ToolTip="{x:Static res:Resources.strAddPageTooltip}" IsToggleable="False" Width="65">
+                    <controls:DropDownToggleButton x:Name="btnInsertNewPage" Click="BtnInsertNewPage_Click" Header="{x:Static res:Resources.strAddPage}" ToolTip="{x:Static res:Resources.strAddPageTooltip}" IsToggleable="False" Width="70">
                         <controls:DropDownToggleButton.LargeIcon>
-                           <Image x:Name="ButtonInsertNewPageIcon" RenderOptions.BitmapScalingMode="Fant" Width="32" Height="32" Source="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/pageadd.png" />
+                            <Image x:Name="ButtonInsertNewPageIcon" RenderOptions.BitmapScalingMode="Fant" Width="32" Height="32" Source="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/pageadd.png" />
                         </controls:DropDownToggleButton.LargeIcon>
                     </controls:DropDownToggleButton>
                     <controls:FluentToggleButtonRemovedToggle x:Name="btnDeletePage" Click="btnDeletePage_Click" Header="{x:Static res:Resources.strDeletePage}" ToolTip="{x:Static res:Resources.strDeletePageTooltip}" Width="55" LargeIcon="pack://application:,,,/SimpleJournal.SharedResources;component/icons/pages/pagedelete.png"/>
@@ -245,7 +248,7 @@
 
                     <!-- Make some space for the ComboBox-->
                     <Fluent:ComboBox Visibility="Hidden" />
-                    <Fluent:ComboBox x:Name="cmbPages" Size="Large" Width="93" IsEditable="False" SelectionChanged="ComboBox_SelectionChanged" HorizontalContentAlignment="Center" />
+                    <Fluent:ComboBox x:Name="cmbPages" Size="Middle" Width="87" IsEditable="False" SelectionChanged="ComboBox_SelectionChanged" HorizontalContentAlignment="Center" RenderTransformOrigin="0.362,0.523" Margin="0,1,0,1" />
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                         <Fluent:Button x:Name="ButtonNextPage" SizeDefinition="Small" Click="ButtonNextPage_Click" ToolTip="{x:Static res:Resources.strNavigateToNextPage}" Icon="pack://application:,,,/SimpleJournal;component/resources/arrow_down.png" />
                         <Fluent:Button x:Name="ButtonPreviouPage" SizeDefinition="Small" Click="ButtonPreviousPage_Click" ToolTip="{x:Static res:Resources.strNavigateToPreviousPage}" Icon="pack://application:,,,/SimpleJournal;component/resources/arrow_up.png" />
@@ -349,7 +352,7 @@
                             <TextBlock Text="{x:Static res:Resources.strNotifications}" Margin="5,0,0,0" VerticalAlignment="Center" FontWeight="Bold" />
                             <controls1:TransparentImageButton x:Name="ButtonCloseNotificationsPanel" ToolTip="{x:Static res:Resources.strCloseSidebar}" Click="ButtonCloseNotificationsPanel_Click" Grid.Column="1" Image="/resources/close.png" Width="24" Height="24" Margin="5" />
                         </Grid>
-                        
+
                         <Border Grid.Row="1" BorderThickness="0 1 0 1" BorderBrush="{DynamicResource Fluent.Ribbon.Brushes.Black}" Background="{DynamicResource Fluent.Ribbon.Brushes.RibbonTabControl.Content.Background}">
                             <ScrollViewer VerticalScrollBarVisibility="Auto">
                                 <StackPanel x:Name="ListNotifications" ScrollViewer.HorizontalScrollBarVisibility="Disabled" />

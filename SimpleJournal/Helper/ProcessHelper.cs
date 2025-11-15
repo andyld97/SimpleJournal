@@ -7,16 +7,13 @@ namespace SimpleJournal.Helper
 {
     public static class ProcessHelper
     {
-        [DllImport("user32.dll")]
-        private static extern bool SetForegroundWindow(IntPtr hWnd);
-
-        public static int CurrentProcID => Process.GetCurrentProcess().Id;
+        public static int CurrentProcID => Environment.ProcessId;
 
         public static int SimpleJournalProcessCount => Process.GetProcesses().Where(p => p.ProcessName.Contains("SimpleJournal")).Count();
 
         public static bool IsProcessActiveByTaskId(int taskID)
         {
-            var process = Process.GetProcesses().Where(p => p.Id == taskID).FirstOrDefault();
+            var process = Process.GetProcesses().FirstOrDefault(p => p.Id == taskID);
             if (process == null)
                 return false;
 
@@ -25,14 +22,14 @@ namespace SimpleJournal.Helper
 
         public static bool BringProcessToFront(int taskID)
         {
-            var process = Process.GetProcesses().Where(p => p.Id == taskID).FirstOrDefault();
+            var process = Process.GetProcesses().FirstOrDefault(p => p.Id == taskID);
             if (process == null)
                 return false;
 
             try
             {
                 if (process.MainWindowHandle != IntPtr.Zero)
-                    SetForegroundWindow(process.MainWindowHandle);
+                    NativeMethods.SetForegroundWindow(process.MainWindowHandle);
 
                 return true;
             }

@@ -14,7 +14,7 @@ namespace SimpleJournal.Dialogs
     /// <summary>
     /// Interaction logic for PDFConversationDialog.xaml
     /// </summary>
-    public partial class PDFConversationDialog : Window
+    public partial class PDFConversationDialog : Window, IDisposable
     {
         #region Private Members
         private readonly string sourceFileName = string.Empty;
@@ -400,5 +400,31 @@ namespace SimpleJournal.Dialogs
             Settings.Instance.SelfHostedPDF2JApiUrl = TextUrl.Text;
             Settings.Instance.Save();
         }
+
+        #region Dispose
+        private bool _disposed;
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (_disposed)
+                return;
+
+            if (disposing)
+            {
+                // Managed Ressourcen freigeben
+                timer?.Dispose();
+            }
+
+            // Unmanaged Ressourcen freigeben
+
+            _disposed = true;
+        }
+        #endregion
     }
 }

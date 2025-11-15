@@ -19,27 +19,21 @@ namespace SimpleJournal.Helper
 
         private static async Task<string> CreateFullHashFromFileAsync(string sourceFilePath)
         {
-            using (SHA256 sha256Hash = SHA256.Create())
-            {
-                using (System.IO.FileStream fs = new System.IO.FileStream(sourceFilePath, System.IO.FileMode.Open))
-                {
-                    var result = await sha256Hash.ComputeHashAsync(fs);
-                    return result.ToHash();
-                }
-            }
+            using SHA256 sha256Hash = SHA256.Create();
+            using System.IO.FileStream fs = new System.IO.FileStream(sourceFilePath, System.IO.FileMode.Open);
+            var result = await sha256Hash.ComputeHashAsync(fs);
+            return result.ToHash();
         }
 
         private static async Task<string> CreateHashFromFilePartlyAsync(string sourceFilePath, int length = 50 * 1024 * 1024)
         {
             var bytes = await CreateHashBufferAsync(sourceFilePath, length);
-
-            using SHA256 sha256Hash = SHA256.Create();
-            return sha256Hash.ComputeHash(bytes).ToHash();
+            return SHA256.HashData(bytes).ToHash();
         }
 
         private static string ToHash(this byte[] data)
         {
-            return string.Join("", data.Select(p => p.ToString("x2")));
+            return string.Join(string.Empty, data.Select(p => p.ToString("x2")));
         }
 
         private static async Task<byte[]> CreateHashBufferAsync(string sourceFilePath, int length)
@@ -52,19 +46,18 @@ namespace SimpleJournal.Helper
             {
                 data = new byte[length * 3];
 
-                using (System.IO.FileStream fs = new System.IO.FileStream(sourceFilePath, System.IO.FileMode.Open))
-                {
-                    // First n bytes
-                    await fs.ReadAsync(data, 0, length);
+                using System.IO.FileStream fs = new System.IO.FileStream(sourceFilePath, System.IO.FileMode.Open);
 
-                    // Middle + n bytes
-                    fs.Seek(fs.Length / 2, System.IO.SeekOrigin.Begin);
-                    await fs.ReadAsync(data, length, length);
+                // First n bytes
+                await fs.ReadExactlyAsync(data, 0, length);
 
-                    // End - n bytes
-                    fs.Seek(fs.Length - length, System.IO.SeekOrigin.Begin);
-                    await fs.ReadAsync(data, length * 2, length);
-                }
+                // Middle + n bytes
+                fs.Seek(fs.Length / 2, System.IO.SeekOrigin.Begin);
+                await fs.ReadExactlyAsync(data, length, length);
+
+                // End - n bytes
+                fs.Seek(fs.Length - length, System.IO.SeekOrigin.Begin);
+                await fs.ReadExactlyAsync(data, length * 2, length);
             }
 
             return data;

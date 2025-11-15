@@ -173,8 +173,10 @@ namespace SimpleJournal
         {
             W_INSTANCE = this;
             isInitalized = false;
-
+     
             InitializeComponent();
+
+            RibbonProperties.SetIsSelectedBackground(ribbon, new SolidColorBrush(Colors.Transparent));
 
             var dpi = VisualTreeHelper.GetDpi(this);
             // Using big screens with a higher resolution => CenterScreen
@@ -228,14 +230,14 @@ namespace SimpleJournal
             GeneralHelper.InstallUWPFileAssoc();
 #endif
 
-            toggleButtons = new Fluent.ToggleButton[]
-            {
+            toggleButtons =
+            [
                 btnRubberGrob,
                 btnRecogniziation,
-            };
+            ];
 
-            dropDownToggleButtons = new DropDownToggleButton[]
-            {
+            dropDownToggleButtons =
+            [
                 btnRuler,
                 btnRubberFine,
                 btnPen1,
@@ -247,7 +249,7 @@ namespace SimpleJournal
                 btnFreeHandPolygon,
                 btnInsertSimpleForm,
                 btnInsertPlot
-            };
+            ];
 
             // Handle keydown
             PreviewKeyDown += MainWindow_PreviewKeyDown;
@@ -274,13 +276,13 @@ namespace SimpleJournal
                     TextExportStatus.Text = e;
             };
 
-            State.Initalize(new[] 
-            {
+            State.Initalize(
+            [
                 Properties.Resources.strStateSaving,
                 Properties.Resources.strStateExportAsPDF,
                 Properties.Resources.strStateExportAsJournal,
                 Properties.Resources.strStatePrinting,
-            });
+            ]);
 
             State.OnStateChanged += delegate (string message, ProgressState state)
             {
@@ -368,7 +370,7 @@ namespace SimpleJournal
                 var bounds = screen.DeviceBounds;
                 if (bounds.Width > bounds.Height)
                 {
-                    Width = Math.Min(1130, bounds.Width);
+                    Width = Math.Min(1200, bounds.Width); // 1130
                     Height = Math.Min(800, bounds.Height);
                 }
                 else
@@ -4209,6 +4211,11 @@ namespace SimpleJournal
                 Settings.Instance.UserRatedOrClosedNotification = true;
                 Settings.Instance.Save();
             }
+        }
+
+        private void TextBackstage_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            MenuBackstage.IsOpen = true;
         }
 
         #endregion

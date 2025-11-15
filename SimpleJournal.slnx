@@ -1,0 +1,116 @@
+<Solution>
+  <Configurations>
+    <BuildType Name="Debug" />
+    <BuildType Name="Normal" />
+    <BuildType Name="Release" />
+    <BuildType Name="UWPNew" />
+    <Platform Name="Any CPU" />
+    <Platform Name="x64" />
+  </Configurations>
+  <Folder Name="/Assets/">
+    <File Path="Assets/screenshot.png" />
+  </Folder>
+  <Folder Name="/External Libraries/">
+    <File Path="External Libraries/IACore.dll" />
+    <File Path="External Libraries/IALoader.dll" />
+    <File Path="External Libraries/IAWinFX.dll" />
+  </Folder>
+  <Folder Name="/Helper Applications/">
+    <Project Path="Helper Applications/Analyzer/Analyzer.csproj" Id="fe0dd19a-1aac-486f-9206-c8430ab8a25a" />
+    <Project Path="Helper Applications/PDF2J/PDF2J.csproj">
+      <BuildType Solution="Normal|Any CPU" Project="Debug" />
+      <BuildType Solution="UWPNew|*" Project="Debug" />
+    </Project>
+    <Project Path="Helper Applications/SJFileAssoc/SJFileAssoc.csproj" Id="32f31565-e65e-4e7c-9a7f-90e26a1da287" />
+    <Project Path="Helper Applications/Touch/Touch.csproj" Id="c41a1395-0b61-46a9-97ec-1de46a25275e">
+      <BuildType Solution="Normal|*" Project="Debug" />
+      <BuildType Solution="UWPNew|*" Project="Debug" />
+    </Project>
+    <Project Path="Helper Applications/TouchDeviceManager/Touch Device Manager.csproj">
+      <BuildType Solution="Normal|*" Project="Debug" />
+      <BuildType Solution="UWPNew|*" Project="Debug" />
+    </Project>
+  </Folder>
+  <Folder Name="/Shared Libraries/">
+    <Project Path="Shared Libraries/Device/Device.csproj" Id="0d481d77-efaa-44ba-a5c4-621b93977661">
+      <BuildType Solution="Normal|*" Project="Debug" />
+      <BuildType Solution="UWPNew|*" Project="Debug" />
+    </Project>
+    <Project Path="Shared Libraries/SimpleJournal.Common/SimpleJournal.Common.csproj">
+      <BuildType Solution="Normal|x64" Project="Debug" />
+      <BuildType Solution="UWPNew|x64" Project="Debug" />
+    </Project>
+    <Project Path="Shared Libraries/SimpleJournal.Documents.PDF/SimpleJournal.Documents.PDF.csproj" />
+    <Project Path="Shared Libraries/SimpleJournal.Documents.UI/SimpleJournal.Documents.UI.csproj" />
+    <Project Path="Shared Libraries/SimpleJournal.Documents/SimpleJournal.Documents.csproj" />
+    <Project Path="Shared Libraries/SimpleJournal.SharedResources/SimpleJournal.SharedResources.csproj">
+      <BuildType Solution="Normal|x64" Project="Debug" />
+      <BuildType Solution="UWPNew|x64" Project="Debug" />
+    </Project>
+  </Folder>
+  <Folder Name="/Solution Items/">
+    <File Path=".editorconfig" />
+  </Folder>
+  <Folder Name="/Store Packages/">
+    <File Path="Store Packages/ReferencePackage (SimpleJournal) (26) (1.2.418.0) (30.03.19).msix" />
+    <File Path="Store Packages/ReferencePackage (SimpleJournal) (27) (1.2.500.0) (13.04.19).msix" />
+    <File Path="Store Packages/ReferencePackage (SimpleJournal) (28) (1.2.501.0) (15.04.19).msix" />
+    <File Path="Store Packages/ReferencePackage (SimpleJournal) (29) (1.2.605.0) (22.04.19).msix" />
+    <File Path="Store Packages/ReferencePackage (SimpleJournal) (30) (1.2.701.0) (19.05.19).msix" />
+    <File Path="Store Packages/ReferencePackage (SimpleJournal) (31) (1.2.803.0) (09.09.19).msix" />
+    <File Path="Store Packages/ReferencePackage (SimpleJournal) (32) (1.2.804.0) (13.09.19).msix" />
+    <File Path="Store Packages/ReferencePackage (SimpleJournal) (34) (1.2.902.0) (22.09.19).msix" />
+    <File Path="Store Packages/ReferencePackage (SimpleJournal) (35) (1.2.903.0) (22.09.19).msix" />
+    <File Path="Store Packages/ReferencePackage (SimpleJournal) (36) (1.3.0.0) (28.09.19).msix" />
+    <File Path="Store Packages/ReferencePackage (SimpleJournal) (37) (1.301.0.0) (03.10.19).msix" />
+    <File Path="Store Packages/ReferencePackage (SimpleJournal) (38) (1.303.0.0) (26.06.20).msix" />
+    <File Path="Store Packages/ReferencePackage (SimpleJournal) (39) (1.303.0.0) (05.07.20).msix" />
+    <File Path="Store Packages/ReferencePackage (SimpleJournal) (40) (1.304.0.0) (15.07.20).msix" />
+    <File Path="Store Packages/ReferencePackage (SimpleJournal) (41) (1.305.0.0) (22.07.20).msix" />
+    <File Path="Store Packages/ReferencePackage (SimpleJournal) (42) (1.306.0.0) (12.09.20).msix" />
+    <File Path="Store Packages/ReferencePackage (SimpleJournal) (43) (1.307.0.0) (16.09.20).msix" />
+    <File Path="Store Packages/ReferencePackage (SimpleJournal) (44) (1.308.0.0) (31.10.20).msix" />
+    <File Path="Store Packages/ReferencePackage (SimpleJournal) (45) (1.390.0.0) (01.12.20).msix" />
+    <File Path="Store Packages/ReferencePackage (SimpleJournal) (46) (1.400.0.0) (05.12.20).msix" />
+    <File Path="Store Packages/ReferencePackage (SimpleJournal) (47) (1.410.0.0) (15.12.20).msix" />
+    <File Path="Store Packages/ReferencePackage (SimpleJournal) (48) (1.420.0.0) (28.12.20).msix" />
+    <File Path="Store Packages/ReferencePackage (SimpleJournal) (49) (1.430.0.0) (29.04.21).msix" />
+    <File Path="Store Packages/ReferencePackage (SimpleJournal) (50) (1.431.0.0) (04.06.21) [Test].msix" />
+    <File Path="Store Packages/ReferencePackage (SimpleJournal) (51) (1.432.0.0) (04.06.21).msix" />
+    <File Path="Store Packages/ReferencePackage (SimpleJournal) (52) (1.440.1.0) (20.07.21).msix" />
+    <File Path="Store Packages/ReferencePackage (SimpleJournal) (53) (1.450.0.0) (24.08.21).msix" />
+    <File Path="Store Packages/ReferencePackage (SimpleJournal) (54) (1.460.0.0) (02.10.21).msix" />
+    <File Path="Store Packages/ReferencePackage (SimpleJournal) (55) (1.470.0.0) (12.10.21).msix" />
+    <File Path="Store Packages/ReferencePackage (SimpleJournal) (56) (1.480.0.0) (11.11.21).msix" />
+    <File Path="Store Packages/ReferencePackage (SimpleJournal) (57) (1.490.0.0) (23.12.21).msix" />
+    <File Path="Store Packages/ReferencePackage (SimpleJournal) (58) (1.491.0.0) (31.12.21).msix" />
+    <File Path="Store Packages/ReferencePackage (SimpleJournal) (59) (1.502.0.0) (01.02.22).msix" />
+    <File Path="Store Packages/ReferencePackage (SimpleJournal) (60) (1.503.0.0) (06.02.22).msix" />
+    <File Path="Store Packages/ReferencePackage (SimpleJournal) (61) (1.504.0.1) (26.02.22).msix" />
+    <File Path="Store Packages/ReferencePackage (SimpleJournal) (62) (1.505.0.0) (02.03.22).msix" />
+    <File Path="Store Packages/ReferencePackage (SimpleJournal) (63) (1.506.0.0) (13.03.22).msix" />
+    <File Path="Store Packages/ReferencePackage (SimpleJournal) (64) (1.506.1.0) (18.03.22).msix" />
+    <File Path="Store Packages/ReferencePackage (SimpleJournal) (65) (1.507.0.0) (25.03.22).msix" />
+    <File Path="Store Packages/ReferencePackage (SimpleJournal) (66) (1.508.0.0) (06.04.22).msix" />
+    <File Path="Store Packages/ReferencePackage (SimpleJournal) (67) (1.509.0.0) (27.04.22).msix" />
+    <File Path="Store Packages/ReferencePackage (SimpleJournal) (68) (1.510.0.0) (10.05.22).msix" />
+    <File Path="Store Packages/ReferencePackage (SimpleJournal) (69) (1.520.0.0) (21.05.22).msix" />
+    <File Path="Store Packages/ReferencePackage (SimpleJournal) (70) (1.530.0.0) (04.06.22).msix" />
+    <File Path="Store Packages/ReferencePackage (SimpleJournal) (71) (1.540.0.0) (11.06.22).msix" />
+    <File Path="Store Packages/ReferencePackage (SimpleJournal) (72) (1.550.0.0) (27.06.22).msix" />
+    <File Path="Store Packages/ReferencePackage (SimpleJournal) (73) (1.560.0.0) (24.07.22).msix" />
+    <File Path="Store Packages/ReferencePackage (SimpleJournal) (74) (1.570.0.0) (27.08.22).msix" />
+    <File Path="Store Packages/ReferencePackage (SimpleJournal) (75) (1.580.0.0) (02.09.22).msix" />
+    <File Path="Store Packages/ReferencePackage (SimpleJournal) (77) (1.600.0.0) (12.03.23).msix" />
+    <File Path="Store Packages/ReferencePackage (SimpleJournal) (78) (1.610.0.0) (06.04.23).msix" />
+    <File Path="Store Packages/ReferencePackage (SimpleJournal) (79) (1.620.0.0) (14.05.23).msix" />
+    <File Path="Store Packages/ReferencePackage (SimpleJournal) (80) (1.630.0.0) (05.08.23).msix" />
+    <File Path="Store Packages/ReferencePackage (SimpleJournal) (81) (1.630.1.0) (06.08.23) HotFix.msix" />
+    <File Path="Store Packages/ReferencePackage (SimpleJournal) (82) (1.640.0.0) (01.11.23).msix" />
+    <File Path="Store Packages/ReferencePackage (SimpleJournal) (85) (1.660.0.0) (26.03.24).msix" />
+    <File Path="Store Packages/ReferencePackage (SimpleJournal) (86) (1.670.0.0) (28.12.24).msix" />
+  </Folder>
+  <Project Path="SimpleJournal/SimpleJournal.csproj">
+    <Platform Solution="Debug|x64" Project="x64" />
+  </Project>
+</Solution>

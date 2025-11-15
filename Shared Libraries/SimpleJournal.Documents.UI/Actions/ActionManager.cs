@@ -24,7 +24,7 @@ namespace SimpleJournal.Documents.UI.Actions
             owner.OnChanged += Owner_OnChanged;
         }
 
-        private void Owner_OnChanged(System.Windows.Ink.StrokeCollection strokes, System.Windows.UIElement child, ActionType value)
+        private void Owner_OnChanged(System.Windows.Ink.StrokeCollection? strokes, System.Windows.UIElement? child, ActionType value)
         {
             if ((strokes == null && child == null) || IgnoreEvents)
                 return;

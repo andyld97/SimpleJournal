@@ -8,7 +8,7 @@
              xmlns:res="clr-namespace:SimpleJournal.Properties"
              mc:Ignorable="d" 
              Width="260" Height="140" BorderBrush="Black" BorderThickness="1">
-    <StackPanel Background="{DynamicResource Fluent.Ribbon.Brushes.RibbonTabItem.Active.Background}">
+    <StackPanel Background="{DynamicResource Fluent.Ribbon.Brushes.RibbonTabControl.Content.Background}">
         
         <TextBlock Margin="5,5,0,2" FontSize="11" Text="{x:Static res:Resources.strSizes}" FontWeight="Bold"/>
         
@@ -21,19 +21,19 @@
                 <ColumnDefinition Width="40"/>
             </Grid.ColumnDefinitions>
 
-            <ToggleButton x:Name="btnSize1" Click="BtnSize1_Click"  Grid.Column="0" Margin="0,0,3,0" IsChecked="True">
+            <ToggleButton x:Name="btnSize1" Style="{DynamicResource ToggleFeatureButton}" Click="BtnSize1_Click"  Grid.Column="0" Margin="0,0,2,0" IsChecked="True">
                 <Ellipse Margin="1" Stroke="Black" Fill="White"  Width="10" Height="10" StrokeThickness="2"/>
             </ToggleButton>
-            <ToggleButton x:Name="btnSize2" Click="BtnSize2_Click"  Grid.Column="1" Margin="0,0,3,0">
+            <ToggleButton x:Name="btnSize2" Style="{DynamicResource ToggleFeatureButton}" Click="BtnSize2_Click"  Grid.Column="1" Margin="0,0,3,0">
                 <Ellipse Margin="1" Stroke="Black" Fill="White" Width="15" Height="15" StrokeThickness="2"/>
             </ToggleButton>
-            <ToggleButton x:Name="btnSize3" Click="BtnSize3_Click" Grid.Column="2" Margin="0,0,3,0">
+            <ToggleButton x:Name="btnSize3" Style="{DynamicResource ToggleFeatureButton}" Click="BtnSize3_Click" Grid.Column="2" Margin="0,0,3,0">
                 <Ellipse Margin="1" Stroke="Black" Fill="White" Width="20" Height="20" StrokeThickness="2"/>
             </ToggleButton>
-            <ToggleButton x:Name="btnSize4" Click="BtnSize4_Click"  Grid.Column="3" Margin="0,0,3,0">
+            <ToggleButton x:Name="btnSize4" Style="{DynamicResource ToggleFeatureButton}" Click="BtnSize4_Click"  Grid.Column="3" Margin="0,0,3,0">
                 <Ellipse Margin="1" Stroke="Black" Fill="White" Width="25" Height="25" StrokeThickness="2"/>
             </ToggleButton>
-            <ToggleButton x:Name="btnSize5" Click="BtnSize5_Click" Grid.Column="4" Margin="0,0,3,0">
+            <ToggleButton x:Name="btnSize5" Style="{DynamicResource ToggleFeatureButton}" Click="BtnSize5_Click" Grid.Column="4" Margin="0,0,0,0">
                 <Ellipse Margin="1" Stroke="Black" Fill="White" Width="30" Height="30" StrokeThickness="2"/>
             </ToggleButton>
         </Grid>
@@ -46,10 +46,10 @@
                 <ColumnDefinition Width="50"/>
             </Grid.ColumnDefinitions>
 
-            <ToggleButton x:Name="btnShapeRectangle" Click="BtnShapeRectangle_Click" Grid.Column="0" Width="40" Margin="0,2,-2,2" IsChecked="True">
+            <ToggleButton x:Name="btnShapeRectangle" Style="{DynamicResource ToggleFeatureButton}" Click="BtnShapeRectangle_Click" Grid.Column="0" Width="40" Margin="0,2,-2,2" IsChecked="True">
                 <Rectangle Width="25" Height="25" Stroke="Black" Fill="White" StrokeThickness="2"/>
             </ToggleButton>
-            <ToggleButton x:Name="btnShapeCircle" Click="BtnShapeCircle_Click" Grid.Column="1" Width="40" Margin="-2,2,0,2">
+            <ToggleButton x:Name="btnShapeCircle" Style="{DynamicResource ToggleFeatureButton}" Click="BtnShapeCircle_Click" Grid.Column="1" Width="40" Margin="-2,2,0,2">
                 <Ellipse Width="25" Height="25" Stroke="Black" Fill="White" StrokeThickness="2"/>
             </ToggleButton>
         </Grid>

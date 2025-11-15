@@ -11,7 +11,7 @@
     <local:DropDownTemplate.Resources>
         <controls:InverseBooleanConverter x:Key="bool"/>
     </local:DropDownTemplate.Resources>
-    <StackPanel Background="{DynamicResource Fluent.Ribbon.Brushes.RibbonTabItem.Active.Background}">
+    <StackPanel Background="{DynamicResource Fluent.Ribbon.Brushes.RibbonTabControl.Content.Background}">
         
         <TextBlock Margin="2" Text="{x:Static res:Resources.strFrameColor}" FontWeight="Bold"/>
         <StackPanel Orientation="Horizontal">

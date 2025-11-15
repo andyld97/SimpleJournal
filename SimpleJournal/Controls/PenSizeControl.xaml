@@ -6,11 +6,6 @@
              xmlns:res="clr-namespace:SimpleJournal.Properties"
              mc:Ignorable="d" >
     <StackPanel>
-        <StackPanel.Resources>
-            <Style TargetType="ToggleButton">
-                <Setter Property="Margin" Value="2,0,0,0" />
-            </Style>
-        </StackPanel.Resources>
         <TextBlock Margin="5,5,0,2" FontSize="12" Text="{x:Static res:Resources.strSizes}" FontWeight="Bold"/>
         <Grid Height="30" HorizontalAlignment="Center">
             <Grid.ColumnDefinitions>
@@ -21,19 +16,19 @@
                 <ColumnDefinition Width="30" />
             </Grid.ColumnDefinitions>
 
-            <ToggleButton x:Name="btnSize1" Click="BtnSize1_Click" Grid.Column="0">
+            <ToggleButton x:Name="btnSize1" Style="{DynamicResource ToggleFeatureButton}" Click="BtnSize1_Click" Margin="5,0,0,0" Grid.Column="0">
                 <Ellipse Margin="1" Stroke="Black" Fill="Black" Width="4" Height="4" />
             </ToggleButton>
-            <ToggleButton x:Name="btnSize2" Click="BtnSize2_Click"  Grid.Column="1">
+            <ToggleButton x:Name="btnSize2" Style="{DynamicResource ToggleFeatureButton}" Click="BtnSize2_Click" Margin="5,0,0,0" Grid.Column="1">
                 <Ellipse Margin="1" Stroke="Black" Fill="Black" Width="6" Height="6"/>
             </ToggleButton>
-            <ToggleButton x:Name="btnSize3" Click="BtnSize3_Click" Grid.Column="2">
+            <ToggleButton x:Name="btnSize3" Style="{DynamicResource ToggleFeatureButton}" Click="BtnSize3_Click" Margin="5,0,0,0" Grid.Column="2">
                 <Ellipse Margin="1" Stroke="Black" Fill="Black" Width="8" Height="8" />
             </ToggleButton>
-            <ToggleButton x:Name="btnSize4" Click="BtnSize4_Click" Grid.Column="3">
+            <ToggleButton x:Name="btnSize4" Style="{DynamicResource ToggleFeatureButton}" Click="BtnSize4_Click" Margin="5,0,0,0" Grid.Column="3">
                 <Ellipse Margin="1" Stroke="Black" Fill="Black" Width="9" Height="9" />
             </ToggleButton>
-            <ToggleButton x:Name="btnSize5" Click="BtnSize5_Click" Grid.Column="4">
+            <ToggleButton x:Name="btnSize5" Style="{DynamicResource ToggleFeatureButton}" Click="BtnSize5_Click" Margin="5,0,0,0" Grid.Column="4">
                 <Ellipse Margin="1" Stroke="Black" Fill="Black" Width="10" Height="10" />
             </ToggleButton>
         </Grid>

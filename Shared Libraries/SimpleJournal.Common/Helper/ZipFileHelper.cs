@@ -10,26 +10,24 @@ namespace SimpleJournal.Common.Helper
     /// </summary>
     public static class ZipFileHelper
     {
-        private static readonly byte[] ZipBytes1 = { 0x50, 0x4b, 0x03, 0x04, 0x0a };
-        private static readonly byte[] GzipBytes = { 0x1f, 0x8b };
-        private static readonly byte[] TarBytes = { 0x1f, 0x9d };
-        private static readonly byte[] LzhBytes = { 0x1f, 0xa0 };
-        private static readonly byte[] Bzip2Bytes = { 0x42, 0x5a, 0x68 };
-        private static readonly byte[] LzipBytes = { 0x4c, 0x5a, 0x49, 0x50 };
-        private static readonly byte[] ZipBytes2 = { 0x50, 0x4b, 0x05, 0x06 };
-        private static readonly byte[] ZipBytes3 = { 0x50, 0x4b, 0x07, 0x08 };
-        private static readonly byte[] ZipBytes4 = { 0x50, 0x4b, 0x03, 0x04 };
+        private static readonly byte[] ZipBytes1 = [0x50, 0x4b, 0x03, 0x04, 0x0a];
+        private static readonly byte[] GzipBytes = [0x1f, 0x8b];
+        private static readonly byte[] TarBytes = [0x1f, 0x9d];
+        private static readonly byte[] LzhBytes = [0x1f, 0xa0];
+        private static readonly byte[] Bzip2Bytes = [0x42, 0x5a, 0x68];
+        private static readonly byte[] LzipBytes = [0x4c, 0x5a, 0x49, 0x50];
+        private static readonly byte[] ZipBytes2 = [0x50, 0x4b, 0x05, 0x06];
+        private static readonly byte[] ZipBytes3 = [0x50, 0x4b, 0x07, 0x08];
+        private static readonly byte[] ZipBytes4 = [0x50, 0x4b, 0x03, 0x04];
 
         public static byte[] GetFirstBytes(string filepath, int length)
         {
-            using (var sr = new StreamReader(filepath))
-            {
-                sr.BaseStream.Seek(0, 0);
-                var bytes = new byte[length];
-                sr.BaseStream.Read(bytes, 0, length);
+            using var sr = new StreamReader(filepath);
+            sr.BaseStream.Seek(0, 0);
+            var bytes = new byte[length];
+            sr.BaseStream.ReadExactly(bytes, 0, length);
 
-                return bytes;
-            }
+            return bytes;
         }
 
         public static bool IsZipFile(string filepath)

@@ -2,6 +2,7 @@
 using SimpleJournal.Documents.UI.Controls;
 using SimpleJournal.Documents.UI.Controls.Paper;
 using SimpleJournal.Documents.UI.Helper;
+using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Ink;
@@ -12,7 +13,7 @@ namespace SimpleJournal.Controls
     /// <summary>
     /// Interaktionslogik für PreviewCanvas.xaml
     /// </summary>
-    public partial class PreviewCanvas : UserControl
+    public partial class PreviewCanvas : UserControl, IDisposable
     {
         private DrawingCanvas currentCanvas;
         private PaperType currentPaperType = PaperType.Blanco;
@@ -144,5 +145,33 @@ namespace SimpleJournal.Controls
         {
             ClearCanvas();
         }
+
+        #region Dispose 
+
+        private bool _disposed;
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (_disposed)
+                return;
+
+            if (disposing)
+            {
+                // Managed Ressourcen freigeben
+                paper?.Dispose();
+            }
+
+            // Unmanaged Ressourcen freigeben
+
+            _disposed = true;
+        }
+
+        #endregion
     }
 }

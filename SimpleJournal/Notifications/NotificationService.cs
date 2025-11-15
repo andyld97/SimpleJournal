@@ -7,7 +7,7 @@ using System.Threading;
 
 namespace Notifications
 {
-    public class NotificationService
+    public class NotificationService : IDisposable
     {
         private System.Threading.Timer noticationTimer;
         private DateTime lastTick = DateTime.MinValue;
@@ -110,5 +110,31 @@ namespace Notifications
             System.Diagnostics.Debug.WriteLine("Stopping notification service ...");
             noticationTimer.Change(Timeout.Infinite, Timeout.Infinite);
         }
+
+        #region Dispose
+
+        private bool _disposed;
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (_disposed)
+                return;
+
+            if (disposing)
+            {
+                // Managed Ressourcen freigeben
+                noticationTimer?.Dispose();
+            }
+
+            // Unmanaged Ressourcen freigeben
+
+            _disposed = true;
+        }
+        #endregion
     }
 }
