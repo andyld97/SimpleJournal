@@ -210,7 +210,11 @@ namespace SimpleJournal.Dialogs
             try
             {
                 // Load journal
-                var journal = await Journal.LoadJournalAsync(backupDataItem.FileInfo.FullName, Consts.BackupDirectory, true);
+                var loadJournalResult = await Journal.LoadJournalAsync(backupDataItem.FileInfo.FullName, Consts.BackupDirectory, true);
+                if (loadJournalResult.State != LoadState.Success)
+                    return string.Empty;
+
+                var journal = loadJournalResult.Journal;
                 if (journal == null)
                     return string.Empty;
 

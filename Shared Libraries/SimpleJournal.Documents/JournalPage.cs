@@ -29,7 +29,7 @@ namespace SimpleJournal.Documents
         /// <summary>
         /// Additional data e.g images, text
         /// </summary>
-        public List<JournalResource> JournalResources = new List<JournalResource>();
+        public List<JournalResource> JournalResources = [];
 
         /// <summary>
         /// The format of the page (currently only A4 is possible)
@@ -37,7 +37,7 @@ namespace SimpleJournal.Documents
         public Format PageFormat { get; set; } = Format.A4;
 
         /// <summary>
-        /// The pattern of the page (i.e. chequered) (TODO: *** Should be renamed to PageType or PaperType)
+        /// The pattern of the page (i.e. chequered) (Could be renamed to PageType or PaperType but that would require old documents to convert ...)
         /// </summary>
         public PaperType PaperPattern { get; set; } = PaperType.Chequered;
 

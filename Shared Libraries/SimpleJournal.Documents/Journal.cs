@@ -1,8 +1,8 @@
 ﻿using SimpleJournal.Common;
-using System.ComponentModel;
-using System.Xml.Serialization;
 using SimpleJournal.Common.Helper;
 using SimpleJournal.Documents.Pattern;
+using System.ComponentModel;
+using System.Xml.Serialization;
 
 namespace SimpleJournal.Documents
 {
@@ -73,16 +73,12 @@ namespace SimpleJournal.Documents
 
             try
             {
-                using (System.IO.FileStream fs = new System.IO.FileStream(path, System.IO.FileMode.Open))
-                {
-                    using (System.IO.Compression.ZipArchive zipArchive = new System.IO.Compression.ZipArchive(fs, System.IO.Compression.ZipArchiveMode.Read, false))
-                    {
-                        var entry = zipArchive.GetEntry("journal.xml");
-                        var data = await entry.ReadZipEntryAsync();
+                using System.IO.FileStream fs = new System.IO.FileStream(path, System.IO.FileMode.Open);
+                using System.IO.Compression.ZipArchive zipArchive = new System.IO.Compression.ZipArchive(fs, System.IO.Compression.ZipArchiveMode.Read, false);
+                var entry = zipArchive.GetEntry("journal.xml");
+                var data = await entry.ReadZipEntryAsync();
 
-                        return Serialization.ReadBytes<Journal>(data, Serialization.Mode.XML);
-                    }
-                }
+                return Serialization.ReadBytes<Journal>(data, Serialization.Mode.XML);
             }
             catch
             {
@@ -99,7 +95,7 @@ namespace SimpleJournal.Documents
         /// <param name="backupDirectory">The directory where old documents will be stored</param>
         /// <param name="quiet">If true, no error message is shown</param>
         /// <returns></returns>
-        public static async Task<Journal> LoadJournalAsync(string path, string backupDirectory, bool quiet = false)
+        public static async Task<JournalLoadResult> LoadJournalAsync(string path, string backupDirectory, bool quiet = false)
         {
             try
             {
@@ -134,102 +130,106 @@ namespace SimpleJournal.Documents
 
                     var result = Serialization.ReadString<Journal>(xmlData, System.Text.Encoding.UTF8);
                     if (result != null)
-                        return result;
+                        return new JournalLoadResult() { Journal = result, State = LoadState.Success };
                 }
                 else
                 {
                     // ... otherwise load it as a zip file
                     bool fail = false;
-                    using (System.IO.FileStream fs = new System.IO.FileStream(path, System.IO.FileMode.Open))
+                    using System.IO.FileStream fs = new System.IO.FileStream(path, System.IO.FileMode.Open);
+                    using System.IO.Compression.ZipArchive zipArchive = new System.IO.Compression.ZipArchive(fs, System.IO.Compression.ZipArchiveMode.Read, false);
+                    Dictionary<int, JournalPage> journalPages = [];
+                    Dictionary<int, PdfJournalPage> pdfJournalPages = [];
+                    Dictionary<int, byte[]> images = [];
+                    Journal journal = new Journal();
+
+                    bool isOldBinaryJournal = zipArchive.Entries.Any(e => e.Name == "info.bin");
+
+                    if (isOldBinaryJournal)
+                        return new JournalLoadResult(LoadState.IncompatibleVersion);
+            
+                    foreach (var currentEntry in zipArchive.Entries)
                     {
-                        using (System.IO.Compression.ZipArchive zipArchive = new System.IO.Compression.ZipArchive(fs, System.IO.Compression.ZipArchiveMode.Read, false))
+                        byte[] data = await currentEntry.ReadZipEntryAsync();
+                        string pageNumber = currentEntry.Name.Replace("page", string.Empty).Replace(".png", string.Empty).Replace(".pdf", string.Empty).Replace(".xml", string.Empty);
+
+                        if (currentEntry.Name == "journal.xml")
                         {
-                            Dictionary<int, JournalPage> journalPages = new Dictionary<int, JournalPage>();
-                            Dictionary<int, PdfJournalPage> pdfJournalPages = new Dictionary<int, PdfJournalPage>();
-                            Dictionary<int, byte[]> images = new Dictionary<int, byte[]>();
-                            Journal journal = new Journal();
-
-                            foreach (var currentEntry in zipArchive.Entries)
+                            string xmlData = System.Text.Encoding.UTF8.GetString(data);
+                            // Correct old documents misspelled pattern!
+                            xmlData = xmlData.Replace("<PaperPattern>Chequeued</PaperPattern>", "<PaperPattern>Chequered</PaperPattern>");
+                            journal = Serialization.ReadString<Journal>(xmlData, System.Text.Encoding.UTF8);
+                        }
+                        else if (int.TryParse(pageNumber, out int page))
+                        {
+                            if (currentEntry.Name.EndsWith(".png"))
                             {
-                                byte[] data = await currentEntry.ReadZipEntryAsync();
-                                string pageNumber = currentEntry.Name.Replace("page", string.Empty).Replace(".png", string.Empty).Replace(".pdf", string.Empty).Replace(".xml", string.Empty);
-
-                                if (currentEntry.Name == "journal.xml")
-                                {
-                                    string xmlData = System.Text.Encoding.UTF8.GetString(data);
-                                    // Correct old documents misspelled pattern!
-                                    xmlData = xmlData.Replace("<PaperPattern>Chequeued</PaperPattern>", "<PaperPattern>Chequered</PaperPattern>");
-                                    journal = Serialization.ReadString<Journal>(xmlData, System.Text.Encoding.UTF8);
-                                }
-                                else if (int.TryParse(pageNumber, out int page))
-                                {
-                                    if (currentEntry.Name.EndsWith(".png"))
-                                    {
-                                        // image for pdf page
-                                        images.Add(page, data);
-                                    }
-                                    else if (currentEntry.Name.EndsWith(".pdf"))
-                                    {
-                                        // pdf page
-                                        pdfJournalPages.Add(page, Serialization.ReadBytes<PdfJournalPage>(data, Serialization.Mode.XML));
-                                    }
-                                    else if (currentEntry.Name.EndsWith(".xml"))
-                                    {
-                                        // normal page
-                                        string xmlData = System.Text.Encoding.UTF8.GetString(data);
-
-                                        // Correct old documents misspelled pattern!
-                                        xmlData = xmlData.Replace("<PaperPattern>Chequeued</PaperPattern>", "<PaperPattern>Chequered</PaperPattern>");
-                                        journalPages.Add(page, Serialization.ReadString<JournalPage>(xmlData, System.Text.Encoding.UTF8));
-                                    }
-                                }
-                                else
-                                {
-                                    fail = true;
-                                    break;
-                                }
+                                // image for pdf page
+                                images.Add(page, data);
                             }
-
-                            if (fail)
-                                throw new ArgumentException("pageParser failed");
-
-                            // Merge dictionaries
-                            // Step 1) Add images to PdFJournalPages (if any)
-                            foreach (var image in images.Keys)
+                            else if (currentEntry.Name.EndsWith(".pdf"))
                             {
-                                var currentPage = pdfJournalPages[image];
-                                currentPage.PageBackground = images[image];
+                                // pdf page
+                                pdfJournalPages.Add(page, Serialization.ReadBytes<PdfJournalPage>(data, Serialization.Mode.XML));
                             }
-
-                            // Step 2) Merge pages in the correct order (huh?)
-                            int oldCount = journalPages.Count + pdfJournalPages.Count;
-                            int count = 0;
-                            journal.Pages.Clear();
-                            for (int i = 0; i < oldCount; i++)
+                            else if (currentEntry.Name.EndsWith(".xml"))
                             {
-                                if (pdfJournalPages.ContainsKey(i))
-                                    journal.Pages.Add(pdfJournalPages[i]);
-                                else if (journalPages.ContainsKey(i))
-                                    journal.Pages.Add(journalPages[i]);
+                                // normal page
+                                string xmlData = System.Text.Encoding.UTF8.GetString(data);
 
-                                count++;
+                                // Correct old documents misspelled pattern!
+                                xmlData = xmlData.Replace("<PaperPattern>Chequeued</PaperPattern>", "<PaperPattern>Chequered</PaperPattern>");
+                                journalPages.Add(page, Serialization.ReadString<JournalPage>(xmlData, System.Text.Encoding.UTF8));
                             }
-
-                            if (oldCount != count)
-                                throw new Exception("Invalid or corrupt file, cannot load data!");
-
-                            return journal;
+                        }
+                        else
+                        {
+                            fail = true;
+                            break;
                         }
                     }
+
+                    if (fail)
+                        return new JournalLoadResult(LoadState.UnsupportedVersionOrCorrupt);
+
+                    // Merge dictionaries
+                    // Step 1) Add images to PdFJournalPages (if any)
+                    foreach (var image in images.Keys)
+                    {
+                        var currentPage = pdfJournalPages[image];
+                        currentPage.PageBackground = images[image];
+                    }
+
+                    // Step 2) Merge pages in the correct order (huh?)
+                    int oldCount = journalPages.Count + pdfJournalPages.Count;
+                    int count = 0;
+                    journal.Pages.Clear();
+                    for (int i = 0; i < oldCount; i++)
+                    {
+                        if (pdfJournalPages.TryGetValue(i, out PdfJournalPage? value))
+                            journal.Pages.Add(value);
+                        else if (journalPages.TryGetValue(i, out JournalPage? value1))
+                            journal.Pages.Add(value1);
+
+                        count++;
+                    }
+
+                    if (oldCount != count)
+                        return new JournalLoadResult(LoadState.InvalidOrCorruptFile);
+
+                    return new JournalLoadResult(journal, LoadState.Success);
                 }
             }
             catch (Exception e)
             {
                 if (!quiet)
+                {
                     OnErrorOccurred?.Invoke(e.Message, "load");
+                    return new JournalLoadResult(LoadState.UnknownError) { SupressErrorMessage = true, ErrorMessage = e.Message };
+                }
             }
 
-            return null;
+            return new JournalLoadResult(LoadState.InvalidOrCorruptFile);
         }
 
         public async Task<bool> UpdateJournalMetaAsync(string filePath, bool forceUpdate)
@@ -241,39 +241,35 @@ namespace SimpleJournal.Documents
                 try
                 {
                     // Update Journal
-                    using (System.IO.FileStream fs = new System.IO.FileStream(filePath, System.IO.FileMode.Open))
+                    using System.IO.FileStream fs = new System.IO.FileStream(filePath, System.IO.FileMode.Open);
+                    using System.IO.Compression.ZipArchive zipArchive = new System.IO.Compression.ZipArchive(fs, System.IO.Compression.ZipArchiveMode.Update, false);
+                    var entry = zipArchive.GetEntry("journal.xml");
+
+                    // Delete entry first to prevent that no old content will stay there!
+                    if (entry != null)
+                        entry.Delete();
+
+                    entry = zipArchive.CreateEntry("journal.xml");
+
+                    using var stream = entry.Open();
+                    var jrn = new Journal()
                     {
-                        using (System.IO.Compression.ZipArchive zipArchive = new System.IO.Compression.ZipArchive(fs, System.IO.Compression.ZipArchiveMode.Update, false))
-                        {
-                            var entry = zipArchive.GetEntry("journal.xml");
+                        ProcessID = this.ProcessID,
+                        IsBackup = this.IsBackup,
+                        OriginalPath = this.OriginalPath,
+                        PreviousDocumentIndex = this.PreviousDocumentIndex,
+                        NextDocumentIndex = this.NextDocumentIndex,
+                        ChequeredPattern = (ChequeredPattern)this.ChequeredPattern?.Clone(),
+                        DottedPattern = (DottedPattern)this.DottedPattern?.Clone(),
+                        RuledPattern = (RuledPattern)this.RuledPattern?.Clone(),
+                    };
 
-                            // Delete entry first to prevent that no old content will stay there!
-                            if (entry != null)
-                                entry.Delete();
+                    // This is just for counting the pages
+                    foreach (var page in Pages)
+                        jrn.Pages.Add(new JournalPage());
 
-                            entry = zipArchive.CreateEntry("journal.xml");
-
-                            using var stream = entry.Open();
-                            var jrn = new Journal()
-                            {
-                                ProcessID = this.ProcessID,
-                                IsBackup = this.IsBackup,
-                                OriginalPath = this.OriginalPath,
-                                PreviousDocumentIndex = this.PreviousDocumentIndex,
-                                NextDocumentIndex = this.NextDocumentIndex,
-                                ChequeredPattern = (ChequeredPattern)this.ChequeredPattern?.Clone(),
-                                DottedPattern = (DottedPattern)this.DottedPattern?.Clone(),
-                                RuledPattern = (RuledPattern)this.RuledPattern?.Clone(),
-                            };
-
-                            // This is just for counting the pages
-                            foreach (var page in Pages)
-                                jrn.Pages.Add(new JournalPage());
-
-                            var data = Serialization.SaveToBytes(jrn, Serialization.Mode.XML);
-                            await stream.WriteAsync(data, 0, data.Length);
-                        }
-                    }
+                    var data = Serialization.SaveToBytes(jrn, Serialization.Mode.XML);
+                    await stream.WriteAsync(data);
 
                     return true;
                 }
@@ -311,75 +307,71 @@ namespace SimpleJournal.Documents
                 using (System.IO.FileStream fs = new System.IO.FileStream(filePath, System.IO.FileMode.Create))
                 {
                     // or update
-                    using (System.IO.Compression.ZipArchive zipArchive = new System.IO.Compression.ZipArchive(fs, System.IO.Compression.ZipArchiveMode.Create, false))
+                    using System.IO.Compression.ZipArchive zipArchive = new System.IO.Compression.ZipArchive(fs, System.IO.Compression.ZipArchiveMode.Create, false);
+                    int pgCount = 0;
+                    foreach (var page in Pages)
                     {
-                        int pgCount = 0;
-                        foreach (var page in Pages)
+                        if (page is PdfJournalPage pdf)
                         {
-                            if (page is PdfJournalPage pdf)
+                            var pageEntry = zipArchive.CreateEntry($"pages/page{pgCount}.pdf", System.IO.Compression.CompressionLevel.Optimal);
+
+                            // Background will be saved separately 
+                            PdfJournalPage pdfJournalPage = new PdfJournalPage
                             {
-                                var pageEntry = zipArchive.CreateEntry($"pages/page{pgCount}.pdf", System.IO.Compression.CompressionLevel.Optimal);
-
-                                // Background will be saved separately 
-                                PdfJournalPage pdfJournalPage = new PdfJournalPage
-                                {
-                                    Data = pdf.Data,
-                                    JournalResources = pdf.JournalResources,
-                                    Orientation = pdf.Orientation,
-                                    PageFormat = pdf.PageFormat,
-                                    PaperPattern = pdf.PaperPattern,
-                                    PageBackground = null
-                                };
-
-                                using (System.IO.Stream stream = pageEntry.Open())
-                                {
-                                    var data = Serialization.SaveToBytes(pdfJournalPage, Serialization.Mode.XML);
-                                    await stream.WriteAsync(data, 0, data.Length);
-                                }
-
-                                // Save background
-                                var imgEntry = zipArchive.CreateEntry($"pages/page{pgCount}.png", System.IO.Compression.CompressionLevel.Optimal);
-                                using (System.IO.Stream stream = imgEntry.Open())
-                                {
-                                    await stream.WriteAsync(pdf.PageBackground, 0, pdf.PageBackground.Length);
-                                }
-                            }
-                            else
-                            {
-                                var pageEntry = zipArchive.CreateEntry($"pages/page{pgCount}.xml", System.IO.Compression.CompressionLevel.Optimal);
-                                using (System.IO.Stream stream = pageEntry.Open())
-                                {
-                                    var data = Serialization.SaveToBytes(page, Serialization.Mode.XML);
-                                    await stream.WriteAsync(data, 0, data.Length);
-                                }
-                            }
-
-                            pgCount++;
-                        }
-
-                        // Write journal infos
-                        var info = zipArchive.CreateEntry("journal.xml");
-                        using (System.IO.Stream stream = info.Open())
-                        {
-                            var jrn = new Journal()
-                            {
-                                ProcessID = this.ProcessID,
-                                IsBackup = this.IsBackup,
-                                OriginalPath = this.OriginalPath,
-                                PreviousDocumentIndex = this.PreviousDocumentIndex,
-                                NextDocumentIndex = this.NextDocumentIndex,
-                                ChequeredPattern = (ChequeredPattern)this.ChequeredPattern?.Clone(),
-                                DottedPattern = (DottedPattern)this.DottedPattern?.Clone(),
-                                RuledPattern = (RuledPattern)this.RuledPattern?.Clone(),
+                                Data = pdf.Data,
+                                JournalResources = pdf.JournalResources,
+                                Orientation = pdf.Orientation,
+                                PageFormat = pdf.PageFormat,
+                                PaperPattern = pdf.PaperPattern,
+                                PageBackground = null
                             };
 
-                            // This is just for counting the pages
-                            foreach (var page in Pages)
-                                jrn.Pages.Add(new JournalPage());
+                            using (System.IO.Stream stream = pageEntry.Open())
+                            {
+                                var data = Serialization.SaveToBytes(pdfJournalPage, Serialization.Mode.XML);
+                                await stream.WriteAsync(data);
+                            }
 
-                            var data = Serialization.SaveToBytes(jrn, Serialization.Mode.XML);
-                            await stream.WriteAsync(data, 0, data.Length);
+                            // Save background
+                            var imgEntry = zipArchive.CreateEntry($"pages/page{pgCount}.png", System.IO.Compression.CompressionLevel.Optimal);
+                            using (System.IO.Stream stream = imgEntry.Open())
+                            {
+                                await stream.WriteAsync(pdf.PageBackground.AsMemory(0, pdf.PageBackground.Length));
+                            }
                         }
+                        else
+                        {
+                            var pageEntry = zipArchive.CreateEntry($"pages/page{pgCount}.xml", System.IO.Compression.CompressionLevel.Optimal);
+                            using System.IO.Stream stream = pageEntry.Open();
+                            var data = Serialization.SaveToBytes(page, Serialization.Mode.XML);
+                            await stream.WriteAsync(data);
+                        }
+
+                        pgCount++;
+                    }
+
+                    // Write journal infos
+                    var info = zipArchive.CreateEntry("journal.xml");
+                    using (System.IO.Stream stream = info.Open())
+                    {
+                        var jrn = new Journal()
+                        {
+                            ProcessID = this.ProcessID,
+                            IsBackup = this.IsBackup,
+                            OriginalPath = this.OriginalPath,
+                            PreviousDocumentIndex = this.PreviousDocumentIndex,
+                            NextDocumentIndex = this.NextDocumentIndex,
+                            ChequeredPattern = (ChequeredPattern)this.ChequeredPattern?.Clone(),
+                            DottedPattern = (DottedPattern)this.DottedPattern?.Clone(),
+                            RuledPattern = (RuledPattern)this.RuledPattern?.Clone(),
+                        };
+
+                        // This is just for counting the pages
+                        foreach (var page in Pages)
+                            jrn.Pages.Add(new JournalPage());
+
+                        var data = Serialization.SaveToBytes(jrn, Serialization.Mode.XML);
+                        await stream.WriteAsync(data);
                     }
                 }
 
@@ -391,7 +383,7 @@ namespace SimpleJournal.Documents
 
                 retVal = true;
 
-                // Old method - only XML Serialization
+                // (wirklich uralt, deprecated) Old method - only XML Serialization
                 //Serialization.Serialization.Save(filePath, this, Serialization.Serialization.Mode.XML);
             }
             catch (Exception e)

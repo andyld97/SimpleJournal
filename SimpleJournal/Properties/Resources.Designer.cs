@@ -19,7 +19,7 @@ namespace SimpleJournal.Properties {
     // -Klasse über ein Tool wie ResGen oder Visual Studio automatisch generiert.
     // Um einen Member hinzuzufügen oder zu entfernen, bearbeiten Sie die .ResX-Datei und führen dann ResGen
     // mit der /str-Option erneut aus, oder Sie erstellen Ihr VS-Projekt neu.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "18.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class Resources {
@@ -1880,6 +1880,44 @@ namespace SimpleJournal.Properties {
         public static string strJournalIsAlreadyOpenedTitle {
             get {
                 return ResourceManager.GetString("strJournalIsAlreadyOpenedTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die This journal was created with an older version of SimpleJournal that is no longer supported. Please open the document using SimpleJournal 0.4.9.1 or contact support@code-a-software.net for assistance with recovery! ähnelt.
+        /// </summary>
+        public static string strJournalLoadError_IncompatibleVersion {
+            get {
+                return ResourceManager.GetString("strJournalLoadError_IncompatibleVersion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die This journal cannot be loaded because it is invalid or corrupted. ähnelt.
+        /// </summary>
+        public static string strJournalLoadError_InvalidOrCorruptFile {
+            get {
+                return ResourceManager.GetString("strJournalLoadError_InvalidOrCorruptFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Failed to load journal:
+        ///
+        ///{0} ähnelt.
+        /// </summary>
+        public static string strJournalLoadError_UnknownError {
+            get {
+                return ResourceManager.GetString("strJournalLoadError_UnknownError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Unsupported or corrupted document format. Maybe this journal was created with an older version of SimpleJournal! ähnelt.
+        /// </summary>
+        public static string strJournalLoadError_UnsupportedVersionOrCorrupt {
+            get {
+                return ResourceManager.GetString("strJournalLoadError_UnsupportedVersionOrCorrupt", resourceCulture);
             }
         }
         

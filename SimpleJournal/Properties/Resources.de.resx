@@ -2283,4 +2283,18 @@ Klicken Sie auf NEIN um die Änderungen zu verwerfen und ein neues Journal zu er
   <data name="strFeedback_Privacy" xml:space="preserve">
     <value>Ihre Daten werden nicht an Dritte übermittelt, sondern nur dazu verwendet, um Ihnen antworten zu können! Weitere Informationen finden Sie in der</value>
   </data>
+  <data name="strJournalLoadError_IncompatibleVersion" xml:space="preserve">
+    <value>Dieses Journal wurde mit einer älteren Version von SimpleJournal erstellt, die nicht mehr unterstützt wird. Bitte öffnen Sie das Dokument mit SimpleJournal 0.4.9.1 oder wenden Sie sich an support@code-a-software.net, um Hilfe bei der Wiederherstellung zu erhalten!</value>
+  </data>
+  <data name="strJournalLoadError_InvalidOrCorruptFile" xml:space="preserve">
+    <value>Dieses Journal kann nicht geladen werden, da sie ungültig oder beschädigt ist.</value>
+  </data>
+  <data name="strJournalLoadError_UnsupportedVersionOrCorrupt" xml:space="preserve">
+    <value>Nicht unterstütztes oder beschädigtes Dokumentformat. Möglicherweise wurde dieses Journal mit einer älteren Version von SimpleJournal erstellt!</value>
+  </data>
+  <data name="strJournalLoadError_UnknownError" xml:space="preserve">
+    <value>Fehler beim Laden des Journals: 
+
+{0}</value>
+  </data>
 </root>

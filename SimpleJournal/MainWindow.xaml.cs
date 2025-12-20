@@ -3540,7 +3540,32 @@ namespace SimpleJournal
                         throw new Exception(string.Format(Properties.Resources.strFileNotFound, fileName));
 
                     dialog.Show();
-                    currentJournal = await Journal.LoadJournalAsync(fileName, Consts.BackupDirectory);
+                    var result = await Journal.LoadJournalAsync(fileName, Consts.BackupDirectory);
+                    currentJournal = result.Journal;
+
+                    if (result.State != LoadState.Success)
+                    {
+                        if (result.SupressErrorMessage)
+                        {
+                            dialog.Close();
+                            return;
+                        }
+                        else
+                        {
+                            string localizedErrorMessage = string.Empty;
+
+                            switch (result.State)
+                            {
+                                case LoadState.IncompatibleVersion: localizedErrorMessage = SimpleJournal.Properties.Resources.strJournalLoadError_IncompatibleVersion; break;
+                                case LoadState.InvalidOrCorruptFile: localizedErrorMessage = SimpleJournal.Properties.Resources.strJournalLoadError_InvalidOrCorruptFile; break;
+                                case LoadState.UnsupportedVersionOrCorrupt: localizedErrorMessage = SimpleJournal.Properties.Resources.strJournalLoadError_UnsupportedVersionOrCorrupt; break;
+                                case LoadState.UnknownError: localizedErrorMessage = string.Format(SimpleJournal.Properties.Resources.strJournalLoadError_UnknownError, result.ErrorMessage); break;
+                            }
+
+                            MessageBox.Show(localizedErrorMessage, Properties.Resources.strFailedToLoadJournalTitle, MessageBoxButton.OK, MessageBoxImage.Error);
+                            return;
+                        }
+                    }
 
                     if (currentJournal == null)
                     {

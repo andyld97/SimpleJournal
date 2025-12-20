@@ -2433,4 +2433,18 @@ Click on NO to discard the changes and create a new journal or click on Cancel t
   <data name="strFeedback_Privacy" xml:space="preserve">
     <value>Your data will not be shared with third parties, but will only be used to reply to you! Further information can be found in the</value>
   </data>
+  <data name="strJournalLoadError_IncompatibleVersion" xml:space="preserve">
+    <value>This journal was created with an older version of SimpleJournal that is no longer supported. Please open the document using SimpleJournal 0.4.9.1 or contact support@code-a-software.net for assistance with recovery!</value>
+  </data>
+  <data name="strJournalLoadError_InvalidOrCorruptFile" xml:space="preserve">
+    <value>This journal cannot be loaded because it is invalid or corrupted.</value>
+  </data>
+  <data name="strJournalLoadError_UnsupportedVersionOrCorrupt" xml:space="preserve">
+    <value>Unsupported or corrupted document format. Maybe this journal was created with an older version of SimpleJournal!</value>
+  </data>
+  <data name="strJournalLoadError_UnknownError" xml:space="preserve">
+    <value>Failed to load journal:
+
+{0}</value>
+  </data>
 </root>
