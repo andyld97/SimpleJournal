@@ -4206,7 +4206,20 @@ namespace SimpleJournal
                 if (Settings.Instance.PageBackground != SimpleJournal.Common.Background.Custom)
                 {
                     string uri = $"pack://application:,,,/SimpleJournal;component/resources/backgrounds/{imageFileName}.jpg";
-                    ImageBrush imageBrush = new ImageBrush(new BitmapImage(new Uri(uri))) { Stretch = Stretch.UniformToFill };
+
+                    var bitmap = new BitmapImage();
+                    bitmap.BeginInit();
+                    bitmap.UriSource = new Uri(uri);
+                    bitmap.CacheOption = BitmapCacheOption.OnLoad;
+                    bitmap.EndInit();
+                    bitmap.Freeze();
+
+                    ImageBrush imageBrush = new ImageBrush(bitmap)
+                    {
+                        Stretch = Stretch.UniformToFill,
+                        AlignmentY = AlignmentY.Top,        // to prevent jump of the background if the save status bar is shown!
+                        AlignmentX = AlignmentX.Center
+                    };
                     mainScrollView.Background = imageBrush;
                 }
                 else
