@@ -1863,4 +1863,18 @@ Klik op NEE om de wijzigingen te negeren en een nieuw journaal aan te maken of k
   <data name="strFeedback_Privacy" xml:space="preserve">
     <value>Uw gegevens worden niet doorgegeven aan derden, maar alleen gebruikt om u te antwoorden! Meer informatie kunt u vinden in de</value>
   </data>
+  <data name="strJournalLoadError_IncompatibleVersion" xml:space="preserve">
+    <value>Dit dagboek is gemaakt met een oudere versie van SimpleJournal die niet langer wordt ondersteund. Open het document met SimpleJournal 0.4.9.1 of neem contact op met support@code-a-software.net voor hulp bij het herstellen!</value>
+  </data>
+  <data name="strJournalLoadError_InvalidOrCorruptFile" xml:space="preserve">
+    <value>Dit journaal kan niet worden geladen omdat het ongeldig of beschadigd is.</value>
+  </data>
+  <data name="strJournalLoadError_UnsupportedVersionOrCorrupt" xml:space="preserve">
+    <value>Niet-ondersteunde of beschadigde documentindeling. Misschien is dit dagboek gemaakt met een oudere versie van SimpleJournal!</value>
+  </data>
+  <data name="strJournalLoadError_UnknownError" xml:space="preserve">
+    <value>Kan journaal niet laden: 
+
+{0}</value>
+  </data>
 </root>
