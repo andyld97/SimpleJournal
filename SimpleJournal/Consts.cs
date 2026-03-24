@@ -33,7 +33,7 @@ namespace SimpleJournal
         public static readonly string GhostScriptDownloadUrl = "https://ghostscript.com/releases/gsdnld.html";
         public static readonly string DotnetReleaseInfoUrl = "https://dotnetcli.blob.core.windows.net/dotnet/release-metadata/10.0/releases.json";
 #if !DEBUG
-        public static readonly string ConverterAPIUrl = "https://cas-server2.ddns.net:8080";
+        public static readonly string ConverterAPIUrl = "https://andy97.de:8080";
 #else
         public static readonly string ConverterAPIUrl = "http://127.0.0.1:5290";
 #endif
@@ -42,7 +42,7 @@ namespace SimpleJournal
         /// <summary>
         /// The .NET version which was used to compile SJ
         /// </summary>
-        public static readonly Version CompiledDotnetVersion = new Version(10, 0, 1);
+        public static readonly Version CompiledDotnetVersion = new Version(10, 0, 5);
 
         /// <summary>
         /// Polling interval for NotificationService
@@ -61,7 +61,6 @@ namespace SimpleJournal
         };
 
 #endregion
-
 
         public static readonly string WebView2CachePath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "SimpleJournal", "WebView2");
 
