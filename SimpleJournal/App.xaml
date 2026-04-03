@@ -555,6 +555,7 @@
 
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/Fluent;Component/Themes/Generic.xaml" />
+                <ResourceDictionary Source="/resources/ScrollBar.xaml" />
                 <!-- Directly use ColorPalette.xaml to prevent messing up all other styles! -->
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;Component/Themes/ColorPicker/ColorPalette.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;Component/Styles/Controls.Slider.xaml" />
