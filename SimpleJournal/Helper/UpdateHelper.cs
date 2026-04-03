@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 using Data;
 using SimpleJournal.Common;
 using System.Linq;
-using System.IO;
 
 namespace Helper
 {
@@ -36,20 +35,50 @@ namespace Helper
                 }
             }
 
+            bool deleteCache = false;
+#if UWP
+
+            if (cache.Version < Consts.StoreVersion)
+            {
+                deleteCache = true;      
+            }
+#else
+            else if (cache.Version < Consts.NormalVersion)
+            {
+                deleteCache = true; 
+            }
+#endif
+
+            if (deleteCache)
+            {
+                try
+                {
+                    System.IO.File.Delete(Consts.UpdateCacheFilePath);
+
+                }
+                catch
+                { }
+                finally
+                {
+                    cache = null;
+                }
+            }
+
+
             var dt = cache?.LastUpdated ?? DateTime.MinValue;
             bool isCacheExpired = (dt > DateTime.MinValue && dt.AddMinutes(30) < now);
 
             // Only return cache if it is valid and only if it is valid
-            if (cache != null && cache.Result != SimpleJournal.Common.UpdateResult.Unknown && !isCacheExpired)
+            if (cache != null && cache.Result != UpdateResult.Unknown && !isCacheExpired)
                 return cache;
 
             if (!GeneralHelper.IsConnectedToInternet())
             {
                 // Even if the cache is expired (if it has valid value) return it, to prevent overwriting valid results due to a lost connection!
-                if (isCacheExpired && cache != null && cache.Result != SimpleJournal.Common.UpdateResult.Unknown)
+                if (isCacheExpired && cache != null && cache.Result != UpdateResult.Unknown)
                     return cache;
 
-                cache = new UpdateInfo(SimpleJournal.Common.UpdateResult.Unknown, null, string.Empty, now);
+                cache = new UpdateInfo(UpdateResult.Unknown, null, string.Empty, now);
                 return cache;
             }
 
@@ -66,61 +95,59 @@ namespace Helper
             // 2) Download version
             try
             {
-                using (HttpClient client = new HttpClient())
-                {
-                    bool debug = false;
+                using HttpClient client = new HttpClient();
+                bool debug = false;
 #if DEBUG
-                    debug = true;
+                debug = true;
 #endif
-                    string url = $"{Consts.VersionUrl}&lang={System.Globalization.CultureInfo.InstalledUICulture.TwoLetterISOLanguageName}&debug={debug.ToString().ToLower()}";
-                    string versionJSON = await client.GetStringAsync(url);
-                    var versionInfo = JsonConvert.DeserializeObject<VersionInfo>(versionJSON);
+                string url = $"{Consts.VersionUrl}&lang={System.Globalization.CultureInfo.InstalledUICulture.TwoLetterISOLanguageName}&debug={debug.ToString().ToLower()}";
+                string versionJSON = await client.GetStringAsync(url);
+                var versionInfo = JsonConvert.DeserializeObject<VersionInfo>(versionJSON);
 
-                    string onlineVersionString;
+                string onlineVersionString;
 #if !UWP
-                    onlineVersionString = versionInfo.Current.Normal;
+                onlineVersionString = versionInfo.Current.Normal;
 #else
-                    onlineVersionString = versionInfo.Current.Store;
+                onlineVersionString = versionInfo.Current.Store;
 #endif
-                    Version onlineVersion = Version.Parse(onlineVersionString);
+                Version onlineVersion = Version.Parse(onlineVersionString);
 
-                    // Find hash
-                    var longVersionInfo = versionInfo.Versions.FirstOrDefault(p => p.Version == versionInfo.Current.Normal);
-                    string hash = longVersionInfo?.Hash;
+                // Find hash
+                var longVersionInfo = versionInfo.Versions.FirstOrDefault(p => p.Version == versionInfo.Current.Normal);
+                string hash = longVersionInfo?.Hash;
 
 #if UWP
-                    // Clear hash (there are no hashes for UWP - since it's managed via MS Store)
-                    hash = string.Empty;
+                // Clear hash (there are no hashes for UWP - since it's managed via MS Store)
+                hash = string.Empty;
 #endif
 
-                    var result = onlineVersion.CompareTo(currentVersion);
-                    if (result > 0)
-                    {
-                        // There is a new version
-                        cache = new UpdateInfo(SimpleJournal.Common.UpdateResult.UpdateAvailable, onlineVersion, hash, now);
-                        SaveCache();
-                        return cache;
-                    }
-                    else if (result < 0)
-                    {
-                        // Online version is older than this version (dev version)
+                var result = onlineVersion.CompareTo(currentVersion);
+                if (result > 0)
+                {
+                    // There is a new version
+                    cache = new UpdateInfo(SimpleJournal.Common.UpdateResult.UpdateAvailable, onlineVersion, hash, now);
+                    SaveCache();
+                    return cache;
+                }
+                else if (result < 0)
+                {
+                    // Online version is older than this version (dev version)
 #if UWP
-                        cache = new UpdateInfo(SimpleJournal.Common.UpdateResult.DevVersion, Consts.StoreVersion, hash, now);
+                    cache = new UpdateInfo(SimpleJournal.Common.UpdateResult.DevVersion, Consts.StoreVersion, hash, now);
 #else
-                        cache = new UpdateInfo(SimpleJournal.Common.UpdateResult.DevVersion, Consts.NormalVersion, hash, now);
+                    cache = new UpdateInfo(SimpleJournal.Common.UpdateResult.DevVersion, Consts.NormalVersion, hash, now);
 #endif
 
-                        cache.LastUpdated = now;
-                        SaveCache();
-                        return cache;
-                    }
-                    else
-                    {
-                        // equal
-                        cache = new UpdateInfo(SimpleJournal.Common.UpdateResult.NoUpdateAvaialble, onlineVersion, hash, now);
-                        SaveCache();
-                        return cache;
-                    }
+                    cache.LastUpdated = now;
+                    SaveCache();
+                    return cache;
+                }
+                else
+                {
+                    // equal
+                    cache = new UpdateInfo(SimpleJournal.Common.UpdateResult.NoUpdateAvaialble, onlineVersion, hash, now);
+                    SaveCache();
+                    return cache;
                 }
             }
             catch (Exception)
@@ -155,7 +182,7 @@ namespace Helper
         {
             var result = Task.Run(() => CheckForUpdatesAsync()).Result;
 
-            if (result.Result == SimpleJournal.Common.UpdateResult.UpdateAvailable && result.Version != null)
+            if (result.Result == UpdateResult.UpdateAvailable && result.Version != null)
             {
                 try
                 {

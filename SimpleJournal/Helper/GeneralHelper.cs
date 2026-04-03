@@ -414,6 +414,14 @@ namespace SimpleJournal
 
         public static bool InstallUWPFileAssoc()
         {
+            // TODO: *** This should be re-worked sometimes, it should:
+            // Parse the version and compare >= instead of string comparision for a specific version
+            // And it shouldn't be done on every start, thats only really necessary if you have both SJ Version (Store|Normal) installed and if you want
+            // to ensure that the file association is always set to the store version.
+
+            // Maybe there is even a better way to create the file association on UWP without starting another application
+            // or without admin rights!
+
             InstallApplicationIconForFileAssociation();
 
             if (InstallFileAssoc())
