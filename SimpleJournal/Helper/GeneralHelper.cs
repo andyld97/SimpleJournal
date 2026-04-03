@@ -1,30 +1,15 @@
 ﻿using ControlzEx.Theming;
 using Newtonsoft.Json;
-using SimpleJournal.Controls;
-using SimpleJournal.Data;
 using SimpleJournal.Dialogs;
-using SimpleJournal.Common;
-using SimpleJournal.Documents.UI.Controls;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Net;
-using System.Text;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Ink;
-using System.Windows.Input;
-using System.Windows.Markup;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using System.Xml;
-using SimpleJournal.Documents;
 using SimpleJournal.Common.Helper;
-using SimpleJournal.Documents.UI.Extensions;
 using SimpleJournal.Documents.PDF;
 using System.Threading.Tasks;
 using System.Net.Http;
@@ -63,27 +48,45 @@ namespace SimpleJournal
 
         public static void ApplyTheming()
         {
-            Color sidebarColor, linkColor, tabControlBackgroundColor, tabItemBackground, tabItemSelectedBackground;
+            Color 
+                sidebarColor, linkColor, tabControlBackgroundColor, tabItemBackground, tabItemSelectedBackground;
+
+            static Color ToColor(string hex) => (Color)ColorConverter.ConvertFromString(hex);
+            static Brush ToBrush(string hex) => new SolidColorBrush(ToColor(hex));
 
             string transparency = Settings.Instance.UseObjectBarTransparency ? "AF" : "FF";
 
             if (Settings.Instance.UseDarkMode)
             {
-                sidebarColor = (Color)ColorConverter.ConvertFromString($"#{transparency}252525");
+                sidebarColor = ToColor($"#{transparency}252525");
                 linkColor = Colors.White;
                 tabControlBackgroundColor = Colors.Black;
                 
-                tabItemBackground = (Color)ColorConverter.ConvertFromString("#AF282828");
-                tabItemSelectedBackground = (Color)ColorConverter.ConvertFromString("#282828");
+                tabItemBackground = ToColor("#AF282828");
+                tabItemSelectedBackground = ToColor("#282828");
+
+                // Scrollbar / Dark
+                App.Current.Resources["ScrollBarButtonBackgroundBrush"] = ToBrush("#FF2B2B2B");
+                App.Current.Resources["ScrollbarThumb"] = ToBrush("#FF383838");
+                App.Current.Resources["ScrollBarButtonHighlightBackgroundBrush"] = ToBrush("#FF3C3C3C");
+                App.Current.Resources["ScrollBarButtonArrowForegroundBrush"] = ToBrush("#FFD0D0D0");
+                App.Current.Resources["ScrollBarTrackBrush"] = ToBrush("#FF1C1C1C");
             }
             else
             {
-                sidebarColor = (Color)ColorConverter.ConvertFromString($"#{transparency}CECACA");
+                sidebarColor = ToColor($"#{transparency}CECACA");
                 linkColor = Colors.MediumBlue;
-                tabControlBackgroundColor = (Color)ColorConverter.ConvertFromString($"#DADADA");
+                tabControlBackgroundColor = ToColor($"#DADADA");
 
-                tabItemBackground = (Color)ColorConverter.ConvertFromString("#D7D7D7");
-                tabItemSelectedBackground = (Color)ColorConverter.ConvertFromString("#F9F9F9");
+                tabItemBackground = ToColor("#D7D7D7");
+                tabItemSelectedBackground = ToColor("#F9F9F9");
+
+                // Scrollbar / Light
+                App.Current.Resources["ScrollBarButtonBackgroundBrush"] = ToBrush("#FFE6E6E6");
+                App.Current.Resources["ScrollbarThumb"] = ToBrush("#FFB5B5B5");
+                App.Current.Resources["ScrollBarButtonHighlightBackgroundBrush"] = ToBrush("#FFDADADA");
+                App.Current.Resources["ScrollBarButtonArrowForegroundBrush"] = ToBrush("#FF4A4A4A");
+                App.Current.Resources["ScrollBarTrackBrush"] = ToBrush("#FFF5F5F5");
             }
 
             // Apply own theming colors
@@ -98,7 +101,7 @@ namespace SimpleJournal
             {
                 if (Settings.Instance.UseDarkMode)
                 {
-                    var fixedBlack = (Color)ColorConverter.ConvertFromString("#FF252525");
+                    var fixedBlack = ToColor("#FF252525");
                     theme.Resources["Fluent.Ribbon.Colors.White"] = fixedBlack;
                     theme.Resources["Fluent.Ribbon.Brushes.White"] = new SolidColorBrush(fixedBlack);                
                 }
@@ -411,9 +414,9 @@ namespace SimpleJournal
 
         public static bool InstallUWPFileAssoc()
         {
-            GeneralHelper.InstallApplicationIconForFileAssociation();
+            InstallApplicationIconForFileAssociation();
 
-            if (GeneralHelper.InstallFileAssoc())
+            if (InstallFileAssoc())
             {
                 var executableSJFileAssocFile = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "journal", "SjFileAssoc.exe");
                 if (System.IO.File.Exists(executableSJFileAssocFile))
